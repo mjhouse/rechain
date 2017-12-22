@@ -1,12 +1,18 @@
+/** \file	block.cpp
+	\brief	Implements the Block class used to manage
+			data (publish, hash etc.) stored in the
+			BlockChain.
+*/
+
 #include "block.hpp"
 #include "keys.hpp"
 
-#include <cryptopp/osrng.h>
-#include <cryptopp/hex.h>
-#include <cryptopp/rsa.h>
-#include <cryptopp/pssr.h>
-#include <cryptopp/whrlpool.h>
+// cryptopp includes
+#include <cryptopp/osrng.h>		// for the AutoSeededRandomPool
+#include <cryptopp/integer.h>	// for Integer data type
+#include <cryptopp/hex.h>		// for the HexEncoder
 
+// system includes
 #include <iostream>
 #include <sstream>
 
@@ -14,119 +20,149 @@
 #include <climits>
 #include <string>
 
-#define MIN_NONCE 	1
-#define MAX_NONCE 	10000
+#define MIN_NONCE 	1		/* Minimum nonce value */
+#define MAX_NONCE 	10000	/* Maximum nonce value */
+
+/* Maximum hash value (smaller increases difficulty) */
 #define HASH_MAX  	"0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 
-using Signer   = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Signer;
-using Verifier = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Verifier;
-
+/*
+	Calculates the current timestamp in seconds
+	since the epoch (Jan 1, 1970)
+*/
 long get_epoch_timestamp(){
+	// Get the time from the system
 	auto tp = std::chrono::system_clock::now();
+
+	// Get a duration since the epoch
 	auto dur = tp.time_since_epoch();
 
+	// Convert the duration to seconds
 	auto seconds = std::chrono::duration_cast<std::chrono::seconds>(dur).count();
+
+	// Typecast to long and return
 	return (long)seconds;
 }
 
+/*
+	Generates a random number between MIN_NONCE and MAX_NONCE
+*/
 long get_nonce(){
+	// Unwrap the namespace for convenience
 	using CryptoPP::Integer;
 
+	// Create a random generator
 	CryptoPP::AutoSeededRandomPool rng;
+
+	// Generate the random number, convert to long and return
 	return Integer(rng,Integer(MIN_NONCE),Integer(MAX_NONCE)).ConvertToLong();
 }
 
+/*
+	Get a string containing data in the block with
+	the exception of the previous hash and the signature.
+*/
 std::string Block::partial_data(){
+	// Create a stringstream
 	std::stringstream stream;
+
+	// Feed each variable as a string
+	// to the stream
 	stream	<< this->message
 			<< this->public_key
 			<< this->reference
 			<< std::to_string(this->nonce)
 			<< std::to_string(this->timestamp)
 			<< std::to_string(this->counter);
+
+	// Return as a std::string
 	return stream.str();
 }
 
+/*
+	Get a string containing all data in the block
+*/
 std::string Block::full_data(){
+	// Create a string stream
 	std::stringstream stream;
+
+	// Feed the partial data as well as
+	// previous and the signature to the stream
 	stream	<< this->partial_data()
 			<< this->previous
 			<< this->signature;
+
+	// Return as a std::string
 	return stream.str();
 }
 
-std::string Block::sign( KeyPair keys ){
-	CryptoPP::RSA::PrivateKey private_key;
-	private_key.Load(CryptoPP::StringSource(keys.get_private_key(), true,
-										   new CryptoPP::HexDecoder()).Ref());
-   std::string signature;
-   Signer signer(private_key);
-   CryptoPP::AutoSeededRandomPool rng;
-
-   CryptoPP::StringSource ss(this->partial_data(), true,
-							 new CryptoPP::SignerFilter(rng, signer,
-							   new CryptoPP::HexEncoder(
-								 new CryptoPP::StringSink(signature))));
-	return signature;
-}
-
-bool Block::check_sig(){
-	CryptoPP::RSA::PublicKey key;
-	key.Load(CryptoPP::StringSource(this->public_key, true,
-									new CryptoPP::HexDecoder()).Ref());
-	std::string sig;
-	CryptoPP::StringSource ss(this->signature, true,
-							  new CryptoPP::HexDecoder(
-								new CryptoPP::StringSink(sig)));
-
-	bool result = false;
-	Verifier verifier(key);
-	CryptoPP::StringSource ss2(sig + this->partial_data(), true,
-							   new CryptoPP::SignatureVerificationFilter(verifier,
-								 new CryptoPP::ArraySink((byte*)&result,
-														 sizeof(result))));
-
-	return result;
-}
-
+/*
+	Get the hash of the data contained in this block
+*/
 std::string Block::get_hash(){
+	// Create a hash
 	CryptoPP::SHA256 hash;
 
+	// Get the full data string
 	std::string data = this->full_data();
 	std::string digest;
 
+	// Hash, hex encode and save to digest
 	CryptoPP::StringSource s(data,true,
 		new CryptoPP::HashFilter(hash,
 			new CryptoPP::HexEncoder(
 				new CryptoPP::StringSink(digest))));
 
+	// Return digest
 	return digest;
 }
 
+/*
+	Try to publish the block with a new nonce, timestamp and counter
+*/
 bool Block::publish( KeyPair keys ){
-	// make sure we don't overflow the max capacity of an unsigned int
+	// Make sure we don't overflow the max capacity of an unsigned int
 	this->counter	= (this->counter >= UINT_MAX-1) ? 0 : this->counter + 1;
 
-	// update the nonce and timestamp
+	// Update the nonce and timestamp
 	this->nonce		 = get_nonce();
 	this->timestamp  = get_epoch_timestamp();
-	this->public_key = keys.get_public_key();
-	this->signature  = this->sign( keys );
 
-	// hash this block
+	// Get the public key and sign the data
+	this->public_key = keys.get_public_key();
+	this->signature  = keys.sign( this->partial_data() );
+
+	// Hash this block
 	std::string hash = this->get_hash();
 
-	// return whether the hash is good
+	// Returns true if hash is valid
 	return (hash <= HASH_MAX);
 }
 
+/*
+	Check if the partial data matches the signature, the
+	full data (with signature) matches the hash, and the
+	hash is small enough.
+*/
 bool Block::is_valid(){
-	std::string hash = this->get_hash();
-	bool sig_good	 = this->check_sig();
+	// Create a public key
+	KeyPair keys;
+	keys.set_public_key(this->public_key);
 
-	return ( sig_good && (hash <= HASH_MAX) );
+	// Get the hash
+	std::string hash = this->get_hash();
+
+	// Check the signature
+	bool sig_valid = keys.verify(this->partial_data(),this->signature);
+
+	// Returns true if signature is good and
+	// hash is valid
+	return ( sig_valid && (hash <= HASH_MAX) );
 }
 
+/*
+	Print function for debugging
+*/
 void Block::print(){
 	std::cout << "--------------" << std::endl <<
 		"	hash:       " << this->get_hash() << std::endl <<

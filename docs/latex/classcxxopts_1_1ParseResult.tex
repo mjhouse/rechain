@@ -1,0 +1,67 @@
+\hypertarget{classcxxopts_1_1ParseResult}{}\section{cxxopts\+:\+:Parse\+Result Class Reference}
+\label{classcxxopts_1_1ParseResult}\index{cxxopts\+::\+Parse\+Result@{cxxopts\+::\+Parse\+Result}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Parse\+Result} (const std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \hyperlink{classcxxopts_1_1OptionDetails}{Option\+Details} $>$$>$ \&, std\+::vector$<$ std\+::string $>$, int \&, char $\ast$$\ast$\&)\hypertarget{classcxxopts_1_1ParseResult_a547f81d147a8c462f9c5adbac3ac0f66}{}\label{classcxxopts_1_1ParseResult_a547f81d147a8c462f9c5adbac3ac0f66}
+
+\item 
+size\+\_\+t {\bfseries count} (const std\+::string \&o) const \hypertarget{classcxxopts_1_1ParseResult_ab7f33cbd795b595e672c5a4033c06df4}{}\label{classcxxopts_1_1ParseResult_ab7f33cbd795b595e672c5a4033c06df4}
+
+\item 
+const \hyperlink{classcxxopts_1_1OptionValue}{Option\+Value} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const std\+::string \&option) const \hypertarget{classcxxopts_1_1ParseResult_ad8a5a4283f54f91fbeba8c210f75813b}{}\label{classcxxopts_1_1ParseResult_ad8a5a4283f54f91fbeba8c210f75813b}
+
+\item 
+const std\+::vector$<$ \hyperlink{classcxxopts_1_1KeyValue}{Key\+Value} $>$ \& {\bfseries arguments} () const \hypertarget{classcxxopts_1_1ParseResult_abb2de686b888afd520e8e522f50f37f5}{}\label{classcxxopts_1_1ParseResult_abb2de686b888afd520e8e522f50f37f5}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcxxopts_1_1OptionValue}{Option\+Value} \& {\bfseries get\+\_\+option} (std\+::shared\+\_\+ptr$<$ \hyperlink{classcxxopts_1_1OptionDetails}{Option\+Details} $>$)\hypertarget{classcxxopts_1_1ParseResult_a6671596ebeb094b59a1ea08dec7e21e3}{}\label{classcxxopts_1_1ParseResult_a6671596ebeb094b59a1ea08dec7e21e3}
+
+\item 
+void {\bfseries parse} (int \&argc, char $\ast$$\ast$\&argv)\hypertarget{classcxxopts_1_1ParseResult_ad81a77df48524ac4598cc1d8a2742215}{}\label{classcxxopts_1_1ParseResult_ad81a77df48524ac4598cc1d8a2742215}
+
+\item 
+void {\bfseries add\+\_\+to\+\_\+option} (const std\+::string \&option, const std\+::string \&arg)\hypertarget{classcxxopts_1_1ParseResult_ad6c07a08104b19b677186ad6f06c3b98}{}\label{classcxxopts_1_1ParseResult_ad6c07a08104b19b677186ad6f06c3b98}
+
+\item 
+bool {\bfseries consume\+\_\+positional} (std\+::string a)\hypertarget{classcxxopts_1_1ParseResult_abbeb912ba353824c3a7c03b09d0c92c9}{}\label{classcxxopts_1_1ParseResult_abbeb912ba353824c3a7c03b09d0c92c9}
+
+\item 
+void {\bfseries parse\+\_\+option} (std\+::shared\+\_\+ptr$<$ \hyperlink{classcxxopts_1_1OptionDetails}{Option\+Details} $>$ value, const std\+::string \&name, const std\+::string \&arg=\char`\"{}\char`\"{})\hypertarget{classcxxopts_1_1ParseResult_a852a0fe7cc224cec36ad4070c505523a}{}\label{classcxxopts_1_1ParseResult_a852a0fe7cc224cec36ad4070c505523a}
+
+\item 
+void {\bfseries parse\+\_\+default} (std\+::shared\+\_\+ptr$<$ \hyperlink{classcxxopts_1_1OptionDetails}{Option\+Details} $>$ details)\hypertarget{classcxxopts_1_1ParseResult_ae3d580d84335f7df3f14a99791570c24}{}\label{classcxxopts_1_1ParseResult_ae3d580d84335f7df3f14a99791570c24}
+
+\item 
+void {\bfseries checked\+\_\+parse\+\_\+arg} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, int \&current, std\+::shared\+\_\+ptr$<$ \hyperlink{classcxxopts_1_1OptionDetails}{Option\+Details} $>$ value, const std\+::string \&name)\hypertarget{classcxxopts_1_1ParseResult_af6747ace765bba07d66dd4a96fb01a3e}{}\label{classcxxopts_1_1ParseResult_af6747ace765bba07d66dd4a96fb01a3e}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \hyperlink{classcxxopts_1_1OptionDetails}{Option\+Details} $>$ $>$ \& {\bfseries m\+\_\+options}\hypertarget{classcxxopts_1_1ParseResult_a83d56d2c1c32704ba5218db38058d3be}{}\label{classcxxopts_1_1ParseResult_a83d56d2c1c32704ba5218db38058d3be}
+
+\item 
+std\+::vector$<$ std\+::string $>$ {\bfseries m\+\_\+positional}\hypertarget{classcxxopts_1_1ParseResult_ae205cfc947baea06415e5d10185d68da}{}\label{classcxxopts_1_1ParseResult_ae205cfc947baea06415e5d10185d68da}
+
+\item 
+std\+::vector$<$ std\+::string $>$\+::iterator {\bfseries m\+\_\+next\+\_\+positional}\hypertarget{classcxxopts_1_1ParseResult_aff5049a94be37481efb60cf1bb0ad91d}{}\label{classcxxopts_1_1ParseResult_aff5049a94be37481efb60cf1bb0ad91d}
+
+\item 
+std\+::unordered\+\_\+set$<$ std\+::string $>$ {\bfseries m\+\_\+positional\+\_\+set}\hypertarget{classcxxopts_1_1ParseResult_a4f3614bf3ba75fbeab82970a8689e06c}{}\label{classcxxopts_1_1ParseResult_a4f3614bf3ba75fbeab82970a8689e06c}
+
+\item 
+std\+::unordered\+\_\+map$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classcxxopts_1_1OptionDetails}{Option\+Details} $>$, \hyperlink{classcxxopts_1_1OptionValue}{Option\+Value} $>$ {\bfseries m\+\_\+results}\hypertarget{classcxxopts_1_1ParseResult_a98c407f6f23da9c83b4ed2407321b169}{}\label{classcxxopts_1_1ParseResult_a98c407f6f23da9c83b4ed2407321b169}
+
+\item 
+std\+::vector$<$ \hyperlink{classcxxopts_1_1KeyValue}{Key\+Value} $>$ {\bfseries m\+\_\+sequential}\hypertarget{classcxxopts_1_1ParseResult_ab9d7bcfd12003cd06bddd374b364a0ec}{}\label{classcxxopts_1_1ParseResult_ab9d7bcfd12003cd06bddd374b364a0ec}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/cxxopts.\+hpp\end{DoxyCompactItemize}

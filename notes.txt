@@ -1,4 +1,0 @@
-Dependencies:
-	cxxopts.hpp
-	cereal
-	libcrypto++-dev

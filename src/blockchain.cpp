@@ -1,26 +1,38 @@
+/** \file	blockchain.cpp
+	\brief	Implements the BlockChain class used to manage,
+			load, save and publish any number of Block objects.
+*/
+
 #include "blockchain.hpp"
 #include "block.hpp"
 #include "keys.hpp"
 
-#include <cereal/archives/json.hpp>
-#include <fstream>
+#include <cereal/archives/json.hpp>	/* For the JSON archives */
+#include <fstream>					/* File i/o */
 
+/* Publish a new block, signing it with the given keys */
 void BlockChain::publish( Block new_block, KeyPair keys ){
+
+	// if the chain is empty, previous is empty (genesis block)
+	// otherwise previous should point to the last block
 	if(!this->chain.empty())
 		new_block.set_previous(this->chain.back().get_hash());
 	else
 		new_block.set_previous("");
 
-	while(!new_block.publish(keys)){
-		std::cout << new_block.get_hash() << std::endl;
-	};
+	// Loop until the block is published
+	while(!new_block.publish(keys));
+
+	// Add the new block to the chain
 	this->chain.push_back(new_block);
 }
 
+/* Get a reference to a block */
 Block& BlockChain::get( int i ){
 	return this->chain[i];
 }
 
+/* Print for debugging */
 void BlockChain::print(){
 	std::cout << "-- BLOCKCHAIN --" << std::endl;
 	for(unsigned int i = 0; i < this->chain.size(); ++i){
@@ -29,22 +41,51 @@ void BlockChain::print(){
 	}
 }
 
+/*
+	Open the given file path and load blockchain data
+	from it
+*/
 bool BlockChain::load( std::string fn ){
+	// open the file
 	std::ifstream ifs(fn);
-	if(ifs){
+
+	// Check that the file is open
+	if( ifs.is_open() ){
+
+		// Create an Archive for it
 		cereal::JSONInputArchive iarchive(ifs);
+
+		// Load data from the archive into the BlockChain
 		iarchive(*this);
+
+		// Return success
 		return true;
 	}
+
+	// Otherwise return failure
 	return false;
 }
 
+/*
+	Save the BlockChain to the given file path
+*/
 bool BlockChain::save( std::string fn ){
+	// open the file
 	std::ofstream ofs(fn);
-	if(ofs){
+
+	// Check that the file is open
+	if( ofs.is_open() ){
+
+		// Create an Archive for the file
 		cereal::JSONOutputArchive oarchive(ofs);
+
+		// Load data from the archive itno the BlockChain
 		oarchive(*this);
+
+		// Return success
 		return true;
 	}
+
+	// Otherwise return failure
 	return false;
 }

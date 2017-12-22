@@ -14,12 +14,12 @@ int main( int argc, char** argv ){
 
 	blockchain->publish(
 		genesis,
-		KeyPair("data/rsa")
+		KeyPair("data/rsa.public","data/rsa.private")
 	);
 
 	blockchain->publish(
 		blockA,
-		KeyPair("data/rsa")
+		KeyPair("data/rsa.public","data/rsa.private")
 	);
 
 	Block& a = blockchain->get(0);
