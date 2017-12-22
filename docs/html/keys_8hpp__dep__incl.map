@@ -1,6 +1,6 @@
 <map id="inc/keys.hpp" name="inc/keys.hpp">
-<area shape="rect" id="node2" href="$block_8cpp_source.html" title="src/block.cpp" alt="" coords="5,80,105,107"/>
-<area shape="rect" id="node3" href="$blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="129,80,259,107"/>
+<area shape="rect" id="node2" href="$block_8cpp.html" title="Implements the Block class used to manage data (publish, hash etc.) stored in the BlockChain..." alt="" coords="5,80,105,107"/>
+<area shape="rect" id="node3" href="$blockchain_8cpp.html" title="Implements the BlockChain class used to manage, load, save and publish any number of Block objects..." alt="" coords="129,80,259,107"/>
 <area shape="rect" id="node4" href="$keys_8cpp.html" title="Implements the KeyPair class used to manage, load, save and generate a public and private pair of RSA..." alt="" coords="284,80,381,107"/>
 <area shape="rect" id="node5" href="$main_8cpp_source.html" title="src/main.cpp" alt="" coords="405,80,503,107"/>
 </map>

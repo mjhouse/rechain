@@ -5,6 +5,7 @@
 */
 
 #include "keys.hpp"
+#include "block.hpp"
 
 #include <cryptopp/osrng.h>
 #include <cryptopp/hex.h>
@@ -169,6 +170,19 @@ bool KeyPair::generate(){
 }
 
 /*
+	Check keys are valid
+*/
+bool KeyPair::is_valid(){
+	/* Create a random generator */
+	CryptoPP::AutoSeededRandomPool rng;
+
+	bool pub_valid = this->public_key.Validate(rng,2);
+	bool pri_valid = this->private_key.Validate(rng,2);
+
+	return ( pub_valid && pri_valid );
+}
+
+/*
 	Sign a given string of data.
 */
 std::string KeyPair::sign( std::string data ){
@@ -190,6 +204,26 @@ std::string KeyPair::sign( std::string data ){
 
 	/* Return the result */
 	return signature;
+}
+
+bool KeyPair::sign( std::shared_ptr<Block> block ){
+
+	if(this->is_valid()){
+		// Set the public key on the block
+		block->set_public_key( this->get_public_key() );
+
+		// Sign the data and get a signature
+		std::string signature = this->sign( block->signed_data() );
+
+		// Set the block signature
+		block->set_signature( signature );
+
+		// Return success
+		return true;
+	}
+
+	// Return failure
+	return false;
 }
 
 /*

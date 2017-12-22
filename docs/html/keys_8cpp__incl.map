@@ -1,3 +1,4 @@
 <map id="src/keys.cpp" name="src/keys.cpp">
-<area shape="rect" id="node2" href="$keys_8hpp.html" title="Defines the KeyPair class used to manage, load, save and generate a public and private pair of RSA256..." alt="" coords="95,80,170,107"/>
+<area shape="rect" id="node2" href="$keys_8hpp.html" title="Defines the KeyPair class used to manage, load, save and generate a public and private pair of RSA256..." alt="" coords="117,80,191,107"/>
+<area shape="rect" id="node5" href="$block_8hpp.html" title="Defines the Block class that contains data to be stored in the BlockChain. " alt="" coords="216,80,295,107"/>
 </map>

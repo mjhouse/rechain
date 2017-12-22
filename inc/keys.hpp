@@ -10,6 +10,9 @@
 #include <cryptopp/rsa.h>
 #include <string>
 
+/** Forward declaration for Block */
+class Block;
+
 /** \brief	Stores hex-encoded public and private
 			keys as strings. Keys are RSA256.
 */
@@ -82,11 +85,22 @@ class KeyPair {
 		*/
 		bool generate();
 
+		/** Check if keys are valid
+			\returns True if keys are valid
+		*/
+		bool is_valid();
+
 		/** Sign a string.
 			\param data the string to sign.
 			\returns the signature
 		*/
 		std::string sign( std::string data );
+
+		/** Sign a Block.
+			\param block The Block to sign.
+			\returns The signature
+		*/
+		bool sign( std::shared_ptr<Block> block );
 
 		/** Verify a signature.
 			\param data the data that was signed

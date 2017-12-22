@@ -145,8 +145,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a83038ddc83fee8ded8f79ae120f638df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d73c5cf28b839eaee85afd5fa0f1360"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#a0d73c5cf28b839eaee85afd5fa0f1360">generate</a> ()</td></tr>
 <tr class="separator:a0d73c5cf28b839eaee85afd5fa0f1360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af635d9d32acf6ea68602ca5e223b9157"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#af635d9d32acf6ea68602ca5e223b9157">is_valid</a> ()</td></tr>
+<tr class="separator:af635d9d32acf6ea68602ca5e223b9157"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d56265ca7350bb95c7b9b024844605e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#a9d56265ca7350bb95c7b9b024844605e">sign</a> (std::string data)</td></tr>
 <tr class="separator:a9d56265ca7350bb95c7b9b024844605e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a609f7c0bd6a0616c40fe90eb80240331"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#a609f7c0bd6a0616c40fe90eb80240331">sign</a> (std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt; block)</td></tr>
+<tr class="separator:a609f7c0bd6a0616c40fe90eb80240331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa02591dc8f26366462087f9f2f487b1b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#aa02591dc8f26366462087f9f2f487b1b">verify</a> (std::string data, std::string signature)</td></tr>
 <tr class="separator:aa02591dc8f26366462087f9f2f487b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -159,7 +163,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00016">16</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00019">19</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa6fe5cf65aacbcf05ce2ea854d03b590"></a>
 <div class="memitem">
@@ -183,7 +187,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The constructor </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00023">23</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00026">26</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
@@ -218,7 +222,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00030">30</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00031">31</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -244,7 +248,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The destructor </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00032">32</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00035">35</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
@@ -263,7 +267,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Generate a new key pair. </p><dl class="section return"><dt>Returns</dt><dd>true if key generation is successful </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00142">142</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00143">143</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +285,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the private key </p><dl class="section return"><dt>Returns</dt><dd>the hex-encoded private key </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00035">35</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00036">36</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -299,7 +303,25 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the public key </p><dl class="section return"><dt>Returns</dt><dd>the hex-encoded public key </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00051">51</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00052">52</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af635d9d32acf6ea68602ca5e223b9157"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool KeyPair::is_valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check if keys are valid </p><dl class="section return"><dt>Returns</dt><dd>True if keys are valid </dd></dl>
+
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00175">175</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +357,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if load is successful </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00135">135</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00136">136</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -360,7 +382,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if key was loaded </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00091">91</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00092">92</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -385,7 +407,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if key was loaded </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00111">111</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00112">112</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -421,7 +443,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if save is successful. </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00071">71</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00072">72</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +467,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00045">45</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00046">46</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -469,7 +491,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00061">61</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00062">62</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -494,7 +516,32 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the signature </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00174">174</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00188">188</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a609f7c0bd6a0616c40fe90eb80240331"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool KeyPair::sign </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt;&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sign a <a class="el" href="classBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. ">Block</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>The <a class="el" href="classBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. ">Block</a> to sign. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The signature </dd></dl>
+
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00209">209</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -530,7 +577,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if signature is valid </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00198">198</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00232">232</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -554,7 +601,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>the private key </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00019">19</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00022">22</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
@@ -577,7 +624,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>the public key </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00018">18</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00021">21</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
@@ -591,7 +638,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classKeyPair.html">KeyPair</a></li>
-    <li class="footer">Generated on Thu Dec 21 2017 15:32:36 for ReChain by
+    <li class="footer">Generated on Fri Dec 22 2017 16:29:28 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

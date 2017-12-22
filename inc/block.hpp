@@ -8,13 +8,14 @@
 
 #include <cereal/cereal.hpp>
 
-/** Forward declaration of KeyPair */
-class KeyPair;
-
 /** \brief	Manages, hashes and verifies a block of data
 			that is stored in the BlockChain.
 */
 class Block {
+
+	/** So that a KeyPair can sign the Block */
+	friend class KeyPair;
+
 	private:
 		// data
 		std::string message;	/**< Placeholder data */
@@ -33,7 +34,7 @@ class Block {
 		/** Combine data for signing
 			\returns combined data
 		*/
-		std::string partial_data();
+		std::string signed_data();
 
 		/** Combine data for hashing
 			\returns combined data
@@ -54,16 +55,20 @@ class Block {
 		*/
 		std::string get_hash();
 
-		/** Publish the block, signing with the given keys.
-			\param keys the KeyPair to sign the block with.
+		/** Try to publish the block
 			\returns true if publish succeeded.
 		*/
-		bool publish( KeyPair keys );
+		bool publish();
 
 		/** Check if the block has correct hash and signature
 			\returns true if block is valid
 		*/
 		bool is_valid();
+
+		/** Check if block is signed correctly
+			\returns true if block is signed
+		*/
+		bool is_signed();
 
 		/** Get the message
 			\returns the block message
@@ -104,6 +109,16 @@ class Block {
 			\param r the hash of the referenced block
 		*/
 		void set_reference( std::string r ){ this->reference = r; }
+
+		/** Get the public key
+			\returns The public key as a hex-encoded string
+		*/
+		std::string get_public_key(){ return this->public_key; }
+
+		/** Set the public key
+			\param p The public key as a hex-encoded string
+		*/
+		void set_public_key( std::string p ){ this->public_key = p; }
 
 		/** Get the timestamp
 			\returns the timestamp

@@ -7,29 +7,42 @@
 #include "block.hpp"
 #include "keys.hpp"
 
+#include <cereal/types/memory.hpp>	/* For serializing smart pointers */
 #include <cereal/archives/json.hpp>	/* For the JSON archives */
 #include <fstream>					/* File i/o */
 
 /* Publish a new block, signing it with the given keys */
-void BlockChain::publish( Block new_block, KeyPair keys ){
+bool BlockChain::publish( std::shared_ptr<Block> new_block ){
 
-	// if the chain is empty, previous is empty (genesis block)
-	// otherwise previous should point to the last block
-	if(!this->chain.empty())
-		new_block.set_previous(this->chain.back().get_hash());
-	else
-		new_block.set_previous("");
+	if(new_block->is_signed()){
+		// if the chain is empty, previous is empty (genesis block)
+		// otherwise previous should point to the last block
+		if(!this->chain.empty())
+			new_block->set_previous(this->chain.back()->get_hash());
+		else
+			new_block->set_previous("");
 
-	// Loop until the block is published
-	while(!new_block.publish(keys));
+		// Loop until the block is published
+		while(!new_block->publish());
 
-	// Add the new block to the chain
-	this->chain.push_back(new_block);
+		// Add the new block to the chain
+		this->chain.push_back(new_block);
+
+		// Return success
+		return true;
+	}
+
+	// Return failure
+	return false;
 }
 
 /* Get a reference to a block */
-Block& BlockChain::get( int i ){
-	return this->chain[i];
+std::weak_ptr<Block> BlockChain::get( unsigned int i ){
+	std::weak_ptr<Block> ref;
+	if( this->chain.size() > i ){
+		ref = this->chain[i];
+	}
+	return ref;
 }
 
 /* Print for debugging */
@@ -37,7 +50,7 @@ void BlockChain::print(){
 	std::cout << "-- BLOCKCHAIN --" << std::endl;
 	for(unsigned int i = 0; i < this->chain.size(); ++i){
 		std::cout << "BLOCK #" << i << std::endl;
-		this->chain[i].print();
+		this->chain[i]->print();
 	}
 }
 
