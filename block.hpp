@@ -6,7 +6,7 @@
 #ifndef BLOCK_HPP
 #define BLOCK_HPP
 
-#include <cereal/cereal.hpp>
+#include <dependencies/cereal/cereal.hpp>
 
 /** \brief	Manages, hashes and verifies a block of data
 			that is stored in the BlockChain.
@@ -20,6 +20,7 @@ class Block {
 		// data
 		std::string message;	/**< Placeholder data */
 		std::string previous;	/**< The hash of the previous block */
+		std::string block_hash;	/**< The hash of this block */
 		std::string public_key;	/**< The public key used to sign this block */
 
 		// author information
@@ -136,6 +137,7 @@ class Block {
 			archive(
 				this->message,
 				this->previous,
+				this->block_hash,
 				this->public_key,
 				this->signature,
 				this->reference,

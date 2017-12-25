@@ -20,15 +20,15 @@
 #include <climits>
 #include <string>
 
-#define MIN_NONCE 	1		/* Minimum nonce value */
-#define MAX_NONCE 	10000	/* Maximum nonce value */
+#define MIN_NONCE 	1		/**< Minimum nonce value */
+#define MAX_NONCE 	10000	/**< Maximum nonce value */
 
-/* Maximum hash value (smaller increases difficulty) */
+/** Maximum hash value (smaller increases difficulty) */
 #define HASH_MAX  	"0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 
-/*
-	Calculates the current timestamp in seconds
+/** Calculates the current timestamp in seconds
 	since the epoch (Jan 1, 1970)
+	\returns A Unix timestamp as a long
 */
 long get_epoch_timestamp(){
 	// Get the time from the system
@@ -44,8 +44,8 @@ long get_epoch_timestamp(){
 	return (long)seconds;
 }
 
-/*
-	Generates a random number between MIN_NONCE and MAX_NONCE
+/** Generates a random number between MIN_NONCE and MAX_NONCE
+	\returns A random long betwen MIN_NONCE and MAX_NONCE
 */
 long get_nonce(){
 	// Unwrap the namespace for convenience
@@ -112,6 +112,9 @@ std::string Block::get_hash(){
 		new CryptoPP::HashFilter(hash,
 			new CryptoPP::HexEncoder(
 				new CryptoPP::StringSink(digest))));
+
+	// Cache the hash for reference
+	this->block_hash = digest;
 
 	// Return digest
 	return digest;

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['save',['save',['../classBlockChain.html#a1b9b79fc37841b05b70f3eda695bda9f',1,'BlockChain::save()'],['../classKeyPair.html#a2a061771418f4e4457c854241b19e5d9',1,'KeyPair::save()']]],
+  ['save',['save',['../classBlockChain.html#afbc73476561d24e8c6d1f6c49c83b078',1,'BlockChain::save()'],['../classBlockChain.html#a1b9b79fc37841b05b70f3eda695bda9f',1,'BlockChain::save(std::string fn)'],['../classKeyPair.html#a2a061771418f4e4457c854241b19e5d9',1,'KeyPair::save()']]],
   ['serialize',['serialize',['../classBlock.html#a4024739a93a0e65932d643a5ecc5ed58',1,'Block::serialize()'],['../classBlockChain.html#a87699a6eb7eae5814ba6d5f5029beee7',1,'BlockChain::serialize()']]],
   ['set_5fmessage',['set_message',['../classBlock.html#a27f1cea44eaafad3329402c9994111b9',1,'Block']]],
   ['set_5fprevious',['set_previous',['../classBlock.html#a8befbba81099799eeb1177039909c12d',1,'Block']]],

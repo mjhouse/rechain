@@ -22,6 +22,7 @@ var classBlock =
     [ "set_signature", "classBlock.html#a6b65985d27c02c094c1a20611115fad8", null ],
     [ "signed_data", "classBlock.html#a3052ccec2005104650fe1e72a3641949", null ],
     [ "KeyPair", "classBlock.html#a0732e42a3a6c26af554ef0d18a933e61", null ],
+    [ "block_hash", "classBlock.html#abede326ea3da0a635ecb836ed881ca81", null ],
     [ "counter", "classBlock.html#a96a75420cb1bb31ac1d6c3d9a79e2db1", null ],
     [ "message", "classBlock.html#aecb8c4ea2bf54e178e2561c8e426aca6", null ],
     [ "nonce", "classBlock.html#a5dc13805185f799f0057e3dd9c5179a7", null ],

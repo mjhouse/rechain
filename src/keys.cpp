@@ -5,7 +5,7 @@
 */
 
 #include "keys.hpp"
-#include "block.hpp"
+#include "basic_block.hpp"
 
 #include <cryptopp/osrng.h>
 #include <cryptopp/hex.h>
@@ -89,6 +89,17 @@ bool KeyPair::save( std::string pub_f, std::string priv_f ){
 	return false;
 }
 
+/*
+	Attempt to load a key pair (*.private and *.public) from
+	location 'fn'.
+*/
+bool KeyPair::load( std::string pub_f, std::string priv_f ){
+	return ( this->load_public_key(pub_f) && this->load_private_key(priv_f) );
+}
+
+/*
+	Attempt to load a private key from a file path.
+*/
 bool KeyPair::load_private_key( std::string fn ){
 	/* Open a file handle for the key */
 	std::ifstream pri_file(fn);
@@ -127,14 +138,6 @@ bool KeyPair::load_public_key( std::string fn ){
 
 	/* Return failure */
 	return false;
-}
-
-/*
-	Attempt to load a key pair (*.private and *.public) from
-	location 'fn'.
-*/
-bool KeyPair::load( std::string pub_f, std::string priv_f ){
-	return ( this->load_public_key(pub_f) && this->load_private_key(priv_f) );
 }
 
 /*
@@ -206,7 +209,7 @@ std::string KeyPair::sign( std::string data ){
 	return signature;
 }
 
-bool KeyPair::sign( std::shared_ptr<Block> block ){
+bool KeyPair::sign( std::shared_ptr<BasicBlock> block ){
 
 	if(this->is_valid()){
 		// Set the public key on the block

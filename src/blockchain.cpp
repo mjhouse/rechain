@@ -1,18 +1,18 @@
 /** \file	blockchain.cpp
 	\brief	Implements the BlockChain class used to manage,
-			load, save and publish any number of Block objects.
+			load, save and publish any number of BasicBlock objects.
 */
 
 #include "blockchain.hpp"
-#include "block.hpp"
+#include "basic_block.hpp"
 #include "keys.hpp"
 
-#include <cereal/types/memory.hpp>	/* For serializing smart pointers */
-#include <cereal/archives/json.hpp>	/* For the JSON archives */
+#include <dependencies/cereal/types/memory.hpp>		/* For serializing smart pointers */
+#include <dependencies/cereal/archives/json.hpp>	/* For the JSON archives */
 #include <fstream>					/* File i/o */
 
-/* Publish a new block, signing it with the given keys */
-bool BlockChain::publish( std::shared_ptr<Block> new_block ){
+/* Publish a new block */
+bool BlockChain::publish( std::shared_ptr<BasicBlock> new_block ){
 
 	if(new_block->is_signed()){
 		// if the chain is empty, previous is empty (genesis block)
@@ -37,21 +37,39 @@ bool BlockChain::publish( std::shared_ptr<Block> new_block ){
 }
 
 /* Get a reference to a block */
-std::weak_ptr<Block> BlockChain::get( unsigned int i ){
-	std::weak_ptr<Block> ref;
+std::shared_ptr<BasicBlock> BlockChain::get( unsigned int i ){
+	std::shared_ptr<BasicBlock> ref;
 	if( this->chain.size() > i ){
 		ref = this->chain[i];
 	}
 	return ref;
 }
 
-/* Print for debugging */
-void BlockChain::print(){
-	std::cout << "-- BLOCKCHAIN --" << std::endl;
-	for(unsigned int i = 0; i < this->chain.size(); ++i){
-		std::cout << "BLOCK #" << i << std::endl;
-		this->chain[i]->print();
+/* Get a reference to a block */
+std::shared_ptr<BasicBlock> BlockChain::get( std::string h ){
+	std::shared_ptr<BasicBlock> ref;
+	for( unsigned int i = 0; i < this->chain.size(); ++i ){
+		if( h.compare(this->chain[i]->get_hash()) == 0 ){
+			ref = this->chain[i];
+		}
 	}
+	return ref;
+}
+
+/*
+	If the BlockChain has a filename associated with it
+	already, load from there.
+*/
+bool BlockChain::load(){
+	// Check for a filename
+	if(!this->filename.empty()){
+
+		// Load from the saved filename and return
+		return this->load(this->filename);
+	}
+
+	// Return failure
+	return false;
 }
 
 /*
@@ -59,8 +77,11 @@ void BlockChain::print(){
 	from it
 */
 bool BlockChain::load( std::string fn ){
-	// open the file
+	// Open the file
 	std::ifstream ifs(fn);
+
+	// Save the file path
+	this->filename = fn;
 
 	// Check that the file is open
 	if( ifs.is_open() ){
@@ -80,11 +101,30 @@ bool BlockChain::load( std::string fn ){
 }
 
 /*
+	If the BlockChain has a filename associated with it
+	already, save there.
+*/
+bool BlockChain::save(){
+	// Check for a filename
+	if(!this->filename.empty()){
+
+		// Load from the saved filename and return
+		return this->save(this->filename);
+	}
+
+	// Return failure
+	return false;
+}
+
+/*
 	Save the BlockChain to the given file path
 */
 bool BlockChain::save( std::string fn ){
-	// open the file
+	// Open the file
 	std::ofstream ofs(fn);
+
+	// Save the file path
+	this->filename = fn;
 
 	// Check that the file is open
 	if( ofs.is_open() ){

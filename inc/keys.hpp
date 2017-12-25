@@ -11,7 +11,7 @@
 #include <string>
 
 /** Forward declaration for Block */
-class Block;
+class BasicBlock;
 
 /** \brief	Stores hex-encoded public and private
 			keys as strings. Keys are RSA256.
@@ -61,6 +61,13 @@ class KeyPair {
 		*/
 		bool save( std::string pub_f, std::string priv_f );
 
+		/** Load keys at the given path.
+			\param pub_f the path to the public key file
+			\param priv_f the path to the private key file
+			\returns true if load is successful
+		*/
+		bool load( std::string pub_f, std::string priv_f );
+
 		/** Load a private key from the path
 			\param fn the path to the private key
 			\returns true if key was loaded
@@ -72,13 +79,6 @@ class KeyPair {
 			\returns true if key was loaded
 		*/
 		bool load_public_key( std::string fn );
-
-		/** Load keys at the given path.
-			\param pub_f the path to the public key file
-			\param priv_f the path to the private key file
-			\returns true if load is successful
-		*/
-		bool load( std::string pub_f, std::string priv_f );
 
 		/** Generate a new key pair.
 			\returns true if key generation is successful
@@ -100,7 +100,7 @@ class KeyPair {
 			\param block The Block to sign.
 			\returns The signature
 		*/
-		bool sign( std::shared_ptr<Block> block );
+		bool sign( std::shared_ptr<BasicBlock> block );
 
 		/** Verify a signature.
 			\param data the data that was signed

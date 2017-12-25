@@ -8,7 +8,7 @@ BLDDIR = obj
 SRCDIR = src
 INCDIR = inc
 
-INC = -I$(INCDIR)
+INC = -I$(INCDIR) -I$(INCDIR)/dependencies
 
 # find all source files in src
 SOURCES  := $(shell find src/ -type f -name '*.cpp')
