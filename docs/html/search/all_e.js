@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['verifier',['Verifier',['../keys_8cpp.html#af37d1e36b5a0745b4daff8d664febe1d',1,'keys.cpp']]],
-  ['verify',['verify',['../classKeyPair.html#aa02591dc8f26366462087f9f2f487b1b',1,'KeyPair']]]
+  ['timestamp',['timestamp',['../classBasicBlock.html#a879404f7d8ea4e20e8439b6a7f8b520c',1,'BasicBlock']]],
+  ['type',['type',['../classBasicBlock.html#ac8f86f7fd105ce4540b2b576c60daf23',1,'BasicBlock::type()'],['../classDataBlock.html#a7565fd4c880c1407da1dfe6e9ffb76ef',1,'DataBlock::type()'],['../classSignatureBlock.html#a429863653b28945554bb715c588ee1a9',1,'SignatureBlock::type()']]]
 ];

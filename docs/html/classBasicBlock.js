@@ -1,0 +1,27 @@
+var classBasicBlock =
+[
+    [ "BasicBlock", "classBasicBlock.html#a64726006c8f1fff74a4b97ff5827ccf0", null ],
+    [ "~BasicBlock", "classBasicBlock.html#a98a03933e831cb54c02b5068ebc30478", null ],
+    [ "full_data", "classBasicBlock.html#ace7260cd92624d81773eb6f7c5f491f8", null ],
+    [ "get_hash", "classBasicBlock.html#a101ce362c56c902490f16986109f9257", null ],
+    [ "get_previous", "classBasicBlock.html#a5404fd028731e7ced801c7bbceefda0f", null ],
+    [ "get_public_key", "classBasicBlock.html#ac25f56c15abcb5fc5ab462bf019cd7b4", null ],
+    [ "get_signature", "classBasicBlock.html#a4e2ca0f8009a394c949eebd4efc12492", null ],
+    [ "get_timestamp", "classBasicBlock.html#a533d4aa98cfb6454096130ce95ad1c4c", null ],
+    [ "is_signed", "classBasicBlock.html#a7fa5bf8e1daa446aeca5a306957e1971", null ],
+    [ "is_valid", "classBasicBlock.html#a7f7a94d7f7fef631a6416cfb807b6967", null ],
+    [ "publish", "classBasicBlock.html#a40497878b5656acb0aa96320582b1f73", null ],
+    [ "serialize", "classBasicBlock.html#a9a3d786a91ab63df46a1b130349c58b6", null ],
+    [ "set_previous", "classBasicBlock.html#ac84b4d06dd0636135ab185335f76c21b", null ],
+    [ "set_public_key", "classBasicBlock.html#addb76033dc47c7873dbfbbea69be0a86", null ],
+    [ "set_signature", "classBasicBlock.html#a8b0e47eb54742354a0695eaf1b8a0150", null ],
+    [ "signed_data", "classBasicBlock.html#aaf6be88c1c168be5db1f20c33e79ad78", null ],
+    [ "type", "classBasicBlock.html#ac8f86f7fd105ce4540b2b576c60daf23", null ],
+    [ "KeyPair", "classBasicBlock.html#a0732e42a3a6c26af554ef0d18a933e61", null ],
+    [ "counter", "classBasicBlock.html#a91052213afe42ee28c03e898b5f2f7bb", null ],
+    [ "nonce", "classBasicBlock.html#a28fa007749317e1484349d2608f9baf3", null ],
+    [ "previous", "classBasicBlock.html#a22498030b5817fadf600fb2b239d5b3a", null ],
+    [ "public_key", "classBasicBlock.html#ae7dd523dd88ed27c1b141cab1e4e9299", null ],
+    [ "signature", "classBasicBlock.html#ae6276e799c546f5eb4030c93bbdc614b", null ],
+    [ "timestamp", "classBasicBlock.html#a879404f7d8ea4e20e8439b6a7f8b520c", null ]
+];

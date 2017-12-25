@@ -14,7 +14,7 @@ var classKeyPair =
     [ "set_private_key", "classKeyPair.html#a96fefbe94443c6cbfd1b078390396ba3", null ],
     [ "set_public_key", "classKeyPair.html#a3b9a946e7411c21673082f32a9de6c81", null ],
     [ "sign", "classKeyPair.html#a9d56265ca7350bb95c7b9b024844605e", null ],
-    [ "sign", "classKeyPair.html#a609f7c0bd6a0616c40fe90eb80240331", null ],
+    [ "sign", "classKeyPair.html#aa755f91162b117f10256cc6dbc1625cc", null ],
     [ "verify", "classKeyPair.html#aa02591dc8f26366462087f9f2f487b1b", null ],
     [ "private_key", "classKeyPair.html#a380c688dd5e468e63462774da2b3c8d4", null ],
     [ "public_key", "classKeyPair.html#a515a9716f3a1bb7c40fe28ebf1d143cc", null ]

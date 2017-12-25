@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['_7eblock',['~Block',['../classBlock.html#a19d1bd0e1cef6a865ed2745a2e648405',1,'Block']]],
-  ['_7eblockchain',['~BlockChain',['../classBlockChain.html#a671e66ac51d33a75495a09398a0f764e',1,'BlockChain']]],
-  ['_7ekeypair',['~KeyPair',['../classKeyPair.html#a3a44152cc8f1f9db589603c73b03cddb',1,'KeyPair']]]
+  ['type',['type',['../classBasicBlock.html#ac8f86f7fd105ce4540b2b576c60daf23',1,'BasicBlock::type()'],['../classDataBlock.html#a7565fd4c880c1407da1dfe6e9ffb76ef',1,'DataBlock::type()'],['../classSignatureBlock.html#a429863653b28945554bb715c588ee1a9',1,'SignatureBlock::type()']]]
 ];

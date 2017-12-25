@@ -1,4 +1,4 @@
 <map id="inc/blockchain.hpp" name="inc/blockchain.hpp">
-<area shape="rect" id="node2" href="$blockchain_8cpp.html" title="Implements the BlockChain class used to manage, load, save and publish any number of Block objects..." alt="" coords="5,80,136,107"/>
+<area shape="rect" id="node2" href="$blockchain_8cpp.html" title="Implements the BlockChain class used to manage, load, save and publish any number of BasicBlock objec..." alt="" coords="5,80,136,107"/>
 <area shape="rect" id="node3" href="$main_8cpp_source.html" title="src/main.cpp" alt="" coords="161,80,258,107"/>
 </map>

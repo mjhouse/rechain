@@ -1,4 +1,4 @@
-/** \file	block.hpp
+/** \file	data_block.hpp
 	\brief	Defines the DataBlock class that contains data to be stored
 			in the BlockChain.
 */

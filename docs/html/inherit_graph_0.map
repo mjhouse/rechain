@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classBlock.html" title="Block" alt="" coords="5,5,60,32"/>
+<area shape="rect" id="node1" href="$classBasicBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. " alt="" coords="5,31,93,57"/>
+<area shape="rect" id="node2" href="$classDataBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. " alt="" coords="155,5,238,32"/>
+<area shape="rect" id="node3" href="$classSignatureBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. " alt="" coords="141,56,252,83"/>
 </map>

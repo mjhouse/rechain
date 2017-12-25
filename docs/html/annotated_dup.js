@@ -1,6 +1,8 @@
 var annotated_dup =
 [
-    [ "Block", "classBlock.html", "classBlock" ],
+    [ "BasicBlock", "classBasicBlock.html", "classBasicBlock" ],
     [ "BlockChain", "classBlockChain.html", "classBlockChain" ],
-    [ "KeyPair", "classKeyPair.html", "classKeyPair" ]
+    [ "DataBlock", "classDataBlock.html", "classDataBlock" ],
+    [ "KeyPair", "classKeyPair.html", "classKeyPair" ],
+    [ "SignatureBlock", "classSignatureBlock.html", "classSignatureBlock" ]
 ];

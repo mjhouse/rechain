@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['keypair',['KeyPair',['../classKeyPair.html#aa6fe5cf65aacbcf05ce2ea854d03b590',1,'KeyPair::KeyPair()'],['../classKeyPair.html#a859a3f3ff1e9b1dbd23e1d13f70e8b34',1,'KeyPair::KeyPair(std::string pub_f, std::string priv_f)']]]
+  ['is_5fsigned',['is_signed',['../classBasicBlock.html#a7fa5bf8e1daa446aeca5a306957e1971',1,'BasicBlock']]],
+  ['is_5fvalid',['is_valid',['../classBasicBlock.html#a7f7a94d7f7fef631a6416cfb807b6967',1,'BasicBlock::is_valid()'],['../classKeyPair.html#af635d9d32acf6ea68602ca5e223b9157',1,'KeyPair::is_valid()']]]
 ];

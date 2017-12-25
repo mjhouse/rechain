@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['message',['message',['../classBlock.html#aecb8c4ea2bf54e178e2561c8e426aca6',1,'Block']]]
+  ['nonce',['nonce',['../classBasicBlock.html#a28fa007749317e1484349d2608f9baf3',1,'BasicBlock']]]
 ];

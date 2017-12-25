@@ -72,6 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -149,8 +150,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af635d9d32acf6ea68602ca5e223b9157"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d56265ca7350bb95c7b9b024844605e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#a9d56265ca7350bb95c7b9b024844605e">sign</a> (std::string data)</td></tr>
 <tr class="separator:a9d56265ca7350bb95c7b9b024844605e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a609f7c0bd6a0616c40fe90eb80240331"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#a609f7c0bd6a0616c40fe90eb80240331">sign</a> (std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt; block)</td></tr>
-<tr class="separator:a609f7c0bd6a0616c40fe90eb80240331"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa755f91162b117f10256cc6dbc1625cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#aa755f91162b117f10256cc6dbc1625cc">sign</a> (std::shared_ptr&lt; <a class="el" href="classBasicBlock.html">BasicBlock</a> &gt; block)</td></tr>
+<tr class="separator:aa755f91162b117f10256cc6dbc1625cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa02591dc8f26366462087f9f2f487b1b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html#aa02591dc8f26366462087f9f2f487b1b">verify</a> (std::string data, std::string signature)</td></tr>
 <tr class="separator:aa02591dc8f26366462087f9f2f487b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -520,22 +521,22 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a609f7c0bd6a0616c40fe90eb80240331"></a>
+<a class="anchor" id="aa755f91162b117f10256cc6dbc1625cc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool KeyPair::sign </td>
           <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classBasicBlock.html">BasicBlock</a> &gt;&#160;</td>
           <td class="paramname"><em>block</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sign a <a class="el" href="classBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. ">Block</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sign a Block. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">block</td><td>The <a class="el" href="classBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. ">Block</a> to sign. </td></tr>
+    <tr><td class="paramname">block</td><td>The Block to sign. </td></tr>
   </table>
   </dd>
 </dl>
@@ -638,7 +639,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classKeyPair.html">KeyPair</a></li>
-    <li class="footer">Generated on Mon Dec 25 2017 12:45:57 for ReChain by
+    <li class="footer">Generated on Mon Dec 25 2017 15:15:59 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
