@@ -1,37 +1,46 @@
+#include <map>
 #include "blockchain.hpp"
-#include "data_block.hpp"
-#include "signature_block.hpp"
+#include "block.hpp"
 #include "keys.hpp"
+
+
+void print_chain( std::unique_ptr<BlockChain>& blockchain ){
+	for( int i = 0; i < blockchain->size(); ++i ){
+		std::cout 	<< "---------"	 << std::endl
+ 					<< "Message:   " << blockchain->get(i)->get_message()	<< std::endl
+					<< "Hash:      " << blockchain->get(i)->get_hash()		<< std::endl
+					<< "Reference: " << blockchain->get(i)->get_reference()	<< std::endl
+					<< "BlockType: " << blockchain->get(i)->type()			<< std::endl;
+	}
+}
 
 int main( int argc, char** argv ){
 
-	// set up some blocks
-	std::shared_ptr<DataBlock> genesis(new DataBlock());
-	genesis->set_message("This is the genesis block");
-
-	std::shared_ptr<DataBlock> blockA(new DataBlock());
-	blockA->set_message("This is the first real block");
-
-	std::shared_ptr<DataBlock> blockB(new DataBlock());
-	blockB->set_message("This is the second real block");
 
 	// create the blockchain and give it a filename to load from
 	std::unique_ptr<BlockChain> blockchain( new BlockChain( "rechain.blockchain" ) );
 
 	// create a genesis key pair and a normal user
-	KeyPair key_pair("data/rsa.public","data/rsa.private");
+	KeyPair owner_keys("data/rsa.public","data/rsa.private");
 	KeyPair user1_keys("data/user1.public","data/user1.private");
 
-	key_pair.sign(genesis);
-	user1_keys.sign(blockA);
-	user1_keys.sign(blockB);
+	// set up some blocks
+	blockchain->create_genesis_block( owner_keys );
+	blockchain->create_data_block( "This is the first real block", user1_keys );
+	blockchain->create_data_block( "This is the second real block", user1_keys );
+	blockchain->create_data_block( "This is the third real block", owner_keys );
+	blockchain->create_signature_block( blockchain->get(1), owner_keys );
+	blockchain->create_signature_block( blockchain->get(3), user1_keys );
 
-	// publish each of the blocks
-	blockchain->publish( genesis );
-	blockchain->publish( blockA	);
-	blockchain->publish( blockB	);
+	print_chain(blockchain);
 
-	std::shared_ptr<BasicBlock> target = blockchain->get(1);
+	// -------------------------------------------------------------------------
+	// Calculate trust
+	std::map<std::string,int> user_trust = blockchain->get_author_trust();
+	for( const auto& sm_pair : user_trust ){
+		std::cout << sm_pair.first << std::endl;
+		std::cout << sm_pair.second << std::endl;
+	}
 
 	//blockchain->save();
 

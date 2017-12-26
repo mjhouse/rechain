@@ -1,4 +1,4 @@
-/** \file	block.hpp
+/** \file	data_block.hpp
 	\brief	Defines the Block class that contains data to be stored
 			in the BlockChain.
 */
@@ -8,24 +8,32 @@
 
 #include <dependencies/cereal/cereal.hpp>
 
+/** Enumberated constants for the type of
+	block (DataBlock or SignatureBlock).
+*/
+enum BlockType {
+	DATA_BLOCK,		/**< DataBlock type*/
+	SIGNATURE_BLOCK	/**< SignatureBlock type*/
+};
+
+
 /** \brief	Manages, hashes and verifies a block of data
 			that is stored in the BlockChain.
 */
 class Block {
 
-	/** So that a KeyPair can sign the Block */
+	/** So that a KeyPair can sign the BasicBlock */
 	friend class KeyPair;
 
 	private:
 		// data
 		std::string message;	/**< Placeholder data */
 		std::string previous;	/**< The hash of the previous block */
-		std::string block_hash;	/**< The hash of this block */
 		std::string public_key;	/**< The public key used to sign this block */
 
-		// author information
+		// signature information
 		std::string signature;	/**< The signature of this block */
-		std::string reference;	/**< A reference for signature blocks */
+		std::string reference;	/**< The reference if one exists */
 
 		// hashing variables
 		long nonce;				/**< Randomly generated value to modify hash */
@@ -42,14 +50,30 @@ class Block {
 		*/
 		std::string full_data();
 
+		/** Calculates the current timestamp in seconds
+			since the epoch (Jan 1, 1970)
+			\returns A Unix timestamp as a long
+		*/
+		long get_epoch_timestamp();
+
+		/** Generates a random number between MIN_NONCE and MAX_NONCE
+			\returns A random long betwen MIN_NONCE and MAX_NONCE
+		*/
+		long get_nonce();
+
 	public:
 		/** Empty constructor
 		*/
-		Block(): nonce(0), timestamp(0), counter(0) {}
+		Block() : nonce(0), timestamp(0), counter(0) {}
 
 		/** Empty destructor
 		*/
 		~Block(){}
+
+		/** Get the block type
+			\returns A BlockType
+		*/
+		BlockType type();
 
 		/** Get a hash of this block
 			\returns the full hash of the block
@@ -91,26 +115,6 @@ class Block {
 		*/
 		void set_previous( std::string p ){ this->previous = p; }
 
-		/** Get the signature for this block
-			\returns the signature
-		*/
-		std::string get_signature(){ return this->signature; }
-
-		/** Set the signature for this block.
-			\param s the signature to set
-		*/
-		void set_signature( std::string s ){ this->signature = s; }
-
-		/** Get the referenced block
-			\returns the hash of the referenced block
-		*/
-		std::string get_reference(){ return this->reference; }
-
-		/** Set the referenced block
-			\param r the hash of the referenced block
-		*/
-		void set_reference( std::string r ){ this->reference = r; }
-
 		/** Get the public key
 			\returns The public key as a hex-encoded string
 		*/
@@ -121,13 +125,32 @@ class Block {
 		*/
 		void set_public_key( std::string p ){ this->public_key = p; }
 
+		/** Get the signature for this block
+			\returns the signature
+		*/
+		std::string get_signature(){ return this->signature; }
+
+		/** Set the signature for this block.
+			\param s the signature to set
+		*/
+		void set_signature( std::string s ){ this->signature = s; }
+
+		/** Get the reference
+			\returns the block reference
+		*/
+		std::string get_reference(){ return this->reference; }
+
+		/** Set the reference
+			\param r the reference to set
+		*/
+		void set_reference( std::string r ){ this->reference = r; }
+
+
 		/** Get the timestamp
 			\returns the timestamp
 		*/
 		long get_timestamp(){ return this->timestamp; }
 
-		/** Print data for debugging */
-		void print();
 
 		/** Serialize function for the cereal lib.
 			\param archive an archive to serialize the block into.
@@ -137,7 +160,6 @@ class Block {
 			archive(
 				this->message,
 				this->previous,
-				this->block_hash,
 				this->public_key,
 				this->signature,
 				this->reference,

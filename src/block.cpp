@@ -1,7 +1,6 @@
 /** \file	block.cpp
 	\brief	Implements the Block class used to manage
-			data (publish, hash etc.) stored in the
-			BlockChain.
+			data stored in the BlockChain.
 */
 
 #include "block.hpp"
@@ -13,6 +12,7 @@
 #include <cryptopp/hex.h>		// for the HexEncoder
 
 // system includes
+#include <string>
 #include <iostream>
 #include <sstream>
 
@@ -30,7 +30,7 @@
 	since the epoch (Jan 1, 1970)
 	\returns A Unix timestamp as a long
 */
-long get_epoch_timestamp(){
+long Block::get_epoch_timestamp(){
 	// Get the time from the system
 	auto tp = std::chrono::system_clock::now();
 
@@ -47,7 +47,7 @@ long get_epoch_timestamp(){
 /** Generates a random number between MIN_NONCE and MAX_NONCE
 	\returns A random long betwen MIN_NONCE and MAX_NONCE
 */
-long get_nonce(){
+long Block::get_nonce(){
 	// Unwrap the namespace for convenience
 	using CryptoPP::Integer;
 
@@ -58,23 +58,30 @@ long get_nonce(){
 	return Integer(rng,Integer(MIN_NONCE),Integer(MAX_NONCE)).ConvertToLong();
 }
 
+BlockType Block::type(){
+	if(this->reference.empty()){
+		return BlockType::DATA_BLOCK;
+	} else {
+		return BlockType::SIGNATURE_BLOCK;
+	}
+}
+
 /*
 	Get a string containing data in the block with
 	the exception of the previous hash and the signature.
 */
 std::string Block::signed_data(){
-	// Create a stringstream
+	// Create a string stream
 	std::stringstream stream;
 
-	// Feed each variable as a string
-	// to the stream
+	// Feed the partial data to the stream
 	stream	<< this->message
-			<< this->public_key
-			<< this->reference;
+			<< this->public_key;
 
 	// Return as a std::string
 	return stream.str();
 }
+
 
 /*
 	Get a string containing all data in the block
@@ -83,7 +90,7 @@ std::string Block::full_data(){
 	// Create a string stream
 	std::stringstream stream;
 
-	// Feed the partial data as well as
+	// Feed the signed data as well as
 	// previous and the signature to the stream
 	stream	<< this->signed_data()
 			<< std::to_string(this->nonce)
@@ -102,19 +109,13 @@ std::string Block::full_data(){
 std::string Block::get_hash(){
 	// Create a hash
 	CryptoPP::SHA256 hash;
-
-	// Get the full data string
-	std::string data = this->full_data();
 	std::string digest;
 
 	// Hash, hex encode and save to digest
-	CryptoPP::StringSource s(data,true,
+	CryptoPP::StringSource s(this->full_data(),true,
 		new CryptoPP::HashFilter(hash,
 			new CryptoPP::HexEncoder(
 				new CryptoPP::StringSink(digest))));
-
-	// Cache the hash for reference
-	this->block_hash = digest;
 
 	// Return digest
 	return digest;
@@ -128,8 +129,8 @@ bool Block::publish(){
 	this->counter	= (this->counter >= UINT_MAX-1) ? 0 : this->counter + 1;
 
 	// Update the nonce and timestamp
-	this->nonce		 = get_nonce();
-	this->timestamp  = get_epoch_timestamp();
+	this->nonce		 = this->get_nonce();
+	this->timestamp  = this->get_epoch_timestamp();
 
 	// Hash this block
 	std::string hash = this->get_hash();
@@ -174,21 +175,4 @@ bool Block::is_signed(){
 	}
 
 	return false;
-}
-
-/*
-	Print function for debugging
-*/
-void Block::print(){
-	std::cout << "--------------" << std::endl <<
-		"	hash:       " << this->get_hash() << std::endl <<
-		"	previous:   " << this->previous	 << std::endl <<
-		"	public_key: " << this->public_key.substr(0,20) + "..." << std::endl <<
-		"	signature:  " << this->signature	 << std::endl <<
-		"	reference:  " << this->reference	 << std::endl <<
-		"	message:    " << this->message	 << std::endl <<
-		"	timestamp:  " << this->timestamp  << std::endl <<
-		"	count:      " << this->counter	 << std::endl <<
-		"	nonce:      " << this->nonce		 << std::endl <<
-		"---------------" << std::endl;
 }

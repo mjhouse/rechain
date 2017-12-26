@@ -11,7 +11,7 @@
 #include <string>
 
 /** Forward declaration for Block */
-class BasicBlock;
+class Block;
 
 /** \brief	Stores hex-encoded public and private
 			keys as strings. Keys are RSA256.
@@ -100,7 +100,7 @@ class KeyPair {
 			\param block The Block to sign.
 			\returns The signature
 		*/
-		bool sign( std::shared_ptr<BasicBlock> block );
+		bool sign( std::shared_ptr<Block> block );
 
 		/** Verify a signature.
 			\param data the data that was signed

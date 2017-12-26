@@ -6,5 +6,7 @@ proof-of-work difficulty in order to stop many transactions from being executed 
 
 Dependencies:
      * cxxopts.hpp
-     * cereal
-     * libcrypto++-dev
+
+	 * cereal
+
+	 * libcrypto++-dev

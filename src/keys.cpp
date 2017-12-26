@@ -5,7 +5,7 @@
 */
 
 #include "keys.hpp"
-#include "basic_block.hpp"
+#include "block.hpp"
 
 #include <cryptopp/osrng.h>
 #include <cryptopp/hex.h>
@@ -209,7 +209,7 @@ std::string KeyPair::sign( std::string data ){
 	return signature;
 }
 
-bool KeyPair::sign( std::shared_ptr<BasicBlock> block ){
+bool KeyPair::sign( std::shared_ptr<Block> block ){
 
 	if(this->is_valid()){
 		// Set the public key on the block
