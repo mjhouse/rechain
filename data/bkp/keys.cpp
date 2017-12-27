@@ -5,7 +5,6 @@
 */
 
 #include "keys.hpp"
-#include "block.hpp"
 
 #include <cryptopp/osrng.h>
 #include <cryptopp/hex.h>
@@ -23,15 +22,8 @@
 using Signer   = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Signer;	 /**< Simplify Signer */
 using Verifier = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Verifier; /**< Simplify Verifier */
 
-/*
-	Overloaded constructor calls 'load' to try
-	and load a key pair (*.private and *.public) at
-	location 'fn'.
-*/
-KeyPair::KeyPair( std::string pub_f, std::string priv_f ){
-	/* Load keys from the given files */
-	this->load(pub_f,priv_f);
-}
+// -----------------------------------------------------------------------------
+// Private Functions
 
 std::string KeyPair::get_private_key(){
 
@@ -64,6 +56,11 @@ void KeyPair::set_public_key( std::string key ){
 	this->public_key.Load(CryptoPP::StringSource(key, true,
 								new CryptoPP::HexDecoder()).Ref());
 }
+
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Public Functions
 
 /*
 	Attempt to save a key pair (*.private and *.public) at
@@ -207,26 +204,6 @@ std::string KeyPair::sign( std::string data ){
 
 	/* Return the result */
 	return signature;
-}
-
-bool KeyPair::sign( std::shared_ptr<Block> block ){
-
-	if(this->is_valid()){
-		// Set the public key on the block
-		block->set_public_key( this->get_public_key() );
-
-		// Sign the data and get a signature
-		std::string signature = this->sign( block->signed_data() );
-
-		// Set the block signature
-		block->set_signature( signature );
-
-		// Return success
-		return true;
-	}
-
-	// Return failure
-	return false;
 }
 
 /*
