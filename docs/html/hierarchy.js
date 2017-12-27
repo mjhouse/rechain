@@ -1,9 +1,11 @@
 var hierarchy =
 [
-    [ "BasicBlock", "classBasicBlock.html", [
-      [ "DataBlock", "classDataBlock.html", null ],
-      [ "SignatureBlock", "classSignatureBlock.html", null ]
+    [ "Data", "classData.html", null ],
+    [ "Key< T >", "classKey.html", null ],
+    [ "Key< CryptoPP::RSA::PrivateKey >", "classKey.html", [
+      [ "PrivateKey", "classPrivateKey.html", null ]
     ] ],
-    [ "BlockChain", "classBlockChain.html", null ],
-    [ "KeyPair", "classKeyPair.html", null ]
+    [ "Key< CryptoPP::RSA::PublicKey >", "classKey.html", [
+      [ "PublicKey", "classPublicKey.html", null ]
+    ] ]
 ];

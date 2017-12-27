@@ -71,7 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -111,24 +110,28 @@ $(document).ready(function(){initNavTree('keys_8hpp.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Defines the <a class="el" href="classKeyPair.html" title="Stores hex-encoded public and private keys as strings. Keys are RSA256. ">KeyPair</a> class used to manage, load, save and generate a public and private pair of RSA256 keys.  
+<p>Defines the <a class="el" href="classKey.html">Key</a> classes used to manage, load, save and generate a public and private pair of RSA256 keys.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;cryptopp/rsa.h&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
+<div class="textblock"><code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;cryptopp/hex.h&gt;</code><br />
+<code>#include &lt;cryptopp/rsa.h&gt;</code><br />
+<code>#include &quot;data.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for keys.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="keys_8hpp__incl.png" border="0" usemap="#inc_2keys_8hpp" alt=""/></div>
+<map name="inc_2keys_8hpp" id="inc_2keys_8hpp">
+<area shape="rect" id="node5" href="data_8hpp_source.html" title="data.hpp" alt="" coords="359,80,431,107"/>
+</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="keys_8hpp__dep__incl.png" border="0" usemap="#inc_2keys_8hppdep" alt=""/></div>
 <map name="inc_2keys_8hppdep" id="inc_2keys_8hppdep">
-<area shape="rect" id="node2" href="basic__block_8cpp.html" title="Implements the BasicBlock class used to manage data (publish, hash etc.) stored in the BlockChain..." alt="" coords="5,80,144,107"/>
-<area shape="rect" id="node3" href="blockchain_8cpp.html" title="Implements the BlockChain class used to manage, load, save and publish any number of BasicBlock objec..." alt="" coords="168,80,299,107"/>
-<area shape="rect" id="node4" href="keys_8cpp.html" title="Implements the KeyPair class used to manage, load, save and generate a public and private pair of RSA..." alt="" coords="323,80,421,107"/>
-<area shape="rect" id="node5" href="main_8cpp_source.html" title="src/main.cpp" alt="" coords="445,80,542,107"/>
+<area shape="rect" id="node2" href="data_8cpp_source.html" title="src/data.cpp" alt="" coords="5,80,100,107"/>
+<area shape="rect" id="node3" href="keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="124,80,221,107"/>
+<area shape="rect" id="node4" href="main_8cpp_source.html" title="src/main.cpp" alt="" coords="245,80,343,107"/>
 </map>
 </div>
 </div>
@@ -136,8 +139,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKeyPair.html">KeyPair</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores hex-encoded public and private keys as strings. Keys are RSA256.  <a href="classKeyPair.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html">Key&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html">PrivateKey</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPublicKey.html">PublicKey</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
@@ -146,7 +152,7 @@ Classes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><a class="el" href="keys_8hpp.html">keys.hpp</a></li>
-    <li class="footer">Generated on Mon Dec 25 2017 15:15:59 for ReChain by
+    <li class="footer">Generated on Wed Dec 27 2017 12:21:16 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -4,22 +4,28 @@
 #include <iostream>
 
 void display( std::shared_ptr<Data>& data ){
-	std::cout 	<< "Data Object: " << std::endl
-				<< "Reference:   " << data->get_reference()  << std::endl
-				<< "Public Key:  " << data->get_public_key() << std::endl
-				<< "Data Type:   " << data->get_datatype()	 << std::endl
-				<< "Signature:	 " << data->get_signature()  << std::endl;
+	Address addr = data->get_address();
+	std::cout 	<< "Data Object:     "	<< std::endl
+				<< "	Public Key:  " 	<< data->get_public_key()	<< std::endl
+				<< "	Signature:	 " 	<< data->get_signature()	<< std::endl
+				<< "	Verified:	 " 	<< data->verify()			<< std::endl
+				<< "Address:         "	<< std::endl
+				<< "	Reference:   " 	<< std::get<0>(addr)		<< std::endl
+				<< "	Block Hash:  " 	<< std::get<1>(addr)		<< std::endl
+				<< "	Data Type:   " 	<< std::get<2>(addr)		<< std::endl;
 }
 
 int main( int argc, char** argv ){
 
-	std::shared_ptr<Data> data(new Data("KJDFDGKDFIIYDFTRKEHTIE7YFVDNDGKHU", DataType::Publication));
+	std::shared_ptr<Data> data( new Data( Address( "REFERENCE", "BLOCK HASH", DataType::Signature ) ) );
 
-	std::shared_ptr<PublicKey> public_key(new PublicKey("data/rsa.public"));
-	std::shared_ptr<PrivateKey> private_key(new PrivateKey("data/rsa.private"));
+	std::shared_ptr<PublicKey> public_key( new PublicKey("data/rsa.public") );
+	std::shared_ptr<PrivateKey> private_key( new PrivateKey("data/rsa.private") );
 
 	data->set_public_key( public_key->to_string() );
 	private_key->sign(data);
+
+	display(data);
 
 	return 0;
 }

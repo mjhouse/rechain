@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classBlockChain.html" title="BlockChain" alt="" coords="5,5,95,32"/>
+<area shape="rect" id="node1" href="$classKey.html" title="Key\&lt; CryptoPP::RSA\l::PrivateKey \&gt;" alt="" coords="5,5,156,47"/>
+<area shape="rect" id="node2" href="$classPrivateKey.html" title="PrivateKey" alt="" coords="204,13,291,39"/>
 </map>

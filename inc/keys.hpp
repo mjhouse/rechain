@@ -7,22 +7,12 @@
 #ifndef KEYS_HPP
 #define KEYS_HPP
 
-#include <cryptopp/osrng.h>		// For AutoSeededRandomPool
+#include <fstream>				// File I/O
+
 #include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
 #include <cryptopp/rsa.h>		// For RSA:: namespace
-#include <cryptopp/pssr.h>		// For PSSR
-#include <cryptopp/whrlpool.h>	// For Whirlpool
-
-#include <fstream>				// File I/O
-#include <string>				// std::string
 
 #include "data.hpp"				// Data objects
-
-/** The RSA key size */
-#define KEY_SIZE 3072
-
-using Signer   = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Signer;
-using Verifier = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Verifier;
 
 /** The templated Key class acts as a base class for both
 	PrivateKey and PublicKey.
@@ -36,16 +26,12 @@ class Key {
 		/** Get the key as a CryptoPP object
 			\returns The key
 		*/
-		T get_key(){
-			return this->key;
-		};
+		T get_key(){ return this->key; }
 
 		/** Set a CryptoPP object as key
 			\param k The key to use
 		*/
-		void set_key( T k ){
-			this->key = k;
-		};
+		void set_key( T k ){ this->key = k; }
 
 		/** Convert the key to a hex encoded string
 			\returns The hex encoded string
@@ -54,7 +40,7 @@ class Key {
 			std::string s;
 			this->key.Save(CryptoPP::HexEncoder( new CryptoPP::StringSink(s)).Ref());
 			return s;
-		};
+		}
 
 		/** Build a CryptoPP private or public key from
 			a hex encoded string
@@ -62,7 +48,7 @@ class Key {
 		*/
 		void from_string( std::string k ){
 			this->key.Load(CryptoPP::StringSource(k, true, new CryptoPP::HexDecoder()).Ref());
-		};
+		}
 
 		/** Load a key from a file
 			\param fn The path to the file
@@ -72,7 +58,7 @@ class Key {
 			if( file.is_open() ){
 				this->from_string( std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()) );
 			}
-		};
+		}
 
 		/** Save the key to a file
 			\param fn The file to save to
@@ -82,7 +68,7 @@ class Key {
 			if( file.is_open() ){
 				file << this->to_string();
 			}
-		};
+		}
 };
 
 /** The PrivateKey class inherits from the templated
@@ -97,36 +83,18 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey> {
 			creation
 			\param fn The file to load
 		*/
-		PrivateKey( std::string fn ){
-			this->load(fn);
-		};
+		PrivateKey( std::string fn );
 
 		/** Empty destructor */
 		~PrivateKey(){}
 
 		/** Generate a new key */
-		void generate(){
-			CryptoPP::AutoSeededRandomPool rng;
-			this->key.GenerateRandomWithKeySize(rng, KEY_SIZE);
-		};
+		void generate();
 
 		/** Sign a given Data block
 			\param data A shared_ptr to the Data object to sign
 		*/
-		void sign( std::shared_ptr<Data>& data ){
-			std::string signature;
-			Signer signer(this->key);
-
-			CryptoPP::AutoSeededRandomPool rng;
-
-			CryptoPP::StringSource ss(data->to_string(), true,
-						new CryptoPP::SignerFilter(rng, signer,
-							new CryptoPP::HexEncoder(
-								new CryptoPP::StringSink(signature))));
-
-			data->set_signature(signature);
-		};
-
+		void sign( std::shared_ptr<Data> data );
 };
 
 /** The PublicKey class inherits from the templated
@@ -141,9 +109,7 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey> {
 			creation
 			\param fn The file to load
 		*/
-		PublicKey( std::string fn ){
-			this->load(fn);
-		};
+		PublicKey( std::string fn );
 
 		/** Empty destructor */
 		~PublicKey(){}
@@ -151,30 +117,19 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey> {
 		/** Generate a new PublicKey from a PrivateKey
 			\param key The PrivateKey to generate from
 		*/
-		void generate( std::shared_ptr<PrivateKey>& key ){
-			CryptoPP::RSA::PublicKey n_key(key->get_key());
-			this->key = n_key;
-		};
+		void generate( std::shared_ptr<PrivateKey>& key );
 
 		/** Verify a Data object to ensure that the
 		 	signature attached to it is correct
 			\param data A shared_ptr to the Data object to verify
 		*/
-		bool verify( std::shared_ptr<Data>& data ){
-			std::string sig;
-			bool result = false;
-			Verifier verifier(this->key);
+		bool verify( std::shared_ptr<Data> data );
 
-			CryptoPP::StringSource ss(data->get_signature(), true,
-									  new CryptoPP::HexDecoder(
-										new CryptoPP::StringSink(sig)));
-
-			CryptoPP::StringSource ss2(sig + data->to_string(), true,
-									   new CryptoPP::SignatureVerificationFilter(verifier,
-										 new CryptoPP::ArraySink((byte*)&result,
-																 sizeof(result))));
-			return result;
-		};
+		/** Verify a Data object to ensure that the
+		 	signature attached to it is correct
+			\param data A pointer to the Data object to verify
+		*/
+		bool verify( Data* data );
 };
 
 #endif

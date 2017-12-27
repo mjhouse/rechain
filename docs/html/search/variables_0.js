@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['chain',['chain',['../classBlockChain.html#a096092e26609445abf55d7de2d54c7c2',1,'BlockChain']]],
-  ['counter',['counter',['../classBasicBlock.html#a91052213afe42ee28c03e898b5f2f7bb',1,'BasicBlock']]]
+  ['key',['key',['../classKey.html#a8266fc6be29c8f8d97522da3c8e034e2',1,'Key']]]
 ];

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['max_5fnonce',['MAX_NONCE',['../basic__block_8cpp.html#a7b03af9a8696c645fb5e24c201c7829b',1,'basic_block.cpp']]],
-  ['message',['message',['../classDataBlock.html#a33ad6814f7a3ccf0db4aa19b3491e890',1,'DataBlock']]],
-  ['min_5fnonce',['MIN_NONCE',['../basic__block_8cpp.html#a6320959b7cad6b405cc50ccb775eae2f',1,'basic_block.cpp']]]
+  ['verify',['verify',['../classPublicKey.html#ad9003e84c47f95c4ab966162baad333e',1,'PublicKey::verify(std::shared_ptr&lt; Data &gt; data)'],['../classPublicKey.html#a4c900e956fc0149e4ea4090f3f94dff5',1,'PublicKey::verify(Data *data)']]]
 ];

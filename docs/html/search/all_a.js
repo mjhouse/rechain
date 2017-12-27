@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['nonce',['nonce',['../classBasicBlock.html#a28fa007749317e1484349d2608f9baf3',1,'BasicBlock']]]
+  ['_7eprivatekey',['~PrivateKey',['../classPrivateKey.html#a959fd85364361e93edee7f73157fb61c',1,'PrivateKey']]],
+  ['_7epublickey',['~PublicKey',['../classPublicKey.html#aa85e9d6e69d866d960dbbdf10f229b3b',1,'PublicKey']]]
 ];
