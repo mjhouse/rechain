@@ -16,16 +16,13 @@ void display( std::shared_ptr<Data>& data ){
 }
 
 int main( int argc, char** argv ){
-
 	std::shared_ptr<Data> data( new Data( Address( "REFERENCE", "BLOCK HASH", DataType::Signature ) ) );
 
 	std::shared_ptr<PublicKey> public_key( new PublicKey("data/rsa.public") );
 	std::shared_ptr<PrivateKey> private_key( new PrivateKey("data/rsa.private") );
 
-	data->set_public_key( public_key->to_string() );
 	private_key->sign(data);
-
-	display(data);
+	display(data1);
 
 	return 0;
 }

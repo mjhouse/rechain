@@ -8,11 +8,14 @@
 #define KEYS_HPP
 
 #include <fstream>				// File I/O
+#include <iostream>
+#include <memory>
 
 #include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 
 #include "data.hpp"				// Data objects
+#include "error.hpp"
 
 /** The templated Key class acts as a base class for both
 	PrivateKey and PublicKey.
@@ -47,7 +50,9 @@ class Key {
 			\param k The string to build
 		*/
 		void from_string( std::string k ){
-			this->key.Load(CryptoPP::StringSource(k, true, new CryptoPP::HexDecoder()).Ref());
+			try {
+				this->key.Load(CryptoPP::StringSource(k, true, new CryptoPP::HexDecoder()).Ref());
+			} catch (CryptoPP::BERDecodeErr& e){ _OUT(e.what()); }
 		}
 
 		/** Load a key from a file
@@ -57,7 +62,7 @@ class Key {
 			std::ifstream file(fn);
 			if( file.is_open() ){
 				this->from_string( std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()) );
-			}
+			} else { _OUT("Can't load '" + fn + "'"); }
 		}
 
 		/** Save the key to a file
@@ -67,14 +72,14 @@ class Key {
 			std::ofstream file(fn);
 			if( file.is_open() ){
 				file << this->to_string();
-			}
+			} else { _OUT("Can't save '" + fn + "'"); }
 		}
 };
 
 /** The PrivateKey class inherits from the templated
 	'Key' base class and adds private-key-specific methods.
 */
-class PrivateKey : public Key<CryptoPP::RSA::PrivateKey> {
+class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_shared_from_this<PrivateKey> {
 	public:
 		/** Empty constructor */
 		PrivateKey(){}
@@ -100,7 +105,7 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey> {
 /** The PublicKey class inherits from the templated
 	'Key' base class and adds public-key-specific methods.
 */
-class PublicKey: public Key<CryptoPP::RSA::PublicKey> {
+class PublicKey: public Key<CryptoPP::RSA::PublicKey>, public std::enable_shared_from_this<PublicKey> {
 	public:
 		/** Empty constructor */
 		PublicKey(){}
@@ -117,19 +122,13 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey> {
 		/** Generate a new PublicKey from a PrivateKey
 			\param key The PrivateKey to generate from
 		*/
-		void generate( std::shared_ptr<PrivateKey>& key );
+		void generate( std::shared_ptr<PrivateKey> key );
 
 		/** Verify a Data object to ensure that the
 		 	signature attached to it is correct
 			\param data A shared_ptr to the Data object to verify
 		*/
 		bool verify( std::shared_ptr<Data> data );
-
-		/** Verify a Data object to ensure that the
-		 	signature attached to it is correct
-			\param data A pointer to the Data object to verify
-		*/
-		bool verify( Data* data );
 };
 
 #endif
