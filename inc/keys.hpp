@@ -4,8 +4,8 @@
 			private pair of RSA256 keys.
 */
 
-#ifndef KEYS_HPP
-#define KEYS_HPP
+#ifndef _KEYS_HPP_
+#define _KEYS_HPP_
 
 #include <fstream>				// File I/O
 #include <iostream>
@@ -24,6 +24,8 @@ template <typename T>
 class Key {
 	protected:
 		T key;	/**< The CryptoPP::*Key to use*/
+
+		Key(){}
 
 	public:
 		/** Get the key as a CryptoPP object
@@ -50,29 +52,32 @@ class Key {
 			\param k The string to build
 		*/
 		void from_string( std::string k ){
-			try {
-				this->key.Load(CryptoPP::StringSource(k, true, new CryptoPP::HexDecoder()).Ref());
-			} catch (CryptoPP::BERDecodeErr& e){ _OUT(e.what()); }
+			this->key.Load(CryptoPP::StringSource(k, true, new CryptoPP::HexDecoder()).Ref());
 		}
+
 
 		/** Load a key from a file
 			\param fn The path to the file
 		*/
-		void load( std::string fn ){
+		bool load( std::string fn ){
 			std::ifstream file(fn);
 			if( file.is_open() ){
 				this->from_string( std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()) );
-			} else { _OUT("Can't load '" + fn + "'"); }
+				return true;
+			}
+			return false;
 		}
 
 		/** Save the key to a file
 			\param fn The file to save to
 		*/
-		void save( std::string fn ){
+		bool save( std::string fn ){
 			std::ofstream file(fn);
 			if( file.is_open() ){
 				file << this->to_string();
-			} else { _OUT("Can't save '" + fn + "'"); }
+				return true;
+			}
+			return false;
 		}
 };
 
@@ -80,18 +85,28 @@ class Key {
 	'Key' base class and adds private-key-specific methods.
 */
 class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_shared_from_this<PrivateKey> {
-	public:
+	private:
+
 		/** Empty constructor */
 		PrivateKey(){}
 
-		/** Constructor to load key from file on
-			creation
-			\param fn The file to load
-		*/
-		PrivateKey( std::string fn );
+	public:
 
-		/** Empty destructor */
-		~PrivateKey(){}
+		static PrivateKey* empty(){
+			return new PrivateKey();
+		};
+
+		static PrivateKey* load_string( std::string s ){
+			PrivateKey* k = new PrivateKey();
+			k->from_string(s);
+			return k;
+		};
+
+		static PrivateKey* load_file( std::string fn ){
+			PrivateKey* k = new PrivateKey();
+			if(!k->load(fn)){ throw rechain::LoadFailure(fn); }
+			return k;
+		};
 
 		/** Generate a new key */
 		void generate();
@@ -99,25 +114,35 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_sha
 		/** Sign a given Data block
 			\param data A shared_ptr to the Data object to sign
 		*/
-		void sign( std::shared_ptr<Data> data );
+		bool sign( std::shared_ptr<Data> data );
 };
 
 /** The PublicKey class inherits from the templated
 	'Key' base class and adds public-key-specific methods.
 */
 class PublicKey: public Key<CryptoPP::RSA::PublicKey>, public std::enable_shared_from_this<PublicKey> {
-	public:
+	private:
+
 		/** Empty constructor */
 		PublicKey(){}
 
-		/** Constructor to load key from file on
-			creation
-			\param fn The file to load
-		*/
-		PublicKey( std::string fn );
+	public:
 
-		/** Empty destructor */
-		~PublicKey(){}
+		static PublicKey* empty(){
+			return new PublicKey();
+		};
+
+		static PublicKey* load_string( std::string s ){
+			PublicKey* k = new PublicKey();
+			k->from_string(s);
+			return k;
+		};
+
+		static PublicKey* load_file( std::string fn ){
+			PublicKey* k = new PublicKey();
+			if(!k->load(fn)){ throw rechain::LoadFailure(fn); }
+			return k;
+		};
 
 		/** Generate a new PublicKey from a PrivateKey
 			\param key The PrivateKey to generate from

@@ -1,3 +1,4 @@
+#include "block.hpp"
 #include "keys.hpp"
 #include "data.hpp"
 
@@ -18,11 +19,25 @@ void display( std::shared_ptr<Data>& data ){
 int main( int argc, char** argv ){
 	std::shared_ptr<Data> data( new Data( Address( "REFERENCE", "BLOCK HASH", DataType::Signature ) ) );
 
-	std::shared_ptr<PublicKey> public_key( new PublicKey("data/rsa.public") );
-	std::shared_ptr<PrivateKey> private_key( new PrivateKey("data/rsa.private") );
-
+	std::shared_ptr<PublicKey> public_key( PublicKey::load_file("data/rsa.public") );
+	std::shared_ptr<PrivateKey> private_key( PrivateKey::load_file("data/rsa.private") );
 	private_key->sign(data);
-	display(data1);
+
+	std::shared_ptr<Block> block(new Block());
+
+
+	if(!block->add_data( data )){
+		std::cout << "block not inserted!" << std::endl;
+	} else {
+		std::cout << "block inserted!" << std::endl;
+	}
+
+	if(!block->remove_data( data->get_signature() )){
+		std::cout << "block not removed!" << std::endl;
+	} else {
+		std::cout << "block removed!" << std::endl;
+	}
+
 
 	return 0;
 }

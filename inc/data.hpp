@@ -1,8 +1,9 @@
-#ifndef DATA_HPP
-#define DATA_HPP
+#ifndef _DATA_HPP_
+#define _DATA_HPP_
 
 #include <tuple>
 #include <memory>
+#include <string>
 
 enum DataType { Publication, Signature };
 
