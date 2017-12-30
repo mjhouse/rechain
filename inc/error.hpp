@@ -4,7 +4,6 @@
 #include <exception>
 #include <sstream>
 
-<<<<<<< HEAD
 /** ReChain namespace to prevent collisions
 	with exceptions from libraries
 */
@@ -27,17 +26,6 @@ namespace rechain {
 			/** An overloaded 'what' method
 				\returns A failure message for the exception
 			*/
-=======
-namespace rechain {
-
-	class LoadFailure : public std::runtime_error {
-		private:
-			std::string path;
-
-		public:
-			LoadFailure( std::string p ) : std::runtime_error("failed to load path"), path(p) {}
-
->>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 			virtual const char* what() const throw() {
 				std::stringstream stream;
 				stream << runtime_error::what() << ": " << get_path();
@@ -45,7 +33,6 @@ namespace rechain {
 				return stream.str().c_str();
 			}
 
-<<<<<<< HEAD
 			/** A getter for the path variable
 				\returns The path as a string
 			*/
@@ -53,11 +40,6 @@ namespace rechain {
 
 	};
 
-=======
-			std::string get_path() const { return path; }
-
-	};
->>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 }
 
 #endif

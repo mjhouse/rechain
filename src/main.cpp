@@ -26,21 +26,5 @@ int main( int argc, char** argv ){
 	std::shared_ptr<Block> block(new Block());
 
 
-<<<<<<< HEAD
-=======
-	if(!block->add_data( data )){
-		std::cout << "block not inserted!" << std::endl;
-	} else {
-		std::cout << "block inserted!" << std::endl;
-	}
-
-	if(!block->remove_data( data->get_signature() )){
-		std::cout << "block not removed!" << std::endl;
-	} else {
-		std::cout << "block removed!" << std::endl;
-	}
-
-
->>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 	return 0;
 }
