@@ -10,7 +10,12 @@ void Data::set_public_key( std::string k ){ this->public_key = k; }
 std::string Data::get_public_key(){ return this->public_key; }
 
 void Data::set_signature( std::string s ){ this->signature = s; }
+<<<<<<< HEAD
 std::string Data::get_signature(){ return this->signature; }
+=======
+std::string Data::get_signature(){ 
+	return this->signature; }
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 
 void Data::set_data_ref( std::string r ){ std::get<0>(this->address) = r; }
 std::string Data::get_data_ref(){ return std::get<0>(this->address); }
@@ -33,6 +38,7 @@ std::string Data::to_string( bool b ){
 }
 
 bool Data::verify(){
+<<<<<<< HEAD
 	// At a minimum, a Data object needs a public key and
 	// signature to be valid
 	if(!this->public_key.empty() && !this->signature.empty()){
@@ -53,5 +59,11 @@ bool Data::verify(){
 		return key->verify( shared_from_this() );
 	}
 
+=======
+	if(!this->public_key.empty()){
+		std::shared_ptr<PublicKey> key(PublicKey::load_string(this->public_key));
+		return key->verify( shared_from_this() );
+	}
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 	return false;
 }

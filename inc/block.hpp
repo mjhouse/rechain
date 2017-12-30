@@ -12,11 +12,14 @@
 
 class Data;
 
+<<<<<<< HEAD
 /** A Block to be included in a BlockChain. The Block
 	holds any number of Data objects (that represent
 	publications or signatures), a hash of the previous
 	Block and various hashing variables.
 */
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 class Block {
 	private:
 		std::map<std::string,std::shared_ptr<Data>> data;	/**< Contained Data objects*/
@@ -26,17 +29,23 @@ class Block {
 		long timestamp;										/**< A timestamp */
 		unsigned int counter;								/**< Counter to modify hash output */
 
+<<<<<<< HEAD
 		/** Generate a new random long between 1 and LONG_MAX
 			\returns A random number
 		*/
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		inline long new_nonce(){
 			CryptoPP::AutoSeededRandomPool rng;
 			return CryptoPP::Integer(rng,CryptoPP::Integer(1),CryptoPP::Integer(LONG_MAX)).ConvertToLong();
 		}
 
+<<<<<<< HEAD
 		/** Get a UNIX timestamp
 			\returns a timestamp as a long
 		*/
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		inline long new_timestamp(){
 			auto e = std::chrono::system_clock::now().time_since_epoch();
 			auto seconds = std::chrono::duration_cast<std::chrono::seconds>(e).count();
@@ -66,7 +75,10 @@ class Block {
 
 		/** Add a Data block
 			\param d The block to add
+<<<<<<< HEAD
 			\returns True if Data was added
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		*/
 		bool add_data( std::shared_ptr<Data> d );
 

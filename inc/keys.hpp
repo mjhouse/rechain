@@ -58,7 +58,10 @@ class Key {
 
 		/** Load a key from a file
 			\param fn The path to the file
+<<<<<<< HEAD
 			\returns True if file was loaded
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		*/
 		bool load( std::string fn ){
 			std::ifstream file(fn);
@@ -71,7 +74,10 @@ class Key {
 
 		/** Save the key to a file
 			\param fn The file to save to
+<<<<<<< HEAD
 			\returns True if key was saved
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		*/
 		bool save( std::string fn ){
 			std::ofstream file(fn);
@@ -93,27 +99,37 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_sha
 		PrivateKey(){}
 
 	public:
+<<<<<<< HEAD
 		/** Create an empty PrivateKey
 			\returns A pointer to the PrivateKey
 		*/
+=======
+
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		static PrivateKey* empty(){
 			return new PrivateKey();
 		};
 
+<<<<<<< HEAD
 		/** Create a new PrivateKey from a string
 			\param s A string representation of a public key
 			\returns A pointer to the PrivateKey
 		*/
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		static PrivateKey* load_string( std::string s ){
 			PrivateKey* k = new PrivateKey();
 			k->from_string(s);
 			return k;
 		};
 
+<<<<<<< HEAD
 		/** Create a new PrivateKey from a file
 			\param fn A path to the file to use
 			\returns A pointer to the PrivateKey
 		*/
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		static PrivateKey* load_file( std::string fn ){
 			PrivateKey* k = new PrivateKey();
 			if(!k->load(fn)){ throw rechain::LoadFailure(fn); }
@@ -125,7 +141,10 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_sha
 
 		/** Sign a given Data block
 			\param data A shared_ptr to the Data object to sign
+<<<<<<< HEAD
 			\returns True if the Data object was signed
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		*/
 		bool sign( std::shared_ptr<Data> data );
 };
@@ -141,27 +160,36 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey>, public std::enable_shared
 
 	public:
 
+<<<<<<< HEAD
 		/** Create an empty PublicKey
 			\returns A pointer to the PublicKey
 		*/
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		static PublicKey* empty(){
 			return new PublicKey();
 		};
 
+<<<<<<< HEAD
 		/** Create a new PublicKey from a string
 			\param s A string representation of a public key
 			\returns A pointer to the PublicKey
 		*/
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		static PublicKey* load_string( std::string s ){
 			PublicKey* k = new PublicKey();
 			k->from_string(s);
 			return k;
 		};
 
+<<<<<<< HEAD
 		/** Create a new PublicKey from a file
 			\param fn A path to the file to use
 			\returns A pointer to the PublicKey
 		*/
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		static PublicKey* load_file( std::string fn ){
 			PublicKey* k = new PublicKey();
 			if(!k->load(fn)){ throw rechain::LoadFailure(fn); }
@@ -176,7 +204,10 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey>, public std::enable_shared
 		/** Verify a Data object to ensure that the
 		 	signature attached to it is correct
 			\param data A shared_ptr to the Data object to verify
+<<<<<<< HEAD
 			\returns True if the Data object is signed correctly
+=======
+>>>>>>> 87a9496026c2891bd964ab35e1298d3e1fc938ff
 		*/
 		bool verify( std::shared_ptr<Data> data );
 };
