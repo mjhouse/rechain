@@ -1,0 +1,4 @@
+<map id="BasicBlock" name="BasicBlock">
+<area shape="rect" id="node2" href="$classDataBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. " alt="" coords="5,80,88,107"/>
+<area shape="rect" id="node3" href="$classSignatureBlock.html" title="Manages, hashes and verifies a block of data that is stored in the BlockChain. " alt="" coords="113,80,223,107"/>
+</map>
