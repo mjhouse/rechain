@@ -5,8 +5,11 @@ integrity rather than an expensive proof-of-work calculation. There is still a f
 proof-of-work difficulty in order to stop many transactions from being executed at once.
 
 Dependencies:
+
      * cxxopts.hpp
 
 	 * cereal
 
 	 * libcrypto++-dev
+
+	 * Catch2
