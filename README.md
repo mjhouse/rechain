@@ -13,12 +13,9 @@ there are no written tutorials or guides because the project isn't that far alon
 
 No.
 
-Dependencies:
+### Dependencies
 
-     * cxxopts.hpp
-
-	 * cereal
-
-	 * libcrypto++-dev
-
-	 * Catch2
+* cxxopts.hpp: For command line argument parsing
+* cereal: To serialize objects to/from files
+* libcrypto++-dev: All sorts of crypto goodies
+* Catch2: For unit tests
