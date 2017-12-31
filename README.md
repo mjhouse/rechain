@@ -6,7 +6,7 @@ proof-of-work difficulty in order to stop many transactions from being executed 
 
 ### Documentation
 
-Generated documentation is available at: https://mjhouse.github.io/rechain/. Currently,
+Generated documentation is available [here](https://mjhouse.github.io/rechain/). Currently,
 there are no written tutorials or guides because the project isn't that far along yet.
 
 ### Can I Contribute?
