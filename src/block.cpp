@@ -1,7 +1,7 @@
 // dependency includes
-#include <cryptopp/osrng.h>		// for the AutoSeededRandomPool
+#include <cryptopp/osrng.h>	// for the AutoSeededRandomPool
 #include <cryptopp/integer.h>	// for Integer data type
-#include <cryptopp/hex.h>		// for the HexEncoder
+#include <cryptopp/hex.h>	// for the HexEncoder
 
 // system includes
 #include <climits>
@@ -11,9 +11,6 @@
 // local includes
 #include "data.hpp"
 #include "block.hpp"
-
-/* Maximum hash value (smaller increases difficulty) */
-#define HASH_MAX  	"00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 
 /* Get the hash of this block
 */
@@ -39,31 +36,22 @@ std::string Block::hash(){
 	CryptoPP::StringSource ss(hash_data,true,
 		new CryptoPP::HashFilter(hasher,
 			new CryptoPP::HexEncoder(
-				new CryptoPP::StringSink(new_hash))));
-
+				new CryptoPP::StringSink(new_hash)))); 
 	// Return new_hash
 	return new_hash;
 }
 
-/* Try different hashes until one is found
-	that is less than the HASH_MAX
+/* Change the hashing variables
 */
-std::string Block::mine(){
+void Block::change_hash(){
+	// Update the counter, and reset to 0 if it
+	// gets to the int max
+	if(this->counter >= UINT_MAX-1) this->counter = 0;
+	else this->counter++;
 
-	while(this->hash() > HASH_MAX){
-
-		// Update the counter, and reset to 0 if it
-		// gets to the int max
-		if(this->counter >= UINT_MAX-1) this->counter = 0;
-		else this->counter++;
-
-		// Update the nonce and timestamp
-		this->nonce		= new_nonce();
-		this->timestamp = new_timestamp();
-
-	}
-	// Return the final hash
-	return this->hash();
+	// Update the nonce and timestamp
+	this->nonce	= new_nonce();
+	this->timestamp = new_timestamp();
 }
 
 /* Get a data block given the signature
@@ -107,4 +95,21 @@ bool Block::remove_data( std::string s ){
 	if(this->data.erase(s) > 0)
 		return true;
 	return false;
+}
+
+/** Get the hash of the previous block
+*/
+std::string Block::get_previous(){ return this->previous; }
+
+
+/** Set the hash of the previous block
+*/
+void Block::set_previous( std::string h ){ this->previous = h; }
+
+
+
+/* Return the size of the Block
+*/
+size_t Block::size(){
+	return this->data.size();
 }

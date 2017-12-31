@@ -1,6 +1,6 @@
 CPP=g++
 C=gcc
-CPPFLAGS=-std=c++11 -ldl -Wall -Wextra -Wpedantic -g -lcrypto++
+CPPFLAGS=-std=c++11 -pthread -ldl -Wall -Wextra -Wpedantic -g -lcrypto++
 
 TARGET = bin/rechain
 OUTDIR = bin

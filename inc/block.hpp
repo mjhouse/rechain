@@ -10,6 +10,9 @@
 #include <chrono>
 #include <string>
 
+/* Maximum hash value (smaller increases difficulty) */
+#define HASH_MAX  	"00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+
 class Data;
 
 /** A Block to be included in a BlockChain. The Block
@@ -21,11 +24,11 @@ class Data;
 class Block {
 	private:
 		std::map<std::string,std::shared_ptr<Data>> data;	/**< Contained Data objects*/
-		std::string previous;								/**< Hash of the previous block */
+		std::string previous;					/**< Hash of the previous block */
 
-		long nonce;											/**< Randomly generated value to modify hash */
-		long timestamp;										/**< A timestamp */
-		unsigned int counter;								/**< Counter to modify hash output */
+		long nonce;						/**< Randomly generated value to modify hash */
+		long timestamp;						/**< A timestamp */
+		unsigned int counter;					/**< Counter to modify hash output */
 
 		/** Generate a new random long between 1 and LONG_MAX
 			\returns A random number
@@ -53,11 +56,9 @@ class Block {
 		*/
 		std::string hash();
 
-		/** Try different hashes until one is found
-			that is less than the HASH_MAX
-			\returns The matching hash
+		/** Update the hashing variables
 		*/
-		std::string mine();
+		void change_hash();
 
 		/** Get a data block given the signature
 			\param s The signature of the block to return
@@ -76,6 +77,22 @@ class Block {
 			\return True if found
 		*/
 		bool remove_data( std::string s );
+		
+		/** Get the hash of the previous block
+		    \returns The hash of the previous block
+		*/
+		std::string get_previous();
+
+
+		/** Set the hash of the previous block
+		    \param h The hash to set
+		*/
+		void set_previous( std::string h );
+
+		/** Get number of Data objects in the Block
+			\returns Size of the Block as size_t
+		*/
+		size_t size();
 };
 
 #endif

@@ -108,3 +108,9 @@ bool Block::remove_data( std::string s ){
 		return true;
 	return false;
 }
+
+/* Return the size of the Block
+*/
+size_t Block::size(){
+	return this->data.size();
+}
