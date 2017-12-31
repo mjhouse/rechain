@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['new_5fnonce',['new_nonce',['../classBlock.html#a5b6b7d4ae2ce01a09a8faab83842b69a',1,'Block']]],
-  ['new_5ftimestamp',['new_timestamp',['../classBlock.html#a3acdc592cef0e80514cf58538ef89343',1,'Block']]]
+  ['load',['load',['../classKey.html#ad322531bb6629051f8edbedc343d1815',1,'Key']]],
+  ['load_5ffile',['load_file',['../classPrivateKey.html#a4f2932510146b8dea99e98d22b78a313',1,'PrivateKey::load_file()'],['../classPublicKey.html#a0dffa72b5e3c84532e82da53235b5803',1,'PublicKey::load_file()']]],
+  ['load_5fstring',['load_string',['../classPrivateKey.html#a864baaaf27a2bc408f9c2196fd7ecbed',1,'PrivateKey::load_string()'],['../classPublicKey.html#a3629d3c23b3af297336b6c0a1d3fa344',1,'PublicKey::load_string()']]],
+  ['loadfailure',['LoadFailure',['../classrechain_1_1LoadFailure.html#a4448bf2ec61cb6d6d265df0f71530ab8',1,'rechain::LoadFailure']]]
 ];

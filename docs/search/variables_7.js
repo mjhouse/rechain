@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timestamp',['timestamp',['../classBlock.html#acaa9f7ad0f75fdafc83a435d2c38425d',1,'Block']]]
+  ['running',['running',['../classBlockChain.html#afae281d8abe5003822f73f66431ed23f',1,'BlockChain']]]
 ];

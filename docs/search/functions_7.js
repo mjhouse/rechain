@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mine',['mine',['../classBlock.html#af177a6a4941fee4af655e8b2d6d8ba24',1,'Block']]]
+  ['hash',['hash',['../classBlock.html#ae2de4f093f846bf821445f80b02da7de',1,'Block']]]
 ];

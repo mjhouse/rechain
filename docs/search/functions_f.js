@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7edata',['~Data',['../classData.html#aab31956423290f0d62dcca47ab4d16dd',1,'Data']]]
+  ['what',['what',['../classrechain_1_1LoadFailure.html#a4b8e589c7f23474ac1f0b8fba4ae2be4',1,'rechain::LoadFailure']]]
 ];

@@ -1,6 +1,7 @@
 var hierarchy =
 [
     [ "Block", "classBlock.html", null ],
+    [ "BlockChain", "classBlockChain.html", null ],
     [ "enable_shared_from_this", null, [
       [ "Data", "classData.html", null ],
       [ "PrivateKey", "classPrivateKey.html", null ],

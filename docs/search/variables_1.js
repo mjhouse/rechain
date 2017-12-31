@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['counter',['counter',['../classBlock.html#a96a75420cb1bb31ac1d6c3d9a79e2db1',1,'Block']]]
+  ['blockchain',['blockchain',['../classBlockChain.html#a6debb2c431b7d8ac47f5430f4e2ddde2',1,'BlockChain']]]
 ];

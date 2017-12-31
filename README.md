@@ -9,7 +9,7 @@ proof-of-work difficulty in order to stop many transactions from being executed 
 Generated documentation is available at: https://mjhouse.github.io/rechain/. Currently,
 there are no written tutorials or guides because the project isn't that far along yet.
 
-### Contribute
+### Can I Contribute?
 
 No.
 

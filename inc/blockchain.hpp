@@ -12,6 +12,9 @@
 
 class Block;
 
+/** The BlockChain class manages a collection of 
+    Block objects.
+*/
 class BlockChain {
 	private:
 		/** The collection of Block objects */
