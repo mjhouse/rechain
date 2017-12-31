@@ -16,7 +16,7 @@ No.
 ### Dependencies
 
 | Dependency		| Included for				|
-|:----------------------|--------------------------------------:|
+|:----------------------|:--------------------------------------|
 | cxxopts.hpp		| For command line argument parsing 	|
 | cereal		| To serialize objects to/from files	|
 | libcrypto++-dev	| All sorts of crypto goodies		|
