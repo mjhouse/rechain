@@ -1,5 +1,10 @@
 language: cpp
-compiler:
-     gcc
+dist: trusty
+sudo: false
+compiler: gcc
+addons:
+  apt:
+    packages:
+      - libcrypto++-dev
 script:
-     make test=1
+      - make test=1
