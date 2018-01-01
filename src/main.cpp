@@ -1,30 +1,34 @@
 #include "block.hpp"
 #include "keys.hpp"
 #include "data.hpp"
+#include "blockchain.hpp"
 
 #include <iostream>
 
-void display( std::shared_ptr<Data>& data ){
-	Address addr = data->get_address();
-	std::cout 	<< "Data Object:     "	<< std::endl
-				<< "	Public Key:  " 	<< data->get_public_key()	<< std::endl
-				<< "	Signature:	 " 	<< data->get_signature()	<< std::endl
-				<< "	Verified:	 " 	<< data->verify()			<< std::endl
-				<< "Address:         "	<< std::endl
-				<< "	Reference:   " 	<< std::get<0>(addr)		<< std::endl
-				<< "	Block Hash:  " 	<< std::get<1>(addr)		<< std::endl
-				<< "	Data Type:   " 	<< std::get<2>(addr)		<< std::endl;
-}
-
 int main( int argc, char** argv ){
-	std::shared_ptr<Data> data( new Data( Address( "REFERENCE", "BLOCK HASH", DataType::Signature ) ) );
-
 	std::shared_ptr<PublicKey> public_key( PublicKey::load_file("data/rsa.public") );
 	std::shared_ptr<PrivateKey> private_key( PrivateKey::load_file("data/rsa.private") );
-	private_key->sign(data);
+
+	std::shared_ptr<Data> data0( new Data( Address( "REFERENCE", "", DataType::Publication) ) );
+	private_key->sign(data0);
+
+	std::shared_ptr<Data> data1( new Data( Address( "REFERENCE", "BLOCK HASH", DataType::Signature ) ) );
+	private_key->sign(data1);
+
+	std::shared_ptr<Data> data2( new Data( Address( "REFERENCE", "", DataType::Publication ) ) );
+	private_key->sign(data2);
 
 	std::shared_ptr<Block> block(new Block());
+	block->add_data(data0);
+	block->add_data(data1);
+	block->add_data(data2);
 
+	std::shared_ptr<BlockChain> blockchain(new BlockChain());
+	blockchain->set_block(block);
+	blockchain->start();
+	blockchain->wait();
+
+	std::cout << blockchain->blockchain.back()->hash() << std::endl;
 
 	return 0;
 }

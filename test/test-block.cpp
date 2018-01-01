@@ -21,7 +21,7 @@ TEST_CASE( "block tests", "[block]" ){
 
 	SECTION( "block adds data objects" ){
 
-		unsigned int = (2*DATA_LIMIT);
+		unsigned int expected = (2*DATA_LIMIT);
 		REQUIRE(block->size()==expected);
 
 		std::shared_ptr<Data> d(new Data(Address("SIG_REF","",DataType::Publication)));
@@ -34,10 +34,12 @@ TEST_CASE( "block tests", "[block]" ){
 		std::string hash = block->hash();
 		REQUIRE(!hash.empty());
 	}
-	SECTION( "block mines an appropriate hash" ){
-		std::string hash = block->mine();
-		REQUIRE(!hash.empty());
-		REQUIRE(hash <= HASH_MAX);
+	SECTION( "block changes hashing variables" ){
+		std::string hash1 = block->hash();
+		block->change_hash();
+		std::string hash2 = block->hash();
+	
+		REQUIRE(hash1 != hash2);
 	}
 
 }

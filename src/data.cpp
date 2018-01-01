@@ -42,11 +42,11 @@ bool Data::verify(){
 		std::string b_ref	= std::get<1>(this->address);
 		DataType type 		= std::get<2>(this->address);
 
-		// Check that it has a Data reference (or document hash) and
-		// That it has a Block ref if it's a signature
-		if( d_ref.empty() || (b_ref.empty() && type == DataType::Signature) ){
-			return false;
-		}
+		// There has to be a data reference
+		if(d_ref.empty()) return false;
+
+		// If there is no block reference, type must be Publication
+		if(b_ref.empty() && type != DataType::Publication) return false;
 
 		// Load the public key and check the signature
 		std::shared_ptr<PublicKey> key(PublicKey::load_string(this->public_key));

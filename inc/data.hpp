@@ -24,7 +24,7 @@ typedef std::tuple<std::string,std::string,DataType> Address;
 */
 class Data: public std::enable_shared_from_this<Data> {
 	private:
-		Address address;			/**< The reference to publish*/
+		Address address;		/**< The reference to publish*/
 		std::string public_key;		/**< The public key to match the signature */
 		std::string signature;		/**< The signature for this data */
 

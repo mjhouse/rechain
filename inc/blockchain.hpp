@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <memory>
+#include <future>
 
 class Block;
 
@@ -16,10 +17,9 @@ class Block;
     Block objects.
 */
 class BlockChain {
-	private:
+	public:
 		/** The collection of Block objects */
 		std::vector<std::shared_ptr<Block>> blockchain;
-	
 
 		/** The Block currently being mined */
 		std::shared_ptr<Block> current_block;
@@ -36,7 +36,7 @@ class BlockChain {
 		    \param block A pointer to the block to add
 		    \returns The valid hash of the new Block
 		*/	
-		std::string add_block( std::shared_ptr<Block> block );
+		std::string mine( std::shared_ptr<Block> block );
 
 	public:
 		/** Empty constructor
@@ -48,15 +48,18 @@ class BlockChain {
 		~BlockChain();
 
 		/** Start mining the current block
-		    \returns True if mining has begun
 		*/
-		bool start();
+		void start();
 
 		/** Stop mining the current block
 		*/
 		void stop();
 
-		/** Mine and add a block to the chain
+		/** Wait for mining operation to complete
+		*/
+		void wait();
+
+		/** Set a Block to be mined
 		    \param block A pointer to the block to mine
 		*/
 		void set_block( std::shared_ptr<Block> block );

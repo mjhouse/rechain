@@ -6,12 +6,12 @@
 #include <cryptopp/integer.h>	// for Integer data type
 
 // system includes
-#include <map>
+#include <vector>
 #include <chrono>
 #include <string>
 
 /* Maximum hash value (smaller increases difficulty) */
-#define HASH_MAX  	"00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+#define HASH_MAX  	"000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 
 class Data;
 
@@ -23,7 +23,7 @@ class Data;
 
 class Block {
 	private:
-		std::map<std::string,std::shared_ptr<Data>> data;	/**< Contained Data objects*/
+		std::vector<std::shared_ptr<Data>> data;		/**< Contained Data objects*/
 		std::string previous;					/**< Hash of the previous block */
 
 		long nonce;						/**< Randomly generated value to modify hash */
@@ -76,7 +76,7 @@ class Block {
 			\param s The signature of the block to remove
 			\return True if found
 		*/
-		bool remove_data( std::string s );
+		void remove_data( std::string s );
 		
 		/** Get the hash of the previous block
 		    \returns The hash of the previous block

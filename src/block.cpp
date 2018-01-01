@@ -7,6 +7,7 @@
 #include <climits>
 #include <algorithm>
 #include <iostream>
+#include <vector>
 
 // local includes
 #include "data.hpp"
@@ -19,8 +20,8 @@ std::string Block::hash(){
 
 	// Get the hashable data for each Data block
 	std::for_each( this->data.begin(), this->data.end(),
-	[&hash_data]( std::pair<std::string,std::shared_ptr<Data>> el ){
-		hash_data.append( el.second->to_string(true) );
+	[&hash_data]( std::shared_ptr<Data> d ){
+		hash_data.append( d->to_string(true) );
 	});
 
 	hash_data.append( this->previous );
@@ -57,16 +58,12 @@ void Block::change_hash(){
 /* Get a data block given the signature
 */
 std::shared_ptr<Data> Block::get_data( std::string s ){
-	// Create a new shared_ptr and try to
-	// get an iterator to the appropriate map
-	// pair.
+	// Create a new shared_ptr
 	std::shared_ptr<Data> d;
-	auto it = this->data.find(s);
 
-	// If the iterator points to an
-	// entry, point the shared_ptr at it.
-	if(it != this->data.end())
-		d = it->second;
+	for(auto i : this->data){
+		if(i->get_signature() == s) d = i;
+	}
 
 	// Return d
 	return d;
@@ -79,10 +76,13 @@ bool Block::add_data( std::shared_ptr<Data> d ){
 	// valid.
 	if(d->verify()){
 		// Try to insert the new Data pointer
-		auto result = this->data.insert(std::pair<std::string,std::shared_ptr<Data>>( d->get_signature(), d ));
+		for(auto i : this->data){
+			if(i->get_signature() == d->get_signature()) return false;
+		}
+		
+		this->data.push_back(d);
+		return true;
 
-		// Return the results of the insertion
-		return result.second;
 	}
 	// Return failure if the Data pointer
 	// isn't valid.
@@ -91,10 +91,9 @@ bool Block::add_data( std::shared_ptr<Data> d ){
 
 /* Remove a Data block
 */
-bool Block::remove_data( std::string s ){
-	if(this->data.erase(s) > 0)
-		return true;
-	return false;
+void Block::remove_data( std::string s ){
+	this->data.erase( std::remove_if(this->data.begin(),this->data.end(),
+	[s]( std::shared_ptr<Data> d ){ return (d->get_signature() == s); }) );
 }
 
 /** Get the hash of the previous block
@@ -105,8 +104,6 @@ std::string Block::get_previous(){ return this->previous; }
 /** Set the hash of the previous block
 */
 void Block::set_previous( std::string h ){ this->previous = h; }
-
-
 
 /* Return the size of the Block
 */

@@ -17,7 +17,7 @@ No.
 
 | Dependency		| Included for				|
 |:----------------------|:--------------------------------------|
-| cxxopts.hpp		| For command line argument parsing 	|
-| cereal		| To serialize objects to/from files	|
-| libcrypto++-dev	| All sorts of crypto goodies		|
-| Catch2		| For unit tests			|
+| cxxopts.hpp		| Command line argument parsing 	|
+| cereal		| Serializing objects to/from files	|
+| libcrypto++-dev	| Public keys and hashing		|
+| Catch2		| Unit tests				|
