@@ -59,9 +59,12 @@ TEST_CASE( "block tests", "[block]" ){
 		key->sign(d0);
 		key->sign(d2);
 
+		REQUIRE(block->size() == (2*DATA_LIMIT));
+
 		REQUIRE_FALSE(block->add_data(d0));
 		REQUIRE_FALSE(block->add_data(d1));
 		REQUIRE_FALSE(block->add_data(d2));
+		
 	}
 	SECTION( "block generates a hash" ){
 		std::string hash = block->hash();
@@ -73,5 +76,9 @@ TEST_CASE( "block tests", "[block]" ){
 		std::string hash2 = block->hash();
 	
 		REQUIRE(hash1 != hash2);
+	}
+	SECTION( "block gets and sets previous has" ){
+		block->set_previous("TEST");
+		REQUIRE(block->get_previous() == "TEST");
 	}
 }

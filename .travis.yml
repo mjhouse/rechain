@@ -2,6 +2,8 @@ language: cpp
 dist: trusty
 sudo: false
 compiler: gcc
+git:
+  lfs_skip_smudge: true
 addons:
   apt:
     packages:
