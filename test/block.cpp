@@ -61,6 +61,8 @@ std::shared_ptr<Data> Block::get_data( std::string s ){
 	// Create a new shared_ptr
 	std::shared_ptr<Data> d;
 
+	// Iterate through data and find the 
+	// matching signature
 	for(auto i : this->data){
 		if(i->get_signature() == s) d = i;
 	}
@@ -75,11 +77,12 @@ bool Block::add_data( std::shared_ptr<Data> d ){
 	// Check the Data object is signed and
 	// valid.
 	if(d->verify()){
-		// Try to insert the new Data pointer
+		// Check to make sure the signature is unique
 		for(auto i : this->data){
 			if(i->get_signature() == d->get_signature()) return false;
 		}
-		
+	
+		// Add to the end of data	
 		this->data.push_back(d);
 		return true;
 
@@ -92,8 +95,12 @@ bool Block::add_data( std::shared_ptr<Data> d ){
 /* Remove a Data block
 */
 void Block::remove_data( std::string s ){
+	// Erase Data objects with the given signature
 	this->data.erase( std::remove_if(this->data.begin(),this->data.end(),
-	[s]( std::shared_ptr<Data> d ){ return (d->get_signature() == s); }) );
+		[s]( std::shared_ptr<Data> d ){
+			return (d->get_signature() == s);
+		}
+	));
 }
 
 /** Get the hash of the previous block

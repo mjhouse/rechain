@@ -1,3 +1,24 @@
+/*
+ * ReChain: The distributed research journal
+ * Copyright (C) 2018  Michael House
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: michaelhouse@gmx.us
+ *
+*/
+
 // dependency includes
 #include <cryptopp/osrng.h>	// for the AutoSeededRandomPool
 #include <cryptopp/integer.h>	// for Integer data type
@@ -61,6 +82,8 @@ std::shared_ptr<Data> Block::get_data( std::string s ){
 	// Create a new shared_ptr
 	std::shared_ptr<Data> d;
 
+	// Iterate through data and find the 
+	// matching signature
 	for(auto i : this->data){
 		if(i->get_signature() == s) d = i;
 	}
@@ -75,11 +98,12 @@ bool Block::add_data( std::shared_ptr<Data> d ){
 	// Check the Data object is signed and
 	// valid.
 	if(d->verify()){
-		// Try to insert the new Data pointer
+		// Check to make sure the signature is unique
 		for(auto i : this->data){
 			if(i->get_signature() == d->get_signature()) return false;
 		}
-		
+	
+		// Add to the end of data	
 		this->data.push_back(d);
 		return true;
 
@@ -92,8 +116,12 @@ bool Block::add_data( std::shared_ptr<Data> d ){
 /* Remove a Data block
 */
 void Block::remove_data( std::string s ){
+	// Erase Data objects with the given signature
 	this->data.erase( std::remove_if(this->data.begin(),this->data.end(),
-	[s]( std::shared_ptr<Data> d ){ return (d->get_signature() == s); }) );
+		[s]( std::shared_ptr<Data> d ){
+			return (d->get_signature() == s);
+		}
+	));
 }
 
 /** Get the hash of the previous block
