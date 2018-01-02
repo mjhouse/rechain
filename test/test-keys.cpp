@@ -131,6 +131,12 @@ TEST_CASE( "private key tests", "[privatekey]" ){
 
 		REQUIRE(data->verify());
 	}
+	SECTION( "private key won't sign bad pointer" ){
+		std::shared_ptr<Data> d;
+		bool signed_ = key->sign(d);
+
+		REQUIRE_FALSE(signed_);
+	}
 
 }
 
@@ -175,5 +181,11 @@ TEST_CASE( "public key tests", "[publickey]" ){
 
 		REQUIRE(signed_);
 		REQUIRE(verify_);
+	}
+	SECTION( "public key doesn't verify expired ptr" ){
+		std::shared_ptr<Data> d;
+		bool verify_ = key->verify(d);
+
+		REQUIRE_FALSE(verify_);
 	}
 }
