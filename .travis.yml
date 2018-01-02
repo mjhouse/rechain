@@ -8,6 +8,11 @@ addons:
   apt:
     packages:
       - libcrypto++-dev
+
+before_install:
+      - pip install --user cpp-coveralls
 script:
       - mkdir obj bin
       - make test
+after_success:
+      - coveralls --gcov-options '\-lp'

@@ -1,6 +1,6 @@
 CPP=g++
 CPPFLAGS=-std=c++11 -pthread -ldl -Wall -Wextra -Wpedantic -g -lcrypto++
-TSTFLAGS=-fprofile-arcs -ftest-coverage -fprofile-dir=src
+TSTFLAGS=-fprofile-arcs -ftest-coverage 
 
 TARGET = bin/rechain
 OUTDIR = bin
@@ -52,4 +52,4 @@ obj/%.o: $(SRCDIR)/%.cpp
 	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS) $(TSTFLAGS)
 
 clean:
-	rm $(BLDDIR)/*.o; rm $(OUTDIR)/*;
+	rm $(BLDDIR)/*; rm $(OUTDIR)/*;
