@@ -15,4 +15,4 @@ script:
       - mkdir obj bin
       - make test
 after_success:
-      - coveralls --gcov-options '\-lp'
+      - coveralls --exclude inc/dependencies --exclude test --gcov-options '\-lp'
