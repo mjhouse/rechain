@@ -6,6 +6,7 @@
 #include <iostream>
 
 int main( int argc, char** argv ){
+	/*
 	std::shared_ptr<PublicKey> public_key( PublicKey::load_file("data/rsa.public") );
 	std::shared_ptr<PrivateKey> private_key( PrivateKey::load_file("data/rsa.private") );
 
@@ -29,6 +30,6 @@ int main( int argc, char** argv ){
 	blockchain->wait();
 
 	std::cout << blockchain->blockchain.back()->hash() << std::endl;
-
+	*/
 	return 0;
 }

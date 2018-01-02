@@ -38,26 +38,9 @@ class Block;
     Block objects.
 */
 class BlockChain {
-	public:
+	private:
 		/** The collection of Block objects */
 		std::vector<std::shared_ptr<Block>> blockchain;
-
-		/** The Block currently being mined */
-		std::shared_ptr<Block> current_block;
-		
-		/** The current mining process */
-		std::future<std::string> current_process;
-
-		/** A flag to indicate whether the 
-		    BlockChain is mining or not
-		*/
-		bool running;		
-
-		/** Mine and add a given block to the BlockChain
-		    \param block A pointer to the block to add
-		    \returns The valid hash of the new Block
-		*/	
-		std::string mine( std::shared_ptr<Block> block );
 
 	public:
 		/** Empty constructor
@@ -68,23 +51,13 @@ class BlockChain {
 		*/
 		~BlockChain();
 
-		/** Start mining the current block
-		*/
-		void start();
+		/** Mine and add a given block to the BlockChain
+		    \param block A pointer to the block to add
+		    \returns The valid hash of the new Block
+		*/	
+		std::string mine( std::shared_ptr<Block> block );
 
-		/** Stop mining the current block
-		*/
-		void stop();
 
-		/** Wait for mining operation to complete
-		*/
-		void wait();
-
-		/** Set a Block to be mined
-		    \param block A pointer to the block to mine
-		*/
-		void set_block( std::shared_ptr<Block> block );
-	
 		/** Discard all blocks following and including
 		    the given hash
 		    \param hash The hash to discard from

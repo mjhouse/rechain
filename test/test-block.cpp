@@ -77,7 +77,7 @@ TEST_CASE( "block tests", "[block]" ){
 	
 		REQUIRE(hash1 != hash2);
 	}
-	SECTION( "block gets and sets previous has" ){
+	SECTION( "block gets and sets previous hash" ){
 		block->set_previous("TEST");
 		REQUIRE(block->get_previous() == "TEST");
 	}

@@ -9,5 +9,5 @@ addons:
     packages:
       - libcrypto++-dev
 script:
-      - ls
+      - mkdir obj bin
       - make test=1
