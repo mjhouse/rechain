@@ -15,10 +15,13 @@ there are no written tutorials or guides because the project isn't that far alon
 
 No.
 
-### Dependencies
+### Tools
 
-Compiler: gcc 5.4.0
-Make:     make 4.1
+* make 4.1
+
+* gcc 5.4.0
+
+### Dependencies
 
 | Dependency		| Included for				|
 |:----------------------|:--------------------------------------|

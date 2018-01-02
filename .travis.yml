@@ -9,4 +9,5 @@ addons:
     packages:
       - libcrypto++-dev
 script:
+      - ls
       - make test=1
