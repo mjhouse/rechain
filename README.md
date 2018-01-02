@@ -1,6 +1,6 @@
 ## ReChain
 
-![build status](https://travis-ci.org/mjhouse/rechain.svg?branch=master)
+[![build status](https://travis-ci.org/mjhouse/rechain.svg?branch=master)](https://travis-ci.org/mjhouse/rechain.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/mjhouse/rechain/badge.svg?branch=master)](https://coveralls.io/github/mjhouse/rechain?branch=master)
 
 ReChain is a modified blockchain design that uses signature blocks to enforce blockchain
