@@ -1,4 +1,6 @@
 #include "catch.hpp"
+
+#include "blockchain.hpp"
 #include "block.hpp"
 #include "data.hpp"
 #include "keys.hpp"

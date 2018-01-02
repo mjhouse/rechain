@@ -10,4 +10,4 @@ addons:
       - libcrypto++-dev
 script:
       - mkdir obj bin
-      - make test=1
+      - make test

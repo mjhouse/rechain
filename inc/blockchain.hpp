@@ -58,19 +58,10 @@ class BlockChain {
 		std::string mine( std::shared_ptr<Block> block );
 
 
-		/** Discard all blocks following and including
-		    the given hash
+		/** Discard a block with the given hash
 		    \param hash The hash to discard from
-		    \returns The number of blocks discarded
 		*/
-		size_t discard( std::string hash );
-		
-		/** Discard all blocks following and including
-		    the given index
-		    \param idx The index to discard from
-		    \returns The number of blocks discarded
-		*/
-		size_t discard( unsigned int idx );
+		void discard( std::string hash );
 		
 		/** Calculate the trust for a Block in the chain
 		    \param hash The hash of the Block

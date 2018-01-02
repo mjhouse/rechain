@@ -1,5 +1,4 @@
 CPP=g++
-C=gcc
 CPPFLAGS=-std=c++11 -pthread -ldl -Wall -Wextra -Wpedantic -g -lcrypto++
 
 TARGET = bin/rechain
@@ -7,21 +6,17 @@ OUTDIR = bin
 BLDDIR = obj
 INCDIR = inc
 SRCDIR = src
+TSTDIR = test
 
 INC = -I$(INCDIR) -I$(INCDIR)/dependencies
 
-ifdef test
-$(shell find src/* -not -name "main.cpp" -exec cp '{}' test/ \;)
-SRCDIR = test
-endif
-
 # find all source files in srcdir
+TSOURCES := $(shell find $(SRCDIR) $(TSTDIR)/ -type f -name '*.cpp' -not -name "main.cpp")
 SOURCES  := $(shell find $(SRCDIR)/ -type f -name '*.cpp')
-CSOURCES := $(shell find $(SRCDIR)/ -type f -name '*.c')
 
 # assembles each source file into a BLDIR/*.o filename
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.cpp=$(BLDDIR)/%.o)
-COBJECTS := $(CSOURCES:$(SRCDIR)/%.c=$(BLDDIR)/%.o)
+TOBJECTS := $(patsubst %.cpp, $(BLDDIR)/%.o, $(notdir $(TSOURCES)))
 
 # ----------------------------------------------------------------------
 # DON'T EDIT BELOW THIS LINE
@@ -29,16 +24,27 @@ COBJECTS := $(CSOURCES:$(SRCDIR)/%.c=$(BLDDIR)/%.o)
 all: link
 
 # link executable
-link: $(OBJECTS) $(COBJECTS)
-	$(CPP) $(OBJECTS) $(COBJECTS) -o $(TARGET) $(CPPFLAGS)
+link: $(OBJECTS)
+	$(CPP) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
 
 # build all .o files from .cpp source
 obj/%.o: $(SRCDIR)/%.cpp
 	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS)
 
-# build all .o files from .c source
-obj/%.o: $(SRCDIR)/%.c
-	$(C) $(INC) -c $< -o $@
+# ----------------------------------------------------------------------
+# Test Build
+# ----------------------------------------------------------------------
+# link executable for testing
+
+test: test-link
+	./bin/rechain
+
+test-link: $(TOBJECTS)
+	$(CPP) $(TOBJECTS) -o $(TARGET) $(CPPFLAGS)
+
+# build all .o files from .cpp source
+obj/%.o: $(TSTDIR)/%.cpp
+	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS)
 
 clean:
 	rm $(BLDDIR)/*.o; rm $(OUTDIR)/*;

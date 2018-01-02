@@ -28,7 +28,7 @@
 		
 /* Empty constructor
 */
-BlockChain::BlockChain() : current_process() {}
+BlockChain::BlockChain() {}
 
 /* Empty destructor
 */
@@ -44,36 +44,29 @@ std::string BlockChain::mine( std::shared_ptr<Block> block ){
 	}
 
 	// Mine the block until it has a valid hash
-	while(this->running){
+	while(block->hash() > HASH_MAX){
 		
 		// Update the hashing variables
 		block->change_hash();
 
-		// Check if the hash is valid
-		if(block->hash() <= HASH_MAX){
-
-			// If so, add to the chain and break
-			this->blockchain.push_back( block );
-			break;
-		}
 	}
 
+	// Add to the chain
+	this->blockchain.push_back( block );
+	
 	// Return the hash
 	return block->hash();
 }
 
-/* Discard all blocks following and including
-    the given hash
+/* Discard a block with the given hash
 */
-size_t BlockChain::discard( std::string hash ){
-	return 0;
-}
-
-/* Discard all blocks following and including
-    the given index
-*/
-size_t BlockChain::discard( unsigned int idx ){
-	return 0;
+void BlockChain::discard( std::string hash ){
+	// Erase Data objects with the given signature
+	this->blockchain.erase( std::remove_if(this->blockchain.begin(),this->blockchain.end(),
+		[hash]( std::shared_ptr<Block> b ){
+			return (b->hash() == hash);
+		}
+	));
 }
 
 /* Calculate the trust for a Block in the chain
