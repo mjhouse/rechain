@@ -1,0 +1,88 @@
+        -:    0:Source:/usr/include/cryptopp/basecode.h
+        -:    0:Programs:5
+        -:    1:#ifndef CRYPTOPP_BASECODE_H
+        -:    2:#define CRYPTOPP_BASECODE_H
+        -:    3:
+        -:    4:#include "filters.h"
+        -:    5:#include "algparam.h"
+        -:    6:#include "argnames.h"
+        -:    7:
+        -:    8:NAMESPACE_BEGIN(CryptoPP)
+        -:    9:
+        -:   10://! base n encoder, where n is a power of 2
+        -:   11:class CRYPTOPP_DLL BaseN_Encoder : public Unflushable<Filter>
+        -:   12:{
+        -:   13:public:
+    #####:   14:	BaseN_Encoder(BufferedTransformation *attachment=NULL)
+    #####:   15:		{Detach(attachment);}
+        -:   16:
+        -:   17:	BaseN_Encoder(const byte *alphabet, int log2base, BufferedTransformation *attachment=NULL, int padding=-1)
+        -:   18:	{
+        -:   19:		Detach(attachment);
+        -:   20:		IsolatedInitialize(MakeParameters(Name::EncodingLookupArray(), alphabet)
+        -:   21:			(Name::Log2Base(), log2base)
+        -:   22:			(Name::Pad(), padding != -1)
+        -:   23:			(Name::PaddingByte(), byte(padding)));
+        -:   24:	}
+        -:   25:
+        -:   26:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:   27:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:   28:
+        -:   29:private:
+        -:   30:	const byte *m_alphabet;
+        -:   31:	int m_padding, m_bitsPerChar, m_outputBlockSize;
+        -:   32:	int m_bytePos, m_bitPos;
+        -:   33:	SecByteBlock m_outBuf;
+        -:   34:};
+        -:   35:
+        -:   36://! base n decoder, where n is a power of 2
+        -:   37:class CRYPTOPP_DLL BaseN_Decoder : public Unflushable<Filter>
+        -:   38:{
+        -:   39:public:
+        -:   40:	BaseN_Decoder(BufferedTransformation *attachment=NULL)
+        -:   41:		{Detach(attachment);}
+        -:   42:
+    #####:   43:	BaseN_Decoder(const int *lookup, int log2base, BufferedTransformation *attachment=NULL)
+    #####:   44:	{
+    #####:   45:		Detach(attachment);
+    #####:   46:		IsolatedInitialize(MakeParameters(Name::DecodingLookupArray(), lookup)(Name::Log2Base(), log2base));
+    #####:   47:	}
+        -:   48:
+        -:   49:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:   50:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:   51:
+        -:   52:	static void CRYPTOPP_API InitializeDecodingLookupArray(int *lookup, const byte *alphabet, unsigned int base, bool caseInsensitive);
+        -:   53:
+        -:   54:private:
+        -:   55:	const int *m_lookup;
+        -:   56:	int m_padding, m_bitsPerChar, m_outputBlockSize;
+        -:   57:	int m_bytePos, m_bitPos;
+        -:   58:	SecByteBlock m_outBuf;
+        -:   59:};
+        -:   60:
+        -:   61://! filter that breaks input stream into groups of fixed size
+        -:   62:class CRYPTOPP_DLL Grouper : public Bufferless<Filter>
+        -:   63:{
+        -:   64:public:
+    #####:   65:	Grouper(BufferedTransformation *attachment=NULL)
+    #####:   66:		{Detach(attachment);}
+        -:   67:
+        -:   68:	Grouper(int groupSize, const std::string &separator, const std::string &terminator, BufferedTransformation *attachment=NULL)
+        -:   69:	{
+        -:   70:		Detach(attachment);
+        -:   71:		IsolatedInitialize(MakeParameters(Name::GroupSize(), groupSize)
+        -:   72:			(Name::Separator(), ConstByteArrayParameter(separator))
+        -:   73:			(Name::Terminator(), ConstByteArrayParameter(terminator)));
+        -:   74:	}
+        -:   75:
+        -:   76:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:   77:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:   78:
+        -:   79:private:
+        -:   80:	SecByteBlock m_separator, m_terminator;
+        -:   81:	size_t m_groupSize, m_counter;
+        -:   82:};
+        -:   83:
+        -:   84:NAMESPACE_END
+        -:   85:
+        -:   86:#endif

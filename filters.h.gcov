@@ -1,0 +1,812 @@
+        -:    0:Source:/usr/include/cryptopp/filters.h
+        -:    0:Programs:5
+        -:    1:#ifndef CRYPTOPP_FILTERS_H
+        -:    2:#define CRYPTOPP_FILTERS_H
+        -:    3:
+        -:    4://! \file
+        -:    5:
+        -:    6:#include "simple.h"
+        -:    7:#include "secblock.h"
+        -:    8:#include "misc.h"
+        -:    9:#include "smartptr.h"
+        -:   10:#include "queue.h"
+        -:   11:#include "algparam.h"
+        -:   12:#include <deque>
+        -:   13:
+        -:   14:NAMESPACE_BEGIN(CryptoPP)
+        -:   15:
+        -:   16:/// provides an implementation of BufferedTransformation's attachment interface
+    #####:   17:class CRYPTOPP_DLL CRYPTOPP_NO_VTABLE Filter : public BufferedTransformation, public NotCopyable
+        -:   18:{
+        -:   19:public:
+        -:   20:	Filter(BufferedTransformation *attachment = NULL);
+        -:   21:
+    #####:   22:	bool Attachable() {return true;}
+        -:   23:	BufferedTransformation *AttachedTransformation();
+        -:   24:	const BufferedTransformation *AttachedTransformation() const;
+        -:   25:	void Detach(BufferedTransformation *newAttachment = NULL);
+        -:   26:
+        -:   27:	size_t TransferTo2(BufferedTransformation &target, lword &transferBytes, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true);
+        -:   28:	size_t CopyRangeTo2(BufferedTransformation &target, lword &begin, lword end=LWORD_MAX, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true) const;
+        -:   29:
+        -:   30:	void Initialize(const NameValuePairs &parameters=g_nullNameValuePairs, int propagation=-1);
+        -:   31:	bool Flush(bool hardFlush, int propagation=-1, bool blocking=true);
+        -:   32:	bool MessageSeriesEnd(int propagation=-1, bool blocking=true);
+        -:   33:
+        -:   34:protected:
+        -:   35:	virtual BufferedTransformation * NewDefaultAttachment() const;
+        -:   36:	void Insert(Filter *nextFilter);	// insert filter after this one
+        -:   37:
+    #####:   38:	virtual bool ShouldPropagateMessageEnd() const {return true;}
+    #####:   39:	virtual bool ShouldPropagateMessageSeriesEnd() const {return true;}
+        -:   40:
+        -:   41:	void PropagateInitialize(const NameValuePairs &parameters, int propagation);
+        -:   42:
+        -:   43:	size_t Output(int outputSite, const byte *inString, size_t length, int messageEnd, bool blocking, const std::string &channel=DEFAULT_CHANNEL);
+        -:   44:	size_t OutputModifiable(int outputSite, byte *inString, size_t length, int messageEnd, bool blocking, const std::string &channel=DEFAULT_CHANNEL);
+        -:   45:	bool OutputMessageEnd(int outputSite, int propagation, bool blocking, const std::string &channel=DEFAULT_CHANNEL);
+        -:   46:	bool OutputFlush(int outputSite, bool hardFlush, int propagation, bool blocking, const std::string &channel=DEFAULT_CHANNEL);
+        -:   47:	bool OutputMessageSeriesEnd(int outputSite, int propagation, bool blocking, const std::string &channel=DEFAULT_CHANNEL);
+        -:   48:
+        -:   49:private:
+        -:   50:	member_ptr<BufferedTransformation> m_attachment;
+        -:   51:	
+        -:   52:protected:
+        -:   53:	size_t m_inputPosition;
+        -:   54:	int m_continueAt;
+        -:   55:};
+        -:   56:
+        -:   57:struct CRYPTOPP_DLL FilterPutSpaceHelper
+        -:   58:{
+        -:   59:	// desiredSize is how much to ask target, bufferSize is how much to allocate in m_tempSpace
+        -:   60:	byte *HelpCreatePutSpace(BufferedTransformation &target, const std::string &channel, size_t minSize, size_t desiredSize, size_t &bufferSize)
+        -:   61:	{
+        -:   62:		assert(desiredSize >= minSize && bufferSize >= minSize);
+        -:   63:		if (m_tempSpace.size() < minSize)
+        -:   64:		{
+        -:   65:			byte *result = target.ChannelCreatePutSpace(channel, desiredSize);
+        -:   66:			if (desiredSize >= minSize)
+        -:   67:			{
+        -:   68:				bufferSize = desiredSize;
+        -:   69:				return result;
+        -:   70:			}
+        -:   71:			m_tempSpace.New(bufferSize);
+        -:   72:		}
+        -:   73:
+        -:   74:		bufferSize = m_tempSpace.size();
+        -:   75:		return m_tempSpace.begin();
+        -:   76:	}
+        -:   77:	byte *HelpCreatePutSpace(BufferedTransformation &target, const std::string &channel, size_t minSize)
+        -:   78:		{return HelpCreatePutSpace(target, channel, minSize, minSize, minSize);}
+        -:   79:	byte *HelpCreatePutSpace(BufferedTransformation &target, const std::string &channel, size_t minSize, size_t bufferSize)
+        -:   80:		{return HelpCreatePutSpace(target, channel, minSize, minSize, bufferSize);}
+        -:   81:	SecByteBlock m_tempSpace;
+        -:   82:};
+        -:   83:
+        -:   84://! measure how many byte and messages pass through, also serves as valve
+        -:   85:class CRYPTOPP_DLL MeterFilter : public Bufferless<Filter>
+        -:   86:{
+        -:   87:public:
+        -:   88:	MeterFilter(BufferedTransformation *attachment=NULL, bool transparent=true)
+        -:   89:		: m_transparent(transparent) {Detach(attachment); ResetMeter();}
+        -:   90:
+        -:   91:	void SetTransparent(bool transparent) {m_transparent = transparent;}
+        -:   92:	void AddRangeToSkip(unsigned int message, lword position, lword size, bool sortNow = true);
+        -:   93:	void ResetMeter();
+        -:   94:	void IsolatedInitialize(const NameValuePairs &parameters) {ResetMeter();}
+        -:   95:
+        -:   96:	lword GetCurrentMessageBytes() const {return m_currentMessageBytes;}
+        -:   97:	lword GetTotalBytes() {return m_totalBytes;}
+        -:   98:	unsigned int GetCurrentSeriesMessages() {return m_currentSeriesMessages;}
+        -:   99:	unsigned int GetTotalMessages() {return m_totalMessages;}
+        -:  100:	unsigned int GetTotalMessageSeries() {return m_totalMessageSeries;}
+        -:  101:
+        -:  102:	byte * CreatePutSpace(size_t &size)
+        -:  103:		{return AttachedTransformation()->CreatePutSpace(size);}
+        -:  104:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:  105:	size_t PutModifiable2(byte *inString, size_t length, int messageEnd, bool blocking);
+        -:  106:	bool IsolatedMessageSeriesEnd(bool blocking);
+        -:  107:
+        -:  108:private:
+        -:  109:	size_t PutMaybeModifiable(byte *inString, size_t length, int messageEnd, bool blocking, bool modifiable);
+        -:  110:	bool ShouldPropagateMessageEnd() const {return m_transparent;}
+        -:  111:	bool ShouldPropagateMessageSeriesEnd() const {return m_transparent;}
+        -:  112:
+        -:  113:	struct MessageRange
+        -:  114:	{
+        -:  115:		inline bool operator<(const MessageRange &b) const	// BCB2006 workaround: this has to be a member function
+        -:  116:			{return message < b.message || (message == b.message && position < b.position);}
+        -:  117:		unsigned int message; lword position; lword size;
+        -:  118:	};
+        -:  119:
+        -:  120:	bool m_transparent;
+        -:  121:	lword m_currentMessageBytes, m_totalBytes;
+        -:  122:	unsigned int m_currentSeriesMessages, m_totalMessages, m_totalMessageSeries;
+        -:  123:	std::deque<MessageRange> m_rangesToSkip;
+        -:  124:	byte *m_begin;
+        -:  125:	size_t m_length;
+        -:  126:};
+        -:  127:
+        -:  128://! _
+        -:  129:class CRYPTOPP_DLL TransparentFilter : public MeterFilter
+        -:  130:{
+        -:  131:public:
+        -:  132:	TransparentFilter(BufferedTransformation *attachment=NULL) : MeterFilter(attachment, true) {}
+        -:  133:};
+        -:  134:
+        -:  135://! _
+        -:  136:class CRYPTOPP_DLL OpaqueFilter : public MeterFilter
+        -:  137:{
+        -:  138:public:
+        -:  139:	OpaqueFilter(BufferedTransformation *attachment=NULL) : MeterFilter(attachment, false) {}
+        -:  140:};
+        -:  141:
+        -:  142:/*! FilterWithBufferedInput divides up the input stream into
+        -:  143:	a first block, a number of middle blocks, and a last block.
+        -:  144:	First and last blocks are optional, and middle blocks may
+        -:  145:	be a stream instead (i.e. blockSize == 1).
+        -:  146:*/
+    #####:  147:class CRYPTOPP_DLL FilterWithBufferedInput : public Filter
+        -:  148:{
+        -:  149:public:
+        -:  150:	FilterWithBufferedInput(BufferedTransformation *attachment);
+        -:  151:	//! firstSize and lastSize may be 0, blockSize must be at least 1
+        -:  152:	FilterWithBufferedInput(size_t firstSize, size_t blockSize, size_t lastSize, BufferedTransformation *attachment);
+        -:  153:
+        -:  154:	void IsolatedInitialize(const NameValuePairs &parameters);
+    #####:  155:	size_t Put2(const byte *inString, size_t length, int messageEnd, bool blocking)
+        -:  156:	{
+    #####:  157:		return PutMaybeModifiable(const_cast<byte *>(inString), length, messageEnd, blocking, false);
+        -:  158:	}
+    #####:  159:	size_t PutModifiable2(byte *inString, size_t length, int messageEnd, bool blocking)
+        -:  160:	{
+    #####:  161:		return PutMaybeModifiable(inString, length, messageEnd, blocking, true);
+        -:  162:	}
+        -:  163:	/*! calls ForceNextPut() if hardFlush is true */
+        -:  164:	bool IsolatedFlush(bool hardFlush, bool blocking);
+        -:  165:
+        -:  166:	/*! The input buffer may contain more than blockSize bytes if lastSize != 0.
+        -:  167:		ForceNextPut() forces a call to NextPut() if this is the case.
+        -:  168:	*/
+        -:  169:	void ForceNextPut();
+        -:  170:
+        -:  171:protected:
+        -:  172:	bool DidFirstPut() {return m_firstInputDone;}
+        -:  173:
+    #####:  174:	virtual void InitializeDerivedAndReturnNewSizes(const NameValuePairs &parameters, size_t &firstSize, size_t &blockSize, size_t &lastSize)
+    #####:  175:		{InitializeDerived(parameters);}
+    #####:  176:	virtual void InitializeDerived(const NameValuePairs &parameters) {}
+        -:  177:	// FirstPut() is called if (firstSize != 0 and totalLength >= firstSize)
+        -:  178:	// or (firstSize == 0 and (totalLength > 0 or a MessageEnd() is received))
+        -:  179:	virtual void FirstPut(const byte *inString) =0;
+        -:  180:	// NextPut() is called if totalLength >= firstSize+blockSize+lastSize
+    #####:  181:	virtual void NextPutSingle(const byte *inString) {assert(false);}
+        -:  182:	// Same as NextPut() except length can be a multiple of blockSize
+        -:  183:	// Either NextPut() or NextPutMultiple() must be overriden
+        -:  184:	virtual void NextPutMultiple(const byte *inString, size_t length);
+        -:  185:	// Same as NextPutMultiple(), but inString can be modified
+        -:  186:	virtual void NextPutModifiable(byte *inString, size_t length)
+        -:  187:		{NextPutMultiple(inString, length);}
+        -:  188:	// LastPut() is always called
+        -:  189:	// if totalLength < firstSize then length == totalLength
+        -:  190:	// else if totalLength <= firstSize+lastSize then length == totalLength-firstSize
+        -:  191:	// else lastSize <= length < lastSize+blockSize
+        -:  192:	virtual void LastPut(const byte *inString, size_t length) =0;
+    #####:  193:	virtual void FlushDerived() {}
+        -:  194:
+        -:  195:protected:
+        -:  196:	size_t PutMaybeModifiable(byte *begin, size_t length, int messageEnd, bool blocking, bool modifiable);
+        -:  197:	void NextPutMaybeModifiable(byte *inString, size_t length, bool modifiable)
+        -:  198:	{
+        -:  199:		if (modifiable) NextPutModifiable(inString, length);
+        -:  200:		else NextPutMultiple(inString, length);
+        -:  201:	}
+        -:  202:
+        -:  203:	// This function should no longer be used, put this here to cause a compiler error
+        -:  204:	// if someone tries to override NextPut().
+    #####:  205:	virtual int NextPut(const byte *inString, size_t length) {assert(false); return 0;}
+        -:  206:
+    #####:  207:	class BlockQueue
+        -:  208:	{
+        -:  209:	public:
+        -:  210:		void ResetQueue(size_t blockSize, size_t maxBlocks);
+        -:  211:		byte *GetBlock();
+        -:  212:		byte *GetContigousBlocks(size_t &numberOfBytes);
+        -:  213:		size_t GetAll(byte *outString);
+        -:  214:		void Put(const byte *inString, size_t length);
+        -:  215:		size_t CurrentSize() const {return m_size;}
+        -:  216:		size_t MaxSize() const {return m_buffer.size();}
+        -:  217:
+        -:  218:	private:
+        -:  219:		SecByteBlock m_buffer;
+        -:  220:		size_t m_blockSize, m_maxBlocks, m_size;
+        -:  221:		byte *m_begin;
+        -:  222:	};
+        -:  223:
+        -:  224:	size_t m_firstSize, m_blockSize, m_lastSize;
+        -:  225:	bool m_firstInputDone;
+        -:  226:	BlockQueue m_queue;
+        -:  227:};
+        -:  228:
+        -:  229://! _
+        -:  230:class CRYPTOPP_DLL FilterWithInputQueue : public Filter
+        -:  231:{
+        -:  232:public:
+        -:  233:	FilterWithInputQueue(BufferedTransformation *attachment=NULL) : Filter(attachment) {}
+        -:  234:
+        -:  235:	size_t Put2(const byte *inString, size_t length, int messageEnd, bool blocking)
+        -:  236:	{
+        -:  237:		if (!blocking)
+        -:  238:			throw BlockingInputOnly("FilterWithInputQueue");
+        -:  239:		
+        -:  240:		m_inQueue.Put(inString, length);
+        -:  241:		if (messageEnd)
+        -:  242:		{
+        -:  243:			IsolatedMessageEnd(blocking);
+        -:  244:			Output(0, NULL, 0, messageEnd, blocking);
+        -:  245:		}
+        -:  246:		return 0;
+        -:  247:	}
+        -:  248:
+        -:  249:protected:
+        -:  250:	virtual bool IsolatedMessageEnd(bool blocking) =0;
+        -:  251:	void IsolatedInitialize(const NameValuePairs &parameters) {m_inQueue.Clear();}
+        -:  252:
+        -:  253:	ByteQueue m_inQueue;
+        -:  254:};
+        -:  255:
+        -:  256:struct BlockPaddingSchemeDef
+        -:  257:{
+        -:  258:	enum BlockPaddingScheme {NO_PADDING, ZEROS_PADDING, PKCS_PADDING, ONE_AND_ZEROS_PADDING, DEFAULT_PADDING};
+        -:  259:};
+        -:  260:
+        -:  261://! Filter Wrapper for StreamTransformation, optionally handling padding/unpadding when needed
+        -:  262:class CRYPTOPP_DLL StreamTransformationFilter : public FilterWithBufferedInput, public BlockPaddingSchemeDef, private FilterPutSpaceHelper
+        -:  263:{
+        -:  264:public:
+        -:  265:	/*! DEFAULT_PADDING means PKCS_PADDING if c.MandatoryBlockSize() > 1 && c.MinLastBlockSize() == 0 (e.g. ECB or CBC mode),
+        -:  266:		otherwise NO_PADDING (OFB, CFB, CTR, CBC-CTS modes).
+        -:  267:		See http://www.weidai.com/scan-mirror/csp.html for details of the padding schemes. */
+        -:  268:	StreamTransformationFilter(StreamTransformation &c, BufferedTransformation *attachment = NULL, BlockPaddingScheme padding = DEFAULT_PADDING, bool allowAuthenticatedSymmetricCipher = false);
+        -:  269:
+        -:  270:	std::string AlgorithmName() const {return m_cipher.AlgorithmName();}
+        -:  271:
+        -:  272:protected:
+        -:  273:	void InitializeDerivedAndReturnNewSizes(const NameValuePairs &parameters, size_t &firstSize, size_t &blockSize, size_t &lastSize);
+        -:  274:	void FirstPut(const byte *inString);
+        -:  275:	void NextPutMultiple(const byte *inString, size_t length);
+        -:  276:	void NextPutModifiable(byte *inString, size_t length);
+        -:  277:	void LastPut(const byte *inString, size_t length);
+        -:  278:
+        -:  279:	static size_t LastBlockSize(StreamTransformation &c, BlockPaddingScheme padding);
+        -:  280:
+        -:  281:	StreamTransformation &m_cipher;
+        -:  282:	BlockPaddingScheme m_padding;
+        -:  283:	unsigned int m_optimalBufferSize;
+        -:  284:};
+        -:  285:
+        -:  286:#ifdef CRYPTOPP_MAINTAIN_BACKWARDS_COMPATIBILITY
+        -:  287:typedef StreamTransformationFilter StreamCipherFilter;
+        -:  288:#endif
+        -:  289:
+        -:  290://! Filter Wrapper for HashTransformation
+        -:  291:class CRYPTOPP_DLL HashFilter : public Bufferless<Filter>, private FilterPutSpaceHelper
+        -:  292:{
+        -:  293:public:
+        -:  294:	HashFilter(HashTransformation &hm, BufferedTransformation *attachment = NULL, bool putMessage=false, int truncatedDigestSize=-1, const std::string &messagePutChannel=DEFAULT_CHANNEL, const std::string &hashPutChannel=DEFAULT_CHANNEL);
+        -:  295:
+        -:  296:	std::string AlgorithmName() const {return m_hashModule.AlgorithmName();}
+        -:  297:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:  298:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:  299:	byte * CreatePutSpace(size_t &size) {return m_hashModule.CreateUpdateSpace(size);}
+        -:  300:
+        -:  301:private:
+        -:  302:	HashTransformation &m_hashModule;
+        -:  303:	bool m_putMessage;
+        -:  304:	unsigned int m_digestSize;
+        -:  305:	byte *m_space;
+        -:  306:	std::string m_messagePutChannel, m_hashPutChannel;
+        -:  307:};
+        -:  308:
+        -:  309://! Filter Wrapper for HashTransformation
+        -:  310:class CRYPTOPP_DLL HashVerificationFilter : public FilterWithBufferedInput
+        -:  311:{
+        -:  312:public:
+        -:  313:	class HashVerificationFailed : public Exception
+        -:  314:	{
+        -:  315:	public:
+        -:  316:		HashVerificationFailed()
+        -:  317:			: Exception(DATA_INTEGRITY_CHECK_FAILED, "HashVerificationFilter: message hash or MAC not valid") {}
+        -:  318:	};
+        -:  319:
+        -:  320:	enum Flags {HASH_AT_END=0, HASH_AT_BEGIN=1, PUT_MESSAGE=2, PUT_HASH=4, PUT_RESULT=8, THROW_EXCEPTION=16, DEFAULT_FLAGS = HASH_AT_BEGIN | PUT_RESULT};
+        -:  321:	HashVerificationFilter(HashTransformation &hm, BufferedTransformation *attachment = NULL, word32 flags = DEFAULT_FLAGS, int truncatedDigestSize=-1);
+        -:  322:
+        -:  323:	std::string AlgorithmName() const {return m_hashModule.AlgorithmName();}
+        -:  324:	bool GetLastResult() const {return m_verified;}
+        -:  325:
+        -:  326:protected:
+        -:  327:	void InitializeDerivedAndReturnNewSizes(const NameValuePairs &parameters, size_t &firstSize, size_t &blockSize, size_t &lastSize);
+        -:  328:	void FirstPut(const byte *inString);
+        -:  329:	void NextPutMultiple(const byte *inString, size_t length);
+        -:  330:	void LastPut(const byte *inString, size_t length);
+        -:  331:
+        -:  332:private:
+        -:  333:	friend class AuthenticatedDecryptionFilter;
+        -:  334:
+        -:  335:	HashTransformation &m_hashModule;
+        -:  336:	word32 m_flags;
+        -:  337:	unsigned int m_digestSize;
+        -:  338:	bool m_verified;
+        -:  339:	SecByteBlock m_expectedHash;
+        -:  340:};
+        -:  341:
+        -:  342:typedef HashVerificationFilter HashVerifier;	// for backwards compatibility
+        -:  343:
+        -:  344://! Filter wrapper for encrypting with AuthenticatedSymmetricCipher, optionally handling padding/unpadding when needed
+        -:  345:/*! Additional authenticated data should be given in channel "AAD". If putAAD is true, AAD will be Put() to the attached BufferedTransformation in channel "AAD". */
+        -:  346:class CRYPTOPP_DLL AuthenticatedEncryptionFilter : public StreamTransformationFilter
+        -:  347:{
+        -:  348:public:
+        -:  349:	/*! See StreamTransformationFilter for documentation on BlockPaddingScheme  */
+        -:  350:	AuthenticatedEncryptionFilter(AuthenticatedSymmetricCipher &c, BufferedTransformation *attachment = NULL, bool putAAD=false, int truncatedDigestSize=-1, const std::string &macChannel=DEFAULT_CHANNEL, BlockPaddingScheme padding = DEFAULT_PADDING);
+        -:  351:
+        -:  352:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:  353:	byte * ChannelCreatePutSpace(const std::string &channel, size_t &size);
+        -:  354:	size_t ChannelPut2(const std::string &channel, const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:  355:	void LastPut(const byte *inString, size_t length);
+        -:  356:
+        -:  357:protected:
+        -:  358:	HashFilter m_hf;
+        -:  359:};
+        -:  360:
+        -:  361://! Filter wrapper for decrypting with AuthenticatedSymmetricCipher, optionally handling padding/unpadding when needed
+        -:  362:/*! Additional authenticated data should be given in channel "AAD". */
+        -:  363:class CRYPTOPP_DLL AuthenticatedDecryptionFilter : public FilterWithBufferedInput, public BlockPaddingSchemeDef
+        -:  364:{
+        -:  365:public:
+        -:  366:	enum Flags {MAC_AT_END=0, MAC_AT_BEGIN=1, THROW_EXCEPTION=16, DEFAULT_FLAGS = THROW_EXCEPTION};
+        -:  367:
+        -:  368:	/*! See StreamTransformationFilter for documentation on BlockPaddingScheme  */
+        -:  369:	AuthenticatedDecryptionFilter(AuthenticatedSymmetricCipher &c, BufferedTransformation *attachment = NULL, word32 flags = DEFAULT_FLAGS, int truncatedDigestSize=-1, BlockPaddingScheme padding = DEFAULT_PADDING);
+        -:  370:
+        -:  371:	std::string AlgorithmName() const {return m_hashVerifier.AlgorithmName();}
+        -:  372:	byte * ChannelCreatePutSpace(const std::string &channel, size_t &size);
+        -:  373:	size_t ChannelPut2(const std::string &channel, const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:  374:	bool GetLastResult() const {return m_hashVerifier.GetLastResult();}
+        -:  375:
+        -:  376:protected:
+        -:  377:	void InitializeDerivedAndReturnNewSizes(const NameValuePairs &parameters, size_t &firstSize, size_t &blockSize, size_t &lastSize);
+        -:  378:	void FirstPut(const byte *inString);
+        -:  379:	void NextPutMultiple(const byte *inString, size_t length);
+        -:  380:	void LastPut(const byte *inString, size_t length);
+        -:  381:
+        -:  382:	HashVerificationFilter m_hashVerifier;
+        -:  383:	StreamTransformationFilter m_streamFilter;
+        -:  384:};
+        -:  385:
+        -:  386://! Filter Wrapper for PK_Signer
+        -:  387:class CRYPTOPP_DLL SignerFilter : public Unflushable<Filter>
+        -:  388:{
+        -:  389:public:
+        -:  390:	SignerFilter(RandomNumberGenerator &rng, const PK_Signer &signer, BufferedTransformation *attachment = NULL, bool putMessage=false)
+        -:  391:		: m_rng(rng), m_signer(signer), m_messageAccumulator(signer.NewSignatureAccumulator(rng)), m_putMessage(putMessage) {Detach(attachment);}
+        -:  392:
+        -:  393:	std::string AlgorithmName() const {return m_signer.AlgorithmName();}
+        -:  394:
+        -:  395:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:  396:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:  397:
+        -:  398:private:
+        -:  399:	RandomNumberGenerator &m_rng;
+        -:  400:	const PK_Signer &m_signer;
+        -:  401:	member_ptr<PK_MessageAccumulator> m_messageAccumulator;
+        -:  402:	bool m_putMessage;
+        -:  403:	SecByteBlock m_buf;
+        -:  404:};
+        -:  405:
+        -:  406://! Filter Wrapper for PK_Verifier
+        -:  407:class CRYPTOPP_DLL SignatureVerificationFilter : public FilterWithBufferedInput
+        -:  408:{
+        -:  409:public:
+        -:  410:	class SignatureVerificationFailed : public Exception
+        -:  411:	{
+        -:  412:	public:
+        -:  413:		SignatureVerificationFailed()
+        -:  414:			: Exception(DATA_INTEGRITY_CHECK_FAILED, "VerifierFilter: digital signature not valid") {}
+        -:  415:	};
+        -:  416:
+        -:  417:	enum Flags {SIGNATURE_AT_END=0, SIGNATURE_AT_BEGIN=1, PUT_MESSAGE=2, PUT_SIGNATURE=4, PUT_RESULT=8, THROW_EXCEPTION=16, DEFAULT_FLAGS = SIGNATURE_AT_BEGIN | PUT_RESULT};
+        -:  418:	SignatureVerificationFilter(const PK_Verifier &verifier, BufferedTransformation *attachment = NULL, word32 flags = DEFAULT_FLAGS);
+        -:  419:
+        -:  420:	std::string AlgorithmName() const {return m_verifier.AlgorithmName();}
+        -:  421:
+        -:  422:	bool GetLastResult() const {return m_verified;}
+        -:  423:
+        -:  424:protected:
+        -:  425:	void InitializeDerivedAndReturnNewSizes(const NameValuePairs &parameters, size_t &firstSize, size_t &blockSize, size_t &lastSize);
+        -:  426:	void FirstPut(const byte *inString);
+        -:  427:	void NextPutMultiple(const byte *inString, size_t length);
+        -:  428:	void LastPut(const byte *inString, size_t length);
+        -:  429:
+        -:  430:private:
+        -:  431:	const PK_Verifier &m_verifier;
+        -:  432:	member_ptr<PK_MessageAccumulator> m_messageAccumulator;
+        -:  433:	word32 m_flags;
+        -:  434:	SecByteBlock m_signature;
+        -:  435:	bool m_verified;
+        -:  436:};
+        -:  437:
+        -:  438:typedef SignatureVerificationFilter VerifierFilter;	// for backwards compatibility
+        -:  439:
+        -:  440://! Redirect input to another BufferedTransformation without owning it
+        -:  441:class CRYPTOPP_DLL Redirector : public CustomSignalPropagation<Sink>
+        -:  442:{
+        -:  443:public:
+        -:  444:	enum Behavior
+        -:  445:	{
+        -:  446:		DATA_ONLY = 0x00,
+        -:  447:		PASS_SIGNALS = 0x01,
+        -:  448:		PASS_WAIT_OBJECTS = 0x02,
+        -:  449:		PASS_EVERYTHING = PASS_SIGNALS | PASS_WAIT_OBJECTS
+        -:  450:	};
+        -:  451:
+        -:  452:	Redirector() : m_target(NULL), m_behavior(PASS_EVERYTHING) {}
+        -:  453:	Redirector(BufferedTransformation &target, Behavior behavior=PASS_EVERYTHING)
+        -:  454:		: m_target(&target), m_behavior(behavior) {}
+        -:  455:
+        -:  456:	void Redirect(BufferedTransformation &target) {m_target = &target;}
+        -:  457:	void StopRedirection() {m_target = NULL;}
+        -:  458:
+        -:  459:	Behavior GetBehavior() {return (Behavior) m_behavior;}
+        -:  460:	void SetBehavior(Behavior behavior) {m_behavior=behavior;}
+        -:  461:	bool GetPassSignals() const {return (m_behavior & PASS_SIGNALS) != 0;}
+        -:  462:	void SetPassSignals(bool pass) { if (pass) m_behavior |= PASS_SIGNALS; else m_behavior &= ~(word32) PASS_SIGNALS; }
+        -:  463:	bool GetPassWaitObjects() const {return (m_behavior & PASS_WAIT_OBJECTS) != 0;}
+        -:  464:	void SetPassWaitObjects(bool pass) { if (pass) m_behavior |= PASS_WAIT_OBJECTS; else m_behavior &= ~(word32) PASS_WAIT_OBJECTS; }
+        -:  465:
+        -:  466:	bool CanModifyInput() const
+        -:  467:		{return m_target ? m_target->CanModifyInput() : false;}
+        -:  468:
+        -:  469:	void Initialize(const NameValuePairs &parameters, int propagation);
+        -:  470:	byte * CreatePutSpace(size_t &size)
+        -:  471:		{return m_target ? m_target->CreatePutSpace(size) : (byte *)(size=0, NULL);}
+        -:  472:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking)
+        -:  473:		{return m_target ? m_target->Put2(begin, length, GetPassSignals() ? messageEnd : 0, blocking) : 0;}
+        -:  474:	bool Flush(bool hardFlush, int propagation=-1, bool blocking=true)
+        -:  475:		{return m_target && GetPassSignals() ? m_target->Flush(hardFlush, propagation, blocking) : false;}
+        -:  476:	bool MessageSeriesEnd(int propagation=-1, bool blocking=true)
+        -:  477:		{return m_target && GetPassSignals() ? m_target->MessageSeriesEnd(propagation, blocking) : false;}
+        -:  478:
+        -:  479:	byte * ChannelCreatePutSpace(const std::string &channel, size_t &size)
+        -:  480:		{return m_target ? m_target->ChannelCreatePutSpace(channel, size) : (byte *)(size=0, NULL);}
+        -:  481:	size_t ChannelPut2(const std::string &channel, const byte *begin, size_t length, int messageEnd, bool blocking)
+        -:  482:		{return m_target ? m_target->ChannelPut2(channel, begin, length, GetPassSignals() ? messageEnd : 0, blocking) : 0;}
+        -:  483:	size_t ChannelPutModifiable2(const std::string &channel, byte *begin, size_t length, int messageEnd, bool blocking)
+        -:  484:		{return m_target ? m_target->ChannelPutModifiable2(channel, begin, length, GetPassSignals() ? messageEnd : 0, blocking) : 0;}
+        -:  485:	bool ChannelFlush(const std::string &channel, bool completeFlush, int propagation=-1, bool blocking=true)
+        -:  486:		{return m_target && GetPassSignals() ? m_target->ChannelFlush(channel, completeFlush, propagation, blocking) : false;}
+        -:  487:	bool ChannelMessageSeriesEnd(const std::string &channel, int propagation=-1, bool blocking=true)
+        -:  488:		{return m_target && GetPassSignals() ? m_target->ChannelMessageSeriesEnd(channel, propagation, blocking) : false;}
+        -:  489:
+        -:  490:	unsigned int GetMaxWaitObjectCount() const
+        -:  491:		{ return m_target && GetPassWaitObjects() ? m_target->GetMaxWaitObjectCount() : 0; }
+        -:  492:	void GetWaitObjects(WaitObjectContainer &container, CallStack const& callStack)
+        -:  493:		{ if (m_target && GetPassWaitObjects()) m_target->GetWaitObjects(container, callStack); }
+        -:  494:
+        -:  495:private:
+        -:  496:	BufferedTransformation *m_target;
+        -:  497:	word32 m_behavior;
+        -:  498:};
+        -:  499:
+        -:  500:// Used By ProxyFilter
+        -:  501:class CRYPTOPP_DLL OutputProxy : public CustomSignalPropagation<Sink>
+        -:  502:{
+        -:  503:public:
+        -:  504:	OutputProxy(BufferedTransformation &owner, bool passSignal) : m_owner(owner), m_passSignal(passSignal) {}
+        -:  505:
+        -:  506:	bool GetPassSignal() const {return m_passSignal;}
+        -:  507:	void SetPassSignal(bool passSignal) {m_passSignal = passSignal;}
+        -:  508:
+        -:  509:	byte * CreatePutSpace(size_t &size)
+        -:  510:		{return m_owner.AttachedTransformation()->CreatePutSpace(size);}
+        -:  511:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking)
+        -:  512:		{return m_owner.AttachedTransformation()->Put2(begin, length, m_passSignal ? messageEnd : 0, blocking);}
+        -:  513:	size_t PutModifiable2(byte *begin, size_t length, int messageEnd, bool blocking)
+        -:  514:		{return m_owner.AttachedTransformation()->PutModifiable2(begin, length, m_passSignal ? messageEnd : 0, blocking);}
+        -:  515:	void Initialize(const NameValuePairs &parameters=g_nullNameValuePairs, int propagation=-1)
+        -:  516:		{if (m_passSignal) m_owner.AttachedTransformation()->Initialize(parameters, propagation);}
+        -:  517:	bool Flush(bool hardFlush, int propagation=-1, bool blocking=true)
+        -:  518:		{return m_passSignal ? m_owner.AttachedTransformation()->Flush(hardFlush, propagation, blocking) : false;}
+        -:  519:	bool MessageSeriesEnd(int propagation=-1, bool blocking=true)
+        -:  520:		{return m_passSignal ? m_owner.AttachedTransformation()->MessageSeriesEnd(propagation, blocking) : false;}
+        -:  521:
+        -:  522:	byte * ChannelCreatePutSpace(const std::string &channel, size_t &size)
+        -:  523:		{return m_owner.AttachedTransformation()->ChannelCreatePutSpace(channel, size);}
+        -:  524:	size_t ChannelPut2(const std::string &channel, const byte *begin, size_t length, int messageEnd, bool blocking)
+        -:  525:		{return m_owner.AttachedTransformation()->ChannelPut2(channel, begin, length, m_passSignal ? messageEnd : 0, blocking);}
+        -:  526:	size_t ChannelPutModifiable2(const std::string &channel, byte *begin, size_t length, int messageEnd, bool blocking)
+        -:  527:		{return m_owner.AttachedTransformation()->ChannelPutModifiable2(channel, begin, length, m_passSignal ? messageEnd : 0, blocking);}
+        -:  528:	bool ChannelFlush(const std::string &channel, bool completeFlush, int propagation=-1, bool blocking=true)
+        -:  529:		{return m_passSignal ? m_owner.AttachedTransformation()->ChannelFlush(channel, completeFlush, propagation, blocking) : false;}
+        -:  530:	bool ChannelMessageSeriesEnd(const std::string &channel, int propagation=-1, bool blocking=true)
+        -:  531:		{return m_passSignal ? m_owner.AttachedTransformation()->ChannelMessageSeriesEnd(channel, propagation, blocking) : false;}
+        -:  532:
+        -:  533:private:
+        -:  534:	BufferedTransformation &m_owner;
+        -:  535:	bool m_passSignal;
+        -:  536:};
+        -:  537:
+        -:  538://! Base class for Filter classes that are proxies for a chain of other filters.
+    #####:  539:class CRYPTOPP_DLL ProxyFilter : public FilterWithBufferedInput
+        -:  540:{
+        -:  541:public:
+        -:  542:	ProxyFilter(BufferedTransformation *filter, size_t firstSize, size_t lastSize, BufferedTransformation *attachment);
+        -:  543:
+        -:  544:	bool IsolatedFlush(bool hardFlush, bool blocking);
+        -:  545:
+        -:  546:	void SetFilter(Filter *filter);
+        -:  547:	void NextPutMultiple(const byte *s, size_t len);
+        -:  548:	void NextPutModifiable(byte *inString, size_t length);
+        -:  549:
+        -:  550:protected:
+        -:  551:	member_ptr<BufferedTransformation> m_filter;
+        -:  552:};
+        -:  553:
+        -:  554://! simple proxy filter that doesn't modify the underlying filter's input or output
+    #####:  555:class CRYPTOPP_DLL SimpleProxyFilter : public ProxyFilter
+        -:  556:{
+        -:  557:public:
+    #####:  558:	SimpleProxyFilter(BufferedTransformation *filter, BufferedTransformation *attachment)
+    #####:  559:		: ProxyFilter(filter, 0, 0, attachment) {}
+        -:  560:
+    #####:  561:	void FirstPut(const byte *) {}
+    #####:  562:	void LastPut(const byte *, size_t) {m_filter->MessageEnd();}
+        -:  563:};
+        -:  564:
+        -:  565://! proxy for the filter created by PK_Encryptor::CreateEncryptionFilter
+        -:  566:/*! This class is here just to provide symmetry with VerifierFilter. */
+        -:  567:class CRYPTOPP_DLL PK_EncryptorFilter : public SimpleProxyFilter
+        -:  568:{
+        -:  569:public:
+        -:  570:	PK_EncryptorFilter(RandomNumberGenerator &rng, const PK_Encryptor &encryptor, BufferedTransformation *attachment = NULL)
+        -:  571:		: SimpleProxyFilter(encryptor.CreateEncryptionFilter(rng), attachment) {}
+        -:  572:};
+        -:  573:
+        -:  574://! proxy for the filter created by PK_Decryptor::CreateDecryptionFilter
+        -:  575:/*! This class is here just to provide symmetry with SignerFilter. */
+        -:  576:class CRYPTOPP_DLL PK_DecryptorFilter : public SimpleProxyFilter
+        -:  577:{
+        -:  578:public:
+        -:  579:	PK_DecryptorFilter(RandomNumberGenerator &rng, const PK_Decryptor &decryptor, BufferedTransformation *attachment = NULL)
+        -:  580:		: SimpleProxyFilter(decryptor.CreateDecryptionFilter(rng), attachment) {}
+        -:  581:};
+        -:  582:
+        -:  583://! Append input to a string object
+        -:  584:template <class T>
+        -:  585:class StringSinkTemplate : public Bufferless<Sink>
+        -:  586:{
+        -:  587:public:
+        -:  588:	// VC60 workaround: no T::char_type
+        -:  589:	typedef typename T::traits_type::char_type char_type;
+        -:  590:
+        -:  591:	StringSinkTemplate(T &output)
+        -:  592:		: m_output(&output) {assert(sizeof(output[0])==1);}
+        -:  593:
+        -:  594:	void IsolatedInitialize(const NameValuePairs &parameters)
+        -:  595:		{if (!parameters.GetValue("OutputStringPointer", m_output)) throw InvalidArgument("StringSink: OutputStringPointer not specified");}
+        -:  596:
+        -:  597:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking)
+        -:  598:	{
+        -:  599:		if (length > 0)
+        -:  600:		{
+        -:  601:			typename T::size_type size = m_output->size();
+        -:  602:			if (length < size && size + length > m_output->capacity())
+        -:  603:				m_output->reserve(2*size);
+        -:  604:		m_output->append((const char_type *)begin, (const char_type *)begin+length);
+        -:  605:		}
+        -:  606:		return 0;
+        -:  607:	}
+        -:  608:
+        -:  609:private:	
+        -:  610:	T *m_output;
+        -:  611:};
+        -:  612:
+        -:  613://! Append input to an std::string
+        -:  614:CRYPTOPP_DLL_TEMPLATE_CLASS StringSinkTemplate<std::string>;
+        -:  615:typedef StringSinkTemplate<std::string> StringSink;
+        -:  616:
+        -:  617://! incorporates input into RNG as additional entropy
+        -:  618:class RandomNumberSink : public Bufferless<Sink>
+        -:  619:{
+        -:  620:public:
+        -:  621:	RandomNumberSink()
+        -:  622:		: m_rng(NULL) {}
+        -:  623:
+        -:  624:	RandomNumberSink(RandomNumberGenerator &rng)
+        -:  625:		: m_rng(&rng) {}
+        -:  626:
+        -:  627:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:  628:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:  629:
+        -:  630:private:
+        -:  631:	RandomNumberGenerator *m_rng;
+        -:  632:};
+        -:  633:
+        -:  634://! Copy input to a memory buffer
+        -:  635:class CRYPTOPP_DLL ArraySink : public Bufferless<Sink>
+        -:  636:{
+        -:  637:public:
+        -:  638:	ArraySink(const NameValuePairs &parameters = g_nullNameValuePairs) {IsolatedInitialize(parameters);}
+        -:  639:	ArraySink(byte *buf, size_t size) : m_buf(buf), m_size(size), m_total(0) {}
+        -:  640:
+        -:  641:	size_t AvailableSize() {return SaturatingSubtract(m_size, m_total);}
+        -:  642:	lword TotalPutLength() {return m_total;}
+        -:  643:
+        -:  644:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:  645:	byte * CreatePutSpace(size_t &size);
+        -:  646:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:  647:
+        -:  648:protected:
+        -:  649:	byte *m_buf;
+        -:  650:	size_t m_size;
+        -:  651:	lword m_total;
+        -:  652:};
+        -:  653:
+        -:  654://! Xor input to a memory buffer
+        -:  655:class CRYPTOPP_DLL ArrayXorSink : public ArraySink
+        -:  656:{
+        -:  657:public:
+        -:  658:	ArrayXorSink(byte *buf, size_t size)
+        -:  659:		: ArraySink(buf, size) {}
+        -:  660:
+        -:  661:	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+        -:  662:	byte * CreatePutSpace(size_t &size) {return BufferedTransformation::CreatePutSpace(size);}
+        -:  663:};
+        -:  664:
+        -:  665://! string-based implementation of Store interface
+    #####:  666:class StringStore : public Store
+        -:  667:{
+        -:  668:public:
+    #####:  669:	StringStore(const char *string = NULL)
+    #####:  670:		{StoreInitialize(MakeParameters("InputBuffer", ConstByteArrayParameter(string)));}
+        -:  671:	StringStore(const byte *string, size_t length)
+        -:  672:		{StoreInitialize(MakeParameters("InputBuffer", ConstByteArrayParameter(string, length)));}
+        -:  673:	template <class T> StringStore(const T &string)
+        -:  674:		{StoreInitialize(MakeParameters("InputBuffer", ConstByteArrayParameter(string)));}
+        -:  675:
+        -:  676:	CRYPTOPP_DLL size_t TransferTo2(BufferedTransformation &target, lword &transferBytes, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true);
+        -:  677:	CRYPTOPP_DLL size_t CopyRangeTo2(BufferedTransformation &target, lword &begin, lword end=LWORD_MAX, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true) const;
+        -:  678:
+        -:  679:private:
+        -:  680:	CRYPTOPP_DLL void StoreInitialize(const NameValuePairs &parameters);
+        -:  681:
+        -:  682:	const byte *m_store;
+        -:  683:	size_t m_length, m_count;
+        -:  684:};
+        -:  685:
+        -:  686://! RNG-based implementation of Source interface
+        -:  687:class CRYPTOPP_DLL RandomNumberStore : public Store
+        -:  688:{
+        -:  689:public:
+        -:  690:	RandomNumberStore()
+        -:  691:		: m_rng(NULL), m_length(0), m_count(0) {}
+        -:  692:
+        -:  693:	RandomNumberStore(RandomNumberGenerator &rng, lword length)
+        -:  694:		: m_rng(&rng), m_length(length), m_count(0) {}
+        -:  695:
+        -:  696:	bool AnyRetrievable() const {return MaxRetrievable() != 0;}
+        -:  697:	lword MaxRetrievable() const {return m_length-m_count;}
+        -:  698:
+        -:  699:	size_t TransferTo2(BufferedTransformation &target, lword &transferBytes, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true);
+        -:  700:	size_t CopyRangeTo2(BufferedTransformation &target, lword &begin, lword end=LWORD_MAX, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true) const
+        -:  701:	{
+        -:  702:		throw NotImplemented("RandomNumberStore: CopyRangeTo2() is not supported by this store");
+        -:  703:	}
+        -:  704:
+        -:  705:private:
+        -:  706:	void StoreInitialize(const NameValuePairs &parameters);
+        -:  707:
+        -:  708:	RandomNumberGenerator *m_rng;
+        -:  709:	lword m_length, m_count;
+        -:  710:};
+        -:  711:
+        -:  712://! empty store
+        -:  713:class CRYPTOPP_DLL NullStore : public Store
+        -:  714:{
+        -:  715:public:
+        -:  716:	NullStore(lword size = ULONG_MAX) : m_size(size) {}
+        -:  717:	void StoreInitialize(const NameValuePairs &parameters) {}
+        -:  718:	lword MaxRetrievable() const {return m_size;}
+        -:  719:	size_t TransferTo2(BufferedTransformation &target, lword &transferBytes, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true);
+        -:  720:	size_t CopyRangeTo2(BufferedTransformation &target, lword &begin, lword end=LWORD_MAX, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true) const;
+        -:  721:
+        -:  722:private:
+        -:  723:	lword m_size;
+        -:  724:};
+        -:  725:
+        -:  726://! A Filter that pumps data into its attachment as input
+    #####:  727:class CRYPTOPP_DLL CRYPTOPP_NO_VTABLE Source : public InputRejecting<Filter>
+        -:  728:{
+        -:  729:public:
+    #####:  730:	Source(BufferedTransformation *attachment = NULL)
+    #####:  731:		{Source::Detach(attachment);}
+        -:  732:
+        -:  733:	lword Pump(lword pumpMax=size_t(0)-1)
+        -:  734:		{Pump2(pumpMax); return pumpMax;}
+        -:  735:	unsigned int PumpMessages(unsigned int count=UINT_MAX)
+        -:  736:		{PumpMessages2(count); return count;}
+    #####:  737:	void PumpAll()
+    #####:  738:		{PumpAll2();}
+        -:  739:	virtual size_t Pump2(lword &byteCount, bool blocking=true) =0;
+        -:  740:	virtual size_t PumpMessages2(unsigned int &messageCount, bool blocking=true) =0;
+        -:  741:	virtual size_t PumpAll2(bool blocking=true);
+        -:  742:	virtual bool SourceExhausted() const =0;
+        -:  743:
+        -:  744:protected:
+    #####:  745:	void SourceInitialize(bool pumpAll, const NameValuePairs &parameters)
+        -:  746:	{
+    #####:  747:		IsolatedInitialize(parameters);
+    #####:  748:		if (pumpAll)
+    #####:  749:			PumpAll();
+    #####:  750:	}
+        -:  751:};
+        -:  752:
+        -:  753://! Turn a Store into a Source
+        -:  754:template <class T>
+    #####:  755:class SourceTemplate : public Source
+        -:  756:{
+        -:  757:public:
+    #####:  758:	SourceTemplate<T>(BufferedTransformation *attachment)
+    #####:  759:		: Source(attachment) {}
+    #####:  760:	void IsolatedInitialize(const NameValuePairs &parameters)
+    #####:  761:		{m_store.IsolatedInitialize(parameters);}
+    #####:  762:	size_t Pump2(lword &byteCount, bool blocking=true)
+    #####:  763:		{return m_store.TransferTo2(*AttachedTransformation(), byteCount, DEFAULT_CHANNEL, blocking);}
+    #####:  764:	size_t PumpMessages2(unsigned int &messageCount, bool blocking=true)
+    #####:  765:		{return m_store.TransferMessagesTo2(*AttachedTransformation(), messageCount, DEFAULT_CHANNEL, blocking);}
+    #####:  766:	size_t PumpAll2(bool blocking=true)
+    #####:  767:		{return m_store.TransferAllTo2(*AttachedTransformation(), DEFAULT_CHANNEL, blocking);}
+    #####:  768:	bool SourceExhausted() const
+    #####:  769:		{return !m_store.AnyRetrievable() && !m_store.AnyMessages();}
+    #####:  770:	void SetAutoSignalPropagation(int propagation)
+    #####:  771:		{m_store.SetAutoSignalPropagation(propagation);}
+    #####:  772:	int GetAutoSignalPropagation() const
+    #####:  773:		{return m_store.GetAutoSignalPropagation();}
+        -:  774:
+        -:  775:protected:
+        -:  776:	T m_store;
+        -:  777:};
+        -:  778:
+        -:  779://! string-based implementation of Source interface
+    #####:  780:class CRYPTOPP_DLL StringSource : public SourceTemplate<StringStore>
+        -:  781:{
+        -:  782:public:
+        -:  783:	StringSource(BufferedTransformation *attachment = NULL)
+        -:  784:		: SourceTemplate<StringStore>(attachment) {}
+        -:  785:	//! zero terminated string as source
+        -:  786:	StringSource(const char *string, bool pumpAll, BufferedTransformation *attachment = NULL)
+        -:  787:		: SourceTemplate<StringStore>(attachment) {SourceInitialize(pumpAll, MakeParameters("InputBuffer", ConstByteArrayParameter(string)));}
+        -:  788:	//! binary byte array as source
+        -:  789:	StringSource(const byte *string, size_t length, bool pumpAll, BufferedTransformation *attachment = NULL)
+        -:  790:		: SourceTemplate<StringStore>(attachment) {SourceInitialize(pumpAll, MakeParameters("InputBuffer", ConstByteArrayParameter(string, length)));}
+        -:  791:	//! std::string as source
+    #####:  792:	StringSource(const std::string &string, bool pumpAll, BufferedTransformation *attachment = NULL)
+    #####:  793:		: SourceTemplate<StringStore>(attachment) {SourceInitialize(pumpAll, MakeParameters("InputBuffer", ConstByteArrayParameter(string)));}
+        -:  794:};
+        -:  795:
+        -:  796://! use the third constructor for an array source
+        -:  797:typedef StringSource ArraySource;
+        -:  798:
+        -:  799://! RNG-based implementation of Source interface
+        -:  800:class CRYPTOPP_DLL RandomNumberSource : public SourceTemplate<RandomNumberStore>
+        -:  801:{
+        -:  802:public:
+        -:  803:	RandomNumberSource(RandomNumberGenerator &rng, int length, bool pumpAll, BufferedTransformation *attachment = NULL)
+        -:  804:		: SourceTemplate<RandomNumberStore>(attachment) 
+        -:  805:		{SourceInitialize(pumpAll, MakeParameters("RandomNumberGeneratorPointer", &rng)("RandomNumberStoreSize", length));}
+        -:  806:};
+        -:  807:
+        -:  808:NAMESPACE_END
+        -:  809:
+        -:  810:#endif

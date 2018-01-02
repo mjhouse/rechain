@@ -1,0 +1,1285 @@
+        -:    0:Source:/usr/include/cryptopp/misc.h
+        -:    0:Programs:5
+        -:    1:#ifndef CRYPTOPP_MISC_H
+        -:    2:#define CRYPTOPP_MISC_H
+        -:    3:
+        -:    4:#include "cryptlib.h"
+        -:    5:#include "smartptr.h"
+        -:    6:#include <string.h>		// for memcpy and memmove
+        -:    7:
+        -:    8:#ifdef _MSC_VER
+        -:    9:	#if _MSC_VER >= 1400
+        -:   10:		// VC2005 workaround: disable declarations that conflict with winnt.h
+        -:   11:		#define _interlockedbittestandset CRYPTOPP_DISABLED_INTRINSIC_1
+        -:   12:		#define _interlockedbittestandreset CRYPTOPP_DISABLED_INTRINSIC_2
+        -:   13:		#define _interlockedbittestandset64 CRYPTOPP_DISABLED_INTRINSIC_3
+        -:   14:		#define _interlockedbittestandreset64 CRYPTOPP_DISABLED_INTRINSIC_4
+        -:   15:		#include <intrin.h>
+        -:   16:		#undef _interlockedbittestandset
+        -:   17:		#undef _interlockedbittestandreset
+        -:   18:		#undef _interlockedbittestandset64
+        -:   19:		#undef _interlockedbittestandreset64
+        -:   20:		#define CRYPTOPP_FAST_ROTATE(x) 1
+        -:   21:	#elif _MSC_VER >= 1300
+        -:   22:		#define CRYPTOPP_FAST_ROTATE(x) ((x) == 32 | (x) == 64)
+        -:   23:	#else
+        -:   24:		#define CRYPTOPP_FAST_ROTATE(x) ((x) == 32)
+        -:   25:	#endif
+        -:   26:#elif (defined(__MWERKS__) && TARGET_CPU_PPC) || \
+        -:   27:	(defined(__GNUC__) && (defined(_ARCH_PWR2) || defined(_ARCH_PWR) || defined(_ARCH_PPC) || defined(_ARCH_PPC64) || defined(_ARCH_COM)))
+        -:   28:	#define CRYPTOPP_FAST_ROTATE(x) ((x) == 32)
+        -:   29:#elif defined(__GNUC__) && (CRYPTOPP_BOOL_X64 || CRYPTOPP_BOOL_X86)	// depend on GCC's peephole optimization to generate rotate instructions
+        -:   30:	#define CRYPTOPP_FAST_ROTATE(x) 1
+        -:   31:#else
+        -:   32:	#define CRYPTOPP_FAST_ROTATE(x) 0
+        -:   33:#endif
+        -:   34:
+        -:   35:#ifdef __BORLANDC__
+        -:   36:#include <mem.h>
+        -:   37:#endif
+        -:   38:
+        -:   39:#if defined(__GNUC__) && defined(__linux__)
+        -:   40:#define CRYPTOPP_BYTESWAP_AVAILABLE
+        -:   41:#include <byteswap.h>
+        -:   42:#include <cstring>
+        -:   43:#endif
+        -:   44:
+        -:   45:NAMESPACE_BEGIN(CryptoPP)
+        -:   46:
+        -:   47:// ************** compile-time assertion ***************
+        -:   48:
+        -:   49:template <bool b>
+        -:   50:struct CompileAssert
+        -:   51:{
+        -:   52:	static char dummy[2*b-1];
+        -:   53:};
+        -:   54:
+        -:   55:#define CRYPTOPP_COMPILE_ASSERT(assertion) CRYPTOPP_COMPILE_ASSERT_INSTANCE(assertion, __LINE__)
+        -:   56:#if defined(CRYPTOPP_EXPORTS) || defined(CRYPTOPP_IMPORTS)
+        -:   57:#define CRYPTOPP_COMPILE_ASSERT_INSTANCE(assertion, instance)
+        -:   58:#else
+        -:   59:#define CRYPTOPP_COMPILE_ASSERT_INSTANCE(assertion, instance) static CompileAssert<(assertion)> CRYPTOPP_ASSERT_JOIN(cryptopp_assert_, instance)
+        -:   60:#endif
+        -:   61:#define CRYPTOPP_ASSERT_JOIN(X, Y) CRYPTOPP_DO_ASSERT_JOIN(X, Y)
+        -:   62:#define CRYPTOPP_DO_ASSERT_JOIN(X, Y) X##Y
+        -:   63:
+        -:   64:// ************** misc classes ***************
+        -:   65:
+        -:   66:class CRYPTOPP_DLL Empty
+        -:   67:{
+        -:   68:};
+        -:   69:
+        -:   70://! _
+        -:   71:template <class BASE1, class BASE2>
+        -:   72:class CRYPTOPP_NO_VTABLE TwoBases : public BASE1, public BASE2
+        -:   73:{
+        -:   74:};
+        -:   75:
+        -:   76://! _
+        -:   77:template <class BASE1, class BASE2, class BASE3>
+        -:   78:class CRYPTOPP_NO_VTABLE ThreeBases : public BASE1, public BASE2, public BASE3
+        -:   79:{
+        -:   80:};
+        -:   81:
+        -:   82:template <class T>
+        -:   83:class ObjectHolder
+        -:   84:{
+        -:   85:protected:
+        -:   86:	T m_object;
+        -:   87:};
+        -:   88:
+        -:   89:class NotCopyable
+        -:   90:{
+        -:   91:public:
+        -:   92:	NotCopyable() {}
+        -:   93:private:
+        -:   94:    NotCopyable(const NotCopyable &);
+        -:   95:    void operator=(const NotCopyable &);
+        -:   96:};
+        -:   97:
+        -:   98:template <class T>
+        -:   99:struct NewObject
+        -:  100:{
+        -:  101:	T* operator()() const {return new T;}
+        -:  102:};
+        -:  103:
+        -:  104:/*! This function safely initializes a static object in a multithreaded environment without using locks (for portability).
+        -:  105:	Note that if two threads call Ref() at the same time, they may get back different references, and one object 
+        -:  106:	may end up being memory leaked. This is by design.
+        -:  107:*/
+        -:  108:template <class T, class F = NewObject<T>, int instance=0>
+        -:  109:class Singleton
+        -:  110:{
+        -:  111:public:
+        -:  112:	Singleton(F objectFactory = F()) : m_objectFactory(objectFactory) {}
+        -:  113:
+        -:  114:	// prevent this function from being inlined
+        -:  115:	CRYPTOPP_NOINLINE const T & Ref(CRYPTOPP_NOINLINE_DOTDOTDOT) const;
+        -:  116:
+        -:  117:private:
+        -:  118:	F m_objectFactory;
+        -:  119:};
+        -:  120:
+        -:  121:template <class T, class F, int instance>
+        -:  122:const T & Singleton<T, F, instance>::Ref(CRYPTOPP_NOINLINE_DOTDOTDOT) const
+        -:  123:{
+        -:  124:	static volatile simple_ptr<T> s_pObject;
+        -:  125:	T *p = s_pObject.m_p;
+        -:  126:
+        -:  127:	if (p)
+        -:  128:		return *p;
+        -:  129:
+        -:  130:	T *newObject = m_objectFactory();
+        -:  131:	p = s_pObject.m_p;
+        -:  132:
+        -:  133:	if (p)
+        -:  134:	{
+        -:  135:		delete newObject;
+        -:  136:		return *p;
+        -:  137:	}
+        -:  138:
+        -:  139:	s_pObject.m_p = newObject;
+        -:  140:	return *newObject;
+        -:  141:}
+        -:  142:
+        -:  143:// ************** misc functions ***************
+        -:  144:
+        -:  145:#if (!__STDC_WANT_SECURE_LIB__)
+    #####:  146:inline void memcpy_s(void *dest, size_t sizeInBytes, const void *src, size_t count)
+        -:  147:{
+    #####:  148:	if (count > sizeInBytes)
+    #####:  149:		throw InvalidArgument("memcpy_s: buffer overflow");
+    #####:  150:	memcpy(dest, src, count);
+    #####:  151:}
+        -:  152:
+        -:  153:inline void memmove_s(void *dest, size_t sizeInBytes, const void *src, size_t count)
+        -:  154:{
+        -:  155:	if (count > sizeInBytes)
+        -:  156:		throw InvalidArgument("memmove_s: buffer overflow");
+        -:  157:	memmove(dest, src, count);
+        -:  158:}
+        -:  159:
+        -:  160:#if __BORLANDC__ >= 0x620
+        -:  161:// C++Builder 2010 workaround: can't use std::memcpy_s because it doesn't allow 0 lengths
+        -:  162:#define memcpy_s CryptoPP::memcpy_s
+        -:  163:#define memmove_s CryptoPP::memmove_s
+        -:  164:#endif
+        -:  165:#endif
+        -:  166:
+        -:  167:inline void * memset_z(void *ptr, int value, size_t num)
+        -:  168:{
+        -:  169:// avoid extranous warning on GCC 4.3.2 Ubuntu 8.10
+        -:  170:#if CRYPTOPP_GCC_VERSION >= 30001
+        -:  171:	if (__builtin_constant_p(num) && num==0)
+        -:  172:		return ptr;
+        -:  173:#endif
+        -:  174:	return memset(ptr, value, num);
+        -:  175:}
+        -:  176:
+        -:  177:// can't use std::min or std::max in MSVC60 or Cygwin 1.1.0
+        -:  178:template <class T> inline const T& STDMIN(const T& a, const T& b)
+        -:  179:{
+        -:  180:	return b < a ? b : a;
+        -:  181:}
+        -:  182:
+        -:  183:template <class T1, class T2> inline const T1 UnsignedMin(const T1& a, const T2& b)
+        -:  184:{
+        -:  185:	CRYPTOPP_COMPILE_ASSERT((sizeof(T1)<=sizeof(T2) && T2(-1)>0) || (sizeof(T1)>sizeof(T2) && T1(-1)>0));
+        -:  186:	assert(a==0 || a>0);	// GCC workaround: get rid of the warning "comparison is always true due to limited range of data type"
+        -:  187:	assert(b>=0);
+        -:  188:
+        -:  189:	if (sizeof(T1)<=sizeof(T2))
+        -:  190:		return b < (T2)a ? (T1)b : a;
+        -:  191:	else
+        -:  192:		return (T1)b < a ? (T1)b : a;
+        -:  193:}
+        -:  194:
+        -:  195:template <class T> inline const T& STDMAX(const T& a, const T& b)
+        -:  196:{
+        -:  197:	return a < b ? b : a;
+        -:  198:}
+        -:  199:
+        -:  200:#define RETURN_IF_NONZERO(x) size_t returnedValue = x; if (returnedValue) return returnedValue
+        -:  201:
+        -:  202:// this version of the macro is fastest on Pentium 3 and Pentium 4 with MSVC 6 SP5 w/ Processor Pack
+        -:  203:#define GETBYTE(x, y) (unsigned int)byte((x)>>(8*(y)))
+        -:  204:// these may be faster on other CPUs/compilers
+        -:  205:// #define GETBYTE(x, y) (unsigned int)(((x)>>(8*(y)))&255)
+        -:  206:// #define GETBYTE(x, y) (((byte *)&(x))[y])
+        -:  207:
+        -:  208:#define CRYPTOPP_GET_BYTE_AS_BYTE(x, y) byte((x)>>(8*(y)))
+        -:  209:
+        -:  210:template <class T>
+        -:  211:unsigned int Parity(T value)
+        -:  212:{
+        -:  213:	for (unsigned int i=8*sizeof(value)/2; i>0; i/=2)
+        -:  214:		value ^= value >> i;
+        -:  215:	return (unsigned int)value&1;
+        -:  216:}
+        -:  217:
+        -:  218:template <class T>
+        -:  219:unsigned int BytePrecision(const T &value)
+        -:  220:{
+        -:  221:	if (!value)
+        -:  222:		return 0;
+        -:  223:
+        -:  224:	unsigned int l=0, h=8*sizeof(value);
+        -:  225:
+        -:  226:	while (h-l > 8)
+        -:  227:	{
+        -:  228:		unsigned int t = (l+h)/2;
+        -:  229:		if (value >> t)
+        -:  230:			l = t;
+        -:  231:		else
+        -:  232:			h = t;
+        -:  233:	}
+        -:  234:
+        -:  235:	return h/8;
+        -:  236:}
+        -:  237:
+        -:  238:template <class T>
+        -:  239:unsigned int BitPrecision(const T &value)
+        -:  240:{
+        -:  241:	if (!value)
+        -:  242:		return 0;
+        -:  243:
+        -:  244:	unsigned int l=0, h=8*sizeof(value);
+        -:  245:
+        -:  246:	while (h-l > 1)
+        -:  247:	{
+        -:  248:		unsigned int t = (l+h)/2;
+        -:  249:		if (value >> t)
+        -:  250:			l = t;
+        -:  251:		else
+        -:  252:			h = t;
+        -:  253:	}
+        -:  254:
+        -:  255:	return h;
+        -:  256:}
+        -:  257:
+        -:  258:inline unsigned int TrailingZeros(word32 v)
+        -:  259:{
+        -:  260:#if defined(__GNUC__) && CRYPTOPP_GCC_VERSION >= 30400
+        -:  261:	return __builtin_ctz(v);
+        -:  262:#elif defined(_MSC_VER) && _MSC_VER >= 1400
+        -:  263:	unsigned long result;
+        -:  264:	_BitScanForward(&result, v);
+        -:  265:	return result;
+        -:  266:#else
+        -:  267:	// from http://graphics.stanford.edu/~seander/bithacks.html#ZerosOnRightMultLookup
+        -:  268:	static const int MultiplyDeBruijnBitPosition[32] = 
+        -:  269:	{
+        -:  270:	  0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 
+        -:  271:	  31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9
+        -:  272:	};
+        -:  273:	return MultiplyDeBruijnBitPosition[((word32)((v & -v) * 0x077CB531U)) >> 27];
+        -:  274:#endif
+        -:  275:}
+        -:  276:
+        -:  277:inline unsigned int TrailingZeros(word64 v)
+        -:  278:{
+        -:  279:#if defined(__GNUC__) && CRYPTOPP_GCC_VERSION >= 30400
+        -:  280:	return __builtin_ctzll(v);
+        -:  281:#elif defined(_MSC_VER) && _MSC_VER >= 1400 && (defined(_M_X64) || defined(_M_IA64))
+        -:  282:	unsigned long result;
+        -:  283:	_BitScanForward64(&result, v);
+        -:  284:	return result;
+        -:  285:#else
+        -:  286:	return word32(v) ? TrailingZeros(word32(v)) : 32 + TrailingZeros(word32(v>>32));
+        -:  287:#endif
+        -:  288:}
+        -:  289:
+        -:  290:template <class T>
+        -:  291:inline T Crop(T value, size_t size)
+        -:  292:{
+        -:  293:	if (size < 8*sizeof(value))
+        -:  294:    	return T(value & ((T(1) << size) - 1));
+        -:  295:	else
+        -:  296:		return value;
+        -:  297:}
+        -:  298:
+        -:  299:template <class T1, class T2>
+        -:  300:inline bool SafeConvert(T1 from, T2 &to)
+        -:  301:{
+        -:  302:	to = (T2)from;
+        -:  303:	if (from != to || (from > 0) != (to > 0))
+        -:  304:		return false;
+        -:  305:	return true;
+        -:  306:}
+        -:  307:
+        -:  308:inline size_t BitsToBytes(size_t bitCount)
+        -:  309:{
+        -:  310:	return ((bitCount+7)/(8));
+        -:  311:}
+        -:  312:
+        -:  313:inline size_t BytesToWords(size_t byteCount)
+        -:  314:{
+        -:  315:	return ((byteCount+WORD_SIZE-1)/WORD_SIZE);
+        -:  316:}
+        -:  317:
+        -:  318:inline size_t BitsToWords(size_t bitCount)
+        -:  319:{
+        -:  320:	return ((bitCount+WORD_BITS-1)/(WORD_BITS));
+        -:  321:}
+        -:  322:
+        -:  323:inline size_t BitsToDwords(size_t bitCount)
+        -:  324:{
+        -:  325:	return ((bitCount+2*WORD_BITS-1)/(2*WORD_BITS));
+        -:  326:}
+        -:  327:
+        -:  328:CRYPTOPP_DLL void CRYPTOPP_API xorbuf(byte *buf, const byte *mask, size_t count);
+        -:  329:CRYPTOPP_DLL void CRYPTOPP_API xorbuf(byte *output, const byte *input, const byte *mask, size_t count);
+        -:  330:
+        -:  331:CRYPTOPP_DLL bool CRYPTOPP_API VerifyBufsEqual(const byte *buf1, const byte *buf2, size_t count);
+        -:  332:
+        -:  333:template <class T>
+        -:  334:inline bool IsPowerOf2(const T &n)
+        -:  335:{
+        -:  336:	return n > 0 && (n & (n-1)) == 0;
+        -:  337:}
+        -:  338:
+        -:  339:template <class T1, class T2>
+        -:  340:inline T2 ModPowerOf2(const T1 &a, const T2 &b)
+        -:  341:{
+        -:  342:	assert(IsPowerOf2(b));
+        -:  343:	return T2(a) & (b-1);
+        -:  344:}
+        -:  345:
+        -:  346:template <class T1, class T2>
+        -:  347:inline T1 RoundDownToMultipleOf(const T1 &n, const T2 &m)
+        -:  348:{
+        -:  349:	if (IsPowerOf2(m))
+        -:  350:		return n - ModPowerOf2(n, m);
+        -:  351:	else
+        -:  352:		return n - n%m;
+        -:  353:}
+        -:  354:
+        -:  355:template <class T1, class T2>
+        -:  356:inline T1 RoundUpToMultipleOf(const T1 &n, const T2 &m)
+        -:  357:{
+        -:  358:	if (n+m-1 < n)
+        -:  359:		throw InvalidArgument("RoundUpToMultipleOf: integer overflow");
+        -:  360:	return RoundDownToMultipleOf(n+m-1, m);
+        -:  361:}
+        -:  362:
+        -:  363:template <class T>
+    #####:  364:inline unsigned int GetAlignmentOf(T *dummy=NULL)	// VC60 workaround
+        -:  365:{
+        -:  366:#ifdef CRYPTOPP_ALLOW_UNALIGNED_DATA_ACCESS
+        -:  367:	if (sizeof(T) < 16)
+    #####:  368:		return 1;
+        -:  369:#endif
+        -:  370:
+        -:  371:#if (_MSC_VER >= 1300)
+        -:  372:	return __alignof(T);
+        -:  373:#elif defined(__GNUC__)
+        -:  374:	return __alignof__(T);
+        -:  375:#elif CRYPTOPP_BOOL_SLOW_WORD64
+        -:  376:	return UnsignedMin(4U, sizeof(T));
+        -:  377:#else
+        -:  378:	return sizeof(T);
+        -:  379:#endif
+        -:  380:}
+        -:  381:
+        -:  382:inline bool IsAlignedOn(const void *p, unsigned int alignment)
+        -:  383:{
+        -:  384:	return alignment==1 || (IsPowerOf2(alignment) ? ModPowerOf2((size_t)p, alignment) == 0 : (size_t)p % alignment == 0);
+        -:  385:}
+        -:  386:
+        -:  387:template <class T>
+        -:  388:inline bool IsAligned(const void *p, T *dummy=NULL)	// VC60 workaround
+        -:  389:{
+        -:  390:	return IsAlignedOn(p, GetAlignmentOf<T>());
+        -:  391:}
+        -:  392:
+        -:  393:#ifdef IS_LITTLE_ENDIAN
+        -:  394:	typedef LittleEndian NativeByteOrder;
+        -:  395:#else
+        -:  396:	typedef BigEndian NativeByteOrder;
+        -:  397:#endif
+        -:  398:
+        -:  399:inline ByteOrder GetNativeByteOrder()
+        -:  400:{
+        -:  401:	return NativeByteOrder::ToEnum();
+        -:  402:}
+        -:  403:
+        -:  404:inline bool NativeByteOrderIs(ByteOrder order)
+        -:  405:{
+        -:  406:	return order == GetNativeByteOrder();
+        -:  407:}
+        -:  408:
+        -:  409:template <class T>
+        -:  410:std::string IntToString(T a, unsigned int base = 10)
+        -:  411:{
+        -:  412:	if (a == 0)
+        -:  413:		return "0";
+        -:  414:	bool negate = false;
+        -:  415:	if (a < 0)
+        -:  416:	{
+        -:  417:		negate = true;
+        -:  418:		a = 0-a;	// VC .NET does not like -a
+        -:  419:	}
+        -:  420:	std::string result;
+        -:  421:	while (a > 0)
+        -:  422:	{
+        -:  423:		T digit = a % base;
+        -:  424:		result = char((digit < 10 ? '0' : ('a' - 10)) + digit) + result;
+        -:  425:		a /= base;
+        -:  426:	}
+        -:  427:	if (negate)
+        -:  428:		result = "-" + result;
+        -:  429:	return result;
+        -:  430:}
+        -:  431:
+        -:  432:template <class T1, class T2>
+        -:  433:inline T1 SaturatingSubtract(const T1 &a, const T2 &b)
+        -:  434:{
+        -:  435:	return T1((a > b) ? (a - b) : 0);
+        -:  436:}
+        -:  437:
+        -:  438:template <class T>
+        -:  439:inline CipherDir GetCipherDir(const T &obj)
+        -:  440:{
+        -:  441:	return obj.IsForwardTransformation() ? ENCRYPTION : DECRYPTION;
+        -:  442:}
+        -:  443:
+        -:  444:CRYPTOPP_DLL void CRYPTOPP_API CallNewHandler();
+        -:  445:
+        -:  446:inline void IncrementCounterByOne(byte *inout, unsigned int s)
+        -:  447:{
+        -:  448:	for (int i=s-1, carry=1; i>=0 && carry; i--)
+        -:  449:		carry = !++inout[i];
+        -:  450:}
+        -:  451:
+        -:  452:inline void IncrementCounterByOne(byte *output, const byte *input, unsigned int s)
+        -:  453:{
+        -:  454:	int i, carry;
+        -:  455:	for (i=s-1, carry=1; i>=0 && carry; i--)
+        -:  456:		carry = ((output[i] = input[i]+1) == 0);
+        -:  457:	memcpy_s(output, s, input, i+1);
+        -:  458:}
+        -:  459:
+        -:  460:template <class T>
+        -:  461:inline void ConditionalSwap(bool c, T &a, T &b)
+        -:  462:{
+        -:  463:	T t = c * (a ^ b);
+        -:  464:	a ^= t;
+        -:  465:	b ^= t;
+        -:  466:}
+        -:  467:
+        -:  468:template <class T>
+        -:  469:inline void ConditionalSwapPointers(bool c, T &a, T &b)
+        -:  470:{
+        -:  471:	ptrdiff_t t = c * (a - b);
+        -:  472:	a -= t;
+        -:  473:	b += t;
+        -:  474:}
+        -:  475:
+        -:  476:// see http://www.dwheeler.com/secure-programs/Secure-Programs-HOWTO/protect-secrets.html
+        -:  477:// and https://www.securecoding.cert.org/confluence/display/cplusplus/MSC06-CPP.+Be+aware+of+compiler+optimization+when+dealing+with+sensitive+data
+        -:  478:template <class T>
+        -:  479:void SecureWipeBuffer(T *buf, size_t n)
+        -:  480:{
+        -:  481:	// GCC 4.3.2 on Cygwin optimizes away the first store if this loop is done in the forward direction
+        -:  482:	volatile T *p = buf+n;
+        -:  483:	while (n--)
+        -:  484:		*(--p) = 0;
+        -:  485:}
+        -:  486:
+        -:  487:#if (_MSC_VER >= 1400 || defined(__GNUC__)) && (CRYPTOPP_BOOL_X64 || CRYPTOPP_BOOL_X86)
+        -:  488:
+    #####:  489:template<> inline void SecureWipeBuffer(byte *buf, size_t n)
+        -:  490:{
+    #####:  491:	volatile byte *p = buf;
+        -:  492:#ifdef __GNUC__
+    #####:  493:	asm volatile("rep stosb" : "+c"(n), "+D"(p) : "a"(0) : "memory");
+        -:  494:#else
+        -:  495:	__stosb((byte *)(size_t)p, 0, n);
+        -:  496:#endif
+    #####:  497:}
+        -:  498:
+    #####:  499:template<> inline void SecureWipeBuffer(word16 *buf, size_t n)
+        -:  500:{
+    #####:  501:	volatile word16 *p = buf;
+        -:  502:#ifdef __GNUC__
+    #####:  503:	asm volatile("rep stosw" : "+c"(n), "+D"(p) : "a"(0) : "memory");
+        -:  504:#else
+        -:  505:	__stosw((word16 *)(size_t)p, 0, n);
+        -:  506:#endif
+    #####:  507:}
+        -:  508:
+    #####:  509:template<> inline void SecureWipeBuffer(word32 *buf, size_t n)
+        -:  510:{
+    #####:  511:	volatile word32 *p = buf;
+        -:  512:#ifdef __GNUC__
+    #####:  513:	asm volatile("rep stosl" : "+c"(n), "+D"(p) : "a"(0) : "memory");
+        -:  514:#else
+        -:  515:	__stosd((unsigned long *)(size_t)p, 0, n);
+        -:  516:#endif
+    #####:  517:}
+        -:  518:
+    #####:  519:template<> inline void SecureWipeBuffer(word64 *buf, size_t n)
+        -:  520:{
+        -:  521:#if CRYPTOPP_BOOL_X64
+    #####:  522:	volatile word64 *p = buf;
+        -:  523:#ifdef __GNUC__
+    #####:  524:	asm volatile("rep stosq" : "+c"(n), "+D"(p) : "a"(0) : "memory");
+        -:  525:#else
+        -:  526:	__stosq((word64 *)(size_t)p, 0, n);
+        -:  527:#endif
+        -:  528:#else
+        -:  529:	SecureWipeBuffer((word32 *)buf, 2*n);
+        -:  530:#endif
+    #####:  531:}
+        -:  532:
+        -:  533:#endif	// #if (_MSC_VER >= 1400 || defined(__GNUC__)) && (CRYPTOPP_BOOL_X64 || CRYPTOPP_BOOL_X86)
+        -:  534:
+        -:  535:template <class T>
+    #####:  536:inline void SecureWipeArray(T *buf, size_t n)
+        -:  537:{
+    #####:  538:	if (sizeof(T) % 8 == 0 && GetAlignmentOf<T>() % GetAlignmentOf<word64>() == 0)
+    #####:  539:		SecureWipeBuffer((word64 *)buf, n * (sizeof(T)/8));
+    #####:  540:	else if (sizeof(T) % 4 == 0 && GetAlignmentOf<T>() % GetAlignmentOf<word32>() == 0)
+    #####:  541:		SecureWipeBuffer((word32 *)buf, n * (sizeof(T)/4));
+    #####:  542:	else if (sizeof(T) % 2 == 0 && GetAlignmentOf<T>() % GetAlignmentOf<word16>() == 0)
+    #####:  543:		SecureWipeBuffer((word16 *)buf, n * (sizeof(T)/2));
+        -:  544:	else
+    #####:  545:		SecureWipeBuffer((byte *)buf, n * sizeof(T));
+    #####:  546:}
+        -:  547:
+        -:  548:// this function uses wcstombs(), which assumes that setlocale() has been called
+    #####:  549:static std::string StringNarrow(const wchar_t *str, bool throwOnError = true)
+        -:  550:{
+        -:  551:#ifdef _MSC_VER
+        -:  552:#pragma warning(push)
+        -:  553:#pragma warning(disable: 4996)	//  'wcstombs': This function or variable may be unsafe.
+        -:  554:#endif
+    #####:  555:	size_t size = wcstombs(NULL, str, 0);
+    #####:  556:	if (size == size_t(0)-1)
+        -:  557:	{
+    #####:  558:		if (throwOnError)
+    #####:  559:			throw InvalidArgument("StringNarrow: wcstombs() call failed");
+        -:  560:		else
+    #####:  561:			return std::string();
+        -:  562:	}
+    #####:  563:	std::string result(size, 0);
+    #####:  564:	wcstombs(&result[0], str, size);
+    #####:  565:	return result;
+        -:  566:#ifdef _MSC_VER
+        -:  567:#pragma warning(pop)
+        -:  568:#endif
+        -:  569:}
+        -:  570:
+        -:  571:#if CRYPTOPP_BOOL_ALIGN16_ENABLED
+        -:  572:CRYPTOPP_DLL void * CRYPTOPP_API AlignedAllocate(size_t size);
+        -:  573:CRYPTOPP_DLL void CRYPTOPP_API AlignedDeallocate(void *p);
+        -:  574:#endif
+        -:  575:
+        -:  576:CRYPTOPP_DLL void * CRYPTOPP_API UnalignedAllocate(size_t size);
+        -:  577:CRYPTOPP_DLL void CRYPTOPP_API UnalignedDeallocate(void *p);
+        -:  578:
+        -:  579:// ************** rotate functions ***************
+        -:  580:
+        -:  581:template <class T> inline T rotlFixed(T x, unsigned int y)
+        -:  582:{
+        -:  583:	assert(y < sizeof(T)*8);
+        -:  584:	return T((x<<y) | (x>>(sizeof(T)*8-y)));
+        -:  585:}
+        -:  586:
+        -:  587:template <class T> inline T rotrFixed(T x, unsigned int y)
+        -:  588:{
+        -:  589:	assert(y < sizeof(T)*8);
+        -:  590:	return T((x>>y) | (x<<(sizeof(T)*8-y)));
+        -:  591:}
+        -:  592:
+        -:  593:template <class T> inline T rotlVariable(T x, unsigned int y)
+        -:  594:{
+        -:  595:	assert(y < sizeof(T)*8);
+        -:  596:	return T((x<<y) | (x>>(sizeof(T)*8-y)));
+        -:  597:}
+        -:  598:
+        -:  599:template <class T> inline T rotrVariable(T x, unsigned int y)
+        -:  600:{
+        -:  601:	assert(y < sizeof(T)*8);
+        -:  602:	return T((x>>y) | (x<<(sizeof(T)*8-y)));
+        -:  603:}
+        -:  604:
+        -:  605:template <class T> inline T rotlMod(T x, unsigned int y)
+        -:  606:{
+        -:  607:	y %= sizeof(T)*8;
+        -:  608:	return T((x<<y) | (x>>(sizeof(T)*8-y)));
+        -:  609:}
+        -:  610:
+        -:  611:template <class T> inline T rotrMod(T x, unsigned int y)
+        -:  612:{
+        -:  613:	y %= sizeof(T)*8;
+        -:  614:	return T((x>>y) | (x<<(sizeof(T)*8-y)));
+        -:  615:}
+        -:  616:
+        -:  617:#ifdef _MSC_VER
+        -:  618:
+        -:  619:template<> inline word32 rotlFixed<word32>(word32 x, unsigned int y)
+        -:  620:{
+        -:  621:	assert(y < 8*sizeof(x));
+        -:  622:	return y ? _lrotl(x, y) : x;
+        -:  623:}
+        -:  624:
+        -:  625:template<> inline word32 rotrFixed<word32>(word32 x, unsigned int y)
+        -:  626:{
+        -:  627:	assert(y < 8*sizeof(x));
+        -:  628:	return y ? _lrotr(x, y) : x;
+        -:  629:}
+        -:  630:
+        -:  631:template<> inline word32 rotlVariable<word32>(word32 x, unsigned int y)
+        -:  632:{
+        -:  633:	assert(y < 8*sizeof(x));
+        -:  634:	return _lrotl(x, y);
+        -:  635:}
+        -:  636:
+        -:  637:template<> inline word32 rotrVariable<word32>(word32 x, unsigned int y)
+        -:  638:{
+        -:  639:	assert(y < 8*sizeof(x));
+        -:  640:	return _lrotr(x, y);
+        -:  641:}
+        -:  642:
+        -:  643:template<> inline word32 rotlMod<word32>(word32 x, unsigned int y)
+        -:  644:{
+        -:  645:	return _lrotl(x, y);
+        -:  646:}
+        -:  647:
+        -:  648:template<> inline word32 rotrMod<word32>(word32 x, unsigned int y)
+        -:  649:{
+        -:  650:	return _lrotr(x, y);
+        -:  651:}
+        -:  652:
+        -:  653:#endif // #ifdef _MSC_VER
+        -:  654:
+        -:  655:#if _MSC_VER >= 1300 && !defined(__INTEL_COMPILER)
+        -:  656:// Intel C++ Compiler 10.0 calls a function instead of using the rotate instruction when using these instructions
+        -:  657:
+        -:  658:template<> inline word64 rotlFixed<word64>(word64 x, unsigned int y)
+        -:  659:{
+        -:  660:	assert(y < 8*sizeof(x));
+        -:  661:	return y ? _rotl64(x, y) : x;
+        -:  662:}
+        -:  663:
+        -:  664:template<> inline word64 rotrFixed<word64>(word64 x, unsigned int y)
+        -:  665:{
+        -:  666:	assert(y < 8*sizeof(x));
+        -:  667:	return y ? _rotr64(x, y) : x;
+        -:  668:}
+        -:  669:
+        -:  670:template<> inline word64 rotlVariable<word64>(word64 x, unsigned int y)
+        -:  671:{
+        -:  672:	assert(y < 8*sizeof(x));
+        -:  673:	return _rotl64(x, y);
+        -:  674:}
+        -:  675:
+        -:  676:template<> inline word64 rotrVariable<word64>(word64 x, unsigned int y)
+        -:  677:{
+        -:  678:	assert(y < 8*sizeof(x));
+        -:  679:	return _rotr64(x, y);
+        -:  680:}
+        -:  681:
+        -:  682:template<> inline word64 rotlMod<word64>(word64 x, unsigned int y)
+        -:  683:{
+        -:  684:	return _rotl64(x, y);
+        -:  685:}
+        -:  686:
+        -:  687:template<> inline word64 rotrMod<word64>(word64 x, unsigned int y)
+        -:  688:{
+        -:  689:	return _rotr64(x, y);
+        -:  690:}
+        -:  691:
+        -:  692:#endif // #if _MSC_VER >= 1310
+        -:  693:
+        -:  694:#if _MSC_VER >= 1400 && !defined(__INTEL_COMPILER)
+        -:  695:// Intel C++ Compiler 10.0 gives undefined externals with these
+        -:  696:
+        -:  697:template<> inline word16 rotlFixed<word16>(word16 x, unsigned int y)
+        -:  698:{
+        -:  699:	assert(y < 8*sizeof(x));
+        -:  700:	return y ? _rotl16(x, y) : x;
+        -:  701:}
+        -:  702:
+        -:  703:template<> inline word16 rotrFixed<word16>(word16 x, unsigned int y)
+        -:  704:{
+        -:  705:	assert(y < 8*sizeof(x));
+        -:  706:	return y ? _rotr16(x, y) : x;
+        -:  707:}
+        -:  708:
+        -:  709:template<> inline word16 rotlVariable<word16>(word16 x, unsigned int y)
+        -:  710:{
+        -:  711:	assert(y < 8*sizeof(x));
+        -:  712:	return _rotl16(x, y);
+        -:  713:}
+        -:  714:
+        -:  715:template<> inline word16 rotrVariable<word16>(word16 x, unsigned int y)
+        -:  716:{
+        -:  717:	assert(y < 8*sizeof(x));
+        -:  718:	return _rotr16(x, y);
+        -:  719:}
+        -:  720:
+        -:  721:template<> inline word16 rotlMod<word16>(word16 x, unsigned int y)
+        -:  722:{
+        -:  723:	return _rotl16(x, y);
+        -:  724:}
+        -:  725:
+        -:  726:template<> inline word16 rotrMod<word16>(word16 x, unsigned int y)
+        -:  727:{
+        -:  728:	return _rotr16(x, y);
+        -:  729:}
+        -:  730:
+        -:  731:template<> inline byte rotlFixed<byte>(byte x, unsigned int y)
+        -:  732:{
+        -:  733:	assert(y < 8*sizeof(x));
+        -:  734:	return y ? _rotl8(x, y) : x;
+        -:  735:}
+        -:  736:
+        -:  737:template<> inline byte rotrFixed<byte>(byte x, unsigned int y)
+        -:  738:{
+        -:  739:	assert(y < 8*sizeof(x));
+        -:  740:	return y ? _rotr8(x, y) : x;
+        -:  741:}
+        -:  742:
+        -:  743:template<> inline byte rotlVariable<byte>(byte x, unsigned int y)
+        -:  744:{
+        -:  745:	assert(y < 8*sizeof(x));
+        -:  746:	return _rotl8(x, y);
+        -:  747:}
+        -:  748:
+        -:  749:template<> inline byte rotrVariable<byte>(byte x, unsigned int y)
+        -:  750:{
+        -:  751:	assert(y < 8*sizeof(x));
+        -:  752:	return _rotr8(x, y);
+        -:  753:}
+        -:  754:
+        -:  755:template<> inline byte rotlMod<byte>(byte x, unsigned int y)
+        -:  756:{
+        -:  757:	return _rotl8(x, y);
+        -:  758:}
+        -:  759:
+        -:  760:template<> inline byte rotrMod<byte>(byte x, unsigned int y)
+        -:  761:{
+        -:  762:	return _rotr8(x, y);
+        -:  763:}
+        -:  764:
+        -:  765:#endif // #if _MSC_VER >= 1400
+        -:  766:
+        -:  767:#if (defined(__MWERKS__) && TARGET_CPU_PPC)
+        -:  768:
+        -:  769:template<> inline word32 rotlFixed<word32>(word32 x, unsigned int y)
+        -:  770:{
+        -:  771:	assert(y < 32);
+        -:  772:	return y ? __rlwinm(x,y,0,31) : x;
+        -:  773:}
+        -:  774:
+        -:  775:template<> inline word32 rotrFixed<word32>(word32 x, unsigned int y)
+        -:  776:{
+        -:  777:	assert(y < 32);
+        -:  778:	return y ? __rlwinm(x,32-y,0,31) : x;
+        -:  779:}
+        -:  780:
+        -:  781:template<> inline word32 rotlVariable<word32>(word32 x, unsigned int y)
+        -:  782:{
+        -:  783:	assert(y < 32);
+        -:  784:	return (__rlwnm(x,y,0,31));
+        -:  785:}
+        -:  786:
+        -:  787:template<> inline word32 rotrVariable<word32>(word32 x, unsigned int y)
+        -:  788:{
+        -:  789:	assert(y < 32);
+        -:  790:	return (__rlwnm(x,32-y,0,31));
+        -:  791:}
+        -:  792:
+        -:  793:template<> inline word32 rotlMod<word32>(word32 x, unsigned int y)
+        -:  794:{
+        -:  795:	return (__rlwnm(x,y,0,31));
+        -:  796:}
+        -:  797:
+        -:  798:template<> inline word32 rotrMod<word32>(word32 x, unsigned int y)
+        -:  799:{
+        -:  800:	return (__rlwnm(x,32-y,0,31));
+        -:  801:}
+        -:  802:
+        -:  803:#endif // #if (defined(__MWERKS__) && TARGET_CPU_PPC)
+        -:  804:
+        -:  805:// ************** endian reversal ***************
+        -:  806:
+        -:  807:template <class T>
+        -:  808:inline unsigned int GetByte(ByteOrder order, T value, unsigned int index)
+        -:  809:{
+        -:  810:	if (order == LITTLE_ENDIAN_ORDER)
+        -:  811:		return GETBYTE(value, index);
+        -:  812:	else
+        -:  813:		return GETBYTE(value, sizeof(T)-index-1);
+        -:  814:}
+        -:  815:
+        -:  816:inline byte ByteReverse(byte value)
+        -:  817:{
+        -:  818:	return value;
+        -:  819:}
+        -:  820:
+        -:  821:inline word16 ByteReverse(word16 value)
+        -:  822:{
+        -:  823:#ifdef CRYPTOPP_BYTESWAP_AVAILABLE
+        -:  824:	return bswap_16(value);
+        -:  825:#elif defined(_MSC_VER) && _MSC_VER >= 1300
+        -:  826:	return _byteswap_ushort(value);
+        -:  827:#else
+        -:  828:	return rotlFixed(value, 8U);
+        -:  829:#endif
+        -:  830:}
+        -:  831:
+        -:  832:inline word32 ByteReverse(word32 value)
+        -:  833:{
+        -:  834:#if defined(__GNUC__) && defined(CRYPTOPP_X86_ASM_AVAILABLE)
+        -:  835:	__asm__ ("bswap %0" : "=r" (value) : "0" (value));
+        -:  836:	return value;
+        -:  837:#elif defined(CRYPTOPP_BYTESWAP_AVAILABLE)
+        -:  838:	return bswap_32(value);
+        -:  839:#elif defined(__MWERKS__) && TARGET_CPU_PPC
+        -:  840:	return (word32)__lwbrx(&value,0);
+        -:  841:#elif _MSC_VER >= 1400 || (_MSC_VER >= 1300 && !defined(_DLL))
+        -:  842:	return _byteswap_ulong(value);
+        -:  843:#elif CRYPTOPP_FAST_ROTATE(32)
+        -:  844:	// 5 instructions with rotate instruction, 9 without
+        -:  845:	return (rotrFixed(value, 8U) & 0xff00ff00) | (rotlFixed(value, 8U) & 0x00ff00ff);
+        -:  846:#else
+        -:  847:	// 6 instructions with rotate instruction, 8 without
+        -:  848:	value = ((value & 0xFF00FF00) >> 8) | ((value & 0x00FF00FF) << 8);
+        -:  849:	return rotlFixed(value, 16U);
+        -:  850:#endif
+        -:  851:}
+        -:  852:
+        -:  853:inline word64 ByteReverse(word64 value)
+        -:  854:{
+        -:  855:#if defined(__GNUC__) && defined(CRYPTOPP_X86_ASM_AVAILABLE) && defined(__x86_64__)
+        -:  856:	__asm__ ("bswap %0" : "=r" (value) : "0" (value));
+        -:  857:	return value;
+        -:  858:#elif defined(CRYPTOPP_BYTESWAP_AVAILABLE)
+        -:  859:	return bswap_64(value);
+        -:  860:#elif defined(_MSC_VER) && _MSC_VER >= 1300
+        -:  861:	return _byteswap_uint64(value);
+        -:  862:#elif CRYPTOPP_BOOL_SLOW_WORD64
+        -:  863:	return (word64(ByteReverse(word32(value))) << 32) | ByteReverse(word32(value>>32));
+        -:  864:#else
+        -:  865:	value = ((value & W64LIT(0xFF00FF00FF00FF00)) >> 8) | ((value & W64LIT(0x00FF00FF00FF00FF)) << 8);
+        -:  866:	value = ((value & W64LIT(0xFFFF0000FFFF0000)) >> 16) | ((value & W64LIT(0x0000FFFF0000FFFF)) << 16);
+        -:  867:	return rotlFixed(value, 32U);
+        -:  868:#endif
+        -:  869:}
+        -:  870:
+        -:  871:inline byte BitReverse(byte value)
+        -:  872:{
+        -:  873:	value = ((value & 0xAA) >> 1) | ((value & 0x55) << 1);
+        -:  874:	value = ((value & 0xCC) >> 2) | ((value & 0x33) << 2);
+        -:  875:	return rotlFixed(value, 4U);
+        -:  876:}
+        -:  877:
+        -:  878:inline word16 BitReverse(word16 value)
+        -:  879:{
+        -:  880:	value = ((value & 0xAAAA) >> 1) | ((value & 0x5555) << 1);
+        -:  881:	value = ((value & 0xCCCC) >> 2) | ((value & 0x3333) << 2);
+        -:  882:	value = ((value & 0xF0F0) >> 4) | ((value & 0x0F0F) << 4);
+        -:  883:	return ByteReverse(value);
+        -:  884:}
+        -:  885:
+        -:  886:inline word32 BitReverse(word32 value)
+        -:  887:{
+        -:  888:	value = ((value & 0xAAAAAAAA) >> 1) | ((value & 0x55555555) << 1);
+        -:  889:	value = ((value & 0xCCCCCCCC) >> 2) | ((value & 0x33333333) << 2);
+        -:  890:	value = ((value & 0xF0F0F0F0) >> 4) | ((value & 0x0F0F0F0F) << 4);
+        -:  891:	return ByteReverse(value);
+        -:  892:}
+        -:  893:
+        -:  894:inline word64 BitReverse(word64 value)
+        -:  895:{
+        -:  896:#if CRYPTOPP_BOOL_SLOW_WORD64
+        -:  897:	return (word64(BitReverse(word32(value))) << 32) | BitReverse(word32(value>>32));
+        -:  898:#else
+        -:  899:	value = ((value & W64LIT(0xAAAAAAAAAAAAAAAA)) >> 1) | ((value & W64LIT(0x5555555555555555)) << 1);
+        -:  900:	value = ((value & W64LIT(0xCCCCCCCCCCCCCCCC)) >> 2) | ((value & W64LIT(0x3333333333333333)) << 2);
+        -:  901:	value = ((value & W64LIT(0xF0F0F0F0F0F0F0F0)) >> 4) | ((value & W64LIT(0x0F0F0F0F0F0F0F0F)) << 4);
+        -:  902:	return ByteReverse(value);
+        -:  903:#endif
+        -:  904:}
+        -:  905:
+        -:  906:template <class T>
+        -:  907:inline T BitReverse(T value)
+        -:  908:{
+        -:  909:	if (sizeof(T) == 1)
+        -:  910:		return (T)BitReverse((byte)value);
+        -:  911:	else if (sizeof(T) == 2)
+        -:  912:		return (T)BitReverse((word16)value);
+        -:  913:	else if (sizeof(T) == 4)
+        -:  914:		return (T)BitReverse((word32)value);
+        -:  915:	else
+        -:  916:	{
+        -:  917:		assert(sizeof(T) == 8);
+        -:  918:		return (T)BitReverse((word64)value);
+        -:  919:	}
+        -:  920:}
+        -:  921:
+        -:  922:template <class T>
+        -:  923:inline T ConditionalByteReverse(ByteOrder order, T value)
+        -:  924:{
+        -:  925:	return NativeByteOrderIs(order) ? value : ByteReverse(value);
+        -:  926:}
+        -:  927:
+        -:  928:template <class T>
+        -:  929:void ByteReverse(T *out, const T *in, size_t byteCount)
+        -:  930:{
+        -:  931:	assert(byteCount % sizeof(T) == 0);
+        -:  932:	size_t count = byteCount/sizeof(T);
+        -:  933:	for (size_t i=0; i<count; i++)
+        -:  934:		out[i] = ByteReverse(in[i]);
+        -:  935:}
+        -:  936:
+        -:  937:template <class T>
+        -:  938:inline void ConditionalByteReverse(ByteOrder order, T *out, const T *in, size_t byteCount)
+        -:  939:{
+        -:  940:	if (!NativeByteOrderIs(order))
+        -:  941:		ByteReverse(out, in, byteCount);
+        -:  942:	else if (in != out)
+        -:  943:		memcpy_s(out, byteCount, in, byteCount);
+        -:  944:}
+        -:  945:
+        -:  946:template <class T>
+        -:  947:inline void GetUserKey(ByteOrder order, T *out, size_t outlen, const byte *in, size_t inlen)
+        -:  948:{
+        -:  949:	const size_t U = sizeof(T);
+        -:  950:	assert(inlen <= outlen*U);
+        -:  951:	memcpy_s(out, outlen*U, in, inlen);
+        -:  952:	memset_z((byte *)out+inlen, 0, outlen*U-inlen);
+        -:  953:	ConditionalByteReverse(order, out, out, RoundUpToMultipleOf(inlen, U));
+        -:  954:}
+        -:  955:
+        -:  956:#ifndef CRYPTOPP_ALLOW_UNALIGNED_DATA_ACCESS
+        -:  957:inline byte UnalignedGetWordNonTemplate(ByteOrder order, const byte *block, const byte *)
+        -:  958:{
+        -:  959:	return block[0];
+        -:  960:}
+        -:  961:
+        -:  962:inline word16 UnalignedGetWordNonTemplate(ByteOrder order, const byte *block, const word16 *)
+        -:  963:{
+        -:  964:	return (order == BIG_ENDIAN_ORDER)
+        -:  965:		? block[1] | (block[0] << 8)
+        -:  966:		: block[0] | (block[1] << 8);
+        -:  967:}
+        -:  968:
+        -:  969:inline word32 UnalignedGetWordNonTemplate(ByteOrder order, const byte *block, const word32 *)
+        -:  970:{
+        -:  971:	return (order == BIG_ENDIAN_ORDER)
+        -:  972:		? word32(block[3]) | (word32(block[2]) << 8) | (word32(block[1]) << 16) | (word32(block[0]) << 24)
+        -:  973:		: word32(block[0]) | (word32(block[1]) << 8) | (word32(block[2]) << 16) | (word32(block[3]) << 24);
+        -:  974:}
+        -:  975:
+        -:  976:inline word64 UnalignedGetWordNonTemplate(ByteOrder order, const byte *block, const word64 *)
+        -:  977:{
+        -:  978:	return (order == BIG_ENDIAN_ORDER)
+        -:  979:		?
+        -:  980:		(word64(block[7]) |
+        -:  981:		(word64(block[6]) <<  8) |
+        -:  982:		(word64(block[5]) << 16) |
+        -:  983:		(word64(block[4]) << 24) |
+        -:  984:		(word64(block[3]) << 32) |
+        -:  985:		(word64(block[2]) << 40) |
+        -:  986:		(word64(block[1]) << 48) |
+        -:  987:		(word64(block[0]) << 56))
+        -:  988:		:
+        -:  989:		(word64(block[0]) |
+        -:  990:		(word64(block[1]) <<  8) |
+        -:  991:		(word64(block[2]) << 16) |
+        -:  992:		(word64(block[3]) << 24) |
+        -:  993:		(word64(block[4]) << 32) |
+        -:  994:		(word64(block[5]) << 40) |
+        -:  995:		(word64(block[6]) << 48) |
+        -:  996:		(word64(block[7]) << 56));
+        -:  997:}
+        -:  998:
+        -:  999:inline void UnalignedPutWordNonTemplate(ByteOrder order, byte *block, byte value, const byte *xorBlock)
+        -: 1000:{
+        -: 1001:	block[0] = xorBlock ? (value ^ xorBlock[0]) : value;
+        -: 1002:}
+        -: 1003:
+        -: 1004:inline void UnalignedPutWordNonTemplate(ByteOrder order, byte *block, word16 value, const byte *xorBlock)
+        -: 1005:{
+        -: 1006:	if (order == BIG_ENDIAN_ORDER)
+        -: 1007:	{
+        -: 1008:		if (xorBlock)
+        -: 1009:		{
+        -: 1010:			block[0] = xorBlock[0] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1011:			block[1] = xorBlock[1] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1012:		}
+        -: 1013:		else
+        -: 1014:		{
+        -: 1015:			block[0] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1016:			block[1] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1017:		}
+        -: 1018:	}
+        -: 1019:	else
+        -: 1020:	{
+        -: 1021:		if (xorBlock)
+        -: 1022:		{
+        -: 1023:			block[0] = xorBlock[0] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1024:			block[1] = xorBlock[1] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1025:		}
+        -: 1026:		else
+        -: 1027:		{
+        -: 1028:			block[0] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1029:			block[1] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1030:		}
+        -: 1031:	}
+        -: 1032:}
+        -: 1033:
+        -: 1034:inline void UnalignedPutWordNonTemplate(ByteOrder order, byte *block, word32 value, const byte *xorBlock)
+        -: 1035:{
+        -: 1036:	if (order == BIG_ENDIAN_ORDER)
+        -: 1037:	{
+        -: 1038:		if (xorBlock)
+        -: 1039:		{
+        -: 1040:			block[0] = xorBlock[0] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 3);
+        -: 1041:			block[1] = xorBlock[1] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 2);
+        -: 1042:			block[2] = xorBlock[2] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1043:			block[3] = xorBlock[3] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1044:		}
+        -: 1045:		else
+        -: 1046:		{
+        -: 1047:			block[0] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 3);
+        -: 1048:			block[1] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 2);
+        -: 1049:			block[2] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1050:			block[3] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1051:		}
+        -: 1052:	}
+        -: 1053:	else
+        -: 1054:	{
+        -: 1055:		if (xorBlock)
+        -: 1056:		{
+        -: 1057:			block[0] = xorBlock[0] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1058:			block[1] = xorBlock[1] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1059:			block[2] = xorBlock[2] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 2);
+        -: 1060:			block[3] = xorBlock[3] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 3);
+        -: 1061:		}
+        -: 1062:		else
+        -: 1063:		{
+        -: 1064:			block[0] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1065:			block[1] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1066:			block[2] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 2);
+        -: 1067:			block[3] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 3);
+        -: 1068:		}
+        -: 1069:	}
+        -: 1070:}
+        -: 1071:
+        -: 1072:inline void UnalignedPutWordNonTemplate(ByteOrder order, byte *block, word64 value, const byte *xorBlock)
+        -: 1073:{
+        -: 1074:	if (order == BIG_ENDIAN_ORDER)
+        -: 1075:	{
+        -: 1076:		if (xorBlock)
+        -: 1077:		{
+        -: 1078:			block[0] = xorBlock[0] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 7);
+        -: 1079:			block[1] = xorBlock[1] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 6);
+        -: 1080:			block[2] = xorBlock[2] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 5);
+        -: 1081:			block[3] = xorBlock[3] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 4);
+        -: 1082:			block[4] = xorBlock[4] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 3);
+        -: 1083:			block[5] = xorBlock[5] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 2);
+        -: 1084:			block[6] = xorBlock[6] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1085:			block[7] = xorBlock[7] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1086:		}
+        -: 1087:		else
+        -: 1088:		{
+        -: 1089:			block[0] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 7);
+        -: 1090:			block[1] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 6);
+        -: 1091:			block[2] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 5);
+        -: 1092:			block[3] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 4);
+        -: 1093:			block[4] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 3);
+        -: 1094:			block[5] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 2);
+        -: 1095:			block[6] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1096:			block[7] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1097:		}
+        -: 1098:	}
+        -: 1099:	else
+        -: 1100:	{
+        -: 1101:		if (xorBlock)
+        -: 1102:		{
+        -: 1103:			block[0] = xorBlock[0] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1104:			block[1] = xorBlock[1] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1105:			block[2] = xorBlock[2] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 2);
+        -: 1106:			block[3] = xorBlock[3] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 3);
+        -: 1107:			block[4] = xorBlock[4] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 4);
+        -: 1108:			block[5] = xorBlock[5] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 5);
+        -: 1109:			block[6] = xorBlock[6] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 6);
+        -: 1110:			block[7] = xorBlock[7] ^ CRYPTOPP_GET_BYTE_AS_BYTE(value, 7);
+        -: 1111:		}
+        -: 1112:		else
+        -: 1113:		{
+        -: 1114:			block[0] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 0);
+        -: 1115:			block[1] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 1);
+        -: 1116:			block[2] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 2);
+        -: 1117:			block[3] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 3);
+        -: 1118:			block[4] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 4);
+        -: 1119:			block[5] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 5);
+        -: 1120:			block[6] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 6);
+        -: 1121:			block[7] = CRYPTOPP_GET_BYTE_AS_BYTE(value, 7);
+        -: 1122:		}
+        -: 1123:	}
+        -: 1124:}
+        -: 1125:#endif	// #ifndef CRYPTOPP_ALLOW_UNALIGNED_DATA_ACCESS
+        -: 1126:
+        -: 1127:template <class T>
+        -: 1128:inline T GetWord(bool assumeAligned, ByteOrder order, const byte *block)
+        -: 1129:{
+        -: 1130:#ifndef CRYPTOPP_ALLOW_UNALIGNED_DATA_ACCESS
+        -: 1131:	if (!assumeAligned)
+        -: 1132:		return UnalignedGetWordNonTemplate(order, block, (T*)NULL);
+        -: 1133:	assert(IsAligned<T>(block));
+        -: 1134:#endif
+        -: 1135:	return ConditionalByteReverse(order, *reinterpret_cast<const T *>(block));
+        -: 1136:}
+        -: 1137:
+        -: 1138:template <class T>
+        -: 1139:inline void GetWord(bool assumeAligned, ByteOrder order, T &result, const byte *block)
+        -: 1140:{
+        -: 1141:	result = GetWord<T>(assumeAligned, order, block);
+        -: 1142:}
+        -: 1143:
+        -: 1144:template <class T>
+        -: 1145:inline void PutWord(bool assumeAligned, ByteOrder order, byte *block, T value, const byte *xorBlock = NULL)
+        -: 1146:{
+        -: 1147:#ifndef CRYPTOPP_ALLOW_UNALIGNED_DATA_ACCESS
+        -: 1148:	if (!assumeAligned)
+        -: 1149:		return UnalignedPutWordNonTemplate(order, block, value, xorBlock);
+        -: 1150:	assert(IsAligned<T>(block));
+        -: 1151:	assert(IsAligned<T>(xorBlock));
+        -: 1152:#endif
+        -: 1153:	*reinterpret_cast<T *>(block) = ConditionalByteReverse(order, value) ^ (xorBlock ? *reinterpret_cast<const T *>(xorBlock) : 0);
+        -: 1154:}
+        -: 1155:
+        -: 1156:template <class T, class B, bool A=false>
+        -: 1157:class GetBlock
+        -: 1158:{
+        -: 1159:public:
+        -: 1160:	GetBlock(const void *block)
+        -: 1161:		: m_block((const byte *)block) {}
+        -: 1162:
+        -: 1163:	template <class U>
+        -: 1164:	inline GetBlock<T, B, A> & operator()(U &x)
+        -: 1165:	{
+        -: 1166:		CRYPTOPP_COMPILE_ASSERT(sizeof(U) >= sizeof(T));
+        -: 1167:		x = GetWord<T>(A, B::ToEnum(), m_block);
+        -: 1168:		m_block += sizeof(T);
+        -: 1169:		return *this;
+        -: 1170:	}
+        -: 1171:
+        -: 1172:private:
+        -: 1173:	const byte *m_block;
+        -: 1174:};
+        -: 1175:
+        -: 1176:template <class T, class B, bool A=false>
+        -: 1177:class PutBlock
+        -: 1178:{
+        -: 1179:public:
+        -: 1180:	PutBlock(const void *xorBlock, void *block)
+        -: 1181:		: m_xorBlock((const byte *)xorBlock), m_block((byte *)block) {}
+        -: 1182:
+        -: 1183:	template <class U>
+        -: 1184:	inline PutBlock<T, B, A> & operator()(U x)
+        -: 1185:	{
+        -: 1186:		PutWord(A, B::ToEnum(), m_block, (T)x, m_xorBlock);
+        -: 1187:		m_block += sizeof(T);
+        -: 1188:		if (m_xorBlock)
+        -: 1189:			m_xorBlock += sizeof(T);
+        -: 1190:		return *this;
+        -: 1191:	}
+        -: 1192:
+        -: 1193:private:
+        -: 1194:	const byte *m_xorBlock;
+        -: 1195:	byte *m_block;
+        -: 1196:};
+        -: 1197:
+        -: 1198:template <class T, class B, bool GA=false, bool PA=false>
+        -: 1199:struct BlockGetAndPut
+        -: 1200:{
+        -: 1201:	// function needed because of C++ grammatical ambiguity between expression-statements and declarations
+        -: 1202:	static inline GetBlock<T, B, GA> Get(const void *block) {return GetBlock<T, B, GA>(block);}
+        -: 1203:	typedef PutBlock<T, B, PA> Put;
+        -: 1204:};
+        -: 1205:
+        -: 1206:template <class T>
+        -: 1207:std::string WordToString(T value, ByteOrder order = BIG_ENDIAN_ORDER)
+        -: 1208:{
+        -: 1209:	if (!NativeByteOrderIs(order))
+        -: 1210:		value = ByteReverse(value);
+        -: 1211:
+        -: 1212:	return std::string((char *)&value, sizeof(value));
+        -: 1213:}
+        -: 1214:
+        -: 1215:template <class T>
+        -: 1216:T StringToWord(const std::string &str, ByteOrder order = BIG_ENDIAN_ORDER)
+        -: 1217:{
+        -: 1218:	T value = 0;
+        -: 1219:	memcpy_s(&value, sizeof(value), str.data(), UnsignedMin(str.size(), sizeof(value)));
+        -: 1220:	return NativeByteOrderIs(order) ? value : ByteReverse(value);
+        -: 1221:}
+        -: 1222:
+        -: 1223:// ************** help remove warning on g++ ***************
+        -: 1224:
+        -: 1225:template <bool overflow> struct SafeShifter;
+        -: 1226:
+        -: 1227:template<> struct SafeShifter<true>
+        -: 1228:{
+        -: 1229:	template <class T>
+        -: 1230:	static inline T RightShift(T value, unsigned int bits)
+        -: 1231:	{
+        -: 1232:		return 0;
+        -: 1233:	}
+        -: 1234:
+        -: 1235:	template <class T>
+        -: 1236:	static inline T LeftShift(T value, unsigned int bits)
+        -: 1237:	{
+        -: 1238:		return 0;
+        -: 1239:	}
+        -: 1240:};
+        -: 1241:
+        -: 1242:template<> struct SafeShifter<false>
+        -: 1243:{
+        -: 1244:	template <class T>
+        -: 1245:	static inline T RightShift(T value, unsigned int bits)
+        -: 1246:	{
+        -: 1247:		return value >> bits;
+        -: 1248:	}
+        -: 1249:
+        -: 1250:	template <class T>
+        -: 1251:	static inline T LeftShift(T value, unsigned int bits)
+        -: 1252:	{
+        -: 1253:		return value << bits;
+        -: 1254:	}
+        -: 1255:};
+        -: 1256:
+        -: 1257:template <unsigned int bits, class T>
+        -: 1258:inline T SafeRightShift(T value)
+        -: 1259:{
+        -: 1260:	return SafeShifter<(bits>=(8*sizeof(T)))>::RightShift(value, bits);
+        -: 1261:}
+        -: 1262:
+        -: 1263:template <unsigned int bits, class T>
+        -: 1264:inline T SafeLeftShift(T value)
+        -: 1265:{
+        -: 1266:	return SafeShifter<(bits>=(8*sizeof(T)))>::LeftShift(value, bits);
+        -: 1267:}
+        -: 1268:
+        -: 1269:// ************** use one buffer for multiple data members ***************
+        -: 1270:
+        -: 1271:#define CRYPTOPP_BLOCK_1(n, t, s) t* m_##n() {return (t *)(m_aggregate+0);}     size_t SS1() {return       sizeof(t)*(s);} size_t m_##n##Size() {return (s);}
+        -: 1272:#define CRYPTOPP_BLOCK_2(n, t, s) t* m_##n() {return (t *)(m_aggregate+SS1());} size_t SS2() {return SS1()+sizeof(t)*(s);} size_t m_##n##Size() {return (s);}
+        -: 1273:#define CRYPTOPP_BLOCK_3(n, t, s) t* m_##n() {return (t *)(m_aggregate+SS2());} size_t SS3() {return SS2()+sizeof(t)*(s);} size_t m_##n##Size() {return (s);}
+        -: 1274:#define CRYPTOPP_BLOCK_4(n, t, s) t* m_##n() {return (t *)(m_aggregate+SS3());} size_t SS4() {return SS3()+sizeof(t)*(s);} size_t m_##n##Size() {return (s);}
+        -: 1275:#define CRYPTOPP_BLOCK_5(n, t, s) t* m_##n() {return (t *)(m_aggregate+SS4());} size_t SS5() {return SS4()+sizeof(t)*(s);} size_t m_##n##Size() {return (s);}
+        -: 1276:#define CRYPTOPP_BLOCK_6(n, t, s) t* m_##n() {return (t *)(m_aggregate+SS5());} size_t SS6() {return SS5()+sizeof(t)*(s);} size_t m_##n##Size() {return (s);}
+        -: 1277:#define CRYPTOPP_BLOCK_7(n, t, s) t* m_##n() {return (t *)(m_aggregate+SS6());} size_t SS7() {return SS6()+sizeof(t)*(s);} size_t m_##n##Size() {return (s);}
+        -: 1278:#define CRYPTOPP_BLOCK_8(n, t, s) t* m_##n() {return (t *)(m_aggregate+SS7());} size_t SS8() {return SS7()+sizeof(t)*(s);} size_t m_##n##Size() {return (s);}
+        -: 1279:#define CRYPTOPP_BLOCKS_END(i) size_t SST() {return SS##i();} void AllocateBlocks() {m_aggregate.New(SST());} AlignedSecByteBlock m_aggregate;
+        -: 1280:
+        -: 1281:NAMESPACE_END
+        -: 1282:
+        -: 1283:#endif

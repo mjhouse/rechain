@@ -1,0 +1,176 @@
+        -:    0:Source:/usr/include/cryptopp/rsa.h
+        -:    0:Programs:5
+        -:    1:#ifndef CRYPTOPP_RSA_H
+        -:    2:#define CRYPTOPP_RSA_H
+        -:    3:
+        -:    4:/** \file
+        -:    5:	This file contains classes that implement the RSA
+        -:    6:	ciphers and signature schemes as defined in PKCS #1 v2.0.
+        -:    7:*/
+        -:    8:
+        -:    9:#include "pubkey.h"
+        -:   10:#include "asn.h"
+        -:   11:#include "pkcspad.h"
+        -:   12:#include "oaep.h"
+        -:   13:#include "emsa2.h"
+        -:   14:
+        -:   15:NAMESPACE_BEGIN(CryptoPP)
+        -:   16:
+        -:   17://! _
+        8:   18:class CRYPTOPP_DLL RSAFunction : public TrapdoorFunction, public X509PublicKey
+        -:   19:{
+        -:   20:	typedef RSAFunction ThisClass;
+        -:   21:
+        -:   22:public:
+        -:   23:	void Initialize(const Integer &n, const Integer &e)
+        -:   24:		{m_n = n; m_e = e;}
+        -:   25:
+        -:   26:	// X509PublicKey
+        -:   27:	OID GetAlgorithmID() const;
+        -:   28:	void BERDecodePublicKey(BufferedTransformation &bt, bool parametersPresent, size_t size);
+        -:   29:	void DEREncodePublicKey(BufferedTransformation &bt) const;
+        -:   30:
+        -:   31:	// CryptoMaterial
+        -:   32:	bool Validate(RandomNumberGenerator &rng, unsigned int level) const;
+        -:   33:	bool GetVoidValue(const char *name, const std::type_info &valueType, void *pValue) const;
+        -:   34:	void AssignFrom(const NameValuePairs &source);
+        -:   35:
+        -:   36:	// TrapdoorFunction
+        -:   37:	Integer ApplyFunction(const Integer &x) const;
+        -:   38:	Integer PreimageBound() const {return m_n;}
+        -:   39:	Integer ImageBound() const {return m_n;}
+        -:   40:
+        -:   41:	// non-derived
+        -:   42:	const Integer & GetModulus() const {return m_n;}
+        -:   43:	const Integer & GetPublicExponent() const {return m_e;}
+        -:   44:
+        -:   45:	void SetModulus(const Integer &n) {m_n = n;}
+        -:   46:	void SetPublicExponent(const Integer &e) {m_e = e;}
+        -:   47:
+        -:   48:protected:
+        -:   49:	Integer m_n, m_e;
+        -:   50:};
+        -:   51:
+        -:   52://! _
+        1:   53:class CRYPTOPP_DLL InvertibleRSAFunction : public RSAFunction, public TrapdoorFunctionInverse, public PKCS8PrivateKey
+        -:   54:{
+        -:   55:	typedef InvertibleRSAFunction ThisClass;
+        -:   56:
+        -:   57:public:
+        -:   58:	void Initialize(RandomNumberGenerator &rng, unsigned int modulusBits, const Integer &e = 17);
+        -:   59:	void Initialize(const Integer &n, const Integer &e, const Integer &d, const Integer &p, const Integer &q, const Integer &dp, const Integer &dq, const Integer &u)
+        -:   60:		{m_n = n; m_e = e; m_d = d; m_p = p; m_q = q; m_dp = dp; m_dq = dq; m_u = u;}
+        -:   61:	//! factor n given private exponent
+        -:   62:	void Initialize(const Integer &n, const Integer &e, const Integer &d);
+        -:   63:
+        -:   64:	// PKCS8PrivateKey
+        -:   65:	void BERDecode(BufferedTransformation &bt)
+        -:   66:		{PKCS8PrivateKey::BERDecode(bt);}
+        -:   67:	void DEREncode(BufferedTransformation &bt) const
+        -:   68:		{PKCS8PrivateKey::DEREncode(bt);}
+       26:   69:	void Load(BufferedTransformation &bt)
+       26:   70:		{PKCS8PrivateKey::BERDecode(bt);}
+       10:   71:	void Save(BufferedTransformation &bt) const
+       10:   72:		{PKCS8PrivateKey::DEREncode(bt);}
+        -:   73:	OID GetAlgorithmID() const {return RSAFunction::GetAlgorithmID();}
+        -:   74:	void BERDecodePrivateKey(BufferedTransformation &bt, bool parametersPresent, size_t size);
+        -:   75:	void DEREncodePrivateKey(BufferedTransformation &bt) const;
+        -:   76:
+        -:   77:	// TrapdoorFunctionInverse
+        -:   78:	Integer CalculateInverse(RandomNumberGenerator &rng, const Integer &x) const;
+        -:   79:
+        -:   80:	// GeneratableCryptoMaterial
+        -:   81:	bool Validate(RandomNumberGenerator &rng, unsigned int level) const;
+        -:   82:	/*! parameters: (ModulusSize, PublicExponent (default 17)) */
+        -:   83:	void GenerateRandom(RandomNumberGenerator &rng, const NameValuePairs &alg);
+        -:   84:	bool GetVoidValue(const char *name, const std::type_info &valueType, void *pValue) const;
+        -:   85:	void AssignFrom(const NameValuePairs &source);
+        -:   86:
+        -:   87:	// non-derived interface
+        -:   88:	const Integer& GetPrime1() const {return m_p;}
+        -:   89:	const Integer& GetPrime2() const {return m_q;}
+        -:   90:	const Integer& GetPrivateExponent() const {return m_d;}
+        -:   91:	const Integer& GetModPrime1PrivateExponent() const {return m_dp;}
+        -:   92:	const Integer& GetModPrime2PrivateExponent() const {return m_dq;}
+        -:   93:	const Integer& GetMultiplicativeInverseOfPrime2ModPrime1() const {return m_u;}
+        -:   94:
+        -:   95:	void SetPrime1(const Integer &p) {m_p = p;}
+        -:   96:	void SetPrime2(const Integer &q) {m_q = q;}
+        -:   97:	void SetPrivateExponent(const Integer &d) {m_d = d;}
+        -:   98:	void SetModPrime1PrivateExponent(const Integer &dp) {m_dp = dp;}
+        -:   99:	void SetModPrime2PrivateExponent(const Integer &dq) {m_dq = dq;}
+        -:  100:	void SetMultiplicativeInverseOfPrime2ModPrime1(const Integer &u) {m_u = u;}
+        -:  101:
+        -:  102:protected:
+        -:  103:	Integer m_d, m_p, m_q, m_dp, m_dq, m_u;
+        -:  104:};
+        -:  105:
+        -:  106:class CRYPTOPP_DLL RSAFunction_ISO : public RSAFunction
+        -:  107:{
+        -:  108:public:
+        -:  109:	Integer ApplyFunction(const Integer &x) const;
+        -:  110:	Integer PreimageBound() const {return ++(m_n>>1);}
+        -:  111:};
+        -:  112:
+        -:  113:class CRYPTOPP_DLL InvertibleRSAFunction_ISO : public InvertibleRSAFunction
+        -:  114:{
+        -:  115:public:
+        -:  116:	Integer CalculateInverse(RandomNumberGenerator &rng, const Integer &x) const;
+        -:  117:	Integer PreimageBound() const {return ++(m_n>>1);}
+        -:  118:};
+        -:  119:
+        -:  120://! RSA
+        -:  121:struct CRYPTOPP_DLL RSA
+        -:  122:{
+        -:  123:	static const char * CRYPTOPP_API StaticAlgorithmName() {return "RSA";}
+        -:  124:	typedef RSAFunction PublicKey;
+        -:  125:	typedef InvertibleRSAFunction PrivateKey;
+        -:  126:};
+        -:  127:
+        -:  128://! <a href="http://www.weidai.com/scan-mirror/ca.html#RSA">RSA cryptosystem</a>
+        -:  129:template <class STANDARD>
+        -:  130:struct RSAES : public TF_ES<STANDARD, RSA>
+        -:  131:{
+        -:  132:};
+        -:  133:
+        -:  134://! <a href="http://www.weidai.com/scan-mirror/sig.html#RSA">RSA signature scheme with appendix</a>
+        -:  135:/*! See documentation of PKCS1v15 for a list of hash functions that can be used with it. */
+        -:  136:template <class STANDARD, class H>
+        -:  137:struct RSASS : public TF_SS<STANDARD, H, RSA>
+        -:  138:{
+        -:  139:};
+        -:  140:
+        -:  141:struct CRYPTOPP_DLL RSA_ISO
+        -:  142:{
+        -:  143:	static const char * CRYPTOPP_API StaticAlgorithmName() {return "RSA-ISO";}
+        -:  144:	typedef RSAFunction_ISO PublicKey;
+        -:  145:	typedef InvertibleRSAFunction_ISO PrivateKey;
+        -:  146:};
+        -:  147:
+        -:  148:template <class H>
+        -:  149:struct RSASS_ISO : public TF_SS<P1363_EMSA2, H, RSA_ISO>
+        -:  150:{
+        -:  151:};
+        -:  152:
+        -:  153:// The two RSA encryption schemes defined in PKCS #1 v2.0
+        -:  154:typedef RSAES<PKCS1v15>::Decryptor RSAES_PKCS1v15_Decryptor;
+        -:  155:typedef RSAES<PKCS1v15>::Encryptor RSAES_PKCS1v15_Encryptor;
+        -:  156:
+        -:  157:typedef RSAES<OAEP<SHA> >::Decryptor RSAES_OAEP_SHA_Decryptor;
+        -:  158:typedef RSAES<OAEP<SHA> >::Encryptor RSAES_OAEP_SHA_Encryptor;
+        -:  159:
+        -:  160:// The three RSA signature schemes defined in PKCS #1 v2.0
+        -:  161:typedef RSASS<PKCS1v15, SHA>::Signer RSASSA_PKCS1v15_SHA_Signer;
+        -:  162:typedef RSASS<PKCS1v15, SHA>::Verifier RSASSA_PKCS1v15_SHA_Verifier;
+        -:  163:
+        -:  164:namespace Weak {
+        -:  165:typedef RSASS<PKCS1v15, Weak1::MD2>::Signer RSASSA_PKCS1v15_MD2_Signer;
+        -:  166:typedef RSASS<PKCS1v15, Weak1::MD2>::Verifier RSASSA_PKCS1v15_MD2_Verifier;
+        -:  167:
+        -:  168:typedef RSASS<PKCS1v15, Weak1::MD5>::Signer RSASSA_PKCS1v15_MD5_Signer;
+        -:  169:typedef RSASS<PKCS1v15, Weak1::MD5>::Verifier RSASSA_PKCS1v15_MD5_Verifier;
+        -:  170:}
+        -:  171:
+        -:  172:NAMESPACE_END
+        -:  173:
+        -:  174:#endif

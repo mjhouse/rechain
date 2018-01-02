@@ -1,0 +1,38 @@
+        -:    0:Source:/usr/include/cryptopp/hex.h
+        -:    0:Programs:5
+        -:    1:#ifndef CRYPTOPP_HEX_H
+        -:    2:#define CRYPTOPP_HEX_H
+        -:    3:
+        -:    4:#include "basecode.h"
+        -:    5:
+        -:    6:NAMESPACE_BEGIN(CryptoPP)
+        -:    7:
+        -:    8://! Converts given data to base 16
+    #####:    9:class CRYPTOPP_DLL HexEncoder : public SimpleProxyFilter
+        -:   10:{
+        -:   11:public:
+    #####:   12:	HexEncoder(BufferedTransformation *attachment = NULL, bool uppercase = true, int outputGroupSize = 0, const std::string &separator = ":", const std::string &terminator = "")
+    #####:   13:		: SimpleProxyFilter(new BaseN_Encoder(new Grouper), attachment)
+        -:   14:	{
+    #####:   15:		IsolatedInitialize(MakeParameters(Name::Uppercase(), uppercase)(Name::GroupSize(), outputGroupSize)(Name::Separator(), ConstByteArrayParameter(separator))(Name::Terminator(), ConstByteArrayParameter(terminator)));
+    #####:   16:	}
+        -:   17:
+        -:   18:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:   19:};
+        -:   20:
+        -:   21://! Decode base 16 data back to bytes
+        -:   22:class CRYPTOPP_DLL HexDecoder : public BaseN_Decoder
+        -:   23:{
+        -:   24:public:
+    #####:   25:	HexDecoder(BufferedTransformation *attachment = NULL)
+    #####:   26:		: BaseN_Decoder(GetDefaultDecodingLookupArray(), 4, attachment) {}
+        -:   27:
+        -:   28:	void IsolatedInitialize(const NameValuePairs &parameters);
+        -:   29:
+        -:   30:private:
+        -:   31:	static const int * CRYPTOPP_API GetDefaultDecodingLookupArray();
+        -:   32:};
+        -:   33:
+        -:   34:NAMESPACE_END
+        -:   35:
+        -:   36:#endif

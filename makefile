@@ -1,5 +1,6 @@
 CPP=g++
 CPPFLAGS=-std=c++11 -pthread -ldl -Wall -Wextra -Wpedantic -g -lcrypto++
+TSTFLAGS=-fprofile-arcs -ftest-coverage -fprofile-dir=src
 
 TARGET = bin/rechain
 OUTDIR = bin
@@ -40,11 +41,15 @@ test: test-link
 	./bin/rechain
 
 test-link: $(TOBJECTS)
-	$(CPP) $(TOBJECTS) -o $(TARGET) $(CPPFLAGS)
+	$(CPP) $(TOBJECTS) -o $(TARGET) $(CPPFLAGS) $(TSTFLAGS)
 
 # build all .o files from .cpp source
 obj/%.o: $(TSTDIR)/%.cpp
-	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS)
+	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS) $(TSTFLAGS)
+
+# build all .o files from .cpp source
+obj/%.o: $(SRCDIR)/%.cpp
+	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS) $(TSTFLAGS)
 
 clean:
 	rm $(BLDDIR)/*.o; rm $(OUTDIR)/*;

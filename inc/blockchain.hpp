@@ -72,7 +72,12 @@ class BlockChain {
 		/** Calculate the trust for the current chain
 		    \returns The trust score for all documents
 		*/
-		size_t trust();	
+		size_t trust();
+		
+		/** Return the number of Block objects in the chain
+		    \returns The number of Block objects 
+		*/
+		size_t size();	
 };
 
 #endif

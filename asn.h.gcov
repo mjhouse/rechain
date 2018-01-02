@@ -1,0 +1,371 @@
+        -:    0:Source:/usr/include/cryptopp/asn.h
+        -:    0:Programs:5
+        -:    1:#ifndef CRYPTOPP_ASN_H
+        -:    2:#define CRYPTOPP_ASN_H
+        -:    3:
+        -:    4:#include "filters.h"
+        -:    5:#include "queue.h"
+        -:    6:#include <vector>
+        -:    7:
+        -:    8:NAMESPACE_BEGIN(CryptoPP)
+        -:    9:
+        -:   10:// these tags and flags are not complete
+        -:   11:enum ASNTag
+        -:   12:{
+        -:   13:	BOOLEAN 			= 0x01,
+        -:   14:	INTEGER 			= 0x02,
+        -:   15:	BIT_STRING			= 0x03,
+        -:   16:	OCTET_STRING		= 0x04,
+        -:   17:	TAG_NULL			= 0x05,
+        -:   18:	OBJECT_IDENTIFIER	= 0x06,
+        -:   19:	OBJECT_DESCRIPTOR	= 0x07,
+        -:   20:	EXTERNAL			= 0x08,
+        -:   21:	REAL				= 0x09,
+        -:   22:	ENUMERATED			= 0x0a,
+        -:   23:	UTF8_STRING			= 0x0c,
+        -:   24:	SEQUENCE			= 0x10,
+        -:   25:	SET 				= 0x11,
+        -:   26:	NUMERIC_STRING		= 0x12,
+        -:   27:	PRINTABLE_STRING 	= 0x13,
+        -:   28:	T61_STRING			= 0x14,
+        -:   29:	VIDEOTEXT_STRING 	= 0x15,
+        -:   30:	IA5_STRING			= 0x16,
+        -:   31:	UTC_TIME 			= 0x17,
+        -:   32:	GENERALIZED_TIME 	= 0x18,
+        -:   33:	GRAPHIC_STRING		= 0x19,
+        -:   34:	VISIBLE_STRING		= 0x1a,
+        -:   35:	GENERAL_STRING		= 0x1b
+        -:   36:};
+        -:   37:
+        -:   38:enum ASNIdFlag
+        -:   39:{
+        -:   40:	UNIVERSAL			= 0x00,
+        -:   41://	DATA				= 0x01,
+        -:   42://	HEADER				= 0x02,
+        -:   43:	CONSTRUCTED 		= 0x20,
+        -:   44:	APPLICATION 		= 0x40,
+        -:   45:	CONTEXT_SPECIFIC	= 0x80,
+        -:   46:	PRIVATE 			= 0xc0
+        -:   47:};
+        -:   48:
+        -:   49:inline void BERDecodeError() {throw BERDecodeErr();}
+        -:   50:
+        -:   51:class CRYPTOPP_DLL UnknownOID : public BERDecodeErr
+        -:   52:{
+        -:   53:public:
+        -:   54:	UnknownOID() : BERDecodeErr("BER decode error: unknown object identifier") {}
+        -:   55:	UnknownOID(const char *err) : BERDecodeErr(err) {}
+        -:   56:};
+        -:   57:
+        -:   58:// unsigned int DERLengthEncode(unsigned int length, byte *output=0);
+        -:   59:CRYPTOPP_DLL size_t CRYPTOPP_API DERLengthEncode(BufferedTransformation &out, lword length);
+        -:   60:// returns false if indefinite length
+        -:   61:CRYPTOPP_DLL bool CRYPTOPP_API BERLengthDecode(BufferedTransformation &in, size_t &length);
+        -:   62:
+        -:   63:CRYPTOPP_DLL void CRYPTOPP_API DEREncodeNull(BufferedTransformation &out);
+        -:   64:CRYPTOPP_DLL void CRYPTOPP_API BERDecodeNull(BufferedTransformation &in);
+        -:   65:
+        -:   66:CRYPTOPP_DLL size_t CRYPTOPP_API DEREncodeOctetString(BufferedTransformation &out, const byte *str, size_t strLen);
+        -:   67:CRYPTOPP_DLL size_t CRYPTOPP_API DEREncodeOctetString(BufferedTransformation &out, const SecByteBlock &str);
+        -:   68:CRYPTOPP_DLL size_t CRYPTOPP_API BERDecodeOctetString(BufferedTransformation &in, SecByteBlock &str);
+        -:   69:CRYPTOPP_DLL size_t CRYPTOPP_API BERDecodeOctetString(BufferedTransformation &in, BufferedTransformation &str);
+        -:   70:
+        -:   71:// for UTF8_STRING, PRINTABLE_STRING, and IA5_STRING
+        -:   72:CRYPTOPP_DLL size_t CRYPTOPP_API DEREncodeTextString(BufferedTransformation &out, const std::string &str, byte asnTag);
+        -:   73:CRYPTOPP_DLL size_t CRYPTOPP_API BERDecodeTextString(BufferedTransformation &in, std::string &str, byte asnTag);
+        -:   74:
+        -:   75:CRYPTOPP_DLL size_t CRYPTOPP_API DEREncodeBitString(BufferedTransformation &out, const byte *str, size_t strLen, unsigned int unusedBits=0);
+        -:   76:CRYPTOPP_DLL size_t CRYPTOPP_API BERDecodeBitString(BufferedTransformation &in, SecByteBlock &str, unsigned int &unusedBits);
+        -:   77:
+        -:   78:// BER decode from source and DER reencode into dest
+        -:   79:CRYPTOPP_DLL void CRYPTOPP_API DERReencode(BufferedTransformation &source, BufferedTransformation &dest);
+        -:   80:
+        -:   81://! Object Identifier
+        -:   82:class CRYPTOPP_DLL OID
+        -:   83:{
+        -:   84:public:
+        -:   85:	OID() {}
+        -:   86:	OID(word32 v) : m_values(1, v) {}
+        -:   87:	OID(BufferedTransformation &bt) {BERDecode(bt);}
+        -:   88:
+        -:   89:	inline OID & operator+=(word32 rhs) {m_values.push_back(rhs); return *this;}
+        -:   90:
+        -:   91:	void DEREncode(BufferedTransformation &bt) const;
+        -:   92:	void BERDecode(BufferedTransformation &bt);
+        -:   93:
+        -:   94:	// throw BERDecodeErr() if decoded value doesn't equal this OID
+        -:   95:	void BERDecodeAndCheck(BufferedTransformation &bt) const;
+        -:   96:
+        -:   97:	std::vector<word32> m_values;
+        -:   98:
+        -:   99:private:
+        -:  100:	static void EncodeValue(BufferedTransformation &bt, word32 v);
+        -:  101:	static size_t DecodeValue(BufferedTransformation &bt, word32 &v);
+        -:  102:};
+        -:  103:
+        -:  104:class EncodedObjectFilter : public Filter
+        -:  105:{
+        -:  106:public:
+        -:  107:	enum Flag {PUT_OBJECTS=1, PUT_MESSANGE_END_AFTER_EACH_OBJECT=2, PUT_MESSANGE_END_AFTER_ALL_OBJECTS=4, PUT_MESSANGE_SERIES_END_AFTER_ALL_OBJECTS=8};
+        -:  108:	EncodedObjectFilter(BufferedTransformation *attachment = NULL, unsigned int nObjects = 1, word32 flags = 0);
+        -:  109:
+        -:  110:	void Put(const byte *inString, size_t length);
+        -:  111:
+        -:  112:	unsigned int GetNumberOfCompletedObjects() const {return m_nCurrentObject;}
+        -:  113:	unsigned long GetPositionOfObject(unsigned int i) const {return m_positions[i];}
+        -:  114:
+        -:  115:private:
+        -:  116:	BufferedTransformation & CurrentTarget();
+        -:  117:
+        -:  118:	word32 m_flags;
+        -:  119:	unsigned int m_nObjects, m_nCurrentObject, m_level;
+        -:  120:	std::vector<unsigned int> m_positions;
+        -:  121:	ByteQueue m_queue;
+        -:  122:	enum State {IDENTIFIER, LENGTH, BODY, TAIL, ALL_DONE} m_state;
+        -:  123:	byte m_id;
+        -:  124:	lword m_lengthRemaining;
+        -:  125:};
+        -:  126:
+        -:  127://! BER General Decoder
+        -:  128:class CRYPTOPP_DLL BERGeneralDecoder : public Store
+        -:  129:{
+        -:  130:public:
+        -:  131:	explicit BERGeneralDecoder(BufferedTransformation &inQueue, byte asnTag);
+        -:  132:	explicit BERGeneralDecoder(BERGeneralDecoder &inQueue, byte asnTag);
+        -:  133:	~BERGeneralDecoder();
+        -:  134:
+        -:  135:	bool IsDefiniteLength() const {return m_definiteLength;}
+        -:  136:	lword RemainingLength() const {assert(m_definiteLength); return m_length;}
+        -:  137:	bool EndReached() const;
+        -:  138:	byte PeekByte() const;
+        -:  139:	void CheckByte(byte b);
+        -:  140:
+        -:  141:	size_t TransferTo2(BufferedTransformation &target, lword &transferBytes, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true);
+        -:  142:	size_t CopyRangeTo2(BufferedTransformation &target, lword &begin, lword end=LWORD_MAX, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true) const;
+        -:  143:
+        -:  144:	// call this to denote end of sequence
+        -:  145:	void MessageEnd();
+        -:  146:
+        -:  147:protected:
+        -:  148:	BufferedTransformation &m_inQueue;
+        -:  149:	bool m_finished, m_definiteLength;
+        -:  150:	lword m_length;
+        -:  151:
+        -:  152:private:
+        -:  153:	void Init(byte asnTag);
+        -:  154:	void StoreInitialize(const NameValuePairs &parameters) {assert(false);}
+        -:  155:	lword ReduceLength(lword delta);
+        -:  156:};
+        -:  157:
+        -:  158://! DER General Encoder
+        -:  159:class CRYPTOPP_DLL DERGeneralEncoder : public ByteQueue
+        -:  160:{
+        -:  161:public:
+        -:  162:	explicit DERGeneralEncoder(BufferedTransformation &outQueue, byte asnTag = SEQUENCE | CONSTRUCTED);
+        -:  163:	explicit DERGeneralEncoder(DERGeneralEncoder &outQueue, byte asnTag = SEQUENCE | CONSTRUCTED);
+        -:  164:	~DERGeneralEncoder();
+        -:  165:
+        -:  166:	// call this to denote end of sequence
+        -:  167:	void MessageEnd();
+        -:  168:
+        -:  169:private:
+        -:  170:	BufferedTransformation &m_outQueue;
+        -:  171:	bool m_finished;
+        -:  172:
+        -:  173:	byte m_asnTag;
+        -:  174:};
+        -:  175:
+        -:  176://! BER Sequence Decoder
+        -:  177:class CRYPTOPP_DLL BERSequenceDecoder : public BERGeneralDecoder
+        -:  178:{
+        -:  179:public:
+        -:  180:	explicit BERSequenceDecoder(BufferedTransformation &inQueue, byte asnTag = SEQUENCE | CONSTRUCTED)
+        -:  181:		: BERGeneralDecoder(inQueue, asnTag) {}
+        -:  182:	explicit BERSequenceDecoder(BERSequenceDecoder &inQueue, byte asnTag = SEQUENCE | CONSTRUCTED)
+        -:  183:		: BERGeneralDecoder(inQueue, asnTag) {}
+        -:  184:};
+        -:  185:
+        -:  186://! DER Sequence Encoder
+        -:  187:class CRYPTOPP_DLL DERSequenceEncoder : public DERGeneralEncoder
+        -:  188:{
+        -:  189:public:
+        -:  190:	explicit DERSequenceEncoder(BufferedTransformation &outQueue, byte asnTag = SEQUENCE | CONSTRUCTED)
+        -:  191:		: DERGeneralEncoder(outQueue, asnTag) {}
+        -:  192:	explicit DERSequenceEncoder(DERSequenceEncoder &outQueue, byte asnTag = SEQUENCE | CONSTRUCTED)
+        -:  193:		: DERGeneralEncoder(outQueue, asnTag) {}
+        -:  194:};
+        -:  195:
+        -:  196://! BER Set Decoder
+        -:  197:class CRYPTOPP_DLL BERSetDecoder : public BERGeneralDecoder
+        -:  198:{
+        -:  199:public:
+        -:  200:	explicit BERSetDecoder(BufferedTransformation &inQueue, byte asnTag = SET | CONSTRUCTED)
+        -:  201:		: BERGeneralDecoder(inQueue, asnTag) {}
+        -:  202:	explicit BERSetDecoder(BERSetDecoder &inQueue, byte asnTag = SET | CONSTRUCTED)
+        -:  203:		: BERGeneralDecoder(inQueue, asnTag) {}
+        -:  204:};
+        -:  205:
+        -:  206://! DER Set Encoder
+        -:  207:class CRYPTOPP_DLL DERSetEncoder : public DERGeneralEncoder
+        -:  208:{
+        -:  209:public:
+        -:  210:	explicit DERSetEncoder(BufferedTransformation &outQueue, byte asnTag = SET | CONSTRUCTED)
+        -:  211:		: DERGeneralEncoder(outQueue, asnTag) {}
+        -:  212:	explicit DERSetEncoder(DERSetEncoder &outQueue, byte asnTag = SET | CONSTRUCTED)
+        -:  213:		: DERGeneralEncoder(outQueue, asnTag) {}
+        -:  214:};
+        -:  215:
+        -:  216:template <class T>
+        -:  217:class ASNOptional : public member_ptr<T>
+        -:  218:{
+        -:  219:public:
+        -:  220:	void BERDecode(BERSequenceDecoder &seqDecoder, byte tag, byte mask = ~CONSTRUCTED)
+        -:  221:	{
+        -:  222:		byte b;
+        -:  223:		if (seqDecoder.Peek(b) && (b & mask) == tag)
+        -:  224:			reset(new T(seqDecoder));
+        -:  225:	}
+        -:  226:	void DEREncode(BufferedTransformation &out)
+        -:  227:	{
+        -:  228:		if (this->get() != NULL)
+        -:  229:			this->get()->DEREncode(out);
+        -:  230:	}
+        -:  231:};
+        -:  232:
+        -:  233://! _
+        -:  234:template <class BASE>
+        1:  235:class CRYPTOPP_DLL CRYPTOPP_NO_VTABLE ASN1CryptoMaterial : public ASN1Object, public BASE
+        -:  236:{
+        -:  237:public:
+    #####:  238:	void Save(BufferedTransformation &bt) const
+    #####:  239:		{BEREncode(bt);}
+    #####:  240:	void Load(BufferedTransformation &bt)
+    #####:  241:		{BERDecode(bt);}
+        -:  242:};
+        -:  243:
+        -:  244://! encodes/decodes subjectPublicKeyInfo
+    #####:  245:class CRYPTOPP_DLL X509PublicKey : public ASN1CryptoMaterial<PublicKey>
+        -:  246:{
+        -:  247:public:
+        -:  248:	void BERDecode(BufferedTransformation &bt);
+        -:  249:	void DEREncode(BufferedTransformation &bt) const;
+        -:  250:
+        -:  251:	virtual OID GetAlgorithmID() const =0;
+        -:  252:	virtual bool BERDecodeAlgorithmParameters(BufferedTransformation &bt)
+        -:  253:		{BERDecodeNull(bt); return false;}
+        -:  254:	virtual bool DEREncodeAlgorithmParameters(BufferedTransformation &bt) const
+        -:  255:		{DEREncodeNull(bt); return false;}	// see RFC 2459, section 7.3.1
+        -:  256:
+        -:  257:	//! decode subjectPublicKey part of subjectPublicKeyInfo, without the BIT STRING header
+        -:  258:	virtual void BERDecodePublicKey(BufferedTransformation &bt, bool parametersPresent, size_t size) =0;
+        -:  259:	//! encode subjectPublicKey part of subjectPublicKeyInfo, without the BIT STRING header
+        -:  260:	virtual void DEREncodePublicKey(BufferedTransformation &bt) const =0;
+        -:  261:};
+        -:  262:
+        -:  263://! encodes/decodes privateKeyInfo
+        1:  264:class CRYPTOPP_DLL PKCS8PrivateKey : public ASN1CryptoMaterial<PrivateKey>
+        -:  265:{
+        -:  266:public:
+        -:  267:	void BERDecode(BufferedTransformation &bt);
+        -:  268:	void DEREncode(BufferedTransformation &bt) const;
+        -:  269:
+        -:  270:	virtual OID GetAlgorithmID() const =0;
+        -:  271:	virtual bool BERDecodeAlgorithmParameters(BufferedTransformation &bt)
+        -:  272:		{BERDecodeNull(bt); return false;}
+        -:  273:	virtual bool DEREncodeAlgorithmParameters(BufferedTransformation &bt) const
+        -:  274:		{DEREncodeNull(bt); return false;}	// see RFC 2459, section 7.3.1
+        -:  275:
+        -:  276:	//! decode privateKey part of privateKeyInfo, without the OCTET STRING header
+        -:  277:	virtual void BERDecodePrivateKey(BufferedTransformation &bt, bool parametersPresent, size_t size) =0;
+        -:  278:	//! encode privateKey part of privateKeyInfo, without the OCTET STRING header
+        -:  279:	virtual void DEREncodePrivateKey(BufferedTransformation &bt) const =0;
+        -:  280:
+        -:  281:	//! decode optional attributes including context-specific tag
+        -:  282:	/*! /note default implementation stores attributes to be output in DEREncodeOptionalAttributes */
+        -:  283:	virtual void BERDecodeOptionalAttributes(BufferedTransformation &bt);
+        -:  284:	//! encode optional attributes including context-specific tag
+        -:  285:	virtual void DEREncodeOptionalAttributes(BufferedTransformation &bt) const;
+        -:  286:
+        -:  287:protected:
+        -:  288:	ByteQueue m_optionalAttributes;
+        -:  289:};
+        -:  290:
+        -:  291:// ********************************************************
+        -:  292:
+        -:  293://! DER Encode Unsigned
+        -:  294:/*! for INTEGER, BOOLEAN, and ENUM */
+        -:  295:template <class T>
+        -:  296:size_t DEREncodeUnsigned(BufferedTransformation &out, T w, byte asnTag = INTEGER)
+        -:  297:{
+        -:  298:	byte buf[sizeof(w)+1];
+        -:  299:	unsigned int bc;
+        -:  300:	if (asnTag == BOOLEAN)
+        -:  301:	{
+        -:  302:		buf[sizeof(w)] = w ? 0xff : 0;
+        -:  303:		bc = 1;
+        -:  304:	}
+        -:  305:	else
+        -:  306:	{
+        -:  307:		buf[0] = 0;
+        -:  308:		for (unsigned int i=0; i<sizeof(w); i++)
+        -:  309:			buf[i+1] = byte(w >> (sizeof(w)-1-i)*8);
+        -:  310:		bc = sizeof(w);
+        -:  311:		while (bc > 1 && buf[sizeof(w)+1-bc] == 0)
+        -:  312:			--bc;
+        -:  313:		if (buf[sizeof(w)+1-bc] & 0x80)
+        -:  314:			++bc;
+        -:  315:	}
+        -:  316:	out.Put(asnTag);
+        -:  317:	size_t lengthBytes = DERLengthEncode(out, bc);
+        -:  318:	out.Put(buf+sizeof(w)+1-bc, bc);
+        -:  319:	return 1+lengthBytes+bc;
+        -:  320:}
+        -:  321:
+        -:  322://! BER Decode Unsigned
+        -:  323:// VC60 workaround: std::numeric_limits<T>::max conflicts with MFC max macro
+        -:  324:// CW41 workaround: std::numeric_limits<T>::max causes a template error
+        -:  325:template <class T>
+        -:  326:void BERDecodeUnsigned(BufferedTransformation &in, T &w, byte asnTag = INTEGER,
+        -:  327:					   T minValue = 0, T maxValue = 0xffffffff)
+        -:  328:{
+        -:  329:	byte b;
+        -:  330:	if (!in.Get(b) || b != asnTag)
+        -:  331:		BERDecodeError();
+        -:  332:
+        -:  333:	size_t bc;
+        -:  334:	BERLengthDecode(in, bc);
+        -:  335:
+        -:  336:	SecByteBlock buf(bc);
+        -:  337:
+        -:  338:	if (bc != in.Get(buf, bc))
+        -:  339:		BERDecodeError();
+        -:  340:
+        -:  341:	const byte *ptr = buf;
+        -:  342:	while (bc > sizeof(w) && *ptr == 0)
+        -:  343:	{
+        -:  344:		bc--;
+        -:  345:		ptr++;
+        -:  346:	}
+        -:  347:	if (bc > sizeof(w))
+        -:  348:		BERDecodeError();
+        -:  349:
+        -:  350:	w = 0;
+        -:  351:	for (unsigned int i=0; i<bc; i++)
+        -:  352:		w = (w << 8) | ptr[i];
+        -:  353:
+        -:  354:	if (w < minValue || w > maxValue)
+        -:  355:		BERDecodeError();
+        -:  356:}
+        -:  357:
+        -:  358:inline bool operator==(const ::CryptoPP::OID &lhs, const ::CryptoPP::OID &rhs)
+        -:  359:	{return lhs.m_values == rhs.m_values;}
+        -:  360:inline bool operator!=(const ::CryptoPP::OID &lhs, const ::CryptoPP::OID &rhs)
+        -:  361:	{return lhs.m_values != rhs.m_values;}
+        -:  362:inline bool operator<(const ::CryptoPP::OID &lhs, const ::CryptoPP::OID &rhs)
+        -:  363:	{return std::lexicographical_compare(lhs.m_values.begin(), lhs.m_values.end(), rhs.m_values.begin(), rhs.m_values.end());}
+        -:  364:inline ::CryptoPP::OID operator+(const ::CryptoPP::OID &lhs, unsigned long rhs)
+        -:  365:	{return ::CryptoPP::OID(lhs)+=rhs;}
+        -:  366:
+        -:  367:NAMESPACE_END
+        -:  368:
+        -:  369:#endif

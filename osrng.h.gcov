@@ -1,0 +1,158 @@
+        -:    0:Source:/usr/include/cryptopp/osrng.h
+        -:    0:Programs:5
+        -:    1:#ifndef CRYPTOPP_OSRNG_H
+        -:    2:#define CRYPTOPP_OSRNG_H
+        -:    3:
+        -:    4://! \file
+        -:    5:
+        -:    6:#include "config.h"
+        -:    7:
+        -:    8:#ifdef OS_RNG_AVAILABLE
+        -:    9:
+        -:   10:#include "randpool.h"
+        -:   11:#include "rng.h"
+        -:   12:#include "aes.h"
+        -:   13:#include "sha.h"
+        -:   14:#include "fips140.h"
+        -:   15:
+        -:   16:NAMESPACE_BEGIN(CryptoPP)
+        -:   17:
+        -:   18://! Exception class for Operating-System Random Number Generator.
+        -:   19:class CRYPTOPP_DLL OS_RNG_Err : public Exception
+        -:   20:{
+        -:   21:public:
+        -:   22:	OS_RNG_Err(const std::string &operation);
+        -:   23:};
+        -:   24:
+        -:   25:#ifdef NONBLOCKING_RNG_AVAILABLE
+        -:   26:
+        -:   27:#ifdef CRYPTOPP_WIN32_AVAILABLE
+        -:   28:class CRYPTOPP_DLL MicrosoftCryptoProvider
+        -:   29:{
+        -:   30:public:
+        -:   31:	MicrosoftCryptoProvider();
+        -:   32:	~MicrosoftCryptoProvider();
+        -:   33:#if defined(_WIN64)
+        -:   34:	typedef unsigned __int64 ProviderHandle;	// type HCRYPTPROV, avoid #include <windows.h>
+        -:   35:#else
+        -:   36:	typedef unsigned long ProviderHandle;
+        -:   37:#endif
+        -:   38:	ProviderHandle GetProviderHandle() const {return m_hProvider;}
+        -:   39:private:
+        -:   40:	ProviderHandle m_hProvider;
+        -:   41:};
+        -:   42:
+        -:   43:#pragma comment(lib, "advapi32.lib")
+        -:   44:#endif
+        -:   45:
+        -:   46://! encapsulate CryptoAPI's CryptGenRandom or /dev/urandom
+        -:   47:class CRYPTOPP_DLL NonblockingRng : public RandomNumberGenerator
+        -:   48:{
+        -:   49:public:
+        -:   50:	NonblockingRng();
+        -:   51:	~NonblockingRng();
+        -:   52:	void GenerateBlock(byte *output, size_t size);
+        -:   53:
+        -:   54:protected:
+        -:   55:#ifdef CRYPTOPP_WIN32_AVAILABLE
+        -:   56:#	ifndef WORKAROUND_MS_BUG_Q258000
+        -:   57:		MicrosoftCryptoProvider m_Provider;
+        -:   58:#	endif
+        -:   59:#else
+        -:   60:	int m_fd;
+        -:   61:#endif
+        -:   62:};
+        -:   63:
+        -:   64:#endif
+        -:   65:
+        -:   66:#ifdef BLOCKING_RNG_AVAILABLE
+        -:   67:
+        -:   68://! encapsulate /dev/random, or /dev/srandom on OpenBSD
+        -:   69:class CRYPTOPP_DLL BlockingRng : public RandomNumberGenerator
+        -:   70:{
+        -:   71:public:
+        -:   72:	BlockingRng();
+        -:   73:	~BlockingRng();
+        -:   74:	void GenerateBlock(byte *output, size_t size);
+        -:   75:
+        -:   76:protected:
+        -:   77:	int m_fd;
+        -:   78:};
+        -:   79:
+        -:   80:#endif
+        -:   81:
+        -:   82:CRYPTOPP_DLL void CRYPTOPP_API OS_GenerateRandomBlock(bool blocking, byte *output, size_t size);
+        -:   83:
+        -:   84://! Automaticly Seeded Randomness Pool
+        -:   85:/*! This class seeds itself using an operating system provided RNG. */
+    #####:   86:class CRYPTOPP_DLL AutoSeededRandomPool : public RandomPool
+        -:   87:{
+        -:   88:public:
+        -:   89:	//! use blocking to choose seeding with BlockingRng or NonblockingRng. the parameter is ignored if only one of these is available
+    #####:   90:	explicit AutoSeededRandomPool(bool blocking = false, unsigned int seedSize = 32)
+    #####:   91:		{Reseed(blocking, seedSize);}
+        -:   92:	void Reseed(bool blocking = false, unsigned int seedSize = 32);
+        -:   93:};
+        -:   94:
+        -:   95://! RNG from ANSI X9.17 Appendix C, seeded using an OS provided RNG
+        -:   96:template <class BLOCK_CIPHER>
+        -:   97:class AutoSeededX917RNG : public RandomNumberGenerator, public NotCopyable
+        -:   98:{
+        -:   99:public:
+        -:  100:	//! use blocking to choose seeding with BlockingRng or NonblockingRng. the parameter is ignored if only one of these is available
+        -:  101:	explicit AutoSeededX917RNG(bool blocking = false, bool autoSeed = true)
+        -:  102:		{if (autoSeed) Reseed(blocking);}
+        -:  103:	void Reseed(bool blocking = false, const byte *additionalEntropy = NULL, size_t length = 0);
+        -:  104:	// exposed for testing
+        -:  105:	void Reseed(const byte *key, size_t keylength, const byte *seed, const byte *timeVector);
+        -:  106:
+        -:  107:	bool CanIncorporateEntropy() const {return true;}
+        -:  108:	void IncorporateEntropy(const byte *input, size_t length) {Reseed(false, input, length);}
+        -:  109:	void GenerateIntoBufferedTransformation(BufferedTransformation &target, const std::string &channel, lword length) {m_rng->GenerateIntoBufferedTransformation(target, channel, length);}
+        -:  110:
+        -:  111:private:
+        -:  112:	member_ptr<RandomNumberGenerator> m_rng;
+        -:  113:};
+        -:  114:
+        -:  115:template <class BLOCK_CIPHER>
+        -:  116:void AutoSeededX917RNG<BLOCK_CIPHER>::Reseed(const byte *key, size_t keylength, const byte *seed, const byte *timeVector)
+        -:  117:{
+        -:  118:	m_rng.reset(new X917RNG(new typename BLOCK_CIPHER::Encryption(key, keylength), seed, timeVector));
+        -:  119:}
+        -:  120:
+        -:  121:template <class BLOCK_CIPHER>
+        -:  122:void AutoSeededX917RNG<BLOCK_CIPHER>::Reseed(bool blocking, const byte *input, size_t length)
+        -:  123:{
+        -:  124:	SecByteBlock seed(BLOCK_CIPHER::BLOCKSIZE + BLOCK_CIPHER::DEFAULT_KEYLENGTH);
+        -:  125:	const byte *key;
+        -:  126:	do
+        -:  127:	{
+        -:  128:		OS_GenerateRandomBlock(blocking, seed, seed.size());
+        -:  129:		if (length > 0)
+        -:  130:		{
+        -:  131:			SHA256 hash;
+        -:  132:			hash.Update(seed, seed.size());
+        -:  133:			hash.Update(input, length);
+        -:  134:			hash.TruncatedFinal(seed, UnsignedMin(hash.DigestSize(), seed.size()));
+        -:  135:		}
+        -:  136:		key = seed + BLOCK_CIPHER::BLOCKSIZE;
+        -:  137:	}	// check that seed and key don't have same value
+        -:  138:	while (memcmp(key, seed, STDMIN((unsigned int)BLOCK_CIPHER::BLOCKSIZE, (unsigned int)BLOCK_CIPHER::DEFAULT_KEYLENGTH)) == 0);
+        -:  139:
+        -:  140:	Reseed(key, BLOCK_CIPHER::DEFAULT_KEYLENGTH, seed, NULL);
+        -:  141:}
+        -:  142:
+        -:  143:CRYPTOPP_DLL_TEMPLATE_CLASS AutoSeededX917RNG<AES>;
+        -:  144:
+        -:  145://! this is AutoSeededX917RNG\<AES\> in FIPS mode, otherwise it's AutoSeededRandomPool
+        -:  146:#if CRYPTOPP_ENABLE_COMPLIANCE_WITH_FIPS_140_2
+        -:  147:typedef AutoSeededX917RNG<AES> DefaultAutoSeededRNG;
+        -:  148:#else
+        -:  149:typedef AutoSeededRandomPool DefaultAutoSeededRNG;
+        -:  150:#endif
+        -:  151:
+        -:  152:NAMESPACE_END
+        -:  153:
+        -:  154:#endif
+        -:  155:
+        -:  156:#endif

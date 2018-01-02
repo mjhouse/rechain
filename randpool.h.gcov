@@ -1,0 +1,35 @@
+        -:    0:Source:/usr/include/cryptopp/randpool.h
+        -:    0:Programs:5
+        -:    1:#ifndef CRYPTOPP_RANDPOOL_H
+        -:    2:#define CRYPTOPP_RANDPOOL_H
+        -:    3:
+        -:    4:#include "cryptlib.h"
+        -:    5:#include "filters.h"
+        -:    6:
+        -:    7:NAMESPACE_BEGIN(CryptoPP)
+        -:    8:
+        -:    9://! Randomness Pool
+        -:   10:/*! This class can be used to generate cryptographic quality
+        -:   11:	pseudorandom bytes after seeding the pool with IncorporateEntropy() */
+    #####:   12:class CRYPTOPP_DLL RandomPool : public RandomNumberGenerator, public NotCopyable
+        -:   13:{
+        -:   14:public:
+        -:   15:	RandomPool();
+        -:   16:
+    #####:   17:	bool CanIncorporateEntropy() const {return true;}
+        -:   18:	void IncorporateEntropy(const byte *input, size_t length);
+        -:   19:	void GenerateIntoBufferedTransformation(BufferedTransformation &target, const std::string &channel, lword size);
+        -:   20:
+        -:   21:	// for backwards compatibility. use RandomNumberSource, RandomNumberStore, and RandomNumberSink for other BufferTransformation functionality
+        -:   22:	void Put(const byte *input, size_t length) {IncorporateEntropy(input, length);}
+        -:   23:
+        -:   24:private:
+        -:   25:	FixedSizeSecBlock<byte, 32> m_key;
+        -:   26:	FixedSizeSecBlock<byte, 16> m_seed;
+        -:   27:	member_ptr<BlockCipher> m_pCipher;
+        -:   28:	bool m_keySet;
+        -:   29:};
+        -:   30:
+        -:   31:NAMESPACE_END
+        -:   32:
+        -:   33:#endif

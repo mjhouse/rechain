@@ -1,0 +1,181 @@
+        -:    0:Source:test/test-keys.cpp
+        -:    0:Programs:5
+        -:    1:#include "catch.hpp"
+        -:    2:#include "keys.hpp"
+        -:    3:#include "data.hpp"
+        -:    4:
+        -:    5:#include <cryptopp/osrng.h>
+        -:    6:#include <cryptopp/rsa.h>
+        -:    7:#include <sstream>
+        -:    8:#include <fstream>
+        -:    9:
+       24:   10:std::string _read_file( std::string fn ){
+       48:   11:	std::ifstream f(fn);
+       24:   12:	if(f.is_open()){
+       48:   13:		std::stringstream contents;
+       24:   14:		contents << f.rdbuf();
+       24:   15:		return contents.str();
+        -:   16:	}
+    #####:   17:	return "";
+        -:   18:}
+        -:   19:
+        6:   20:TEST_CASE( "base key tests for privatekey and publickey", "[basekey]" ){
+       10:   21:	std::string pri_fn	= "test/data/test.private";
+       10:   22:	std::string pub_fn	= "test/data/test.public";
+        -:   23:
+       10:   24:	std::string pri_key = _read_file(pri_fn);
+       10:   25:	std::string pub_key = _read_file(pub_fn);
+        -:   26:
+       10:   27:	std::shared_ptr<PrivateKey> private_key(PrivateKey::empty());
+       10:   28:	std::shared_ptr<PublicKey> public_key(PublicKey::empty());
+        -:   29:
+       10:   30:	SECTION( "can get internal key" ) {
+        1:   31:		private_key->from_string(pri_key);
+        1:   32:		public_key->from_string(pub_key);
+        2:   33:		CryptoPP::RSA::PrivateKey c_pri_key = private_key->get_key();
+        2:   34:		CryptoPP::RSA::PublicKey c_pub_key = public_key->get_key();
+        -:   35:
+        2:   36:		CryptoPP::AutoSeededRandomPool rng;
+        -:   37:
+        1:   38:		REQUIRE(c_pub_key.Validate(rng,2));
+        1:   39:		REQUIRE(c_pri_key.Validate(rng,2));
+        -:   40:	}
+       10:   41:	SECTION( "can set internal key" ) {
+        2:   42:		CryptoPP::RSA::PrivateKey c_pri_key;
+        1:   43:		c_pri_key.Load(CryptoPP::StringSource(pri_key, true, new CryptoPP::HexDecoder()).Ref());
+        -:   44:
+        2:   45:		CryptoPP::RSA::PublicKey c_pub_key;
+        1:   46:		c_pub_key.Load(CryptoPP::StringSource(pub_key, true, new CryptoPP::HexDecoder()).Ref());
+        -:   47:
+        1:   48:		private_key->set_key(c_pri_key);
+        1:   49:		public_key->set_key(c_pub_key);
+        -:   50:
+        2:   51:		CryptoPP::AutoSeededRandomPool rng;
+        1:   52:		REQUIRE(private_key->get_key().Validate(rng,2));
+        1:   53:		REQUIRE(public_key->get_key().Validate(rng,2));
+        -:   54:	}
+       10:   55:	SECTION( "keys can be converted from/to a string" ) {
+        1:   56:		private_key->from_string(pri_key);
+        1:   57:		public_key->from_string(pub_key);
+        -:   58:
+        2:   59:		CryptoPP::AutoSeededRandomPool rng;
+        1:   60:		REQUIRE(private_key->get_key().Validate(rng,2));
+        1:   61:		REQUIRE(public_key->get_key().Validate(rng,2));
+        1:   62:		REQUIRE(private_key->to_string() == pri_key);
+        1:   63:		REQUIRE(public_key->to_string() == pub_key);
+        -:   64:	}
+       10:   65:	SECTION( "keys can be loaded from file" ) {
+        1:   66:		bool result1 = private_key->load(pri_fn);
+        1:   67:		bool result2 = public_key->load(pub_fn);
+        2:   68:		CryptoPP::AutoSeededRandomPool rng;
+        -:   69:
+        1:   70:		REQUIRE(result1);
+        1:   71:		REQUIRE(result2);
+        1:   72:		REQUIRE(private_key->get_key().Validate(rng,2));
+        1:   73:		REQUIRE(public_key->get_key().Validate(rng,2));
+        1:   74:		REQUIRE(private_key->to_string() == pri_key);
+        1:   75:		REQUIRE(public_key->to_string() == pub_key);
+        -:   76:	}
+       10:   77:	SECTION( "keys can be saved to a file" ) {
+        1:   78:		private_key->load(pri_fn);
+        1:   79:		public_key->load(pub_fn);
+        -:   80:
+        1:   81:		bool result1 = private_key->save("test/data/save_test.private");
+        1:   82:		bool result2 = public_key->save("test/data/save_test.public");
+        2:   83:		std::string s_pri = _read_file("test/data/save_test.private");
+        2:   84:		std::string s_pub = _read_file("test/data/save_test.public");
+        -:   85:
+        1:   86:		REQUIRE(result1);
+        1:   87:		REQUIRE(result2);
+        1:   88:		REQUIRE(s_pri == private_key->to_string());
+        1:   89:		REQUIRE(pri_key == private_key->to_string());
+        1:   90:		REQUIRE(s_pub == public_key->to_string());
+        1:   91:		REQUIRE(pub_key == public_key->to_string());
+        -:   92:
+        1:   93:		std::remove("test/data/save_test.private");
+        1:   94:		std::remove("test/data/save_test.public");
+        -:   95:	}
+        5:   96:}
+        -:   97:
+        5:   98:TEST_CASE( "private key tests", "[privatekey]" ){
+        8:   99:	std::shared_ptr<PrivateKey> key(PrivateKey::empty());
+        8:  100:	std::shared_ptr<Data> data(new Data(Address("DATA_REF","BLOCK_REF",DataType::Signature)));
+        -:  101:
+        8:  102:	std::string pri_fn	= "test/data/test.private";
+        8:  103:	std::string pri_key = _read_file(pri_fn);
+        -:  104:
+        8:  105:	SECTION( "private key can be created from a string" ) {
+        2:  106:		std::shared_ptr<PrivateKey> k(PrivateKey::load_string(pri_key));
+        -:  107:
+        2:  108:		CryptoPP::AutoSeededRandomPool rng;
+        1:  109:		REQUIRE(k->get_key().Validate(rng,2));
+        1:  110:		REQUIRE(!k->to_string().empty());
+        1:  111:		REQUIRE(k->to_string() == pri_key);
+        -:  112:	}
+        8:  113:	SECTION( "private key can be created from file" ) {
+        2:  114:		std::shared_ptr<PrivateKey> k(PrivateKey::load_file(pri_fn));
+        -:  115:
+        2:  116:		CryptoPP::AutoSeededRandomPool rng;
+        1:  117:		REQUIRE(k->get_key().Validate(rng,2));
+        1:  118:		REQUIRE(!k->to_string().empty());
+        1:  119:		REQUIRE(k->to_string() == pri_key);
+        -:  120:	}
+        8:  121:	SECTION( "private key generates a valid key" ) {
+        1:  122:		key->generate();
+        2:  123:		CryptoPP::AutoSeededRandomPool rng;
+        -:  124:
+        1:  125:		REQUIRE(!key->to_string().empty());
+        1:  126:		REQUIRE(key->get_key().Validate(rng,2));
+        -:  127:	}
+        8:  128:	SECTION( "private key signs a Data object" ) {
+        1:  129:		key->from_string(pri_key);
+        1:  130:		key->sign(data);
+        -:  131:
+        1:  132:		REQUIRE(data->verify());
+        -:  133:	}
+        -:  134:
+        4:  135:}
+        -:  136:
+        5:  137:TEST_CASE( "public key tests", "[publickey]" ){
+        8:  138:	std::shared_ptr<Data> data(new Data(Address("DATA_REF","BLOCK_REF",DataType::Signature)));
+        -:  139:
+        8:  140:	std::string pri_fn	= "test/data/test.private";
+        8:  141:	std::string pub_fn	= "test/data/test.public";
+        -:  142:
+        8:  143:	std::string pri_key = _read_file(pri_fn);
+        8:  144:	std::string pub_key = _read_file(pub_fn);
+        -:  145:
+        8:  146:	std::shared_ptr<PrivateKey> private_key(PrivateKey::load_string(pri_key));
+        8:  147:	std::shared_ptr<PublicKey> key(PublicKey::load_string(pub_key));
+        -:  148:
+        8:  149:	SECTION( "public key can be created from a string" ) {
+        2:  150:		std::shared_ptr<PublicKey> k(PublicKey::load_string(pub_key));
+        -:  151:
+        2:  152:		CryptoPP::AutoSeededRandomPool rng;
+        1:  153:		REQUIRE(k->get_key().Validate(rng,2));
+        1:  154:		REQUIRE(!k->to_string().empty());
+        1:  155:		REQUIRE(k->to_string() == pub_key);
+        -:  156:	}
+        8:  157:	SECTION( "public key can be created from file" ) {
+        2:  158:		std::shared_ptr<PublicKey> k(PublicKey::load_file(pub_fn));
+        -:  159:
+        2:  160:		CryptoPP::AutoSeededRandomPool rng;
+        1:  161:		REQUIRE(k->get_key().Validate(rng,2));
+        1:  162:		REQUIRE(!k->to_string().empty());
+        1:  163:		REQUIRE(k->to_string() == pub_key);
+        -:  164:	}
+        8:  165:	SECTION( "public key generates a valid key" ) {
+        1:  166:		key->generate(private_key);
+        2:  167:		CryptoPP::AutoSeededRandomPool rng;
+        -:  168:
+        1:  169:		REQUIRE(!key->to_string().empty());
+        1:  170:		REQUIRE(key->get_key().Validate(rng,2));
+        -:  171:	}
+        8:  172:	SECTION( "public key verifies a Data object" ) {
+        1:  173:		bool signed_ = private_key->sign(data);
+        1:  174:		bool verify_ = key->verify(data);
+        -:  175:
+        1:  176:		REQUIRE(signed_);
+        1:  177:		REQUIRE(verify_);
+        -:  178:	}
+        7:  179:}

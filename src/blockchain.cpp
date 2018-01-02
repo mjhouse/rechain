@@ -81,3 +81,8 @@ size_t BlockChain::trust(){
 	return 0;
 }	
 
+/* Returns the number of Block objects
+*/
+size_t BlockChain::size(){
+	return this->blockchain.size();
+}

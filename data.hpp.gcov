@@ -1,0 +1,142 @@
+        -:    0:Source:inc/data.hpp
+        -:    0:Programs:5
+        -:    1:/*
+        -:    2: * ReChain: The distributed research journal
+        -:    3: * Copyright (C) 2018  Michael House
+        -:    4: * 
+        -:    5: * This program is free software: you can redistribute it and/or modify
+        -:    6: * it under the terms of the GNU General Public License as published by
+        -:    7: * the Free Software Foundation, either version 3 of the License, or
+        -:    8: * (at your option) any later version.
+        -:    9: * 
+        -:   10: * This program is distributed in the hope that it will be useful,
+        -:   11: * but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   12: * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   13: * GNU General Public License for more details.
+        -:   14: * 
+        -:   15: * You should have received a copy of the GNU General Public License
+        -:   16: * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+        -:   17: *
+        -:   18: * Contact: michaelhouse@gmx.us
+        -:   19: *
+        -:   20:*/
+        -:   21:
+        -:   22:/** \file	data.hpp
+        -:   23:	\brief	Defines a Data object that holds publishing
+        -:   24:			information or a signature for another
+        -:   25:			published Data object.
+        -:   26:*/
+        -:   27:#ifndef _DATA_HPP_
+        -:   28:#define _DATA_HPP_
+        -:   29:
+        -:   30:#include <tuple>
+        -:   31:#include <memory>
+        -:   32:#include <string>
+        -:   33:
+        -:   34:/** An enumerated type for defining different
+        -:   35:	kinds of Address references.
+        -:   36:*/
+        -:   37:enum DataType { Publication, Signature };
+        -:   38:
+        -:   39:/** Typedef for conveniance */
+        -:   40:typedef std::tuple<std::string,std::string,DataType> Address;
+        -:   41:
+        -:   42:/** The Data class maintains a reference internally to another
+        -:   43:	Data object (if this is a signature) or to a hash for a
+        -:   44:	document (if the Data is a publication).
+        -:   45:*/
+        -:   46:class Data: public std::enable_shared_from_this<Data> {
+        -:   47:	private:
+        -:   48:		Address address;		/**< The reference to publish*/
+        -:   49:		std::string public_key;		/**< The public key to match the signature */
+        -:   50:		std::string signature;		/**< The signature for this data */
+        -:   51:
+        -:   52:	public:
+        -:   53:		/** Empty constructor */
+        1:   54:		Data(){}
+        -:   55:
+        -:   56:		/** Constructor that initializes the
+        -:   57:			Address.
+        -:   58:			\param a The Address to use
+        -:   59:		*/
+      140:   60:		Data( Address a ) : address(a) {}
+        -:   61:
+        -:   62:		/** Empty destructor */
+      141:   63:		~Data(){}
+        -:   64:
+        -:   65:		/**	Set the Address for the Data object
+        -:   66:			\param a An Address to use
+        -:   67:		*/
+        -:   68:		void set_address( Address a );
+        -:   69:
+        -:   70:		/** Get the Address from the Data object
+        -:   71:			\returns The Address currently used
+        -:   72:		*/
+        -:   73:		Address get_address();
+        -:   74:
+        -:   75:		/** Set the public key for the Data object
+        -:   76:			\param k The public key to use (should match signature)
+        -:   77:		*/
+        -:   78:		void set_public_key( std::string k );
+        -:   79:
+        -:   80:		/** Get the public key from the Data object
+        -:   81:			\returns The public key as a hex encoded string
+        -:   82:		*/
+        -:   83:		std::string get_public_key();
+        -:   84:
+        -:   85:		/** Set the signature on the Data object
+        -:   86:			\param s The signature to hold
+        -:   87:		*/
+        -:   88:		void set_signature( std::string s );
+        -:   89:
+        -:   90:		/** Get the signature from the Data object
+        -:   91:			\returns The current signature
+        -:   92:		*/
+        -:   93:		std::string get_signature();
+        -:   94:
+        -:   95:		/** Set the Data reference in the Address
+        -:   96:			\param r Either the signature of a published Data block
+        -:   97:					 or the hash of a document to publish
+        -:   98:		*/
+        -:   99:		void set_data_ref( std::string r );
+        -:  100:
+        -:  101:		/** Get the Data reference from the Address
+        -:  102:			\returns Either a signature for a publish Data object
+        -:  103:					 or the hash of a document.
+        -:  104:		*/
+        -:  105:		std::string get_data_ref();
+        -:  106:
+        -:  107:		/** Set the block reference in the Address
+        -:  108:			\param r A hash of a referenced Block
+        -:  109:		*/
+        -:  110:		void set_block_ref( std::string r );
+        -:  111:
+        -:  112:		/** Get the Block reference from the Address
+        -:  113:			\returns A hash for a published Block or empty string
+        -:  114:		*/
+        -:  115:		std::string get_block_ref();
+        -:  116:
+        -:  117:		/** Set the data type of the Address
+        -:  118:			\param d Either 'Signature' or 'Publication'
+        -:  119:		*/
+        -:  120:		void set_data_type( DataType d );
+        -:  121:
+        -:  122:		/** Get the data type of the Address
+        -:  123:			\returns Either 'Signature' or 'Publication'
+        -:  124:		*/
+        -:  125:		DataType get_data_type();
+        -:  126:
+        -:  127:		/** Get the held data and the counter/nonce/timestamp
+        -:  128:			as a string for hashing.
+        -:  129:			\param b True if the signature should be included
+        -:  130:			\returns A string of all held data
+        -:  131:		*/
+        -:  132:		std::string to_string( bool b = false );
+        -:  133:
+        -:  134:		/** Check if this Data object is valid
+        -:  135:			\returns True if block is signed and valid
+        -:  136:		*/
+        -:  137:		bool verify();
+        -:  138:};
+        -:  139:
+        -:  140:#endif

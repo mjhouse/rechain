@@ -1,0 +1,207 @@
+        -:    0:Source:inc/keys.hpp
+        -:    0:Programs:5
+        -:    1:/*
+        -:    2: * ReChain: The distributed research journal
+        -:    3: * Copyright (C) 2018  Michael House
+        -:    4: * 
+        -:    5: * This program is free software: you can redistribute it and/or modify
+        -:    6: * it under the terms of the GNU General Public License as published by
+        -:    7: * the Free Software Foundation, either version 3 of the License, or
+        -:    8: * (at your option) any later version.
+        -:    9: * 
+        -:   10: * This program is distributed in the hope that it will be useful,
+        -:   11: * but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   12: * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   13: * GNU General Public License for more details.
+        -:   14: * 
+        -:   15: * You should have received a copy of the GNU General Public License
+        -:   16: * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+        -:   17: *
+        -:   18: * Contact: michaelhouse@gmx.us
+        -:   19: *
+        -:   20:*/
+        -:   21:
+        -:   22:/** \file	keys.hpp
+        -:   23:	\brief	Defines the Key classes used to manage,
+        -:   24:			load, save and generate a public and
+        -:   25:			private pair of RSA256 keys.
+        -:   26:*/
+        -:   27:
+        -:   28:#ifndef _KEYS_HPP_
+        -:   29:#define _KEYS_HPP_
+        -:   30:
+        -:   31:#include <fstream>				// File I/O
+        -:   32:#include <iostream>
+        -:   33:#include <memory>
+        -:   34:
+        -:   35:#include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
+        -:   36:#include <cryptopp/rsa.h>		// For RSA:: namespace
+        -:   37:
+        -:   38:#include "data.hpp"				// Data objects
+        -:   39:#include "error.hpp"
+        -:   40:
+        -:   41:/** The templated Key class acts as a base class for both
+        -:   42:	PrivateKey and PublicKey.
+        -:   43:*/
+        -:   44:template <typename T>
+       29:   45:class Key {
+        -:   46:	protected:
+        -:   47:		T key;	/**< The CryptoPP::*Key to use*/
+        -:   48:
+       29:   49:		Key(){}
+        -:   50:
+        -:   51:	public:
+        -:   52:		/** Get the key as a CryptoPP object
+        -:   53:			\returns The key
+        -:   54:		*/
+        7:   55:		T get_key(){ return this->key; }
+        -:   56:
+        -:   57:		/** Set a CryptoPP object as key
+        -:   58:			\param k The key to use
+        -:   59:		*/
+        2:   60:		void set_key( T k ){ this->key = k; }
+        -:   61:
+        -:   62:		/** Convert the key to a hex encoded string
+        -:   63:			\returns The hex encoded string
+        -:   64:		*/
+       10:   65:		std::string to_string(){
+       10:   66:			std::string s;
+       10:   67:			this->key.Save(CryptoPP::HexEncoder( new CryptoPP::StringSink(s)).Ref());
+       10:   68:			return s;
+        -:   69:		}
+        -:   70:
+        -:   71:		/** Build a CryptoPP private or public key from
+        -:   72:			a hex encoded string
+        -:   73:			\param k The string to build
+        -:   74:		*/
+       25:   75:		void from_string( std::string k ){
+       25:   76:			this->key.Load(CryptoPP::StringSource(k, true, new CryptoPP::HexDecoder()).Ref());
+       25:   77:		}
+        -:   78:
+        -:   79:
+        -:   80:		/** Load a key from a file
+        -:   81:			\param fn The path to the file
+        -:   82:			\returns True if file was loaded
+        -:   83:		*/
+       20:   84:		bool load( std::string fn ){
+       40:   85:			std::ifstream file(fn);
+       20:   86:			if( file.is_open() ){
+       20:   87:				this->from_string( std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()) );
+       20:   88:				return true;
+        -:   89:			}
+    #####:   90:			return false;
+        -:   91:		}
+        -:   92:
+        -:   93:		/** Save the key to a file
+        -:   94:			\param fn The file to save to
+        -:   95:			\returns True if key was saved
+        -:   96:		*/
+        2:   97:		bool save( std::string fn ){
+        4:   98:			std::ofstream file(fn);
+        2:   99:			if( file.is_open() ){
+        2:  100:				file << this->to_string();
+        2:  101:				return true;
+        -:  102:			}
+    #####:  103:			return false;
+        -:  104:		}
+        -:  105:};
+        -:  106:
+        -:  107:/** The PrivateKey class inherits from the templated
+        -:  108:	'Key' base class and adds private-key-specific methods.
+        -:  109:*/
+       29:  110:class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_shared_from_this<PrivateKey> {
+        -:  111:	private:
+        -:  112:
+        -:  113:		/** Empty constructor */
+       29:  114:		PrivateKey(){}
+        -:  115:
+        -:  116:	public:
+        -:  117:		/** Create an empty PrivateKey
+        -:  118:			\returns A pointer to the PrivateKey
+        -:  119:		*/
+        9:  120:		static PrivateKey* empty(){
+        9:  121:			return new PrivateKey();
+        -:  122:		};
+        -:  123:
+        -:  124:		/** Create a new PrivateKey from a string
+        -:  125:			\param s A string representation of a public key
+        -:  126:			\returns A pointer to the PrivateKey
+        -:  127:		*/
+        5:  128:		static PrivateKey* load_string( std::string s ){
+        5:  129:			PrivateKey* k = new PrivateKey();
+        5:  130:			k->from_string(s);
+        5:  131:			return k;
+        -:  132:		};
+        -:  133:
+        -:  134:		/** Create a new PrivateKey from a file
+        -:  135:			\param fn A path to the file to use
+        -:  136:			\returns A pointer to the PrivateKey
+        -:  137:		*/
+       15:  138:		static PrivateKey* load_file( std::string fn ){
+       15:  139:			PrivateKey* k = new PrivateKey();
+       15:  140:			if(!k->load(fn)){ throw rechain::LoadFailure(fn); }
+       15:  141:			return k;
+        -:  142:		};
+        -:  143:
+        -:  144:		/** Generate a new key */
+        -:  145:		void generate();
+        -:  146:
+        -:  147:		/** Sign a given Data block
+        -:  148:			\param data A shared_ptr to the Data object to sign
+        -:  149:			\returns True if the Data object was signed
+        -:  150:		*/
+        -:  151:		bool sign( std::shared_ptr<Data> data );
+        -:  152:};
+        -:  153:
+        -:  154:/** The PublicKey class inherits from the templated
+        -:  155:	'Key' base class and adds public-key-specific methods.
+        -:  156:*/
+    #####:  157:class PublicKey: public Key<CryptoPP::RSA::PublicKey>, public std::enable_shared_from_this<PublicKey> {
+        -:  158:	private:
+        -:  159:
+        -:  160:		/** Empty constructor */
+    #####:  161:		PublicKey(){}
+        -:  162:
+        -:  163:	public:
+        -:  164:
+        -:  165:		/** Create an empty PublicKey
+        -:  166:			\returns A pointer to the PublicKey
+        -:  167:		*/
+    #####:  168:		static PublicKey* empty(){
+    #####:  169:			return new PublicKey();
+        -:  170:		};
+        -:  171:
+        -:  172:		/** Create a new PublicKey from a string
+        -:  173:			\param s A string representation of a public key
+        -:  174:			\returns A pointer to the PublicKey
+        -:  175:		*/
+    #####:  176:		static PublicKey* load_string( std::string s ){
+    #####:  177:			PublicKey* k = new PublicKey();
+    #####:  178:			k->from_string(s);
+    #####:  179:			return k;
+        -:  180:		};
+        -:  181:
+        -:  182:		/** Create a new PublicKey from a file
+        -:  183:			\param fn A path to the file to use
+        -:  184:			\returns A pointer to the PublicKey
+        -:  185:		*/
+        1:  186:		static PublicKey* load_file( std::string fn ){
+        1:  187:			PublicKey* k = new PublicKey();
+        1:  188:			if(!k->load(fn)){ throw rechain::LoadFailure(fn); }
+        1:  189:			return k;
+        -:  190:		};
+        -:  191:
+        -:  192:		/** Generate a new PublicKey from a PrivateKey
+        -:  193:			\param key The PrivateKey to generate from
+        -:  194:		*/
+        -:  195:		void generate( std::shared_ptr<PrivateKey> key );
+        -:  196:
+        -:  197:		/** Verify a Data object to ensure that the
+        -:  198:		 	signature attached to it is correct
+        -:  199:			\param data A shared_ptr to the Data object to verify
+        -:  200:			\returns True if the Data object is signed correctly
+        -:  201:		*/
+        -:  202:		bool verify( std::shared_ptr<Data> data );
+        -:  203:};
+        -:  204:
+        -:  205:#endif
