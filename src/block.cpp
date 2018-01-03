@@ -76,7 +76,7 @@ void Block::change_hash(){
 	this->timestamp = new_timestamp();
 }
 
-/* Get a data block given the signature
+/* Get a Data block given the signature
 */
 std::shared_ptr<Data> Block::get_data( std::string s ){
 	// Create a new shared_ptr
@@ -90,6 +90,22 @@ std::shared_ptr<Data> Block::get_data( std::string s ){
 
 	// Return d
 	return d;
+}
+
+/* Get a Data block given the index
+*/
+std::shared_ptr<Data> Block::get_data( unsigned int i ){
+	std::shared_ptr<Data> d;
+	if(i < this->data.size()){
+		d = this->data.at(i);
+	}
+	return d;
+}
+
+/* Get all Data objects
+*/
+std::vector<std::shared_ptr<Data>> Block::get_data(){
+	return this->data;
 }
 
 /* Add a Data block

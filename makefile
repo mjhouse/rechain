@@ -1,6 +1,5 @@
 CPP=g++
-CPPFLAGS=-std=c++11 -pthread -ldl -Wall -Wextra -Wpedantic -g -lcrypto++
-TSTFLAGS=-fprofile-arcs -ftest-coverage 
+CPPFLAGS=-std=c++11 -ldl -Wall -Wextra -Wpedantic -g -lcrypto++
 
 TARGET = bin/rechain
 OUTDIR = bin
@@ -37,6 +36,7 @@ obj/%.o: $(SRCDIR)/%.cpp
 # ----------------------------------------------------------------------
 # link executable for testing
 
+test: TSTFLAGS = -fprofile-arcs -ftest-coverage 
 test: test-link
 	./bin/rechain
 

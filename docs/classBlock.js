@@ -5,6 +5,8 @@ var classBlock =
     [ "add_data", "classBlock.html#a5ffadce3fa57fad07a70e8ac1080043c", null ],
     [ "change_hash", "classBlock.html#a3f70eab32551ffec2940a79db2a96b66", null ],
     [ "get_data", "classBlock.html#a1937b121751b9e9aa43507f23b707abd", null ],
+    [ "get_data", "classBlock.html#a0c860803566c8b13078d9d178edc65c0", null ],
+    [ "get_data", "classBlock.html#a22abd562e77f6ea3c05ee2cf53f8dd66", null ],
     [ "get_previous", "classBlock.html#a952d5c0e36a541600f47ab7c96553bdb", null ],
     [ "hash", "classBlock.html#ae2de4f093f846bf821445f80b02da7de", null ],
     [ "new_nonce", "classBlock.html#a5b6b7d4ae2ce01a09a8faab83842b69a", null ],

@@ -30,7 +30,7 @@
 
 #include <vector>
 #include <memory>
-#include <future>
+#include <map>
 
 class Block;
 
@@ -72,7 +72,7 @@ class BlockChain {
 		/** Calculate the trust for the current chain
 		    \returns The trust score for all documents
 		*/
-		size_t trust();
+		std::map<std::string,float> trust();
 		
 		/** Return the number of Block objects in the chain
 		    \returns The number of Block objects 

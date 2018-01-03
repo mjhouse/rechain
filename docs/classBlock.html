@@ -126,6 +126,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3f70eab32551ffec2940a79db2a96b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1937b121751b9e9aa43507f23b707abd"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classData.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a1937b121751b9e9aa43507f23b707abd">get_data</a> (std::string s)</td></tr>
 <tr class="separator:a1937b121751b9e9aa43507f23b707abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c860803566c8b13078d9d178edc65c0"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classData.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a0c860803566c8b13078d9d178edc65c0">get_data</a> (unsigned int i)</td></tr>
+<tr class="separator:a0c860803566c8b13078d9d178edc65c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22abd562e77f6ea3c05ee2cf53f8dd66"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classData.html">Data</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a22abd562e77f6ea3c05ee2cf53f8dd66">get_data</a> ()</td></tr>
+<tr class="separator:a22abd562e77f6ea3c05ee2cf53f8dd66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ffadce3fa57fad07a70e8ac1080043c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a5ffadce3fa57fad07a70e8ac1080043c">add_data</a> (std::shared_ptr&lt; <a class="el" href="classData.html">Data</a> &gt; d)</td></tr>
 <tr class="separator:a5ffadce3fa57fad07a70e8ac1080043c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a676f0789b957010eca8e84598b89c7bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a676f0789b957010eca8e84598b89c7bc">remove_data</a> (std::string s)</td></tr>
@@ -183,7 +187,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="classData.html">Data</a> was added </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00097">97</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00113">113</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -218,15 +222,64 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get a data block given the signature </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Get a <a class="el" href="classData.html">Data</a> block given the signature </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>The signature of the block to return </td></tr>
+    <tr><td class="paramname">s</td><td>The signature of the <a class="el" href="classData.html">Data</a> object to return </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The requested <a class="el" href="classData.html">Data</a> block </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The requested <a class="el" href="classData.html">Data</a> block or empty pointer </dd></dl>
 
 <p>Definition at line <a class="el" href="block_8cpp_source.html#l00081">81</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0c860803566c8b13078d9d178edc65c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classData.html">Data</a> &gt; Block::get_data </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get a <a class="el" href="classData.html">Data</a> block given the index </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>The index of the <a class="el" href="classData.html">Data</a> object to return </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The requested <a class="el" href="classData.html">Data</a> block or empty pointer </dd></dl>
+
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00097">97</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a22abd562e77f6ea3c05ee2cf53f8dd66"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classData.html">Data</a> &gt; &gt; Block::get_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get a <a class="el" href="classData.html">Data</a> block given the index </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>The index of the <a class="el" href="classData.html">Data</a> object to return </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The requested <a class="el" href="classData.html">Data</a> block or empty pointer </dd></dl>
+
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00107">107</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -245,7 +298,7 @@ Private Attributes</h2></td></tr>
 <p>Get the hash of the previous block </p><dl class="section return"><dt>Returns</dt><dd>The hash of the previous block</dd></dl>
 <p>Get the hash of the previous block </p>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00129">129</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00145">145</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -340,7 +393,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if found </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00118">118</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00134">134</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -365,7 +418,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p>Set the hash of the previous block </p>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00134">134</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00150">150</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -383,7 +436,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get number of <a class="el" href="classData.html">Data</a> objects in the <a class="el" href="classBlock.html">Block</a> </p><dl class="section return"><dt>Returns</dt><dd>Size of the <a class="el" href="classBlock.html">Block</a> as size_t </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00138">138</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00154">154</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -513,7 +566,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBlock.html">Block</a></li>
-    <li class="footer">Generated on Wed Jan 3 2018 07:09:07 for ReChain by
+    <li class="footer">Generated on Wed Jan 3 2018 12:50:18 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -20,11 +20,12 @@
 */
 
 // System includes
-#include <future>
+#include <iostream>
 
 // Local includes
 #include "blockchain.hpp"
 #include "block.hpp"
+#include "data.hpp"
 		
 /* Empty constructor
 */
@@ -77,8 +78,78 @@ size_t BlockChain::trust( std::string hash ){
 
 /* Calculate the trust for the current chain
 */
-size_t BlockChain::trust(){
-	return 0;
+std::map<std::string,float> BlockChain::trust(){
+	// Will hold computed trust for public keys
+	std::map<std::string,float> key_trust;
+	std::map<std::string,std::string> pub_trust;
+
+	// Iterators
+	std::vector<std::shared_ptr<Block>>::iterator b_it;
+	std::vector<std::shared_ptr<Data>>::iterator d_it;
+ 
+	// Get the owners public key (public key of first block)
+	// and insert it with a value of 1
+	std::string gen_key = this->blockchain.at(0)->get_data(0)->get_public_key();
+	key_trust.insert( std::pair<std::string,float>(gen_key,1.0f) );
+
+	// Iterate over each block and get the data
+	for(b_it = this->blockchain.begin(); b_it != this->blockchain.end(); ++b_it){
+		std::shared_ptr<Block> block = *b_it;
+		std::vector<std::shared_ptr<Data>> data = block->get_data();
+		
+		// Iterate over each Data object and calculate trust
+		for(d_it = data.begin(); d_it != data.end(); ++d_it ){
+			std::shared_ptr<Data> d = *d_it; 
+			
+			switch(d->get_data_type()){
+				case DataType::Publication:
+					{
+						// If this is a publication Data object, then
+						// the public key is added to 'key_trust' if
+						// it isn't already there
+						
+						// Get the public key and the signature
+						std::string key = d->get_public_key();
+						std::string ref = d->get_signature();
+
+						// Try to insert the public key with an initial
+						// value of '0.0'
+						key_trust.insert( std::make_pair(key,0.0f) );
+						
+						// Update the publication record linking the signature
+						// to the public key
+						pub_trust.insert( std::make_pair(ref,key) );
+					}
+					break;
+				case DataType::Signature:
+					{
+						// If this is a signature Data object, then half
+						// of the signers trust goes to the owner of the
+						// referenced document
+
+						// Get the public keys of the document publisher and
+						// the signer
+						std::string ref_key = pub_trust[ d->get_data_ref() ];
+						std::string sig_key = d->get_public_key();
+					
+						// Get the current trust of each
+						float sig_trust	= key_trust[ sig_key ];
+						float ref_trust = key_trust[ ref_key ];
+
+						// Move half of the signers trust to the 
+						// publisher
+						sig_trust = sig_trust/2;
+						ref_trust += sig_trust;
+					
+						// Update the key_trust map
+						key_trust[ref_key] = ref_trust;	
+						key_trust[sig_key] = sig_trust;	
+					}
+					break;
+			}
+		}
+	}
+	return key_trust;
 }	
 
 /* Returns the number of Block objects

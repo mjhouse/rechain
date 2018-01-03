@@ -6,6 +6,6 @@ var classBlockChain =
     [ "mine", "classBlockChain.html#abe816778cb822ad840ec4a1a64bc89bd", null ],
     [ "size", "classBlockChain.html#acb48c2b272c045d5e3fa294fafe536b9", null ],
     [ "trust", "classBlockChain.html#a4dc3e625f87fa08228cfafe8a98797db", null ],
-    [ "trust", "classBlockChain.html#a1c5843b9574cd7ace35cfa58a3ea1d69", null ],
+    [ "trust", "classBlockChain.html#aff688bee14c565647aeb8e6313b23e80", null ],
     [ "blockchain", "classBlockChain.html#a6debb2c431b7d8ac47f5430f4e2ddde2", null ]
 ];

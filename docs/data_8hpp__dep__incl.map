@@ -1,7 +1,8 @@
 <map id="inc/data.hpp" name="inc/data.hpp">
-<area shape="rect" id="node2" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="155,80,251,107"/>
+<area shape="rect" id="node2" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="105,80,201,107"/>
 <area shape="rect" id="node3" href="$data_8cpp_source.html" title="src/data.cpp" alt="" coords="5,155,100,181"/>
 <area shape="rect" id="node4" href="$keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="124,155,221,181"/>
 <area shape="rect" id="node5" href="$main_8cpp_source.html" title="src/main.cpp" alt="" coords="245,155,343,181"/>
 <area shape="rect" id="node6" href="$block_8cpp_source.html" title="src/block.cpp" alt="" coords="327,80,427,107"/>
+<area shape="rect" id="node7" href="$blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="450,80,581,107"/>
 </map>

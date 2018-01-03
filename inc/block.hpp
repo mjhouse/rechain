@@ -81,11 +81,24 @@ class Block {
 		*/
 		void change_hash();
 
-		/** Get a data block given the signature
-			\param s The signature of the block to return
-			\returns The requested Data block
+		/** Get a Data block given the signature
+			\param s The signature of the Data object to return
+			\returns The requested Data block or empty pointer
 		*/
 		std::shared_ptr<Data> get_data( std::string s );
+
+		/** Get a Data block given the index
+		    \param i The index of the Data object to return
+		    \returns The requested Data block or empty pointer
+		*/
+		std::shared_ptr<Data> get_data( unsigned int i );
+		
+		/** Get a Data block given the index
+		    \param i The index of the Data object to return
+		    \returns The requested Data block or empty pointer
+		*/
+		std::vector<std::shared_ptr<Data>> get_data();
+
 
 		/** Add a Data block
 			\param d The block to add
