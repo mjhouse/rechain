@@ -13,8 +13,5 @@ var hierarchy =
     ] ],
     [ "Key< CryptoPP::RSA::PublicKey >", "classKey.html", [
       [ "PublicKey", "classPublicKey.html", null ]
-    ] ],
-    [ "runtime_error", null, [
-      [ "rechain::LoadFailure", "classrechain_1_1LoadFailure.html", null ]
     ] ]
 ];

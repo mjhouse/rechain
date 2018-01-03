@@ -36,7 +36,6 @@
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 
 #include "data.hpp"				// Data objects
-#include "error.hpp"
 
 /** The templated Key class acts as a base class for both
 	PrivateKey and PublicKey.
@@ -137,7 +136,7 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_sha
 		*/
 		static PrivateKey* load_file( std::string fn ){
 			PrivateKey* k = new PrivateKey();
-			if(!k->load(fn)){ throw rechain::LoadFailure(fn); }
+			k->load(fn);
 			return k;
 		};
 
@@ -185,7 +184,7 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey>, public std::enable_shared
 		*/
 		static PublicKey* load_file( std::string fn ){
 			PublicKey* k = new PublicKey();
-			if(!k->load(fn)){ throw rechain::LoadFailure(fn); }
+			k->load(fn);
 			return k;
 		};
 

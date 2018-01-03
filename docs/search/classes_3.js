@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['loadfailure',['LoadFailure',['../classrechain_1_1LoadFailure.html',1,'rechain']]]
+  ['privatekey',['PrivateKey',['../classPrivateKey.html',1,'']]],
+  ['publickey',['PublicKey',['../classPublicKey.html',1,'']]]
 ];

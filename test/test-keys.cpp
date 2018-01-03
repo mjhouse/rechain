@@ -74,6 +74,13 @@ TEST_CASE( "base key tests for privatekey and publickey", "[basekey]" ){
 		REQUIRE(private_key->to_string() == pri_key);
 		REQUIRE(public_key->to_string() == pub_key);
 	}
+	SECTION( "keys cannot be loaded from bad filename" ){
+		bool result1 = private_key->load( "BAD PATH" );
+		bool result2 = public_key->load( "BAD PATH" );
+
+		REQUIRE_FALSE(result1);
+		REQUIRE_FALSE(result2);
+	}
 	SECTION( "keys can be saved to a file" ) {
 		private_key->load(pri_fn);
 		public_key->load(pub_fn);
@@ -92,6 +99,16 @@ TEST_CASE( "base key tests for privatekey and publickey", "[basekey]" ){
 
 		std::remove("test/data/save_test.private");
 		std::remove("test/data/save_test.public");
+	}
+	SECTION( "keys cannot be saved to a bad filename" ){
+		private_key->load(pri_fn);
+		public_key->load(pub_fn);
+
+		bool result1 = private_key->save("test/NOEXIST/save_test.private");
+		bool result2 = public_key->save("test/NOEXIST/save_test.public");
+
+		REQUIRE_FALSE(result1);
+		REQUIRE_FALSE(result2);
 	}
 }
 

@@ -48,7 +48,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -103,11 +102,17 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="title">ReChain </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>ReChain is a modified blockchain design that uses signature blocks to enforce blockchain integrity rather than an expensive proof-of-work calculation. There is still a fixed proof-of-work difficulty in order to stop many transactions from being executed at once.</p>
+<div class="textblock"><p><a href="https://travis-ci.org/mjhouse/rechain"></a> <a href="https://coveralls.io/github/mjhouse/rechain?branch=master"></a></p>
+<p>ReChain is a modified blockchain design that uses signature blocks to enforce blockchain integrity rather than an expensive proof-of-work calculation. There is still a fixed proof-of-work difficulty in order to stop many transactions from being executed at once.</p>
 <h3>Documentation</h3>
 <p>Generated documentation is available <a href="https://mjhouse.github.io/rechain/">here</a>. Currently, there are no written tutorials or guides because the project isn't that far along yet.</p>
 <h3>Can I Contribute?</h3>
 <p>No.</p>
+<h3>Tools</h3>
+<ul>
+<li>make 4.1</li>
+<li>gcc 5.4.0</li>
+</ul>
 <h3>Dependencies</h3>
 <table class="doxtable">
 <tr>
@@ -126,7 +131,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jan 1 2018 11:21:23 for ReChain by
+    <li class="footer">Generated on Tue Jan 2 2018 21:17:52 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

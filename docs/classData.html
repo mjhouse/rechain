@@ -48,7 +48,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -121,11 +120,15 @@ $(document).ready(function(){initNavTree('classData.html','');});
 Inheritance diagram for Data:</div>
 <div class="dyncontent">
 <div class="center"><img src="classData__inherit__graph.png" border="0" usemap="#Data_inherit__map" alt="Inheritance graph"/></div>
+<map name="Data_inherit__map" id="Data_inherit__map">
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Data:</div>
 <div class="dyncontent">
 <div class="center"><img src="classData__coll__graph.png" border="0" usemap="#Data_coll__map" alt="Collaboration graph"/></div>
+<map name="Data_coll__map" id="Data_coll__map">
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -177,7 +180,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classData.html">Data</a> class maintains a reference internally to another <a class="el" href="classData.html">Data</a> object (if this is a signature) or to a hash for a document (if the <a class="el" href="classData.html">Data</a> is a publication). </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00025">25</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00046">46</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="af11f741cb7f587e2e495452a8905a22a"></a>
 <div class="memitem">
@@ -201,7 +204,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Empty constructor </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00033">33</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00054">54</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -233,7 +236,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00039">39</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00060">60</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -259,7 +262,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Empty destructor </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00042">42</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00063">63</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -278,7 +281,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the Address from the <a class="el" href="classData.html">Data</a> object </p><dl class="section return"><dt>Returns</dt><dd>The Address currently used </dd></dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00007">7</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00028">28</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,7 +299,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the <a class="el" href="classBlock.html">Block</a> reference from the Address </p><dl class="section return"><dt>Returns</dt><dd>A hash for a published <a class="el" href="classBlock.html">Block</a> or empty string </dd></dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00019">19</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00040">40</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -314,7 +317,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the <a class="el" href="classData.html">Data</a> reference from the Address </p><dl class="section return"><dt>Returns</dt><dd>Either a signature for a publish <a class="el" href="classData.html">Data</a> object or the hash of a document. </dd></dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00016">16</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00037">37</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -332,7 +335,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the data type of the Address </p><dl class="section return"><dt>Returns</dt><dd>Either 'Signature' or 'Publication' </dd></dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00022">22</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00043">43</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -350,7 +353,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the public key from the <a class="el" href="classData.html">Data</a> object </p><dl class="section return"><dt>Returns</dt><dd>The public key as a hex encoded string </dd></dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00010">10</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00031">31</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -368,7 +371,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the signature from the <a class="el" href="classData.html">Data</a> object </p><dl class="section return"><dt>Returns</dt><dd>The current signature </dd></dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00013">13</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00034">34</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -392,7 +395,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00006">6</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00027">27</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -416,7 +419,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00018">18</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00039">39</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +443,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00015">15</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00036">36</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -464,7 +467,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00021">21</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00042">42</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +491,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00009">9</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00030">30</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -512,7 +515,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00012">12</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00033">33</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -537,7 +540,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A string of all held data </dd></dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00024">24</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00045">45</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -555,7 +558,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Check if this <a class="el" href="classData.html">Data</a> object is valid </p><dl class="section return"><dt>Returns</dt><dd>True if block is signed and valid </dd></dl>
 
-<p>Definition at line <a class="el" href="data_8cpp_source.html#l00035">35</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8cpp_source.html#l00056">56</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
 
 </div>
 </div>
@@ -579,7 +582,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The reference to publish </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00027">27</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00048">48</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -602,7 +605,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The public key to match the signature </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00028">28</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00049">49</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -625,7 +628,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The signature for this data </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00029">29</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00050">50</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -639,7 +642,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classData.html">Data</a></li>
-    <li class="footer">Generated on Mon Jan 1 2018 11:21:23 for ReChain by
+    <li class="footer">Generated on Tue Jan 2 2018 21:17:52 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

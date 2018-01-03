@@ -70,6 +70,12 @@ TEST_CASE( "block tests", "[block]" ){
 		std::string hash = block->hash();
 		REQUIRE(!hash.empty());
 	}
+	SECTION( "block fetches data by signature" ){
+		std::string sig = signatures.at(0);
+		std::shared_ptr<Data> d = block->get_data( sig );
+		REQUIRE(d);
+		REQUIRE(d->get_signature() == sig);
+	}
 	SECTION( "block changes hashing variables" ){
 		std::string hash1 = block->hash();
 		block->change_hash();
