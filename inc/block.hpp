@@ -93,9 +93,8 @@ class Block {
 		*/
 		std::shared_ptr<Data> get_data( unsigned int i );
 		
-		/** Get a Data block given the index
-		    \param i The index of the Data object to return
-		    \returns The requested Data block or empty pointer
+		/** Get all Data objects
+		    \returns A vector of Data pointers
 		*/
 		std::vector<std::shared_ptr<Data>> get_data();
 
