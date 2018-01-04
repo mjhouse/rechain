@@ -49,7 +49,7 @@ class Data: public std::enable_shared_from_this<Data> {
 		std::string public_key;		/**< The public key to match the signature */
 		std::string signature;		/**< The signature for this data */
 
-		float trust;
+		float trust;			/**< Recorded trust for Signature records*/
 
 	public:
 		/** Empty constructor */
