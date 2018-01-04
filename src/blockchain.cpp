@@ -121,7 +121,7 @@ std::map<std::string,float> BlockChain::get_trust(){
 						try {
 							std::string signer = d->get_public_key();
 							std::string signee = ref.at(d->get_data_ref());
-							float ct = trust.at(signer)/2;
+							float ct = trust.at(signer)/2.0f;
 							trust[signer] = ct;
 							trust[signee] += ct;
 							

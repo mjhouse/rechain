@@ -4,12 +4,17 @@
 #include "keys.hpp"
 
 #define DATA_LIMIT	10
+#define TRUST_CONST	17
 
 TEST_CASE( "block tests", "[block]" ){
 	std::shared_ptr<Block> block(new Block());
 	std::shared_ptr<PrivateKey> key(PrivateKey::load_file("test/data/test.private"));
+	std::shared_ptr<PublicKey> pub_key(PublicKey::load_file("test/data/test.public"));
 	std::vector<std::string> signatures;
 
+	std::map<std::string,float> trust;
+	trust.insert( std::make_pair(pub_key->to_string(),TRUST_CONST) );
+	
 	for(unsigned int i = 0; i < DATA_LIMIT; ++i){
 		std::shared_ptr<Data> d1(new Data(Address("SIG_REF","BLOCK_REF",DataType::Signature)));
 		std::shared_ptr<Data> d2(new Data(Address("SIG_REF","",DataType::Publication)));
@@ -22,6 +27,7 @@ TEST_CASE( "block tests", "[block]" ){
 		block->add_data(d1);
 		block->add_data(d2);
 	}
+
 
 	SECTION( "block removes data objects" ){
 		// Remove each Data object by the save hash	
@@ -82,6 +88,27 @@ TEST_CASE( "block tests", "[block]" ){
 		std::string hash2 = block->hash();
 	
 		REQUIRE(hash1 != hash2);
+	}
+	SECTION( "block updates trust from trust map" ){
+		block->set_trust(trust);
+		std::vector<std::shared_ptr<Data>> data_obj = block->get_data();
+		for(auto d : data_obj){
+			if(d->get_data_type() == DataType::Signature){
+				REQUIRE(d->get_trust() == TRUST_CONST);
+			}
+		}
+	}
+	SECTION( "block returns all data objects in vector" ){
+		std::vector<std::shared_ptr<Data>> data_obj = block->get_data();
+		for(auto d : data_obj){
+			auto it = std::find(signatures.begin(),signatures.end(),d->get_signature());
+			REQUIRE_FALSE(it == signatures.end());
+		}
+	}
+	SECTION( "block returns data object at index" ){
+		auto data_obj = block->get_data(3);
+		REQUIRE(data_obj);
+		REQUIRE(data_obj->get_signature() == signatures[3]);
 	}
 	SECTION( "block gets and sets previous hash" ){
 		block->set_previous("TEST");

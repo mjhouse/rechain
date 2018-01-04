@@ -59,6 +59,11 @@ TEST_CASE( "data object tests", "[data]" ){
 		data->set_block_ref(s);
 		REQUIRE(data->get_block_ref() == s);
 	}
+	SECTION( "data object can set/get trust" ){
+		float t = 17.0;
+		data->set_trust(t);
+		REQUIRE( data->get_trust() == t );
+	}
 	SECTION( "data object can set/get a data type" ){
 		data->set_data_type(DataType::Publication);
 		REQUIRE(data->get_data_type() == DataType::Publication);

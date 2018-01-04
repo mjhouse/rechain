@@ -16,7 +16,6 @@ int main( int argc, char** argv ){
 	std::shared_ptr<PublicKey> user2_pubkey( PublicKey::load_file("data/user2.public") );
 	std::shared_ptr<PrivateKey> user2_privkey( PrivateKey::load_file("data/user2.private") );
 
-
 	std::shared_ptr<Data> genesis_record( new Data( Address( "GENESIS", "", DataType::Publication) ) );
 	private_key->sign(genesis_record);
 
@@ -46,8 +45,12 @@ int main( int argc, char** argv ){
 	std::shared_ptr<Data> sig2( new Data( Address( rec2->get_signature(), block1->hash(), DataType::Signature) ) );
 	user1_privkey->sign(sig2);
 
+	std::shared_ptr<Data> sig3( new Data( Address( rec1->get_signature(), block1->hash(), DataType::Signature) ) );
+	user2_privkey->sign(sig3);
+
 	block2->add_data(sig1);
 	block2->add_data(sig2);
+	block2->add_data(sig3);
 
 	blockchain->mine(block2);
 
