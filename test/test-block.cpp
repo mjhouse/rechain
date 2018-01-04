@@ -105,6 +105,13 @@ TEST_CASE( "block tests", "[block]" ){
 			REQUIRE_FALSE(it == signatures.end());
 		}
 	}
+	SECTION( "block updates trust to 0 if not in trust map" ){
+		std::map<std::string,float> bad_trust;
+		block->set_trust(bad_trust);
+		for(auto d : block->get_data()){
+			REQUIRE(d->get_trust() == 0);
+		}
+	}
 	SECTION( "block returns data object at index" ){
 		auto data_obj = block->get_data(3);
 		REQUIRE(data_obj);
