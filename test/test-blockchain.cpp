@@ -5,6 +5,8 @@
 #include "data.hpp"
 #include "keys.hpp"
 
+#include <iostream>
+
 TEST_CASE( "blockchain tests", "[blockchain]" ){
 	std::shared_ptr<BlockChain> blockchain(new BlockChain());
 
@@ -17,6 +19,7 @@ TEST_CASE( "blockchain tests", "[blockchain]" ){
 		block->add_data(d2);
 
 		std::string hash = blockchain->mine( block );
+		
 		REQUIRE(blockchain->size() == 1);	
 	}
 }

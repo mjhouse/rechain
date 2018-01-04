@@ -41,7 +41,7 @@ class BlockChain {
 	private:
 		/** The collection of Block objects */
 		std::vector<std::shared_ptr<Block>> blockchain;
-
+		
 	public:
 		/** Empty constructor
 		*/
@@ -57,22 +57,27 @@ class BlockChain {
 		*/	
 		std::string mine( std::shared_ptr<Block> block );
 
+		/** Get a Block by hash
+		    \param hash The hash of the Block to get
+		    \returns a pointer to a Block
+		*/
+		std::shared_ptr<Block> get_block( std::string hash );
 
 		/** Discard a block with the given hash
 		    \param hash The hash to discard from
 		*/
 		void discard( std::string hash );
-		
-		/** Calculate the trust for a Block in the chain
-		    \param hash The hash of the Block
-		    \returns The trust score for the Block
+
+		/** Calculate the trust for a publication
+		    \param s The signature of the Data object
+		    \returns The trust for the Data object
 		*/
-		size_t trust( std::string hash );	
-		
-		/** Calculate the trust for the current chain
-		    \returns The trust score for all documents
+		float get_publication_trust( std::string s );
+
+		/** Calculate the key trust for the current chain
+		    \returns The trust score for all public keys
 		*/
-		std::map<std::string,float> trust();
+		std::map<std::string,float> get_trust();
 		
 		/** Return the number of Block objects in the chain
 		    \returns The number of Block objects 

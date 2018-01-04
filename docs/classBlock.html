@@ -124,6 +124,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae2de4f093f846bf821445f80b02da7de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f70eab32551ffec2940a79db2a96b66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a3f70eab32551ffec2940a79db2a96b66">change_hash</a> ()</td></tr>
 <tr class="separator:a3f70eab32551ffec2940a79db2a96b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c674b22a50ab6651bd1a1d008ccf315"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a0c674b22a50ab6651bd1a1d008ccf315">set_trust</a> (std::map&lt; std::string, float &gt; trust)</td></tr>
+<tr class="separator:a0c674b22a50ab6651bd1a1d008ccf315"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1937b121751b9e9aa43507f23b707abd"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classData.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a1937b121751b9e9aa43507f23b707abd">get_data</a> (std::string s)</td></tr>
 <tr class="separator:a1937b121751b9e9aa43507f23b707abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c860803566c8b13078d9d178edc65c0"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classData.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a0c860803566c8b13078d9d178edc65c0">get_data</a> (unsigned int i)</td></tr>
@@ -187,7 +189,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="classData.html">Data</a> was added </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00113">113</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00124">124</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +257,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The requested <a class="el" href="classData.html">Data</a> block or empty pointer </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00097">97</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00108">108</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -273,7 +275,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get all <a class="el" href="classData.html">Data</a> objects </p><dl class="section return"><dt>Returns</dt><dd>A vector of <a class="el" href="classData.html">Data</a> pointers </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00107">107</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00118">118</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +294,7 @@ Private Attributes</h2></td></tr>
 <p>Get the hash of the previous block </p><dl class="section return"><dt>Returns</dt><dd>The hash of the previous block</dd></dl>
 <p>Get the hash of the previous block </p>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00145">145</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00156">156</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -387,7 +389,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if found </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00134">134</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00145">145</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -412,7 +414,31 @@ Private Attributes</h2></td></tr>
 </dl>
 <p>Set the hash of the previous block </p>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00150">150</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00161">161</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0c674b22a50ab6651bd1a1d008ccf315"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Block::set_trust </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; std::string, float &gt;&#160;</td>
+          <td class="paramname"><em>trust</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Update the trust for signatures </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trust</td><td>A map of public keys and current trust </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00097">97</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +456,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get number of <a class="el" href="classData.html">Data</a> objects in the <a class="el" href="classBlock.html">Block</a> </p><dl class="section return"><dt>Returns</dt><dd>Size of the <a class="el" href="classBlock.html">Block</a> as size_t </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00154">154</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00165">165</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -560,7 +586,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBlock.html">Block</a></li>
-    <li class="footer">Generated on Wed Jan 3 2018 12:51:33 for ReChain by
+    <li class="footer">Generated on Thu Jan 4 2018 13:55:32 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

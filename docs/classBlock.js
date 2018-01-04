@@ -13,6 +13,7 @@ var classBlock =
     [ "new_timestamp", "classBlock.html#a3acdc592cef0e80514cf58538ef89343", null ],
     [ "remove_data", "classBlock.html#a676f0789b957010eca8e84598b89c7bc", null ],
     [ "set_previous", "classBlock.html#a7dfe940380c63b066dd50190cf0c83fb", null ],
+    [ "set_trust", "classBlock.html#a0c674b22a50ab6651bd1a1d008ccf315", null ],
     [ "size", "classBlock.html#aa3f0e1e2580adb15c40d7135f7c820f2", null ],
     [ "counter", "classBlock.html#a96a75420cb1bb31ac1d6c3d9a79e2db1", null ],
     [ "data", "classBlock.html#a36bec30c21a1f01fb213971f365f65d3", null ],

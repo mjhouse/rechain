@@ -38,7 +38,11 @@ BlockChain::~BlockChain(){}
 /* Mine and add a block to the chain
 */
 std::string BlockChain::mine( std::shared_ptr<Block> block ){	
-	
+
+
+	// Update trust on the block if it's a signature
+	block->set_trust( this->get_trust() );
+
 	// Check if the chain has a genesis block
 	if(this->blockchain.size() > 0){
 		block->set_previous(this->blockchain.back()->hash());
@@ -59,6 +63,18 @@ std::string BlockChain::mine( std::shared_ptr<Block> block ){
 	return block->hash();
 }
 
+/** Get a Block by hash
+*/
+std::shared_ptr<Block> BlockChain::get_block( std::string hash ){
+	std::shared_ptr<Block> block;
+	for(auto b : this->blockchain){
+		if(b->hash() == hash){
+			block = b;
+		}
+	}
+	return block;
+}
+
 /* Discard a block with the given hash
 */
 void BlockChain::discard( std::string hash ){
@@ -70,87 +86,54 @@ void BlockChain::discard( std::string hash ){
 	));
 }
 
-/* Calculate the trust for a Block in the chain
+/* Calculate the trust for a document
 */
-size_t BlockChain::trust( std::string hash ){
-	return 0;
-}	
-
-/* Calculate the trust for the current chain
-*/
-std::map<std::string,float> BlockChain::trust(){
-	// Will hold computed trust for public keys
-	std::map<std::string,float> key_trust;
-	std::map<std::string,std::string> pub_trust;
-
-	// Iterators
-	std::vector<std::shared_ptr<Block>>::iterator b_it;
-	std::vector<std::shared_ptr<Data>>::iterator d_it;
- 
-	// Get the owners public key (public key of first block)
-	// and insert it with a value of 1
-	std::string gen_key = this->blockchain.at(0)->get_data(0)->get_public_key();
-	key_trust.insert( std::pair<std::string,float>(gen_key,1.0f) );
-
-	// Iterate over each block and get the data
-	for(b_it = this->blockchain.begin(); b_it != this->blockchain.end(); ++b_it){
-		std::shared_ptr<Block> block = *b_it;
-		std::vector<std::shared_ptr<Data>> data = block->get_data();
-		
-		// Iterate over each Data object and calculate trust
-		for(d_it = data.begin(); d_it != data.end(); ++d_it ){
-			std::shared_ptr<Data> d = *d_it; 
-			
-			switch(d->get_data_type()){
-				case DataType::Publication:
-					{
-						// If this is a publication Data object, then
-						// the public key is added to 'key_trust' if
-						// it isn't already there
-						
-						// Get the public key and the signature
-						std::string key = d->get_public_key();
-						std::string ref = d->get_signature();
-
-						// Try to insert the public key with an initial
-						// value of '0.0'
-						key_trust.insert( std::make_pair(key,0.0f) );
-						
-						// Update the publication record linking the signature
-						// to the public key
-						pub_trust.insert( std::make_pair(ref,key) );
-					}
-					break;
-				case DataType::Signature:
-					{
-						// If this is a signature Data object, then half
-						// of the signers trust goes to the owner of the
-						// referenced document
-
-						// Get the public keys of the document publisher and
-						// the signer
-						std::string ref_key = pub_trust[ d->get_data_ref() ];
-						std::string sig_key = d->get_public_key();
-					
-						// Get the current trust of each
-						float sig_trust	= key_trust[ sig_key ];
-						float ref_trust = key_trust[ ref_key ];
-
-						// Move half of the signers trust to the 
-						// publisher
-						sig_trust = sig_trust/2;
-						ref_trust += sig_trust;
-					
-						// Update the key_trust map
-						key_trust[ref_key] = ref_trust;	
-						key_trust[sig_key] = sig_trust;	
-					}
-					break;
+float BlockChain::get_publication_trust( std::string s ){
+	float trust = 0;
+	for(auto b : this->blockchain){
+		for(auto d : b->get_data()){
+			if(d->get_data_type() == DataType::Signature && d->get_data_ref() == s ){
+				trust += d->get_trust();
 			}
 		}
 	}
-	return key_trust;
-}	
+	return trust;
+}
+
+/* Calculate the trust for the public keys
+*/
+std::map<std::string,float> BlockChain::get_trust(){
+	std::map<std::string,float> trust;
+	std::map<std::string,std::string> ref;
+
+	if(!this->blockchain.empty()){
+		std::string gen_key = this->blockchain.at(0)->get_data(0)->get_public_key();
+		trust.insert( std::make_pair(gen_key,1.0f) );
+
+		for(auto b : this->blockchain){
+			for(auto d : b->get_data()){
+				switch( d->get_data_type() ){
+					case DataType::Publication:
+						trust.insert( std::make_pair( d->get_public_key(), 0.0f ) );
+						ref.insert( std::make_pair( d->get_signature(), d->get_public_key() ) );	
+						break;
+					case DataType::Signature:
+						try {
+							std::string signer = d->get_public_key();
+							std::string signee = ref.at(d->get_data_ref());
+							float ct = trust.at(signer)/2;
+							trust[signer] = ct;
+							trust[signee] += ct;
+							
+						} catch(const std::out_of_range& e){/* continue */}	
+						break;
+				}
+			}
+		}
+	}
+	
+	return trust;
+}
 
 /* Returns the number of Block objects
 */

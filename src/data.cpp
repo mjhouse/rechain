@@ -24,6 +24,9 @@
 
 #include <string>
 
+void Data::set_trust( float t ){ this->trust = t; }
+float Data::get_trust(){ return this->trust; }
+
 void Data::set_address( Address a ){ this->address = a; }
 Address Data::get_address(){ return this->address; }
 
@@ -49,7 +52,10 @@ std::string Data::to_string( bool b ){
 	data.append(std::to_string(std::get<2>(this->address)));
 	data.append(this->public_key);
 
-	if(b){ data.append(this->signature); }
+	if(b){
+		data.append(this->signature);
+		data.append(std::to_string(this->trust));
+	}
 	return data;
 }
 

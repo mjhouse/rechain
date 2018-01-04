@@ -92,6 +92,17 @@ std::shared_ptr<Data> Block::get_data( std::string s ){
 	return d;
 }
 
+/* Update the current trust of each signature
+*/
+void Block::set_trust( std::map<std::string,float> trust ){
+	for(auto d : this->data){
+		if(d->get_data_type() == DataType::Signature){
+			try { d->set_trust( trust.at(d->get_public_key()) ); }
+			catch(const std::out_of_range& e){ d->set_trust(0); }
+		}
+	}
+}
+
 /* Get a Data block given the index
 */
 std::shared_ptr<Data> Block::get_data( unsigned int i ){

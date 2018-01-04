@@ -79,6 +79,7 @@ TEST_CASE( "data object tests", "[data]" ){
 
 		manual_full.append(manual_part);
 		manual_full.append(data->get_signature());
+		manual_full.append(std::to_string(data->get_trust()));
 
 		REQUIRE(full == manual_full);
 		REQUIRE(part == manual_part);

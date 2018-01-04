@@ -37,7 +37,7 @@ int main( int argc, char** argv ){
 	std::shared_ptr<BlockChain> blockchain(new BlockChain());
 	blockchain->mine(block1);
 
-	// No we create another block with signatures referencing the first block/data objects
+	// Now we create another block with signatures referencing the first block/data objects
 	std::shared_ptr<Block> block2(new Block());
 
 	std::shared_ptr<Data> sig1( new Data( Address( rec1->get_signature(), block1->hash(), DataType::Signature) ) );
@@ -55,8 +55,7 @@ int main( int argc, char** argv ){
 	std::cout << "User1: " << user1_pubkey->to_string().substr(50,20) << std::endl << std::endl;
 	std::cout << "User2: " << user2_pubkey->to_string().substr(50,20) << std::endl << std::endl;
 
-
-	std::map<std::string,float> trust = blockchain->trust();
+	std::map<std::string,float> trust = blockchain->get_trust();
 	for( auto element : trust ){
 		std::cout << "TRUST/KEY: " 
 			  << std::to_string(element.second) 

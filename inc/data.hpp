@@ -49,6 +49,8 @@ class Data: public std::enable_shared_from_this<Data> {
 		std::string public_key;		/**< The public key to match the signature */
 		std::string signature;		/**< The signature for this data */
 
+		float trust;
+
 	public:
 		/** Empty constructor */
 		Data(){}
@@ -57,10 +59,20 @@ class Data: public std::enable_shared_from_this<Data> {
 			Address.
 			\param a The Address to use
 		*/
-		Data( Address a ) : address(a) {}
+		Data( Address a ) : address(a) , trust(0) {}
 
 		/** Empty destructor */
 		~Data(){}
+
+		/** Set the trust value
+		    \param t The new value for trust
+		*/
+		void set_trust( float t );
+
+		/** Get the current trust value
+		    \returns The current value of trust
+		*/
+		float get_trust();
 
 		/**	Set the Address for the Data object
 			\param a An Address to use

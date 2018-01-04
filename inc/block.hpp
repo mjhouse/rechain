@@ -81,6 +81,11 @@ class Block {
 		*/
 		void change_hash();
 
+		/** Update the trust for signatures
+		    \param trust A map of public keys and current trust
+		*/
+		void set_trust( std::map<std::string,float> trust );
+		
 		/** Get a Data block given the signature
 			\param s The signature of the Data object to return
 			\returns The requested Data block or empty pointer
