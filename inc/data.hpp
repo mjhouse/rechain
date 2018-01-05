@@ -43,7 +43,7 @@ typedef std::tuple<std::string,std::string,DataType> Address;
 	Data object (if this is a signature) or to a hash for a
 	document (if the Data is a publication).
 */
-class Data: public std::enable_shared_from_this<Data> {
+class Data {
 	private:
 		Address address;		/**< The reference to publish*/
 		std::string public_key;		/**< The public key to match the signature */

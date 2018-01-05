@@ -33,6 +33,7 @@
 #include <map>
 
 class Block;
+class Data;
 
 /** The BlockChain class manages a collection of 
     Block objects.
@@ -40,8 +41,14 @@ class Block;
 class BlockChain {
 	private:
 		/** The collection of Block objects */
-		std::vector<std::shared_ptr<Block>> blockchain;
+		std::vector<Block*> blockchain;
+
+		Block* current;
+
+		std::map<std::string,float> usr_trust;
+		std::map<std::string,float> pub_trust;
 		
+		void update_trust();	
 	public:
 		/** Empty constructor
 		*/
@@ -51,34 +58,79 @@ class BlockChain {
 		*/
 		~BlockChain();
 
+		// ------------------------------------------------------
+		// Mining Methods
+
+		/** Create a new Block
+		    \returns A pointer to the BlockChain
+		*/
+		BlockChain* open_block();
+
+		/** Add Data to an open Block
+		    \param A pointer to a Data block
+		    \returns A pointer to the BlockChain
+		*/
+		BlockChain* with_data( Data* d );
+
 		/** Mine and add a given block to the BlockChain
 		    \param block A pointer to the block to add
 		    \returns The valid hash of the new Block
 		*/	
-		std::string mine( std::shared_ptr<Block> block );
+		std::string mine();
 
-		/** Get a Block by hash
-		    \param hash The hash of the Block to get
-		    \returns a pointer to a Block
-		*/
-		std::shared_ptr<Block> get_block( std::string hash );
+		// ------------------------------------------------------
+		// Trust Methods
 
-		/** Discard a block with the given hash
-		    \param hash The hash to discard from
-		*/
-		void discard( std::string hash );
-
-		/** Calculate the trust for a publication
+		/** Get the trust for a publication
 		    \param s The signature of the Data object
 		    \returns The trust for the Data object
 		*/
 		float get_publication_trust( std::string s );
-
-		/** Calculate the key trust for the current chain
-		    \returns The trust score for all public keys
-		*/
-		std::map<std::string,float> get_trust();
 		
+		/** Get all publication trust as a map 
+		    \returns The trust for all publications
+		*/
+		std::map<std::string,float> get_publication_trust();
+
+		/** Get the trust for a user
+		    \param p The public key for the user
+		    \returns The trust for the public key
+		*/
+		float get_user_trust( std::string p );
+
+		/** Get all user trust as a map 
+		    \returns The trust for all public keys
+		*/
+		std::map<std::string,float> get_user_trust();
+
+		// ------------------------------------------------------
+		// Iterator Methods
+		
+		/** Return an iterator to the start of the BlockChain
+		    \returns An iterator
+		*/
+		std::vector<Block*>::iterator begin();
+
+		/** Returns an iterator to the beginning of the BlockChain
+		    \param b A reference to the BlockChain
+		    \returns A vector iterator
+		*/
+		std::vector<Block*>::iterator begin( BlockChain& b );
+		
+		/** Returns an iterator to the end of the BlockChain
+		   \returns A vector iterator
+		*/ 
+		std::vector<Block*>::iterator end();
+		
+		/** Returns an iterator to the end of the BlockChain
+		    \param b A reference to the BlockChain
+		    \returns A vector iterator
+		*/
+		std::vector<Block*>::iterator end( BlockChain& b );
+
+		// ------------------------------------------------------
+		// Utility Methods
+
 		/** Return the number of Block objects in the chain
 		    \returns The number of Block objects 
 		*/

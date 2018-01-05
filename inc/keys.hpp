@@ -37,10 +37,13 @@
 
 #include "data.hpp"				// Data objects
 
+class PrivateKey;
+class PublicKey;
+
 /** The templated Key class acts as a base class for both
 	PrivateKey and PublicKey.
 */
-template <typename T>
+template <typename T, typename K>
 class Key {
 	protected:
 		T key;	/**< The CryptoPP::*Key to use*/
@@ -48,6 +51,34 @@ class Key {
 		Key(){}
 
 	public:
+		
+		/** Create an empty Key
+			\returns A pointer to the Key
+		*/
+		static K* empty(){
+			return new K();
+		};
+
+		/** Create a new Key from a string
+			\param s A string representation of a key
+			\returns A pointer to the Key
+		*/
+		static K* load_string( std::string s ){
+			K* k = new K();
+			k->from_string(s);
+			return k;
+		};
+
+		/** Create a new Key from a file
+			\param fn A path to the file to use
+			\returns A pointer to the Key
+		*/
+		static K* load_file( std::string fn ){
+			K* k = new K();
+			k->load(fn);
+			return k;
+		};
+
 		/** Get the key as a CryptoPP object
 			\returns The key
 		*/
@@ -106,39 +137,10 @@ class Key {
 /** The PrivateKey class inherits from the templated
 	'Key' base class and adds private-key-specific methods.
 */
-class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_shared_from_this<PrivateKey> {
-	private:
-
+class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
+	public:
 		/** Empty constructor */
 		PrivateKey(){}
-
-	public:
-		/** Create an empty PrivateKey
-			\returns A pointer to the PrivateKey
-		*/
-		static PrivateKey* empty(){
-			return new PrivateKey();
-		};
-
-		/** Create a new PrivateKey from a string
-			\param s A string representation of a public key
-			\returns A pointer to the PrivateKey
-		*/
-		static PrivateKey* load_string( std::string s ){
-			PrivateKey* k = new PrivateKey();
-			k->from_string(s);
-			return k;
-		};
-
-		/** Create a new PrivateKey from a file
-			\param fn A path to the file to use
-			\returns A pointer to the PrivateKey
-		*/
-		static PrivateKey* load_file( std::string fn ){
-			PrivateKey* k = new PrivateKey();
-			k->load(fn);
-			return k;
-		};
 
 		/** Generate a new key */
 		void generate();
@@ -147,58 +149,28 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey>, public std::enable_sha
 			\param data A shared_ptr to the Data object to sign
 			\returns True if the Data object was signed
 		*/
-		bool sign( std::shared_ptr<Data> data );
+		bool sign( Data* data );
 };
 
 /** The PublicKey class inherits from the templated
 	'Key' base class and adds public-key-specific methods.
 */
-class PublicKey: public Key<CryptoPP::RSA::PublicKey>, public std::enable_shared_from_this<PublicKey> {
-	private:
-
+class PublicKey: public Key<CryptoPP::RSA::PublicKey,PublicKey> {
+	public:
 		/** Empty constructor */
 		PublicKey(){}
-
-	public:
-
-		/** Create an empty PublicKey
-			\returns A pointer to the PublicKey
-		*/
-		static PublicKey* empty(){
-			return new PublicKey();
-		};
-
-		/** Create a new PublicKey from a string
-			\param s A string representation of a public key
-			\returns A pointer to the PublicKey
-		*/
-		static PublicKey* load_string( std::string s ){
-			PublicKey* k = new PublicKey();
-			k->from_string(s);
-			return k;
-		};
-
-		/** Create a new PublicKey from a file
-			\param fn A path to the file to use
-			\returns A pointer to the PublicKey
-		*/
-		static PublicKey* load_file( std::string fn ){
-			PublicKey* k = new PublicKey();
-			k->load(fn);
-			return k;
-		};
 
 		/** Generate a new PublicKey from a PrivateKey
 			\param key The PrivateKey to generate from
 		*/
-		void generate( std::shared_ptr<PrivateKey> key );
+		void generate( PrivateKey* key );
 
 		/** Verify a Data object to ensure that the
 		 	signature attached to it is correct
 			\param data A shared_ptr to the Data object to verify
 			\returns True if the Data object is signed correctly
 		*/
-		bool verify( std::shared_ptr<Data> data );
+		bool verify( Data* data );
 };
 
 #endif

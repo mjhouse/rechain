@@ -16,8 +16,8 @@ TEST_CASE( "block tests", "[block]" ){
 	trust.insert( std::make_pair(pub_key->to_string(),TRUST_CONST) );
 	
 	for(unsigned int i = 0; i < DATA_LIMIT; ++i){
-		std::shared_ptr<Data> d1(new Data(Address("SIG_REF","BLOCK_REF",DataType::Signature)));
-		std::shared_ptr<Data> d2(new Data(Address("SIG_REF","",DataType::Publication)));
+		Data* d1 = new Data(Address("SIG_REF","BLOCK_REF",DataType::Signature));
+		Data* d2 = new Data(Address("SIG_REF","",DataType::Publication));
 		key->sign(d1);
 		key->sign(d2);
 
@@ -45,7 +45,7 @@ TEST_CASE( "block tests", "[block]" ){
 		REQUIRE(block->size()==expected);
 
 		// Create a new Data object and sign it
-		std::shared_ptr<Data> d(new Data(Address("SIG_REF","",DataType::Publication)));
+		Data* d = new Data(Address("SIG_REF","",DataType::Publication));
 		key->sign(d);
 
 		// Add it to the block and make sure the size changes
@@ -62,14 +62,14 @@ TEST_CASE( "block tests", "[block]" ){
 		// Invalid because it is a signature with no block reference
 		std::shared_ptr<Data> d2(new Data(Address("SIG_REF","",DataType::Signature)));
 
-		key->sign(d0);
-		key->sign(d2);
+		key->sign(d0.get());
+		key->sign(d2.get());
 
 		REQUIRE(block->size() == (2*DATA_LIMIT));
 
-		REQUIRE_FALSE(block->add_data(d0));
-		REQUIRE_FALSE(block->add_data(d1));
-		REQUIRE_FALSE(block->add_data(d2));
+		REQUIRE_FALSE(block->add_data(d0.get()));
+		REQUIRE_FALSE(block->add_data(d1.get()));
+		REQUIRE_FALSE(block->add_data(d2.get()));
 		
 	}
 	SECTION( "block generates a hash" ){
@@ -78,7 +78,7 @@ TEST_CASE( "block tests", "[block]" ){
 	}
 	SECTION( "block fetches data by signature" ){
 		std::string sig = signatures.at(0);
-		std::shared_ptr<Data> d = block->get_data( sig );
+		Data* d = block->get_data( sig );
 		REQUIRE(d);
 		REQUIRE(d->get_signature() == sig);
 	}
@@ -91,7 +91,7 @@ TEST_CASE( "block tests", "[block]" ){
 	}
 	SECTION( "block updates trust from trust map" ){
 		block->set_trust(trust);
-		std::vector<std::shared_ptr<Data>> data_obj = block->get_data();
+		std::vector<Data*> data_obj = block->get_data();
 		for(auto d : data_obj){
 			if(d->get_data_type() == DataType::Signature){
 				REQUIRE(d->get_trust() == TRUST_CONST);
@@ -99,7 +99,7 @@ TEST_CASE( "block tests", "[block]" ){
 		}
 	}
 	SECTION( "block returns all data objects in vector" ){
-		std::vector<std::shared_ptr<Data>> data_obj = block->get_data();
+		std::vector<Data*> data_obj = block->get_data();
 		for(auto d : data_obj){
 			auto it = std::find(signatures.begin(),signatures.end(),d->get_signature());
 			REQUIRE_FALSE(it == signatures.end());

@@ -11,17 +11,7 @@ TEST_CASE( "data object tests", "[data]" ){
 	Address address("DATA_REF","BLOCK_REF",DataType::Signature);
 	std::shared_ptr<Data> data(new Data(address));
 	std::shared_ptr<PrivateKey> key(PrivateKey::load_file("test/data/test.private"));
-
-	std::ifstream f("test/data/test.public");
-	if(f.is_open()){
-		std::stringstream contents;
-		contents << f.rdbuf();
-		std::string pub_key = contents.str();
-
-		data->set_public_key(pub_key);
-	}
-
-	key->sign(data);
+	key->sign(data.get());
 
 	SECTION( "data object can set/get address" ) {
 		std::shared_ptr<Data> d(new Data());

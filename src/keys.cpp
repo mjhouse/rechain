@@ -47,14 +47,14 @@ void PrivateKey::generate(){
 }
 
 // Sign a Data block
-bool PrivateKey::sign( std::shared_ptr<Data> data ){
+bool PrivateKey::sign( Data* data ){
 	if(data){
 		std::string signature;
 
 		// Create a public key and set it on the
 		// Data object
 		std::shared_ptr<PublicKey> pub_key(PublicKey::empty());
-		pub_key->generate( shared_from_this() );
+		pub_key->generate( this );
 		data->set_public_key(pub_key->to_string());
 
 		// Create a Signer and random generator
@@ -78,13 +78,13 @@ bool PrivateKey::sign( std::shared_ptr<Data> data ){
 // PublicKey Implementation
 
 // Generate a new PublicKey from a PrivateKey
-void PublicKey::generate( std::shared_ptr<PrivateKey> key ){
+void PublicKey::generate( PrivateKey* key ){
 	CryptoPP::RSA::PublicKey n_key(key->get_key());
 	this->key = n_key;
 }
 
 // Verify the signature on a Data block
-bool PublicKey::verify( std::shared_ptr<Data> data ){
+bool PublicKey::verify( Data* data ){
 	if(data){
 		std::string signature;
 		bool result = false;

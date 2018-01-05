@@ -77,7 +77,7 @@ bool Data::verify(){
 
 		// Load the public key and check the signature
 		std::shared_ptr<PublicKey> key(PublicKey::load_string(this->public_key));
-		return key->verify( shared_from_this() );
+		return key->verify( this );
 	}
 
 	return false;

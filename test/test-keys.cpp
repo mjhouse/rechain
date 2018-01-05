@@ -144,13 +144,12 @@ TEST_CASE( "private key tests", "[privatekey]" ){
 	}
 	SECTION( "private key signs a Data object" ) {
 		key->from_string(pri_key);
-		key->sign(data);
+		key->sign(data.get());
 
 		REQUIRE(data->verify());
 	}
 	SECTION( "private key won't sign bad pointer" ){
-		std::shared_ptr<Data> d;
-		bool signed_ = key->sign(d);
+		bool signed_ = key->sign(nullptr);
 
 		REQUIRE_FALSE(signed_);
 	}
@@ -186,22 +185,21 @@ TEST_CASE( "public key tests", "[publickey]" ){
 		REQUIRE(k->to_string() == pub_key);
 	}
 	SECTION( "public key generates a valid key" ) {
-		key->generate(private_key);
+		key->generate(private_key.get());
 		CryptoPP::AutoSeededRandomPool rng;
 
 		REQUIRE(!key->to_string().empty());
 		REQUIRE(key->get_key().Validate(rng,2));
 	}
 	SECTION( "public key verifies a Data object" ) {
-		bool signed_ = private_key->sign(data);
-		bool verify_ = key->verify(data);
+		bool signed_ = private_key->sign(data.get());
+		bool verify_ = key->verify(data.get());
 
 		REQUIRE(signed_);
 		REQUIRE(verify_);
 	}
 	SECTION( "public key doesn't verify expired ptr" ){
-		std::shared_ptr<Data> d;
-		bool verify_ = key->verify(d);
+		bool verify_ = key->verify(nullptr);
 
 		REQUIRE_FALSE(verify_);
 	}

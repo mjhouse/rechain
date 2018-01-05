@@ -1,11 +1,14 @@
 var classKey =
 [
-    [ "Key", "classKey.html#a82cb02b394984e183194987268fa7a4c", null ],
-    [ "from_string", "classKey.html#a0680d9ef1b40ca75a0622ec53a3c8fa8", null ],
-    [ "get_key", "classKey.html#af4d335eb6ae02d2b5d618a9264812390", null ],
-    [ "load", "classKey.html#ad322531bb6629051f8edbedc343d1815", null ],
-    [ "save", "classKey.html#adf9f557d03a0b2a609155c5a10b6f520", null ],
-    [ "set_key", "classKey.html#a5a8b983898b8d0909632e693a47c6cb2", null ],
-    [ "to_string", "classKey.html#aa31f9efdc3c1303ac1734b39a7687ea3", null ],
-    [ "key", "classKey.html#a8266fc6be29c8f8d97522da3c8e034e2", null ]
+    [ "Key", "classKey.html#ac28570ef93fe26f77dd3e3c160640e62", null ],
+    [ "empty", "classKey.html#a08e57890f02ba908908a2cce74718569", null ],
+    [ "from_string", "classKey.html#a1aeb68a09e5a9316487c1c966d6053ab", null ],
+    [ "get_key", "classKey.html#a95aeb74991b64b8555332f0b9b391797", null ],
+    [ "load", "classKey.html#a19d43c163fbdb9bd797ffdc724a9659b", null ],
+    [ "load_file", "classKey.html#abd5ac5ed0c7299812e4710f4b6f21b5a", null ],
+    [ "load_string", "classKey.html#ad68afd1fc17b523c1abc47f0f12e4c5a", null ],
+    [ "save", "classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6", null ],
+    [ "set_key", "classKey.html#ab73e562ed50f209dcf0f6b08104fffd9", null ],
+    [ "to_string", "classKey.html#a5be9347813dd1648ee07427bf2971eba", null ],
+    [ "key", "classKey.html#ac94d6b84bd9cf4da10171590a0638713", null ]
 ];

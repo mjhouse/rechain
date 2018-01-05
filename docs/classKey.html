@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>ReChain: Key&lt; T &gt; Class Template Reference</title>
+<title>ReChain: Key&lt; T, K &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -108,59 +108,99 @@ $(document).ready(function(){initNavTree('classKey.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classKey-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Key&lt; T &gt; Class Template Reference</div>  </div>
+<div class="title">Key&lt; T, K &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="keys_8hpp_source.html">keys.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Collaboration diagram for Key&lt; T &gt;:</div>
+Collaboration diagram for Key&lt; T, K &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classKey__coll__graph.png" border="0" usemap="#Key_3_01T_01_4_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="classKey__coll__graph.png" border="0" usemap="#Key_3_01T_00_01K_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="Key_3_01T_00_01K_01_4_coll__map" id="Key_3_01T_00_01K_01_4_coll__map">
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af4d335eb6ae02d2b5d618a9264812390"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#af4d335eb6ae02d2b5d618a9264812390">get_key</a> ()</td></tr>
-<tr class="separator:af4d335eb6ae02d2b5d618a9264812390"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a8b983898b8d0909632e693a47c6cb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a5a8b983898b8d0909632e693a47c6cb2">set_key</a> (T k)</td></tr>
-<tr class="separator:a5a8b983898b8d0909632e693a47c6cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa31f9efdc3c1303ac1734b39a7687ea3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#aa31f9efdc3c1303ac1734b39a7687ea3">to_string</a> ()</td></tr>
-<tr class="separator:aa31f9efdc3c1303ac1734b39a7687ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0680d9ef1b40ca75a0622ec53a3c8fa8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a0680d9ef1b40ca75a0622ec53a3c8fa8">from_string</a> (std::string k)</td></tr>
-<tr class="separator:a0680d9ef1b40ca75a0622ec53a3c8fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad322531bb6629051f8edbedc343d1815"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#ad322531bb6629051f8edbedc343d1815">load</a> (std::string fn)</td></tr>
-<tr class="separator:ad322531bb6629051f8edbedc343d1815"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf9f557d03a0b2a609155c5a10b6f520"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#adf9f557d03a0b2a609155c5a10b6f520">save</a> (std::string fn)</td></tr>
-<tr class="separator:adf9f557d03a0b2a609155c5a10b6f520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95aeb74991b64b8555332f0b9b391797"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a95aeb74991b64b8555332f0b9b391797">get_key</a> ()</td></tr>
+<tr class="separator:a95aeb74991b64b8555332f0b9b391797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab73e562ed50f209dcf0f6b08104fffd9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#ab73e562ed50f209dcf0f6b08104fffd9">set_key</a> (T k)</td></tr>
+<tr class="separator:ab73e562ed50f209dcf0f6b08104fffd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5be9347813dd1648ee07427bf2971eba"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a5be9347813dd1648ee07427bf2971eba">to_string</a> ()</td></tr>
+<tr class="separator:a5be9347813dd1648ee07427bf2971eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aeb68a09e5a9316487c1c966d6053ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a1aeb68a09e5a9316487c1c966d6053ab">from_string</a> (std::string k)</td></tr>
+<tr class="separator:a1aeb68a09e5a9316487c1c966d6053ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d43c163fbdb9bd797ffdc724a9659b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a19d43c163fbdb9bd797ffdc724a9659b">load</a> (std::string fn)</td></tr>
+<tr class="separator:a19d43c163fbdb9bd797ffdc724a9659b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f267d4271aff8b17abdeaf7a4b211d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6">save</a> (std::string fn)</td></tr>
+<tr class="separator:a4f267d4271aff8b17abdeaf7a4b211d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a08e57890f02ba908908a2cce74718569"><td class="memItemLeft" align="right" valign="top">static K *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a08e57890f02ba908908a2cce74718569">empty</a> ()</td></tr>
+<tr class="separator:a08e57890f02ba908908a2cce74718569"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad68afd1fc17b523c1abc47f0f12e4c5a"><td class="memItemLeft" align="right" valign="top">static K *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#ad68afd1fc17b523c1abc47f0f12e4c5a">load_string</a> (std::string s)</td></tr>
+<tr class="separator:ad68afd1fc17b523c1abc47f0f12e4c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd5ac5ed0c7299812e4710f4b6f21b5a"><td class="memItemLeft" align="right" valign="top">static K *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#abd5ac5ed0c7299812e4710f4b6f21b5a">load_file</a> (std::string fn)</td></tr>
+<tr class="separator:abd5ac5ed0c7299812e4710f4b6f21b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a8266fc6be29c8f8d97522da3c8e034e2"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a8266fc6be29c8f8d97522da3c8e034e2">key</a></td></tr>
-<tr class="separator:a8266fc6be29c8f8d97522da3c8e034e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac94d6b84bd9cf4da10171590a0638713"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#ac94d6b84bd9cf4da10171590a0638713">key</a></td></tr>
+<tr class="separator:ac94d6b84bd9cf4da10171590a0638713"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T&gt;<br />
-class Key&lt; T &gt;</h3>
+<div class="textblock"><h3>template&lt;typename T, typename K&gt;<br />
+class Key&lt; T, K &gt;</h3>
 
 <p>The templated <a class="el" href="classKey.html">Key</a> class acts as a base class for both <a class="el" href="classPrivateKey.html">PrivateKey</a> and <a class="el" href="classPublicKey.html">PublicKey</a>. </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00044">44</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00047">47</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a0680d9ef1b40ca75a0622ec53a3c8fa8"></a>
+<a class="anchor" id="a08e57890f02ba908908a2cce74718569"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename T, typename K&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classKey.html">Key</a>&lt; T &gt;::from_string </td>
+          <td class="memname">static K* <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create an empty <a class="el" href="classKey.html">Key</a> </p><dl class="section return"><dt>Returns</dt><dd>A pointer to the <a class="el" href="classKey.html">Key</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00058">58</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1aeb68a09e5a9316487c1c966d6053ab"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename K&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::from_string </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>k</em></td><td>)</td>
@@ -180,21 +220,21 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00074">74</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00105">105</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af4d335eb6ae02d2b5d618a9264812390"></a>
+<a class="anchor" id="a95aeb74991b64b8555332f0b9b391797"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename T, typename K&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T <a class="el" href="classKey.html">Key</a>&lt; T &gt;::get_key </td>
+          <td class="memname">T <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::get_key </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -208,21 +248,21 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <p>Get the key as a CryptoPP object </p><dl class="section return"><dt>Returns</dt><dd>The key </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00054">54</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00085">85</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad322531bb6629051f8edbedc343d1815"></a>
+<a class="anchor" id="a19d43c163fbdb9bd797ffdc724a9659b"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename T, typename K&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classKey.html">Key</a>&lt; T &gt;::load </td>
+          <td class="memname">bool <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::load </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>fn</em></td><td>)</td>
@@ -243,21 +283,91 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if file was loaded </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00083">83</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00114">114</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="adf9f557d03a0b2a609155c5a10b6f520"></a>
+<a class="anchor" id="abd5ac5ed0c7299812e4710f4b6f21b5a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename T, typename K&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classKey.html">Key</a>&lt; T &gt;::save </td>
+          <td class="memname">static K* <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::load_file </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a new <a class="el" href="classKey.html">Key</a> from a file </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fn</td><td>A path to the file to use </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the <a class="el" href="classKey.html">Key</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00076">76</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad68afd1fc17b523c1abc47f0f12e4c5a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename K&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static K* <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::load_string </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a new <a class="el" href="classKey.html">Key</a> from a string </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>A string representation of a key </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the <a class="el" href="classKey.html">Key</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00066">66</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4f267d4271aff8b17abdeaf7a4b211d6"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename K&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::save </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>fn</em></td><td>)</td>
@@ -278,21 +388,21 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if key was saved </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00096">96</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00127">127</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5a8b983898b8d0909632e693a47c6cb2"></a>
+<a class="anchor" id="ab73e562ed50f209dcf0f6b08104fffd9"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename T, typename K&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classKey.html">Key</a>&lt; T &gt;::set_key </td>
+          <td class="memname">void <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::set_key </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>k</em></td><td>)</td>
@@ -312,21 +422,21 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00059">59</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00090">90</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa31f9efdc3c1303ac1734b39a7687ea3"></a>
+<a class="anchor" id="a5be9347813dd1648ee07427bf2971eba"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename T, typename K&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string <a class="el" href="classKey.html">Key</a>&lt; T &gt;::to_string </td>
+          <td class="memname">std::string <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::to_string </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -340,22 +450,22 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <p>Convert the key to a hex encoded string </p><dl class="section return"><dt>Returns</dt><dd>The hex encoded string </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00064">64</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00095">95</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a8266fc6be29c8f8d97522da3c8e034e2"></a>
+<a class="anchor" id="ac94d6b84bd9cf4da10171590a0638713"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename T, typename K&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T <a class="el" href="classKey.html">Key</a>&lt; T &gt;::key</td>
+          <td class="memname">T <a class="el" href="classKey.html">Key</a>&lt; T, K &gt;::key</td>
         </tr>
       </table>
   </td>
@@ -366,7 +476,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <p>The CryptoPP::*Key to use </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00046">46</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00049">49</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +489,7 @@ template&lt;typename T&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classKey.html">Key</a></li>
-    <li class="footer">Generated on Thu Jan 4 2018 16:00:50 for ReChain by
+    <li class="footer">Generated on Fri Jan 5 2018 15:51:31 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

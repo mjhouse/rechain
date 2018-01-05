@@ -29,111 +29,163 @@
 		
 /* Empty constructor
 */
-BlockChain::BlockChain() {}
+BlockChain::BlockChain() : current(nullptr) {}
 
 /* Empty destructor
 */
-BlockChain::~BlockChain(){}
+BlockChain::~BlockChain(){
+	for(auto b : this->blockchain){ delete b; }
+	this->blockchain.clear();
 
-/* Mine and add a block to the chain
-*/
-std::string BlockChain::mine( std::shared_ptr<Block> block ){	
-
-
-	// Update trust on the block if it's a signature
-	block->set_trust( this->get_trust() );
-
-	// Check if the chain has a genesis block
-	if(this->blockchain.size() > 0){
-		block->set_previous(this->blockchain.back()->hash());
-	}
-
-	// Mine the block until it has a valid hash
-	while(block->hash() > HASH_MAX){
-		
-		// Update the hashing variables
-		block->change_hash();
-
-	}
-
-	// Add to the chain
-	this->blockchain.push_back( block );
-	
-	// Return the hash
-	return block->hash();
+	delete this->current;
+	this->current = nullptr;
 }
 
-/** Get a Block by hash
+/** Create a new Block
 */
-std::shared_ptr<Block> BlockChain::get_block( std::string hash ){
-	std::shared_ptr<Block> block;
-	for(auto b : this->blockchain){
-		if(b->hash() == hash){
-			block = b;
-		}
+BlockChain* BlockChain::open_block(){
+	if(!this->current) this->current = new Block();
+	return this;
+}
+
+/** Add Data to an open Block
+*/
+BlockChain* BlockChain::with_data( Data* d ){
+	if(this->current){
+		this->current->add_data(d);
 	}
-	return block;
+	return this;
 }
 
-/* Discard a block with the given hash
+/* Update trust maps
 */
-void BlockChain::discard( std::string hash ){
-	// Erase Data objects with the given signature
-	this->blockchain.erase( std::remove_if(this->blockchain.begin(),this->blockchain.end(),
-		[hash]( std::shared_ptr<Block> b ){
-			return (b->hash() == hash);
-		}
-	));
-}
+void BlockChain::update_trust(){
 
-/* Calculate the trust for a document
-*/
-float BlockChain::get_publication_trust( std::string s ){
-	float trust = 0;
-	for(auto b : this->blockchain){
-		for(auto d : b->get_data()){
-			if(d->get_data_type() == DataType::Signature && d->get_data_ref() == s ){
-				trust += d->get_trust();
-			}
-		}
-	}
-	return trust;
-}
+	this->usr_trust.clear();
+	this->pub_trust.clear();
 
-/* Calculate the trust for the public keys
-*/
-std::map<std::string,float> BlockChain::get_trust(){
-	std::map<std::string,float> trust;
 	std::map<std::string,std::string> ref;
 
 	if(!this->blockchain.empty()){
 		std::string gen_key = this->blockchain.at(0)->get_data(0)->get_public_key();
-		trust.insert( std::make_pair(gen_key,1.0f) );
+		this->usr_trust.insert( std::make_pair(gen_key,1.0f) );
 
 		for(auto b : this->blockchain){
 			for(auto d : b->get_data()){
 				switch( d->get_data_type() ){
 					case DataType::Publication:
-						trust.insert( std::make_pair( d->get_public_key(), 0.0f ) );
+
+						// init a trust entry for the publisher
+						this->usr_trust.insert( std::make_pair( d->get_public_key(), 0.0f ) );
+						
+						// update the signature -> user reference
 						ref.insert( std::make_pair( d->get_signature(), d->get_public_key() ) );	
+						
 						break;
 					case DataType::Signature:
-						try {
+						{
+							// Get publication reference, the signer and signee
+							// public keys
+							std::string pubref = d->get_data_ref();
 							std::string signer = d->get_public_key();
-							std::string signee = ref.at(d->get_data_ref());
-							float ct = trust.at(signer)/2.0f;
-							trust[signer] = ct;
-							trust[signee] += ct;
-							
-						} catch(const std::out_of_range& e){/* continue */}	
+							std::string signee = ref[pubref];
+
+							float ct = this->usr_trust[signer]/2.0f;// index will return 0.0f by default
+							if(ct && !signee.empty()){
+								this->usr_trust[signer] = ct;	// signer loses half of trust
+								this->usr_trust[signee] += ct;	// signee gains half of signers trust
+								this->pub_trust[pubref] += ct;	// pubref gains half of signers trust
+							}
+						}
 						break;
 				}
 			}
 		}
 	}
-	
-	return trust;
 }
+
+/* Mine and add a block to the chain
+*/
+std::string BlockChain::mine(){	
+	std::string ret_hash;
+	if(this->current){
+		// Update trust on the block if it's a signature
+		this->current->set_trust( this->get_publication_trust() );
+
+		// Check if the chain has a genesis block
+		if(this->blockchain.size() > 0){
+			this->current->set_previous(this->blockchain.back()->hash());
+		}
+
+		// Mine the block until it has a valid hash
+		while(this->current->hash() > HASH_MAX){
+			
+			// Update the hashing variables
+			this->current->change_hash();
+
+		}
+
+		// Return the hash
+		ret_hash = this->current->hash();
+
+		// Add to the chain
+		this->blockchain.push_back( this->current );
+		this->current = nullptr;
+		
+		// Update trust maps
+		this->update_trust();
+	}
+	return ret_hash;
+}
+
+/* Get the trust for a publication
+*/
+float BlockChain::get_publication_trust( std::string s ){
+	return this->pub_trust[s];	
+}
+
+/* Get the trust for all publications
+*/
+std::map<std::string,float> BlockChain::get_publication_trust(){
+	return this->pub_trust;	
+}
+
+/* Get the trust for a public key
+*/
+float BlockChain::get_user_trust( std::string p ){
+	return this->usr_trust[p];
+}
+
+/* Get the trust for all public keys
+*/
+std::map<std::string,float> BlockChain::get_user_trust(){
+	return this->usr_trust;
+}
+
+/* Iterator begin
+*/
+std::vector<Block*>::iterator BlockChain::begin(){
+	return this->blockchain.begin();
+}
+
+/* Iterator begin with reference
+*/
+std::vector<Block*>::iterator BlockChain::begin( BlockChain& b ){
+	return b.blockchain.begin();
+}
+
+/* Iterator end
+*/
+std::vector<Block*>::iterator BlockChain::end(){
+	return this->blockchain.end();
+}
+
+/* Iterator end with reference
+*/
+std::vector<Block*>::iterator BlockChain::end( BlockChain& b ){
+	return b.blockchain.end();
+}
+
 
 /* Returns the number of Block objects
 */

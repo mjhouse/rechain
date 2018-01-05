@@ -34,6 +34,11 @@
 #include "data.hpp"
 #include "block.hpp"
 
+Block::~Block(){
+	for(auto d : this->data) delete d;
+	this->data.clear();
+}
+
 /* Get the hash of this block
 */
 std::string Block::hash(){
@@ -41,7 +46,7 @@ std::string Block::hash(){
 
 	// Get the hashable data for each Data block
 	std::for_each( this->data.begin(), this->data.end(),
-	[&hash_data]( std::shared_ptr<Data> d ){
+	[&hash_data]( Data* d ){
 		hash_data.append( d->to_string(true) );
 	});
 
@@ -78,18 +83,14 @@ void Block::change_hash(){
 
 /* Get a Data block given the signature
 */
-std::shared_ptr<Data> Block::get_data( std::string s ){
-	// Create a new shared_ptr
-	std::shared_ptr<Data> d;
-
+Data* Block::get_data( std::string s ){
 	// Iterate through data and find the 
 	// matching signature
-	for(auto i : this->data){
-		if(i->get_signature() == s) d = i;
+	for(auto d : this->data){
+		if(d->get_signature() == s) return d;
 	}
 
-	// Return d
-	return d;
+	return nullptr;
 }
 
 /* Update the current trust of each signature
@@ -97,34 +98,28 @@ std::shared_ptr<Data> Block::get_data( std::string s ){
 void Block::set_trust( std::map<std::string,float> trust ){
 	for(auto d : this->data){
 		if(d->get_data_type() == DataType::Signature){
-			try {
-				d->set_trust( trust.at(d->get_public_key()) );
-			} catch(const std::out_of_range& e){
-				d->set_trust(0);
-			}
+			float t = trust[d->get_public_key()];
+			d->set_trust(t);
 		}
 	}
 }
 
 /* Get a Data block given the index
 */
-std::shared_ptr<Data> Block::get_data( unsigned int i ){
-	std::shared_ptr<Data> d;
-	if(i < this->data.size()){
-		d = this->data.at(i);
-	}
-	return d;
+Data* Block::get_data( unsigned int i ){
+	if(i < this->data.size()) return this->data[i];
+	return nullptr;
 }
 
 /* Get all Data objects
 */
-std::vector<std::shared_ptr<Data>> Block::get_data(){
+std::vector<Data*> Block::get_data(){
 	return this->data;
 }
 
 /* Add a Data block
 */
-bool Block::add_data( std::shared_ptr<Data> d ){
+bool Block::add_data( Data* d ){
 	// Check the Data object is signed and
 	// valid.
 	if(d->verify()){
@@ -148,7 +143,7 @@ bool Block::add_data( std::shared_ptr<Data> d ){
 void Block::remove_data( std::string s ){
 	// Erase Data objects with the given signature
 	this->data.erase( std::remove_if(this->data.begin(),this->data.end(),
-		[s]( std::shared_ptr<Data> d ){
+		[&s]( Data* d ){
 			return (d->get_signature() == s);
 		}
 	));

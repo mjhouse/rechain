@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['empty',['empty',['../classPrivateKey.html#aad1a88cf30c9ae28b43ec3bd35b3f928',1,'PrivateKey::empty()'],['../classPublicKey.html#a2c99067adcc5b7e8597fa62c987a15b7',1,'PublicKey::empty()']]]
+  ['empty',['empty',['../classKey.html#a08e57890f02ba908908a2cce74718569',1,'Key']]],
+  ['end',['end',['../classBlockChain.html#aefb006c81f9096684223c9e965ed0bc9',1,'BlockChain::end()'],['../classBlockChain.html#a613611e8f24ad7677bfbf9d3c4af4867',1,'BlockChain::end(BlockChain &amp;b)']]]
 ];

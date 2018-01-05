@@ -11,38 +11,23 @@ TEST_CASE( "blockchain tests", "[blockchain]" ){
 	std::shared_ptr<BlockChain> blockchain(new BlockChain());
 	std::shared_ptr<PrivateKey> key(PrivateKey::load_file("test/data/test.private"));
 
-	std::shared_ptr<Block> block1(new Block());
-	std::shared_ptr<Block> block(new Block());
-
-	std::shared_ptr<Data> d1( new Data( Address("DREF","BREF",DataType::Publication) ) );
-	std::shared_ptr<Data> d2( new Data( Address("DREF","BREF",DataType::Publication) ) );
+	Data* d1 = new Data( Address("DREF","BREF",DataType::Publication) );
+	Data* d2 = new Data( Address("DREF","BREF",DataType::Publication) );
 
 	key->sign(d1);
 	key->sign(d2);
 
-	block->add_data(d1);
-	block1->add_data(d2);
+	std::string b1_hash = blockchain->open_block()
+		->with_data(d1)
+		->mine();
 
-	blockchain->mine(block);
-	blockchain->mine(block1);
+	std::string b2_hash = blockchain->open_block()
+		->with_data(d2)
+		->mine();
 
 	SECTION( "blockchain can mine valid blocks" ){
-		std::shared_ptr<Block> block3(new Block());
-		blockchain->mine( block3 );
+		blockchain->open_block()->mine();
 		
 		REQUIRE(blockchain->size() == 3);	
-	}
-	SECTION( "blockchain can return a block by hash" ){
-		auto b = blockchain->get_block(block1->hash());
-		
-		REQUIRE(b);
-		REQUIRE(block1->hash() == b->hash());	
-	}
-	SECTION( "blockchain can erase a mined block" ){
-		blockchain->discard( block1->hash() );
-		auto b = blockchain->get_block( block1->hash() );
-
-		REQUIRE_FALSE(b);
-		REQUIRE( blockchain->size() == 1 );
 	}
 }

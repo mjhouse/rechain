@@ -108,6 +108,7 @@ $(document).ready(function(){initNavTree('classBlockChain.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classBlockChain-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -116,6 +117,14 @@ $(document).ready(function(){initNavTree('classBlockChain.html','');});
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for BlockChain:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBlockChain__coll__graph.png" border="0" usemap="#BlockChain_coll__map" alt="Collaboration graph"/></div>
+<map name="BlockChain_coll__map" id="BlockChain_coll__map">
+<area shape="rect" id="node2" href="classBlock.html" title="Block" alt="" coords="23,5,77,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -123,28 +132,55 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acf99d40594ac22787e424cab7850b626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a671e66ac51d33a75495a09398a0f764e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a671e66ac51d33a75495a09398a0f764e">~BlockChain</a> ()</td></tr>
 <tr class="separator:a671e66ac51d33a75495a09398a0f764e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe816778cb822ad840ec4a1a64bc89bd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#abe816778cb822ad840ec4a1a64bc89bd">mine</a> (std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt; block)</td></tr>
-<tr class="separator:abe816778cb822ad840ec4a1a64bc89bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b956cabb6f1defef14abdb94f298fa2"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a3b956cabb6f1defef14abdb94f298fa2">get_block</a> (std::string hash)</td></tr>
-<tr class="separator:a3b956cabb6f1defef14abdb94f298fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64393d80e1ee1015dc90a5cde78e6a35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a64393d80e1ee1015dc90a5cde78e6a35">discard</a> (std::string hash)</td></tr>
-<tr class="separator:a64393d80e1ee1015dc90a5cde78e6a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addbf5c55d78fa5c98a131096e93ba645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBlockChain.html">BlockChain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#addbf5c55d78fa5c98a131096e93ba645">open_block</a> ()</td></tr>
+<tr class="separator:addbf5c55d78fa5c98a131096e93ba645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf4334f40e64ee459339adfda31db0c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBlockChain.html">BlockChain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#adf4334f40e64ee459339adfda31db0c2">with_data</a> (<a class="el" href="classData.html">Data</a> *d)</td></tr>
+<tr class="separator:adf4334f40e64ee459339adfda31db0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e7eaf1825246d7ad9663552f5568a87"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a7e7eaf1825246d7ad9663552f5568a87">mine</a> ()</td></tr>
+<tr class="separator:a7e7eaf1825246d7ad9663552f5568a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d0158b65237eaaeace82540355c02f0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a1d0158b65237eaaeace82540355c02f0">get_publication_trust</a> (std::string s)</td></tr>
 <tr class="separator:a1d0158b65237eaaeace82540355c02f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a190db92db67400e7b34c53606ffff4e6"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a190db92db67400e7b34c53606ffff4e6">get_trust</a> ()</td></tr>
-<tr class="separator:a190db92db67400e7b34c53606ffff4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d6ca6b4b64a6a7afbfd8a4b46c2ec28"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a4d6ca6b4b64a6a7afbfd8a4b46c2ec28">get_publication_trust</a> ()</td></tr>
+<tr class="separator:a4d6ca6b4b64a6a7afbfd8a4b46c2ec28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac659c7f7ba71962bc8ddd12fd70d80c8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#ac659c7f7ba71962bc8ddd12fd70d80c8">get_user_trust</a> (std::string p)</td></tr>
+<tr class="separator:ac659c7f7ba71962bc8ddd12fd70d80c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf0736b1b8e009fd2b752efb26903ff7"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#acf0736b1b8e009fd2b752efb26903ff7">get_user_trust</a> ()</td></tr>
+<tr class="separator:acf0736b1b8e009fd2b752efb26903ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7281cf79d9320bcc314094cfe308427"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#ab7281cf79d9320bcc314094cfe308427">begin</a> ()</td></tr>
+<tr class="separator:ab7281cf79d9320bcc314094cfe308427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cef8bbd5f4d125bea81198aa1557124"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a2cef8bbd5f4d125bea81198aa1557124">begin</a> (<a class="el" href="classBlockChain.html">BlockChain</a> &amp;b)</td></tr>
+<tr class="separator:a2cef8bbd5f4d125bea81198aa1557124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefb006c81f9096684223c9e965ed0bc9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#aefb006c81f9096684223c9e965ed0bc9">end</a> ()</td></tr>
+<tr class="separator:aefb006c81f9096684223c9e965ed0bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613611e8f24ad7677bfbf9d3c4af4867"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a613611e8f24ad7677bfbf9d3c4af4867">end</a> (<a class="el" href="classBlockChain.html">BlockChain</a> &amp;b)</td></tr>
+<tr class="separator:a613611e8f24ad7677bfbf9d3c4af4867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb48c2b272c045d5e3fa294fafe536b9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#acb48c2b272c045d5e3fa294fafe536b9">size</a> ()</td></tr>
 <tr class="separator:acb48c2b272c045d5e3fa294fafe536b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a82851a102065917794e939b1bbd91633"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82851a102065917794e939b1bbd91633"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>update_trust</b> ()</td></tr>
+<tr class="separator:a82851a102065917794e939b1bbd91633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a6debb2c431b7d8ac47f5430f4e2ddde2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a6debb2c431b7d8ac47f5430f4e2ddde2">blockchain</a></td></tr>
-<tr class="separator:a6debb2c431b7d8ac47f5430f4e2ddde2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc7da81f9015b598d7439ad76160a5f4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#afc7da81f9015b598d7439ad76160a5f4">blockchain</a></td></tr>
+<tr class="separator:afc7da81f9015b598d7439ad76160a5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3740a283256898a241820f91a0fb7b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3740a283256898a241820f91a0fb7b8"></a>
+<a class="el" href="classBlock.html">Block</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>current</b></td></tr>
+<tr class="separator:ad3740a283256898a241820f91a0fb7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da20930058912e98af0e2bcb461ab61"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4da20930058912e98af0e2bcb461ab61"></a>
+std::map&lt; std::string, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>usr_trust</b></td></tr>
+<tr class="separator:a4da20930058912e98af0e2bcb461ab61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedacf23590e36f9c015a2c123fbee82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adedacf23590e36f9c015a2c123fbee82"></a>
+std::map&lt; std::string, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pub_trust</b></td></tr>
+<tr class="separator:adedacf23590e36f9c015a2c123fbee82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classBlockChain.html">BlockChain</a> class manages a collection of <a class="el" href="classBlock.html">Block</a> objects. </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00040">40</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00041">41</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acf99d40594ac22787e424cab7850b626"></a>
 <div class="memitem">
@@ -183,53 +219,89 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a64393d80e1ee1015dc90a5cde78e6a35"></a>
+<a class="anchor" id="ab7281cf79d9320bcc314094cfe308427"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BlockChain::discard </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;::iterator BlockChain::begin </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>hash</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Discard a block with the given hash </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">hash</td><td>The hash to discard from </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Return an iterator to the start of the <a class="el" href="classBlockChain.html">BlockChain</a> </p><dl class="section return"><dt>Returns</dt><dd>An iterator </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00080">80</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00167">167</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3b956cabb6f1defef14abdb94f298fa2"></a>
+<a class="anchor" id="a2cef8bbd5f4d125bea81198aa1557124"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt; BlockChain::get_block </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;::iterator BlockChain::begin </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>hash</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classBlockChain.html">BlockChain</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get a <a class="el" href="classBlock.html">Block</a> by hash </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Returns an iterator to the beginning of the <a class="el" href="classBlockChain.html">BlockChain</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">hash</td><td>The hash of the <a class="el" href="classBlock.html">Block</a> to get </td></tr>
+    <tr><td class="paramname">b</td><td>A reference to the <a class="el" href="classBlockChain.html">BlockChain</a> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a pointer to a <a class="el" href="classBlock.html">Block</a></dd></dl>
-<p>Get a <a class="el" href="classBlock.html">Block</a> by hash </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector iterator </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00068">68</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00173">173</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aefb006c81f9096684223c9e965ed0bc9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;::iterator BlockChain::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns an iterator to the end of the <a class="el" href="classBlockChain.html">BlockChain</a> </p><dl class="section return"><dt>Returns</dt><dd>A vector iterator </dd></dl>
+
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00179">179</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a613611e8f24ad7677bfbf9d3c4af4867"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classBlock.html">Block</a> * &gt;::iterator BlockChain::end </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBlockChain.html">BlockChain</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns an iterator to the end of the <a class="el" href="classBlockChain.html">BlockChain</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>A reference to the <a class="el" href="classBlockChain.html">BlockChain</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector iterator </dd></dl>
+
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00185">185</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -246,7 +318,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Calculate the trust for a publication </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Get the trust for a publication </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">s</td><td>The signature of the <a class="el" href="classData.html">Data</a> object </td></tr>
   </table>
@@ -254,37 +326,79 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The trust for the <a class="el" href="classData.html">Data</a> object </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00091">91</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00143">143</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a190db92db67400e7b34c53606ffff4e6"></a>
+<a class="anchor" id="a4d6ca6b4b64a6a7afbfd8a4b46c2ec28"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt; std::string, float &gt; BlockChain::get_trust </td>
+          <td class="memname">std::map&lt; std::string, float &gt; BlockChain::get_publication_trust </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Calculate the key trust for the current chain </p><dl class="section return"><dt>Returns</dt><dd>The trust score for all public keys </dd></dl>
+<p>Get all publication trust as a map </p><dl class="section return"><dt>Returns</dt><dd>The trust for all publications </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00105">105</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00149">149</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abe816778cb822ad840ec4a1a64bc89bd"></a>
+<a class="anchor" id="ac659c7f7ba71962bc8ddd12fd70d80c8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float BlockChain::get_user_trust </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the trust for a user </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The public key for the user </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The trust for the public key </dd></dl>
+
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00155">155</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acf0736b1b8e009fd2b752efb26903ff7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, float &gt; BlockChain::get_user_trust </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get all user trust as a map </p><dl class="section return"><dt>Returns</dt><dd>The trust for all public keys </dd></dl>
+
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00161">161</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7e7eaf1825246d7ad9663552f5568a87"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">std::string BlockChain::mine </td>
           <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classBlock.html">Block</a> &gt;&#160;</td>
-          <td class="paramname"><em>block</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -297,7 +411,26 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The valid hash of the new <a class="el" href="classBlock.html">Block</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00040">40</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00109">109</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="addbf5c55d78fa5c98a131096e93ba645"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBlockChain.html">BlockChain</a> * BlockChain::open_block </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create a new <a class="el" href="classBlock.html">Block</a> </p><dl class="section return"><dt>Returns</dt><dd>A pointer to the <a class="el" href="classBlockChain.html">BlockChain</a></dd></dl>
+<p>Create a new <a class="el" href="classBlock.html">Block</a> </p>
+
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00046">46</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -315,12 +448,38 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Return the number of <a class="el" href="classBlock.html">Block</a> objects in the chain </p><dl class="section return"><dt>Returns</dt><dd>The number of <a class="el" href="classBlock.html">Block</a> objects </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00140">140</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00192">192</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adf4334f40e64ee459339adfda31db0c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBlockChain.html">BlockChain</a> * BlockChain::with_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classData.html">Data</a> *&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Add <a class="el" href="classData.html">Data</a> to an open <a class="el" href="classBlock.html">Block</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>pointer to a <a class="el" href="classData.html">Data</a> block </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the <a class="el" href="classBlockChain.html">BlockChain</a></dd></dl>
+<p>Add <a class="el" href="classData.html">Data</a> to an open <a class="el" href="classBlock.html">Block</a> </p>
+
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00053">53</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a6debb2c431b7d8ac47f5430f4e2ddde2"></a>
+<a class="anchor" id="afc7da81f9015b598d7439ad76160a5f4"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -328,7 +487,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classBlock.html">Block</a>&gt; &gt; BlockChain::blockchain</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classBlock.html">Block</a>*&gt; BlockChain::blockchain</td>
         </tr>
       </table>
   </td>
@@ -339,7 +498,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The collection of <a class="el" href="classBlock.html">Block</a> objects </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00043">43</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00044">44</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -353,7 +512,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBlockChain.html">BlockChain</a></li>
-    <li class="footer">Generated on Thu Jan 4 2018 16:00:50 for ReChain by
+    <li class="footer">Generated on Fri Jan 5 2018 15:51:31 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
