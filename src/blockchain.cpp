@@ -41,14 +41,14 @@ BlockChain::~BlockChain(){
 	this->current = nullptr;
 }
 
-/** Create a new Block
+/* Create a new Block
 */
 BlockChain* BlockChain::open_block(){
 	if(!this->current) this->current = new Block();
 	return this;
 }
 
-/** Add Data to an open Block
+/* Add Data to an open Block
 */
 BlockChain* BlockChain::with_data( Data* d ){
 	if(this->current){

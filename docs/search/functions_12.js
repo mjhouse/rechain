@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7eblockchain',['~BlockChain',['../classBlockChain.html#a671e66ac51d33a75495a09398a0f764e',1,'BlockChain']]],
-  ['_7edata',['~Data',['../classData.html#aab31956423290f0d62dcca47ab4d16dd',1,'Data']]]
+  ['with_5fdata',['with_data',['../classBlockChain.html#adf4334f40e64ee459339adfda31db0c2',1,'BlockChain']]]
 ];

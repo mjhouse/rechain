@@ -40,14 +40,15 @@ class Data;
 */
 class BlockChain {
 	private:
-		/** The collection of Block objects */
-		std::vector<Block*> blockchain;
+		std::vector<Block*> blockchain;		/**< Collection of Block objects*/
 
-		Block* current;
+		Block* current;				/**< Current working Block*/
 
-		std::map<std::string,float> usr_trust;
-		std::map<std::string,float> pub_trust;
-		
+		std::map<std::string,float> usr_trust;	/**< Trust of public keys*/
+		std::map<std::string,float> pub_trust;	/**< Trust of publications*/
+	
+		/** Update 'usr_trust' and 'pub_trust'
+		*/	
 		void update_trust();	
 	public:
 		/** Empty constructor
@@ -67,13 +68,12 @@ class BlockChain {
 		BlockChain* open_block();
 
 		/** Add Data to an open Block
-		    \param A pointer to a Data block
+		    \param d A pointer to a Data block
 		    \returns A pointer to the BlockChain
 		*/
 		BlockChain* with_data( Data* d );
 
-		/** Mine and add a given block to the BlockChain
-		    \param block A pointer to the block to add
+		/** Mine the current Block to the BlockChain
 		    \returns The valid hash of the new Block
 		*/	
 		std::string mine();
