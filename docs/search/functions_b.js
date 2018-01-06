@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['open_5fblock',['open_block',['../classBlockChain.html#addbf5c55d78fa5c98a131096e93ba645',1,'BlockChain']]]
+  ['privatekey',['PrivateKey',['../classPrivateKey.html#ad3e7fd1d3fd3552a52b5425e37b02e85',1,'PrivateKey']]],
+  ['publickey',['PublicKey',['../classPublicKey.html#af4c4839004f3b4f54dc5320a602e7547',1,'PublicKey']]]
 ];

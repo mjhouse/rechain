@@ -70,15 +70,22 @@ std::string Block::hash(){
 
 /* Change the hashing variables
 */
-void Block::change_hash(){
-	// Update the counter, and reset to 0 if it
-	// gets to the int max
-	if(this->counter >= UINT_MAX-1) this->counter = 0;
-	else this->counter++;
+std::string Block::mine(){
+	
+	// Mine the block until it has a valid hash
+	while(this->hash() > HASH_MAX){
+		// Update the counter, and reset to 0 if it
+		// gets to the int max
+		if(this->counter >= UINT_MAX-1) this->counter = 0;
+		else this->counter++;
 
-	// Update the nonce and timestamp
-	this->nonce	= new_nonce();
-	this->timestamp = new_timestamp();
+		// Update the nonce and timestamp
+		this->nonce	= new_nonce();
+		this->timestamp = new_timestamp();	
+	}
+
+	return this->hash();
+	
 }
 
 /* Get a Data block given the signature

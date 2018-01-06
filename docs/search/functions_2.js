@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['change_5fhash',['change_hash',['../classBlock.html#a3f70eab32551ffec2940a79db2a96b66',1,'Block']]]
+  ['data',['Data',['../classData.html#af11f741cb7f587e2e495452a8905a22a',1,'Data::Data()'],['../classData.html#a7edd155cb35f9ecbcfa9541d5bb5d31e',1,'Data::Data(Address a)']]]
 ];

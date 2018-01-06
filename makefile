@@ -1,5 +1,5 @@
 CPP=g++
-CPPFLAGS=-std=c++11 -ldl -Wall -Wextra -Wpedantic -g -lcrypto++
+CPPFLAGS = -std=c++11 -lcrypto++
 
 TARGET = bin/rechain
 OUTDIR = bin
@@ -21,35 +21,32 @@ TOBJECTS := $(patsubst %.cpp, $(BLDDIR)/%.o, $(notdir $(TSOURCES)))
 # ----------------------------------------------------------------------
 # DON'T EDIT BELOW THIS LINE
 # ----------------------------------------------------------------------
-all: link
+debug: CPPFLAGS = -std=c++11 -lcrypto++ -Wall -Wextra -Wpedantic -g -ggdb -lcrypto++
+debug: link-debug
 
-# link executable
-link: $(OBJECTS)
-	$(CPP) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
-
-# build all .o files from .cpp source
-obj/%.o: $(SRCDIR)/%.cpp
-	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS)
-
-# ----------------------------------------------------------------------
-# Test Build
-# ----------------------------------------------------------------------
-# link executable for testing
-
-test: TSTFLAGS = -fprofile-arcs -ftest-coverage 
-test: test-link
+test: CPPFLAGS = -std=c++11 -lcrypto++ -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage 
+test: link-test
 	./bin/rechain
 
-test-link: $(TOBJECTS)
-	$(CPP) $(TOBJECTS) -o $(TARGET) $(CPPFLAGS) $(TSTFLAGS)
+release: CPPFLAGS = -std=c++11 -lcrypto++ -O3
+release: link-release
 
-# build all .o files from .cpp source
+# LINK
+link-debug: $(OBJECTS)
+	$(CPP) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
+
+link-test: $(TOBJECTS)
+	$(CPP) $(TOBJECTS) -o $(TARGET) $(CPPFLAGS)
+
+link-release: $(OBJECTS)
+	$(CPP) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
+
+# BUILD
 obj/%.o: $(TSTDIR)/%.cpp
-	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS) $(TSTFLAGS)
+	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS)
 
-# build all .o files from .cpp source
 obj/%.o: $(SRCDIR)/%.cpp
-	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS) $(TSTFLAGS)
+	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS)
 
 clean:
 	rm $(BLDDIR)/*; rm $(OUTDIR)/*;

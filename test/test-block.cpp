@@ -82,12 +82,9 @@ TEST_CASE( "block tests", "[block]" ){
 		REQUIRE(d);
 		REQUIRE(d->get_signature() == sig);
 	}
-	SECTION( "block changes hashing variables" ){
-		std::string hash1 = block->hash();
-		block->change_hash();
-		std::string hash2 = block->hash();
-	
-		REQUIRE(hash1 != hash2);
+	SECTION( "block can be mined" ){
+		std::string hash = block->mine();
+		REQUIRE(hash <= HASH_MAX);
 	}
 	SECTION( "block updates trust from trust map" ){
 		block->set_trust(trust);

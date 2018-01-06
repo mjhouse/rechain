@@ -41,7 +41,6 @@ class Data;
 	publications or signatures), a hash of the previous
 	Block and various hashing variables.
 */
-
 class Block {
 	private:
 		std::vector<Data*> data;				/**< Contained Data objects*/
@@ -77,9 +76,11 @@ class Block {
 		*/
 		std::string hash();
 
-		/** Update the hashing variables
+		/** Hash and update hashing variables until
+		    a valid hash is found
+		    \returns A valid hash
 		*/
-		void change_hash();
+		std::string mine();
 
 		/** Update the trust for signatures
 		    \param trust A map of public keys and current trust

@@ -107,7 +107,7 @@ void BlockChain::update_trust(){
 /* Mine and add a block to the chain
 */
 std::string BlockChain::mine(){	
-	std::string ret_hash;
+	std::string hash; 
 	if(this->current){
 		// Update trust on the block if it's a signature
 		this->current->set_trust( this->get_publication_trust() );
@@ -117,16 +117,8 @@ std::string BlockChain::mine(){
 			this->current->set_previous(this->blockchain.back()->hash());
 		}
 
-		// Mine the block until it has a valid hash
-		while(this->current->hash() > HASH_MAX){
-			
-			// Update the hashing variables
-			this->current->change_hash();
-
-		}
-
-		// Return the hash
-		ret_hash = this->current->hash();
+		// Get the hash to return
+		hash = this->current->mine();
 
 		// Add to the chain
 		this->blockchain.push_back( this->current );
@@ -135,7 +127,7 @@ std::string BlockChain::mine(){
 		// Update trust maps
 		this->update_trust();
 	}
-	return ret_hash;
+	return hash;
 }
 
 /* Get the trust for a publication
