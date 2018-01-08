@@ -11,6 +11,7 @@ var classData =
     [ "get_public_key", "classData.html#ac5d9492436ae5405e677f9c4cdabf2ec", null ],
     [ "get_signature", "classData.html#a39dde1e822986954b6656d5fe0a728b3", null ],
     [ "get_trust", "classData.html#a509bb143382f00b5fff569d229f77a4c", null ],
+    [ "serialize", "classData.html#aa23ae316f44c07d26c584580f14e56f0", null ],
     [ "set_address", "classData.html#a02ca90a537d1a2246629c31a129e205b", null ],
     [ "set_block_ref", "classData.html#a7036a7441c615b655c5c823799906974", null ],
     [ "set_data_ref", "classData.html#a792c39c3f52aeeca2ccdbc80bca9c9d8", null ],

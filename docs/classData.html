@@ -159,6 +159,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5030562a5c23fca3e952777a68dd1d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87e3e7ff9f51a57a6c691e11ee3955f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classData.html#a87e3e7ff9f51a57a6c691e11ee3955f9">verify</a> ()</td></tr>
 <tr class="separator:a87e3e7ff9f51a57a6c691e11ee3955f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa23ae316f44c07d26c584580f14e56f0"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:aa23ae316f44c07d26c584580f14e56f0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classData.html#aa23ae316f44c07d26c584580f14e56f0">serialize</a> (Archive &amp;ar)</td></tr>
+<tr class="separator:aa23ae316f44c07d26c584580f14e56f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -174,7 +177,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classData.html">Data</a> class maintains a reference internally to another <a class="el" href="classData.html">Data</a> object (if this is a signature) or to a hash for a document (if the <a class="el" href="classData.html">Data</a> is a publication). </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00048">48</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00052">52</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="af11f741cb7f587e2e495452a8905a22a"></a>
 <div class="memitem">
@@ -198,7 +201,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Empty constructor </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00059">59</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00063">63</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -230,7 +233,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00064">64</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00068">68</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +295,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Empty destructor </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00073">73</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00077">77</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -420,6 +423,40 @@ Private Attributes</h2></td></tr>
 <p>Get the current trust value </p><dl class="section return"><dt>Returns</dt><dd>The current value of trust </dd></dl>
 
 <p>Definition at line <a class="el" href="data_8cpp_source.html#l00034">34</a> of file <a class="el" href="data_8cpp_source.html">data.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa23ae316f44c07d26c584580f14e56f0"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Archive &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Data::serialize </td>
+          <td>(</td>
+          <td class="paramtype">Archive &amp;&#160;</td>
+          <td class="paramname"><em>ar</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Serialize/Unserialize this <a class="el" href="classData.html">Data</a> object </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ar</td><td>The archive to serialize to or from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00167">167</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -654,7 +691,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The reference to publish </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00050">50</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00054">54</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -677,7 +714,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The public key to match the signature </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00051">51</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00055">55</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -700,7 +737,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The signature for this data </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00052">52</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00056">56</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -723,7 +760,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Recorded trust for Signature records </p>
 
-<p>Definition at line <a class="el" href="data_8hpp_source.html#l00054">54</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
+<p>Definition at line <a class="el" href="data_8hpp_source.html#l00058">58</a> of file <a class="el" href="data_8hpp_source.html">data.hpp</a>.</p>
 
 </div>
 </div>
@@ -737,7 +774,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classData.html">Data</a></li>
-    <li class="footer">Generated on Mon Jan 8 2018 13:49:11 for ReChain by
+    <li class="footer">Generated on Mon Jan 8 2018 17:20:57 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -19,17 +19,21 @@
  *
 */
 
-// System includes
+// system includes
 #include <iostream>
 
-// Local includes
+// dependency includes
+#include <cereal/archives/json.hpp>
+#include "cereal/types/vector.hpp"
+
+// local includes
 #include "blockchain.hpp"
 #include "block.hpp"
 #include "data.hpp"
 		
 /* Empty constructor
 */
-BlockChain::BlockChain() {}
+BlockChain::BlockChain(){}
 
 /* Empty destructor
 */
@@ -185,4 +189,39 @@ BlockChain::iterator BlockChain::end(){
 */
 size_t BlockChain::size(){
 	return this->blockchain.size();
+}
+
+/** Save the BlockChain to a given location
+*/
+bool BlockChain::save( std::string p ){
+	std::string path = (!p.empty()) ? p : this->file_path;
+	if(!path.empty()){
+		std::ofstream os(path);
+		if(os.is_open()){
+			cereal::JSONOutputArchive archive(os);
+			archive( *this );
+			this->file_path = path;
+			return true;
+		}
+	} 
+
+	return false;
+}
+
+/** Load the BlockChain from a given location
+*/
+bool BlockChain::load( std::string p ){
+	std::string path = (!p.empty()) ? p : this->file_path;
+	if(!path.empty()){
+		std::ifstream is(path);
+		if(is.is_open()){
+			cereal::JSONInputArchive archive(is);
+			archive( *this );
+			this->file_path = path;
+			this->update_trust();
+			return true;
+		}
+	}
+	
+	return false;
 }

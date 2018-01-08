@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['timestamp',['timestamp',['../classBlock.html#acaa9f7ad0f75fdafc83a435d2c38425d',1,'Block']]],
-  ['trust',['trust',['../classData.html#a98673b446d10b51bbdc13bc7f96ae63d',1,'Data']]]
+  ['signature',['signature',['../classData.html#a0919bbd455823820d6b07e0f70d526e5',1,'Data']]]
 ];

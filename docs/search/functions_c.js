@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['save',['save',['../classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6',1,'Key']]],
+  ['save',['save',['../classBlockChain.html#a5e73c9e3754a32dca2ce587dfa8f1be9',1,'BlockChain::save()'],['../classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6',1,'Key::save()']]],
+  ['serialize',['serialize',['../classBlock.html#ad0db01340a60dee62eae231295cba1f9',1,'Block::serialize()'],['../classBlockChain.html#ac0dd294dc2adfd1857b7aef9911370d8',1,'BlockChain::serialize()'],['../classData.html#aa23ae316f44c07d26c584580f14e56f0',1,'Data::serialize()']]],
   ['set_5faddress',['set_address',['../classData.html#a02ca90a537d1a2246629c31a129e205b',1,'Data']]],
   ['set_5fblock_5fref',['set_block_ref',['../classData.html#a7036a7441c615b655c5c823799906974',1,'Data']]],
   ['set_5fdata_5fref',['set_data_ref',['../classData.html#a792c39c3f52aeeca2ccdbc80bca9c9d8',1,'Data']]],

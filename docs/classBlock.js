@@ -12,6 +12,7 @@ var classBlock =
     [ "operator=", "classBlock.html#a211f39ec7292f203df97a9170257845d", null ],
     [ "operator[]", "classBlock.html#afa3f32ce60ff8550c009a65e64999f9d", null ],
     [ "previous", "classBlock.html#ab42c53898f487472ae314f3d86617a5f", null ],
+    [ "serialize", "classBlock.html#ad0db01340a60dee62eae231295cba1f9", null ],
     [ "size", "classBlock.html#aa3f0e1e2580adb15c40d7135f7c820f2", null ],
     [ "counter", "classBlock.html#a96a75420cb1bb31ac1d6c3d9a79e2db1", null ],
     [ "data", "classBlock.html#ad39c219832b0745bfe35ca1c49cd6a2b", null ],

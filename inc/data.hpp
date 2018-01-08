@@ -27,9 +27,13 @@
 #ifndef _DATA_HPP_
 #define _DATA_HPP_
 
+// system includes
 #include <tuple>
 #include <memory>
 #include <string>
+
+// dependency includes
+#include "cereal/types/tuple.hpp"
 
 class PrivateKey;
 
@@ -155,6 +159,19 @@ class Data {
 			\returns True if block is signed and valid
 		*/
 		bool verify();
+
+		/** Serialize/Unserialize this Data object
+		    \param ar The archive to serialize to or from
+		*/
+		template <class Archive>
+		void serialize( Archive& ar ){
+			ar(
+				address,
+				public_key,
+				signature,
+				trust
+			);
+		}
 };
 
 #endif

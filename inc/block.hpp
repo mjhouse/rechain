@@ -27,6 +27,9 @@
 #include <vector>
 #include <string>
 
+// dependency includes
+#include "cereal/types/vector.hpp"
+
 /* Maximum hash value (smaller increases difficulty) */
 #define HASH_MAX "000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 
@@ -120,6 +123,20 @@ class Block {
 		    \returns Size of the Block as size_t
 		*/
 		size_t size();
+
+		/** Serialize/Unserialize this Block
+		    \param ar The archive to serialize to or from
+		*/
+		template <class Archive>
+		void serialize( Archive& ar ){
+			ar(
+				data,
+				prev,
+				nonce,
+				timestamp,
+				counter
+			);
+		}
 };
 
 #endif

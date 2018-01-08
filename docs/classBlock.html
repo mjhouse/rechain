@@ -145,6 +145,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af32ff9a1df5fd761f9c5fb820a598cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3f0e1e2580adb15c40d7135f7c820f2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#aa3f0e1e2580adb15c40d7135f7c820f2">size</a> ()</td></tr>
 <tr class="separator:aa3f0e1e2580adb15c40d7135f7c820f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0db01340a60dee62eae231295cba1f9"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:ad0db01340a60dee62eae231295cba1f9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classBlock.html#ad0db01340a60dee62eae231295cba1f9">serialize</a> (Archive &amp;ar)</td></tr>
+<tr class="separator:ad0db01340a60dee62eae231295cba1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -162,7 +165,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A <a class="el" href="classBlock.html">Block</a> to be included in a <a class="el" href="classBlockChain.html">BlockChain</a>. The <a class="el" href="classBlock.html">Block</a> holds any number of <a class="el" href="classData.html">Data</a> objects (that represent publications or signatures), a hash of the previous <a class="el" href="classBlock.html">Block</a> and various hashing variables. </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00040">40</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00043">43</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a4531596cc343b4d18d7b4efe4488ff36"></a>
 <div class="memitem">
@@ -175,7 +178,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Define a <a class="el" href="classData.html">Data</a> iterator </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00051">51</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00054">54</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -382,6 +385,40 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad0db01340a60dee62eae231295cba1f9"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Archive &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Block::serialize </td>
+          <td>(</td>
+          <td class="paramtype">Archive &amp;&#160;</td>
+          <td class="paramname"><em>ar</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Serialize/Unserialize this <a class="el" href="classBlock.html">Block</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ar</td><td>The archive to serialize to or from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00131">131</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aa3f0e1e2580adb15c40d7135f7c820f2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -420,7 +457,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Counter to modify hash output </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00047">47</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00050">50</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -443,7 +480,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Contained <a class="el" href="classData.html">Data</a> objects </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00042">42</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00045">45</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -466,7 +503,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Randomly generated value to modify hash </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00045">45</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00048">48</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -489,7 +526,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Hash of the previous block </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00043">43</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00046">46</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -512,7 +549,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>A timestamp </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00046">46</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00049">49</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -526,7 +563,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBlock.html">Block</a></li>
-    <li class="footer">Generated on Mon Jan 8 2018 13:49:11 for ReChain by
+    <li class="footer">Generated on Mon Jan 8 2018 17:20:57 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
