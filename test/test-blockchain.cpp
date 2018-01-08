@@ -61,7 +61,8 @@ TEST_CASE( "blockchain tests", "[blockchain]" ){
 		}
 	}
 	SECTION( "blockchain can be copied" ){
-		BlockChain b = blockchain;
+		BlockChain b;
+		b = blockchain;
 		REQUIRE(b.get_user_trust() == blockchain.get_user_trust());
 		REQUIRE(b.get_publication_trust() == blockchain.get_publication_trust());
 		REQUIRE(b.size() == blockchain.size());
