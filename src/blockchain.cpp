@@ -175,24 +175,11 @@ std::vector<Block>::iterator BlockChain::begin(){
 	return this->blockchain.begin();
 }
 
-/* Iterator begin with reference
-*/
-std::vector<Block>::iterator BlockChain::begin( BlockChain& b ){
-	return b.blockchain.begin();
-}
-
 /* Iterator end
 */
 std::vector<Block>::iterator BlockChain::end(){
 	return this->blockchain.end();
 }
-
-/* Iterator end with reference
-*/
-std::vector<Block>::iterator BlockChain::end( BlockChain& b ){
-	return b.blockchain.end();
-}
-
 
 /* Returns the number of Block objects
 */

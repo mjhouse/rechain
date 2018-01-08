@@ -105,23 +105,11 @@ class Block {
 		*/
 		std::vector<Data>::iterator begin();
 
-		/** Returns an iterator to the beginning of the Data
-		    \param b A reference to the Block
-		    \returns A vector iterator
-		*/
-		std::vector<Data>::iterator begin( Block& b );
-		
 		/** Returns an iterator to the end of the Data collection
 		    \returns A vector iterator
 		*/ 
 		std::vector<Data>::iterator end();
 		
-		/** Returns an iterator to the end of the Data collection
-		    \param b A reference to the Block
-		    \returns A vector iterator
-		*/
-		std::vector<Data>::iterator end( Block& b );
-
 		// ------------------------------------------------------
 		// Utility Methods
 		

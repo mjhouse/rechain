@@ -129,22 +129,10 @@ class BlockChain {
 		*/
 		std::vector<Block>::iterator begin();
 
-		/** Returns an iterator to the beginning of the BlockChain
-		    \param b A reference to the BlockChain
-		    \returns A vector iterator
-		*/
-		std::vector<Block>::iterator begin( BlockChain& b );
-		
 		/** Returns an iterator to the end of the BlockChain
 		   \returns A vector iterator
 		*/ 
 		std::vector<Block>::iterator end();
-		
-		/** Returns an iterator to the end of the BlockChain
-		    \param b A reference to the BlockChain
-		    \returns A vector iterator
-		*/
-		std::vector<Block>::iterator end( BlockChain& b );
 
 		// ------------------------------------------------------
 		// Utility Methods

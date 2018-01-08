@@ -149,22 +149,10 @@ std::vector<Data>::iterator Block::begin(){
 	return this->data.begin();
 }
 
-/** Returns an iterator to the beginning of the Data
-*/
-std::vector<Data>::iterator Block::begin( Block& b ){
-	return b.data.begin();
-}
-
 /** Returns an iterator to the end of the Data collection
 */ 
 std::vector<Data>::iterator Block::end(){
 	return this->data.end();
-}
-
-/** Returns an iterator to the end of the Data collection
-*/
-std::vector<Data>::iterator Block::end( Block& b ){
-	return b.data.end();
 }
 
 /* Return the size of the Block
