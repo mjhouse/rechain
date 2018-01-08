@@ -81,17 +81,19 @@ class BlockChain {
 		// ------------------------------------------------------
 		// Accessor Methods
 
-		Block& operator[] ( unsigned int i ){
-			return this->blockchain[i];
-		}
+		
+		/** Overloaded index operator
+		    \param i The index to return a reference to
+		    \returns A reference to a Block object
+		*/
+		Block& operator[] ( unsigned int i );
 
-		BlockChain& operator=( const BlockChain& b ){
-			this->blockchain = b.blockchain;
-			this->current	 = b.current;
-			this->usr_trust	 = b.usr_trust;
-			this->pub_trust	 = b.pub_trust;
-			return *this;
-		}
+
+		/** Overloaded assignment operator
+		    \param b The BlockChain to copy data from
+		    \returns A reference to the current BlockChain
+		*/
+		BlockChain& operator=( const BlockChain& b );
 		
 		// ------------------------------------------------------
 		// Trust Methods

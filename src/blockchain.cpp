@@ -129,6 +129,22 @@ std::string BlockChain::mine(){
 	return hash;
 }
 
+/** Overloaded index operator
+*/
+Block& BlockChain::operator[] ( unsigned int i ){
+	return this->blockchain[i];
+}
+
+
+/** Overloaded assignment operator
+*/
+BlockChain& BlockChain::operator=( const BlockChain& b ){
+	this->blockchain = b.blockchain;
+	this->current	 = b.current;
+	this->usr_trust	 = b.usr_trust;
+	this->pub_trust	 = b.pub_trust;
+	return *this;
+}
 /* Get the trust for a publication
 */
 float BlockChain::get_publication_trust( std::string s ){

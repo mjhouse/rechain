@@ -95,6 +95,22 @@ std::string Block::mine(){
 	
 }
 
+/** Overloaded index operator
+*/
+Data& Block::operator[] ( unsigned int i ){
+	return this->data[i];
+}
+
+/** Overloaded assignment operator
+*/
+Block& Block::operator=( const Block& b ){
+	this->data	= b.data;
+	this->prev	= b.prev;
+	this->nonce	= b.nonce;
+	this->timestamp	= b.timestamp;
+	this->counter	= b.counter;
+	return *this;
+}
 /* Get an iterator to a Data block given the signature
 */
 std::vector<Data>::iterator Block::find( std::string s ){

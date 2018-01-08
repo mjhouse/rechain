@@ -67,18 +67,17 @@ class Block {
 		// ------------------------------------------------------
 		// Accessor Methods
 
-		Data& operator[] ( unsigned int i ){
-			return this->data[i];
-		}
+		/** Overloaded index operator
+		    \param i The index to return a reference to
+		    \returns A reference to a Data object
+		*/
+		Data& operator[] ( unsigned int i );
 		
-		Block& operator=( const Block& b ){
-			this->data	= b.data;
-			this->prev	= b.prev;
-			this->nonce	= b.nonce;
-			this->timestamp	= b.timestamp;
-			this->counter	= b.counter;
-			return *this;
-		}
+		/** Overloaded assignment operator
+		    \param b The Block to copy data from
+		    \returns A reference to the current Block
+		*/
+		Block& operator=( const Block& b );
  
 		/** Get a Data block given the index
 		    \param s The signature of the Data object to return
