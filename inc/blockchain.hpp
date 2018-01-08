@@ -32,6 +32,7 @@
 #include <memory>
 #include <map>
 #include "block.hpp"
+
 class Block;
 class Data;
 

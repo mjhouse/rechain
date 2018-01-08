@@ -11,8 +11,14 @@ TEST_CASE( "data object tests", "[data]" ){
 	Address address("DATA_REF","BLOCK_REF",DataType::Signature);
 	std::shared_ptr<Data> data(new Data(address));
 	std::shared_ptr<PrivateKey> key(PrivateKey::load_file("test/data/test.private"));
+	std::shared_ptr<PublicKey> pub_key(PublicKey::load_file("test/data/test.public"));
 	key->sign(data.get());
 
+	SECTION( "data can self-sign at initialization" ){
+		Data d(address,key.get());
+		REQUIRE(d.verify());
+		REQUIRE(pub_key->verify(&d));
+	}
 	SECTION( "data object can set/get address" ) {
 		std::shared_ptr<Data> d(new Data());
 		d->set_address(address);

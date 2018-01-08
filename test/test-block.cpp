@@ -27,7 +27,13 @@ TEST_CASE( "block tests", "[block]" ){
 		block.add(d1);
 		block.add(d2);
 	}
-
+	
+	SECTION( "block can iterate" ){
+		for( auto d : block){
+			auto it = std::find(signatures.begin(),signatures.end(),d.get_signature());
+			REQUIRE_FALSE(it == signatures.end());
+		}
+	}
 	SECTION( "block adds data objects" ){
 		
 		// Check the expected size after initialization
