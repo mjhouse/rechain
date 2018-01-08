@@ -86,13 +86,14 @@ class Block {
 		std::vector<Data>::iterator find( std::string s );
 
 		/** Add a Data block
-			\param d The block to add
-			\returns True if Data was added
+		    \param d The block to add
+		    \returns True if Data was added
 		*/
 		bool add( Data& d );
 
 		/** Get or set the hash of the previous block
 		    \param h The hash to set
+		    \returns The current hash
 		*/
 		std::string previous( std::string h = "" );
 
