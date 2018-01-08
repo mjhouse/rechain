@@ -39,6 +39,8 @@
 
 class PrivateKey;
 class PublicKey;
+class Data;
+
 
 /** The templated Key class acts as a base class for both
 	PrivateKey and PublicKey.

@@ -27,6 +27,7 @@
 // system includes
 #include <climits>
 #include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <vector>
 
@@ -35,7 +36,6 @@
 #include "block.hpp"
 
 Block::~Block(){
-	for(auto d : this->data) delete d;
 	this->data.clear();
 }
 
@@ -46,11 +46,11 @@ std::string Block::hash(){
 
 	// Get the hashable data for each Data block
 	std::for_each( this->data.begin(), this->data.end(),
-	[&hash_data]( Data* d ){
-		hash_data.append( d->to_string(true) );
+	[&hash_data]( Data d ){
+		hash_data.append( d.to_string(true) );
 	});
 
-	hash_data.append( this->previous );
+	hash_data.append( this->prev );
 	hash_data.append( std::to_string(this->nonce) );
 	hash_data.append( std::to_string(this->timestamp) );
 	hash_data.append( std::to_string(this->counter) );
@@ -78,63 +78,38 @@ std::string Block::mine(){
 		// gets to the int max
 		if(this->counter >= UINT_MAX-1) this->counter = 0;
 		else this->counter++;
-
-		// Update the nonce and timestamp
-		this->nonce	= new_nonce();
-		this->timestamp = new_timestamp();	
+		
+		// Update the timestamp
+		auto e = std::chrono::system_clock::now().time_since_epoch();
+		auto seconds = std::chrono::duration_cast<std::chrono::seconds>(e).count();
+		this->timestamp = (long)seconds;
+	
+		// Update the random nonce	
+		CryptoPP::AutoSeededRandomPool rng;
+		this->nonce = CryptoPP::Integer(rng,
+			CryptoPP::Integer(1),
+			CryptoPP::Integer(LONG_MAX)).ConvertToLong();	
 	}
 
 	return this->hash();
 	
 }
 
-/* Get a Data block given the signature
+/* Get an iterator to a Data block given the signature
 */
-Data* Block::get_data( std::string s ){
-	// Iterate through data and find the 
-	// matching signature
-	for(auto d : this->data){
-		if(d->get_signature() == s) return d;
-	}
-
-	return nullptr;
-}
-
-/* Update the current trust of each signature
-*/
-void Block::set_trust( std::map<std::string,float> trust ){
-	for(auto d : this->data){
-		if(d->get_data_type() == DataType::Signature){
-			float t = trust[d->get_public_key()];
-			d->set_trust(t);
-		}
-	}
-}
-
-/* Get a Data block given the index
-*/
-Data* Block::get_data( unsigned int i ){
-	if(i < this->data.size()) return this->data[i];
-	return nullptr;
-}
-
-/* Get all Data objects
-*/
-std::vector<Data*> Block::get_data(){
-	return this->data;
+std::vector<Data>::iterator Block::find( std::string s ){
+	return std::find_if(this->data.begin(),this->data.end(),
+	[&s](Data& d){
+		return (d.get_signature() == s);
+	});
 }
 
 /* Add a Data block
 */
-bool Block::add_data( Data* d ){
+bool Block::add( Data& d ){
 	// Check the Data object is signed and
 	// valid.
-	if(d->verify()){
-		// Check to make sure the signature is unique
-		for(auto i : this->data){
-			if(i->get_signature() == d->get_signature()) return false;
-		}
-	
+	if(d.verify()){
 		// Add to the end of data	
 		this->data.push_back(d);
 		return true;
@@ -145,25 +120,36 @@ bool Block::add_data( Data* d ){
 	return false;
 }
 
-/* Remove a Data block
+/** Get or set the hash of the previous block
 */
-void Block::remove_data( std::string s ){
-	// Erase Data objects with the given signature
-	this->data.erase( std::remove_if(this->data.begin(),this->data.end(),
-		[&s]( Data* d ){
-			return (d->get_signature() == s);
-		}
-	));
+std::string Block::previous( std::string h ){
+	if(!h.empty()) this->prev = h;
+	return this->prev;
 }
 
-/** Get the hash of the previous block
+/** Return an iterator to the start of the Data
 */
-std::string Block::get_previous(){ return this->previous; }
+std::vector<Data>::iterator Block::begin(){ 
+	return this->data.begin();
+}
 
-
-/** Set the hash of the previous block
+/** Returns an iterator to the beginning of the Data
 */
-void Block::set_previous( std::string h ){ this->previous = h; }
+std::vector<Data>::iterator Block::begin( Block& b ){
+	return b.data.begin();
+}
+
+/** Returns an iterator to the end of the Data collection
+*/ 
+std::vector<Data>::iterator Block::end(){
+	return this->data.end();
+}
+
+/** Returns an iterator to the end of the Data collection
+*/
+std::vector<Data>::iterator Block::end( Block& b ){
+	return b.data.end();
+}
 
 /* Return the size of the Block
 */

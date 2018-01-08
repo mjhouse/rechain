@@ -108,7 +108,6 @@ $(document).ready(function(){initNavTree('classBlock.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classBlock-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -124,38 +123,35 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae2de4f093f846bf821445f80b02da7de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af177a6a4941fee4af655e8b2d6d8ba24"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#af177a6a4941fee4af655e8b2d6d8ba24">mine</a> ()</td></tr>
 <tr class="separator:af177a6a4941fee4af655e8b2d6d8ba24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c674b22a50ab6651bd1a1d008ccf315"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a0c674b22a50ab6651bd1a1d008ccf315">set_trust</a> (std::map&lt; std::string, float &gt; trust)</td></tr>
-<tr class="separator:a0c674b22a50ab6651bd1a1d008ccf315"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab986a8904bc2307ac383e548137704bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classData.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#ab986a8904bc2307ac383e548137704bd">get_data</a> (std::string s)</td></tr>
-<tr class="separator:ab986a8904bc2307ac383e548137704bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77870f456f3d29be2f130aa44ee1dedb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classData.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a77870f456f3d29be2f130aa44ee1dedb">get_data</a> (unsigned int i)</td></tr>
-<tr class="separator:a77870f456f3d29be2f130aa44ee1dedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a036292aef432e92a9b70cf1072c845b8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classData.html">Data</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a036292aef432e92a9b70cf1072c845b8">get_data</a> ()</td></tr>
-<tr class="separator:a036292aef432e92a9b70cf1072c845b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c5288536412f34c7f0ff0f84af67054"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a7c5288536412f34c7f0ff0f84af67054">add_data</a> (<a class="el" href="classData.html">Data</a> *d)</td></tr>
-<tr class="separator:a7c5288536412f34c7f0ff0f84af67054"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a676f0789b957010eca8e84598b89c7bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a676f0789b957010eca8e84598b89c7bc">remove_data</a> (std::string s)</td></tr>
-<tr class="separator:a676f0789b957010eca8e84598b89c7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a952d5c0e36a541600f47ab7c96553bdb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a952d5c0e36a541600f47ab7c96553bdb">get_previous</a> ()</td></tr>
-<tr class="separator:a952d5c0e36a541600f47ab7c96553bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dfe940380c63b066dd50190cf0c83fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a7dfe940380c63b066dd50190cf0c83fb">set_previous</a> (std::string h)</td></tr>
-<tr class="separator:a7dfe940380c63b066dd50190cf0c83fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afea58a51f89430d1815e834a7d49cac5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afea58a51f89430d1815e834a7d49cac5"></a>
+<a class="el" href="classData.html">Data</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (unsigned int i)</td></tr>
+<tr class="separator:afea58a51f89430d1815e834a7d49cac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab447a34aba3078b30df54042e4d61d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeab447a34aba3078b30df54042e4d61d"></a>
+<a class="el" href="classBlock.html">Block</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBlock.html">Block</a> &amp;b)</td></tr>
+<tr class="separator:aeab447a34aba3078b30df54042e4d61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81472192b1066db0ae3e723adb86d2fc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a81472192b1066db0ae3e723adb86d2fc">find</a> (std::string s)</td></tr>
+<tr class="separator:a81472192b1066db0ae3e723adb86d2fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1540ba3423f33430abd988efb7edd986"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a1540ba3423f33430abd988efb7edd986">add</a> (<a class="el" href="classData.html">Data</a> &amp;d)</td></tr>
+<tr class="separator:a1540ba3423f33430abd988efb7edd986"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab42c53898f487472ae314f3d86617a5f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#ab42c53898f487472ae314f3d86617a5f">previous</a> (std::string h=&quot;&quot;)</td></tr>
+<tr class="separator:ab42c53898f487472ae314f3d86617a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8766ef09354a05b4143d53b22c9e413"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#aa8766ef09354a05b4143d53b22c9e413">begin</a> ()</td></tr>
+<tr class="separator:aa8766ef09354a05b4143d53b22c9e413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade109de3ab961f4f47df143d4fd7816"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#aade109de3ab961f4f47df143d4fd7816">begin</a> (<a class="el" href="classBlock.html">Block</a> &amp;b)</td></tr>
+<tr class="separator:aade109de3ab961f4f47df143d4fd7816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda7f847bb3869e9deedaf4b823043a6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#acda7f847bb3869e9deedaf4b823043a6">end</a> ()</td></tr>
+<tr class="separator:acda7f847bb3869e9deedaf4b823043a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ecd565679a137e3217ad7779ddbda3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a86ecd565679a137e3217ad7779ddbda3">end</a> (<a class="el" href="classBlock.html">Block</a> &amp;b)</td></tr>
+<tr class="separator:a86ecd565679a137e3217ad7779ddbda3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3f0e1e2580adb15c40d7135f7c820f2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#aa3f0e1e2580adb15c40d7135f7c820f2">size</a> ()</td></tr>
 <tr class="separator:aa3f0e1e2580adb15c40d7135f7c820f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:a5b6b7d4ae2ce01a09a8faab83842b69a"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a5b6b7d4ae2ce01a09a8faab83842b69a">new_nonce</a> ()</td></tr>
-<tr class="separator:a5b6b7d4ae2ce01a09a8faab83842b69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3acdc592cef0e80514cf58538ef89343"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a3acdc592cef0e80514cf58538ef89343">new_timestamp</a> ()</td></tr>
-<tr class="separator:a3acdc592cef0e80514cf58538ef89343"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a2f3f9699a06db124c08ceabbc330d528"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classData.html">Data</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a2f3f9699a06db124c08ceabbc330d528">data</a></td></tr>
-<tr class="separator:a2f3f9699a06db124c08ceabbc330d528"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d00d09357ecd86f79e169016eb49104"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a7d00d09357ecd86f79e169016eb49104">previous</a></td></tr>
-<tr class="separator:a7d00d09357ecd86f79e169016eb49104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad39c219832b0745bfe35ca1c49cd6a2b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#ad39c219832b0745bfe35ca1c49cd6a2b">data</a></td></tr>
+<tr class="separator:ad39c219832b0745bfe35ca1c49cd6a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b067da7a49637a3967093bfb4efa85a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a7b067da7a49637a3967093bfb4efa85a">prev</a></td></tr>
+<tr class="separator:a7b067da7a49637a3967093bfb4efa85a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5dc13805185f799f0057e3dd9c5179a7"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a5dc13805185f799f0057e3dd9c5179a7">nonce</a></td></tr>
 <tr class="separator:a5dc13805185f799f0057e3dd9c5179a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acaa9f7ad0f75fdafc83a435d2c38425d"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#acaa9f7ad0f75fdafc83a435d2c38425d">timestamp</a></td></tr>
@@ -166,16 +162,16 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A <a class="el" href="classBlock.html">Block</a> to be included in a <a class="el" href="classBlockChain.html">BlockChain</a>. The <a class="el" href="classBlock.html">Block</a> holds any number of <a class="el" href="classData.html">Data</a> objects (that represent publications or signatures), a hash of the previous <a class="el" href="classBlock.html">Block</a> and various hashing variables. </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00044">44</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00040">40</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a7c5288536412f34c7f0ff0f84af67054"></a>
+<a class="anchor" id="a1540ba3423f33430abd988efb7edd986"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Block::add_data </td>
+          <td class="memname">bool Block::add </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classData.html">Data</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classData.html">Data</a> &amp;&#160;</td>
           <td class="paramname"><em>d</em></td><td>)</td>
           <td></td>
         </tr>
@@ -189,16 +185,106 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="classData.html">Data</a> was added </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00129">129</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00109">109</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab986a8904bc2307ac383e548137704bd"></a>
+<a class="anchor" id="aa8766ef09354a05b4143d53b22c9e413"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classData.html">Data</a> * Block::get_data </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator Block::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return an iterator to the start of the <a class="el" href="classData.html">Data</a> </p><dl class="section return"><dt>Returns</dt><dd>An iterator</dd></dl>
+<p>Return an iterator to the start of the <a class="el" href="classData.html">Data</a> </p>
+
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00132">132</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aade109de3ab961f4f47df143d4fd7816"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator Block::begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns an iterator to the beginning of the <a class="el" href="classData.html">Data</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>A reference to the <a class="el" href="classBlock.html">Block</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector iterator</dd></dl>
+<p>Returns an iterator to the beginning of the <a class="el" href="classData.html">Data</a> </p>
+
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00138">138</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acda7f847bb3869e9deedaf4b823043a6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator Block::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns an iterator to the end of the <a class="el" href="classData.html">Data</a> collection </p><dl class="section return"><dt>Returns</dt><dd>A vector iterator</dd></dl>
+<p>Returns an iterator to the end of the <a class="el" href="classData.html">Data</a> collection </p>
+
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00144">144</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a86ecd565679a137e3217ad7779ddbda3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator Block::end </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns an iterator to the end of the <a class="el" href="classData.html">Data</a> collection </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>A reference to the <a class="el" href="classBlock.html">Block</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector iterator</dd></dl>
+<p>Returns an iterator to the end of the <a class="el" href="classData.html">Data</a> collection </p>
+
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00150">150</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a81472192b1066db0ae3e723adb86d2fc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classData.html">Data</a> &gt;::iterator Block::find </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>s</em></td><td>)</td>
@@ -206,77 +292,15 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get a <a class="el" href="classData.html">Data</a> block given the signature </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Get a <a class="el" href="classData.html">Data</a> block given the index </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">s</td><td>The signature of the <a class="el" href="classData.html">Data</a> object to return </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The requested <a class="el" href="classData.html">Data</a> block or nullptr </dd></dl>
-
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00093">93</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a77870f456f3d29be2f130aa44ee1dedb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classData.html">Data</a> * Block::get_data </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get a <a class="el" href="classData.html">Data</a> block given the index </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i</td><td>The index of the <a class="el" href="classData.html">Data</a> object to return </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd>The requested <a class="el" href="classData.html">Data</a> block or empty pointer </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00116">116</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a036292aef432e92a9b70cf1072c845b8"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classData.html">Data</a> * &gt; Block::get_data </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get all <a class="el" href="classData.html">Data</a> objects </p><dl class="section return"><dt>Returns</dt><dd>A vector of <a class="el" href="classData.html">Data</a> pointers </dd></dl>
-
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00123">123</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a952d5c0e36a541600f47ab7c96553bdb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Block::get_previous </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get the hash of the previous block </p><dl class="section return"><dt>Returns</dt><dd>The hash of the previous block</dd></dl>
-<p>Get the hash of the previous block </p>
-
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00161">161</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00100">100</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -316,129 +340,28 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5b6b7d4ae2ce01a09a8faab83842b69a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Block::new_nonce </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Generate a new random long between 1 and LONG_MAX </p><dl class="section return"><dt>Returns</dt><dd>A random number </dd></dl>
-
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00056">56</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3acdc592cef0e80514cf58538ef89343"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Block::new_timestamp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Get a UNIX timestamp </p><dl class="section return"><dt>Returns</dt><dd>a timestamp as a long </dd></dl>
-
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00064">64</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a676f0789b957010eca8e84598b89c7bc"></a>
+<a class="anchor" id="ab42c53898f487472ae314f3d86617a5f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Block::remove_data </td>
+          <td class="memname">std::string Block::previous </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
+          <td class="paramname"><em>h</em> = <code>&quot;&quot;</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Remove a <a class="el" href="classData.html">Data</a> block </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>The signature of the block to remove </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if found </dd></dl>
-
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00150">150</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7dfe940380c63b066dd50190cf0c83fb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Block::set_previous </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>h</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Set the hash of the previous block </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Get or set the hash of the previous block </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">h</td><td>The hash to set</td></tr>
   </table>
   </dd>
 </dl>
-<p>Set the hash of the previous block </p>
+<p>Get or set the hash of the previous block </p>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00166">166</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0c674b22a50ab6651bd1a1d008ccf315"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Block::set_trust </td>
-          <td>(</td>
-          <td class="paramtype">std::map&lt; std::string, float &gt;&#160;</td>
-          <td class="paramname"><em>trust</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Update the trust for signatures </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">trust</td><td>A map of public keys and current trust </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00105">105</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00125">125</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -456,7 +379,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get number of <a class="el" href="classData.html">Data</a> objects in the <a class="el" href="classBlock.html">Block</a> </p><dl class="section return"><dt>Returns</dt><dd>Size of the <a class="el" href="classBlock.html">Block</a> as size_t </dd></dl>
 
-<p>Definition at line <a class="el" href="block_8cpp_source.html#l00170">170</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8cpp_source.html#l00156">156</a> of file <a class="el" href="block_8cpp_source.html">block.cpp</a>.</p>
 
 </div>
 </div>
@@ -480,11 +403,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Counter to modify hash output </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00051">51</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00047">47</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2f3f9699a06db124c08ceabbc330d528"></a>
+<a class="anchor" id="ad39c219832b0745bfe35ca1c49cd6a2b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -492,7 +415,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classData.html">Data</a>*&gt; Block::data</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classData.html">Data</a>&gt; Block::data</td>
         </tr>
       </table>
   </td>
@@ -503,7 +426,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Contained <a class="el" href="classData.html">Data</a> objects </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00046">46</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00042">42</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -526,11 +449,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Randomly generated value to modify hash </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00049">49</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00045">45</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a7d00d09357ecd86f79e169016eb49104"></a>
+<a class="anchor" id="a7b067da7a49637a3967093bfb4efa85a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -538,7 +461,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Block::previous</td>
+          <td class="memname">std::string Block::prev</td>
         </tr>
       </table>
   </td>
@@ -549,7 +472,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Hash of the previous block </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00047">47</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00043">43</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +495,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>A timestamp </p>
 
-<p>Definition at line <a class="el" href="block_8hpp_source.html#l00050">50</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
+<p>Definition at line <a class="el" href="block_8hpp_source.html#l00046">46</a> of file <a class="el" href="block_8hpp_source.html">block.hpp</a>.</p>
 
 </div>
 </div>
@@ -586,7 +509,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBlock.html">Block</a></li>
-    <li class="footer">Generated on Sat Jan 6 2018 17:23:11 for ReChain by
+    <li class="footer">Generated on Mon Jan 8 2018 09:43:18 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

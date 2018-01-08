@@ -31,7 +31,7 @@
 #include <vector>
 #include <memory>
 #include <map>
-
+#include "block.hpp"
 class Block;
 class Data;
 
@@ -40,9 +40,9 @@ class Data;
 */
 class BlockChain {
 	private:
-		std::vector<Block*> blockchain;		/**< Collection of Block objects*/
+		std::vector<Block> blockchain;		/**< Collection of Block objects*/
 
-		Block* current;				/**< Current working Block*/
+		Block current;				/**< Current working Block*/
 
 		std::map<std::string,float> usr_trust;	/**< Trust of public keys*/
 		std::map<std::string,float> pub_trust;	/**< Trust of publications*/
@@ -63,21 +63,36 @@ class BlockChain {
 		// Mining Methods
 
 		/** Create a new Block
-		    \returns A pointer to the BlockChain
+		    \returns A reference to the BlockChain
 		*/
-		BlockChain* open_block();
+		BlockChain& new_block();
 
 		/** Add Data to an open Block
 		    \param d A pointer to a Data block
 		    \returns A pointer to the BlockChain
 		*/
-		BlockChain* with_data( Data* d );
+		BlockChain& with_data( Data d );
 
 		/** Mine the current Block to the BlockChain
 		    \returns The valid hash of the new Block
 		*/	
 		std::string mine();
 
+		// ------------------------------------------------------
+		// Accessor Methods
+
+		Block& operator[] ( unsigned int i ){
+			return this->blockchain[i];
+		}
+
+		BlockChain& operator=( const BlockChain& b ){
+			this->blockchain = b.blockchain;
+			this->current	 = b.current;
+			this->usr_trust	 = b.usr_trust;
+			this->pub_trust	 = b.pub_trust;
+			return *this;
+		}
+		
 		// ------------------------------------------------------
 		// Trust Methods
 
@@ -109,24 +124,24 @@ class BlockChain {
 		/** Return an iterator to the start of the BlockChain
 		    \returns An iterator
 		*/
-		std::vector<Block*>::iterator begin();
+		std::vector<Block>::iterator begin();
 
 		/** Returns an iterator to the beginning of the BlockChain
 		    \param b A reference to the BlockChain
 		    \returns A vector iterator
 		*/
-		std::vector<Block*>::iterator begin( BlockChain& b );
+		std::vector<Block>::iterator begin( BlockChain& b );
 		
 		/** Returns an iterator to the end of the BlockChain
 		   \returns A vector iterator
 		*/ 
-		std::vector<Block*>::iterator end();
+		std::vector<Block>::iterator end();
 		
 		/** Returns an iterator to the end of the BlockChain
 		    \param b A reference to the BlockChain
 		    \returns A vector iterator
 		*/
-		std::vector<Block*>::iterator end( BlockChain& b );
+		std::vector<Block>::iterator end( BlockChain& b );
 
 		// ------------------------------------------------------
 		// Utility Methods

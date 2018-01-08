@@ -2,6 +2,7 @@ var classData =
 [
     [ "Data", "classData.html#af11f741cb7f587e2e495452a8905a22a", null ],
     [ "Data", "classData.html#a7edd155cb35f9ecbcfa9541d5bb5d31e", null ],
+    [ "Data", "classData.html#ad5509b629c6187fe3083016ff0fda3f4", null ],
     [ "~Data", "classData.html#aab31956423290f0d62dcca47ab4d16dd", null ],
     [ "get_address", "classData.html#a191543e667ef89f0ca8a2bee2b4c11d1", null ],
     [ "get_block_ref", "classData.html#a35553b957d4132194d26c93946490b8a", null ],

@@ -29,32 +29,26 @@
 		
 /* Empty constructor
 */
-BlockChain::BlockChain() : current(nullptr) {}
+BlockChain::BlockChain() {}
 
 /* Empty destructor
 */
 BlockChain::~BlockChain(){
-	for(auto b : this->blockchain){ delete b; }
 	this->blockchain.clear();
-
-	delete this->current;
-	this->current = nullptr;
 }
 
 /* Create a new Block
 */
-BlockChain* BlockChain::open_block(){
-	if(!this->current) this->current = new Block();
-	return this;
+BlockChain& BlockChain::new_block(){
+	this->current = Block();
+	return *this;
 }
 
 /* Add Data to an open Block
 */
-BlockChain* BlockChain::with_data( Data* d ){
-	if(this->current){
-		this->current->add_data(d);
-	}
-	return this;
+BlockChain& BlockChain::with_data( Data d ){
+	this->current.add(d);
+	return *this;
 }
 
 /* Update trust maps
@@ -66,28 +60,28 @@ void BlockChain::update_trust(){
 
 	std::map<std::string,std::string> ref;
 
-	if(!this->blockchain.empty()){
-		std::string gen_key = this->blockchain.at(0)->get_data(0)->get_public_key();
+	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
+		std::string gen_key = this->blockchain[0][0].get_public_key();
 		this->usr_trust.insert( std::make_pair(gen_key,1.0f) );
 
 		for(auto b : this->blockchain){
-			for(auto d : b->get_data()){
-				switch( d->get_data_type() ){
+			for(auto d : b){
+				switch( d.get_data_type() ){
 					case DataType::Publication:
 
 						// init a trust entry for the publisher
-						this->usr_trust.insert( std::make_pair( d->get_public_key(), 0.0f ) );
+						this->usr_trust.insert( std::make_pair( d.get_public_key(), 0.0f ) );
 						
 						// update the signature -> user reference
-						ref.insert( std::make_pair( d->get_signature(), d->get_public_key() ) );	
+						ref.insert( std::make_pair( d.get_signature(), d.get_public_key() ) );	
 						
 						break;
 					case DataType::Signature:
 						{
 							// Get publication reference, the signer and signee
 							// public keys
-							std::string pubref = d->get_data_ref();
-							std::string signer = d->get_public_key();
+							std::string pubref = d.get_data_ref();
+							std::string signer = d.get_public_key();
 							std::string signee = ref[pubref];
 
 							float ct = this->usr_trust[signer]/2.0f;// index will return 0.0f by default
@@ -108,22 +102,27 @@ void BlockChain::update_trust(){
 */
 std::string BlockChain::mine(){	
 	std::string hash; 
-	if(this->current){
+	if(this->current.size() > 0){
 		// Update trust on the block if it's a signature
-		this->current->set_trust( this->get_publication_trust() );
+		for(auto d : this->current){
+			if(d.get_data_type() == DataType::Signature){
+				float t = this->pub_trust[d.get_public_key()];
+				d.set_trust( t );
+			}
+		}
 
 		// Check if the chain has a genesis block
 		if(this->blockchain.size() > 0){
-			this->current->set_previous(this->blockchain.back()->hash());
+			this->current.previous(this->blockchain.back().hash());
 		}
 
 		// Get the hash to return
-		hash = this->current->mine();
+		hash = this->current.mine();
 
 		// Add to the chain
 		this->blockchain.push_back( this->current );
-		this->current = nullptr;
-		
+		this->current = Block();	
+	
 		// Update trust maps
 		this->update_trust();
 	}
@@ -156,25 +155,25 @@ std::map<std::string,float> BlockChain::get_user_trust(){
 
 /* Iterator begin
 */
-std::vector<Block*>::iterator BlockChain::begin(){
+std::vector<Block>::iterator BlockChain::begin(){
 	return this->blockchain.begin();
 }
 
 /* Iterator begin with reference
 */
-std::vector<Block*>::iterator BlockChain::begin( BlockChain& b ){
+std::vector<Block>::iterator BlockChain::begin( BlockChain& b ){
 	return b.blockchain.begin();
 }
 
 /* Iterator end
 */
-std::vector<Block*>::iterator BlockChain::end(){
+std::vector<Block>::iterator BlockChain::end(){
 	return this->blockchain.end();
 }
 
 /* Iterator end with reference
 */
-std::vector<Block*>::iterator BlockChain::end( BlockChain& b ){
+std::vector<Block>::iterator BlockChain::end( BlockChain& b ){
 	return b.blockchain.end();
 }
 

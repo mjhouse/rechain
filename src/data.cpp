@@ -24,6 +24,12 @@
 
 #include <string>
 
+/** Constructor that initializes the Address and signs
+*/
+Data::Data( Address a, PrivateKey* p ) : address(a) , trust(0) {
+	p->sign( this );
+}
+
 void Data::set_trust( float t ){ this->trust = t; }
 float Data::get_trust(){ return this->trust; }
 

@@ -22,13 +22,9 @@
 #ifndef _BLOCK_HPP_
 #define _BLOCK_HPP_
 
-// dependency includes
-#include <cryptopp/osrng.h>		// for the AutoSeededRandomPool
-#include <cryptopp/integer.h>	// for Integer data type
-
 // system includes
 #include <vector>
-#include <chrono>
+#include <map>
 #include <string>
 
 /* Maximum hash value (smaller increases difficulty) */
@@ -43,33 +39,19 @@ class Data;
 */
 class Block {
 	private:
-		std::vector<Data*> data;				/**< Contained Data objects*/
-		std::string previous;					/**< Hash of the previous block */
+		std::vector<Data> data;		/**< Contained Data objects*/
+		std::string prev;		/**< Hash of the previous block */
 
-		long nonce;						/**< Randomly generated value to modify hash */
-		long timestamp;						/**< A timestamp */
-		unsigned int counter;					/**< Counter to modify hash output */
-
-		/** Generate a new random long between 1 and LONG_MAX
-			\returns A random number
-		*/
-		inline long new_nonce(){
-			CryptoPP::AutoSeededRandomPool rng;
-			return CryptoPP::Integer(rng,CryptoPP::Integer(1),CryptoPP::Integer(LONG_MAX)).ConvertToLong();
-		}
-
-		/** Get a UNIX timestamp
-			\returns a timestamp as a long
-		*/
-		inline long new_timestamp(){
-			auto e = std::chrono::system_clock::now().time_since_epoch();
-			auto seconds = std::chrono::duration_cast<std::chrono::seconds>(e).count();
-			return (long)seconds;
-		}
+		long nonce;			/**< Randomly generated value to modify hash */
+		long timestamp;			/**< A timestamp */
+		unsigned int counter;		/**< Counter to modify hash output */
 
 	public:
 		Block() : nonce(0), timestamp(0), counter(0) {}
 		~Block();
+		
+		// ------------------------------------------------------
+		// Mining Methods
 
 		/** Get the hash of this block
 			\returns The current hash of the block
@@ -82,54 +64,69 @@ class Block {
 		*/
 		std::string mine();
 
-		/** Update the trust for signatures
-		    \param trust A map of public keys and current trust
-		*/
-		void set_trust( std::map<std::string,float> trust );
-		
-		/** Get a Data block given the signature
-			\param s The signature of the Data object to return
-			\returns The requested Data block or nullptr
-		*/
-		Data* get_data( std::string s );
+		// ------------------------------------------------------
+		// Accessor Methods
 
+		Data& operator[] ( unsigned int i ){
+			return this->data[i];
+		}
+		
+		Block& operator=( const Block& b ){
+			this->data	= b.data;
+			this->prev	= b.prev;
+			this->nonce	= b.nonce;
+			this->timestamp	= b.timestamp;
+			this->counter	= b.counter;
+			return *this;
+		}
+ 
 		/** Get a Data block given the index
-		    \param i The index of the Data object to return
+		    \param s The signature of the Data object to return
 		    \returns The requested Data block or empty pointer
 		*/
-		Data* get_data( unsigned int i );
-		
-		/** Get all Data objects
-		    \returns A vector of Data pointers
-		*/
-		std::vector<Data*> get_data();
-
+		std::vector<Data>::iterator find( std::string s );
 
 		/** Add a Data block
 			\param d The block to add
 			\returns True if Data was added
 		*/
-		bool add_data( Data* d );
+		bool add( Data& d );
 
-		/** Remove a Data block
-			\param s The signature of the block to remove
-			\return True if found
-		*/
-		void remove_data( std::string s );
-		
-		/** Get the hash of the previous block
-		    \returns The hash of the previous block
-		*/
-		std::string get_previous();
-
-
-		/** Set the hash of the previous block
+		/** Get or set the hash of the previous block
 		    \param h The hash to set
 		*/
-		void set_previous( std::string h );
+		std::string previous( std::string h = "" );
 
+		// ------------------------------------------------------
+		// Iterator Methods
+		
+		/** Return an iterator to the start of the Data
+		    \returns An iterator
+		*/
+		std::vector<Data>::iterator begin();
+
+		/** Returns an iterator to the beginning of the Data
+		    \param b A reference to the Block
+		    \returns A vector iterator
+		*/
+		std::vector<Data>::iterator begin( Block& b );
+		
+		/** Returns an iterator to the end of the Data collection
+		    \returns A vector iterator
+		*/ 
+		std::vector<Data>::iterator end();
+		
+		/** Returns an iterator to the end of the Data collection
+		    \param b A reference to the Block
+		    \returns A vector iterator
+		*/
+		std::vector<Data>::iterator end( Block& b );
+
+		// ------------------------------------------------------
+		// Utility Methods
+		
 		/** Get number of Data objects in the Block
-			\returns Size of the Block as size_t
+		    \returns Size of the Block as size_t
 		*/
 		size_t size();
 };

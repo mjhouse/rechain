@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['to_5fstring',['to_string',['../classData.html#a5030562a5c23fca3e952777a68dd1d71',1,'Data::to_string()'],['../classKey.html#a5be9347813dd1648ee07427bf2971eba',1,'Key::to_string()']]]
+  ['verify',['verify',['../classData.html#a87e3e7ff9f51a57a6c691e11ee3955f9',1,'Data::verify()'],['../classPublicKey.html#a4c900e956fc0149e4ea4090f3f94dff5',1,'PublicKey::verify()']]]
 ];

@@ -97,9 +97,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_l"><span>l</span></a></li>
       <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_n"><span>n</span></a></li>
-      <li><a href="#index_o"><span>o</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
-      <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
@@ -141,8 +139,8 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
-<li>add_data()
-: <a class="el" href="classBlock.html#a7c5288536412f34c7f0ff0f84af67054">Block</a>
+<li>add()
+: <a class="el" href="classBlock.html#a1540ba3423f33430abd988efb7edd986">Block</a>
 </li>
 <li>address
 : <a class="el" href="classData.html#a3a39112a2aceb187f5e40e99f472d3c4">Data</a>
@@ -152,13 +150,14 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
 <li>begin()
-: <a class="el" href="classBlockChain.html#ab7281cf79d9320bcc314094cfe308427">BlockChain</a>
-</li>
-<li>blockchain
-: <a class="el" href="classBlockChain.html#afc7da81f9015b598d7439ad76160a5f4">BlockChain</a>
+: <a class="el" href="classBlock.html#aa8766ef09354a05b4143d53b22c9e413">Block</a>
+, <a class="el" href="classBlockChain.html#a13d16503865eeecb4c27635fa0677b62">BlockChain</a>
 </li>
 <li>BlockChain()
 : <a class="el" href="classBlockChain.html#acf99d40594ac22787e424cab7850b626">BlockChain</a>
+</li>
+<li>blockchain
+: <a class="el" href="classBlockChain.html#a9e885cdf4c59b225b8a4efd70ce084f0">BlockChain</a>
 </li>
 </ul>
 
@@ -168,17 +167,17 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="classBlock.html#a96a75420cb1bb31ac1d6c3d9a79e2db1">Block</a>
 </li>
 <li>current
-: <a class="el" href="classBlockChain.html#ad3740a283256898a241820f91a0fb7b8">BlockChain</a>
+: <a class="el" href="classBlockChain.html#a288c8c10e0586dfe6bc0bbd638c0d778">BlockChain</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
 <li>data
-: <a class="el" href="classBlock.html#a2f3f9699a06db124c08ceabbc330d528">Block</a>
+: <a class="el" href="classBlock.html#ad39c219832b0745bfe35ca1c49cd6a2b">Block</a>
 </li>
 <li>Data()
-: <a class="el" href="classData.html#af11f741cb7f587e2e495452a8905a22a">Data</a>
+: <a class="el" href="classData.html#a7edd155cb35f9ecbcfa9541d5bb5d31e">Data</a>
 </li>
 </ul>
 
@@ -188,12 +187,16 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="classKey.html#a08e57890f02ba908908a2cce74718569">Key&lt; T, K &gt;</a>
 </li>
 <li>end()
-: <a class="el" href="classBlockChain.html#a613611e8f24ad7677bfbf9d3c4af4867">BlockChain</a>
+: <a class="el" href="classBlock.html#acda7f847bb3869e9deedaf4b823043a6">Block</a>
+, <a class="el" href="classBlockChain.html#a421582ef0bc70f4c7198dda062e85cad">BlockChain</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>find()
+: <a class="el" href="classBlock.html#a81472192b1066db0ae3e723adb86d2fc">Block</a>
+</li>
 <li>from_string()
 : <a class="el" href="classKey.html#a1aeb68a09e5a9316487c1c966d6053ab">Key&lt; T, K &gt;</a>
 </li>
@@ -211,9 +214,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>get_block_ref()
 : <a class="el" href="classData.html#a35553b957d4132194d26c93946490b8a">Data</a>
 </li>
-<li>get_data()
-: <a class="el" href="classBlock.html#ab986a8904bc2307ac383e548137704bd">Block</a>
-</li>
 <li>get_data_ref()
 : <a class="el" href="classData.html#a1d6cb4a353e5961576da8411bc909ab3">Data</a>
 </li>
@@ -223,14 +223,11 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>get_key()
 : <a class="el" href="classKey.html#a95aeb74991b64b8555332f0b9b391797">Key&lt; T, K &gt;</a>
 </li>
-<li>get_previous()
-: <a class="el" href="classBlock.html#a952d5c0e36a541600f47ab7c96553bdb">Block</a>
-</li>
 <li>get_public_key()
 : <a class="el" href="classData.html#ac5d9492436ae5405e677f9c4cdabf2ec">Data</a>
 </li>
 <li>get_publication_trust()
-: <a class="el" href="classBlockChain.html#a4d6ca6b4b64a6a7afbfd8a4b46c2ec28">BlockChain</a>
+: <a class="el" href="classBlockChain.html#a1d0158b65237eaaeace82540355c02f0">BlockChain</a>
 </li>
 <li>get_signature()
 : <a class="el" href="classData.html#a39dde1e822986954b6656d5fe0a728b3">Data</a>
@@ -280,11 +277,8 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 
 <h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
-<li>new_nonce()
-: <a class="el" href="classBlock.html#a5b6b7d4ae2ce01a09a8faab83842b69a">Block</a>
-</li>
-<li>new_timestamp()
-: <a class="el" href="classBlock.html#a3acdc592cef0e80514cf58538ef89343">Block</a>
+<li>new_block()
+: <a class="el" href="classBlockChain.html#a2875acf13b83a89cddcebe92368456ba">BlockChain</a>
 </li>
 <li>nonce
 : <a class="el" href="classBlock.html#a5dc13805185f799f0057e3dd9c5179a7">Block</a>
@@ -292,16 +286,12 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </ul>
 
 
-<h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
-<li>open_block()
-: <a class="el" href="classBlockChain.html#addbf5c55d78fa5c98a131096e93ba645">BlockChain</a>
-</li>
-</ul>
-
-
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
-<li>previous
-: <a class="el" href="classBlock.html#a7d00d09357ecd86f79e169016eb49104">Block</a>
+<li>prev
+: <a class="el" href="classBlock.html#a7b067da7a49637a3967093bfb4efa85a">Block</a>
+</li>
+<li>previous()
+: <a class="el" href="classBlock.html#ab42c53898f487472ae314f3d86617a5f">Block</a>
 </li>
 <li>PrivateKey()
 : <a class="el" href="classPrivateKey.html#ad3e7fd1d3fd3552a52b5425e37b02e85">PrivateKey</a>
@@ -314,13 +304,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>PublicKey()
 : <a class="el" href="classPublicKey.html#af4c4839004f3b4f54dc5320a602e7547">PublicKey</a>
-</li>
-</ul>
-
-
-<h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
-<li>remove_data()
-: <a class="el" href="classBlock.html#a676f0789b957010eca8e84598b89c7bc">Block</a>
 </li>
 </ul>
 
@@ -344,9 +327,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>set_key()
 : <a class="el" href="classKey.html#ab73e562ed50f209dcf0f6b08104fffd9">Key&lt; T, K &gt;</a>
 </li>
-<li>set_previous()
-: <a class="el" href="classBlock.html#a7dfe940380c63b066dd50190cf0c83fb">Block</a>
-</li>
 <li>set_public_key()
 : <a class="el" href="classData.html#a7fb2e80a9eff98e9aaf46f65e005cd81">Data</a>
 </li>
@@ -354,8 +334,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="classData.html#a1387fea5776a7d586b310198e66bb1ab">Data</a>
 </li>
 <li>set_trust()
-: <a class="el" href="classBlock.html#a0c674b22a50ab6651bd1a1d008ccf315">Block</a>
-, <a class="el" href="classData.html#adf3d31b9b28b07c16268ad8eaf1d8558">Data</a>
+: <a class="el" href="classData.html#adf3d31b9b28b07c16268ad8eaf1d8558">Data</a>
 </li>
 <li>sign()
 : <a class="el" href="classPrivateKey.html#a9cd9811230f8d36f856bbbc45d44de57">PrivateKey</a>
@@ -404,7 +383,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 <h3><a class="anchor" id="index_w"></a>- w -</h3><ul>
 <li>with_data()
-: <a class="el" href="classBlockChain.html#adf4334f40e64ee459339adfda31db0c2">BlockChain</a>
+: <a class="el" href="classBlockChain.html#a940d9fd1551c6c48068c8a19e94186fe">BlockChain</a>
 </li>
 </ul>
 
@@ -422,7 +401,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Jan 6 2018 17:23:11 for ReChain by
+    <li class="footer">Generated on Mon Jan 8 2018 09:43:18 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

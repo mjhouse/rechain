@@ -31,6 +31,8 @@
 #include <memory>
 #include <string>
 
+class PrivateKey;
+
 /** An enumerated type for defining different
 	kinds of Address references.
 */
@@ -55,11 +57,16 @@ class Data {
 		/** Empty constructor */
 		Data(){}
 
-		/** Constructor that initializes the
-			Address.
-			\param a The Address to use
+		/** Constructor that initializes the Address.
+		    \param a The Address to use
 		*/
 		Data( Address a ) : address(a) , trust(0) {}
+
+		/** Constructor that initializes the Address and signs
+		    \param a The Address to use
+		    \param p The PrivateKey to sign with
+		*/
+		Data( Address a, PrivateKey* p );
 
 		/** Empty destructor */
 		~Data(){}
