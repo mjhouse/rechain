@@ -113,7 +113,7 @@ Block& Block::operator=( const Block& b ){
 }
 /* Get an iterator to a Data block given the signature
 */
-std::vector<Data>::iterator Block::find( std::string s ){
+Block::iterator Block::find( std::string s ){
 	return std::find_if(this->data.begin(),this->data.end(),
 	[&s](Data& d){
 		return (d.get_signature() == s);
@@ -145,13 +145,13 @@ std::string Block::previous( std::string h ){
 
 /** Return an iterator to the start of the Data
 */
-std::vector<Data>::iterator Block::begin(){ 
+Block::iterator Block::begin(){ 
 	return this->data.begin();
 }
 
 /** Returns an iterator to the end of the Data collection
 */ 
-std::vector<Data>::iterator Block::end(){
+Block::iterator Block::end(){
 	return this->data.end();
 }
 

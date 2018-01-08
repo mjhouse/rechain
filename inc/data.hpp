@@ -54,6 +54,7 @@ class Data {
 		float trust;			/**< Recorded trust for Signature records*/
 
 	public:
+		
 		/** Empty constructor */
 		Data(){}
 

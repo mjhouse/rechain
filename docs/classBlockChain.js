@@ -1,9 +1,10 @@
 var classBlockChain =
 [
+    [ "iterator", "classBlockChain.html#abdff7c5523028944b11547d27100ac0a", null ],
     [ "BlockChain", "classBlockChain.html#acf99d40594ac22787e424cab7850b626", null ],
     [ "~BlockChain", "classBlockChain.html#a671e66ac51d33a75495a09398a0f764e", null ],
-    [ "begin", "classBlockChain.html#a7d7f15661d3016a4e7ec1f9fb18a8d7c", null ],
-    [ "end", "classBlockChain.html#a421582ef0bc70f4c7198dda062e85cad", null ],
+    [ "begin", "classBlockChain.html#a992631fb0424bd3861f6e78e7a90a410", null ],
+    [ "end", "classBlockChain.html#ad951d129fca84317ef4c321d3dd61c20", null ],
     [ "get_publication_trust", "classBlockChain.html#a1d0158b65237eaaeace82540355c02f0", null ],
     [ "get_publication_trust", "classBlockChain.html#a4d6ca6b4b64a6a7afbfd8a4b46c2ec28", null ],
     [ "get_user_trust", "classBlockChain.html#ac659c7f7ba71962bc8ddd12fd70d80c8", null ],

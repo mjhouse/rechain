@@ -171,13 +171,13 @@ std::map<std::string,float> BlockChain::get_user_trust(){
 
 /* Iterator begin
 */
-std::vector<Block>::iterator BlockChain::begin(){
+BlockChain::iterator BlockChain::begin(){
 	return this->blockchain.begin();
 }
 
 /* Iterator end
 */
-std::vector<Block>::iterator BlockChain::end(){
+BlockChain::iterator BlockChain::end(){
 	return this->blockchain.end();
 }
 

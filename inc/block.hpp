@@ -23,8 +23,8 @@
 #define _BLOCK_HPP_
 
 // system includes
-#include <vector>
 #include <map>
+#include <vector>
 #include <string>
 
 /* Maximum hash value (smaller increases difficulty) */
@@ -47,6 +47,9 @@ class Block {
 		unsigned int counter;		/**< Counter to modify hash output */
 
 	public:
+		/** Define a Data iterator */
+		typedef std::vector<Data>::iterator iterator;
+
 		Block() : nonce(0), timestamp(0), counter(0) {}
 		~Block();
 		
@@ -83,7 +86,7 @@ class Block {
 		    \param s The signature of the Data object to return
 		    \returns The requested Data block or empty pointer
 		*/
-		std::vector<Data>::iterator find( std::string s );
+		Block::iterator find( std::string s );
 
 		/** Add a Data block
 		    \param d The block to add
@@ -103,12 +106,12 @@ class Block {
 		/** Return an iterator to the start of the Data
 		    \returns An iterator
 		*/
-		std::vector<Data>::iterator begin();
+		Block::iterator begin();
 
 		/** Returns an iterator to the end of the Data collection
 		    \returns A vector iterator
 		*/ 
-		std::vector<Data>::iterator end();
+		Block::iterator end();
 		
 		// ------------------------------------------------------
 		// Utility Methods

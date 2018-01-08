@@ -52,6 +52,9 @@ class BlockChain {
 		*/	
 		void update_trust();	
 	public:
+		/** Define a BlockChain iterator */
+		typedef std::vector<Block>::iterator iterator;
+
 		/** Empty constructor
 		*/
 		BlockChain();
@@ -127,12 +130,12 @@ class BlockChain {
 		/** Return an iterator to the start of the BlockChain
 		    \returns An iterator
 		*/
-		std::vector<Block>::iterator begin();
+		BlockChain::iterator begin();
 
 		/** Returns an iterator to the end of the BlockChain
 		   \returns A vector iterator
 		*/ 
-		std::vector<Block>::iterator end();
+		BlockChain::iterator end();
 
 		// ------------------------------------------------------
 		// Utility Methods

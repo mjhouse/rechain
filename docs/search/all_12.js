@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['verify',['verify',['../classData.html#a87e3e7ff9f51a57a6c691e11ee3955f9',1,'Data::verify()'],['../classPublicKey.html#a4c900e956fc0149e4ea4090f3f94dff5',1,'PublicKey::verify()']]]
+  ['update_5ftrust',['update_trust',['../classBlockChain.html#a82851a102065917794e939b1bbd91633',1,'BlockChain']]],
+  ['usr_5ftrust',['usr_trust',['../classBlockChain.html#a4da20930058912e98af0e2bcb461ab61',1,'BlockChain']]]
 ];

@@ -60,13 +60,6 @@ TEST_CASE( "blockchain tests", "[blockchain]" ){
 			REQUIRE_FALSE(it == hashes.end());
 		}
 	}
-	SECTION( "blockchain is explicitly iterable" ){
-		for(std::vector<Block>::iterator it = blockchain.begin(); it != blockchain.end(); ++it){
-			Block& b = *it;
-			auto h_it = std::find(hashes.begin(),hashes.end(),b.hash());
-			REQUIRE_FALSE(h_it == hashes.end());
-		}
-	}
 	SECTION( "blockchain can be copied" ){
 		BlockChain b;
 		b = blockchain;
