@@ -56,22 +56,27 @@ class BlockChain {
 
 		std::map<std::string,float> usr_trust;	/**< Trust of public keys*/
 		std::map<std::string,float> pub_trust;	/**< Trust of publications*/
-	
+
+		/** Empty constructor
+		*/
+		BlockChain(){};
+
 		/** Update 'usr_trust' and 'pub_trust'
 		*/	
 		void update_trust();	
 	public:
 		/** Define a BlockChain iterator */
 		typedef std::vector<Block>::iterator iterator;
-
-		/** Empty constructor
+		
+		/** Singleton creation method
+			\returns The BlockChain
 		*/
-		BlockChain();
+		static BlockChain* get_blockchain();
 
 		/** Empty destructor
 		*/
-		~BlockChain();
-
+		~BlockChain(){};
+		
 		// ------------------------------------------------------
 		// Mining Methods
 

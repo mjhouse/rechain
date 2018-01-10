@@ -30,17 +30,14 @@
 #include "blockchain.hpp"
 #include "block.hpp"
 #include "data.hpp"
-		
-/* Empty constructor
-*/
-BlockChain::BlockChain(){}
 
-/* Empty destructor
+/* Get or create a new BlockChain
 */
-BlockChain::~BlockChain(){
-	this->blockchain.clear();
+BlockChain* BlockChain::get_blockchain(){
+	static BlockChain* b = new BlockChain();
+	return b;
 }
-
+		
 /* Create a new Block
 */
 BlockChain& BlockChain::new_block(){

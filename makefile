@@ -1,5 +1,4 @@
 CPP=g++
-CPPFLAGS = -std=c++11 -lcrypto++
 
 TARGET = bin/rechain
 OUTDIR = bin
@@ -21,14 +20,16 @@ TOBJECTS := $(patsubst %.cpp, $(BLDDIR)/%.o, $(notdir $(TSOURCES)))
 # ----------------------------------------------------------------------
 # DON'T EDIT BELOW THIS LINE
 # ----------------------------------------------------------------------
-debug: CPPFLAGS = -std=c++11 -lcrypto++ -Wall -Wextra -Wpedantic -g -ggdb -lcrypto++
+all: ./configure.sh
+
+debug: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -ggdb -lcrypto++
 debug: link-debug
 
-test: CPPFLAGS = -std=c++11 -lcrypto++ -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage 
+test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage 
 test: link-test
 	./bin/rechain
 
-release: CPPFLAGS = -std=c++11 -lcrypto++ -O3
+release: CPPFLAGS = -std=c++11 -lpthread -lcrypto++ -O3
 release: link-release
 
 # LINK

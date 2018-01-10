@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['usr_5ftrust',['usr_trust',['../classBlockChain.html#a4da20930058912e98af0e2bcb461ab61',1,'BlockChain']]]
+  ['signature',['signature',['../classData.html#a0919bbd455823820d6b07e0f70d526e5',1,'Data']]]
 ];

@@ -32,7 +32,23 @@
 #include "block.hpp"
 #include "blockchain.hpp"
 
+#define trim_slash(X)(\
+)
+
+
+int Interface::help(){}
+
+int Interface::blockchain(){}
+
+int Interface::publish( std::string s ){}
+
+int Interface::sign( std::string s ){}
+
+int Interface::list(){}
+
 int Interface::execute(){
+
+	std::shared_ptr<BlockChain> blockchain(BlockChain::get_blockchain());
 	
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()
@@ -42,9 +58,6 @@ int Interface::execute(){
 		("s,sign","Sign a published document",cxxopts::value<std::string>(),"<path>")
 		("l,list","List published documents");
 
-	BlockChain blockchain;
-	std::string blockchain_path;
-
 	try {
 		
 		auto result = options.parse(this->argc,this->argv);
@@ -52,52 +65,42 @@ int Interface::execute(){
 		if(result.count("help")){
 			std::cout << options.help() << std::endl;
 		} else {
-			// paths to search for blockchain file
-			std::vector<std::string> paths;
-
-			// if a file is provided, add it first
-			if(result.count("blockchain"))
-				paths.push_back(result["b"].as<std::string>());
-
-
-			// Look in the homedir under .rechain
-			std::string path = getenv("HOME");
-			path.append("/.rechain/rechain.blockchain");
-
-			// Look in the local dir
-			paths.push_back(path);
-			paths.push_back("rechain.blockchain");
-
-			// Try to load from each path in order- 
-			// the one that works is saved
-			for(auto p : paths){
-				if(blockchain.load(p)) break;
+			
+			if(result.count("blockchain")){
+				if(!blockchain->load(result["b"].as<std::string>())){
+					this->log->error("Couldn't load blockchain from {}",
+						result["b"].as<std::string>());
+				}
+			} 
+			else if(!this->home.empty()){
+				std::string bpath = trim(this->home) + "/rechain.blockchain";
+				if(!blockchain->load(bpath)){
+					this->log->error("Couldn't load blockchain from {}",bpath);
+				}
+			}
+			else {
+				this->log->error("Can't find a blockchain file!");
 			}
 
+			if(result.count("help")){
+				return this->help();
+			}
+			
 			if(result.count("publish")){
-				std::string fpath = result["p"].as<std::string>();
-				std::cout << fpath << std::endl;
+				return this->publish(result["p"].as<std::string>());
 			}
 			
 			if(result.count("sign")){
-				// I don't know exactly how this will work
+				return this->sign(result["s"].as<std::string>());
 			}
 			
 			if(result.count("list")){
-				for(auto block : blockchain){
-					for(auto data : block){
-						if(data.get_data_type() == DataType::Publication){
-							std::cout	<< data.get_data_ref().substr(0,20)
-									<< "..." << std::endl;
-						}
-					}
-				}
+				return this->list();
 			}
 		}
 
 	} catch (const cxxopts::OptionException& e){
-		std::cout << options.help() << std::endl;
-		return 1;
+		// ERROR can't parse args
 	}
 
 	return 0;
