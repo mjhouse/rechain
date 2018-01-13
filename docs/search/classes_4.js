@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['privatekey',['PrivateKey',['../classPrivateKey.html',1,'']]],
-  ['publickey',['PublicKey',['../classPublicKey.html',1,'']]]
+  ['log',['Log',['../classLog.html',1,'']]],
+  ['logger',['Logger',['../classLogger.html',1,'']]]
 ];

@@ -71,7 +71,7 @@ class BlockChain {
 		/** Singleton creation method
 			\returns The BlockChain
 		*/
-		static BlockChain* get_blockchain();
+		static BlockChain& get_blockchain();
 
 		/** Empty destructor
 		*/
@@ -165,9 +165,10 @@ class BlockChain {
 		template <class Archive>
 		void serialize( Archive& ar ){
 			ar(	CEREAL_NVP(blockchain),
-				current,
-				usr_trust,
-				pub_trust	);
+				CEREAL_NVP(current),
+				CEREAL_NVP(usr_trust),
+				CEREAL_NVP(pub_trust)
+			);
 		}
 
 		/** Save the BlockChain to a given location

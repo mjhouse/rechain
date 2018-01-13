@@ -166,10 +166,10 @@ class Data {
 		template <class Archive>
 		void serialize( Archive& ar ){
 			ar(
-				address,
-				public_key,
-				signature,
-				trust
+				CEREAL_NVP(address),
+				CEREAL_NVP(public_key),
+				CEREAL_NVP(signature),
+				CEREAL_NVP(trust)
 			);
 		}
 };

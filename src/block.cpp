@@ -35,9 +35,7 @@
 #include "data.hpp"
 #include "block.hpp"
 
-Block::~Block(){
-	this->data.clear();
-}
+Block::~Block(){}
 
 /* Get the hash of this block
 */
@@ -128,9 +126,10 @@ bool Block::add( Data& d ){
 	if(d.verify()){
 		// Add to the end of data	
 		this->data.push_back(d);
+		std::cout << "ADDED BLOCK" << std::endl;
 		return true;
-
 	}
+	std::cout << "FAILED TO ADD BLOCK" << std::endl;
 	// Return failure if the Data pointer
 	// isn't valid.
 	return false;

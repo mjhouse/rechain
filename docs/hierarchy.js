@@ -10,5 +10,7 @@ var hierarchy =
     ] ],
     [ "Key< CryptoPP::RSA::PublicKey, PublicKey >", "classKey.html", [
       [ "PublicKey", "classPublicKey.html", null ]
-    ] ]
+    ] ],
+    [ "Log", "classLog.html", null ],
+    [ "Logger", "classLogger.html", null ]
 ];

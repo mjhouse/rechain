@@ -21,10 +21,14 @@
 
 // system includes
 #include <iostream>
+#include <sstream>
 #include <string>
 
 // dependency includes
 #include "cxxopts.hpp"
+#include <cryptopp/osrng.h>	// for the AutoSeededRandomPool
+#include <cryptopp/integer.h>	// for Integer data type
+#include <cryptopp/hex.h>	// for the HexEncoder
 
 // local includes
 #include "interface.hpp"
@@ -32,23 +36,69 @@
 #include "block.hpp"
 #include "blockchain.hpp"
 
-#define trim_slash(X)(\
-)
+#define NOERR	0
+#define ERROR	1
 
+typedef Logger rl;
 
-int Interface::help(){}
+int Interface::publish( std::string s ){
+	BlockChain& blockchain = BlockChain::get_blockchain();
 
-int Interface::blockchain(){}
+	std::ifstream ifs(s);
+	if(ifs.is_open()){
+	
+		CryptoPP::SHA256 hasher;
+		
+		std::string data = [&ifs]{
+			std::ostringstream ss{};
+			ss << ifs.rdbuf();
+			return ss.str(); }();
 
-int Interface::publish( std::string s ){}
+		std::string new_hash;
 
-int Interface::sign( std::string s ){}
+		CryptoPP::StringSource ss(data,true,
+			new CryptoPP::HashFilter(hasher,
+				new CryptoPP::HexEncoder(
+					new CryptoPP::StringSink(new_hash)))); 
+		
+		std::cout << blockchain.new_block()
+			.with_data(Data(Address(new_hash,"",DataType::Publication)))
+			.mine();
 
-int Interface::list(){}
+		if(blockchain.save(this->home + "/rechain.blockchain"))
+			return NOERR;
+	}
+
+	return ERROR;
+}
+
+int Interface::sign( std::string s ){
+	BlockChain& blockchain = BlockChain::get_blockchain();
+
+	std::ifstream ifs(s);
+	if(ifs.is_open()){
+	
+		return NOERR;
+	}
+
+	return ERROR;
+}
+
+int Interface::list(){
+	BlockChain& blockchain = BlockChain::get_blockchain();
+	for(auto block : blockchain){
+		rl::get("console").info("BLOCK:");
+		for(auto data : block){
+			rl::get("console")
+				.info("\tData: " + data.get_data_ref().substr(0,20));
+		}
+	}
+	return NOERR;
+}
 
 int Interface::execute(){
 
-	std::shared_ptr<BlockChain> blockchain(BlockChain::get_blockchain());
+	BlockChain& blockchain = BlockChain::get_blockchain();
 	
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()
@@ -67,23 +117,27 @@ int Interface::execute(){
 		} else {
 			
 			if(result.count("blockchain")){
-				if(!blockchain->load(result["b"].as<std::string>())){
-					this->log->error("Couldn't load blockchain from {}",
-						result["b"].as<std::string>());
+				// Try to load the blockchain from a given path
+				std::string path = result["b"].as<std::string>();
+				if(!blockchain.load(path)){
+					rl::get().info("couldn't load blockchain from: " + path);
 				}
 			} 
-			else if(!this->home.empty()){
-				std::string bpath = trim(this->home) + "/rechain.blockchain";
-				if(!blockchain->load(bpath)){
-					this->log->error("Couldn't load blockchain from {}",bpath);
+			else if(!home.empty()){
+				// Try to load the blockchain from the home dir
+				std::string path = home + "/rechain.blockchain";
+				if(!blockchain.load(path)){
+					rl::get().info("couldn't load blockchain from: " + path);
 				}
 			}
 			else {
-				this->log->error("Can't find a blockchain file!");
+				// If RECHAIN_HOME isn't set, exit with error
+				rl::get().error("RECHAIN_HOME isn't set!");
+				exit(1);
 			}
 
 			if(result.count("help")){
-				return this->help();
+				std::cout << options.help() << std::endl;
 			}
 			
 			if(result.count("publish")){

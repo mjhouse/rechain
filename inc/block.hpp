@@ -130,11 +130,11 @@ class Block {
 		template <class Archive>
 		void serialize( Archive& ar ){
 			ar(
-				data,
-				prev,
-				nonce,
-				timestamp,
-				counter
+				CEREAL_NVP(data),
+				CEREAL_NVP(prev),
+				CEREAL_NVP(nonce),
+				CEREAL_NVP(timestamp),
+				CEREAL_NVP(counter)
 			);
 		}
 };

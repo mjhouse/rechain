@@ -5,7 +5,7 @@ var classBlockChain =
     [ "~BlockChain", "classBlockChain.html#a671e66ac51d33a75495a09398a0f764e", null ],
     [ "begin", "classBlockChain.html#a992631fb0424bd3861f6e78e7a90a410", null ],
     [ "end", "classBlockChain.html#ad951d129fca84317ef4c321d3dd61c20", null ],
-    [ "get_blockchain", "classBlockChain.html#a06c471e30b2c4e7291420260ef9ef5ee", null ],
+    [ "get_blockchain", "classBlockChain.html#a816a30057df90ddddbcc03ff7176b487", null ],
     [ "get_publication_trust", "classBlockChain.html#a1d0158b65237eaaeace82540355c02f0", null ],
     [ "get_publication_trust", "classBlockChain.html#a4d6ca6b4b64a6a7afbfd8a4b46c2ec28", null ],
     [ "get_user_trust", "classBlockChain.html#ac659c7f7ba71962bc8ddd12fd70d80c8", null ],

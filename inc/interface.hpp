@@ -29,23 +29,17 @@
 
 // system includes
 #include <string>
+#include <iostream>
 
-// dependency includes
-#include "spdlog/spdlog.h"
-
-namespace spd = spdlog;
+// local includes
+#include "logger.hpp"
 
 class Interface {
 	private:
 		int argc;
 		char** argv;
 
-		std::shared_ptr<spd::logger> log;	/**< A handle to the logger */
 		std::string home;			/**< The path to the home directory */
-		
-		int help();
-		
-		int blockchain();
 		
 		int publish( std::string s );
 		
@@ -53,43 +47,27 @@ class Interface {
 		
 		int list();
 
-
-		inline std::string env(std::string const& key){
-		    char const* val = std::getenv(key.c_str()); 
-		    return (val == NULL) ? std::string() : std::string(val);
-		}
-
 		inline std::string trim( std::string s ){
 			auto it = s.end() - 1;
 			if(*it == '/') s.erase(it);
 			return s;
 		}
 
+		inline std::string env(std::string const& key){
+		    char const* val = std::getenv(key.c_str()); 
+		    return (val == NULL) ? std::string() : trim(std::string(val));
+		}
+
 	public:
 		Interface( int c, char** v ) : argc(c), argv(v) {
-			this->home = env("RECHAIN_HOME");
-
-			if(!this->home.empty()){
-
-				// Create a logger that outputs to a file and stdout (in color)
-				std::vector<spd::sink_ptr> sinks;
-				sinks.push_back(std::make_shared<spd::sinks::simple_file_sink_st>( (this->home + "/rechain.log") ));
-
-				#if defined(_WIN32) || defined(_WIN64)
-					sinks.push_back(std::make_shared<spdlog::sinks::wincolor_stdout_sink_mt>());
-				#elif defined(__linux__)
-					sinks.push_back(std::make_shared<spdlog::sinks::ansicolor_stdout_sink_mt>());
-				#endif
-
-				// Register the logger
-				this->log = std::make_shared<spd::logger>("log", begin(sinks), end(sinks));
-				spd::register_logger(this->log);
-				
-				// Set the log output level
-				spd::set_level(spd::level::debug);
-			}		
+			home = env("RECHAIN_HOME");
+			
+			Logger::get()
+				.with( Log("console",STDOUT,Level::error) )
+				.with( Log("log",home + "/rechain.log",Level::error) );
 
 		};
+
 		~Interface(){};
 
 		int execute();

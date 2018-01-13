@@ -12,5 +12,6 @@ var dir_bfccd401955b95cf8c75461437045ac0 =
       [ "Key", "classKey.html", "classKey" ],
       [ "PrivateKey", "classPrivateKey.html", "classPrivateKey" ],
       [ "PublicKey", "classPublicKey.html", "classPublicKey" ]
-    ] ]
+    ] ],
+    [ "logger.hpp", "logger_8hpp_source.html", null ]
 ];

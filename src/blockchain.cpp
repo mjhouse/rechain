@@ -33,8 +33,8 @@
 
 /* Get or create a new BlockChain
 */
-BlockChain* BlockChain::get_blockchain(){
-	static BlockChain* b = new BlockChain();
+BlockChain& BlockChain::get_blockchain(){
+	static BlockChain b;
 	return b;
 }
 		
@@ -103,30 +103,29 @@ void BlockChain::update_trust(){
 */
 std::string BlockChain::mine(){	
 	std::string hash; 
-	if(this->current.size() > 0){
-		// Update trust on the block if it's a signature
-		for(auto d : this->current){
-			if(d.get_data_type() == DataType::Signature){
-				float t = this->pub_trust[d.get_public_key()];
-				d.set_trust( t );
-			}
+	// Update trust on the block if it's a signature
+	for(auto d : this->current){
+		if(d.get_data_type() == DataType::Signature){
+			float t = this->pub_trust[d.get_public_key()];
+			d.set_trust( t );
 		}
-
-		// Check if the chain has a genesis block
-		if(this->blockchain.size() > 0){
-			this->current.previous(this->blockchain.back().hash());
-		}
-
-		// Get the hash to return
-		hash = this->current.mine();
-
-		// Add to the chain
-		this->blockchain.push_back( this->current );
-		this->current = Block();	
-	
-		// Update trust maps
-		this->update_trust();
 	}
+
+	// Check if the chain has a genesis block
+	if(this->blockchain.size() > 0){
+		this->current.previous(this->blockchain.back().hash());
+	}
+
+	// Get the hash to return
+	hash = this->current.mine();
+	
+	// Add to the chain
+	this->blockchain.push_back( this->current );
+	this->current = Block();	
+
+	// Update trust maps
+	this->update_trust();
+	
 	return hash;
 }
 
