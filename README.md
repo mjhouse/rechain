@@ -29,4 +29,3 @@ No.
 | cereal		| Serializing objects to/from files	|
 | libcrypto++-dev	| Public keys and hashing		|
 | Catch2		| Unit tests				|
-| spdlog		| Logging				|
