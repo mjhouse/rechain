@@ -59,6 +59,20 @@ class Record {
 		Record( std::string r, std::string b = "", std::string t = 0.0f ) 
 			: _reference(r), _block(b) _trust(t) {}
 
+		Record( std::ifstream& r, std::string b = "", std::string t = 0.0f )
+			: _block(b), _trust(t) {
+			
+			std::string data = [&r]{
+				std::ostringstream ss{};
+				ss << r.rdbuf();
+				return ss.str(); }();
+
+			CryptoPP::StringSource ss(data,true,
+				new CryptoPP::HashFilter(hasher,
+					new CryptoPP::HexEncoder(
+						new CryptoPP::StringSink(_reference)))); 
+		}
+
 		~Record(){}
 
 		std::string& reference( std::string s = "" ){
