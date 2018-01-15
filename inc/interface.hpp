@@ -33,6 +33,7 @@
 
 // local includes
 #include "logger.hpp"
+#include "keys.hpp"
 
 class Interface {
 	private:
@@ -40,12 +41,17 @@ class Interface {
 		char** argv;
 
 		std::string home;			/**< The path to the home directory */
+	
+		PrivateKey* private_key;
+		PublicKey* public_key;
+
+		void publish( std::string s );
 		
-		int publish( std::string s );
-		
-		int sign( std::string s );
-		
-		int list();
+		void sign( std::string s );
+	
+		void mine();
+
+		void list();
 
 		inline std::string trim( std::string s ){
 			auto it = s.end() - 1;
@@ -68,7 +74,10 @@ class Interface {
 
 		};
 
-		~Interface(){};
+		~Interface(){
+			delete private_key;
+			delete public_key;
+		};
 
 		int execute();
 };

@@ -1,3 +1,5 @@
 <map id="inc/interface.hpp" name="inc/interface.hpp">
-<area shape="rect" id="node4" href="$logger_8hpp_source.html" title="logger.hpp" alt="" coords="173,80,255,107"/>
+<area shape="rect" id="node4" href="$logger_8hpp_source.html" title="logger.hpp" alt="" coords="229,80,311,107"/>
+<area shape="rect" id="node9" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="535,80,610,107"/>
+<area shape="rect" id="node13" href="$data_8hpp.html" title="Defines a Data object that holds publishing information or a signature for another published Data obj..." alt="" coords="781,155,853,181"/>
 </map>

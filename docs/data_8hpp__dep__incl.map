@@ -1,8 +1,10 @@
 <map id="inc/data.hpp" name="inc/data.hpp">
-<area shape="rect" id="node2" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="78,80,174,107"/>
-<area shape="rect" id="node3" href="$data_8cpp_source.html" title="src/data.cpp" alt="" coords="5,155,100,181"/>
-<area shape="rect" id="node4" href="$keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="149,155,247,181"/>
-<area shape="rect" id="node5" href="$block_8cpp_source.html" title="src/block.cpp" alt="" coords="249,80,349,107"/>
-<area shape="rect" id="node6" href="$blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="373,80,503,107"/>
-<area shape="rect" id="node7" href="$interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="527,80,645,107"/>
+<area shape="rect" id="node2" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="169,80,265,107"/>
+<area shape="rect" id="node4" href="$interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="299,229,417,256"/>
+<area shape="rect" id="node6" href="$data_8cpp_source.html" title="src/data.cpp" alt="" coords="5,155,100,181"/>
+<area shape="rect" id="node7" href="$keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="267,155,364,181"/>
+<area shape="rect" id="node8" href="$block_8cpp_source.html" title="src/block.cpp" alt="" coords="440,80,540,107"/>
+<area shape="rect" id="node9" href="$blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="563,80,694,107"/>
+<area shape="rect" id="node3" href="$interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="124,155,243,181"/>
+<area shape="rect" id="node5" href="$main_8cpp_source.html" title="src/main.cpp" alt="" coords="135,229,232,256"/>
 </map>

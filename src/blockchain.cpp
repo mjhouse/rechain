@@ -31,6 +31,8 @@
 #include "block.hpp"
 #include "data.hpp"
 
+typedef Logger rl;
+
 /* Get or create a new BlockChain
 */
 BlockChain& BlockChain::get_blockchain(){
@@ -38,16 +40,9 @@ BlockChain& BlockChain::get_blockchain(){
 	return b;
 }
 		
-/* Create a new Block
-*/
-BlockChain& BlockChain::new_block(){
-	this->current = Block();
-	return *this;
-}
-
 /* Add Data to an open Block
 */
-BlockChain& BlockChain::with_data( Data d ){
+BlockChain& BlockChain::with( Data d ){
 	this->current.add(d);
 	return *this;
 }
@@ -197,10 +192,14 @@ bool BlockChain::save( std::string p ){
 			cereal::JSONOutputArchive archive(os);
 			archive( *this );
 			this->file_path = path;
+
+			rl::get().debug("Blockchain saved to: " + path);
 			return true;
 		}
 	} 
 
+	
+	rl::get().error("Blockchain FAILED to save: " + path);	
 	return false;
 }
 
@@ -215,9 +214,12 @@ bool BlockChain::load( std::string p ){
 			archive( *this );
 			this->file_path = path;
 			this->update_trust();
+
+			rl::get().debug("Blockchain loaded from: " + path);
 			return true;
 		}
 	}
 	
+	rl::get().error("Blockchain FAILED to load: " + path);	
 	return false;
 }

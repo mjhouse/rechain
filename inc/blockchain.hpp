@@ -80,16 +80,11 @@ class BlockChain {
 		// ------------------------------------------------------
 		// Mining Methods
 
-		/** Create a new Block
-			\returns A reference to the BlockChain
-		*/
-		BlockChain& new_block();
-
 		/** Add Data to an open Block
 			\param d A pointer to a Data block
 			\returns A pointer to the BlockChain
 		*/
-		BlockChain& with_data( Data d );
+		BlockChain& with( Data d );
 
 		/** Mine the current Block to the BlockChain
 			\returns The valid hash of the new Block
@@ -182,6 +177,7 @@ class BlockChain {
 			\returns True if the BlockChain was loaded and is valid
 		*/
 		bool load( std::string p = "" );
+
 };
 
 #endif

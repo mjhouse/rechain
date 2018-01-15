@@ -45,6 +45,90 @@ enum DataType { Publication, Signature };
 /** Typedef for conveniance */
 typedef std::tuple<std::string,std::string,DataType> Address;
 
+/*
+class Record {
+	private:
+		std::string _reference;
+		std::string _block;
+		std::string _public_key;
+		std::string _signature;
+
+		float _trust;
+
+	public:
+		Record( std::string r, std::string b = "", std::string t = 0.0f ) 
+			: _reference(r), _block(b) _trust(t) {}
+
+		~Record(){}
+
+		std::string& reference( std::string s = "" ){
+			if(!s.empty()) _reference = s;
+			return _reference;
+		}
+
+		std::string& block( std::string b = "" ){
+			if(!b.empty()) _block = b;
+			return _block;
+		}
+		
+		std::string& public_key( std::string k = "" ){
+			if(!k.empty()) _public_key = k;
+			return _public_key;
+		}
+
+		std::string& signature( std::string s ){
+			if(!s.empty()) _signature = s;
+			return _signature;
+		}
+
+		float& trust( float t = 0.0 ){ 
+			if(t) _trust = t;
+			return _trust;
+		}
+
+		DataType type(){
+			if(_block.empty()) return DataType::Publication;
+			return DataType::Signature;
+		}
+
+		std::string& string( bool b = false ){
+			std::string data;
+			
+			data.append(_reference);
+			data.append(_block);
+			data.append(_public_key);
+
+			if(b){
+				data.append(_signature);
+				data.append(std::to_string(this->trust));
+			}
+			return data;
+		}
+
+		bool& verify(){
+			if(!this->public_key.empty() && !this->signature.empty()){
+				if(_reference.empty()) return false;
+				if(_block.empty() && type() != DataType::Publication) return false;
+
+				std::shared_ptr<PublicKey> key(PublicKey::load_string(_public_key));
+				return key->verify( this );
+			}
+
+			return false;
+		}
+
+		template <class Archive>
+		void serialize( Archive& ar ){
+			ar(
+				CEREAL_NVP(address),
+				CEREAL_NVP(public_key),
+				CEREAL_NVP(signature),
+				CEREAL_NVP(trust)
+			);
+		}
+
+}
+*/
 /** The Data class maintains a reference internally to another
 	Data object (if this is a signature) or to a hash for a
 	document (if the Data is a publication).

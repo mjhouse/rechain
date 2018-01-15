@@ -21,6 +21,7 @@
 
 #include "data.hpp"
 #include "keys.hpp"
+#include "logger.hpp"
 
 #include <string>
 

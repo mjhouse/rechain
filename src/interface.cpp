@@ -41,7 +41,7 @@
 
 typedef Logger rl;
 
-int Interface::publish( std::string s ){
+void Interface::publish( std::string s ){
 	BlockChain& blockchain = BlockChain::get_blockchain();
 
 	std::ifstream ifs(s);
@@ -61,50 +61,51 @@ int Interface::publish( std::string s ){
 				new CryptoPP::HexEncoder(
 					new CryptoPP::StringSink(new_hash)))); 
 		
-		std::cout << blockchain.new_block()
-			.with_data(Data(Address(new_hash,"",DataType::Publication)))
-			.mine();
+		rl::get().debug("Adding data block...");
+		blockchain.with(Data(Address(new_hash,"",DataType::Publication), private_key));
 
-		if(blockchain.save(this->home + "/rechain.blockchain"))
-			return NOERR;
+		blockchain.save()
 	}
 
-	return ERROR;
 }
 
-int Interface::sign( std::string s ){
-	BlockChain& blockchain = BlockChain::get_blockchain();
-
+void Interface::sign( std::string s ){
 	std::ifstream ifs(s);
 	if(ifs.is_open()){
 	
-		return NOERR;
 	}
-
-	return ERROR;
 }
 
-int Interface::list(){
+void Interface::mine(){
 	BlockChain& blockchain = BlockChain::get_blockchain();
+
+	rl::get()
+		.debug("Mining: ")
+		.debug("Hash: " + blockchain.mine());
+
+	blockchain.save()
+}
+
+void Interface::list(){
+	BlockChain& blockchain = BlockChain::get_blockchain();
+	rl::get("console").info(" ---- Blockchain ---- ");
+
 	for(auto block : blockchain){
-		rl::get("console").info("BLOCK:");
+		rl::get("console").info("Block:");
 		for(auto data : block){
 			rl::get("console")
 				.info("\tData: " + data.get_data_ref().substr(0,20));
 		}
 	}
-	return NOERR;
 }
 
 int Interface::execute(){
-
-	BlockChain& blockchain = BlockChain::get_blockchain();
 	
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()
 		("h,help","Display this usage message")	
-		("b,blockchain","Use a saved blockchain file",cxxopts::value<std::string>(),"<path>")	
 		("p,publish","Publish a document",cxxopts::value<std::string>(),"<path>")	
+		("m,mine","Mine a block")	
 		("s,sign","Sign a published document",cxxopts::value<std::string>(),"<path>")
 		("l,list","List published documents");
 
@@ -112,50 +113,43 @@ int Interface::execute(){
 		
 		auto result = options.parse(this->argc,this->argv);
 		
-		if(result.count("help")){
-			std::cout << options.help() << std::endl;
-		} else {
-			
-			if(result.count("blockchain")){
-				// Try to load the blockchain from a given path
-				std::string path = result["b"].as<std::string>();
-				if(!blockchain.load(path)){
-					rl::get().info("couldn't load blockchain from: " + path);
-				}
-			} 
-			else if(!home.empty()){
-				// Try to load the blockchain from the home dir
-				std::string path = home + "/rechain.blockchain";
-				if(!blockchain.load(path)){
-					rl::get().info("couldn't load blockchain from: " + path);
-				}
-			}
-			else {
-				// If RECHAIN_HOME isn't set, exit with error
-				rl::get().error("RECHAIN_HOME isn't set!");
-				exit(1);
-			}
+		if(!home.empty()){
+			std::string path = home + "/rechain.blockchain";
+			std::string priv = home + "/keys/rsa.private";
+			std::string publ = home + "/keys/rsa.public";
 
-			if(result.count("help")){
-				std::cout << options.help() << std::endl;
+			BlockChain& blockchain = BlockChain::get_blockchain();
+
+			if(!blockchain.load(path)){
+				rl::get().info("couldn't load blockchain from: " + path);
+				blockchain.save(path);
 			}
 			
-			if(result.count("publish")){
-				return this->publish(result["p"].as<std::string>());
-			}
-			
-			if(result.count("sign")){
-				return this->sign(result["s"].as<std::string>());
-			}
-			
-			if(result.count("list")){
-				return this->list();
-			}
+			private_key = PrivateKey::load_file(priv);
+			public_key = PublicKey::load_file(publ);
+		}
+		else {
+			rl::get().error("RECHAIN_HOME isn't set!");
+			exit(1);
 		}
 
-	} catch (const cxxopts::OptionException& e){
-		// ERROR can't parse args
-	}
+		if(result.count("help")){
+			std::cout << options.help() << std::endl;
+		}
+		else {
+			if(result.count("publish"))
+				this->publish(result["p"].as<std::string>());
+			
+			if(result.count("mine"))
+				this->mine();
 
-	return 0;
+			if(result.count("sign"))
+				this->sign(result["s"].as<std::string>());
+			
+			if(result.count("list"))
+				this->list();
+		}
+	} catch (const cxxopts::OptionException& e){
+		rl::get().error("Failed to parse command line arguments!");
+	}
 }
