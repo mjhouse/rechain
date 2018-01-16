@@ -32,7 +32,7 @@
 
 // local includes
 #include "interface.hpp"
-#include "data.hpp"
+#include "record.hpp"
 #include "block.hpp"
 #include "blockchain.hpp"
 
@@ -47,24 +47,10 @@ void Interface::publish( std::string s ){
 	std::ifstream ifs(s);
 	if(ifs.is_open()){
 	
-		CryptoPP::SHA256 hasher;
-		
-		std::string data = [&ifs]{
-			std::ostringstream ss{};
-			ss << ifs.rdbuf();
-			return ss.str(); }();
-
-		std::string new_hash;
-
-		CryptoPP::StringSource ss(data,true,
-			new CryptoPP::HashFilter(hasher,
-				new CryptoPP::HexEncoder(
-					new CryptoPP::StringSink(new_hash)))); 
-		
 		rl::get().debug("Adding data block...");
-		blockchain.with(Data(Address(new_hash,"",DataType::Publication), private_key));
+		blockchain.with( private_key->sign( Record(ifs) ) );
 
-		blockchain.save()
+		blockchain.save();
 	}
 
 }
@@ -83,7 +69,7 @@ void Interface::mine(){
 		.debug("Mining: ")
 		.debug("Hash: " + blockchain.mine());
 
-	blockchain.save()
+	blockchain.save();
 }
 
 void Interface::list(){
@@ -92,14 +78,14 @@ void Interface::list(){
 
 	for(auto block : blockchain){
 		rl::get("console").info("Block:");
-		for(auto data : block){
+		for(auto r : block){
 			rl::get("console")
-				.info("\tData: " + data.get_data_ref().substr(0,20));
+				.info("\tData: " + r.reference().substr(0,20));
 		}
 	}
 }
 
-int Interface::execute(){
+void Interface::execute(){
 	
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()

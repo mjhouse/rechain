@@ -18,7 +18,7 @@ var classBlockChain =
     [ "serialize", "classBlockChain.html#ac0dd294dc2adfd1857b7aef9911370d8", null ],
     [ "size", "classBlockChain.html#acb48c2b272c045d5e3fa294fafe536b9", null ],
     [ "update_trust", "classBlockChain.html#a82851a102065917794e939b1bbd91633", null ],
-    [ "with", "classBlockChain.html#a90cd782b0eb0c10638012223cfc257a4", null ],
+    [ "with", "classBlockChain.html#a5da5f716b1d88dc766a9ef30e5accfb8", null ],
     [ "blockchain", "classBlockChain.html#a9e885cdf4c59b225b8a4efd70ce084f0", null ],
     [ "current", "classBlockChain.html#a288c8c10e0586dfe6bc0bbd638c0d778", null ],
     [ "file_path", "classBlockChain.html#acdba7c5340f6b0b26966c341b2e6a8d4", null ],

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
@@ -25,17 +27,14 @@
 			private pair of RSA256 keys.
 */
 
-#ifndef _KEYS_HPP_
-#define _KEYS_HPP_
-
-#include <fstream>				// File I/O
+#include <fstream>			// File I/O
 #include <iostream>
 #include <memory>
 
 #include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 
-#include "data.hpp"				// Data objects
+#include "record.hpp"			// Data objects
 
 class PrivateKey;
 class PublicKey;
@@ -147,11 +146,11 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 		/** Generate a new key */
 		void generate();
 
-		/** Sign a given Data block
-			\param data A shared_ptr to the Data object to sign
-			\returns True if the Data object was signed
+		/** Sign a given Record
+			\param r A pointer to the Record to sign
+			\returns True if the Record was signed
 		*/
-		bool sign( Data* data );
+		Record sign( Record r );
 };
 
 /** The PublicKey class inherits from the templated
@@ -167,12 +166,11 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey,PublicKey> {
 		*/
 		void generate( PrivateKey* key );
 
-		/** Verify a Data object to ensure that the
+		/** Verify a Record to ensure that the
 		 	signature attached to it is correct
-			\param data A shared_ptr to the Data object to verify
-			\returns True if the Data object is signed correctly
+			\param r A pointer to the Record to verify
+			\returns True if the Record is signed correctly
 		*/
-		bool verify( Data* data );
+		bool verify( Record* r );
 };
 
-#endif

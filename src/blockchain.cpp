@@ -29,7 +29,8 @@
 // local includes
 #include "blockchain.hpp"
 #include "block.hpp"
-#include "data.hpp"
+#include "record.hpp"
+#include "logger.hpp"
 
 typedef Logger rl;
 
@@ -40,10 +41,10 @@ BlockChain& BlockChain::get_blockchain(){
 	return b;
 }
 		
-/* Add Data to an open Block
+/* Add a Record to an open Block
 */
-BlockChain& BlockChain::with( Data d ){
-	this->current.add(d);
+BlockChain& BlockChain::with( Record r ){
+	this->current.add(r);
 	return *this;
 }
 
@@ -57,27 +58,27 @@ void BlockChain::update_trust(){
 	std::map<std::string,std::string> ref;
 
 	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
-		std::string gen_key = this->blockchain[0][0].get_public_key();
+		std::string gen_key = this->blockchain[0][0].public_key();
 		this->usr_trust.insert( std::make_pair(gen_key,1.0f) );
 
 		for(auto b : this->blockchain){
 			for(auto d : b){
-				switch( d.get_data_type() ){
+				switch( d.type() ){
 					case DataType::Publication:
 
 						// init a trust entry for the publisher
-						this->usr_trust.insert( std::make_pair( d.get_public_key(), 0.0f ) );
+						this->usr_trust.insert( std::make_pair( d.public_key(), 0.0f ) );
 						
 						// update the signature -> user reference
-						ref.insert( std::make_pair( d.get_signature(), d.get_public_key() ) );	
+						ref.insert( std::make_pair( d.signature(), d.public_key() ) );	
 						
 						break;
 					case DataType::Signature:
 						{
 							// Get publication reference, the signer and signee
 							// public keys
-							std::string pubref = d.get_data_ref();
-							std::string signer = d.get_public_key();
+							std::string pubref = d.reference();
+							std::string signer = d.public_key();
 							std::string signee = ref[pubref];
 
 							float ct = this->usr_trust[signer]/2.0f;// index will return 0.0f by default
@@ -100,9 +101,9 @@ std::string BlockChain::mine(){
 	std::string hash; 
 	// Update trust on the block if it's a signature
 	for(auto d : this->current){
-		if(d.get_data_type() == DataType::Signature){
-			float t = this->pub_trust[d.get_public_key()];
-			d.set_trust( t );
+		if(d.type() == DataType::Signature){
+			float t = this->pub_trust[d.public_key()];
+			d.trust( t );
 		}
 	}
 

@@ -33,16 +33,16 @@
 /* Maximum hash value (smaller increases difficulty) */
 #define HASH_MAX "000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 
-class Data;
+class Record;
 
 /** A Block to be included in a BlockChain. The Block
-	holds any number of Data objects (that represent
+	holds any number of Record objects (that represent
 	publications or signatures), a hash of the previous
 	Block and various hashing variables.
 */
 class Block {
 	private:
-		std::vector<Data> data;		/**< Contained Data objects*/
+		std::vector<Record> records;	/**< Contained Record objects*/
 		std::string prev;		/**< Hash of the previous block */
 
 		long nonce;			/**< Randomly generated value to modify hash */
@@ -50,8 +50,8 @@ class Block {
 		unsigned int counter;		/**< Counter to modify hash output */
 
 	public:
-		/** Define a Data iterator */
-		typedef std::vector<Data>::iterator iterator;
+		/** Define a Record iterator */
+		typedef std::vector<Record>::iterator iterator;
 
 		Block() : nonce(0), timestamp(0), counter(0) {}
 		~Block();
@@ -75,9 +75,9 @@ class Block {
 
 		/** Overloaded index operator
 		    \param i The index to return a reference to
-		    \returns A reference to a Data object
+		    \returns A reference to a Record object
 		*/
-		Data& operator[] ( unsigned int i );
+		Record& operator[] ( unsigned int i );
 		
 		/** Overloaded assignment operator
 		    \param b The Block to copy data from
@@ -85,17 +85,17 @@ class Block {
 		*/
 		Block& operator=( const Block& b );
  
-		/** Get a Data block given the index
-		    \param s The signature of the Data object to return
-		    \returns The requested Data block or empty pointer
+		/** Get a Record block given the index
+		    \param s The signature of the Record object to return
+		    \returns The requested Record block or empty pointer
 		*/
 		Block::iterator find( std::string s );
 
-		/** Add a Data block
+		/** Add a Record block
 		    \param d The block to add
-		    \returns True if Data was added
+		    \returns True if Record was added
 		*/
-		bool add( Data& d );
+		bool add( Record& d );
 
 		/** Get or set the hash of the previous block
 		    \param h The hash to set
@@ -106,12 +106,12 @@ class Block {
 		// ------------------------------------------------------
 		// Iterator Methods
 		
-		/** Return an iterator to the start of the Data
+		/** Return an iterator to the start of the Record collection
 		    \returns An iterator
 		*/
 		Block::iterator begin();
 
-		/** Returns an iterator to the end of the Data collection
+		/** Returns an iterator to the end of the Record collection
 		    \returns A vector iterator
 		*/ 
 		Block::iterator end();
@@ -119,7 +119,7 @@ class Block {
 		// ------------------------------------------------------
 		// Utility Methods
 		
-		/** Get number of Data objects in the Block
+		/** Get number of Record objects in the Block
 		    \returns Size of the Block as size_t
 		*/
 		size_t size();
@@ -130,7 +130,7 @@ class Block {
 		template <class Archive>
 		void serialize( Archive& ar ){
 			ar(
-				CEREAL_NVP(data),
+				CEREAL_NVP(records),
 				CEREAL_NVP(prev),
 				CEREAL_NVP(nonce),
 				CEREAL_NVP(timestamp),

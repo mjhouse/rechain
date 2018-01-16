@@ -1,7 +1,7 @@
 <map id="inc/keys.hpp" name="inc/keys.hpp">
 <area shape="rect" id="node2" href="$interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="71,80,189,107"/>
-<area shape="rect" id="node5" href="$data_8cpp_source.html" title="src/data.cpp" alt="" coords="213,80,308,107"/>
-<area shape="rect" id="node6" href="$keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="332,80,429,107"/>
+<area shape="rect" id="node5" href="$keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="213,80,311,107"/>
+<area shape="rect" id="node6" href="$record_8cpp_source.html" title="src/record.cpp" alt="" coords="335,80,440,107"/>
 <area shape="rect" id="node3" href="$interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="5,155,124,181"/>
 <area shape="rect" id="node4" href="$main_8cpp_source.html" title="src/main.cpp" alt="" coords="148,155,245,181"/>
 </map>

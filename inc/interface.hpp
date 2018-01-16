@@ -79,7 +79,7 @@ class Interface {
 			delete public_key;
 		};
 
-		int execute();
+		void execute();
 };
 
 #endif

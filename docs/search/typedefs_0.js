@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['address',['Address',['../data_8hpp.html#acc6f0480cdec6f16f5498f62e86d7ace',1,'data.hpp']]]
+  ['iterator',['iterator',['../classBlock.html#a9f3b57c07473e53f42a874d71af2b97e',1,'Block::iterator()'],['../classBlockChain.html#abdff7c5523028944b11547d27100ac0a',1,'BlockChain::iterator()']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['name',['name',['../classLog.html#a5d8c89b4d368a5876c404a7b30a3aa34',1,'Log']]],
-  ['nonce',['nonce',['../classBlock.html#a5dc13805185f799f0057e3dd9c5179a7',1,'Block']]]
+  ['prev',['prev',['../classBlock.html#a7b067da7a49637a3967093bfb4efa85a',1,'Block']]],
+  ['pub_5ftrust',['pub_trust',['../classBlockChain.html#adedacf23590e36f9c015a2c123fbee82',1,'BlockChain']]]
 ];

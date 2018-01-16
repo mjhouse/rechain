@@ -29,7 +29,6 @@
 #include <string>				// std::string
 
 #include "keys.hpp"
-#include "data.hpp"				// Data objects
 
 /** The RSA key size */
 #define KEY_SIZE 3072
@@ -47,30 +46,27 @@ void PrivateKey::generate(){
 }
 
 // Sign a Data block
-bool PrivateKey::sign( Data* data ){
-	if(data){
-		std::string signature;
+Record PrivateKey::sign( Record r ){
+	std::string signature;
 
-		// Create a public key and set it on the
-		// Data object
-		std::shared_ptr<PublicKey> pub_key(PublicKey::empty());
-		pub_key->generate( this );
-		data->set_public_key(pub_key->to_string());
+	// Create a public key and set it on the
+	// Data object
+	std::shared_ptr<PublicKey> pub_key(PublicKey::empty());
+	pub_key->generate( this );
+	r.public_key(pub_key->to_string());
 
-		// Create a Signer and random generator
-		Signer signer(this->key);
-		CryptoPP::AutoSeededRandomPool rng;
+	// Create a Signer and random generator
+	Signer signer(this->key);
+	CryptoPP::AutoSeededRandomPool rng;
 
-		// Sign the Data object
-		CryptoPP::StringSource ss(data->to_string(), true,
-					new CryptoPP::SignerFilter(rng, signer,
-						new CryptoPP::HexEncoder(
-							new CryptoPP::StringSink(signature))));
+	// Sign the Data object
+	CryptoPP::StringSource ss(r.string(), true,
+				new CryptoPP::SignerFilter(rng, signer,
+					new CryptoPP::HexEncoder(
+						new CryptoPP::StringSink(signature))));
 
-		data->set_signature(signature);
-		return true;
-	}
-	return false;
+	r.signature(signature);
+	return r;
 }
 // -----------------------------------------------------------------------------
 
@@ -84,20 +80,20 @@ void PublicKey::generate( PrivateKey* key ){
 }
 
 // Verify the signature on a Data block
-bool PublicKey::verify( Data* data ){
-	if(data){
+bool PublicKey::verify( Record* r ){
+	if(r){
 		std::string signature;
 		bool result = false;
 
 		Verifier verifier(this->key);
 
-		CryptoPP::StringSource ss(data->get_signature(), true,
-								  new CryptoPP::HexDecoder(
-									new CryptoPP::StringSink(signature)));
+		CryptoPP::StringSource ss(r->signature(), true,
+					  new CryptoPP::HexDecoder(
+						new CryptoPP::StringSink(signature)));
 
-		CryptoPP::StringSource ss2(signature + data->to_string(), true,
-								   new CryptoPP::SignatureVerificationFilter(verifier,
-									 new CryptoPP::ArraySink((byte*)&result, sizeof(result))));
+		CryptoPP::StringSource ss2(signature + r->string(), true,
+					   new CryptoPP::SignatureVerificationFilter(verifier,
+						 new CryptoPP::ArraySink((byte*)&result, sizeof(result))));
 		return result;
 	}
 	return false;

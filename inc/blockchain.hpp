@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
@@ -25,9 +27,6 @@
 		and verifies the Block collection. 
 */
 
-#ifndef _BLOCKCHAIN_HPP_
-#define _BLOCKCHAIN_HPP_
-
 // system includes
 #include <vector>
 #include <memory>
@@ -42,7 +41,7 @@
 #include "block.hpp"
 
 class Block;
-class Data;
+class Record;
 
 /** The BlockChain class manages a collection of 
     Block objects.
@@ -80,11 +79,11 @@ class BlockChain {
 		// ------------------------------------------------------
 		// Mining Methods
 
-		/** Add Data to an open Block
-			\param d A pointer to a Data block
+		/** Add Record to an open Block
+			\param d A pointer to a Record block
 			\returns A pointer to the BlockChain
 		*/
-		BlockChain& with( Data d );
+		BlockChain& with( Record r );
 
 		/** Mine the current Block to the BlockChain
 			\returns The valid hash of the new Block
@@ -112,8 +111,8 @@ class BlockChain {
 		// Trust Methods
 
 		/** Get the trust for a publication
-			\param s The signature of the Data object
-			\returns The trust for the Data object
+			\param s The signature of the Record object
+			\returns The trust for the Record object
 		*/
 		float get_publication_trust( std::string s );
 		
@@ -180,4 +179,3 @@ class BlockChain {
 
 };
 
-#endif

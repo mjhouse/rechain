@@ -32,7 +32,7 @@
 #include <vector>
 
 // local includes
-#include "data.hpp"
+#include "record.hpp"
 #include "block.hpp"
 
 Block::~Block(){}
@@ -42,10 +42,10 @@ Block::~Block(){}
 std::string Block::hash(){
 	std::string hash_data;
 
-	// Get the hashable data for each Data block
-	std::for_each( this->data.begin(), this->data.end(),
-	[&hash_data]( Data d ){
-		hash_data.append( d.to_string(true) );
+	// Get the hashable data for each Record block
+	std::for_each( records.begin(), records.end(),
+	[&hash_data]( Record r ){
+		hash_data.append( r.string(true) );
 	});
 
 	hash_data.append( this->prev );
@@ -95,40 +95,40 @@ std::string Block::mine(){
 
 /** Overloaded index operator
 */
-Data& Block::operator[] ( unsigned int i ){
-	return this->data[i];
+Record& Block::operator[] ( unsigned int i ){
+	return records[i];
 }
 
 /** Overloaded assignment operator
 */
 Block& Block::operator=( const Block& b ){
-	this->data	= b.data;
-	this->prev	= b.prev;
-	this->nonce	= b.nonce;
-	this->timestamp	= b.timestamp;
-	this->counter	= b.counter;
+	records		= b.records;
+	prev		= b.prev;
+	nonce		= b.nonce;
+	timestamp	= b.timestamp;
+	counter		= b.counter;
 	return *this;
 }
-/* Get an iterator to a Data block given the signature
+/* Get an iterator to a Record block given the signature
 */
 Block::iterator Block::find( std::string s ){
-	return std::find_if(this->data.begin(),this->data.end(),
-	[&s](Data& d){
-		return (d.get_signature() == s);
+	return std::find_if(records.begin(),records.end(),
+	[&s](Record& r){
+		return (r.signature() == s);
 	});
 }
 
-/* Add a Data block
+/* Add a Record block
 */
-bool Block::add( Data& d ){
-	// Check the Data object is signed and
+bool Block::add( Record& d ){
+	// Check the Record object is signed and
 	// valid.
 	if(d.verify()){
 		// Add to the end of data	
-		this->data.push_back(d);
+		records.push_back(d);
 		return true;
 	}
-	// Return failure if the Data pointer
+	// Return failure if the Record pointer
 	// isn't valid.
 	return false;
 }
@@ -140,20 +140,20 @@ std::string Block::previous( std::string h ){
 	return this->prev;
 }
 
-/** Return an iterator to the start of the Data
+/** Return an iterator to the start of the Record
 */
 Block::iterator Block::begin(){ 
-	return this->data.begin();
+	return records.begin();
 }
 
-/** Returns an iterator to the end of the Data collection
+/** Returns an iterator to the end of the Record collection
 */ 
 Block::iterator Block::end(){
-	return this->data.end();
+	return records.end();
 }
 
 /* Return the size of the Block
 */
 size_t Block::size(){
-	return this->data.size();
+	return records.size();
 }
