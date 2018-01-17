@@ -187,7 +187,7 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey,PublicKey> {
 			\param r A pointer to the Record to verify
 			\returns True if the Record is signed correctly
 		*/
-		bool verify( Record* r );
+		bool verify( Record& r );
 };
 
 #endif

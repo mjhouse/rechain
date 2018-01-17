@@ -98,7 +98,7 @@ bool Record::valid(){
 		if(_block.empty() && type() != DataType::Publication) return false;
 
 		std::shared_ptr<PublicKey> key(PublicKey::load_string(_public_key));
-		return key->verify( this );
+		return key->verify( *this );
 	}
 
 	return false;

@@ -82,23 +82,20 @@ void PublicKey::generate( PrivateKey* key ){
 }
 
 // Verify the signature on a Data block
-bool PublicKey::verify( Record* r ){
-	if(r){
-		std::string signature;
-		bool result = false;
+bool PublicKey::verify( Record& r ){
+	std::string signature;
+	bool result = false;
 
-		Verifier verifier(this->key);
+	Verifier verifier(this->key);
 
-		CryptoPP::StringSource ss(r->signature(), true,
-					  new CryptoPP::HexDecoder(
-						new CryptoPP::StringSink(signature)));
+	CryptoPP::StringSource ss(r.signature(), true,
+				  new CryptoPP::HexDecoder(
+					new CryptoPP::StringSink(signature)));
 
-		CryptoPP::StringSource ss2(signature + r->string(), true,
-					   new CryptoPP::SignatureVerificationFilter(verifier,
-						 new CryptoPP::ArraySink((byte*)&result, sizeof(result))));
-		return result;
-	}
-	return false;
+	CryptoPP::StringSource ss2(signature + r.string(), true,
+				   new CryptoPP::SignatureVerificationFilter(verifier,
+					 new CryptoPP::ArraySink((byte*)&result, sizeof(result))));
+	return result;
 }
 
 // -----------------------------------------------------------------------------
