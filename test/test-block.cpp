@@ -108,6 +108,17 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 			}
 		}
 
+		WHEN( "block is accessed with an iterator" ){
+
+			THEN( "block returns expected references" ){
+				for(Block::iterator b_it = block.begin(); b_it != block.end(); ++b_it){
+					auto r = *b_it;
+					auto r_it = std::find(sigs.begin(),sigs.end(),r.signature());
+					REQUIRE(r_it != sigs.end());
+				}
+			}
+		}
+	
 		WHEN( "block is accessed with 'find'" ){
 			auto it = block.find(sigs[NUM_RECORDS/2]);
 			auto r = *it;
@@ -183,6 +194,24 @@ SCENARIO( "block can add valid and reject invalid records", "[block-adding]" ){
 				REQUIRE_FALSE(block.add(a));
 				REQUIRE_FALSE(block.add(b));
 				REQUIRE(block.size() == NUM_RECORDS);
+			}
+		}
+
+		WHEN( "block is deliberately given an invalid record" ){
+			
+			// invalid because no reference
+			block[3] = Record("");
+
+			THEN( "block becomes invalid" ){
+				REQUIRE_FALSE(block.valid());
+			}
+		}
+
+		WHEN( "block has not been mined" ){
+			Block b;
+
+			THEN( "block hash is invalid" ){
+				REQUIRE_FALSE(b.valid());
 			}
 		}
 	}
