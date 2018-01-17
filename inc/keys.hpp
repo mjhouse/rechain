@@ -29,8 +29,9 @@
 
 #include <fstream>			// File I/O
 #include <iostream>
-#include <memory>
+#include <stdexcept>
 
+#include <cryptopp/osrng.h>		// For AutoSeededRandomPool
 #include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 
@@ -67,6 +68,9 @@ class Key {
 		static K* load_string( std::string s ){
 			K* k = new K();
 			k->from_string(s);
+			
+			if(!k->valid()) throw std::invalid_argument("Given key isn't valid");
+			
 			return k;
 		};
 
@@ -77,6 +81,9 @@ class Key {
 		static K* load_file( std::string fn ){
 			K* k = new K();
 			k->load(fn);
+
+			if(!k->valid()) throw std::invalid_argument("Given key isn't valid");
+
 			return k;
 		};
 
@@ -107,6 +114,14 @@ class Key {
 			this->key.Load(CryptoPP::StringSource(k, true, new CryptoPP::HexDecoder()).Ref());
 		}
 
+
+		/** Verify that the key is valid
+			\returns True if valid, false otherwise
+		*/
+		bool valid(){
+			CryptoPP::AutoSeededRandomPool rng;
+			return this->key.Validate(rng,1);
+		}
 
 		/** Load a key from a file
 			\param fn The path to the file
@@ -150,7 +165,7 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 			\param r A pointer to the Record to sign
 			\returns True if the Record was signed
 		*/
-		void sign( Record* r );
+		void sign( Record& r );
 };
 
 /** The PublicKey class inherits from the templated

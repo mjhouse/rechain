@@ -92,7 +92,7 @@ std::string Record::string( bool b ){
 	return data;
 }
 
-bool Record::verify(){
+bool Record::valid(){
 	if(!_public_key.empty() && !_signature.empty()){
 		if(_reference.empty()) return false;
 		if(_block.empty() && type() != DataType::Publication) return false;

@@ -23,7 +23,7 @@
 #include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 #include <cryptopp/pssr.h>		// For PSSR
-#include <cryptopp/whrlpool.h>	// For Whirlpool
+#include <cryptopp/whrlpool.h>		// For Whirlpool
 
 #include <fstream>				// File I/O
 #include <string>				// std::string
@@ -49,27 +49,26 @@ void PrivateKey::generate(){
 }
 
 // Sign a Data block
-void PrivateKey::sign( Record* r ){
+void PrivateKey::sign( Record& r ){
 	std::string signature;
 
 	// Create a public key and set it on the
 	// Data object
 	std::shared_ptr<PublicKey> pub_key(PublicKey::empty());
 	pub_key->generate( this );
-	r->public_key(pub_key->to_string());
-
+	r.public_key(pub_key->to_string());
 
 	// Create a Signer and random generator
 	Signer signer(this->key);
 	CryptoPP::AutoSeededRandomPool rng;
 
 	// Sign the Data object
-	CryptoPP::StringSource ss(r->string(), true,
+	CryptoPP::StringSource ss(r.string(), true,
 				new CryptoPP::SignerFilter(rng, signer,
 					new CryptoPP::HexEncoder(
 						new CryptoPP::StringSink(signature))));
 
-	r->signature(signature);
+	r.signature(signature);
 }
 // -----------------------------------------------------------------------------
 

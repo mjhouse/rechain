@@ -69,8 +69,8 @@ void BlockChain::update_trust(){
 						// init a trust entry for the publisher
 						this->usr_trust.insert( std::make_pair( d.public_key(), 0.0f ) );
 						
-						// update the signature -> user reference
-						ref.insert( std::make_pair( d.signature(), d.public_key() ) );	
+						// update the reference-to-user map
+						ref.insert( std::make_pair( d.reference(), d.public_key() ) );	
 						
 						break;
 					case DataType::Signature:
@@ -80,7 +80,7 @@ void BlockChain::update_trust(){
 							std::string pubref = d.reference();
 							std::string signer = d.public_key();
 							std::string signee = ref[pubref];
-
+							
 							float ct = this->usr_trust[signer]/2.0f;// index will return 0.0f by default
 							if(ct && !signee.empty()){
 								this->usr_trust[signer] = ct;	// signer loses half of trust
@@ -166,12 +166,58 @@ Block BlockChain::block( std::string s ){
 std::pair<std::string,std::string> BlockChain::address( std::string s ){
 	for(auto b : blockchain){
 		for(auto r : b){
-			if(r.signature() == s){
+			if(r.reference() == s){
 				return std::make_pair(b.hash(),s);
 			}
 		}
 	}
 	throw std::out_of_range("Address not found");
+}
+
+/* Check if a Record already exists
+*/
+bool BlockChain::contains( std::string s ){
+	for(auto b : blockchain)
+		for(auto r : b)
+			if(r.reference() == s) return true;
+	return false;
+}
+
+/* Check if BlockChain is valid
+*/
+bool BlockChain::valid(){
+	std::vector<std::string> pubs;
+	std::vector<std::string> blks;
+
+	for(auto b : blockchain){
+		for(auto r : b){
+			if(!r.valid())
+				return false;
+			
+			switch(r.type()){
+				case DataType::Publication:
+				{
+					auto it = std::find(pubs.begin(),pubs.end(),r.reference());
+					if(it != pubs.end())
+						return false;
+					else
+						pubs.push_back(r.reference());
+						blks.push_back(b.hash());
+				}
+				break;
+
+				case DataType::Signature:
+				{
+					auto r_it = std::find(pubs.begin(),pubs.end(),r.reference());
+					auto b_it = std::find(blks.begin(),blks.end(),r.block());
+					if(r_it == pubs.end() || b_it == blks.end())
+						return false;
+				}
+				break;
+			}
+		}
+	}
+	return true;
 }
 
 /* Get the trust for a publication
@@ -227,13 +273,13 @@ bool BlockChain::save( std::string p ){
 			archive( *this );
 			this->file_path = path;
 
-			rl::get().debug("Blockchain saved to: " + path);
+			rl::get().debug("Blockchain saved: " + path);
 			return true;
 		}
 	} 
 
 	
-	rl::get().error("Blockchain FAILED to save: " + path);	
+	rl::get().warning("Blockchain failed to save: " + path);	
 	return false;
 }
 
@@ -249,11 +295,11 @@ bool BlockChain::load( std::string p ){
 			this->file_path = path;
 			this->update_trust();
 
-			rl::get().debug("Blockchain loaded from: " + path);
+			rl::get().debug("Blockchain loaded: " + path);
 			return true;
 		}
 	}
 	
-	rl::get().error("Blockchain FAILED to load: " + path);	
+	rl::get().warning("Blockchain failed to load: " + path);	
 	return false;
 }

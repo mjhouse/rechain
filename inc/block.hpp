@@ -70,6 +70,11 @@ class Block {
 		*/
 		std::string mine();
 
+		/** Check if Block is valid
+			\returns True if Block is valid
+		*/
+		bool valid();
+
 		// ------------------------------------------------------
 		// Accessor Methods
 

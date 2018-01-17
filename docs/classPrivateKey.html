@@ -138,8 +138,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad3e7fd1d3fd3552a52b5425e37b02e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4360bb239415bbadddfbb3f40cf52a79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#a4360bb239415bbadddfbb3f40cf52a79">generate</a> ()</td></tr>
 <tr class="separator:a4360bb239415bbadddfbb3f40cf52a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd42ad5318edbd19cdeb085db53f6bd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#afd42ad5318edbd19cdeb085db53f6bd5">sign</a> (<a class="el" href="classRecord.html">Record</a> *r)</td></tr>
-<tr class="separator:afd42ad5318edbd19cdeb085db53f6bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae201c4156c0449bc4e83e07879cf3ab4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#ae201c4156c0449bc4e83e07879cf3ab4">sign</a> (<a class="el" href="classRecord.html">Record</a> &amp;r)</td></tr>
+<tr class="separator:ae201c4156c0449bc4e83e07879cf3ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classKey"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classKey')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td></tr>
 <tr class="memitem:a95aeb74991b64b8555332f0b9b391797 inherit pub_methods_classKey"><td class="memItemLeft" align="right" valign="top">CryptoPP::RSA::PrivateKey&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a95aeb74991b64b8555332f0b9b391797">get_key</a> ()</td></tr>
 <tr class="separator:a95aeb74991b64b8555332f0b9b391797 inherit pub_methods_classKey"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +149,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5be9347813dd1648ee07427bf2971eba inherit pub_methods_classKey"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1aeb68a09e5a9316487c1c966d6053ab inherit pub_methods_classKey"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a1aeb68a09e5a9316487c1c966d6053ab">from_string</a> (std::string k)</td></tr>
 <tr class="separator:a1aeb68a09e5a9316487c1c966d6053ab inherit pub_methods_classKey"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad46ab1196dcad2937abca7ca166011 inherit pub_methods_classKey"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a3ad46ab1196dcad2937abca7ca166011">valid</a> ()</td></tr>
+<tr class="separator:a3ad46ab1196dcad2937abca7ca166011 inherit pub_methods_classKey"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19d43c163fbdb9bd797ffdc724a9659b inherit pub_methods_classKey"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a19d43c163fbdb9bd797ffdc724a9659b">load</a> (std::string fn)</td></tr>
 <tr class="separator:a19d43c163fbdb9bd797ffdc724a9659b inherit pub_methods_classKey"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f267d4271aff8b17abdeaf7a4b211d6 inherit pub_methods_classKey"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6">save</a> (std::string fn)</td></tr>
@@ -170,7 +172,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classPrivateKey.html">PrivateKey</a> class inherits from the templated '<a class="el" href="classKey.html">Key</a>' base class and adds private-key-specific methods. </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00141">141</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00156">156</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ad3e7fd1d3fd3552a52b5425e37b02e85"></a>
 <div class="memitem">
@@ -194,7 +196,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Empty constructor </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00144">144</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00159">159</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
@@ -217,14 +219,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afd42ad5318edbd19cdeb085db53f6bd5"></a>
+<a class="anchor" id="ae201c4156c0449bc4e83e07879cf3ab4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void PrivateKey::sign </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classRecord.html">Record</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classRecord.html">Record</a> &amp;&#160;</td>
           <td class="paramname"><em>r</em></td><td>)</td>
           <td></td>
         </tr>
@@ -252,7 +254,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPrivateKey.html">PrivateKey</a></li>
-    <li class="footer">Generated on Tue Jan 16 2018 18:27:21 for ReChain by
+    <li class="footer">Generated on Wed Jan 17 2018 08:43:16 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

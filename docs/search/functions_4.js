@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['find',['find',['../classBlock.html#ad24d61039cce7244b6faedb1fa7bc90d',1,'Block']]],
-  ['format',['format',['../classLog.html#a47b9b327c3ba5b804ab3323fb2d44261',1,'Log']]],
-  ['from_5fstring',['from_string',['../classKey.html#a1aeb68a09e5a9316487c1c966d6053ab',1,'Key']]]
+  ['empty',['empty',['../classKey.html#a08e57890f02ba908908a2cce74718569',1,'Key']]],
+  ['end',['end',['../classBlock.html#af32ff9a1df5fd761f9c5fb820a598cbf',1,'Block::end()'],['../classBlockChain.html#ad951d129fca84317ef4c321d3dd61c20',1,'BlockChain::end()']]],
+  ['error',['error',['../classLogger.html#af087d53472568f6895e0c193a7de3221',1,'Logger']]]
 ];

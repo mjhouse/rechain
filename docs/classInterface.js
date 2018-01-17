@@ -2,6 +2,7 @@ var classInterface =
 [
     [ "Interface", "classInterface.html#af93d05de57a4d0eb2339ce463d780560", null ],
     [ "~Interface", "classInterface.html#a19179888f29f18f1be54a3dfe98f68c0", null ],
+    [ "check", "classInterface.html#a3d96c00a836d23801c956d72239e3f54", null ],
     [ "env", "classInterface.html#a9255da373826af6766b3849b04cf0826", null ],
     [ "execute", "classInterface.html#a569864e8dbe3cdfaf4a7dff74819435a", null ],
     [ "list", "classInterface.html#a687ee3c3021f07b0cfd9af5b42b71896", null ],

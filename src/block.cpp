@@ -34,8 +34,11 @@
 // local includes
 #include "record.hpp"
 #include "block.hpp"
+#include "logger.hpp"
 
 Block::~Block(){}
+
+using rl = Logger;
 
 /* Get the hash of this block
 */
@@ -93,6 +96,22 @@ std::string Block::mine(){
 	
 }
 
+/* Check if Block is valid
+*/
+bool Block::valid(){
+	// Make sure all records are valid
+	for(auto r : records)
+		if(!r.valid())
+			return false;
+	
+	// Check that hash is good
+	if(this->hash() > HASH_MAX)
+		return false;
+
+	// The Block is good
+	return true;
+}
+
 /** Overloaded index operator
 */
 Record& Block::operator[] ( unsigned int i ){
@@ -123,7 +142,7 @@ Block::iterator Block::find( std::string s ){
 bool Block::add( Record& r ){
 	// Check the Record object is signed and
 	// valid.
-	if(r.verify()){
+	if(r.valid()){
 		// Add to the end of data	
 		records.push_back(r);
 		return true;

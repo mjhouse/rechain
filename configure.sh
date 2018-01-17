@@ -1,4 +1,7 @@
 #!/bin/bash
 
-mkdir -p ~/.rechain;
-export RECHAIN_HOME=$(cd ~/.rechain/; pwd);
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+DIR=${DIR%/}/data;
+
+mkdir -p ${DIR};
+export RECHAIN_HOME=${DIR};

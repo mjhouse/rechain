@@ -151,6 +151,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a614f3fb9ae01707b2dbcf9ea51eb6dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab0fcc5bf778b90925ce864554628ece"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#aab0fcc5bf778b90925ce864554628ece">address</a> (std::string s)</td></tr>
 <tr class="separator:aab0fcc5bf778b90925ce864554628ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dfc96d4b23db0c4259b352dd69c57e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a3dfc96d4b23db0c4259b352dd69c57e6">contains</a> (std::string s)</td></tr>
+<tr class="separator:a3dfc96d4b23db0c4259b352dd69c57e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affe7ebd7b5d67de56bf685b4e0adc0f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#affe7ebd7b5d67de56bf685b4e0adc0f0">valid</a> ()</td></tr>
+<tr class="separator:affe7ebd7b5d67de56bf685b4e0adc0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d0158b65237eaaeace82540355c02f0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a1d0158b65237eaaeace82540355c02f0">get_publication_trust</a> (std::string s)</td></tr>
 <tr class="separator:a1d0158b65237eaaeace82540355c02f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d6ca6b4b64a6a7afbfd8a4b46c2ec28"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a4d6ca6b4b64a6a7afbfd8a4b46c2ec28">get_publication_trust</a> ()</td></tr>
@@ -337,7 +341,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Return an iterator to the start of the <a class="el" href="classBlockChain.html">BlockChain</a> </p><dl class="section return"><dt>Returns</dt><dd>An iterator </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00203">203</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00249">249</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -366,6 +370,31 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a3dfc96d4b23db0c4259b352dd69c57e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BlockChain::contains </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check if a given <a class="el" href="classRecord.html">Record</a> already exists </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>The reference to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="classRecord.html">Record</a> exists </dd></dl>
+
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00179">179</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ad951d129fca84317ef4c321d3dd61c20"></a>
 <div class="memitem">
 <div class="memproto">
@@ -380,7 +409,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns an iterator to the end of the <a class="el" href="classBlockChain.html">BlockChain</a> </p><dl class="section return"><dt>Returns</dt><dd>A vector iterator </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00209">209</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00255">255</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -431,7 +460,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The trust for the <a class="el" href="classRecord.html">Record</a> object </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00179">179</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00225">225</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -449,7 +478,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get all publication trust as a map </p><dl class="section return"><dt>Returns</dt><dd>The trust for all publications </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00185">185</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00231">231</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -474,7 +503,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The trust for the public key </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00191">191</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00237">237</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -492,7 +521,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get all user trust as a map </p><dl class="section return"><dt>Returns</dt><dd>The trust for all public keys </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00197">197</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00243">243</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -518,7 +547,7 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="classBlockChain.html">BlockChain</a> was loaded and is valid</dd></dl>
 <p>Load the <a class="el" href="classBlockChain.html">BlockChain</a> from a given location </p>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00242">242</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00288">288</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -639,7 +668,7 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="classBlockChain.html">BlockChain</a> was saved</dd></dl>
 <p>Save the <a class="el" href="classBlockChain.html">BlockChain</a> to a given location </p>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00221">221</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00267">267</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -673,7 +702,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00179">179</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00190">190</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -691,7 +720,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Return the number of <a class="el" href="classBlock.html">Block</a> objects in the chain </p><dl class="section return"><dt>Returns</dt><dd>The number of <a class="el" href="classBlock.html">Block</a> objects </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00215">215</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00261">261</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -718,6 +747,24 @@ template&lt;class Archive &gt; </div>
 <p>Update 'usr_trust' and 'pub_trust' </p>
 
 <p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00053">53</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="affe7ebd7b5d67de56bf685b4e0adc0f0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BlockChain::valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verify that the <a class="el" href="classBlockChain.html">BlockChain</a> is valid returns True if <a class="el" href="classBlockChain.html">BlockChain</a> is valid </p>
+
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00188">188</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -847,7 +894,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBlockChain.html">BlockChain</a></li>
-    <li class="footer">Generated on Tue Jan 16 2018 18:27:21 for ReChain by
+    <li class="footer">Generated on Wed Jan 17 2018 08:43:16 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

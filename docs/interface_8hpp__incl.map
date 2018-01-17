@@ -1,5 +1,5 @@
 <map id="inc/interface.hpp" name="inc/interface.hpp">
-<area shape="rect" id="node4" href="$logger_8hpp_source.html" title="logger.hpp" alt="" coords="229,80,311,107"/>
-<area shape="rect" id="node9" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="535,80,610,107"/>
-<area shape="rect" id="node13" href="$record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="779,155,862,181"/>
+<area shape="rect" id="node4" href="$logger_8hpp_source.html" title="logger.hpp" alt="" coords="251,80,333,107"/>
+<area shape="rect" id="node9" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="612,80,687,107"/>
+<area shape="rect" id="node14" href="$record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="925,155,1008,181"/>
 </map>

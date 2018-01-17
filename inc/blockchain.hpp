@@ -126,6 +126,17 @@ class BlockChain {
 		*/
 		std::pair<std::string,std::string> address( std::string s );
 
+		/** Check if a given Record already exists
+			\param s The reference to check
+			\returns True if Record exists
+		*/
+		bool contains( std::string s );
+
+		/** Verify that the BlockChain is valid
+			returns True if BlockChain is valid
+		*/
+		bool valid();
+
 		// ------------------------------------------------------
 		// Trust Methods
 

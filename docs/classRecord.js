@@ -12,7 +12,7 @@ var classRecord =
     [ "string", "classRecord.html#af114f694bef7f6dcdab07ed42e0a88f6", null ],
     [ "trust", "classRecord.html#aee22770b75e624f94a928f80d4e4a5b5", null ],
     [ "type", "classRecord.html#ac88205304b44a4fc8a1f864a7a20a296", null ],
-    [ "verify", "classRecord.html#ac517960c05bae3b04120dca837fbe7e3", null ],
+    [ "valid", "classRecord.html#a99384e7e8fce0967eccd6aadd8bcecdb", null ],
     [ "_block", "classRecord.html#a98e04677b98c8b6aa8c2d6c867695059", null ],
     [ "_public_key", "classRecord.html#a5951ab8149eedbb859214d5d4182c42e", null ],
     [ "_reference", "classRecord.html#ac119b8e74dc524b3fd86ed0a48774273", null ],

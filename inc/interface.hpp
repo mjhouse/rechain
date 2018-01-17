@@ -49,6 +49,8 @@ class Interface {
 		
 		void sign( std::string s );
 	
+		void check();
+		
 		void mine();
 
 		void list();

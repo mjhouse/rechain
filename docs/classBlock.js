@@ -14,6 +14,7 @@ var classBlock =
     [ "previous", "classBlock.html#ab42c53898f487472ae314f3d86617a5f", null ],
     [ "serialize", "classBlock.html#ad0db01340a60dee62eae231295cba1f9", null ],
     [ "size", "classBlock.html#aa3f0e1e2580adb15c40d7135f7c820f2", null ],
+    [ "valid", "classBlock.html#a14b5a037d41f75319162b647f9fddc17", null ],
     [ "counter", "classBlock.html#a96a75420cb1bb31ac1d6c3d9a79e2db1", null ],
     [ "nonce", "classBlock.html#a5dc13805185f799f0057e3dd9c5179a7", null ],
     [ "prev", "classBlock.html#a7b067da7a49637a3967093bfb4efa85a", null ],

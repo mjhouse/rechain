@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['debug',['debug',['../classLogger.html#a7327f655152c92c8efe2e05263b24124',1,'Logger']]]
+  ['contains',['contains',['../classBlockChain.html#a3dfc96d4b23db0c4259b352dd69c57e6',1,'BlockChain']]]
 ];

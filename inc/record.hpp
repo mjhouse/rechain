@@ -70,7 +70,7 @@ class Record {
 
 		std::string string( bool b = false );
 
-		bool verify();
+		bool valid();
 
 		template <class Archive>
 		void serialize( Archive& ar ){

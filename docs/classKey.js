@@ -10,5 +10,6 @@ var classKey =
     [ "save", "classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6", null ],
     [ "set_key", "classKey.html#ab73e562ed50f209dcf0f6b08104fffd9", null ],
     [ "to_string", "classKey.html#a5be9347813dd1648ee07427bf2971eba", null ],
+    [ "valid", "classKey.html#a3ad46ab1196dcad2937abca7ca166011", null ],
     [ "key", "classKey.html#ac94d6b84bd9cf4da10171590a0638713", null ]
 ];

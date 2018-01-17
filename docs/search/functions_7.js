@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['info',['info',['../classLogger.html#a0a9052468ca3d05f8a2c4bb397d86651',1,'Logger']]]
+  ['hash',['hash',['../classBlock.html#ae2de4f093f846bf821445f80b02da7de',1,'Block']]]
 ];
