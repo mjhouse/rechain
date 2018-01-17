@@ -1,4 +1,3 @@
-
 #include <cereal/archives/json.hpp>
 
 #include "catch.hpp"

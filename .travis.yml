@@ -5,10 +5,14 @@ compiler: gcc
 
 git:
   lfs_skip_smudge: true
+
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
       - libcrypto++-dev
+      - g++-5
 
 before_install:
       - pip install --user cpp-coveralls
@@ -16,7 +20,7 @@ before_install:
 script:
       - mkdir obj bin
       - source configure.sh
-      - echo ${RECHAIN_HOME}
+      - gcc --version
       - make test
 
 after_success:
