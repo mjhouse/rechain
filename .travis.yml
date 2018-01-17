@@ -2,6 +2,7 @@ language: cpp
 dist: trusty
 sudo: false
 compiler: gcc
+
 git:
   lfs_skip_smudge: true
 addons:
@@ -11,8 +12,11 @@ addons:
 
 before_install:
       - pip install --user cpp-coveralls
+
 script:
       - mkdir obj bin
+      - source configure.sh
       - make test
+
 after_success:
       - coveralls --exclude data --exclude inc/dependencies --exclude test --gcov-options '\-lp'
