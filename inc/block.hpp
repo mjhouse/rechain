@@ -92,10 +92,10 @@ class Block {
 		Block::iterator find( std::string s );
 
 		/** Add a Record block
-		    \param d The block to add
+		    \param r The Record to add
 		    \returns True if Record was added
 		*/
-		bool add( Record& d );
+		bool add( Record& r );
 
 		/** Get or set the hash of the previous block
 		    \param h The hash to set

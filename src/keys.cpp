@@ -29,9 +29,12 @@
 #include <string>				// std::string
 
 #include "keys.hpp"
+#include "logger.hpp"
 
 /** The RSA key size */
 #define KEY_SIZE 3072
+
+using rl = Logger;
 
 using Signer   = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Signer;
 using Verifier = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Verifier;
@@ -46,27 +49,27 @@ void PrivateKey::generate(){
 }
 
 // Sign a Data block
-Record PrivateKey::sign( Record r ){
+void PrivateKey::sign( Record* r ){
 	std::string signature;
 
 	// Create a public key and set it on the
 	// Data object
 	std::shared_ptr<PublicKey> pub_key(PublicKey::empty());
 	pub_key->generate( this );
-	r.public_key(pub_key->to_string());
+	r->public_key(pub_key->to_string());
+
 
 	// Create a Signer and random generator
 	Signer signer(this->key);
 	CryptoPP::AutoSeededRandomPool rng;
 
 	// Sign the Data object
-	CryptoPP::StringSource ss(r.string(), true,
+	CryptoPP::StringSource ss(r->string(), true,
 				new CryptoPP::SignerFilter(rng, signer,
 					new CryptoPP::HexEncoder(
 						new CryptoPP::StringSink(signature))));
 
-	r.signature(signature);
-	return r;
+	r->signature(signature);
 }
 // -----------------------------------------------------------------------------
 

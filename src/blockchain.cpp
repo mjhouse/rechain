@@ -43,7 +43,7 @@ BlockChain& BlockChain::get_blockchain(){
 		
 /* Add a Record to an open Block
 */
-BlockChain& BlockChain::with( Record r ){
+BlockChain& BlockChain::add( Record& r ){
 	this->current.add(r);
 	return *this;
 }
@@ -141,6 +141,39 @@ BlockChain& BlockChain::operator=( const BlockChain& b ){
 	this->pub_trust	 = b.pub_trust;
 	return *this;
 }
+
+/**
+*/
+Record BlockChain::record( std::string s ){
+	for(auto block : blockchain)
+		for(auto record : block)
+			if(record.signature() == s) return record;
+
+	throw std::out_of_range("Record not found");
+}
+
+/**
+*/
+Block BlockChain::block( std::string s ){
+	for(auto block : blockchain)
+		if(block.hash() == s) return block;
+
+	throw std::out_of_range("Block not found");
+}
+
+/** Find an address for a Block/Record
+*/
+std::pair<std::string,std::string> BlockChain::address( std::string s ){
+	for(auto b : blockchain){
+		for(auto r : b){
+			if(r.signature() == s){
+				return std::make_pair(b.hash(),s);
+			}
+		}
+	}
+	throw std::out_of_range("Address not found");
+}
+
 /* Get the trust for a publication
 */
 float BlockChain::get_publication_trust( std::string s ){

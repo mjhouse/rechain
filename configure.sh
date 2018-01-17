@@ -1,3 +1,4 @@
 #!/bin/bash
 
-export RECHAIN_HOME="/home/mhouse/.rechain/";
+mkdir -p ~/.rechain;
+export RECHAIN_HOME=$(cd ~/.rechain/; pwd);

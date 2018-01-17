@@ -3,7 +3,7 @@ var classBlock =
     [ "iterator", "classBlock.html#a9f3b57c07473e53f42a874d71af2b97e", null ],
     [ "Block", "classBlock.html#a37658a946bf5067ad01d68d9ff086adc", null ],
     [ "~Block", "classBlock.html#a19d1bd0e1cef6a865ed2745a2e648405", null ],
-    [ "add", "classBlock.html#a59d3a44685fc27714a92aaf1e24ba71b", null ],
+    [ "add", "classBlock.html#a0f426185d80227fffc5ace2c71f4b15b", null ],
     [ "begin", "classBlock.html#af160b934d6f14b2a14d6528e7e68194f", null ],
     [ "end", "classBlock.html#af32ff9a1df5fd761f9c5fb820a598cbf", null ],
     [ "find", "classBlock.html#ad24d61039cce7244b6faedb1fa7bc90d", null ],

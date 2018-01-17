@@ -120,12 +120,12 @@ Block::iterator Block::find( std::string s ){
 
 /* Add a Record block
 */
-bool Block::add( Record& d ){
+bool Block::add( Record& r ){
 	// Check the Record object is signed and
 	// valid.
-	if(d.verify()){
+	if(r.verify()){
 		// Add to the end of data	
-		records.push_back(d);
+		records.push_back(r);
 		return true;
 	}
 	// Return failure if the Record pointer

@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['timestamp',['timestamp',['../classLog.html#a6de71fa1840c55777ceb9fa34fa939f9',1,'Log']]],
-  ['to_5fstring',['to_string',['../classKey.html#a5be9347813dd1648ee07427bf2971eba',1,'Key']]]
+  ['save',['save',['../classBlockChain.html#a5e73c9e3754a32dca2ce587dfa8f1be9',1,'BlockChain::save()'],['../classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6',1,'Key::save()']]],
+  ['serialize',['serialize',['../classBlock.html#ad0db01340a60dee62eae231295cba1f9',1,'Block::serialize()'],['../classBlockChain.html#ac0dd294dc2adfd1857b7aef9911370d8',1,'BlockChain::serialize()']]],
+  ['set_5fkey',['set_key',['../classKey.html#ab73e562ed50f209dcf0f6b08104fffd9',1,'Key']]],
+  ['sign',['sign',['../classPrivateKey.html#afd42ad5318edbd19cdeb085db53f6bd5',1,'PrivateKey']]],
+  ['size',['size',['../classBlock.html#aa3f0e1e2580adb15c40d7135f7c820f2',1,'Block::size()'],['../classBlockChain.html#acb48c2b272c045d5e3fa294fafe536b9',1,'BlockChain::size()']]]
 ];

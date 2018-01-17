@@ -150,7 +150,7 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 			\param r A pointer to the Record to sign
 			\returns True if the Record was signed
 		*/
-		Record sign( Record r );
+		void sign( Record* r );
 };
 
 /** The PublicKey class inherits from the templated

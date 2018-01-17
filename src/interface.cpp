@@ -46,9 +46,12 @@ void Interface::publish( std::string s ){
 
 	std::ifstream ifs(s);
 	if(ifs.is_open()){
-	
-		rl::get().debug("Adding data block...");
-		blockchain.with( private_key->sign( Record(ifs) ) );
+		rl::get().debug("Signing record...");
+		Record r(ifs);
+		private_key->sign(&r);
+
+		rl::get().debug("Adding record...");
+		blockchain.add(r);
 
 		blockchain.save();
 	}
@@ -56,9 +59,16 @@ void Interface::publish( std::string s ){
 }
 
 void Interface::sign( std::string s ){
-	std::ifstream ifs(s);
-	if(ifs.is_open()){
-	
+	BlockChain& blockchain = BlockChain::get_blockchain();
+
+	try {
+		auto a = blockchain.address(s);
+		Record r(a.second,a.first);
+		
+		private_key->sign(&r);
+		blockchain.add(r);
+	}catch(const std::out_of_range& e){
+		rl::get().error("Couldn't find record to sign!");
 	}
 }
 

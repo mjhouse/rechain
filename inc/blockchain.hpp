@@ -31,6 +31,7 @@
 #include <vector>
 #include <memory>
 #include <fstream>
+#include <utility>
 #include <map>
 
 // dependency includes
@@ -83,7 +84,7 @@ class BlockChain {
 			\param d A pointer to a Record block
 			\returns A pointer to the BlockChain
 		*/
-		BlockChain& with( Record r );
+		BlockChain& add( Record& r );
 
 		/** Mine the current Block to the BlockChain
 			\returns The valid hash of the new Block
@@ -106,7 +107,25 @@ class BlockChain {
 			\returns A reference to the current BlockChain
 		*/
 		BlockChain& operator=( const BlockChain& b );
-		
+	
+		/** Find a Record
+			\param s The signature of the Record
+			\returns A reference to the Record
+		*/
+		Record record( std::string s );
+
+		/** Find a Block by hash
+			\param s The hash of the Block
+			\returns A reference to the Block
+		*/
+		Block block( std::string s );
+
+		/** Find an address for a Block/Record
+			\param s The hash of the Block or signature of the Record
+			\returns A (<block_hash>,<record_signature>) pair
+		*/
+		std::pair<std::string,std::string> address( std::string s );
+
 		// ------------------------------------------------------
 		// Trust Methods
 

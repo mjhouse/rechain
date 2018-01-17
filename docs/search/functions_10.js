@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['verify',['verify',['../classPublicKey.html#afbf4657086fea7d404385dc9dff71e3f',1,'PublicKey']]]
+  ['update_5ftrust',['update_trust',['../classBlockChain.html#a82851a102065917794e939b1bbd91633',1,'BlockChain']]]
 ];
