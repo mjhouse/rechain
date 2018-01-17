@@ -16,6 +16,7 @@ before_install:
 script:
       - mkdir obj bin
       - source configure.sh
+      - echo ${RECHAIN_HOME}
       - make test
 
 after_success:
