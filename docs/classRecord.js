@@ -1,8 +1,8 @@
 var classRecord =
 [
     [ "Record", "classRecord.html#ae8ee53ffec6ff4dac9911517d47e86a5", null ],
-    [ "Record", "classRecord.html#a9967707793aba56d87f843f4a1f85f1f", null ],
-    [ "Record", "classRecord.html#a995a87b094865e227884920d225d30e6", null ],
+    [ "Record", "classRecord.html#a7f55e5b97e110841fcff26ab407264a2", null ],
+    [ "Record", "classRecord.html#a8870746d3130da6f64f65c8cc37014a6", null ],
     [ "~Record", "classRecord.html#ad2ce1a99d866834ab53dedd788cb1ea6", null ],
     [ "block", "classRecord.html#a675e1dc6656497d29a1c5d6cd059208f", null ],
     [ "public_key", "classRecord.html#a6e3df43b85e4798a505ed609c85370c0", null ],

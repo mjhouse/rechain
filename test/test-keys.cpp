@@ -1,7 +1,4 @@
-#include <cereal/archives/json.hpp>
-
 #include "catch.hpp"
-#include "block.hpp"
 #include "record.hpp"
 #include "keys.hpp"
 
@@ -11,15 +8,13 @@ extern std::string gen_random();
 
 SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 
-	GIVEN( "paths to public and private keys and a block" ){
+	GIVEN( "paths to public and private keys" ){
 
 		std::string public_path = "test/data/test.public";
 		std::string private_path = "test/data/test.private";
 
 		std::string public_str;
 		std::string private_str;
-
-		Block block;
 
 		std::ifstream pub(public_path);
 		std::ifstream pri(private_path);
@@ -105,6 +100,16 @@ SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 			
 				std::remove(tmp_priv.c_str());
 				std::remove(tmp_publ.c_str());
+			}
+		}
+
+		WHEN( "keys are saved to a bad file location" ){
+			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_string(private_str));
+			std::shared_ptr<PublicKey> public_key(PublicKey::load_string(public_str));
+	
+			THEN( "they return false" ){
+				REQUIRE_FALSE(private_key->save("test/data/NOEXIST/test"));
+				REQUIRE_FALSE(public_key->save("test/data/NOEXIST/test"));
 			}
 		}
 

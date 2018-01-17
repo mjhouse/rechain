@@ -51,9 +51,9 @@ class Record {
 	public:
 		Record();
 
-		Record( std::string r, std::string b = "", float t = 0.0f );
+		Record( std::string r, std::string b = "" );
 
-		Record( std::ifstream& r, std::string b = "", float t = 0.0f );
+		Record( std::ifstream& r );
 
 		~Record();
 

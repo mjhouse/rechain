@@ -29,9 +29,9 @@
 
 Record::Record() : _trust(0.0f) {}
 
-Record::Record( std::string r, std::string b, float t ) : _reference(r), _block(b), _trust(t) {}
+Record::Record( std::string r, std::string b ) : _reference(r), _block(b), _trust(0.0f) {}
 
-Record::Record( std::ifstream& r, std::string b, float t ) : _block(b), _trust(t) {
+Record::Record( std::ifstream& r ) : _trust(0.0f) {
 	
 	CryptoPP::SHA256 hasher;
 	
