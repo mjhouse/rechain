@@ -24,8 +24,8 @@
 		for ReChain. 
 */
 
-#ifndef _INTERFACE_HPP_
-#define _INTERFACE_HPP_
+#ifndef _RECHAIN_INTERFACE_HPP_
+#define _RECHAIN_INTERFACE_HPP_
 
 // system includes
 #include <string>
@@ -37,36 +37,63 @@
 
 class Interface {
 	private:
-		int argc;
-		char** argv;
+		int argc;				/**< Command line argument count */
+		char** argv;				/**< Command line arguments */
 
 		std::string home;			/**< The path to the home directory */
 	
-		PrivateKey* private_key;
-		PublicKey* public_key;
+		PrivateKey* private_key;		/**< A pointer to the current private key */
+		PublicKey* public_key;			/**< A pointer to the current public key */
 
-		void publish( std::string s );
+		/** Public a given document
+			\param s The path to the file
+			\returns True on success
+		*/
+		bool publish( std::string s );
 		
-		void sign( std::string s );
+		/** Sign a previously published document
+			\param s The reference hash to sign
+			\returns True on success
+		*/
+		bool sign( std::string s );
 	
+		/** Check the BlockChain is valid
+		*/
 		void check();
-		
-		void mine();
+	
+		/** Mine the current working block
+			\returns True on success
+		*/
+		bool mine();
 
+		/** List the current BlockChain state
+		*/
 		void list();
 
+		/** Trim a trailing slash from a path
+			\param s The path to trim
+			\returns The trimmed path
+		*/
 		inline std::string trim( std::string s ){
 			auto it = s.end() - 1;
 			if(*it == '/') s.erase(it);
 			return s;
 		}
 
+		/** Get and environment variable
+			\param key The key for the environment variable
+			\returns The variable as a string or empty on failure
+		*/
 		inline std::string env(std::string const& key){
 		    char const* val = std::getenv(key.c_str()); 
 		    return (val == NULL) ? std::string() : trim(std::string(val));
 		}
 
 	public:
+		/** Constructor
+			\param c The count of arguments
+			\param v The command line arguments
+		*/
 		Interface( int c, char** v ) : argc(c), argv(v) {
 			home = env("RECHAIN_HOME");
 			
@@ -76,12 +103,16 @@ class Interface {
 
 		};
 
+		/** Destructor
+		*/
 		~Interface(){
 			delete private_key;
 			delete public_key;
 		};
 
-		void execute();
+		/** Execute command line options
+		*/
+		int execute();
 };
 
 #endif

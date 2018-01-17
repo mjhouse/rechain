@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
@@ -26,6 +24,9 @@
 		manages Block objects, searches
 		and verifies the Block collection. 
 */
+
+#ifndef _RECHAIN_BLOCKCHAIN_HPP_
+#define _RECHAIN_BLOCKCHAIN_HPP_
 
 // system includes
 #include <vector>
@@ -209,3 +210,4 @@ class BlockChain {
 
 };
 
+#endif

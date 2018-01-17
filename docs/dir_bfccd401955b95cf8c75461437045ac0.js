@@ -7,11 +7,7 @@ var dir_bfccd401955b95cf8c75461437045ac0 =
     [ "interface.hpp", "interface_8hpp.html", [
       [ "Interface", "classInterface.html", "classInterface" ]
     ] ],
-    [ "keys.hpp", "keys_8hpp.html", [
-      [ "Key", "classKey.html", "classKey" ],
-      [ "PrivateKey", "classPrivateKey.html", "classPrivateKey" ],
-      [ "PublicKey", "classPublicKey.html", "classPublicKey" ]
-    ] ],
+    [ "keys.hpp", "keys_8hpp.html", "keys_8hpp" ],
     [ "logger.hpp", "logger_8hpp_source.html", null ],
     [ "record.hpp", "record_8hpp.html", "record_8hpp" ]
 ];

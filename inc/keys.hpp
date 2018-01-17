@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
@@ -36,6 +34,9 @@
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 
 #include "record.hpp"			// Data objects
+
+#ifndef _RECHAIN_KEYS_HPP_
+#define _RECHAIN_KEYS_HPP_
 
 class PrivateKey;
 class PublicKey;
@@ -189,3 +190,4 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey,PublicKey> {
 		bool verify( Record* r );
 };
 
+#endif

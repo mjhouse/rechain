@@ -19,8 +19,8 @@
  *
 */
 
-#ifndef _BLOCK_HPP_
-#define _BLOCK_HPP_
+#ifndef _RECHAIN_BLOCK_HPP_
+#define _RECHAIN_BLOCK_HPP_
 
 // system includes
 #include <map>
@@ -90,7 +90,7 @@ class Block {
 		*/
 		Block& operator=( const Block& b );
  
-		/** Get a Record block given the index
+		/** Get a Record block given the signature
 		    \param s The signature of the Record object to return
 		    \returns The requested Record block or empty pointer
 		*/

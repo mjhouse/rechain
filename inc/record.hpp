@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
@@ -26,6 +24,9 @@
 		information or a signature for another
 		published Record object.
 */
+
+#ifndef _RECHAIN_RECORD_HPP_
+#define _RECHAIN_RECORD_HPP_
 
 // system includes
 #include <string>
@@ -84,3 +85,5 @@ class Record {
 		}
 
 };
+
+#endif

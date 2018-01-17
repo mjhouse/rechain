@@ -3,7 +3,5 @@
 
 int main( int argc, char** argv ){
 	Interface interface(argc,argv);
-	interface.execute();
-
-	return 0;
+	return interface.execute();
 }

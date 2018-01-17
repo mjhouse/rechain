@@ -1,5 +1,3 @@
-#pragma once
-
 // system includes
 #include <iostream>
 #include <algorithm>
@@ -7,6 +5,9 @@
 #include <string>
 #include <fstream>
 #include <ctime>
+
+#ifndef _RECHAIN_LOGGER_HPP_
+#define _RECHAIN_LOGGER_HPP_
 
 /** Enum for different log levels */
 enum Level { info, debug, warning, error };
@@ -173,3 +174,5 @@ class Logger {
 			return *this;
 		}
 };
+
+#endif

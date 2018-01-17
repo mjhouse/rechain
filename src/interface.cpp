@@ -41,7 +41,7 @@
 
 typedef Logger rl;
 
-void Interface::publish( std::string s ){
+bool Interface::publish( std::string s ){
 	BlockChain& blockchain = BlockChain::get_blockchain();
 
 	std::ifstream ifs(s);
@@ -56,15 +56,17 @@ void Interface::publish( std::string s ){
 			blockchain.save();
 		} else {
 			rl::get().error("Publication already exists");
+			return false;
 		}
 	}
 	else {
 		rl::get().error("Couldn't find the file to add: " + s);
+		return false;
 	}
-
+	return true;
 }
 
-void Interface::sign( std::string s ){
+bool Interface::sign( std::string s ){
 	BlockChain& blockchain = BlockChain::get_blockchain();
 
 	try {
@@ -79,11 +81,14 @@ void Interface::sign( std::string s ){
 			blockchain.save();
 		} else {
 			rl::get().error("Publication doesn't exist");	
+			return false;
 		}
 
 	}catch(const std::out_of_range& e){
 		rl::get().error("Couldn't find the referenced record");
+		return false;
 	}
+	return true;
 }
 
 void Interface::check(){
@@ -95,14 +100,16 @@ void Interface::check(){
 	}
 }
 
-void Interface::mine(){
+bool Interface::mine(){
 	BlockChain& blockchain = BlockChain::get_blockchain();
 
 	rl::get()
 		.debug("Mining: ")
 		.debug("Hash: " + blockchain.mine());
 
-	blockchain.save();
+	if(blockchain.valid() && blockchain.save())
+		return true;
+	return false;
 }
 
 void Interface::list(){
@@ -114,23 +121,26 @@ void Interface::list(){
 		for(unsigned int j = 0; j < blockchain[i].size(); ++j){
 			auto record = blockchain[i][j];
 			std::string msg;
+			std::string ref = record.reference();
+			std::string own = record.public_key();
 			std::string type = (record.type() == DataType::Publication) ? "Publication" : "Signature";
 			float trust = (type == "Publication") ? blockchain.get_publication_trust(record.reference()) : 0.0f;
 
 			if(j == 0 && i == 0)
-				msg = "\tRecord: " + record.reference() + " (Genesis)";
+				msg = "\tRecord: " + ref + " (Genesis)";
 			else
-				msg = "\tRecord: " + record.reference();
+				msg = "\tRecord: " + ref;
 
 			rl::get("console")
 				.info(msg)
-				.info("\t\tType: " + type)
+				.info("\tOwner:  " + own.substr(50,ref.length()-3) + "...")
+				.info("\t\tType:  " + type)
 				.info("\t\tTrust: " + std::to_string(trust));
 		}
 	}
 }
 
-void Interface::execute(){
+int Interface::execute(){
 	
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()
@@ -139,6 +149,8 @@ void Interface::execute(){
 		("c,check","Validate the blockchain")	
 		("m,mine","Mine a block")	
 		("s,sign","Sign a published document",cxxopts::value<std::string>(),"<path>")
+		("private_key","Make a private key active",cxxopts::value<std::string>(),"<path>")
+		("public_key","Make a public key active",cxxopts::value<std::string>(),"<path>")
 		("l,list","List published documents");
 
 	try {
@@ -147,47 +159,96 @@ void Interface::execute(){
 		
 		if(!home.empty()){
 			std::string path = home + "/rechain.blockchain";
-			std::string priv = home + "/keys/rsa.private";
-			std::string publ = home + "/keys/rsa.public";
-
 			BlockChain& blockchain = BlockChain::get_blockchain();
 
 			if(!blockchain.load(path)){
 				blockchain.save(path);
 			}
 			
-			try {
-				private_key = PrivateKey::load_file(priv);
-				public_key = PublicKey::load_file(publ);
-			} catch (const std::invalid_argument& e) {
-				rl::get().error(e.what());
-			}
 		}
 		else {
 			rl::get().error("RECHAIN_HOME isn't set!");
-			exit(1);
+			return ERROR;
 		}
 
 		if(result.count("help")){
+			// Display help for command line options
 			std::cout << options.help() << std::endl;
+			return NOERR;
 		}
 		else {
-			if(result.count("publish"))
-				this->publish(result["p"].as<std::string>());
+			std::string publ = home + "/current.public";
+			std::string priv = home + "/current.private";
+	
+			// Try to load a private key from a given path
+			// or from the default path
+			try {
+				if(result.count("private_key")){
+					private_key = PrivateKey::load_file(result["private_key"].as<std::string>());
+					private_key->save(priv);
+				} else {
+					private_key = PrivateKey::load_file(priv);
+				}
+			} catch (const std::invalid_argument& e){
+				rl::get().error(e.what());
+				return ERROR;
+			}
+		
+			// Try to load a public key from a given path
+			// or from the default path
+			try {
+				if(result.count("public_key")){
+						public_key = PublicKey::load_file(result["public_key"].as<std::string>());
+						public_key->save(publ);
+				} else {
+						public_key = PublicKey::load_file(publ);
+				}
+			} catch (const std::invalid_argument& e){
+				rl::get().error(e.what());
+				return ERROR;
+			}
+
+			// Publish a document to the BlockChain
+			if(result.count("publish")){
+				if(this->publish(result["p"].as<std::string>()))
+					return NOERR;
+				else
+					return ERROR;
+			}
 			
-			if(result.count("check"))
+			// Check the BlockChain integrity
+			if(result.count("check")){
 				this->check();
-
-			if(result.count("mine"))
-				this->mine();
-
-			if(result.count("sign"))
-				this->sign(result["s"].as<std::string>());
+				return NOERR;
+			}
 			
-			if(result.count("list"))
+			// Mine the current Block
+			if(result.count("mine")){
+				if(this->mine())
+					return NOERR;
+				else
+					return ERROR;
+			}
+
+			// Sign a previously published Record
+			if(result.count("sign")){
+				if(this->sign(result["s"].as<std::string>()))
+					return NOERR;
+				else
+					return ERROR;
+				
+			}
+
+			// Display the current BlockChain state
+			if(result.count("list")){
 				this->list();
+				return NOERR;
+			}
 		}
 	} catch (const cxxopts::OptionException& e){
 		rl::get().error("Failed to parse command line arguments!");
+		return ERROR;
 	}
+
+	return NOERR;
 }
