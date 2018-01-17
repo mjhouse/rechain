@@ -1,4 +1,5 @@
-CPP=g++
+CXX=g++-5
+CC=gcc
 
 TARGET = bin/rechain
 OUTDIR = bin
@@ -34,20 +35,20 @@ release: link-release
 
 # LINK
 link-debug: $(OBJECTS)
-	$(CPP) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
+	$(CXX) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
 
 link-test: $(TOBJECTS)
-	$(CPP) $(TOBJECTS) -o $(TARGET) $(CPPFLAGS)
+	$(CXX) $(TOBJECTS) -o $(TARGET) $(CPPFLAGS)
 
 link-release: $(OBJECTS)
-	$(CPP) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
+	$(CXX) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
 
 # BUILD
 obj/%.o: $(TSTDIR)/%.cpp
-	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS)
+	$(CXX) $(INC) -c $< -o $@ $(CPPFLAGS)
 
 obj/%.o: $(SRCDIR)/%.cpp
-	$(CPP) $(INC) -c $< -o $@ $(CPPFLAGS)
+	$(CXX) $(INC) -c $< -o $@ $(CPPFLAGS)
 
 clean:
 	rm $(BLDDIR)/*; rm $(OUTDIR)/*;
