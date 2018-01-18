@@ -7,13 +7,15 @@
 #include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 
+#include <cereal/archives/json.hpp>
+
 #include <string>
 
 #define DUMP_FILE(X) (std::string( std::istreambuf_iterator<char>(X),std::istreambuf_iterator<char>()))
 
 extern std::string gen_random();
 
-SCENARIO( "records created with different initial values" ){
+SCENARIO( "records created with different initial values", "[record-create]" ){
 
 	GIVEN( "a reference, block hash and initial trust value" ){
 
@@ -67,7 +69,7 @@ SCENARIO( "records created with different initial values" ){
 
 }
 
-SCENARIO( "record methods are used to set and retrieve values" ){
+SCENARIO( "record methods are used to set and retrieve values", "[record-access]" ){
 
 	GIVEN( "a publication and signature record" ){
 		std::string reference = gen_random();
@@ -77,6 +79,17 @@ SCENARIO( "record methods are used to set and retrieve values" ){
 		Record publication(reference);
 		Record signature(reference,block);
 	
+
+		WHEN( "records are signed" ){
+			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/test.private"));
+			private_key->sign(publication);
+
+			THEN( "signed records are valid, unsigned are not" ){
+				REQUIRE(publication.valid());
+				REQUIRE_FALSE(signature.valid());
+			}
+		}
+
 		WHEN( "values are retrieved" ){
 			std::string r = publication.reference();
 			std::string b = signature.block();
@@ -93,11 +106,16 @@ SCENARIO( "record methods are used to set and retrieve values" ){
 			THEN( "trust should be 0.0f" ){
 				REQUIRE(t == 0.0f);
 			}
+
+			THEN( "types match expected values" ){
+				REQUIRE(publication.type() == DataType::Publication);
+				REQUIRE(signature.type() == DataType::Signature);
+			}
 		}
 
 		WHEN( "values are set" ){
 			std::string r = publication.reference("TEST");
-			std::string b = publication.block("TEST");
+			std::string b = signature.block("TEST");
 			float t = publication.trust(trust);
 
 			THEN( "reference matches given reference" ){
@@ -111,6 +129,73 @@ SCENARIO( "record methods are used to set and retrieve values" ){
 			THEN( "trust should be 0.0f" ){
 				REQUIRE(t == trust);
 			}
+
+			THEN( "types match expected values" ){
+				REQUIRE(publication.type() == DataType::Publication);
+				REQUIRE(signature.type() == DataType::Signature);
+			}
+		}
+
+	}
+}
+
+SCENARIO( "records are serialized or converted to strings", "[record-transform]" ){
+
+	GIVEN( "a valid record" ){
+		
+		std::string reference = gen_random();
+		std::string block = gen_random();
+		float trust = 0.34f;
+
+		Record record(reference,block);
+		record.trust(trust);
+
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/test.private"));
+		private_key->sign(record);
+
+		WHEN( "record is converted to a string" ){
+			std::string automatic = record.string(true);
+			std::string manual;
+
+			manual.append(record.reference());
+			manual.append(record.block());
+			manual.append(record.public_key());
+			manual.append(record.signature());
+			manual.append(std::to_string(record.trust()));
+
+			THEN( "string is equal to expected string" ){
+				REQUIRE(manual == automatic);
+			}
+		}
+
+		WHEN( "record is serialized to a file" ){
+			Record empty;
+
+			std::ofstream ofs("test/data/tmp.record");
+			if(ofs.is_open()){
+				cereal::JSONOutputArchive archive(ofs);
+				archive( record );
+			}
+
+
+			std::ifstream ifs("test/data/tmp.record");
+			if(ifs.is_open()){
+				cereal::JSONInputArchive archive(ifs);
+				archive( empty );
+			}
+
+			std::remove("test/data/tmp.record");
+			THEN( "unserialized record is the same as original" ){
+				REQUIRE(empty.reference() == record.reference());
+				REQUIRE(empty.block() == record.block());
+				REQUIRE(empty.trust() == record.trust());
+				REQUIRE(empty.string(true) == record.string(true));
+			}
+
+			THEN( "unserialized record is valid" ){
+				REQUIRE(empty.valid());
+			}
 		}
 	}
 }
+
