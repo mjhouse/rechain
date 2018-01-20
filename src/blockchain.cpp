@@ -98,7 +98,6 @@ void BlockChain::update_trust(){
 /* Mine and add a block to the chain
 */
 std::string BlockChain::mine(){	
-	std::string hash; 
 	// Update trust on the block if it's a signature
 	for(auto d : this->current){
 		if(d.type() == DataType::Signature){
@@ -113,7 +112,7 @@ std::string BlockChain::mine(){
 	}
 
 	// Get the hash to return
-	hash = this->current.mine();
+	std::string hash = this->current.mine();
 	
 	// Add to the chain
 	this->blockchain.push_back( this->current );
@@ -144,7 +143,7 @@ BlockChain& BlockChain::operator=( const BlockChain& b ){
 
 /**
 */
-Record BlockChain::record( std::string s ){
+Record& BlockChain::record( std::string s ){
 	for(auto block : blockchain)
 		for(auto record : block)
 			if(record.signature() == s) return record;
@@ -154,7 +153,7 @@ Record BlockChain::record( std::string s ){
 
 /**
 */
-Block BlockChain::block( std::string s ){
+Block& BlockChain::block( std::string s ){
 	for(auto block : blockchain)
 		if(block.hash() == s) return block;
 
@@ -186,9 +185,6 @@ bool BlockChain::contains( std::string s ){
 /* Check if BlockChain is valid
 */
 bool BlockChain::valid(){
-	std::vector<std::string> pubs;
-	std::vector<std::string> blks;
-
 	for(auto b : blockchain){
 		for(auto r : b){
 			if(!r.valid())
@@ -197,21 +193,21 @@ bool BlockChain::valid(){
 			switch(r.type()){
 				case DataType::Publication:
 				{
-					auto it = std::find(pubs.begin(),pubs.end(),r.reference());
-					if(it != pubs.end())
+					try {
+						auto it = this->record(r.reference());
 						return false;
-					else
-						pubs.push_back(r.reference());
-						blks.push_back(b.hash());
+					}
+					catch (const std::out_of_range& e){}
 				}
 				break;
 
 				case DataType::Signature:
 				{
-					auto r_it = std::find(pubs.begin(),pubs.end(),r.reference());
-					auto b_it = std::find(blks.begin(),blks.end(),r.block());
-					if(r_it == pubs.end() || b_it == blks.end())
-						return false;
+					try {
+						auto addr = this->address(r.reference());
+						if(addr.first != r.block() || addr.second != r.reference())
+							return false;
+					}catch(const std::out_of_range* e){}
 				}
 				break;
 			}

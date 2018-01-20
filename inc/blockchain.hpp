@@ -113,13 +113,13 @@ class BlockChain {
 			\param s The signature of the Record
 			\returns A reference to the Record
 		*/
-		Record record( std::string s );
+		Record& record( std::string s );
 
 		/** Find a Block by hash
 			\param s The hash of the Block
 			\returns A reference to the Block
 		*/
-		Block block( std::string s );
+		Block& block( std::string s );
 
 		/** Find an address for a Block/Record
 			\param s The hash of the Block or signature of the Record

@@ -34,10 +34,11 @@ SCENARIO( "records are added to blockchain", "[blockchain access]" ){
 				blockchain.add(record);
 			}
 
-			blockchain.mine();
-
 			THEN( "blockchain adds them" ){
+				std::string hash = blockchain.mine();
 				REQUIRE(blockchain[0].size() == NUM_RECORDS);
+				REQUIRE(hash == blockchain[0].hash());
+
 				for(unsigned int i = 0 ; i < blockchain[0].size(); ++i){
 					REQUIRE(blockchain[0][i].signature() == signatures[i]);
 				}
