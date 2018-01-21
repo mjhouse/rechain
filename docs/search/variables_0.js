@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['argc',['argc',['../classInterface.html#aca541ba0454057c87ea258f17ceb0eae',1,'Interface']]],
-  ['argv',['argv',['../classInterface.html#af12b358bea1addb340cd1cc7b32100e0',1,'Interface']]]
+  ['_5fblock',['_block',['../classRecord.html#a98e04677b98c8b6aa8c2d6c867695059',1,'Record']]],
+  ['_5fpublic_5fkey',['_public_key',['../classRecord.html#a5951ab8149eedbb859214d5d4182c42e',1,'Record']]],
+  ['_5freference',['_reference',['../classRecord.html#ac119b8e74dc524b3fd86ed0a48774273',1,'Record']]],
+  ['_5fsignature',['_signature',['../classRecord.html#a97d2a3278efab8469f9e223d88e21c26',1,'Record']]],
+  ['_5ftrust',['_trust',['../classRecord.html#a93225e0307246fd7b2d2fa6395cde867',1,'Record']]]
 ];

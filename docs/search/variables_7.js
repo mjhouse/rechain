@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['name',['name',['../classLog.html#a5d8c89b4d368a5876c404a7b30a3aa34',1,'Log']]],
-  ['nonce',['nonce',['../classBlock.html#a5dc13805185f799f0057e3dd9c5179a7',1,'Block']]]
+  ['level',['level',['../classLog.html#a92d51ffba068b55635eb128c8e49eb4b',1,'Log']]],
+  ['logs',['logs',['../classLogger.html#ad61a171d4a1f82eb0cfcaf9c8ccbc1db',1,'Logger']]]
 ];

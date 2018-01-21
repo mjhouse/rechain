@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['file_5fpath',['file_path',['../classBlockChain.html#acdba7c5340f6b0b26966c341b2e6a8d4',1,'BlockChain']]],
-  ['find',['find',['../classBlock.html#ad24d61039cce7244b6faedb1fa7bc90d',1,'Block::find()'],['../classBlockChain.html#ac17b1450e78d59e5a2098069aca501e4',1,'BlockChain::find()']]],
-  ['format',['format',['../classLog.html#a47b9b327c3ba5b804ab3323fb2d44261',1,'Log']]],
-  ['from_5fstring',['from_string',['../classKey.html#a1aeb68a09e5a9316487c1c966d6053ab',1,'Key']]]
+  ['empty',['empty',['../classKey.html#a08e57890f02ba908908a2cce74718569',1,'Key']]],
+  ['end',['end',['../classBlock.html#af32ff9a1df5fd761f9c5fb820a598cbf',1,'Block::end()'],['../classBlockChain.html#ad951d129fca84317ef4c321d3dd61c20',1,'BlockChain::end()']]],
+  ['env',['env',['../classInterface.html#a9255da373826af6766b3849b04cf0826',1,'Interface']]],
+  ['error',['error',['../classLogger.html#af087d53472568f6895e0c193a7de3221',1,'Logger']]],
+  ['execute',['execute',['../classInterface.html#aa3f24e3f85920b871a65c0b25d79224d',1,'Interface']]]
 ];

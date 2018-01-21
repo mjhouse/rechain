@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['generate',['generate',['../classPrivateKey.html#a4360bb239415bbadddfbb3f40cf52a79',1,'PrivateKey::generate()'],['../classPublicKey.html#a7a42eb5ca0c399b1da9cc1d71ea93777',1,'PublicKey::generate()']]],
-  ['get',['get',['../classLogger.html#a40756728767e9e61adc4654709bb9e05',1,'Logger']]],
-  ['get_5fkey',['get_key',['../classKey.html#a95aeb74991b64b8555332f0b9b391797',1,'Key']]],
-  ['get_5fpublication_5ftrust',['get_publication_trust',['../classBlockChain.html#a1d0158b65237eaaeace82540355c02f0',1,'BlockChain::get_publication_trust(std::string s)'],['../classBlockChain.html#a4d6ca6b4b64a6a7afbfd8a4b46c2ec28',1,'BlockChain::get_publication_trust()']]],
-  ['get_5fuser_5ftrust',['get_user_trust',['../classBlockChain.html#ac659c7f7ba71962bc8ddd12fd70d80c8',1,'BlockChain::get_user_trust(std::string p)'],['../classBlockChain.html#acf0736b1b8e009fd2b752efb26903ff7',1,'BlockChain::get_user_trust()']]]
+  ['file_5fpath',['file_path',['../classBlockChain.html#acdba7c5340f6b0b26966c341b2e6a8d4',1,'BlockChain']]],
+  ['find',['find',['../classBlock.html#ad24d61039cce7244b6faedb1fa7bc90d',1,'Block::find()'],['../classBlockChain.html#ac17b1450e78d59e5a2098069aca501e4',1,'BlockChain::find()']]],
+  ['format',['format',['../classLog.html#a47b9b327c3ba5b804ab3323fb2d44261',1,'Log']]],
+  ['from_5fstring',['from_string',['../classKey.html#a1aeb68a09e5a9316487c1c966d6053ab',1,'Key']]]
 ];

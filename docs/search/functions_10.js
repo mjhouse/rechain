@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['update_5ftrust',['update_trust',['../classBlockChain.html#a82851a102065917794e939b1bbd91633',1,'BlockChain']]]
+  ['timestamp',['timestamp',['../classLog.html#a6de71fa1840c55777ceb9fa34fa939f9',1,'Log']]],
+  ['to_5fstring',['to_string',['../classKey.html#a5be9347813dd1648ee07427bf2971eba',1,'Key']]],
+  ['trim',['trim',['../classInterface.html#a17b94f7a998330a5966c2aa633884855',1,'Interface']]],
+  ['trust',['trust',['../classRecord.html#aee22770b75e624f94a928f80d4e4a5b5',1,'Record']]],
+  ['type',['type',['../classRecord.html#ac88205304b44a4fc8a1f864a7a20a296',1,'Record']]]
 ];

@@ -132,9 +132,7 @@ Block& Block::operator=( const Block& b ){
 */
 Block::iterator Block::find( std::string s ){
 	return std::find_if(records.begin(),records.end(),
-	[&s](Record& r){
-		return (r.reference() == s);
-	});
+	[&s](Record& r){ return (r.reference() == s); });
 }
 
 /* Add a Record block

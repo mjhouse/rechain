@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['check',['check',['../classInterface.html#a3d96c00a836d23801c956d72239e3f54',1,'Interface']]],
-  ['contains',['contains',['../classBlockChain.html#a3dfc96d4b23db0c4259b352dd69c57e6',1,'BlockChain']]],
-  ['counter',['counter',['../classBlock.html#a96a75420cb1bb31ac1d6c3d9a79e2db1',1,'Block']]],
-  ['current',['current',['../classBlockChain.html#a288c8c10e0586dfe6bc0bbd638c0d778',1,'BlockChain::current()'],['../classLogger.html#ae9da1df8c090f2c1ca579822482996ed',1,'Logger::current()']]]
+  ['begin',['begin',['../classBlock.html#af160b934d6f14b2a14d6528e7e68194f',1,'Block::begin()'],['../classBlockChain.html#a992631fb0424bd3861f6e78e7a90a410',1,'BlockChain::begin()']]],
+  ['block',['Block',['../classBlock.html',1,'Block'],['../classRecord.html#a675e1dc6656497d29a1c5d6cd059208f',1,'Record::block()']]],
+  ['blockchain',['BlockChain',['../classBlockChain.html',1,'BlockChain'],['../classBlockChain.html#acf99d40594ac22787e424cab7850b626',1,'BlockChain::BlockChain()'],['../classBlockChain.html#a9e885cdf4c59b225b8a4efd70ce084f0',1,'BlockChain::blockchain()']]],
+  ['blockchain_2ehpp',['blockchain.hpp',['../blockchain_8hpp.html',1,'']]]
 ];

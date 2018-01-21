@@ -139,7 +139,7 @@ BlockChain& BlockChain::operator=( const BlockChain& b ){
 */
 BlockChain::iterator BlockChain::find( std::string h ){
 	return std::find_if(blockchain.begin(),blockchain.end(),
-	[&s](Block& b){ return (b.hash() == h); });
+	[&h](Block& b){ return (b.hash() == h); });
 }
 
 /* Check if a Record already exists

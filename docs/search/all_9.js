@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['key',['Key',['../classKey.html',1,'Key&lt; T, K &gt;'],['../classKey.html#ac94d6b84bd9cf4da10171590a0638713',1,'Key::key()']]],
-  ['key_3c_20cryptopp_3a_3arsa_3a_3aprivatekey_2c_20privatekey_20_3e',['Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;',['../classKey.html',1,'']]],
-  ['key_3c_20cryptopp_3a_3arsa_3a_3apublickey_2c_20publickey_20_3e',['Key&lt; CryptoPP::RSA::PublicKey, PublicKey &gt;',['../classKey.html',1,'']]],
-  ['keys_2ehpp',['keys.hpp',['../keys_8hpp.html',1,'']]]
+  ['info',['info',['../classLogger.html#a0a9052468ca3d05f8a2c4bb397d86651',1,'Logger']]],
+  ['interface',['Interface',['../classInterface.html',1,'Interface'],['../classInterface.html#af93d05de57a4d0eb2339ce463d780560',1,'Interface::Interface()']]],
+  ['interface_2ehpp',['interface.hpp',['../interface_8hpp.html',1,'']]],
+  ['iterator',['iterator',['../classBlock.html#a9f3b57c07473e53f42a874d71af2b97e',1,'Block::iterator()'],['../classBlockChain.html#abdff7c5523028944b11547d27100ac0a',1,'BlockChain::iterator()']]]
 ];

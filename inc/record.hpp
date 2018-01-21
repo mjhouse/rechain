@@ -41,38 +41,80 @@ enum DataType { Publication, Signature };
 
 class Record {
 	private:
-		std::string _reference;
-		std::string _block;
-		std::string _public_key;
-		std::string _signature;
+		std::string _reference;		/**< A reference to a document or another Record */
+		std::string _block;		/**< Block hash, only used if this is a Signature record*/
+		std::string _public_key;	/**< The public key of the owner */
+		std::string _signature;		/**< The signature */
 
-		float _trust;
+		float _trust;			/**< The trust of the Record (only used by Signatures) */
 
 	public:
+		/** Empty constructor */
 		Record();
 
+		/** Construct from a reference and block hash
+			\param r A file hash or reference to another Record
+			\param b An optional Block hash
+		*/
 		Record( std::string r, std::string b = "" );
 
+		/** Construct a Publication Record from a file
+			\param r An open ifstream object
+		*/
 		Record( std::ifstream& r );
 
+		/** Empty destructor */
 		~Record();
 
+		/** Update or get the reference
+			\param s The reference to use
+			\returns The value of _reference
+		*/
 		std::string& reference( std::string s = "" );
 
+		/** Update or get the Block hash
+			\param b The Block hash to use
+			\returns The value of _block
+		*/
 		std::string& block( std::string b = "" );
-		
+
+		/** Update or get the public key
+			\param k The public key to use
+			\returns The value of _public_key
+		*/
 		std::string& public_key( std::string k = "" );
 
+		/** Update or get the signature
+			\param s The signature to use
+			\returns The value of _signature
+		*/
 		std::string& signature( std::string s = "" );
 
+		/** Update or get the trust
+			\param t The trust value to use
+			\returns The value of _trust
+		*/
 		float& trust( float t = 0.0 ); 
 
+		/** Get the DataType of this Record
+			\returns The DataType of this Record
+		*/
 		DataType type();
 
+		/** Get Record as a single string
+			\param b False returns a subset of values
+			\returns Data in the Record as a string
+		*/
 		std::string string( bool b = false );
 
+		/** Check if Record is internally valid
+			\returns True if Record is valid
+		*/
 		bool valid();
 
+		/** Serialize Record to an archive/file
+			\param ar The archive to serialize to
+		*/
 		template <class Archive>
 		void serialize( Archive& ar ){
 			ar(
