@@ -1,5 +1,7 @@
 <map id="inc/interface.hpp" name="inc/interface.hpp">
-<area shape="rect" id="node4" href="$logger_8hpp_source.html" title="logger.hpp" alt="" coords="251,80,333,107"/>
-<area shape="rect" id="node9" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="612,80,687,107"/>
-<area shape="rect" id="node14" href="$record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="925,155,1008,181"/>
+<area shape="rect" id="node4" href="$logger_8hpp_source.html" title="logger.hpp" alt="" coords="182,80,264,107"/>
+<area shape="rect" id="node9" href="$blockchain_8hpp.html" title="Defines the BlockChain class that manages Block objects, searches and verifies the Block collection..." alt="" coords="584,80,694,107"/>
+<area shape="rect" id="node16" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="1103,80,1178,107"/>
+<area shape="rect" id="node15" href="$block_8hpp_source.html" title="block.hpp" alt="" coords="501,155,580,181"/>
+<area shape="rect" id="node21" href="$record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="1047,155,1130,181"/>
 </map>

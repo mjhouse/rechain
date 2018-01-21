@@ -34,13 +34,6 @@
 
 typedef Logger rl;
 
-/* Get or create a new BlockChain
-*/
-BlockChain& BlockChain::get_blockchain(){
-	static BlockChain b;
-	return b;
-}
-		
 /* Add a Record to an open Block
 */
 BlockChain& BlockChain::add( Record& r ){
@@ -143,71 +136,70 @@ BlockChain& BlockChain::operator=( const BlockChain& b ){
 
 /**
 */
-Record& BlockChain::record( std::string s ){
-	for(auto block : blockchain)
-		for(auto record : block)
-			if(record.signature() == s) return record;
-
-	throw std::out_of_range("Record not found");
-}
-
-/**
-*/
-Block& BlockChain::block( std::string s ){
-	for(auto block : blockchain)
-		if(block.hash() == s) return block;
-
-	throw std::out_of_range("Block not found");
-}
-
-/** Find an address for a Block/Record
-*/
-std::pair<std::string,std::string> BlockChain::address( std::string s ){
-	for(auto b : blockchain){
-		for(auto r : b){
-			if(r.reference() == s){
-				return std::make_pair(b.hash(),s);
-			}
-		}
-	}
-	throw std::out_of_range("Address not found");
+BlockChain::iterator BlockChain::find( std::string s ){
+	return std::find_if(blockchain.begin(),blockchain.end(),
+	[&s](Block& b){
+		return (b.hash() == s);
+	});
 }
 
 /* Check if a Record already exists
 */
 bool BlockChain::contains( std::string s ){
+	// Check in the blockchain
 	for(auto b : blockchain)
-		for(auto r : b)
-			if(r.reference() == s) return true;
+		if(b.hash() == s) return true;
+	
+	// Can't find it
 	return false;
 }
 
 /* Check if BlockChain is valid
 */
 bool BlockChain::valid(){
+	std::string previous;
 	for(auto b : blockchain){
+
+		if(b.previous() != previous)
+			return false;
+		if(b.hash() > HASH_MAX)
+			return false;
+
+		previous = b.hash();
+
 		for(auto r : b){
-			if(!r.valid())
-				return false;
+			if(!r.valid()) return false;
 			
 			switch(r.type()){
 				case DataType::Publication:
 				{
-					try {
-						auto it = this->record(r.reference());
-						return false;
+					for(auto b : blockchain){
+						auto it = b.find(r.reference());
+						if(it != b.end()){
+							Record& n = *it;
+							if(n.type() == DataType::Publication && 
+							   n.signature() != r.signature() ){
+								return false;
+							}
+						}
 					}
-					catch (const std::out_of_range& e){}
 				}
 				break;
 
 				case DataType::Signature:
 				{
-					try {
-						auto addr = this->address(r.reference());
-						if(addr.first != r.block() || addr.second != r.reference())
-							return false;
-					}catch(const std::out_of_range* e){}
+					// Try to find the referenced block by hash
+					auto b_it = this->find(r.block());
+					if(b_it == this->end()){
+						return false;
+					}
+
+					// Try to find the referenced publication
+					Block& b = *b_it;
+					auto r_it = b.find(r.reference());
+					if(r_it == b.end()){ 
+						return false;
+					}
 				}
 				break;
 			}

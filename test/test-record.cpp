@@ -45,12 +45,13 @@ SCENARIO( "records created with different initial values", "[record-create]" ){
 		}
 
 		WHEN( "record is created with file iostream" ){
-			std::ifstream ifs("test/data/dummy.txt");
+			std::string tmp_path = "test/data/files/general/dummy.txt";
+			std::ifstream ifs(tmp_path);
 			Record r(ifs);
 
 			CryptoPP::SHA256 hasher;
 	
-			std::ifstream mfs("test/data/dummy.txt");
+			std::ifstream mfs(tmp_path);
 			std::string data = DUMP_FILE(mfs);
 			std::string hash;
 
@@ -81,7 +82,7 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 	
 
 		WHEN( "records are signed" ){
-			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/test.private"));
+			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 			private_key->sign(publication);
 
 			THEN( "signed records are valid, unsigned are not" ){
@@ -150,7 +151,7 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 		Record record(reference,block);
 		record.trust(trust);
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/test.private"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		private_key->sign(record);
 
 		WHEN( "record is converted to a string" ){
@@ -170,21 +171,21 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 
 		WHEN( "record is serialized to a file" ){
 			Record empty;
-
-			std::ofstream ofs("test/data/tmp.record");
+			std::string tmp_path = "test/data/files/general/tmp.record";
+			std::ofstream ofs(tmp_path);
 			if(ofs.is_open()){
 				cereal::JSONOutputArchive archive(ofs);
 				archive( record );
 			}
 
 
-			std::ifstream ifs("test/data/tmp.record");
+			std::ifstream ifs(tmp_path);
 			if(ifs.is_open()){
 				cereal::JSONInputArchive archive(ifs);
 				archive( empty );
 			}
 
-			std::remove("test/data/tmp.record");
+			std::remove(tmp_path.c_str());
 			THEN( "unserialized record is the same as original" ){
 				REQUIRE(empty.reference() == record.reference());
 				REQUIRE(empty.block() == record.block());

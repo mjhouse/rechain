@@ -33,17 +33,20 @@
 
 // local includes
 #include "logger.hpp"
+#include "blockchain.hpp"
 #include "keys.hpp"
 
 class Interface {
 	private:
-		int argc;				/**< Command line argument count */
-		char** argv;				/**< Command line arguments */
+		int argc;						/**< Command line argument count */
+		char** argv;						/**< Command line arguments */
 
-		std::string home;			/**< The path to the home directory */
-	
-		PrivateKey* private_key;		/**< A pointer to the current private key */
-		PublicKey* public_key;			/**< A pointer to the current public key */
+		std::string home;					/**< The path to the home directory */
+
+		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
+		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
+
+		BlockChain blockchain;
 
 		/** Public a given document
 			\param s The path to the file
@@ -105,10 +108,7 @@ class Interface {
 
 		/** Destructor
 		*/
-		~Interface(){
-			delete private_key;
-			delete public_key;
-		};
+		~Interface(){};
 
 		/** Execute command line options
 		*/

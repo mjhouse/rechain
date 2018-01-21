@@ -42,8 +42,6 @@
 typedef Logger rl;
 
 bool Interface::publish( std::string s ){
-	BlockChain& blockchain = BlockChain::get_blockchain();
-
 	std::ifstream ifs(s);
 	if(ifs.is_open()){
 		rl::get().info("Signing and adding '" + s + "' to blockchain");
@@ -67,32 +65,31 @@ bool Interface::publish( std::string s ){
 }
 
 bool Interface::sign( std::string s ){
-	BlockChain& blockchain = BlockChain::get_blockchain();
+	rl::get().info("Adding signature for '" + s.substr(0,20) + "...' to blockchain");
 
-	try {
-		rl::get().info("Adding signature for '" + s.substr(0,20) + "...' to blockchain");
-		
-		auto a = blockchain.address(s);
-		Record r(a.second,a.first);
-		private_key->sign(r);
-
-		if(blockchain.contains(r.reference())){
-			blockchain.add(r);
-			blockchain.save();
-		} else {
-			rl::get().error("Publication doesn't exist");	
-			return false;
+	Record record;
+	for(auto b : blockchain){
+		for(auto r : b){
+			if(r.reference() == s){
+				record.reference(r.reference());
+				record.block(b.hash());
+				private_key->sign(record);
+			}
 		}
+	}
 
-	}catch(const std::out_of_range& e){
-		rl::get().error("Couldn't find the referenced record");
+	if(record.valid()){
+		blockchain.add(record);
+		blockchain.save();
+	} else {
+		rl::get().error("Referenced publication doesn't exist");
 		return false;
 	}
+
 	return true;
 }
 
 void Interface::check(){
-	BlockChain& blockchain = BlockChain::get_blockchain();
 	if(!blockchain.valid()){
 		rl::get().error("Blockchain is BAD");
 	} else {
@@ -101,8 +98,6 @@ void Interface::check(){
 }
 
 bool Interface::mine(){
-	BlockChain& blockchain = BlockChain::get_blockchain();
-
 	rl::get()
 		.debug("Mining: ")
 		.debug("Hash: " + blockchain.mine());
@@ -113,7 +108,6 @@ bool Interface::mine(){
 }
 
 void Interface::list(){
-	BlockChain& blockchain = BlockChain::get_blockchain();
 	rl::get("console").info(" ---- Blockchain ---- ");
 
 	for(unsigned int i = 0; i < blockchain.size(); ++i){
@@ -159,8 +153,6 @@ int Interface::execute(){
 		
 		if(!home.empty()){
 			std::string path = home + "/rechain.blockchain";
-			BlockChain& blockchain = BlockChain::get_blockchain();
-
 			if(!blockchain.load(path)){
 				blockchain.save(path);
 			}
@@ -184,10 +176,10 @@ int Interface::execute(){
 			// or from the default path
 			try {
 				if(result.count("private_key")){
-					private_key = PrivateKey::load_file(result["private_key"].as<std::string>());
+					private_key.reset(PrivateKey::load_file(result["private_key"].as<std::string>()));
 					private_key->save(priv);
 				} else {
-					private_key = PrivateKey::load_file(priv);
+					private_key.reset(PrivateKey::load_file(priv));
 				}
 			} catch (const std::invalid_argument& e){
 				rl::get().error(e.what());
@@ -198,10 +190,10 @@ int Interface::execute(){
 			// or from the default path
 			try {
 				if(result.count("public_key")){
-						public_key = PublicKey::load_file(result["public_key"].as<std::string>());
+						public_key.reset(PublicKey::load_file(result["public_key"].as<std::string>()));
 						public_key->save(publ);
 				} else {
-						public_key = PublicKey::load_file(publ);
+						public_key.reset(PublicKey::load_file(publ));
 				}
 			} catch (const std::invalid_argument& e){
 				rl::get().error(e.what());

@@ -1,6 +1,4 @@
 <map id="Interface" name="Interface">
-<area shape="rect" id="node2" href="$classPrivateKey.html" title="PrivateKey" alt="" coords="233,17,320,43"/>
-<area shape="rect" id="node3" href="$classKey.html" title="Key\&lt; CryptoPP::RSA\l::PrivateKey, PrivateKey \&gt;" alt="" coords="5,5,184,47"/>
-<area shape="rect" id="node4" href="$classPublicKey.html" title="PublicKey" alt="" coords="236,71,317,98"/>
-<area shape="rect" id="node5" href="$classKey.html" title="Key\&lt; CryptoPP::RSA\l::PublicKey, PublicKey \&gt;" alt="" coords="11,71,179,112"/>
+<area shape="rect" id="node2" href="$classBlockChain.html" title="BlockChain" alt="" coords="5,95,95,121"/>
+<area shape="rect" id="node3" href="$classBlock.html" title="Block" alt="" coords="23,5,77,32"/>
 </map>

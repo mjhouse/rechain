@@ -133,7 +133,7 @@ Block& Block::operator=( const Block& b ){
 Block::iterator Block::find( std::string s ){
 	return std::find_if(records.begin(),records.end(),
 	[&s](Record& r){
-		return (r.signature() == s);
+		return (r.reference() == s);
 	});
 }
 

@@ -1,6 +1,10 @@
 CXX=g++-5
 CC=gcc
 
+# This is overridden from the command line
+# to provide arguments to the tests
+TAGGED =
+
 TARGET = bin/rechain
 OUTDIR = bin
 BLDDIR = obj
@@ -28,7 +32,7 @@ debug: link-debug
 
 test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage 
 test: link-test
-	./bin/rechain
+	./bin/rechain ${TAGGED}
 
 release: CPPFLAGS = -std=c++11 -lpthread -lcrypto++ -O3
 release: link-release

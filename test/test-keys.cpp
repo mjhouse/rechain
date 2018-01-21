@@ -10,8 +10,8 @@ SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 
 	GIVEN( "paths to public and private keys" ){
 
-		std::string public_path = "test/data/test.public";
-		std::string private_path = "test/data/test.private";
+		std::string public_path = "test/data/keys/test.public";
+		std::string private_path = "test/data/keys/test.private";
 
 		std::string public_str;
 		std::string private_str;
@@ -79,8 +79,8 @@ SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_string(private_str));
 			std::shared_ptr<PublicKey> public_key(PublicKey::load_string(public_str));
 	
-			std::string tmp_priv = "test/data/tmp_key.private";
-			std::string tmp_publ = "test/data/tmp_key.public";
+			std::string tmp_priv = "test/data/keys/tmp_key.private";
+			std::string tmp_publ = "test/data/keys/tmp_key.public";
 
 			private_key->save(tmp_priv);
 			public_key->save(tmp_publ);
@@ -120,8 +120,8 @@ SCENARIO( "keys can generated and used to sign/verify", "[keys-work]" ){
 
 	GIVEN( "a pair of valid keys and a valid and invalid record" ){
 
-		std::string public_path = "test/data/test.public";
-		std::string private_path = "test/data/test.private";
+		std::string public_path = "test/data/keys/test.public";
+		std::string private_path = "test/data/keys/test.private";
 
 		Record good_record(gen_random());
 		Record bad_record("");

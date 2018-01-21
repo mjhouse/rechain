@@ -159,3 +159,104 @@
 [Wed Jan 17 09:33:00 2018]: Debug: Hash: 000FE7824F4A95B83226E1CAC0257F9B5ACC278BCF2DDCA1C8C9F6C76AF911DD
 [Wed Jan 17 09:33:00 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
 [Wed Jan 17 09:33:01 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:06:07 2018]: Warning: Blockchain failed to load: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:06:07 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:06:07 2018]: Info: Signing and adding 'makefile' to blockchain
+[Sun Jan 21 10:06:07 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:06:25 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:06:25 2018]: Info: Signing and adding 'doxygen.conf' to blockchain
+[Sun Jan 21 10:06:25 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:06:34 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:06:34 2018]: Debug: Mining: 
+[Sun Jan 21 10:06:34 2018]: Debug: Hash: 000171669C0115AE6A8C28FE305A09D8D9580CCD025A50FD4DDB3ED8AC2DFEFE
+[Sun Jan 21 10:06:34 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:06:38 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:06 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:06 2018]: Info: Adding signature for '4EBB2C002B7764BFAD1F...' to blockchain
+[Sun Jan 21 10:07:06 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:20 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:20 2018]: Info: Signing and adding 'LICENSE.txt' to blockchain
+[Sun Jan 21 10:07:20 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:26 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:26 2018]: Info: Signing and adding 'README.md' to blockchain
+[Sun Jan 21 10:07:26 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:30 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:30 2018]: Debug: Mining: 
+[Sun Jan 21 10:07:30 2018]: Debug: Hash: 0007125497DAA51B59A0D6DCCF9E1495EC3543BD6063C129413DBDC370D410EA
+[Sun Jan 21 10:07:34 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:48 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:56 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:07:56 2018]: Debug: Mining: 
+[Sun Jan 21 10:07:56 2018]: Debug: Hash: 000D1B94339686A7EFEB03742085298ECE0872443994936C7E02E5DE99481894
+[Sun Jan 21 10:07:58 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:09:11 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:09:12 2018]: Debug: Mining: 
+[Sun Jan 21 10:09:12 2018]: Debug: Hash: 0009F2C925DF3BC1B9B9271D41EE85EAC59A6336DD21071E22A5E3222E7B2E04
+[Sun Jan 21 10:10:30 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:10:30 2018]: Debug: Mining: 
+[Sun Jan 21 10:10:30 2018]: Debug: Hash: 000E8CF0C44208AA9E23FAD4EA7EC33D89B651BEE2F13139AAAF560B21C11D1F
+[Sun Jan 21 10:13:12 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:13:12 2018]: Debug: Mining: 
+[Sun Jan 21 10:13:12 2018]: Debug: Hash: 00021576811B0D0FB99EF420DB95CED7E34C718101B3D2CD8EE9A118777CEC63
+[Sun Jan 21 10:23:51 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:23:52 2018]: Debug: Mining: 
+[Sun Jan 21 10:23:52 2018]: Debug: Hash: 0000739CCAAE8312EBDF6A8E73B8A0C0E7B075B5FF6EF073E519B3D150AD127E
+[Sun Jan 21 10:23:52 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:23:58 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:24:51 2018]: Warning: Blockchain failed to load: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:24:51 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:24:51 2018]: Info: Signing and adding 'LICENSE.txt' to blockchain
+[Sun Jan 21 10:24:51 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:24:58 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:24:58 2018]: Info: Signing and adding 'makefile' to blockchain
+[Sun Jan 21 10:24:58 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:25:39 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:25:58 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:25:58 2018]: Info: Signing and adding 'doxygen.conf' to blockchain
+[Sun Jan 21 10:25:58 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:26:04 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:26:04 2018]: Info: Signing and adding 'README.md' to blockchain
+[Sun Jan 21 10:26:04 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:26:11 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:26:11 2018]: Debug: Mining: 
+[Sun Jan 21 10:26:11 2018]: Debug: Hash: 0002323C021609C2C7D2863295F7207105A0068BA179432BEDCCE5BCCB9B7DFA
+[Sun Jan 21 10:26:11 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:26:16 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:26:54 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:27:20 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:27:20 2018]: Info: Adding signature for '4112D7E4A309974E5392...' to blockchain
+[Sun Jan 21 10:27:20 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:27:24 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:28:03 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:28:19 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:28:19 2018]: Info: Signing and adding 'src/main.cpp' to blockchain
+[Sun Jan 21 10:28:19 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:28:24 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:28:25 2018]: Debug: Mining: 
+[Sun Jan 21 10:28:25 2018]: Debug: Hash: 00057CBEEE77AC6ACB3653FC3863095C265F81406015581CFC498EEF5D7A40BC
+[Sun Jan 21 10:28:25 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:28:28 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:28:43 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:29:06 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:29:06 2018]: Info: Adding signature for 'A9A8D2EE0BD117F7048F...' to blockchain
+[Sun Jan 21 10:29:06 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:29:11 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:29:11 2018]: Debug: Mining: 
+[Sun Jan 21 10:29:11 2018]: Debug: Hash: 0006EA6C680433BC00D01327461BD713C0FEECFA77933F2CB81F50C5F7E7EAB1
+[Sun Jan 21 10:29:11 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 10:29:14 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:03:59 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:04:38 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:04:38 2018]: Error: Given key isn't valid
+[Sun Jan 21 11:04:53 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:05:10 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:05:10 2018]: Info: Signing and adding 'inc/blockchain.hpp' to blockchain
+[Sun Jan 21 11:05:10 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:05:47 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:05:47 2018]: Info: Adding signature for '4EBB2C002B7764BFAD1F...' to blockchain
+[Sun Jan 21 11:05:47 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:05:54 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:05:55 2018]: Debug: Mining: 
+[Sun Jan 21 11:05:55 2018]: Debug: Hash: 00061D5976A70EF2814D476791CCED6A5AAB9DB8E8813DDDD41FE2BD9A37B872
+[Sun Jan 21 11:05:55 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 21 11:06:00 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain

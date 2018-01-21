@@ -23,8 +23,8 @@ SCENARIO( "block can be mined and generate a valid hash", "[block-mining]" ){
 
 		Block block;
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/test.private"));
-		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/test.public"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
+		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/keys/test.public"));
 
 		std::vector<std::string> sigs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){
@@ -62,14 +62,16 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 
 		Block block;
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/test.private"));
-		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/test.public"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
+		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/keys/test.public"));
 
 		std::vector<std::string> sigs;
+		std::vector<std::string> refs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){
 			Record r(gen_random());
 			private_key->sign(r);
 			sigs.push_back(r.signature());
+			refs.push_back(r.reference());
 			block.add(r);
 		}
 
@@ -120,11 +122,12 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 		}
 	
 		WHEN( "block is accessed with 'find'" ){
-			auto it = block.find(sigs[NUM_RECORDS/2]);
+			auto it = block.find(refs[NUM_RECORDS/2]);
 			auto r = *it;
 
 			THEN( "it returns an iterator to the correct record" ){
 				REQUIRE(r.signature() == sigs[NUM_RECORDS/2]);
+				REQUIRE(r.reference() == refs[NUM_RECORDS/2]);
 			}
 		}
 
@@ -132,14 +135,16 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 			Block a = block;
 			Block b;
 
-			std::ofstream ofs("test/data/tmp.block");
+			std::string tmp_path = "test/data/files/general/tmp.block";
+
+			std::ofstream ofs(tmp_path);
 			if(ofs.is_open()){
 				cereal::JSONOutputArchive archive(ofs);
 				archive( block );
 			}
 
 
-			std::ifstream ifs("test/data/tmp.block");
+			std::ifstream ifs(tmp_path);
 			if(ifs.is_open()){
 				cereal::JSONInputArchive archive(ifs);
 				archive( b );
@@ -150,7 +155,7 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 				REQUIRE(a.size() == b.size());
 			}
 			
-			std::remove("test/data/tmp.block");
+			std::remove(tmp_path.c_str());
 		}
 	}
 }
@@ -163,8 +168,8 @@ SCENARIO( "block can add valid and reject invalid records", "[block-adding]" ){
 
 		Block block;
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/test.private"));
-		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/test.public"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
+		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/keys/test.public"));
 
 		std::vector<std::string> sigs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){

@@ -58,9 +58,6 @@ class BlockChain {
 		std::map<std::string,float> usr_trust;	/**< Trust of public keys*/
 		std::map<std::string,float> pub_trust;	/**< Trust of publications*/
 
-		/** Empty constructor
-		*/
-		BlockChain(){};
 
 		/** Update 'usr_trust' and 'pub_trust'
 		*/	
@@ -69,10 +66,9 @@ class BlockChain {
 		/** Define a BlockChain iterator */
 		typedef std::vector<Block>::iterator iterator;
 		
-		/** Singleton creation method
-			\returns The BlockChain
+		/** Empty constructor
 		*/
-		static BlockChain& get_blockchain();
+		BlockChain(){};
 
 		/** Empty destructor
 		*/
@@ -109,27 +105,15 @@ class BlockChain {
 		*/
 		BlockChain& operator=( const BlockChain& b );
 	
-		/** Find a Record
-			\param s The signature of the Record
-			\returns A reference to the Record
-		*/
-		Record& record( std::string s );
-
 		/** Find a Block by hash
 			\param s The hash of the Block
-			\returns A reference to the Block
+			\returns An iterator to the Block
 		*/
-		Block& block( std::string s );
+		BlockChain::iterator find( std::string s );
 
-		/** Find an address for a Block/Record
-			\param s The hash of the Block or signature of the Record
-			\returns A (<block_hash>,<record_signature>) pair
-		*/
-		std::pair<std::string,std::string> address( std::string s );
-
-		/** Check if a given Record already exists
-			\param s The reference to check
-			\returns True if Record exists
+		/** Check if a given Block already exists
+			\param s The hash to check
+			\returns True if Block exists
 		*/
 		bool contains( std::string s );
 
