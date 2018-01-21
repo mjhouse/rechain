@@ -181,16 +181,14 @@ bool BlockChain::valid(){
 				{
 					// Try to find the referenced block by hash
 					auto b_it = this->find(r.block());
-					if(b_it == this->end()){
+					if(b_it == this->end())
 						return false;
-					}
 
 					// Try to find the referenced publication
 					Block& b = *b_it;
 					auto r_it = b.find(r.reference());
-					if(r_it == b.end()){ 
+					if(r_it == b.end()) 
 						return false;
-					}
 				}
 				break;
 			}

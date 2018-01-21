@@ -217,9 +217,24 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			}
 		}
 
-		WHEN( "record is altered, re-signed and block is re-mined" ){
+		WHEN( "a duplicate record is added to the blockchain" ){
+			Record r(blockchain[1][0].reference());
+
+			std::shared_ptr<PrivateKey> key(PrivateKey::empty());
+			key->generate();
+			key->sign(r);
+			
+			blockchain.add(r);
+			blockchain.mine();
+
+
+			THEN( "blockchain is invalid because duplicate reference" ){
+				REQUIRE_FALSE(blockchain.valid());
+			}
+		}
+
+		WHEN( "record is re-signed and block is re-mined" ){
 			Block& b = blockchain[1];
-			b[0].reference(gen_random());
 
 			std::shared_ptr<PrivateKey> key(PrivateKey::empty());
 			key->generate();
