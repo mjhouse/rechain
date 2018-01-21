@@ -21,6 +21,7 @@
 
 // system includes
 #include <iostream>
+#include <set>
 
 // dependency includes
 #include <cereal/archives/json.hpp>
@@ -136,11 +137,9 @@ BlockChain& BlockChain::operator=( const BlockChain& b ){
 
 /**
 */
-BlockChain::iterator BlockChain::find( std::string s ){
+BlockChain::iterator BlockChain::find( std::string h ){
 	return std::find_if(blockchain.begin(),blockchain.end(),
-	[&s](Block& b){
-		return (b.hash() == s);
-	});
+	[&s](Block& b){ return (b.hash() == h); });
 }
 
 /* Check if a Record already exists
@@ -158,6 +157,8 @@ bool BlockChain::contains( std::string s ){
 */
 bool BlockChain::valid(){
 	std::string previous;
+	std::set<std::string> pubs;
+
 	for(auto b : blockchain){
 
 		if(b.previous() != previous)
@@ -172,19 +173,9 @@ bool BlockChain::valid(){
 			
 			switch(r.type()){
 				case DataType::Publication:
-				{
-					for(auto b : blockchain){
-						auto it = b.find(r.reference());
-						if(it != b.end()){
-							Record& n = *it;
-							if(n.type() == DataType::Publication && 
-							   n.signature() != r.signature() ){
-								return false;
-							}
-						}
-					}
-				}
-				break;
+					if(!pubs.insert(r.reference()).second)
+						return false;
+					break;
 
 				case DataType::Signature:
 				{

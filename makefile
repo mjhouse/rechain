@@ -4,6 +4,7 @@ CC=gcc
 # This is overridden from the command line
 # to provide arguments to the tests
 TAGGED =
+VERSION= $(shell git describe --abbrev=0 --tags)
 
 TARGET = bin/rechain
 OUTDIR = bin
@@ -49,10 +50,10 @@ link-release: $(OBJECTS)
 
 # BUILD
 obj/%.o: $(TSTDIR)/%.cpp
-	$(CXX) $(INC) -c $< -o $@ $(CPPFLAGS)
+	$(CXX) -DRECHAIN_VERSION=\"$(VERSION)\" $(INC) -c $< -o $@ $(CPPFLAGS)
 
 obj/%.o: $(SRCDIR)/%.cpp
-	$(CXX) $(INC) -c $< -o $@ $(CPPFLAGS)
+	$(CXX) -DRECHAIN_VERSION=\"$(VERSION)\" $(INC) -c $< -o $@ $(CPPFLAGS)
 
 clean:
 	rm $(BLDDIR)/*; rm $(OUTDIR)/*;

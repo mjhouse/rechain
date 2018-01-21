@@ -106,10 +106,10 @@ class BlockChain {
 		BlockChain& operator=( const BlockChain& b );
 	
 		/** Find a Block by hash
-			\param s The hash of the Block
+			\param h The hash of the Block
 			\returns An iterator to the Block
 		*/
-		BlockChain::iterator find( std::string s );
+		BlockChain::iterator find( std::string h );
 
 		/** Check if a given Block already exists
 			\param s The hash to check

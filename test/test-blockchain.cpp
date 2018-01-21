@@ -206,22 +206,36 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 		}
 
 		WHEN( "record is re-signed in chain" ){
-			int idx = NUM_BLOCKS/2;
-			Block& b = blockchain[idx];
+			Block& b = blockchain[1];
 			
 			std::shared_ptr<PrivateKey> key(PrivateKey::empty());
 			key->generate();
-			key->sign(b[0]);	
+			key->sign(b[0]);
 
-			THEN( "blockchain is invalid because hashes are bad" ){
+			THEN( "blockchain is invalid because block hash is bad" ){
 				REQUIRE_FALSE(blockchain.valid());
 			}
 		}
 
-		WHEN( "record is altered and blocks are re-mined" ){
+		WHEN( "record is altered, re-signed and block is re-mined" ){
+			Block& b = blockchain[1];
+			b[0].reference(gen_random());
+
+			std::shared_ptr<PrivateKey> key(PrivateKey::empty());
+			key->generate();
+			key->sign(b[0]);
+
+			b.mine();
+
+			THEN( "blockchain is invalid because previous hash is wrong" ){
+				REQUIRE_FALSE(blockchain.valid());
+			}
+		}
+
+		WHEN( "record is altered, re-signed and all blocks are re-mined" ){
 
 			// Select a block
-			int idx = NUM_BLOCKS/2;
+			int idx = 1;
 			Block& b = blockchain[idx];
 			Record& r = b[0];
 

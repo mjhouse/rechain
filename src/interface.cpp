@@ -135,7 +135,7 @@ void Interface::list(){
 }
 
 int Interface::execute(){
-	
+
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()
 		("h,help","Display this usage message")	
@@ -145,7 +145,8 @@ int Interface::execute(){
 		("s,sign","Sign a published document",cxxopts::value<std::string>(),"<path>")
 		("private_key","Make a private key active",cxxopts::value<std::string>(),"<path>")
 		("public_key","Make a public key active",cxxopts::value<std::string>(),"<path>")
-		("l,list","List published documents");
+		("l,list","List published documents")
+		("v,version","Display version information");
 
 	try {
 		
@@ -234,6 +235,13 @@ int Interface::execute(){
 			// Display the current BlockChain state
 			if(result.count("list")){
 				this->list();
+				return NOERR;
+			}
+
+			// Display the current version
+			if(result.count("version")){
+				std::cout << "ReChain v" << RECHAIN_VERSION << " (GNU GPL v3) "
+					  << "The distributed research journal" << std::endl;
 				return NOERR;
 			}
 		}
