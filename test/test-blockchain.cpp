@@ -24,36 +24,70 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 	GIVEN( "a valid blockchain" ){
 
 		BlockChain blockchain;
-		std::vector<std::string> signatures;
-		std::vector<std::string> hashes;
+		blockchain.load("test/data/files/gold/gold.blockchain");
+
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 
-		for(unsigned int j = 0; j < NUM_BLOCKS; ++j){
-			for(unsigned int i = 0; i < NUM_RECORDS; ++i){
-				Record record(gen_random());
-				private_key->sign(record);
-				signatures.push_back(record.signature());
+		std::vector<std::string> signatures;
+		std::vector<std::string> hashes;
 
-				blockchain.add(record);
+		for(auto b : blockchain){
+			hashes.push_back(b.hash());
+			for(auto r : b){
+				signatures.push_back(r.signature());
 			}
-
-			std::string hash = blockchain.mine();
-			hashes.push_back(hash);
 		}
 
-		WHEN( "valid records are added to the blockchain and mined" ){
+		WHEN( "valid publications are added to the blockchain and mined" ){
+			size_t orig_size = blockchain.size();
+
+			for(unsigned int i = 0; i < 10; ++i){
+				Record r(gen_random());
+				private_key->sign(r);
+
+				signatures.push_back(r.signature());
+				blockchain.add(r);
+			}
+		
+			hashes.push_back(blockchain.mine());
+
 			THEN( "blockchain adds them" ){	
-				REQUIRE(blockchain.size() == NUM_BLOCKS);
+				REQUIRE(blockchain.size() == orig_size+1);
+				REQUIRE(blockchain.valid());
+
 				int count = 0;
-				for(unsigned int i = 0 ; i < blockchain.size(); ++i){
-					Block& block = blockchain[i];
-					for(unsigned int j = 0; j < block.size(); ++j){
-						REQUIRE(blockchain[i][j].signature() == signatures[count]);
+				for(auto b : blockchain){
+					for(auto r : b){
+						REQUIRE(r.signature() == signatures[count]);
 						count++;
 					}
+				}
+			}
+		}
 
-					REQUIRE(block.hash() < HASH_MAX);
-					REQUIRE(block.hash() == hashes[i]);
+		WHEN( "valid signatures are added to the blockchain and mined" ){
+			size_t orig_size = blockchain.size();
+
+			for(unsigned int i = 0; i < 3; ++i){
+				Record r(blockchain[i][0].reference(),blockchain[i].hash());
+				private_key->sign(r);
+
+				signatures.push_back(r.signature());
+				blockchain.add(r);
+			}
+		
+			hashes.push_back(blockchain.mine());
+
+			THEN( "the blockchain adds them" ){
+				REQUIRE(blockchain.size() == orig_size+1);
+				REQUIRE(blockchain.valid());
+
+				int count = 0;
+				for(auto b : blockchain){
+					for(auto r : b){
+						REQUIRE(r.signature() == signatures[count]);
+						count++;
+					}
 				}
 			}
 		}
@@ -65,23 +99,18 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 	GIVEN( "a valid blockchain" ){
 
 		BlockChain blockchain;
+		blockchain.load("test/data/files/gold/gold.blockchain");
+		
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		
 		std::vector<std::string> signatures;
 		std::vector<std::string> hashes;
 
-
-		for(unsigned int j = 0; j < NUM_BLOCKS; ++j){
-			for(unsigned int i = 0; i < NUM_RECORDS; ++i){
-				Record record(gen_random());
-				private_key->sign(record);
-				signatures.push_back(record.signature());
-
-				blockchain.add(record);
+		for(auto b : blockchain){
+			hashes.push_back(b.hash());
+			for(auto r : b){
+				signatures.push_back(r.signature());
 			}
-
-			std::string hash = blockchain.mine();
-			hashes.push_back(hash);
 		}
 
 		WHEN( "blockchain is indexed" ){
@@ -164,18 +193,6 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file("test/data/keys/user1.private"));
-
-		std::vector<std::string> signatures;
-		std::vector<std::string> hashes;
-
-		for(auto b : blockchain){
-			hashes.push_back(b.hash());
-			for(auto r : b){
-				signatures.push_back(r.signature());
-			}
-		}
-
-		//Logger::get().with( Log("console",STDOUT,Level::info) );
 
 		WHEN( "blockchain loaded from gold file" ){
 			THEN( "blockchain is valid" ){
