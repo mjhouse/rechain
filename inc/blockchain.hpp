@@ -78,8 +78,8 @@ class BlockChain {
 		// Mining Methods
 
 		/** Add Record to an open Block
-			\param d A pointer to a Record block
-			\returns A pointer to the BlockChain
+			\param r A reference to a Record block
+			\returns A reference to the BlockChain
 		*/
 		BlockChain& add( Record& r );
 
@@ -118,7 +118,7 @@ class BlockChain {
 		bool contains( std::string s );
 
 		/** Verify that the BlockChain is valid
-			returns True if BlockChain is valid
+			\returns True if BlockChain is valid
 		*/
 		bool valid();
 

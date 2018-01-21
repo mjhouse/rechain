@@ -39,6 +39,9 @@ class PrivateKey;
 */
 enum DataType { Publication, Signature };
 
+/** A single record that can be stored
+	within a Block on the BlockChain
+*/
 class Record {
 	private:
 		std::string _reference;		/**< A reference to a document or another Record */

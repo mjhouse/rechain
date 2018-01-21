@@ -36,6 +36,10 @@
 #include "blockchain.hpp"
 #include "keys.hpp"
 
+/** Manages a command line interface to the
+	BlockChain and executes arguments 
+	against it.
+*/
 class Interface {
 	private:
 		int argc;						/**< Command line argument count */
@@ -46,7 +50,7 @@ class Interface {
 		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
 		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
 
-		BlockChain blockchain;
+		BlockChain blockchain;					/**< A BlockChain to load data into */
 
 		/** Public a given document
 			\param s The path to the file
@@ -111,6 +115,7 @@ class Interface {
 		~Interface(){};
 
 		/** Execute command line options
+			\returns 0 on success, 1 otherwise.
 		*/
 		int execute();
 };

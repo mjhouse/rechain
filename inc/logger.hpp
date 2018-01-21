@@ -15,6 +15,8 @@ enum Level { info, debug, warning, error };
 static const std::string STDOUT = "__stdout__"; /**< A key to identify STDOUT v. file path */
 static const std::string STDERR = "__stderr__";	/**< A key to identify STDERR v. file path */
 
+/** A log that writes to a file or stderr/stdout
+*/
 class Log{
 	private:
 		std::string name;	/**< The name to identify this log by */
