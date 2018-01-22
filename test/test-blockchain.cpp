@@ -19,6 +19,51 @@
 
 extern std::string gen_random();
 
+SCENARIO( "blockchain is loaded or saved", "[blockchain][blockchain-serial]" ){
+
+
+		BlockChain blockchain;
+		std::string good_path = "test/data/files/gold/gold.blockchain";
+		std::string bad_path  = "test/data/files/NOEXIST/gold.blockchain";
+
+		WHEN( "blockchain is loaded from valid file path" ){
+	
+			blockchain.load(good_path);
+
+			THEN( "blockchain is loaded correctly" ){
+				REQUIRE(blockchain.valid());
+			}
+		}
+
+		WHEN( "blockchain is loaded from invalid file path" ){
+	
+			THEN( "blockchain fails to load correctly" ){
+				REQUIRE_FALSE(blockchain.load(bad_path));
+			}
+		}
+
+		WHEN( "blockchain is saved to valid file path" ){
+			std::string good_save = "test/data/files/general/tmp.blockchain";
+
+			blockchain.load(good_path);
+			blockchain.save(good_save);
+			std::ifstream ifs(good_save);
+
+			THEN( "blockchain saves correctly" ){
+				REQUIRE(ifs.good());
+			}
+
+			std::remove(good_save.c_str());
+		}
+
+		WHEN( "blockchain is saved to an invalid file path" ){
+			THEN( "blockchain fails to save correctly" ){
+				REQUIRE(blockchain.load(good_path));
+				REQUIRE_FALSE(blockchain.save(bad_path));
+			}
+		}
+}
+
 SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-mine]" ){
 
 	GIVEN( "a valid blockchain" ){
