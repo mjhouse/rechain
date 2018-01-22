@@ -17,11 +17,10 @@ extern std::string gen_random();
 
 SCENARIO( "records created with different initial values", "[record-create]" ){
 
-	GIVEN( "a reference, block hash and initial trust value" ){
+	GIVEN( "a reference and block hash" ){
 
 		std::string reference = gen_random();
 		std::string block = gen_random();
-		float trust = 0.34f;
 
 		WHEN( "record is created with only a reference" ){
 			Record r(reference);
@@ -75,7 +74,6 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 	GIVEN( "a publication and signature record" ){
 		std::string reference = gen_random();
 		std::string block = gen_random();
-		float trust = 0.34f;
 
 		Record publication(reference);
 		Record signature(reference,block);
@@ -94,7 +92,6 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 		WHEN( "values are retrieved" ){
 			std::string r = publication.reference();
 			std::string b = signature.block();
-			float t = publication.trust();
 
 			THEN( "reference matches given reference" ){
 				REQUIRE(r == reference);
@@ -102,10 +99,6 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 
 			THEN( "block reference matches given block reference" ){
 				REQUIRE(b == block);
-			}
-
-			THEN( "trust should be 0.0f" ){
-				REQUIRE(t == 0.0f);
 			}
 
 			THEN( "types match expected values" ){
@@ -117,7 +110,6 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 		WHEN( "values are set" ){
 			std::string r = publication.reference("TEST");
 			std::string b = signature.block("TEST");
-			float t = publication.trust(trust);
 
 			THEN( "reference matches given reference" ){
 				REQUIRE(r == "TEST");
@@ -125,10 +117,6 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 
 			THEN( "block reference matches given block reference" ){
 				REQUIRE(b == "TEST");
-			}
-
-			THEN( "trust should be 0.0f" ){
-				REQUIRE(t == trust);
 			}
 
 			THEN( "types match expected values" ){
@@ -146,10 +134,8 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 		
 		std::string reference = gen_random();
 		std::string block = gen_random();
-		float trust = 0.34f;
 
 		Record record(reference,block);
-		record.trust(trust);
 
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		private_key->sign(record);
@@ -162,7 +148,6 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 			manual.append(record.block());
 			manual.append(record.public_key());
 			manual.append(record.signature());
-			manual.append(std::to_string(record.trust()));
 
 			THEN( "string is equal to expected string" ){
 				REQUIRE(manual == automatic);
@@ -189,7 +174,6 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 			THEN( "unserialized record is the same as original" ){
 				REQUIRE(empty.reference() == record.reference());
 				REQUIRE(empty.block() == record.block());
-				REQUIRE(empty.trust() == record.trust());
 				REQUIRE(empty.string(true) == record.string(true));
 			}
 

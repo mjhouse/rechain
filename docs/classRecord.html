@@ -135,8 +135,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6e3df43b85e4798a505ed609c85370c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77d4cd555d271d7136785a08564beb27"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a77d4cd555d271d7136785a08564beb27">signature</a> (std::string s=&quot;&quot;)</td></tr>
 <tr class="separator:a77d4cd555d271d7136785a08564beb27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee22770b75e624f94a928f80d4e4a5b5"><td class="memItemLeft" align="right" valign="top">float &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#aee22770b75e624f94a928f80d4e4a5b5">trust</a> (float t=0.0)</td></tr>
-<tr class="separator:aee22770b75e624f94a928f80d4e4a5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac88205304b44a4fc8a1f864a7a20a296"><td class="memItemLeft" align="right" valign="top"><a class="el" href="record_8hpp.html#ad8ed01ff3ff33333d8e19db4d2818bb6">DataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ac88205304b44a4fc8a1f864a7a20a296">type</a> ()</td></tr>
 <tr class="separator:ac88205304b44a4fc8a1f864a7a20a296"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af114f694bef7f6dcdab07ed42e0a88f6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#af114f694bef7f6dcdab07ed42e0a88f6">string</a> (bool b=false)</td></tr>
@@ -157,8 +155,6 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a5951ab8149eedbb859214d5d4182c42e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97d2a3278efab8469f9e223d88e21c26"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a97d2a3278efab8469f9e223d88e21c26">_signature</a></td></tr>
 <tr class="separator:a97d2a3278efab8469f9e223d88e21c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93225e0307246fd7b2d2fa6395cde867"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a93225e0307246fd7b2d2fa6395cde867">_trust</a></td></tr>
-<tr class="separator:a93225e0307246fd7b2d2fa6395cde867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A single record that can be stored within a <a class="el" href="classBlock.html">Block</a> on the <a class="el" href="classBlockChain.html">BlockChain</a> </p>
@@ -366,7 +362,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="record_8hpp_source.html#l00122">122</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00114">114</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
 
 </div>
 </div>
@@ -416,32 +412,7 @@ template&lt;class Archive &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Data in the <a class="el" href="classRecord.html">Record</a> as a string </dd></dl>
 
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00081">81</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aee22770b75e624f94a928f80d4e4a5b5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float &amp; Record::trust </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>t</em> = <code>0.0</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Update or get the trust </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>The trust value to use </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of _trust </dd></dl>
-
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00071">71</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00076">76</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
 
 </div>
 </div>
@@ -459,7 +430,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Get the DataType of this <a class="el" href="classRecord.html">Record</a> </p><dl class="section return"><dt>Returns</dt><dd>The DataType of this <a class="el" href="classRecord.html">Record</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00076">76</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00071">71</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
 
 </div>
 </div>
@@ -477,7 +448,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Check if <a class="el" href="classRecord.html">Record</a> is internally valid </p><dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="classRecord.html">Record</a> is valid </dd></dl>
 
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00095">95</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00087">87</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
 
 </div>
 </div>
@@ -574,29 +545,6 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a93225e0307246fd7b2d2fa6395cde867"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float Record::_trust</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The trust of the <a class="el" href="classRecord.html">Record</a> (only used by Signatures) </p>
-
-<p>Definition at line <a class="el" href="record_8hpp_source.html#l00052">52</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>inc/<a class="el" href="record_8hpp_source.html">record.hpp</a></li>
 <li>src/<a class="el" href="record_8cpp_source.html">record.cpp</a></li>
@@ -607,7 +555,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRecord.html">Record</a></li>
-    <li class="footer">Generated on Sun Jan 21 2018 15:29:50 for ReChain by
+    <li class="footer">Generated on Mon Jan 22 2018 05:21:16 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

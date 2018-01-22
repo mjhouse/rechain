@@ -10,12 +10,10 @@ var classRecord =
     [ "serialize", "classRecord.html#a3d60bd49c6c0745b9cfcb0ae884db3dd", null ],
     [ "signature", "classRecord.html#a77d4cd555d271d7136785a08564beb27", null ],
     [ "string", "classRecord.html#af114f694bef7f6dcdab07ed42e0a88f6", null ],
-    [ "trust", "classRecord.html#aee22770b75e624f94a928f80d4e4a5b5", null ],
     [ "type", "classRecord.html#ac88205304b44a4fc8a1f864a7a20a296", null ],
     [ "valid", "classRecord.html#a99384e7e8fce0967eccd6aadd8bcecdb", null ],
     [ "_block", "classRecord.html#a98e04677b98c8b6aa8c2d6c867695059", null ],
     [ "_public_key", "classRecord.html#a5951ab8149eedbb859214d5d4182c42e", null ],
     [ "_reference", "classRecord.html#ac119b8e74dc524b3fd86ed0a48774273", null ],
-    [ "_signature", "classRecord.html#a97d2a3278efab8469f9e223d88e21c26", null ],
-    [ "_trust", "classRecord.html#a93225e0307246fd7b2d2fa6395cde867", null ]
+    [ "_signature", "classRecord.html#a97d2a3278efab8469f9e223d88e21c26", null ]
 ];

@@ -49,8 +49,6 @@ class Record {
 		std::string _public_key;	/**< The public key of the owner */
 		std::string _signature;		/**< The signature */
 
-		float _trust;			/**< The trust of the Record (only used by Signatures) */
-
 	public:
 		/** Empty constructor */
 		Record();
@@ -93,12 +91,6 @@ class Record {
 		*/
 		std::string& signature( std::string s = "" );
 
-		/** Update or get the trust
-			\param t The trust value to use
-			\returns The value of _trust
-		*/
-		float& trust( float t = 0.0 ); 
-
 		/** Get the DataType of this Record
 			\returns The DataType of this Record
 		*/
@@ -124,8 +116,7 @@ class Record {
 				CEREAL_NVP(_reference),
 				CEREAL_NVP(_block),
 				CEREAL_NVP(_public_key),
-				CEREAL_NVP(_signature),
-				CEREAL_NVP(_trust)
+				CEREAL_NVP(_signature)
 			);
 		}
 

@@ -92,14 +92,6 @@ void BlockChain::update_trust(){
 /* Mine and add a block to the chain
 */
 std::string BlockChain::mine(){	
-	// Update trust on the block if it's a signature
-	for(auto d : this->current){
-		if(d.type() == DataType::Signature){
-			float t = this->pub_trust[d.public_key()];
-			d.trust( t );
-		}
-	}
-
 	// Check if the chain has a genesis block
 	if(this->blockchain.size() > 0){
 		this->current.previous(this->blockchain.back().hash());

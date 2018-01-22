@@ -113,6 +113,13 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 			}
 		}
 
+		WHEN( "blockchain should be valid" ){
+		
+			THEN( "blockchain is valid" ){
+				REQUIRE(blockchain.valid());
+			}
+		}
+
 		WHEN( "blockchain is indexed" ){
 
 			THEN( "blockchain returns valid references" ){
@@ -162,7 +169,7 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 			}
 		}
 
-		WHEN( "blockchain is queried for hash" ){
+		WHEN( "blockchain is queried to see if the hash exists" ){
 		
 			THEN( "returns true if hash exists" ){
 				std::string hash = hashes[NUM_BLOCKS/2];
@@ -173,14 +180,6 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 				REQUIRE_FALSE(blockchain.contains(gen_random()));
 			}
 		}
-
-		WHEN( "blockchain should be valid" ){
-		
-			THEN( "blockchain is valid" ){
-				REQUIRE(blockchain.valid());
-			}
-		}
-
 	}
 }
 
@@ -218,6 +217,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			b[0].block( "BAD BLOCK" );
 
 			THEN( "blockchain is invalid because block hash is bad" ){
+				REQUIRE_FALSE(b.valid());
 				REQUIRE_FALSE(blockchain.valid());
 			}
 		}
@@ -230,6 +230,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			key->sign(b[0]);
 
 			THEN( "blockchain is invalid because block hash is bad" ){
+				REQUIRE_FALSE(b.valid());
 				REQUIRE_FALSE(blockchain.valid());
 			}
 		}
@@ -288,6 +289,39 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			// Check that signatures are broken
 			THEN( "blockchain is invalid because signature records are bad" ){
 				REQUIRE_FALSE(blockchain.valid());
+			}
+		}
+	}
+}
+
+SCENARIO( "blockchain is accessed for trust", "[blockchain][blockchain-trust]" ){
+
+	GIVEN( "a valid blockchain" ){
+	
+		BlockChain blockchain;
+		blockchain.load("test/data/files/gold/gold.blockchain");
+
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
+		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file("test/data/keys/user1.private"));
+
+		std::map<std::string,float> expected = {
+			{"8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903",0.5f},
+			{"ED6FBF3F6C3F94D0193341BABA2BE7AAF23E2A16FE78E9152BD77CD9C83B3664",0.4375f},
+			{"A9A8D2EE0BD117F7048FC657234E0641CD78393347E7453936FD9FB84377A570",0.5f},
+			{"A9A8D2EE0BD117F7048FC657234E0641CD78393347E7453936FD9FB84377A570",0.5f},
+			{"C155EFCE2F1429CC37DA1BDE36EE478CA2EDE8DCDDC02D8C76AE2577A6B9A146",0.125f},
+			{"C155EFCE2F1429CC37DA1BDE36EE478CA2EDE8DCDDC02D8C76AE2577A6B9A146",0.125f}
+		};
+
+		WHEN( "blockchain calculates trust on load" ){
+
+			THEN( "trust should match expected values" ){
+				auto calculated = blockchain.get_publication_trust();
+				for(auto pair : calculated){
+					if(pair.second != 0.0f){
+						REQUIRE(pair.second == expected[pair.first]);
+					}
+				}
 			}
 		}
 	}

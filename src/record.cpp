@@ -27,11 +27,11 @@
 #include <sstream>
 
 
-Record::Record() : _trust(0.0f) {}
+Record::Record(){}
 
-Record::Record( std::string r, std::string b ) : _reference(r), _block(b), _trust(0.0f) {}
+Record::Record( std::string r, std::string b ) : _reference(r), _block(b) {}
 
-Record::Record( std::ifstream& r ) : _trust(0.0f) {
+Record::Record( std::ifstream& r ){
 	
 	CryptoPP::SHA256 hasher;
 	
@@ -68,11 +68,6 @@ std::string& Record::signature( std::string s ){
 	return _signature;
 }
 
-float& Record::trust( float t ){ 
-	if(t) _trust = t;
-	return _trust;
-}
-
 DataType Record::type(){
 	if(_block.empty()) return DataType::Publication;
 	return DataType::Signature;
@@ -85,10 +80,7 @@ std::string Record::string( bool b ){
 	data.append(_block);
 	data.append(_public_key);
 
-	if(b){
-		data.append(_signature);
-		data.append(std::to_string(_trust));
-	}
+	if(b) data.append(_signature);
 	return data;
 }
 
