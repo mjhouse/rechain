@@ -191,26 +191,8 @@ bool BlockChain::valid(){
 
 /* Get the trust for a publication
 */
-float BlockChain::get_publication_trust( std::string s ){
-	return this->pub_trust[s];	
-}
-
-/* Get the trust for all publications
-*/
-std::map<std::string,float> BlockChain::get_publication_trust(){
-	return this->pub_trust;	
-}
-
-/* Get the trust for a public key
-*/
-float BlockChain::get_user_trust( std::string p ){
-	return this->usr_trust[p];
-}
-
-/* Get the trust for all public keys
-*/
-std::map<std::string,float> BlockChain::get_user_trust(){
-	return this->usr_trust;
+float BlockChain::trust( std::string r ){
+	return this->pub_trust[r];	
 }
 
 /* Iterator begin

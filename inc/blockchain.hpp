@@ -126,26 +126,10 @@ class BlockChain {
 		// Trust Methods
 
 		/** Get the trust for a publication
-			\param s The signature of the Record object
+			\param s The reference of the Record object
 			\returns The trust for the Record object
 		*/
-		float get_publication_trust( std::string s );
-		
-		/** Get all publication trust as a map 
-			\returns The trust for all publications
-		*/
-		std::map<std::string,float> get_publication_trust();
-
-		/** Get the trust for a user
-			\param p The public key for the user
-			\returns The trust for the public key
-		*/
-		float get_user_trust( std::string p );
-
-		/** Get all user trust as a map 
-			\returns The trust for all public keys
-		*/
-		std::map<std::string,float> get_user_trust();
+		float trust( std::string r );
 
 		// ------------------------------------------------------
 		// Iterator Methods

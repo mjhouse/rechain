@@ -118,7 +118,7 @@ void Interface::list(){
 			std::string ref = record.reference();
 			std::string own = record.public_key();
 			std::string type = (record.type() == DataType::Publication) ? "Publication" : "Signature";
-			float trust = (type == "Publication") ? blockchain.get_publication_trust(record.reference()) : 0.0f;
+			float trust = (type == "Publication") ? blockchain.trust(record.reference()) : 0.0f;
 
 			if(j == 0 && i == 0)
 				msg = "\tRecord: " + ref + " (Genesis)";

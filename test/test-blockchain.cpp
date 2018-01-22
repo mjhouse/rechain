@@ -299,7 +299,7 @@ SCENARIO( "blockchain is accessed for trust", "[blockchain][blockchain-trust]" )
 	GIVEN( "a valid blockchain" ){
 	
 		BlockChain blockchain;
-		blockchain.load("test/data/files/gold/gold.blockchain");
+		std::string path = "test/data/files/gold/gold.blockchain";
 
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file("test/data/keys/user1.private"));
@@ -313,13 +313,21 @@ SCENARIO( "blockchain is accessed for trust", "[blockchain][blockchain-trust]" )
 			{"C155EFCE2F1429CC37DA1BDE36EE478CA2EDE8DCDDC02D8C76AE2577A6B9A146",0.125f}
 		};
 
-		WHEN( "blockchain calculates trust on load" ){
+		WHEN( "blockchain calculates publication trust on load" ){
+
+			blockchain.load(path);
 
 			THEN( "trust should match expected values" ){
-				auto calculated = blockchain.get_publication_trust();
-				for(auto pair : calculated){
-					if(pair.second != 0.0f){
-						REQUIRE(pair.second == expected[pair.first]);
+				for(auto block : blockchain){
+					for(auto record : block){
+						float trust = blockchain.trust( record.reference() );
+						if(expected.count(record.reference()) == 0 ){
+							REQUIRE(trust == 0.0f);
+						} else {
+							REQUIRE(trust == expected[record.reference()]);
+						}
+
+						
 					}
 				}
 			}
