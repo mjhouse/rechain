@@ -1,0 +1,14 @@
+{
+    "value0": {
+        "blockchain": [],
+        "current": {
+            "records": [],
+            "prev": "",
+            "nonce": 0,
+            "timestamp": 0,
+            "counter": 0
+        },
+        "usr_trust": [],
+        "pub_trust": []
+    }
+}

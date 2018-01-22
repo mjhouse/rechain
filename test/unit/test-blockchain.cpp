@@ -5,12 +5,6 @@
 #include "logger.hpp"
 #include "keys.hpp"
 
-#include <cryptopp/osrng.h>		// For AutoSeededRandomPool
-#include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
-#include <cryptopp/rsa.h>		// For RSA:: namespace
-
-#include <cereal/archives/json.hpp>
-
 #include <string>
 
 #define DUMP_FILE(X) (std::string( std::istreambuf_iterator<char>(X),std::istreambuf_iterator<char>()))
