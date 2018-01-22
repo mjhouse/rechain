@@ -126,7 +126,7 @@ class BlockChain {
 		// Trust Methods
 
 		/** Get the trust for a publication
-			\param s The reference of the Record object
+			\param r The reference of the Record object
 			\returns The trust for the Record object
 		*/
 		float trust( std::string r );
