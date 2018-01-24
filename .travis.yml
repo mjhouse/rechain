@@ -20,7 +20,7 @@ before_install:
 script:
       - mkdir obj bin
       - source configure.sh
-      - make unit-test
+      - make test
 
 after_success:
       - coveralls --exclude data --exclude inc/dependencies --exclude test --gcov-options '\-lp'
