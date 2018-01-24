@@ -32,7 +32,6 @@
 #include <iostream>
 
 // local includes
-#include "logger.hpp"
 #include "blockchain.hpp"
 #include "keys.hpp"
 
@@ -103,11 +102,6 @@ class Interface {
 		*/
 		Interface( int c, char** v ) : argc(c), argv(v) {
 			home = env("RECHAIN_HOME");
-			
-			Logger::get()
-				.with( Log("console",STDOUT,Level::error) )
-				.with( Log("log",home + "/rechain.log",Level::error) );
-
 		};
 
 		/** Destructor

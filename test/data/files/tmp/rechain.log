@@ -1,0 +1,22 @@
+[Wed Jan 24 10:42:34 2018]: Warning: Blockchain failed to load: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 10:42:34 2018]: Debug: Blockchain saved: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 10:54:15 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 11:25:17 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 11:54:49 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 11:56:34 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 11:58:06 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:20:38 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:20:38 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:47:11 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:47:11 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:47:11 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:47:11 2018]: Error: Given key isn't valid
+[Wed Jan 24 12:47:11 2018]: Error: Given key isn't valid
+[Wed Jan 24 12:49:32 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:49:32 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:49:32 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:49:32 2018]: Error: Given key isn't valid
+[Wed Jan 24 12:49:32 2018]: Error: Given key isn't valid
+[Wed Jan 24 12:50:44 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:50:44 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Wed Jan 24 12:50:44 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain

@@ -35,6 +35,7 @@
 #include "record.hpp"
 #include "block.hpp"
 #include "blockchain.hpp"
+#include "logger.hpp"
 
 #define NOERR	0
 #define ERROR	1
@@ -139,6 +140,7 @@ int Interface::execute(){
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()
 		("h,help","Display this usage message")	
+		("v,version","Display version information")
 		("p,publish","Publish a document",cxxopts::value<std::string>(),"<path>")	
 		("c,check","Validate the blockchain")	
 		("m,mine","Mine a block")	
@@ -146,30 +148,45 @@ int Interface::execute(){
 		("private_key","Make a private key active",cxxopts::value<std::string>(),"<path>")
 		("public_key","Make a public key active",cxxopts::value<std::string>(),"<path>")
 		("l,list","List published documents")
-		("v,version","Display version information");
+		("verbose","All logging output")
+		("silent","No logging output");
 
-	try {
+	
+    try {
 		
 		auto result = options.parse(this->argc,this->argv);
+
+        Level level;
+        if(result.count("verbose"))     level = Level::error;
+        else if(result.count("silent")) level = Level::none;
+        else                            level = Level::info;
 		
-		if(!home.empty()){
+        Logger::get()
+            .with( Log("console",STDOUT,level) )
+            .with( Log("log",home + "/rechain.log",Level::error) );
+
+        // Check RECHAIN_HOME
+        if(!home.empty()){
 			std::string path = home + "/rechain.blockchain";
 			if(!blockchain.load(path)){
 				blockchain.save(path);
 			}
-			
 		}
 		else {
+            // or error out
 			rl::get().error("RECHAIN_HOME isn't set!");
 			return ERROR;
 		}
 
+        // Check for help first
 		if(result.count("help")){
 			// Display help for command line options
 			std::cout << options.help() << std::endl;
-			return NOERR;
+            return NOERR;
 		}
 		else {
+
+            // Do other options
 			std::string publ = home + "/current.public";
 			std::string priv = home + "/current.private";
 	

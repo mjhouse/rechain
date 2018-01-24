@@ -16,7 +16,7 @@ TSTDIR = test
 INC = -I$(INCDIR) -I$(INCDIR)/dependencies
 
 # find all source files in srcdir
-TSOURCES := $(shell find $(SRCDIR) $(TSTDIR)/unit -type f -name '*.cpp' -not -name "main.cpp")
+TSOURCES := $(shell find $(SRCDIR) $(TSTDIR) -type f -name '*.cpp' -not -name "main.cpp")
 SOURCES  := $(shell find $(SRCDIR)/ -type f -name '*.cpp')
 
 # assembles each source file into a BLDIR/*.o filename
@@ -31,8 +31,8 @@ all: ./configure.sh
 debug: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -ggdb -lcrypto++
 debug: link-debug
 
-unit-test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage 
-unit-test: link-test
+test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage 
+test: link-test
 	./bin/rechain ${TAGGED}
 
 release: CPPFLAGS = -std=c++11 -lpthread -lcrypto++ -O3
@@ -49,7 +49,7 @@ link-release: $(OBJECTS)
 	$(CXX) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
 
 # BUILD
-obj/%.o: $(TSTDIR)/unit/%.cpp
+obj/%.o: $(TSTDIR)/%.cpp
 	$(CXX) -DRECHAIN_VERSION=\"$(VERSION)\" $(INC) -c $< -o $@ $(CPPFLAGS)
 
 obj/%.o: $(SRCDIR)/%.cpp
