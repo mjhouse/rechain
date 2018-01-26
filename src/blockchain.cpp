@@ -45,47 +45,54 @@ BlockChain& BlockChain::add( Record& r ){
 */
 void BlockChain::update_trust(){
 
-    std::map<std::string,float> usr_trust;
-	this->pub_trust.clear();
-
-	std::map<std::string,std::string> ref;
-
 	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
+
+        std::map<std::string,float> usr_trust;
+        std::map<std::string,float> _trust;
+        std::map<std::string,std::string> references;
+        this->pub_trust.clear();
+
+        int count = 1;
+        for(auto b : blockchain){
+            for(auto r : b){
+                switch(r.type()){
+                    case DataType::Publication:
+                        references.insert( std::make_pair(r.reference(),r.public_key()) );
+                    break;
+                    case DataType::Signature:
+                    {
+                        count++; // for genesis_trust
+                        _trust[r.public_key()] += 1;
+                    }
+                    break;
+                }
+            }
+        }
+
+        float genesis_trust = (float)(count*2);
+
+        for(auto pair : _trust){
+            std::cout << pair.first.substr(0,20) << "... : " << pair.second << std::endl;
+        }
+
         // set the genesis owner to a starting trust value
 		std::string gen_key = this->blockchain[0][0].public_key();
-		usr_trust.insert( std::make_pair( gen_key, genesis_trust() ) );
+		usr_trust.insert( std::make_pair( gen_key, genesis_trust ) );
 
 		for(auto b : this->blockchain){
 			for(auto d : b){
-				switch( d.type() ){
-					case DataType::Publication:
-
-						// init a trust entry for the publisher
-						usr_trust.insert( std::make_pair( d.public_key(), 0.0f ) );
-						
-						// update the reference-to-user map
-						ref.insert( std::make_pair( d.reference(), d.public_key() ) );	
-						
-						break;
-					case DataType::Signature:
-						{
-							// Get publication reference, the signer and signee
-							// public keys
-							std::string pubref = d.reference();
-							std::string signer = d.public_key();
-							std::string signee = ref[pubref];
-						
-							float ct = usr_trust[signer]/2.0f;
-
-                            std::cout << ct << std::endl;
-							
-                            if(ct && !signee.empty()){
-								usr_trust[signer]        = ct;  // signer loses half of trust
-								usr_trust[signee]       += ct;  // signee gains half of signers trust
-								this->pub_trust[pubref] += ct;	// pubref gains half of signers trust
-							}
-						}
-						break;
+				if( d.type() == DataType::Signature ){
+                        std::string pubref = d.reference();
+                        std::string signer = d.public_key();
+                        std::string signee = references[pubref];
+                    
+                        float ct = usr_trust[signer]/2.0f;
+                        
+                        if(ct && !signee.empty()){
+                            usr_trust[signer]        = ct;  // signer loses half of trust
+                            usr_trust[signee]       += ct;  // signee gains half of signers trust
+                            this->pub_trust[pubref] += ct;	// pubref gains half of signers trust
+                        }
 				}
 			}
 		}

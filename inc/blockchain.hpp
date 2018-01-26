@@ -58,25 +58,6 @@ class BlockChain {
         std::string file_path;			        /**< The path to load or save from/to*/
 		std::map<std::string,float> pub_trust;	/**< Trust of publications*/
 
-
-        /** Calculates the starting trust for
-            the genesis signer.
-            \returns Initial trust for genesis signer
-        */
-        inline float genesis_trust(){
-
-            // Count the number of signatures in the blockchain
-            int count = 1;
-            for(auto b : blockchain){
-                for(auto r : b){
-                    if(r.type() == DataType::Signature)
-                        count++;
-                }
-            }
-
-            return (float)(count*2);
-        }
-
 		/** Update 'usr_trust' and 'pub_trust'
 		*/	
 		void update_trust();	

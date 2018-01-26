@@ -8,7 +8,6 @@ var classBlockChain =
     [ "contains", "classBlockChain.html#a3dfc96d4b23db0c4259b352dd69c57e6", null ],
     [ "end", "classBlockChain.html#ad951d129fca84317ef4c321d3dd61c20", null ],
     [ "find", "classBlockChain.html#ac17b1450e78d59e5a2098069aca501e4", null ],
-    [ "genesis_trust", "classBlockChain.html#a78eccd33c5ba0c95622f16919822a69c", null ],
     [ "load", "classBlockChain.html#a0f6a4b1a97fb73854a7b4fa78455cc56", null ],
     [ "mine", "classBlockChain.html#a7e7eaf1825246d7ad9663552f5568a87", null ],
     [ "operator=", "classBlockChain.html#afff04093ee51b47097bd614e94cc8619", null ],
