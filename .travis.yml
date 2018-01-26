@@ -18,7 +18,6 @@ before_install:
       - pip install --user cpp-coveralls
 
 script:
-      - mkdir obj bin
       - source configure.sh
       - make test
 
