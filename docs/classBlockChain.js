@@ -8,6 +8,7 @@ var classBlockChain =
     [ "contains", "classBlockChain.html#a3dfc96d4b23db0c4259b352dd69c57e6", null ],
     [ "end", "classBlockChain.html#ad951d129fca84317ef4c321d3dd61c20", null ],
     [ "find", "classBlockChain.html#ac17b1450e78d59e5a2098069aca501e4", null ],
+    [ "genesis_trust", "classBlockChain.html#a78eccd33c5ba0c95622f16919822a69c", null ],
     [ "load", "classBlockChain.html#a0f6a4b1a97fb73854a7b4fa78455cc56", null ],
     [ "mine", "classBlockChain.html#a7e7eaf1825246d7ad9663552f5568a87", null ],
     [ "operator=", "classBlockChain.html#afff04093ee51b47097bd614e94cc8619", null ],
@@ -21,6 +22,5 @@ var classBlockChain =
     [ "blockchain", "classBlockChain.html#a9e885cdf4c59b225b8a4efd70ce084f0", null ],
     [ "current", "classBlockChain.html#a288c8c10e0586dfe6bc0bbd638c0d778", null ],
     [ "file_path", "classBlockChain.html#acdba7c5340f6b0b26966c341b2e6a8d4", null ],
-    [ "pub_trust", "classBlockChain.html#adedacf23590e36f9c015a2c123fbee82", null ],
-    [ "usr_trust", "classBlockChain.html#a4da20930058912e98af0e2bcb461ab61", null ]
+    [ "pub_trust", "classBlockChain.html#adedacf23590e36f9c015a2c123fbee82", null ]
 ];

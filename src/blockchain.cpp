@@ -30,7 +30,6 @@
 // local includes
 #include "blockchain.hpp"
 #include "block.hpp"
-#include "record.hpp"
 #include "logger.hpp"
 
 typedef Logger rl;
@@ -46,14 +45,15 @@ BlockChain& BlockChain::add( Record& r ){
 */
 void BlockChain::update_trust(){
 
-	this->usr_trust.clear();
+    std::map<std::string,float> usr_trust;
 	this->pub_trust.clear();
 
 	std::map<std::string,std::string> ref;
 
 	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
+        // set the genesis owner to a starting trust value
 		std::string gen_key = this->blockchain[0][0].public_key();
-		this->usr_trust.insert( std::make_pair(gen_key,1.0f) );
+		usr_trust.insert( std::make_pair( gen_key, genesis_trust() ) );
 
 		for(auto b : this->blockchain){
 			for(auto d : b){
@@ -61,7 +61,7 @@ void BlockChain::update_trust(){
 					case DataType::Publication:
 
 						// init a trust entry for the publisher
-						this->usr_trust.insert( std::make_pair( d.public_key(), 0.0f ) );
+						usr_trust.insert( std::make_pair( d.public_key(), 0.0f ) );
 						
 						// update the reference-to-user map
 						ref.insert( std::make_pair( d.reference(), d.public_key() ) );	
@@ -74,11 +74,14 @@ void BlockChain::update_trust(){
 							std::string pubref = d.reference();
 							std::string signer = d.public_key();
 							std::string signee = ref[pubref];
+						
+							float ct = usr_trust[signer]/2.0f;
+
+                            std::cout << ct << std::endl;
 							
-							float ct = this->usr_trust[signer]/2.0f;// index will return 0.0f by default
-							if(ct && !signee.empty()){
-								this->usr_trust[signer] = ct;	// signer loses half of trust
-								this->usr_trust[signee] += ct;	// signee gains half of signers trust
+                            if(ct && !signee.empty()){
+								usr_trust[signer]        = ct;  // signer loses half of trust
+								usr_trust[signee]       += ct;  // signee gains half of signers trust
 								this->pub_trust[pubref] += ct;	// pubref gains half of signers trust
 							}
 						}
@@ -122,7 +125,6 @@ Block& BlockChain::operator[] ( unsigned int i ){
 BlockChain& BlockChain::operator=( const BlockChain& b ){
 	this->blockchain = b.blockchain;
 	this->current	 = b.current;
-	this->usr_trust	 = b.usr_trust;
 	this->pub_trust	 = b.pub_trust;
 	return *this;
 }

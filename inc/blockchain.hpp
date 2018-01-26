@@ -34,6 +34,7 @@
 #include <fstream>
 #include <utility>
 #include <map>
+#include <math.h>
 
 // dependency includes
 #include "cereal/types/vector.hpp"
@@ -41,6 +42,7 @@
 
 // local includes
 #include "block.hpp"
+#include "record.hpp"
 
 class Block;
 class Record;
@@ -50,14 +52,30 @@ class Record;
 */
 class BlockChain {
 	private:
-		std::vector<Block> blockchain;		/**< Collection of Block objects*/
-		std::string file_path;			/**< The path to load or save from/to*/
-
-		Block current;				/**< Current working Block*/
-
-		std::map<std::string,float> usr_trust;	/**< Trust of public keys*/
+		std::vector<Block> blockchain;		    /**< Collection of Block objects*/
+		
+		Block current;				            /**< Current working Block*/
+        std::string file_path;			        /**< The path to load or save from/to*/
 		std::map<std::string,float> pub_trust;	/**< Trust of publications*/
 
+
+        /** Calculates the starting trust for
+            the genesis signer.
+            \returns Initial trust for genesis signer
+        */
+        inline float genesis_trust(){
+
+            // Count the number of signatures in the blockchain
+            int count = 1;
+            for(auto b : blockchain){
+                for(auto r : b){
+                    if(r.type() == DataType::Signature)
+                        count++;
+                }
+            }
+
+            return (float)(count*2);
+        }
 
 		/** Update 'usr_trust' and 'pub_trust'
 		*/	
@@ -159,7 +177,6 @@ class BlockChain {
 		void serialize( Archive& ar ){
 			ar(	CEREAL_NVP(blockchain),
 				CEREAL_NVP(current),
-				CEREAL_NVP(usr_trust),
 				CEREAL_NVP(pub_trust)
 			);
 		}
