@@ -1,4 +1,14 @@
-bin/
-obj/
+# generated files
+bin/*
+obj/*
+
+# keep empty files
+!bin/.empty
+!obj/.empty
+
+# gcov files
 *.gcov
+*.gcno
+
+# vim swap files
 *.swp

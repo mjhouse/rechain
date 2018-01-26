@@ -48,7 +48,6 @@ void BlockChain::update_trust(){
 	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
 
         std::map<std::string,float> usr_trust;
-        std::map<std::string,float> _trust;
         std::map<std::string,std::string> references;
         this->pub_trust.clear();
 
@@ -60,20 +59,13 @@ void BlockChain::update_trust(){
                         references.insert( std::make_pair(r.reference(),r.public_key()) );
                     break;
                     case DataType::Signature:
-                    {
                         count++; // for genesis_trust
-                        _trust[r.public_key()] += 1;
-                    }
                     break;
                 }
             }
         }
 
         float genesis_trust = (float)(count*2);
-
-        for(auto pair : _trust){
-            std::cout << pair.first.substr(0,20) << "... : " << pair.second << std::endl;
-        }
 
         // set the genesis owner to a starting trust value
 		std::string gen_key = this->blockchain[0][0].public_key();

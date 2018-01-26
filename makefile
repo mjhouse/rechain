@@ -56,4 +56,5 @@ obj/%.o: $(SRCDIR)/%.cpp
 	$(CXX) -DRECHAIN_VERSION=\"$(VERSION)\" $(INC) -c $< -o $@ $(CPPFLAGS)
 
 clean:
-	rm $(BLDDIR)/*; rm $(OUTDIR)/*;
+	find $(BLDDIR)/ ! -name '.empty' -type f -exec rm -f {} +;
+	find $(OUTDIR)/ ! -name '.empty' -type f -exec rm -f {} +;
