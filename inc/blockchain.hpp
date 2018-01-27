@@ -44,9 +44,7 @@
 #include "block.hpp"
 #include "record.hpp"
 
-class Block;
-class Record;
-
+class Block; class Record; 
 /** The BlockChain class manages a collection of 
     Block objects.
 */
@@ -56,11 +54,12 @@ class BlockChain {
 		
 		Block current;				            /**< Current working Block*/
         std::string file_path;			        /**< The path to load or save from/to*/
-		std::map<std::string,float> pub_trust;	/**< Trust of publications*/
+		std::map<std::string,float> pub_trust;	/**< Trust of publications by reference*/
+		std::map<std::string,float> usr_trust;	/**< Trust of users by public key*/
 
-		/** Update 'usr_trust' and 'pub_trust'
-		*/	
+		/** Update 'usr_trust' and 'pub_trust'*/	
 		void update_trust();	
+
 	public:
 		/** Define a BlockChain iterator */
 		typedef std::vector<Block>::iterator iterator;

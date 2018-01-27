@@ -21,5 +21,6 @@ var classBlockChain =
     [ "blockchain", "classBlockChain.html#a9e885cdf4c59b225b8a4efd70ce084f0", null ],
     [ "current", "classBlockChain.html#a288c8c10e0586dfe6bc0bbd638c0d778", null ],
     [ "file_path", "classBlockChain.html#acdba7c5340f6b0b26966c341b2e6a8d4", null ],
-    [ "pub_trust", "classBlockChain.html#adedacf23590e36f9c015a2c123fbee82", null ]
+    [ "pub_trust", "classBlockChain.html#adedacf23590e36f9c015a2c123fbee82", null ],
+    [ "usr_trust", "classBlockChain.html#a4da20930058912e98af0e2bcb461ab61", null ]
 ];

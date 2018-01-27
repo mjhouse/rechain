@@ -32,6 +32,7 @@ var NAVTREEINDEX0 =
 "classBlockChain.html#a21f80b91af87e4ba9e90139cd0c737bf":[0,0,1,11],
 "classBlockChain.html#a288c8c10e0586dfe6bc0bbd638c0d778":[0,0,1,19],
 "classBlockChain.html#a3dfc96d4b23db0c4259b352dd69c57e6":[0,0,1,5],
+"classBlockChain.html#a4da20930058912e98af0e2bcb461ab61":[0,0,1,22],
 "classBlockChain.html#a5e73c9e3754a32dca2ce587dfa8f1be9":[0,0,1,12],
 "classBlockChain.html#a671e66ac51d33a75495a09398a0f764e":[0,0,1,2],
 "classBlockChain.html#a7e7eaf1825246d7ad9663552f5568a87":[0,0,1,9],

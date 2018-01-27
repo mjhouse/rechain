@@ -48,8 +48,10 @@ void BlockChain::update_trust(){
 	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
 
 		std::map<std::string,std::string> references;
-		std::map<std::string,float> user_trust;
 		std::vector<Record> records;
+
+        pub_trust.clear();
+        usr_trust.clear();
 
 		int count = 1;
 		for(auto b : blockchain){
@@ -68,17 +70,17 @@ void BlockChain::update_trust(){
 
 		float gt = (float)(count*2);
 		std::string owner = blockchain[0][0].public_key();
-		user_trust.insert( std::make_pair(owner,gt) );
+		usr_trust.insert( std::make_pair(owner,gt) );
 
 		for(auto r : records){
 			std::string pubref = r.reference();
 			std::string signer = r.public_key();
 			std::string signee = references[pubref];
 		    
-			float ct = user_trust[signer]/2.0f;
+			float ct = usr_trust[signer]/2.0f;
 			if(ct && !signee.empty()){
-			    user_trust[signer]	 = ct;	// signer loses half of trust
-			    user_trust[signee]	+= ct;	// signee gains half of signers trust
+			    usr_trust[signer]	 = ct;	// signer loses half of trust
+			    usr_trust[signee]	+= ct;	// signee gains half of signers trust
 			    pub_trust[pubref]	+= ct;	// pubref gains half of signers trust
 			}
 		}
@@ -187,7 +189,7 @@ bool BlockChain::valid(){
 /* Get the trust for a publication
 */
 float BlockChain::trust( std::string r ){
-	return this->pub_trust[r];	
+	return this->pub_trust[r];
 }
 
 /* Iterator begin
