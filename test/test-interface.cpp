@@ -384,20 +384,34 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
 			}
 		}
 
-		WHEN( "interface is used to display the blockchain" ){
-			THEN(""){
-				//Interface i(argc,argv);
-				//REQUIRE_FALSE(interface.execute() == 0);
+		WHEN( "interface is used to list the blockchain" ){
+            // redirect cout to capture help message
+            std::streambuf* buf = std::cout.rdbuf();
+            std::ostringstream buffer;
+            std::cout.rdbuf( buffer.rdbuf() );
+
+			char* argv[] = {
+                (char*)"./bin/rechain",
+                (char*)"--list",
+            };
+			int argc = 2;
+
+            std::string list_gold = dump("test/data/files/gold/interface_list.gold");
+
+            move("test/data/files/gold/interface_list_blockchain.gold",
+                 "test/data/files/tmp/rechain.blockchain");
+
+			THEN("interface prints blockchain information"){
+				Interface interface(argc,argv);
+                int result = interface.execute();
+
+				REQUIRE(result == 0);
+				REQUIRE(list_gold == buffer.str());
+
+                // Set cout back to original buf
+                std::cout.rdbuf( buf );
 			}
 		}
-
-		WHEN( "interface is used to display the version" ){
-			THEN(""){
-				//Interface i(argc,argv);
-				//REQUIRE_FALSE(interface.execute() == 0);
-			}
-		}
-
 
 	}
 }

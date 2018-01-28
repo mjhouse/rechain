@@ -38,7 +38,7 @@ test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fp
 test: link-test
 	./bin/rechain ${TAGGED}
 
-release: CPPFLAGS = -std=c++11 -lpthread -lcrypto++ -O3
+release: CPPFLAGS = -DNDEBUG -std=c++11 -lpthread -lcrypto++ -O3 
 release: link-release
 
 # LINK

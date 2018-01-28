@@ -111,10 +111,11 @@ bool Interface::mine(){
 }
 
 void Interface::list(){
-	rl::get("console").info(" ---- Blockchain ---- ");
+	#define print(x)(std::cout << x << std::endl)
+    print(" ---- Blockchain ---- ");
 
 	for(unsigned int i = 0; i < blockchain.size(); ++i){
-		rl::get("console").info("Block #" + std::to_string(i) + ":");
+		print("Block #" + std::to_string(i) + ":");
 		for(unsigned int j = 0; j < blockchain[i].size(); ++j){
 			auto record = blockchain[i][j];
 			std::string msg;
@@ -128,11 +129,10 @@ void Interface::list(){
 			else
 				msg = "\tRecord: " + ref;
 
-			rl::get("console")
-				.info(msg)
-				.info("\tOwner:  " + own.substr(50,ref.length()-3) + "...")
-				.info("\t\tType:  " + type)
-				.info("\t\tTrust: " + std::to_string(trust));
+			print(msg);
+		    print("\tOwner:  " + own.substr(50,ref.length()-3) + "...");
+		    print("\t\tType:  " + type);
+			print("\t\tTrust: " + std::to_string(trust));
 		}
 	}
 }
