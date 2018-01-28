@@ -143,12 +143,14 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		
 		std::vector<std::string> signatures;
+		std::vector<std::string> references;
 		std::vector<std::string> hashes;
 
 		for(auto b : blockchain){
 			hashes.push_back(b.hash());
 			for(auto r : b){
 				signatures.push_back(r.signature());
+				references.push_back(r.reference());
 			}
 		}
 
@@ -208,7 +210,7 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 			}
 		}
 
-		WHEN( "blockchain is queried to see if the hash exists" ){
+		WHEN( "blockchain is queried to see if hash exists" ){
 		
 			THEN( "returns true if hash exists" ){
 				std::string hash = hashes[NUM_BLOCKS/2];
@@ -216,6 +218,18 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 			}
 
 			THEN( "returns false if hash doesn't exist" ){
+				REQUIRE_FALSE(blockchain.contains(gen_random()));
+			}
+		}
+
+		WHEN( "blockchain is queried to see if reference exists" ){
+		
+			THEN( "returns true if reference exists" ){
+				std::string ref = references[NUM_RECORDS/2];
+				REQUIRE(blockchain.contains(ref,Search::RecordType));
+			}
+
+			THEN( "returns false if reference doesn't exist" ){
 				REQUIRE_FALSE(blockchain.contains(gen_random()));
 			}
 		}

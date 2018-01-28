@@ -107,8 +107,6 @@ SCENARIO( "use interface", "[interface]" ){
                 std::string gold = dump("test/data/files/gold/interface_publish.gold");
                 std::string grey = dump("test/data/files/tmp/rechain.blockchain");
 
-                std::cout << grey << std::endl;
-
                 // signatures are different every
                 // time, so we have to strip them out
                 gold.erase(1158,768);
@@ -116,6 +114,23 @@ SCENARIO( "use interface", "[interface]" ){
 
                 REQUIRE(result == 0);
                 REQUIRE(grey == gold);
+			}
+		}
+
+		WHEN( "interface is used to publish a non-existing document" ){
+			THEN("document is not published to blockchain"){
+                char* argv[] = {
+                    (char*)"./bin/rechain",
+                    (char*)"--publish",
+                    (char*)"test/data/files/NOEXIST/test_publish.txt",
+                    (char*)"--silent"
+                };
+                int argc = 4;
+				
+                Interface interface(argc,argv);
+				int result = interface.execute();
+
+                REQUIRE_FALSE(result == 0);
 			}
 		}
 
