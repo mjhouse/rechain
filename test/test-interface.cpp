@@ -35,15 +35,17 @@ SCENARIO( "use interface", "[interface]" ){
 		move("test/data/keys/rsa.public","test/data/files/tmp/current.public");
 		move("test/data/keys/rsa.private","test/data/files/tmp/current.private");
 
-        // get the help output gold file
+        // get the key files as strings
         std::string priv_gold = dump("test/data/files/keys/user1.private");
         std::string publ_gold = dump("test/data/files/keys/user1.public");
-
-        std::streambuf* buf = std::cout.rdbuf();
-        std::ostringstream buffer;
-        std::cout.rdbuf( buffer.rdbuf() );
        
 		WHEN( "interface is used for help message" ){
+
+            // redirect cout to capture help message
+            std::streambuf* buf = std::cout.rdbuf();
+            std::ostringstream buffer;
+            std::cout.rdbuf( buffer.rdbuf() );
+
 			char* argv[] = {
                 (char*)"./bin/rechain",
                 (char*)"--help",
@@ -59,6 +61,9 @@ SCENARIO( "use interface", "[interface]" ){
 
 				REQUIRE(result == 0);
 				REQUIRE(help_gold == buffer.str());
+
+                // Set cout back to original buf
+                std::cout.rdbuf( buf );
 			}
 		}
 
@@ -77,8 +82,6 @@ SCENARIO( "use interface", "[interface]" ){
                 std::string cur_priv = dump("test/data/tmp/current.private");
                 std::string cur_publ = dump("test/data/tmp/current.public");
 				
-                std::cout.rdbuf( buf );
-                
                 Interface i(argc,argv);
 				int result = i.execute();
 
@@ -88,7 +91,7 @@ SCENARIO( "use interface", "[interface]" ){
 			}
 		}
 
-		WHEN( "interface is used to publish a document" ){
+		WHEN( "interface is used to publish a valid document" ){
 			THEN("document is published to blockchain"){
                 char* argv[] = {
                     (char*)"./bin/rechain",
@@ -98,8 +101,6 @@ SCENARIO( "use interface", "[interface]" ){
                 };
                 int argc = 4;
 				
-                std::cout.rdbuf( buf );
-                
                 Interface i(argc,argv);
 				int result = i.execute();
 
@@ -116,10 +117,59 @@ SCENARIO( "use interface", "[interface]" ){
 			}
 		}
 
-		WHEN( "interface is used to check the blockchain" ){
-			THEN(""){
-				//Interface i(argc,argv);
-				//REQUIRE_FALSE(interface.execute() == 0);
+		WHEN( "interface is used to publish a previously published document" ){
+			THEN("document is not published to blockchain"){
+                char* argv[] = {
+                    (char*)"./bin/rechain",
+                    (char*)"--publish",
+                    (char*)"test/data/files/general/test_publish.txt",
+                    (char*)"--silent"
+                };
+                int argc = 4;
+			
+                // overwrite the blockchain with one that already has this file published in it
+                move("test/data/files/gold/interface_already_published.gold",
+                     "test/data/files/tmp/rechain.blockchain");
+
+                Interface interface(argc,argv);
+				int result = interface.execute();
+
+                REQUIRE_FALSE(result == 0);
+			}
+		}
+
+		WHEN( "interface is used to check a valid blockchain" ){
+            char* argv[] = {
+                (char*)"./bin/rechain",
+                (char*)"--check"
+            };
+            int argc = 2;
+
+            move("test/data/files/gold/blockchain_general.gold",
+                 "test/data/files/tmp/rechain.blockchain");
+
+			THEN("blockchain is valid"){
+				Interface interface(argc,argv);
+                int result = interface.execute();
+                REQUIRE(result == 0);
+			}
+		}
+
+		WHEN( "interface is used to check an invalid blockchain" ){
+            char* argv[] = {
+                (char*)"./bin/rechain",
+                (char*)"--check",
+                (char*)"--silent"
+            };
+            int argc = 3;
+
+            move("test/data/files/black/blockchain_duplicate_reference.black",
+                 "test/data/files/tmp/rechain.blockchain");
+
+			THEN("blockchain is invalid"){
+				Interface interface(argc,argv);
+                int result = interface.execute();
+                REQUIRE_FALSE(result == 0);
 			}
 		}
 
@@ -151,8 +201,6 @@ SCENARIO( "use interface", "[interface]" ){
 			}
 		}
 
-        // Set cout back to original buf
-        std::cout.rdbuf( buf );
 
 	}
 }

@@ -64,8 +64,9 @@ class Interface {
 		bool sign( std::string s );
 	
 		/** Check the BlockChain is valid
-		*/
-		void check();
+		    \returns true if blockchain is valid
+        */
+		bool check();
 	
 		/** Mine the current working block
 			\returns True on success

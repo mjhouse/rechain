@@ -50,7 +50,7 @@ bool Interface::publish( std::string s ){
 		Record r(ifs);
 		private_key->sign(r);
 
-		if(!blockchain.contains(r.reference())){
+		if(!blockchain.contains(r.reference(),Search::RecordType)){
 			blockchain.add(r);
 			blockchain.save();
 		} else {
@@ -90,11 +90,13 @@ bool Interface::sign( std::string s ){
 	return true;
 }
 
-void Interface::check(){
-	if(!blockchain.valid()){
-		rl::get().error("Blockchain is BAD");
+bool Interface::check(){
+	if(blockchain.valid()){
+        rl::get().error("Blockchain is GOOD");
+        return true;
 	} else {
-		rl::get().error("Blockchain is GOOD");
+		rl::get().error("Blockchain is BAD");
+        return false;
 	}
 }
 
@@ -228,8 +230,10 @@ int Interface::execute(){
 			
 			// Check the BlockChain integrity
 			if(result.count("check")){
-				this->check();
-				return NOERR;
+                if(this->check())
+					return NOERR;
+				else
+					return ERROR;
 			}
 			
 			// Mine the current Block

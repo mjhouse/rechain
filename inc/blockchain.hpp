@@ -19,7 +19,7 @@
  *
 */
 
-/** 	\file  	blockchain.hpp
+/**	\file  	blockchain.hpp
 	\brief 	Defines the BlockChain class that 
 		manages Block objects, searches
 		and verifies the Block collection. 
@@ -44,7 +44,14 @@
 #include "block.hpp"
 #include "record.hpp"
 
-class Block; class Record; 
+enum Search {
+    RecordType,
+    BlockType
+};
+
+class Block;
+class Record; 
+
 /** The BlockChain class manages a collection of 
     Block objects.
 */
@@ -63,7 +70,7 @@ class BlockChain {
 	public:
 		/** Define a BlockChain iterator */
 		typedef std::vector<Block>::iterator iterator;
-		
+
 		/** Empty constructor
 		*/
 		BlockChain(){};
@@ -111,9 +118,10 @@ class BlockChain {
 
 		/** Check if a given Block already exists
 			\param s The hash to check
+            \param type The type of search to perform
 			\returns True if Block exists
 		*/
-		bool contains( std::string s );
+		bool contains( std::string s, Search type = Search::BlockType );
 
 		/** Verify that the BlockChain is valid
 			\returns True if BlockChain is valid

@@ -148,8 +148,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afff04093ee51b47097bd614e94cc8619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac17b1450e78d59e5a2098069aca501e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBlockChain.html#abdff7c5523028944b11547d27100ac0a">BlockChain::iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#ac17b1450e78d59e5a2098069aca501e4">find</a> (std::string h)</td></tr>
 <tr class="separator:ac17b1450e78d59e5a2098069aca501e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dfc96d4b23db0c4259b352dd69c57e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a3dfc96d4b23db0c4259b352dd69c57e6">contains</a> (std::string s)</td></tr>
-<tr class="separator:a3dfc96d4b23db0c4259b352dd69c57e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07ff998ca2eab9a8f72a42681d1e19fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#a07ff998ca2eab9a8f72a42681d1e19fc">contains</a> (std::string s, Search type=Search::BlockType)</td></tr>
+<tr class="separator:a07ff998ca2eab9a8f72a42681d1e19fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affe7ebd7b5d67de56bf685b4e0adc0f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#affe7ebd7b5d67de56bf685b4e0adc0f0">valid</a> ()</td></tr>
 <tr class="separator:affe7ebd7b5d67de56bf685b4e0adc0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae920a7a7bfad3b828b74be00f331936c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html#ae920a7a7bfad3b828b74be00f331936c">trust</a> (std::string r)</td></tr>
@@ -189,7 +189,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classBlockChain.html">BlockChain</a> class manages a collection of <a class="el" href="classBlock.html">Block</a> objects. </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00051">51</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00058">58</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="abdff7c5523028944b11547d27100ac0a"></a>
 <div class="memitem">
@@ -202,7 +202,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Define a <a class="el" href="classBlockChain.html">BlockChain</a> iterator </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00065">65</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00072">72</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -229,7 +229,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Empty constructor </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00069">69</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00076">76</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +255,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Empty destructor </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00073">73</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00080">80</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -299,11 +299,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Return an iterator to the start of the <a class="el" href="classBlockChain.html">BlockChain</a> </p><dl class="section return"><dt>Returns</dt><dd>An iterator </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00197">197</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00217">217</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3dfc96d4b23db0c4259b352dd69c57e6"></a>
+<a class="anchor" id="a07ff998ca2eab9a8f72a42681d1e19fc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -311,14 +311,25 @@ Private Attributes</h2></td></tr>
           <td class="memname">bool BlockChain::contains </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Search&#160;</td>
+          <td class="paramname"><em>type</em> = <code>Search::BlockType</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Check if a given <a class="el" href="classBlock.html">Block</a> already exists </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">s</td><td>The hash to check </td></tr>
+    <tr><td class="paramname">type</td><td>The type of search to perform </td></tr>
   </table>
   </dd>
 </dl>
@@ -342,7 +353,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns an iterator to the end of the <a class="el" href="classBlockChain.html">BlockChain</a> </p><dl class="section return"><dt>Returns</dt><dd>A vector iterator </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00203">203</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00223">223</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -393,7 +404,7 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="classBlockChain.html">BlockChain</a> was loaded and is valid</dd></dl>
 <p>Load the <a class="el" href="classBlockChain.html">BlockChain</a> from a given location </p>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00236">236</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00256">256</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -489,7 +500,7 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="classBlockChain.html">BlockChain</a> was saved</dd></dl>
 <p>Save the <a class="el" href="classBlockChain.html">BlockChain</a> to a given location </p>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00215">215</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00235">235</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -523,7 +534,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00157">157</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00165">165</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -541,7 +552,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Return the number of <a class="el" href="classBlock.html">Block</a> objects in the chain </p><dl class="section return"><dt>Returns</dt><dd>The number of <a class="el" href="classBlock.html">Block</a> objects </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00209">209</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00229">229</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -566,7 +577,7 @@ template&lt;class Archive &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The trust for the <a class="el" href="classRecord.html">Record</a> object </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00191">191</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00211">211</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -610,7 +621,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Verify that the <a class="el" href="classBlockChain.html">BlockChain</a> is valid </p><dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="classBlockChain.html">BlockChain</a> is valid </dd></dl>
 
-<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00147">147</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00167">167</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -634,7 +645,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Collection of <a class="el" href="classBlock.html">Block</a> objects </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00053">53</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00060">60</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -657,7 +668,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Current working <a class="el" href="classBlock.html">Block</a> </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00055">55</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00062">62</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -680,7 +691,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The path to load or save from/to </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00056">56</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00063">63</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -703,7 +714,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Trust of publications by reference </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00057">57</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00064">64</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +737,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Trust of users by public key </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00058">58</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00065">65</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -740,7 +751,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBlockChain.html">BlockChain</a></li>
-    <li class="footer">Generated on Sat Jan 27 2018 18:26:57 for ReChain by
+    <li class="footer">Generated on Sat Jan 27 2018 20:20:54 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -133,12 +133,32 @@ BlockChain::iterator BlockChain::find( std::string h ){
 
 /* Check if a Record already exists
 */
-bool BlockChain::contains( std::string s ){
-	// Check in the blockchain
-	for(auto b : blockchain)
-		if(b.hash() == s) return true;
-	
-	// Can't find it
+bool BlockChain::contains( std::string s, Search type ){
+
+    switch(type){
+        case Search::RecordType:
+        {
+            // Check in the blockchain
+            for(auto b : blockchain)
+                for(auto r : b)
+                    if(r.reference() == s) return true;
+            
+            for(auto r : current)
+                if(r.reference() == s) return true;
+            
+            break;
+        }
+        case Search::BlockType:
+        {
+            // Check in the blockchain
+            for(auto b : blockchain)
+                if(b.hash() == s) return true;
+            
+            break;
+        }
+    }
+
+    // Can't find it
 	return false;
 }
 
