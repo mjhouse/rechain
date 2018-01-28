@@ -28,6 +28,10 @@ SCENARIO( "use interface", "[interface]" ){
 
     GIVEN( "a test environment without variables" ){
     
+		// set RECHAIN_HOME
+        char* home = std::getenv("RECHAIN_HOME");
+		putenv((char*)"RECHAIN_HOME=");
+
         WHEN( "any operation is performed" ){
             char* argv[] = {
                 (char*)"./bin/rechain",
@@ -46,7 +50,7 @@ SCENARIO( "use interface", "[interface]" ){
                 REQUIRE_FALSE( result == 0 );    
             }
         }
-    
+
     }
 
 	GIVEN( "a test environment with variables set" ){
