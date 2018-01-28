@@ -162,7 +162,7 @@ int Interface::execute(){
         if(result.count("verbose"))     level = Level::error;
         else if(result.count("silent")) level = Level::none;
         else                            level = Level::info;
-		
+
         Logger::get()
             .with( Log("console",STDOUT,level) )
             .with( Log("log",home + "/rechain.log",Level::error) );

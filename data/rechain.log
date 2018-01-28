@@ -363,3 +363,21 @@
 [Sat Jan 27 22:37:56 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
 [Sat Jan 27 22:37:56 2018]: Info: Signing and adding 'README.md' to blockchain
 [Sat Jan 27 22:37:56 2018]: Error: Publication already exists
+[Sat Jan 27 23:10:17 2018]: Warning: Blockchain failed to load: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 23:10:17 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 23:10:17 2018]: Info: Signing and adding 'LICENSE.txt' to blockchain
+[Sat Jan 27 23:10:17 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 23:10:25 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 23:10:25 2018]: Info: Signing and adding 'README.md' to blockchain
+[Sat Jan 27 23:10:25 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 23:13:28 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 23:13:29 2018]: Debug: Mining: 
+[Sat Jan 27 23:13:29 2018]: Debug: Hash: 0003F33184861762C28635D386015714BD87954DD837E93570E9FBFC7DE86148
+[Sat Jan 27 23:13:29 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 10:43:59 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 10:44:19 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 10:44:19 2018]: Info: Adding signature for '4112D7E4A309974E5392...' to blockchain
+[Sun Jan 28 10:44:19 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 10:44:29 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 10:44:29 2018]: Info: Adding signature for '4112D7E4A309974E5392...' to blockchain
+[Sun Jan 28 10:44:29 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain

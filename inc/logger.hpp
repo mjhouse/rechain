@@ -1,7 +1,7 @@
 // system includes
 #include <iostream>
 #include <algorithm>
-#include <vector>
+#include <set>
 #include <string>
 #include <fstream>
 #include <ctime>
@@ -10,7 +10,13 @@
 #define _RECHAIN_LOGGER_HPP_
 
 /** Enum for different log levels */
-enum Level { none, info, debug, warning, error };
+enum Level {
+    error   = 0,
+    warning = 1,
+    debug   = 2,
+    info    = 3,
+    none    = 4
+};
 
 static const std::string STDOUT = "__stdout__"; /**< A key to identify STDOUT v. file path */
 static const std::string STDERR = "__stderr__";	/**< A key to identify STDERR v. file path */
@@ -19,14 +25,14 @@ static const std::string STDERR = "__stderr__";	/**< A key to identify STDERR v.
 */
 class Log{
 	private:
-		std::string name;	/**< The name to identify this log by */
-		std::string out;	/**< The path to the log file */
-		Level level;		/**< The log level to write at */
+		std::string _name;	/**< The name to identify this log by */
+		std::string _out;	/**< The path to the log file */
+		Level _level;		/**< The log level to write at */
 
 		/** Get a timestamp as a string
 			\returns A timestamp as a string
 		*/
-		inline std::string timestamp(){
+		inline std::string timestamp() const {
 			time_t now = time(0);
 			std::string dt = std::string(ctime(&now));
 			dt.erase(std::remove_if(dt.begin(),dt.end(),[]( unsigned char c ){
@@ -39,7 +45,7 @@ class Log{
 			\param m The string to format
 			\returns The now-formatted string
 		*/
-		inline std::string format( std::string m ){
+		inline std::string format( std::string m ) const {
 			std::string formatted;
 
 			formatted.append("[" + timestamp() + "]: ");
@@ -55,31 +61,37 @@ class Log{
 			\param o The path to write to
 			\param l The log level to write at
 		*/
-		Log( std::string n, std::string o, Level l ) : name(n), out(o), level(l) {}
+		Log( std::string n, std::string o, Level l ) : _name(n), _out(o), _level(l) {}
 
 		/** Empty destructor */
 		~Log(){}
 
-		/** Compare the name of this log to a string
-			\param n The string to compare to
-			\returns True if the given string matches name
+		/** Get the log name
+			\returns The log name
 		*/
-		bool named( std::string n ){
-			return (!name.empty() && n == name);
+		std::string name() const {
+			return _name;
 		}
+
+        /** Get the log level
+            \returns A Level enum value
+        */
+        Level level() const {
+            return _level;
+        }
 
 		/** Write to this log
 			\param m The message to write
 			\param l The Level to write at
 		*/
-		void write( std::string m, Level l ){
-			if(l <= level){
-				if(out == STDOUT)
+		void write( std::string m, Level l ) const {
+            if(l >= _level){
+				if(_out == STDOUT)
 					std::cout << format(m) << std::endl;
-				else if(out == STDERR)
+				else if(_out == STDERR)
 					std::cerr << format(m) << std::endl;
 				else {
-					std::ofstream ofs(out,std::ios::app);
+					std::ofstream ofs(_out,std::ios::app);
 					if(ofs.is_open()){
 						ofs << format(m) << std::endl;
 					}
@@ -87,6 +99,46 @@ class Log{
 			}
 		}
 
+        /** Overloaded not-equal comparison
+            \param rhs The log to compare with
+            \returns True if logs are not equal
+        */
+        bool operator!=( const Log& rhs ) const {
+            return !(*this == rhs);
+        }
+
+        /** Overloaded equal comparison
+            \param rhs The log to compare with
+            \returns True if logs are equal
+        */
+        bool operator==( const Log& rhs ) const {
+            return (_name == rhs._name && _out == rhs._out && _level == rhs._level);
+        }
+
+        /** Overloaded less-than comparison
+            \param rhs The log to compare with
+            \returns True if this < rhs
+        */
+        bool operator<( const Log& rhs ) const {
+            return (_name < rhs._name);
+        }
+
+        /** Overloaded greater-than comparison
+            \param rhs The log to compare with
+            \returns True if this > rhs
+        */
+        bool operator>( const Log& rhs ) const {
+            return (_name > rhs._name);
+        }
+
+        /** Overloaded copy/assignment operator
+            \param rhs The log to copy
+        */
+        void operator=( const Log& rhs ){
+            _name  = rhs._name;
+            _out   = rhs._out;
+            _level = rhs._level;
+        }
 };
 
 /** The Logger is a singleton class used to write to 
@@ -94,8 +146,8 @@ class Log{
 */
 class Logger {
 	private:
-		std::vector<Log> logs;			/**< The collection of Log objects */
-		std::vector<Log>::iterator current;	/**< An iterator to the current Log */
+		std::set<Log> logs;			        /**< The collection of Log objects */
+		std::set<Log>::iterator current;    /**< An iterator to the current Log */
 
 		/** Empty constructor */
 		Logger(){}
@@ -124,8 +176,8 @@ class Logger {
 		static Logger& get( std::string s = "" ){
 			static Logger l;
 			l.current = std::find_if(l.logs.begin(),l.logs.end(),
-			[&s]( Log& l ){
-				return (l.named(s));
+			[&s]( const Log& l ){
+				return (l.name() == s);
 			});
 			return l;
 		}
@@ -135,7 +187,7 @@ class Logger {
 			\returns A reference to the Logger
 		*/
 		Logger& with( const Log& l ){
-			logs.push_back(l);
+            logs.insert(l);
 			current = logs.end();
 			return *this;
 		}
@@ -145,7 +197,7 @@ class Logger {
 			\returns A reference to the Logger
 		*/
 		Logger& info( std::string m ){
-			write("Info: " + m,Level::info);
+            write("Info: " + m,Level::info);
 			return *this;
 		}
 

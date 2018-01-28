@@ -9,6 +9,6 @@ var classLogger =
     [ "warning", "classLogger.html#af984d05e7198e489cbecd0e0ce5df869", null ],
     [ "with", "classLogger.html#addff079673295d2f5d52652953bf9cd3", null ],
     [ "write", "classLogger.html#a7ab2071d0781cc91c6693d38ba4df385", null ],
-    [ "current", "classLogger.html#ae9da1df8c090f2c1ca579822482996ed", null ],
-    [ "logs", "classLogger.html#ad61a171d4a1f82eb0cfcaf9c8ccbc1db", null ]
+    [ "current", "classLogger.html#a84535e671f012b5a6e22318a83bcdc08", null ],
+    [ "logs", "classLogger.html#ad9442b3a33f313553cd57048be7afa8f", null ]
 ];

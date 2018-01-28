@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['level',['level',['../classLog.html#ac47cf2995567e8696d75bdfb3150a40d',1,'Log']]],
   ['list',['list',['../classInterface.html#a687ee3c3021f07b0cfd9af5b42b71896',1,'Interface']]],
   ['load',['load',['../classBlockChain.html#a0f6a4b1a97fb73854a7b4fa78455cc56',1,'BlockChain::load()'],['../classKey.html#a19d43c163fbdb9bd797ffdc724a9659b',1,'Key::load()']]],
   ['load_5ffile',['load_file',['../classKey.html#abd5ac5ed0c7299812e4710f4b6f21b5a',1,'Key']]],
