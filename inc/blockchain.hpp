@@ -44,6 +44,9 @@
 #include "block.hpp"
 #include "record.hpp"
 
+/** Flag to specify the type of object
+    to search for.
+*/
 enum Search {
     RecordType,
     BlockType
