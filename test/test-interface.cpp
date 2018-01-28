@@ -28,9 +28,6 @@ SCENARIO( "use interface", "[interface]" ){
 
     GIVEN( "a test environment without variables" ){
     
-		// set RECHAIN_HOME
-        char* home = std::getenv("RECHAIN_HOME");
-		putenv((char*)"RECHAIN_HOME=");
 
         WHEN( "any operation is performed" ){
             char* argv[] = {
@@ -42,6 +39,10 @@ SCENARIO( "use interface", "[interface]" ){
                 (char*)"--silent"
             };
             int argc = 6;
+
+            // set RECHAIN_HOME
+            char* home = std::getenv("RECHAIN_HOME");
+            putenv((char*)"RECHAIN_HOME=");
 
             Interface i(argc,argv);
             int result = i.execute();
