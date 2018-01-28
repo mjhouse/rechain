@@ -354,3 +354,12 @@
 [Mon Jan 22 05:09:50 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
 [Mon Jan 22 10:16:59 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
 [Mon Jan 22 10:18:41 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 22:37:39 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 22:37:39 2018]: Info: Signing and adding 'makefile' to blockchain
+[Sat Jan 27 22:37:39 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 22:37:49 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 22:37:49 2018]: Info: Signing and adding 'doxygen.conf' to blockchain
+[Sat Jan 27 22:37:49 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 22:37:56 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sat Jan 27 22:37:56 2018]: Info: Signing and adding 'README.md' to blockchain
+[Sat Jan 27 22:37:56 2018]: Error: Publication already exists

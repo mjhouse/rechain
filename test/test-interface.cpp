@@ -24,7 +24,7 @@ inline void move( std::string in, std::string out ){
     dst << src.rdbuf();
 }
 
-SCENARIO( "use interface", "[interface]" ){
+SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
 
     GIVEN( "a test environment without variables" ){
     
@@ -296,10 +296,21 @@ SCENARIO( "use interface", "[interface]" ){
 			}
 		}
 
-		WHEN( "interface is used to mine a blockchain" ){
-			THEN(""){
-				//Interface i(argc,argv);
-				//REQUIRE_FALSE(interface.execute() == 0);
+		WHEN( "interface is used to mine a block" ){
+            char* argv[] = {
+                (char*)"./bin/rechain",
+                (char*)"--mine",
+                (char*)"--silent"
+            };
+            int argc = 3;
+
+            move("test/data/files/gold/interface_mine.gold",
+                 "test/data/files/tmp/rechain.blockchain");
+
+			THEN("interface mines a block"){
+				Interface interface(argc,argv);
+                int result = interface.execute();
+                REQUIRE(result == 0);
 			}
 		}
 
