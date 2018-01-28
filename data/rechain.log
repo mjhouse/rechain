@@ -386,3 +386,10 @@
 [Sun Jan 28 12:18:55 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
 [Sun Jan 28 12:26:33 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
 [Sun Jan 28 12:27:20 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 13:45:14 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 13:45:14 2018]: Info: Signing and adding '/home/mhouse/Downloads/Project1_Spring_2018.pdf' to blockchain
+[Sun Jan 28 13:45:14 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 13:45:20 2018]: Debug: Blockchain loaded: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain
+[Sun Jan 28 13:45:20 2018]: Debug: Mining: 
+[Sun Jan 28 13:45:20 2018]: Debug: Hash: 00030EE1D1F4166069834FA91FA4C96F9BCCB25677B58E4648CBCD3C8FEFB92A
+[Sun Jan 28 13:45:20 2018]: Debug: Blockchain saved: /home/mhouse/Projects/cpp/rechain/data/rechain.blockchain

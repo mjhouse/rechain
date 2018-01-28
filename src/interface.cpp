@@ -102,8 +102,8 @@ bool Interface::check(){
 
 bool Interface::mine(){
 	rl::get()
-		.debug("Mining: ")
-		.debug("Hash: " + blockchain.mine());
+		.info("Mining: ")
+		.info("Hash: " + blockchain.mine());
 
 	if(blockchain.valid() && blockchain.save())
 		return true;
