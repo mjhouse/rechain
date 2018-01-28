@@ -45,7 +45,7 @@ enum DataType { Publication, Signature };
 class Record {
 	private:
 		std::string _reference;		/**< A reference to a document or another Record */
-		std::string _block;		/**< Block hash, only used if this is a Signature record*/
+		std::string _block;		    /**< Block hash, only used if this is a Signature record*/
 		std::string _public_key;	/**< The public key of the owner */
 		std::string _signature;		/**< The signature */
 

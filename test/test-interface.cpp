@@ -36,7 +36,6 @@ SCENARIO( "use interface", "[interface]" ){
 		move("test/data/keys/rsa.private","test/data/files/tmp/current.private");
 
         // get the help output gold file
-        std::string help_gold = dump("test/data/files/gold/gold.help");
         std::string priv_gold = dump("test/data/files/keys/user1.private");
         std::string publ_gold = dump("test/data/files/keys/user1.public");
 
@@ -51,6 +50,8 @@ SCENARIO( "use interface", "[interface]" ){
                 (char*)"--silent"
             };
 			int argc = 3;
+
+            std::string help_gold = dump("test/data/files/gold/interface_help.gold");
 
 			THEN("interface prints help message"){
 				Interface i(argc,argv);
@@ -88,9 +89,30 @@ SCENARIO( "use interface", "[interface]" ){
 		}
 
 		WHEN( "interface is used to publish a document" ){
-			THEN(""){
-				//Interface i(argc,argv);
-				//REQUIRE_FALSE(interface.execute() == 0);
+			THEN("document is published to blockchain"){
+                char* argv[] = {
+                    (char*)"./bin/rechain",
+                    (char*)"--publish",
+                    (char*)"test/data/files/general/test_publish.txt",
+                    (char*)"--silent"
+                };
+                int argc = 4;
+				
+                std::cout.rdbuf( buf );
+                
+                Interface i(argc,argv);
+				int result = i.execute();
+
+                std::string gold = dump("test/data/files/gold/interface_publish.gold");
+                std::string grey = dump("test/data/files/tmp/rechain.blockchain");
+
+                // signatures are different every
+                // time, so we have to strip them out
+                gold.erase(1158,768);
+                grey.erase(1158,768);
+
+                REQUIRE(result == 0);
+                REQUIRE(grey == gold);
 			}
 		}
 

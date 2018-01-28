@@ -17,8 +17,8 @@ SCENARIO( "blockchain is loaded or saved", "[blockchain][blockchain-serial]" ){
 
 
 		BlockChain blockchain;
-		std::string good_path = "test/data/files/gold/gold.blockchain";
-		std::string bad_path  = "test/data/files/NOEXIST/gold.blockchain";
+		std::string good_path = "test/data/files/gold/blockchain_general.gold";
+		std::string bad_path  = "test/data/files/NOEXIST/blockchain_general.gold";
 
 		WHEN( "blockchain is loaded from valid file path" ){
 	
@@ -63,7 +63,7 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 	GIVEN( "a valid blockchain" ){
 
 		BlockChain blockchain;
-		blockchain.load("test/data/files/gold/gold.blockchain");
+		blockchain.load("test/data/files/gold/blockchain_general.gold");
 
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 
@@ -138,7 +138,7 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 	GIVEN( "a valid blockchain" ){
 
 		BlockChain blockchain;
-		blockchain.load("test/data/files/gold/gold.blockchain");
+		blockchain.load("test/data/files/gold/blockchain_general.gold");
 		
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		
@@ -227,7 +227,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 	GIVEN( "a valid blockchain" ){
 
 		BlockChain blockchain;
-		blockchain.load("test/data/files/gold/gold.blockchain");
+		blockchain.load("test/data/files/gold/blockchain_general.gold");
 
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file("test/data/keys/user1.private"));
@@ -338,7 +338,7 @@ SCENARIO( "blockchain is accessed for trust", "[blockchain][blockchain-trust]" )
 	GIVEN( "a valid blockchain" ){
 	
 		BlockChain blockchain;
-		std::string path = "test/data/files/gold/gold.blockchain";
+		std::string path = "test/data/files/gold/blockchain_general.gold";
 
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
 		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file("test/data/keys/user1.private"));
