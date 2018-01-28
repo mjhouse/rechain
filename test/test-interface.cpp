@@ -26,6 +26,29 @@ inline void move( std::string in, std::string out ){
 
 SCENARIO( "use interface", "[interface]" ){
 
+    GIVEN( "a test environment without variables" ){
+    
+        WHEN( "any operation is performed" ){
+            char* argv[] = {
+                (char*)"./bin/rechain",
+                (char*)"--private_key",
+                (char*)"test/data/keys/user1.private",
+                (char*)"--public_key",
+                (char*)"test/data/keys/user1.public",
+                (char*)"--silent"
+            };
+            int argc = 6;
+
+            Interface i(argc,argv);
+            int result = i.execute();
+
+            THEN( "interface fails to run" ){
+                REQUIRE_FALSE( result == 0 );    
+            }
+        }
+    
+    }
+
 	GIVEN( "a test environment with variables set" ){
 
 		// set RECHAIN_HOME
@@ -39,7 +62,7 @@ SCENARIO( "use interface", "[interface]" ){
         std::string priv_gold = dump("test/data/files/keys/user1.private");
         std::string publ_gold = dump("test/data/files/keys/user1.public");
        
-		WHEN( "interface is used for help message" ){
+		WHEN( "interface is called with --help argument" ){
 
             // redirect cout to capture help message
             std::streambuf* buf = std::cout.rdbuf();
@@ -67,6 +90,48 @@ SCENARIO( "use interface", "[interface]" ){
 			}
 		}
 
+        WHEN( "interface is called with --version argument" ){
+
+            // redirect cout to avoid printing version
+            std::streambuf* buf = std::cout.rdbuf();
+            std::ostringstream buffer;
+            std::cout.rdbuf( buffer.rdbuf() );
+			
+            char* argv[] = {
+                (char*)"./bin/rechain",
+                (char*)"--version",
+                (char*)"--silent"
+            };
+			int argc = 3;
+
+			THEN("interface prints version information"){
+				Interface interface(argc,argv);
+                int result = interface.execute();
+
+				REQUIRE(result == 0);
+                REQUIRE_FALSE(buffer.str().empty());
+
+                // Set cout back to original buf
+                std::cout.rdbuf( buf );
+			}
+        }
+
+        WHEN( "interface is called with bad commandline arguments" ){
+			char* argv[] = {
+                (char*)"./bin/rechain",
+                (char*)"--BADARG",
+                (char*)"--silent"
+            };
+			int argc = 3;
+
+			THEN("interface fails to run"){
+				Interface interface(argc,argv);
+                int result = interface.execute();
+
+				REQUIRE_FALSE(result == 0);
+			}
+        }
+
 		WHEN( "interface is used to load a new key pair" ){
 			THEN("interface copies keys to rechain home"){
                 char* argv[] = {
@@ -82,14 +147,50 @@ SCENARIO( "use interface", "[interface]" ){
                 std::string cur_priv = dump("test/data/tmp/current.private");
                 std::string cur_publ = dump("test/data/tmp/current.public");
 				
-                Interface i(argc,argv);
-				int result = i.execute();
+                Interface interface(argc,argv);
+				int result = interface.execute();
 
                 REQUIRE(result == 0);
                 REQUIRE(cur_priv == priv_gold);
                 REQUIRE(cur_publ == publ_gold);
 			}
 		}
+
+        WHEN( "interface is used to load a malformed key pair" ){
+            THEN( "bad public key fails to load" ){
+                char* argv[] = {
+                    (char*)"./bin/rechain",
+                    (char*)"--private_key",
+                    (char*)"test/data/keys/user1.private",
+                    (char*)"--public_key",
+                    (char*)"test/data/files/black/interface_key_public.black",
+                    (char*)"--silent"
+                };
+                int argc = 6;
+				
+                Interface interface(argc,argv);
+				int result = interface.execute();
+
+                REQUIRE_FALSE(result == 0);
+            }
+
+            THEN( "bad private key fails to load" ){
+                char* argv[] = {
+                    (char*)"./bin/rechain",
+                    (char*)"--private_key",
+                    (char*)"test/data/files/black/interface_key_private.black",
+                    (char*)"--public_key",
+                    (char*)"test/data/keys/user1.public",
+                    (char*)"--silent"
+                };
+                int argc = 6;
+				
+                Interface interface(argc,argv);
+				int result = interface.execute();
+
+                REQUIRE_FALSE(result == 0);
+            }
+        }
 
 		WHEN( "interface is used to publish a valid document" ){
 			THEN("document is published to blockchain"){

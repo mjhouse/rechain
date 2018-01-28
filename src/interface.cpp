@@ -201,7 +201,7 @@ int Interface::execute(){
 				} else {
 					private_key.reset(PrivateKey::load_file(priv));
 				}
-			} catch (const std::invalid_argument& e){
+			} catch (const CryptoPP::InvalidArgument& e){
 				rl::get().error(e.what());
 				return ERROR;
 			}
@@ -215,7 +215,7 @@ int Interface::execute(){
 				} else {
 						public_key.reset(PublicKey::load_file(publ));
 				}
-			} catch (const std::invalid_argument& e){
+			} catch (const CryptoPP::InvalidArgument& e){
 				rl::get().error(e.what());
 				return ERROR;
 			}
