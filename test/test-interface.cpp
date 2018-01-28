@@ -101,11 +101,13 @@ SCENARIO( "use interface", "[interface]" ){
                 };
                 int argc = 4;
 				
-                Interface i(argc,argv);
-				int result = i.execute();
+                Interface interface(argc,argv);
+				int result = interface.execute();
 
                 std::string gold = dump("test/data/files/gold/interface_publish.gold");
                 std::string grey = dump("test/data/files/tmp/rechain.blockchain");
+
+                std::cout << grey << std::endl;
 
                 // signatures are different every
                 // time, so we have to strip them out
@@ -165,8 +167,6 @@ SCENARIO( "use interface", "[interface]" ){
 
             move("test/data/files/black/blockchain_duplicate_reference.black",
                  "test/data/files/tmp/rechain.blockchain");
-
-            std::cout << "--------------------------" << std::endl;
 
 			THEN("blockchain is invalid"){
 				Interface interface(argc,argv);

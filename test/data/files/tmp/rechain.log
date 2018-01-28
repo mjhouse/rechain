@@ -1,0 +1,185 @@
+[Sat Jan 27 20:44:59 2018]: Warning: Blockchain failed to load: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain saved: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Info: Signing and adding 'test/data/files/general/test_publish.txt' to blockchain
+[Sat Jan 27 20:44:59 2018]: Info: Signing and adding 'test/data/files/general/test_publish.txt' to blockchain
+[Sat Jan 27 20:44:59 2018]: Info: Signing and adding 'test/data/files/general/test_publish.txt' to blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain saved: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain saved: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain saved: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Info: Signing and adding 'test/data/files/general/test_publish.txt' to blockchain
+[Sat Jan 27 20:44:59 2018]: Info: Signing and adding 'test/data/files/general/test_publish.txt' to blockchain
+[Sat Jan 27 20:44:59 2018]: Info: Signing and adding 'test/data/files/general/test_publish.txt' to blockchain
+[Sat Jan 27 20:44:59 2018]: Info: Signing and adding 'test/data/files/general/test_publish.txt' to blockchain
+[Sat Jan 27 20:44:59 2018]: Error: Publication already exists
+[Sat Jan 27 20:44:59 2018]: Error: Publication already exists
+[Sat Jan 27 20:44:59 2018]: Error: Publication already exists
+[Sat Jan 27 20:44:59 2018]: Error: Publication already exists
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is GOOD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is GOOD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is GOOD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is GOOD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is GOOD
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Debug: Blockchain loaded: test/data/files/tmp/rechain.blockchain
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is BAD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is BAD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is BAD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is BAD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is BAD
+[Sat Jan 27 20:44:59 2018]: Error: Blockchain is BAD
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to load: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to load: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to load: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to load: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to load: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to load: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain saved: test/data/files/general/tmp.blockchain
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain saved: test/data/files/general/tmp.blockchain
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain saved: test/data/files/general/tmp.blockchain
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain saved: test/data/files/general/tmp.blockchain
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain saved: test/data/files/general/tmp.blockchain
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain saved: test/data/files/general/tmp.blockchain
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to save: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to save: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to save: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to save: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to save: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Warning: Blockchain failed to save: test/data/files/NOEXIST/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:06 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:12 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:14 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:14 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:14 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:14 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:14 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:14 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:17 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:17 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:17 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:17 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:17 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:17 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:20 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:20 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:20 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:20 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:20 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:20 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:24 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:24 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:24 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:24 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:24 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
+[Sat Jan 27 20:45:24 2018]: Debug: Blockchain loaded: test/data/files/gold/blockchain_general.gold
