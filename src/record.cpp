@@ -26,6 +26,7 @@
 #include <string>
 #include <sstream>
 
+typedef Logger rl;
 
 Record::Record(){}
 
@@ -89,8 +90,13 @@ bool Record::valid(){
 		if(_reference.empty()) return false;
 		if(_block.empty() && type() != DataType::Publication) return false;
 
-		std::shared_ptr<PublicKey> key(PublicKey::load_string(_public_key));
-		return key->verify( *this );
+        try {
+		    std::shared_ptr<PublicKey> key(PublicKey::load_string(_public_key));
+		    return key->verify( *this );
+        } catch (const CryptoPP::InvalidArgument& e){
+            rl::get().error(e.what());
+            return false;
+        }
 	}
 
 	return false;

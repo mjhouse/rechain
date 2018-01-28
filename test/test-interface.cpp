@@ -296,7 +296,7 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
 			}
 		}
 
-		WHEN( "interface is used to mine a block" ){
+		WHEN( "interface is used to mine a valid block" ){
             char* argv[] = {
                 (char*)"./bin/rechain",
                 (char*)"--mine",
@@ -313,6 +313,24 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
                 REQUIRE(result == 0);
 			}
 		}
+
+        WHEN( "interface is used to mine an invalid block" ){
+            char* argv[] = {
+                (char*)"./bin/rechain",
+                (char*)"--mine",
+                (char*)"--silent"
+            };
+            int argc = 3;
+
+            move("test/data/files/black/interface_mine.black",
+                 "test/data/files/tmp/rechain.blockchain");
+
+			THEN("interface fails to mine a block"){
+				Interface interface(argc,argv);
+                int result = interface.execute();
+                REQUIRE_FALSE(result == 0);
+			}
+        }
 
 		WHEN( "interface is used to sign a published record" ){
 			THEN(""){
