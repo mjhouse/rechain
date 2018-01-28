@@ -166,6 +166,8 @@ SCENARIO( "use interface", "[interface]" ){
             move("test/data/files/black/blockchain_duplicate_reference.black",
                  "test/data/files/tmp/rechain.blockchain");
 
+            std::cout << "--------------------------" << std::endl;
+
 			THEN("blockchain is invalid"){
 				Interface interface(argc,argv);
                 int result = interface.execute();
