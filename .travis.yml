@@ -21,10 +21,18 @@ compiler:
       - g++-5
 
 before_install:
-      - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cryptopp; fi 
-      - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rm '/usr/local/include/c++'; fi
-      - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc5; fi 
-      - pip install --user cpp-coveralls
+      - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 
+            brew install cryptopp; 
+            rm '/usr/local/include/c++';
+            brew install gcc5;
+            brew install pyenv
+            eval "$(pyenv init -)"
+            pyenv install 3.5.2
+            pyenv rehash
+            pip install cpp-coveralls
+            pyenv rehash
+      - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+            pip install --user cpp-coveralls
       - eval "CXX=g++-5"
 
 script:
