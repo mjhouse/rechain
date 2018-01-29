@@ -16,14 +16,12 @@ addons:
 
 before_install:
       - pip install --user cpp-coveralls
+      - eval "CXX=g++-5"
 
 script:
       - source configure.sh
       - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test
       - make && ./test/rechain
-
-before_install:
-      - eval "CXX=g++-5"
 
 after_success:
       - coveralls --basePath "CMakeFiles/rechain.dir/src" --gcov-options '\-lp'
