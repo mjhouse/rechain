@@ -26,4 +26,4 @@ before_install:
       - eval "CXX=g++-5"
 
 after_success:
-      - coveralls --exclude data --exclude inc/dependencies --exclude test --gcov-options '\-lp'
+      - coveralls --basePath "CMakeFiles/rechain.dir/src" --gcov-options '\-lp'
