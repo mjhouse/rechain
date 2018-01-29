@@ -24,4 +24,4 @@ script:
       - make && ./test/rechain
 
 after_success:
-      - coveralls --basePath "build/CMakeFiles/rechain.dir/src" --gcov-options '\-lp'
+      - coveralls --include "build/CMakeFiles/rechain.dir/src/" --gcov-options '\-lp'
