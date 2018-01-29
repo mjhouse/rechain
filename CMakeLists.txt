@@ -40,21 +40,29 @@ elseif(CMAKE_BUILD_TYPE MATCHES Release)
 
 elseif(CMAKE_BUILD_TYPE MATCHES Test)
     file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/test")
-    
-    set(TEST_FILES "${CMAKE_SOURCE_DIR}/test/data")
+  
+    # set TEST_ROOT and clean the 'tmp' directory
+    set(TEST_ROOT "${CMAKE_SOURCE_DIR}/test/data")
+    file(REMOVE "${TEST_ROOT}/files/tmp/*")
 
     # find the source files with wildcards
     file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/*.cpp" "${CMAKE_SOURCE_DIR}/test/*.cpp")
     list(REMOVE_ITEM SOURCES "${PROJECT_SOURCE_DIR}/main.cpp")
 
-    # set flags for compilation and linking
-    set(CXX_VARIABLES "-DTEST_FILES=${TEST_FILES}")
-    set(CXX_FLAGS  "-std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_VARIABLES} ${CXX_FLAGS}")
+    # set the TEST_ROOT so that the tests can find files
+    add_definitions( "-DTEST_ROOT=\"${TEST_ROOT}\"" )
 
+    # set flags for compilation and linking
+    set(CXX_FLAGS  "-std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS}")
+
+    # output the binary to the test directory
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/test")
 
 endif()
 
 add_executable(rechain ${SOURCES})
+
+# link dependencies
 target_link_libraries(rechain -lcrypto++)
+

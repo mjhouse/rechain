@@ -6,23 +6,10 @@
 #include <string>
 #include <fstream>
 
-inline std::string dump( std::string path ){
-    std::string content;
-    std::ifstream ifs(path);
-    if(ifs.is_open()){
-        content = [&ifs]{
-            std::ostringstream ss{};
-            ss << ifs.rdbuf();
-            return ss.str();}();
-    }
-    return content;
-}
-
-inline void move( std::string in, std::string out ){
-    std::ifstream src(in, std::ios::binary);
-    std::ofstream dst(out, std::ios::binary);
-    dst << src.rdbuf();
-}
+extern inline std::string dump_file( std::string path );
+extern inline void copy_file( std::string in, std::string out );
+extern inline std::string get_path( std::string partial );
+extern inline char* get_path_char( std::string partial );
 
 SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
 
@@ -33,9 +20,9 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             char* argv[] = {
                 (char*)"./bin/rechain",
                 (char*)"--private_key",
-                (char*)"test/data/keys/user1.private",
+                get_path_char("keys/user1.private"),
                 (char*)"--public_key",
-                (char*)"test/data/keys/user1.public",
+                get_path_char("keys/user1.public"),
                 (char*)"--silent"
             };
             int argc = 6;
@@ -57,15 +44,16 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
 	GIVEN( "a test environment with variables set" ){
 
 		// set RECHAIN_HOME
-		putenv((char*)"RECHAIN_HOME=test/data/files/tmp");
+        std::string home_path = "RECHAIN_HOME=" + get_path("files/tmp");
+        putenv((char*)home_path.c_str());
 
 		// create current keys
-		move("test/data/keys/rsa.public","test/data/files/tmp/current.public");
-		move("test/data/keys/rsa.private","test/data/files/tmp/current.private");
+		copy_file(get_path("keys/rsa.public"),get_path("files/tmp/current.public"));
+		copy_file(get_path("keys/rsa.private"),get_path("files/tmp/current.private"));
 
         // get the key files as strings
-        std::string priv_gold = dump("test/data/files/keys/user1.private");
-        std::string publ_gold = dump("test/data/files/keys/user1.public");
+        std::string priv_gold = dump_file(get_path("keys/user1.private"));
+        std::string publ_gold = dump_file(get_path("keys/user1.public"));
        
 		WHEN( "interface is called with --help argument" ){
 
@@ -81,7 +69,7 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             };
 			int argc = 3;
 
-            std::string help_gold = dump("test/data/files/gold/interface_help.gold");
+            std::string help_gold = dump_file(get_path("files/gold/interface_help.gold"));
 
 			THEN("interface prints help message"){
 				Interface i(argc,argv);
@@ -142,18 +130,18 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
                 char* argv[] = {
                     (char*)"./bin/rechain",
                     (char*)"--private_key",
-                    (char*)"test/data/keys/user1.private",
+                    get_path_char("keys/user1.private"),
                     (char*)"--public_key",
-                    (char*)"test/data/keys/user1.public",
+                    get_path_char("keys/user1.public"),
                     (char*)"--silent"
                 };
                 int argc = 6;
 
-                std::string cur_priv = dump("test/data/tmp/current.private");
-                std::string cur_publ = dump("test/data/tmp/current.public");
-				
                 Interface interface(argc,argv);
 				int result = interface.execute();
+
+                std::string cur_priv = dump_file(get_path("files/tmp/current.private"));
+                std::string cur_publ = dump_file(get_path("files/tmp/current.public"));
 
                 REQUIRE(result == 0);
                 REQUIRE(cur_priv == priv_gold);
@@ -166,9 +154,9 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
                 char* argv[] = {
                     (char*)"./bin/rechain",
                     (char*)"--private_key",
-                    (char*)"test/data/keys/user1.private",
+                    get_path_char("keys/user1.private"),
                     (char*)"--public_key",
-                    (char*)"test/data/files/black/interface_key_public.black",
+                    get_path_char("files/black/interface_key_public.black"),
                     (char*)"--silent"
                 };
                 int argc = 6;
@@ -183,13 +171,13 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
                 char* argv[] = {
                     (char*)"./bin/rechain",
                     (char*)"--private_key",
-                    (char*)"test/data/files/black/interface_key_private.black",
+                    get_path_char("files/black/interface_key_private.black"),
                     (char*)"--public_key",
-                    (char*)"test/data/keys/user1.public",
+                    get_path_char("keys/user1.public"),
                     (char*)"--silent"
                 };
                 int argc = 6;
-				
+			
                 Interface interface(argc,argv);
 				int result = interface.execute();
 
@@ -202,16 +190,18 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
                 char* argv[] = {
                     (char*)"./bin/rechain",
                     (char*)"--publish",
-                    (char*)"test/data/files/general/test_publish.txt",
+                    get_path_char("files/general/test_publish.txt"),
                     (char*)"--silent"
                 };
                 int argc = 4;
-				
+			
+                std::remove(get_path_char("files/tmp/rechain.blockchain"));
+
                 Interface interface(argc,argv);
 				int result = interface.execute();
 
-                std::string gold = dump("test/data/files/gold/interface_publish.gold");
-                std::string grey = dump("test/data/files/tmp/rechain.blockchain");
+                std::string gold = dump_file(get_path("files/gold/interface_publish.gold"));
+                std::string grey = dump_file(get_path("files/tmp/rechain.blockchain"));
 
                 // signatures are different every
                 // time, so we have to strip them out
@@ -228,7 +218,7 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
                 char* argv[] = {
                     (char*)"./bin/rechain",
                     (char*)"--publish",
-                    (char*)"test/data/files/NOEXIST/test_publish.txt",
+                    get_path_char("files/NOEXIST/test_publish.txt"),
                     (char*)"--silent"
                 };
                 int argc = 4;
@@ -245,14 +235,14 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
                 char* argv[] = {
                     (char*)"./bin/rechain",
                     (char*)"--publish",
-                    (char*)"test/data/files/general/test_publish.txt",
+                    get_path_char("files/general/test_publish.txt"),
                     (char*)"--silent"
                 };
                 int argc = 4;
 			
                 // overwrite the blockchain with one that already has this file published in it
-                move("test/data/files/gold/interface_already_published.gold",
-                     "test/data/files/tmp/rechain.blockchain");
+                copy_file(get_path("files/gold/interface_already_published.gold"),
+                     get_path("files/tmp/rechain.blockchain"));
 
                 Interface interface(argc,argv);
 				int result = interface.execute();
@@ -268,8 +258,8 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             };
             int argc = 2;
 
-            move("test/data/files/gold/blockchain_general.gold",
-                 "test/data/files/tmp/rechain.blockchain");
+            copy_file(get_path("files/gold/blockchain_general.gold"),
+                 get_path("files/tmp/rechain.blockchain"));
 
 			THEN("blockchain is valid"){
 				Interface interface(argc,argv);
@@ -286,8 +276,8 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             };
             int argc = 3;
 
-            move("test/data/files/black/blockchain_duplicate_reference.black",
-                 "test/data/files/tmp/rechain.blockchain");
+            copy_file(get_path("files/black/blockchain_duplicate_reference.black"),
+                 get_path("files/tmp/rechain.blockchain"));
 
 			THEN("blockchain is invalid"){
 				Interface interface(argc,argv);
@@ -304,8 +294,8 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             };
             int argc = 3;
 
-            move("test/data/files/gold/interface_mine.gold",
-                 "test/data/files/tmp/rechain.blockchain");
+            copy_file(get_path("files/gold/interface_mine.gold"),
+                 get_path("files/tmp/rechain.blockchain"));
 
 			THEN("interface mines a block"){
 				Interface interface(argc,argv);
@@ -322,8 +312,8 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             };
             int argc = 3;
 
-            move("test/data/files/black/interface_mine.black",
-                 "test/data/files/tmp/rechain.blockchain");
+            copy_file(get_path("files/black/interface_mine.black"),
+                 get_path("files/tmp/rechain.blockchain"));
 
 			THEN("interface fails to mine a block"){
 				Interface interface(argc,argv);
@@ -348,8 +338,8 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             };
             int argc_m = 3;
 
-            move("test/data/files/gold/interface_pre_sign.gold",
-                 "test/data/files/tmp/rechain.blockchain");
+            copy_file(get_path("files/gold/interface_pre_sign.gold"),
+                 get_path("files/tmp/rechain.blockchain"));
 
 			THEN("interface signs the provided record reference"){
 				Interface interface_s(argc_s,argv_s);
@@ -373,8 +363,8 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             };
             int argc_s = 4;
 
-            move("test/data/files/gold/interface_pre_sign.gold",
-                 "test/data/files/tmp/rechain.blockchain");
+            copy_file(get_path("files/gold/interface_pre_sign.gold"),
+                 get_path("files/tmp/rechain.blockchain"));
 
 			THEN("interface fails to sign the provided record reference"){
 				Interface interface_s(argc_s,argv_s);
@@ -396,10 +386,10 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             };
 			int argc = 2;
 
-            std::string list_gold = dump("test/data/files/gold/interface_list.gold");
+            std::string list_gold = dump_file(get_path("files/gold/interface_list.gold"));
 
-            move("test/data/files/gold/interface_list_blockchain.gold",
-                 "test/data/files/tmp/rechain.blockchain");
+            copy_file(get_path("files/gold/interface_list_blockchain.gold"),
+                 get_path("files/tmp/rechain.blockchain"));
 
 			THEN("interface prints blockchain information"){
 				Interface interface(argc,argv);

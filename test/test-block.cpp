@@ -5,16 +5,9 @@
 #include "record.hpp"
 #include "keys.hpp"
 
-std::string gen_random() {
-	std::string result;
-	const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+extern inline std::string generate_hash();
+extern inline std::string get_path( std::string partial );
 
-	for (int i = 0; i < 50; ++i) {
-		result.append(&(alphanum[rand() % (sizeof(alphanum) - 1)]));
-	}
-
-	return result;
-}
 SCENARIO( "block can be mined and generate a valid hash", "[block-mining]" ){
 
 	const int NUM_RECORDS = 10;
@@ -23,12 +16,12 @@ SCENARIO( "block can be mined and generate a valid hash", "[block-mining]" ){
 
 		Block block;
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
-		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/keys/test.public"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
+		std::shared_ptr<PublicKey> public_key(PublicKey::load_file(get_path("/keys/test.public")));
 
 		std::vector<std::string> sigs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){
-			Record r(gen_random());
+			Record r(generate_hash());
 			private_key->sign(r);
 			sigs.push_back(r.signature());
 			block.add(r);
@@ -62,13 +55,13 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 
 		Block block;
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
-		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/keys/test.public"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
+		std::shared_ptr<PublicKey> public_key(PublicKey::load_file(get_path("keys/test.public")));
 
 		std::vector<std::string> sigs;
 		std::vector<std::string> refs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){
-			Record r(gen_random());
+			Record r(generate_hash());
 			private_key->sign(r);
 			sigs.push_back(r.signature());
 			refs.push_back(r.reference());
@@ -86,7 +79,7 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 		WHEN( "block is assigned" ){
 			Block b;
 			for(unsigned int i = 0; i < (NUM_RECORDS/2); ++i){
-				Record r(gen_random());
+				Record r(generate_hash());
 				private_key->sign(r);
 				b.add(r);
 			}
@@ -135,7 +128,7 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 			Block a = block;
 			Block b;
 
-			std::string tmp_path = "test/data/files/general/tmp.block";
+			std::string tmp_path = get_path("files/general/tmp.block");
 
 			std::ofstream ofs(tmp_path);
 			if(ofs.is_open()){
@@ -168,18 +161,18 @@ SCENARIO( "block can add valid and reject invalid records", "[block-adding]" ){
 
 		Block block;
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
-		std::shared_ptr<PublicKey> public_key(PublicKey::load_file("test/data/keys/test.public"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
+		std::shared_ptr<PublicKey> public_key(PublicKey::load_file(get_path("keys/test.public")));
 
 		std::vector<std::string> sigs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){
-			Record r(gen_random());
+			Record r(generate_hash());
 			private_key->sign(r);
 			sigs.push_back(r.signature());
 			block.add(r);
 		}
 		WHEN( "valid blocks are added" ){
-			Record r(gen_random());
+			Record r(generate_hash());
 			private_key->sign(r);
 
 			THEN( "they are accepted" ){
@@ -191,7 +184,7 @@ SCENARIO( "block can add valid and reject invalid records", "[block-adding]" ){
 		
 		WHEN( "invalid blocks are added" ){
 			Record a("");		// invalid because no reference
-			Record b(gen_random()); // invalid because not signed
+			Record b(generate_hash()); // invalid because not signed
 
 			private_key->sign(a);
 

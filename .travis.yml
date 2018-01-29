@@ -1,7 +1,7 @@
 language: cpp
 dist: trusty
 sudo: false
-compiler: gcc
+compiler: cmake
 
 git:
   lfs_skip_smudge: true
@@ -12,14 +12,15 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - libcrypto++-dev
-      - g++-5
 
 before_install:
       - pip install --user cpp-coveralls
 
 script:
       - source configure.sh
-      - make test
+      - mkdir build && cd build
+      - cmake .. -DCMAKE_BUILD_TYPE=Test
+      - make && ./test/rechain
 
 after_success:
       - coveralls --exclude data --exclude inc/dependencies --exclude test --gcov-options '\-lp'

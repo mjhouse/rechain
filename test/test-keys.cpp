@@ -2,27 +2,21 @@
 #include "record.hpp"
 #include "keys.hpp"
 
-#define DUMP_FILE(X) (std::string( std::istreambuf_iterator<char>(X),std::istreambuf_iterator<char>()))
-
-extern std::string gen_random();
+extern inline std::string generate_hash();
+extern inline std::string dump_file( std::string path );
+extern inline std::string get_path( std::string partial );
 
 SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 
 	GIVEN( "paths to public and private keys" ){
 
-		std::string public_path = "test/data/keys/test.public";
-		std::string private_path = "test/data/keys/test.private";
+		std::string public_path = get_path("keys/test.public");
+		std::string private_path = get_path("keys/test.private");
 
-		std::string public_str;
-		std::string private_str;
+		std::string public_str = dump_file(public_path);
+		std::string private_str = dump_file(private_path);
 
-		std::ifstream pub(public_path);
-		std::ifstream pri(private_path);
 
-		if(pub.is_open() && pri.is_open()){
-			public_str = DUMP_FILE(pub); 
-			private_str = DUMP_FILE(pri); 
-		}
 
 		WHEN( "keys are loaded from file" ){
 			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(private_path));
@@ -63,8 +57,8 @@ SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 
 		WHEN( "keys loaded from a file that doesn't contain a key" ){
 			THEN( "throws a decode error" ){
-				REQUIRE_THROWS(PublicKey::load_file("test/test-keys.cpp"));
-				REQUIRE_THROWS(PrivateKey::load_file("test/test-keys.cpp"));
+				REQUIRE_THROWS(PublicKey::load_file(get_path("files/general/dummy.txt")));
+				REQUIRE_THROWS(PrivateKey::load_file(get_path("files/general/dummy.txt")));
 			}
 		}
 
@@ -79,21 +73,15 @@ SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_string(private_str));
 			std::shared_ptr<PublicKey> public_key(PublicKey::load_string(public_str));
 	
-			std::string tmp_priv = "test/data/keys/tmp_key.private";
-			std::string tmp_publ = "test/data/keys/tmp_key.public";
+			std::string tmp_priv = get_path("keys/tmp_key.private");
+			std::string tmp_publ = get_path("keys/tmp_key.public");
 
 			private_key->save(tmp_priv);
 			public_key->save(tmp_publ);
 
 			THEN( "files contain the hex keys" ){
-				std::ifstream priv(tmp_priv);
-				std::ifstream publ(tmp_publ);
-				
-				REQUIRE(priv.is_open());
-				REQUIRE(publ.is_open());
-			
-				std::string publ_str = DUMP_FILE(publ); 
-				std::string priv_str = DUMP_FILE(priv); 
+				std::string publ_str = dump_file(tmp_publ); 
+				std::string priv_str = dump_file(tmp_priv); 
 
 				REQUIRE(priv_str == private_str);
 				REQUIRE(publ_str == public_str);
@@ -108,8 +96,8 @@ SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 			std::shared_ptr<PublicKey> public_key(PublicKey::load_string(public_str));
 	
 			THEN( "they return false" ){
-				REQUIRE_FALSE(private_key->save("test/data/NOEXIST/test"));
-				REQUIRE_FALSE(public_key->save("test/data/NOEXIST/test"));
+				REQUIRE_FALSE(private_key->save(get_path("NOEXIST/test")));
+				REQUIRE_FALSE(public_key->save(get_path("NOEXIST/test")));
 			}
 		}
 
@@ -120,10 +108,10 @@ SCENARIO( "keys can generated and used to sign/verify", "[keys-work]" ){
 
 	GIVEN( "a pair of valid keys and a valid and invalid record" ){
 
-		std::string public_path = "test/data/keys/test.public";
-		std::string private_path = "test/data/keys/test.private";
+		std::string public_path = get_path("keys/test.public");
+		std::string private_path = get_path("keys/test.private");
 
-		Record good_record(gen_random());
+		Record good_record(generate_hash());
 		Record bad_record("");
 
 

@@ -11,16 +11,16 @@
 
 #include <string>
 
-#define DUMP_FILE(X) (std::string( std::istreambuf_iterator<char>(X),std::istreambuf_iterator<char>()))
-
-extern std::string gen_random();
+extern inline std::string generate_hash();
+extern inline std::string get_path( std::string partial );
+extern inline std::string dump_file( std::string path );
 
 SCENARIO( "records created with different initial values", "[record-create]" ){
 
 	GIVEN( "a reference and block hash" ){
 
-		std::string reference = gen_random();
-		std::string block = gen_random();
+		std::string reference = generate_hash();
+		std::string block = generate_hash();
 
 		WHEN( "record is created with only a reference" ){
 			Record r(reference);
@@ -44,14 +44,13 @@ SCENARIO( "records created with different initial values", "[record-create]" ){
 		}
 
 		WHEN( "record is created with file iostream" ){
-			std::string tmp_path = "test/data/files/general/dummy.txt";
+			std::string tmp_path = get_path("files/general/dummy.txt");
 			std::ifstream ifs(tmp_path);
 			Record r(ifs);
 
 			CryptoPP::SHA256 hasher;
 	
-			std::ifstream mfs(tmp_path);
-			std::string data = DUMP_FILE(mfs);
+			std::string data = dump_file(tmp_path);
 			std::string hash;
 
 			CryptoPP::StringSource ss(data,true,
@@ -72,15 +71,15 @@ SCENARIO( "records created with different initial values", "[record-create]" ){
 SCENARIO( "record methods are used to set and retrieve values", "[record-access]" ){
 
 	GIVEN( "a publication and signature record" ){
-		std::string reference = gen_random();
-		std::string block = gen_random();
+		std::string reference = generate_hash();
+		std::string block = generate_hash();
 
 		Record publication(reference);
 		Record signature(reference,block);
 	
 
 		WHEN( "records are signed" ){
-			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
+			std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
 			private_key->sign(publication);
 
 			THEN( "signed records are valid, unsigned are not" ){
@@ -132,12 +131,12 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 
 	GIVEN( "a valid record" ){
 		
-		std::string reference = gen_random();
-		std::string block = gen_random();
+		std::string reference = generate_hash();
+		std::string block = generate_hash();
 
 		Record record(reference,block);
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
 		private_key->sign(record);
 
 		WHEN( "record is converted to a string" ){
@@ -156,7 +155,7 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 
 		WHEN( "record is serialized to a file" ){
 			Record empty;
-			std::string tmp_path = "test/data/files/general/tmp.record";
+			std::string tmp_path = get_path("files/general/tmp.record");
 			std::ofstream ofs(tmp_path);
 			if(ofs.is_open()){
 				cereal::JSONOutputArchive archive(ofs);

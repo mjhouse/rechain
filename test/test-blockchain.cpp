@@ -7,18 +7,18 @@
 
 #include <string>
 
-#define DUMP_FILE(X) (std::string( std::istreambuf_iterator<char>(X),std::istreambuf_iterator<char>()))
 #define NUM_RECORDS 10
 #define NUM_BLOCKS  4
 
-extern std::string gen_random();
+extern inline std::string generate_hash();
+extern inline std::string get_path( std::string partial );
 
 SCENARIO( "blockchain is loaded or saved", "[blockchain][blockchain-serial]" ){
 
 
 		BlockChain blockchain;
-		std::string good_path = "test/data/files/gold/blockchain_general.gold";
-		std::string bad_path  = "test/data/files/NOEXIST/blockchain_general.gold";
+		std::string good_path = get_path("files/gold/blockchain_general.gold");
+		std::string bad_path  = get_path("files/NOEXIST/blockchain_general.gold");
 
 		WHEN( "blockchain is loaded from valid file path" ){
 	
@@ -37,7 +37,7 @@ SCENARIO( "blockchain is loaded or saved", "[blockchain][blockchain-serial]" ){
 		}
 
 		WHEN( "blockchain is saved to valid file path" ){
-			std::string good_save = "test/data/files/general/tmp.blockchain";
+			std::string good_save = get_path("files/general/tmp.blockchain");
 
 			blockchain.load(good_path);
 			blockchain.save(good_save);
@@ -63,9 +63,9 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 	GIVEN( "a valid blockchain" ){
 
 		BlockChain blockchain;
-		blockchain.load("test/data/files/gold/blockchain_general.gold");
+		blockchain.load(get_path("files/gold/blockchain_general.gold"));
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
 
 		std::vector<std::string> signatures;
 		std::vector<std::string> hashes;
@@ -81,7 +81,7 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 			size_t orig_size = blockchain.size();
 
 			for(unsigned int i = 0; i < 10; ++i){
-				Record r(gen_random());
+				Record r(generate_hash());
 				private_key->sign(r);
 
 				signatures.push_back(r.signature());
@@ -138,9 +138,9 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 	GIVEN( "a valid blockchain" ){
 
 		BlockChain blockchain;
-		blockchain.load("test/data/files/gold/blockchain_general.gold");
+		blockchain.load(get_path("files/gold/blockchain_general.gold"));
 		
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
 		
 		std::vector<std::string> signatures;
 		std::vector<std::string> references;
@@ -197,7 +197,7 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 
 		WHEN( "blockchain is searched for hash" ){
 			auto good = blockchain.find(hashes[NUM_BLOCKS/2]);
-			auto bad  = blockchain.find(gen_random());
+			auto bad  = blockchain.find(generate_hash());
 
 			THEN( "if block exists, blockchain returns iterator point to block" ){
 				Block& b = *good;
@@ -218,7 +218,7 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 			}
 
 			THEN( "returns false if hash doesn't exist" ){
-				REQUIRE_FALSE(blockchain.contains(gen_random()));
+				REQUIRE_FALSE(blockchain.contains(generate_hash()));
 			}
 		}
 
@@ -230,7 +230,7 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 			}
 
 			THEN( "returns false if reference doesn't exist" ){
-				REQUIRE_FALSE(blockchain.contains(gen_random()));
+				REQUIRE_FALSE(blockchain.contains(generate_hash()));
 			}
 		}
 	}
@@ -241,10 +241,10 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 	GIVEN( "a valid blockchain" ){
 
 		BlockChain blockchain;
-		blockchain.load("test/data/files/gold/blockchain_general.gold");
+		blockchain.load(get_path("files/gold/blockchain_general.gold"));
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
-		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file("test/data/keys/user1.private"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
+		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file(get_path("keys/user1.private")));
 
 		WHEN( "blockchain loaded from gold file" ){
 			THEN( "blockchain is valid" ){
@@ -326,7 +326,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			Record& r = b[0];
 
 			// Alter a record in the block
-			r.reference(gen_random());
+			r.reference(generate_hash());
 			user1_key->sign(r);
 		
 			// Falsify the blockchain by re-mining each block after
@@ -352,10 +352,10 @@ SCENARIO( "blockchain is accessed for trust", "[blockchain][blockchain-trust]" )
 	GIVEN( "a valid blockchain" ){
 	
 		BlockChain blockchain;
-		std::string path = "test/data/files/gold/blockchain_general.gold";
+		std::string path = get_path("files/gold/blockchain_general.gold");
 
-		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file("test/data/keys/test.private"));
-		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file("test/data/keys/user1.private"));
+		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
+		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file(get_path("keys/user1.private")));
 
 		std::map<std::string,float> expected = {
             {"8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903",7.0f},
