@@ -25,12 +25,13 @@ before_install:
             brew install cryptopp; 
             rm '/usr/local/include/c++';
             brew install gcc5;
-            brew install pyenv
-            eval "$(pyenv init -)"
-            pyenv install 3.5.2
-            pyenv rehash
-            pip install cpp-coveralls
-            pyenv rehash
+            brew install pyenv;
+            eval "$(pyenv init -)";
+            pyenv install 3.5.2;
+            pyenv rehash;
+            pip install cpp-coveralls;
+            pyenv rehash;
+        fi
       - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
             pip install --user cpp-coveralls
       - eval "CXX=g++-5"
