@@ -1,10 +1,16 @@
 language: cpp
-dist: trusty
-sudo: false
-compiler: cmake
 
 git:
   lfs_skip_smudge: true
+
+matrix:
+      include:
+            - os: linux
+              dist: trusty
+              sudo: false
+            - os: osx
+
+compiler: g++-5
 
 addons:
   apt:
