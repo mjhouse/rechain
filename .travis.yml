@@ -25,7 +25,6 @@ before_install:
             brew install cryptopp; 
             rm '/usr/local/include/c++';
             brew install gcc5;
-            brew install pyenv;
             eval "$(pyenv init -)";
             pyenv install 3.5.2;
             pyenv rehash;
