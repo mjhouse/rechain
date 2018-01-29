@@ -24,4 +24,4 @@ script:
       - make && ./test/rechain
 
 after_success:
-      - coveralls --include "build/CMakeFiles/rechain.dir/src/" --gcov-options '\-lp'
+      - coveralls --root .. --exclude data --exclude inc/dependencies --exclude test --gcov-options '\-lp'
