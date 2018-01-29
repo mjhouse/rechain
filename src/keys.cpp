@@ -94,7 +94,7 @@ bool PublicKey::verify( Record& r ){
 
 	CryptoPP::StringSource ss2(signature + r.string(), true,
 				   new CryptoPP::SignatureVerificationFilter(verifier,
-					 new CryptoPP::ArraySink((byte*)&result, sizeof(result))));
+					 new CryptoPP::ArraySink((unsigned char*)&result, sizeof(result))));
 	return result;
 }
 
