@@ -21,8 +21,8 @@ compiler:
       - g++-5
 
 before_install:
-      - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi 
       - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cryptopp; fi 
+      - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rm '/usr/local/include/c++'; fi
       - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc5; fi 
       - pip install --user cpp-coveralls
       - eval "CXX=g++-5"
