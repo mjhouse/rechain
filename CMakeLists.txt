@@ -12,6 +12,16 @@ add_definitions(-DRECHAIN_VERSION="v0.1.0")
 # set the include directories
 include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/")
 
+#set(CMAKE_CXX_COMPILER      "g++-5")
+#set(CMAKE_CXX_FLAGS         "-std=c++11 -lpthread -lcrypto++")
+#set(CMAKE_CXX_FLAGS_DEBUG   "-Wall -Wextra -Wpedantic -g -ggdb")
+#set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
+
+set(RELEASE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/release")
+set(DEBUG_DIRECTORY   "${CMAKE_SOURCE_DIR}/build/debug")
+set(TEST_DIRECTORY    "${CMAKE_SOURCE_DIR}/build/test")
+
+# default to a debug build
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
@@ -36,7 +46,7 @@ elseif(CMAKE_BUILD_TYPE MATCHES Release)
     # set flags for compilation and linking
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNDEBUG -std=c++11 -lpthread -lcrypto++ -O3")
 
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/release")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${RELEASE_DIRECTORY})
 
 elseif(CMAKE_BUILD_TYPE MATCHES Test)
     file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/test")
@@ -59,7 +69,7 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
     endif()
 
     # set flags for compilation and linking
-    set(CXX_FLAGS  "-std=c++11 ${crypto} -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage")
+    set(CXX_FLAGS  "-std=c++11 ${crypto} -lpthread -g -fprofile-arcs -ftest-coverage")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS}")
 
     # output the binary to the test directory
