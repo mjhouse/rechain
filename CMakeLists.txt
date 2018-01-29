@@ -9,19 +9,21 @@ set(PROJECT_BINARY_DIR "${CMAKE_SOURCE_DIR}/bin")
 execute_process(COMMAND -E git describe --abbrev=0 --tags RESULT_VARIABLE REVERSION)
 add_definitions(-DRECHAIN_VERSION="v0.1.0")
 
+message($REVERSION)
+
 # set the include directories
 include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/")
 
-#set(CMAKE_CXX_COMPILER      "g++-5")
-#set(CMAKE_CXX_FLAGS         "-std=c++11 -lpthread -lcrypto++")
-#set(CMAKE_CXX_FLAGS_DEBUG   "-Wall -Wextra -Wpedantic -g -ggdb")
-#set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
+set(CMAKE_CXX_COMPILER      "g++-5")
+set(CMAKE_CXX_FLAGS         "-std=c++11 -lpthread -lcrypto++")
+set(CMAKE_CXX_FLAGS_DEBUG   "-Wall -Wextra -Wpedantic -g -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
+set(CMAKE_CXX_FLAGS_TEST    "-g -fprofile-arcs -ftest-coverage")
 
 set(RELEASE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/release")
 set(DEBUG_DIRECTORY   "${CMAKE_SOURCE_DIR}/build/debug")
 set(TEST_DIRECTORY    "${CMAKE_SOURCE_DIR}/build/test")
 
-# default to a debug build
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
@@ -29,56 +31,36 @@ endif()
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/debug")
     
-    # find the source files with wildcards
     file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/*.cpp")
-
-    # set flags for compilation and linking
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lpthread -Wall -Wextra -Wpedantic -g -ggdb")
 
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/debug")
 
 elseif(CMAKE_BUILD_TYPE MATCHES Release)
     file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/release")
     
-    # find the source files with wildcards
     file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/*.cpp")
-
-    # set flags for compilation and linking
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNDEBUG -std=c++11 -lpthread -lcrypto++ -O3")
 
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${RELEASE_DIRECTORY})
 
 elseif(CMAKE_BUILD_TYPE MATCHES Test)
     file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/test")
   
-    # set TEST_ROOT and clean the 'tmp' directory
-    set(TEST_ROOT "${CMAKE_SOURCE_DIR}/test/data")
     file(REMOVE "${TEST_ROOT}/files/tmp/*")
 
-    # find the source files with wildcards
     file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/*.cpp" "${CMAKE_SOURCE_DIR}/test/*.cpp")
     list(REMOVE_ITEM SOURCES "${PROJECT_SOURCE_DIR}/main.cpp")
 
-    # set the TEST_ROOT so that the tests can find files
+    set(TEST_ROOT "${CMAKE_SOURCE_DIR}/test/data")
     add_definitions( "-DTEST_ROOT=\"${TEST_ROOT}\"" )
 
-    if(APPLE)
-        set(crypto "-lcryptopp")
-    else()
-        set(crypto "-lcrypto++")
-    endif()
-
-    # set flags for compilation and linking
-    set(CXX_FLAGS  "-std=c++11 ${crypto} -lpthread -g -fprofile-arcs -ftest-coverage")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS}")
-
-    # output the binary to the test directory
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/test")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${TEST_DIRECTORY}")
 
 endif()
 
 add_executable(rechain ${SOURCES})
 
-# link dependencies
-target_link_libraries(rechain -lcrypto++)
-
+if(APPLE)
+    target_link_libraries(rechain -lcryptopp)
+else()
+    target_link_libraries(rechain -lcrypto++)
+endif()
