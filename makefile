@@ -31,7 +31,7 @@ $(shell rm -f test/data/files/tmp/*)
 # ----------------------------------------------------------------------
 all: ./configure.sh
 
-debug: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -ggdb -lcrypto++
+debug: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -ggdb 
 debug: link-debug
 
 test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage 
