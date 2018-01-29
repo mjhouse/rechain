@@ -33,7 +33,8 @@ before_install:
             pyenv rehash;
         fi
       - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-            pip install --user cpp-coveralls
+            pip install --user cpp-coveralls;
+        fi
       - eval "CXX=g++-5"
 
 script:
