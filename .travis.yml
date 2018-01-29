@@ -24,4 +24,4 @@ script:
       - ./test/rechain
 
 after_success:
-      - coveralls --root .. --exclude data --exclude inc/dependencies -E *CMake* --exclude test --gcov-options '\-lp'
+      - coveralls --root .. --exclude data --exclude inc/dependencies -E .*CMake.* --exclude test --gcov-options '\-lp'
