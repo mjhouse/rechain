@@ -20,7 +20,7 @@ before_install:
 
 script:
       - source configure.sh
-      - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test && cmake --build
+      - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test && cmake --build .
       - ./test/rechain
 
 after_success:
