@@ -20,8 +20,8 @@ before_install:
 
 script:
       - source configure.sh
-      - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test
-      - make && ./test/rechain
+      - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test && cmake --build
+      - ./test/rechain
 
 after_success:
-      - coveralls --root .. --exclude data --exclude inc/dependencies --exclude test --gcov-options '\-lp'
+      - coveralls --root .. --exclude data --exclude inc/dependencies -E *CMake* --exclude test --gcov-options '\-lp'
