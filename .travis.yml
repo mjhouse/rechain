@@ -18,7 +18,8 @@ before_install:
 
 script:
       - source configure.sh
-      - mkdir build && cd build
+      - ls
+      - cd build
       - cmake .. -DCMAKE_BUILD_TYPE=Test
       - make && ./test/rechain
 
