@@ -59,7 +59,7 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
     endif()
 
     # set flags for compilation and linking
-    set(CXX_FLAGS  "-std=c++11 ${crypto} -Wno-deprecated-declarations -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage")
+    set(CXX_FLAGS  "-std=c++11 ${crypto} -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS}")
 
     # output the binary to the test directory
