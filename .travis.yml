@@ -16,7 +16,7 @@ matrix:
                     - libcrypto++-dev
                     - g++-5
             - os: osx
-
+              sudo: false
 compiler:
       - g++-5
 
