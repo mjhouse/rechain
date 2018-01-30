@@ -15,8 +15,8 @@ message($REVERSION)
 include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/")
 
 if(APPLE)
-    set(CMAKE_CXX_FLAGS "-std=gnu++11 -lpthread -Wno-deprecated -lc++ -stdlib=libc++ -DCRYPTOPP_DISABLE_ASM")
-else()
+    set(CMAKE_CXX_FLAGS "-std=gnu++11 -lpthread -Wno-deprecated -lc++ -DCRYPTOPP_DISABLE_ASM")
+elseif(UNIX)
     set(CMAKE_CXX_FLAGS "-std=c++11 -lpthread")
 endif()
 
