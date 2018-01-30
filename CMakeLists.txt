@@ -58,5 +58,6 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
 endif()
 
 add_executable(rechain ${SOURCES})
-target_link_libraries(rechain -lcryptopp)
-#target_link_libraries(rechain -lcrypto++)
+
+find_library(CRYPTOPP NAMES cryptopp crypto++)
+target_link_libraries(rechain "${CRYPTOPP}")
