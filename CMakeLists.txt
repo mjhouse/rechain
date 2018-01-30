@@ -24,6 +24,10 @@ set(RELEASE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/release")
 set(DEBUG_DIRECTORY   "${CMAKE_SOURCE_DIR}/build/debug")
 set(TEST_DIRECTORY    "${CMAKE_SOURCE_DIR}/build/test")
 
+if(APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+endif()
+
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
@@ -60,7 +64,4 @@ endif()
 add_executable(rechain ${SOURCES})
 
 find_library(CRYPTOPP NAMES cryptopp crypto++ libcrypto++)
-
-message("LIBRARY: ${CRYPTOPP}")
-
 target_link_libraries(rechain "${CRYPTOPP}")
