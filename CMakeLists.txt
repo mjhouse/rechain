@@ -14,11 +14,16 @@ message($REVERSION)
 # set the include directories
 include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/")
 
+if(APPLE)
+    set(CMAKE_CXX_FLAGS "-std=gnu++11 -lpthread -Wno-deprecated -lc++ -stdlib=libc++ -DCRYPTOPP_DISABLE_ASM")
+else()
+    set(CMAKE_CXX_FLAGS "-std=c++11 -lpthread")
+endif()
+
 set(CMAKE_CXX_COMPILER      "g++-5")
-set(CMAKE_CXX_FLAGS         "-std=c++11 -lpthread -Wno-deprecated -lc++ -lstdlib=libc++ -DCRYPTOPP_DISABLE_ASM")
 set(CMAKE_CXX_FLAGS_DEBUG   "-Wall -Wextra -Wpedantic -g -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
-set(CMAKE_CXX_FLAGS_TEST    "-g -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS_TEST    "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage")
 
 set(RELEASE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/release")
 set(DEBUG_DIRECTORY   "${CMAKE_SOURCE_DIR}/build/debug")

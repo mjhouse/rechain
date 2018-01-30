@@ -36,9 +36,14 @@ before_install:
         fi
 
 script:
-      - eval "CXX=g++-5"
+      - if [[ "#TRAVIS_OS_NAME" == "osx" ]]; then
+            eval "CXX=clang++"
+        else
+            eval "CXX=g++-5"
+        fi
       - source configure.sh
-      - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test && cmake --build .
+      - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test
+      - make
       - ./test/rechain
 
 after_success:
