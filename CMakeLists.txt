@@ -15,7 +15,7 @@ message($REVERSION)
 include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/")
 
 set(CMAKE_CXX_COMPILER      "g++-5")
-set(CMAKE_CXX_FLAGS         "-std=c++11 -lpthread")
+set(CMAKE_CXX_FLAGS         "-std=c++11 -lpthread -lstdlib=libstdc++ -DCRYPTOPP_DISABLE_ASM")
 set(CMAKE_CXX_FLAGS_DEBUG   "-Wall -Wextra -Wpedantic -g -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 set(CMAKE_CXX_FLAGS_TEST    "-g -fprofile-arcs -ftest-coverage")
@@ -60,12 +60,12 @@ endif()
 
 add_executable(rechain ${SOURCES})
 
-find_path(CRYPTO_ORNG PATHS "cryptopp/osrng.h")
+#find_path(CRYPTO_ORNG PATHS "cryptopp/osrng.h")
 
 find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
 
-message("CRYPTO_ORNG ${CRYPTO_ORNG}")
-message("CRYPTOPP: ${CRYPTOPP}")
+#message("CRYPTO_ORNG ${CRYPTO_ORNG}")
+#message("CRYPTOPP: ${CRYPTOPP}")
 
-add_library(CRYPTOPP STATIC IMPORTED)
+#add_library(CRYPTOPP STATIC IMPORTED)
 target_link_libraries(rechain "${CRYPTOPP}")
