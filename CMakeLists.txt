@@ -56,10 +56,16 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
 
 endif()
 
-set_source_files_properties(${SOURCES} PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations")
+#set_source_files_properties(${SOURCES} PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations")
 
 add_executable(rechain ${SOURCES})
 
+find_path(CRYPTO_ORNG PATHS "cryptopp/osrng.h")
+
 find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
+
+message("CRYPTO_ORNG ${CRYPTO_ORNG}")
+message("CRYPTOPP: ${CRYPTOPP}")
+
 add_library(CRYPTOPP STATIC IMPORTED)
 target_link_libraries(rechain "${CRYPTOPP}")
