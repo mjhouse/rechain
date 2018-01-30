@@ -25,7 +25,7 @@ set(DEBUG_DIRECTORY   "${CMAKE_SOURCE_DIR}/build/debug")
 set(TEST_DIRECTORY    "${CMAKE_SOURCE_DIR}/build/test")
 
 if(APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++")
 endif()
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -48,7 +48,6 @@ elseif(CMAKE_BUILD_TYPE MATCHES Release)
 
 elseif(CMAKE_BUILD_TYPE MATCHES Test)
     file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/test")
-  
     file(REMOVE "${TEST_ROOT}/files/tmp/*")
 
     file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/*.cpp" "${CMAKE_SOURCE_DIR}/test/*.cpp")
