@@ -17,6 +17,9 @@ matrix:
                     - g++-5
             - os: osx
 
+compiler:
+      - g++-5
+
 before_install:
       - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 
             brew install cryptopp; 
@@ -31,12 +34,9 @@ before_install:
       - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
             pip install --user cpp-coveralls;
         fi
-      - eval "CXX=g++-5"
-
-compiler:
-      - g++-5
 
 script:
+      - eval "CXX=g++-5"
       - source configure.sh
       - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test && cmake --build .
       - ./test/rechain
