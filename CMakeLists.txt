@@ -62,5 +62,5 @@ endif()
 
 add_executable(rechain ${SOURCES})
 
-find_library(CRYPTOPP NAMES cryptopp crypto++ libcrypto++)
+find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
 target_link_libraries(rechain "${CRYPTOPP}")
