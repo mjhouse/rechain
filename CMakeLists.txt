@@ -24,10 +24,6 @@ set(RELEASE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/release")
 set(DEBUG_DIRECTORY   "${CMAKE_SOURCE_DIR}/build/debug")
 set(TEST_DIRECTORY    "${CMAKE_SOURCE_DIR}/build/test")
 
-if(APPLE)
-    set(CLANG_CXX_LIBRARY "libc++")
-endif()
-
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
@@ -60,7 +56,10 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
 
 endif()
 
+set_source_files_properties(${SOURCES} PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations")
+
 add_executable(rechain ${SOURCES})
 
 find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
+add_library(CRYPTOPP STATIC IMPORTED)
 target_link_libraries(rechain "${CRYPTOPP}")
