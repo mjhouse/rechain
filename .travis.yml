@@ -43,4 +43,6 @@ script:
       - ./test/rechain
 
 after_success:
-      - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then coveralls --root .. --exclude data --exclude inc/dependencies -E ".*CMake.*" --exclude test --gcov-options '\-lp'; fi
+      - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
+            coveralls --root .. --exclude data --exclude inc/dependencies -E ".*CMake.*" --exclude test --gcov-options '\-lp';
+        fi

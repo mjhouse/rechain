@@ -58,9 +58,5 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
 endif()
 
 add_executable(rechain ${SOURCES})
-
-if(APPLE)
-    target_link_libraries(rechain -lcryptopp)
-else()
-    target_link_libraries(rechain -lcrypto++)
-endif()
+target_link_libraries(rechain -lcryptopp)
+#target_link_libraries(rechain -lcrypto++)
