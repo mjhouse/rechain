@@ -18,7 +18,7 @@ matrix:
             - os: osx
               sudo: false
 compiler:
-      - g++-5
+      - g++
 
 before_install:
       - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 

@@ -60,4 +60,7 @@ endif()
 add_executable(rechain ${SOURCES})
 
 find_library(CRYPTOPP NAMES cryptopp crypto++ libcrypto++)
+
+message("LIBRARY: ${CRYPTOPP}")
+
 target_link_libraries(rechain "${CRYPTOPP}")
