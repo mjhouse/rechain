@@ -15,7 +15,7 @@ message($REVERSION)
 include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/")
 
 set(CMAKE_CXX_COMPILER      "g++-5")
-set(CMAKE_CXX_FLAGS         "-std=c++11 -lpthread -lcrypto++")
+set(CMAKE_CXX_FLAGS         "-std=c++11 -lpthread")
 set(CMAKE_CXX_FLAGS_DEBUG   "-Wall -Wextra -Wpedantic -g -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 set(CMAKE_CXX_FLAGS_TEST    "-g -fprofile-arcs -ftest-coverage")
@@ -59,5 +59,5 @@ endif()
 
 add_executable(rechain ${SOURCES})
 
-find_library(CRYPTOPP NAMES cryptopp crypto++)
+find_library(CRYPTOPP NAMES cryptopp crypto++ libcrypto++)
 target_link_libraries(rechain "${CRYPTOPP}")
