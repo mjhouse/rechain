@@ -25,7 +25,7 @@ set(DEBUG_DIRECTORY   "${CMAKE_SOURCE_DIR}/build/debug")
 set(TEST_DIRECTORY    "${CMAKE_SOURCE_DIR}/build/test")
 
 if(APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++")
+    set(CLANG_CXX_LIBRARY "libc++")
 endif()
 
 if(NOT CMAKE_BUILD_TYPE)
