@@ -10,8 +10,8 @@
 #define NUM_RECORDS 10
 #define NUM_BLOCKS  4
 
-extern inline std::string generate_hash();
-extern inline std::string get_path( std::string partial );
+extern std::string generate_hash();
+extern std::string get_path( std::string partial );
 
 SCENARIO( "blockchain is loaded or saved", "[blockchain][blockchain-serial]" ){
 

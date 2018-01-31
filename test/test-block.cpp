@@ -5,8 +5,8 @@
 #include "record.hpp"
 #include "keys.hpp"
 
-extern inline std::string generate_hash();
-extern inline std::string get_path( std::string partial );
+extern std::string generate_hash();
+extern std::string get_path( std::string partial );
 
 SCENARIO( "block can be mined and generate a valid hash", "[block-mining]" ){
 

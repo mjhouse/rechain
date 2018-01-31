@@ -11,9 +11,9 @@
 
 #include <string>
 
-extern inline std::string generate_hash();
-extern inline std::string get_path( std::string partial );
-extern inline std::string dump_file( std::string path );
+extern std::string generate_hash();
+extern std::string get_path( std::string partial );
+extern std::string dump_file( std::string path );
 
 SCENARIO( "records created with different initial values", "[record-create]" ){
 

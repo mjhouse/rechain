@@ -2,9 +2,9 @@
 #include "record.hpp"
 #include "keys.hpp"
 
-extern inline std::string generate_hash();
-extern inline std::string dump_file( std::string path );
-extern inline std::string get_path( std::string partial );
+extern std::string generate_hash();
+extern std::string dump_file( std::string path );
+extern std::string get_path( std::string partial );
 
 SCENARIO( "keys can be created from strings or files", "[keys-create]" ){
 
