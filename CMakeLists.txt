@@ -9,8 +9,6 @@ set(PROJECT_BINARY_DIR "${CMAKE_SOURCE_DIR}/bin")
 execute_process(COMMAND -E git describe --abbrev=0 --tags RESULT_VARIABLE REVERSION)
 add_definitions(-DRECHAIN_VERSION="v0.1.0")
 
-message($REVERSION)
-
 # set the include directories
 include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/")
 
@@ -63,16 +61,9 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
 
 endif()
 
-#set_source_files_properties(${SOURCES} PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations")
-
 add_executable(rechain ${SOURCES})
 
-#find_path(CRYPTO_ORNG PATHS "cryptopp/osrng.h")
-
-find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
-
-#message("CRYPTO_ORNG ${CRYPTO_ORNG}")
-#message("CRYPTOPP: ${CRYPTOPP}")
-
-#add_library(CRYPTOPP STATIC IMPORTED)
-target_link_libraries(rechain "${CRYPTOPP}")
+if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
+    find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
+    target_link_libraries(rechain "${CRYPTOPP}")
+endif()
