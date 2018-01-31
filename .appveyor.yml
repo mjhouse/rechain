@@ -1,0 +1,27 @@
+version: 0.1.0-{build}
+
+branches:
+  only:
+    - master
+
+image:
+  - Visual Studio 2015
+  
+init:
+  - Install-Package CMake -Version 3.5.2
+  - Install-Package cryptopp -Version 5.6.5.4
+
+#environment:
+#  RECHAIN_HOME:
+
+platform:
+  - x64
+
+before_build:
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+
+build_script:
+  - cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=Test
+  - cmake --build
+  - test\rechain
