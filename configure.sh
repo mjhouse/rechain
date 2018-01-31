@@ -3,25 +3,28 @@
 OS_NAME=$1
 STATUS=0;
 
+failure(){
+    if [[ ! -z "$1" ]]; then
+        echo $1;
+    fi
+    exit 0;
+}
+
 if [[ "$OS_NAME" == "osx" ]]; then 
 
-    brew install cryptopp       || STATUS=1; 
-    rm '/usr/local/include/c++' || STATUS=1;
-    brew install gcc5           || STATUS=1;
-    eval "$(pyenv init -)"      || STATUS=1;
-    pyenv install 3.5.2         || STATUS=1;
-    pyenv rehash                || STATUS=1;
+    brew install cryptopp       || failure("couldn't install cryptopp!"); 
+    rm '/usr/local/include/c++' || failure("couldn't remove symlink!");
+    brew install gcc5           || failure("couldn't install gcc5!");
+    eval "$(pyenv init -)"      || failure("couldn't init pyenv!");
+    pyenv install 3.5.2         || failure("couldn't install python 3.5!");
+    pyenv rehash                || failure("couldn't rehash after python 3.5!");
 
-    pip install cpp-coveralls   || STATUS=1;
-    pyenv rehash                || STATUS=1;
+    pip install cpp-coveralls   || failure("couldn't install cpp-coveralls!");
+    pyenv rehash                || failure("couldn't rehash after coveralls!");
     
-    if [[ "$STATUS" -eq "1" ]]; then
-        exit STATUS;
-    fi
-
 elif [[ "$OS_NAME" == "linux" ]]; then
 
-    pip install --user cpp-coveralls || exit 1;
+    pip install --user cpp-coveralls || failure("couldn't install cpp-coveralls!");
 
 fi
     
