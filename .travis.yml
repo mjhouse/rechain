@@ -21,35 +21,12 @@ compiler:
       - g++-5
 
 before_install:
-      - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 
-            brew install cryptopp || travis_terminate 0; 
-            rm '/usr/local/include/c++' || travis_terminate 0;
-            brew install gcc5 || travis_terminate 0;
-            eval "$(pyenv init -)" || travis_terminate 0;
-            pyenv install 3.5.2 || travis_terminate 0;
-            pyenv rehash || travis_terminate 0;
-
-            pip install cpp-coveralls || travis_terminate 0;
-            pyenv rehash || travis_terminate 0;
-            travis_terminate 1;
-        fi
-      - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-            pip install --user cpp-coveralls || travis_terminate 0;
-            travis_terminate 1;
-        fi
+      - ./configure.sh $TRAVIS_OS_NAME
 
 script:
-      - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-            eval "CXX=clang++"
-        else
-            eval "CXX=g++-5"
-        fi
-      - source configure.sh
       - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test
       - make
       - ./test/rechain
 
 after_success:
-      - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
-            coveralls --root .. --exclude data --exclude inc/dependencies -E ".*CMake.*" --exclude test --gcov-options '\-lp';
-        fi
+      - coveralls --root .. --exclude data --exclude inc/dependencies -E ".*CMake.*" --exclude test --gcov-options '\-lp';
