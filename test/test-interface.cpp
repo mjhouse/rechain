@@ -6,10 +6,10 @@
 #include <string>
 #include <fstream>
 
-extern inline std::string dump_file( std::string path );
-extern inline void copy_file( std::string in, std::string out );
-extern inline std::string get_path( std::string partial );
-extern inline char* get_path_char( std::string partial );
+extern std::string dump_file( std::string path );
+extern void copy_file( std::string in, std::string out );
+extern std::string get_path( std::string partial );
+extern char* get_path_char( std::string partial );
 
 SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
 
