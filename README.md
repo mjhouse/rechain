@@ -13,19 +13,21 @@ there are no written tutorials or guides because the project isn't that far alon
 
 ### Can I Contribute?
 
-No.
+There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at michaelhouse@gmx.us.
 
 ### Tools
 
-* make 4.1
+* cmake
 
-* gcc 5.4.0
+* g++ 5.4.0/llvm-g++/nmake
+
+* doxygen
 
 ### Dependencies
 
-| Dependency		| Included for				|
-|:----------------------|:--------------------------------------|
-| cxxopts.hpp		| Command line argument parsing 	|
-| cereal		| Serializing objects to/from files	|
-| libcrypto++-dev	| Public keys and hashing		|
-| Catch2		| Unit tests				|
+| Dependency		        | Included for				                  | Status       |
+|:----------------------|:--------------------------------------|:-------------|
+| cxxopts               | Command line argument parsing         | Included     |
+| cereal                | Serializing objects to/from files     | Included     |
+| Crypto++              | Public keys and hashing               | Not included |
+| Catch2                | Unit tests                            | Included     |
