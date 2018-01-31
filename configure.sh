@@ -15,7 +15,7 @@ if [[ "$OS_NAME" == "osx" ]]; then
     pip install cpp-coveralls   || STATUS=1;
     pyenv rehash                || STATUS=1;
     
-    if [[ "$STATUS" == "1" ]]; then
+    if [[ "$STATUS" -eq "1" ]]; then
         exit STATUS;
     fi
 
