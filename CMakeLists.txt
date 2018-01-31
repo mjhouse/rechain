@@ -16,7 +16,8 @@ include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependen
 
 if(APPLE)
     set(CMAKE_CXX_COMPILER "llvm-g++")
-    set(CMAKE_CXX_FLAGS "-std=gnu++11 -lpthread -Wno-deprecated -lc++ -stdlib=libc++ -DCRYPTOPP_DISABLE_ASM")
+    set(CMAKE_CXX_FLAGS "-std=c++11 -lpthread")
+    #set(CMAKE_CXX_FLAGS "-std=c++11 -lpthread -Wno-deprecated -lc++ -stdlib=libc++ -DCRYPTOPP_DISABLE_ASM")
 elseif(UNIX)
     set(CMAKE_CXX_COMPILER "g++-5")
     set(CMAKE_CXX_FLAGS "-std=c++11 -lpthread")
