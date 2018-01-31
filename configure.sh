@@ -19,7 +19,7 @@ if [[ "$OS_NAME" == "osx" ]]; then
     pyenv install 3.5.2         || failure "couldn't install python 3.5!";
     pyenv rehash                || failure "couldn't rehash after python 3.5!";
 
-    pip3 install cpp-coveralls   || failure "couldn't install cpp-coveralls!";
+    pip3 install cpp-coveralls  || failure "couldn't install cpp-coveralls!";
     pyenv rehash                || failure "couldn't rehash after coveralls!";
     
 elif [[ "$OS_NAME" == "linux" ]]; then
