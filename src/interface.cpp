@@ -26,7 +26,8 @@
 
 // dependency includes
 #include "cxxopts.hpp"
-#include <cryptopp/osrng.h>	// for the AutoSeededRandomPool
+
+#include <osrng.h>	// for the AutoSeededRandomPool
 #include <cryptopp/integer.h>	// for Integer data type
 #include <cryptopp/hex.h>	// for the HexEncoder
 
