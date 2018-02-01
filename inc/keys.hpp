@@ -29,9 +29,9 @@
 #include <iostream>
 #include <stdexcept>
 
-#include <osrng.h>		// For AutoSeededRandomPool
-#include <hex.h>		// For HexEncoder/HexDecoder
-#include <rsa.h>		// For RSA:: namespace
+#include <cryptopp/osrng.h>		// For AutoSeededRandomPool
+#include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
+#include <cryptopp/rsa.h>		// For RSA:: namespace
 
 #include "record.hpp"			// Data objects
 
