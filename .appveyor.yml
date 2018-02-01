@@ -10,7 +10,6 @@ image:
 init:
   - vcpkg install cryptopp
   - vcpkg integrate install
-  - echo VCPKG ROOT: %VCPKG_ROOT%
 
 #environment:
 #  RECHAIN_HOME:
