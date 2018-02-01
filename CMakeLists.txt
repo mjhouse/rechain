@@ -63,17 +63,16 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
 
 endif()
 
-set(CryptoPP_DIR "${CMAKE_SOURCE_DIR}/data")
-
 add_executable(rechain ${SOURCES})
 
-message("CHECK THIS OUT: ${CMAKE_MODULE_PATH}")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/data")
 
 if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
     find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
     target_include_directories(rechain SYSTEM PUBLIC "/usr/include/cryptopp" "/usr/local/include/cryptopp/")
     target_link_libraries(rechain "${CRYPTOPP}")
 else()
+    message($VCPKG_TARGET_TRIPLET)
     find_package(CryptoPP REQUIRED)
     target_link_libraries(rechain CryptoPP)
 endif()
