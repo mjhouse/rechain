@@ -67,8 +67,8 @@ add_executable(rechain ${SOURCES})
 
 if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
     find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
-    get_filename_component(CRYPTOPP_DIR CRYPTOPP DIRECTORY)
-    message("${CRYPTOPP_DIR}")
+    
+    message("${CRYPTOPP_OUTPUT_DIRECTORY}")
     #link_directory(CRYPTOPP_DIR)
     target_link_libraries(rechain "${CRYPTOPP}")
 else()
