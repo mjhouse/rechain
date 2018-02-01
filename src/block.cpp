@@ -20,9 +20,9 @@
 */
 
 // dependency includes
-#include <osrng.h>	// for the AutoSeededRandomPool
-#include <integer.h>	// for Integer data type
-#include <hex.h>	// for the HexEncoder
+#include <cryptopp/osrng.h>	// for the AutoSeededRandomPool
+#include <cryptopp/integer.h>	// for Integer data type
+#include <cryptopp/hex.h>	// for the HexEncoder
 
 // system includes
 #include <climits>
