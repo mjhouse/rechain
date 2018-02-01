@@ -63,6 +63,8 @@ elseif(CMAKE_BUILD_TYPE MATCHES Test)
 
 endif()
 
+set(CryptoPP_DIR "${CMAKE_SOURCE_DIR}/data")
+
 add_executable(rechain ${SOURCES})
 
 if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
