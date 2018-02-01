@@ -65,13 +65,11 @@ endif()
 
 add_executable(rechain ${SOURCES})
 
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/data")
-
 if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
     find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
     target_include_directories(rechain SYSTEM PUBLIC "/usr/include/cryptopp" "/usr/local/include/cryptopp/")
     target_link_libraries(rechain "${CRYPTOPP}")
 else()
-    find_package(CryptoPP REQUIRED)
-    target_link_libraries(rechain CryptoPP)
+    find_library(cryptopp)
+    target_link_libraries(rechain cryptopp)
 endif()
