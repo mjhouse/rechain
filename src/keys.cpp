@@ -19,11 +19,11 @@
  *
 */
 
-#include <osrng.h>		// For AutoSeededRandomPool
-#include <hex.h>		// For HexEncoder/HexDecoder
-#include <rsa.h>		// For RSA:: namespace
-#include <pssr.h>		// For PSSR
-#include <whrlpool.h>		// For Whirlpool
+#include <cryptopp/osrng.h>		// For AutoSeededRandomPool
+#include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
+#include <cryptopp/rsa.h>		// For RSA:: namespace
+#include <cryptopp/pssr.h>		// For PSSR
+#include <cryptopp/whrlpool.h>		// For Whirlpool
 
 #include <fstream>				// File I/O
 #include <string>				// std::string
