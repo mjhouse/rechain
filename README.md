@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/mjhouse/rechain.svg?branch=master)](https://travis-ci.org/mjhouse/rechain)
 [![Coverage Status](https://coveralls.io/repos/github/mjhouse/rechain/badge.svg?branch=master)](https://coveralls.io/github/mjhouse/rechain?branch=master)
 
-ReChain is a modified blockchain design that uses signature blocks to enforce blockchain
+ReChain is a modified blockchain design that uses signature transactions to enforce blockchain
 integrity rather than an expensive proof-of-work calculation. There is still a fixed
 proof-of-work difficulty in order to stop many transactions from being executed at once.
 
@@ -19,7 +19,7 @@ There isn't any support or guides for contributions, but if you add something co
 
 * cmake
 
-* g++ 5.4.0/llvm-g++/nmake
+* g++5.4.0 / llvm-g++ / cl.exe
 
 * doxygen
 
