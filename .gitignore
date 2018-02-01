@@ -7,6 +7,7 @@ build/*
 # gcov files
 *.gcov
 *.gcno
+*.swo
 
 # vim swap files
 *.swp
