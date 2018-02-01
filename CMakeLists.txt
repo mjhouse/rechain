@@ -67,6 +67,8 @@ set(CryptoPP_DIR "${CMAKE_SOURCE_DIR}/data")
 
 add_executable(rechain ${SOURCES})
 
+message("CHECK THIS OUT: ${CMAKE_MODULE_PATH}")
+
 if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
     find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
     target_include_directories(rechain SYSTEM PUBLIC "/usr/include/cryptopp" "/usr/local/include/cryptopp/")
