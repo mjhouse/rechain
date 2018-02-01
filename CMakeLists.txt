@@ -10,7 +10,7 @@ execute_process(COMMAND -E git describe --abbrev=0 --tags RESULT_VARIABLE REVERS
 add_definitions(-DRECHAIN_VERSION="v0.1.0")
 
 # set the include directories
-include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/" "/usr/include/cryptopp/")
+include_directories("${CMAKE_SOURCE_DIR}/inc/" "${CMAKE_SOURCE_DIR}/inc/dependencies/")
 
 if(APPLE)
     set(CMAKE_CXX_COMPILER "llvm-g++")    
@@ -67,6 +67,7 @@ add_executable(rechain ${SOURCES})
 
 if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
     find_library(CRYPTOPP NAMES cryptopp crypto++ libcryptopp PATHS "/usr/lib/")
+    target_include_directories(CRYPTOPP)
     target_link_libraries(rechain "${CRYPTOPP}")
 else()
     find_package(cryptopp REQUIRED)
