@@ -11,7 +11,7 @@
 #   CRYPTOPP_FOUND
 #     Indicates whether the library has been found.
 #
-#   CRYPTOPP_INCLUDE_DIRS
+#   CRYPTOPP_INCLUDE_DIR
 #     Points to the CryptoPP include directory.
 #
 #   CRYPTOPP_LIBRARIES
