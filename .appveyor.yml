@@ -23,5 +23,5 @@ before_build:
 build_script:
   - cd build
   - cmake .. -DVCPKG_TARGET_TRIPLET=x64-windows-static -DCMAKE_TOOLCHAIN_FILE=C:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Test
-  - nmake .
+  - cmake --build .
   - test\rechain
