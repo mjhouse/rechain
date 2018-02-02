@@ -11,9 +11,6 @@ init:
   - vcpkg install cryptopp:x64-windows-static
   - vcpkg integrate install
 
-#environment:
-#  RECHAIN_HOME:
-
 platform:
   - x64
 
