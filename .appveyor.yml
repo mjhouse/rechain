@@ -18,7 +18,7 @@ before_build:
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
   
 build_script:
-  - dir "C:/Tools/vcpkg/installed/x64-windows-static/include"
+  - dir "C:/Tools/vcpkg/installed/x64-windows-static/include/cryptopp"
   - cd build
   - cmake .. -G "NMake Makefiles" -DVCPKG_TARGET_TRIPLET=x64-windows-static -DCMAKE_TOOLCHAIN_FILE=C:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Test
   - cmake --build .
