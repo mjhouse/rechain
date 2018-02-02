@@ -22,6 +22,7 @@ elseif(UNIX)
     set(CMAKE_CXX_FLAGS "-std=c++11 -lpthread")
 elseif(WINDOWS)
     set(CMAKE_GENERATOR "NMake Makefiles")
+    set(CMAKE_CXX_COMPILER "nmake")
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
