@@ -19,6 +19,7 @@ elseif(UNIX)
     set(CMAKE_CXX_COMPILER "g++-5")
     set(CMAKE_CXX_FLAGS "-std=c++11 -lpthread")
 elseif(WINDOWS)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     set(CMAKE_CXX_COMPILER "nmake")
 endif()
 
