@@ -74,14 +74,9 @@ if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
     endif()
     target_link_libraries(rechain "${CRYPTOPP}")
 else()
-    set(CMAKE_MODULE_PATH "C:/Tools/vcpkg/packages/cryptopp_x64-windows-static;${CMAKE_MODULE_PATH}")
-    find_package(cryptopp REQUIRED)
-    
-    
-    
+    target_link_libraries(rechain "C:/Tools/vcpkg/packages/cryptopp_x64-windows-static/lib/cryptopp-static.lib")
     find_path(CRYPTOPP_DIR NAMES cryptopp)
     if(CRYPTOPP_DIR)
-        target_include_directories(rechain PUBLIC "${CRYPTOPP_DIR}/cryptopp")
         target_include_directories(rechain PUBLIC "${CRYPTOPP_DIR}")
     else()
         message(FATAL_ERROR "CryptoPP: library not found! ${CRYPTOPP_DIR}")
