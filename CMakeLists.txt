@@ -74,6 +74,10 @@ if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
     endif()
     target_link_libraries(rechain "${CRYPTOPP}")
 else()
+    find_package(CRYPTO cryptopp)
+    message("CRYPTO: ${CRYPTO}")
+    
+    
     find_path(CRYPTOPP_DIR NAMES cryptopp)
     if(CRYPTOPP_DIR)
         target_include_directories(rechain PUBLIC "${CRYPTOPP_DIR}/cryptopp")
