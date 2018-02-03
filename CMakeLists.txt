@@ -75,8 +75,7 @@ if(NOT CMAKE_SYSTEM_NAME MATCHES Windows)
     target_link_libraries(rechain "${CRYPTOPP}")
 else()
     set(CMAKE_MODULE_PATH "C:/Tools/vcpkg/packages/cryptopp_x64-windows-static;${CMAKE_MODULE_PATH}")
-    find_package(CRYPTO cryptopp)
-    message("CRYPTO: ${CRYPTO}")
+    find_package(cryptopp REQUIRED)
     
     
     
