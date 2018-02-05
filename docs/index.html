@@ -102,36 +102,37 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="title">ReChain </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://travis-ci.org/mjhouse/rechain"></a> <a href="https://coveralls.io/github/mjhouse/rechain?branch=master"></a></p>
-<p>ReChain is a modified blockchain design that uses signature blocks to enforce blockchain integrity rather than an expensive proof-of-work calculation. There is still a fixed proof-of-work difficulty in order to stop many transactions from being executed at once.</p>
+<div class="textblock"><p><a href="https://travis-ci.org/mjhouse/rechain"></a> <a href="https://ci.appveyor.com/project/mjhouse/rechain"></a> <a href="https://coveralls.io/github/mjhouse/rechain?branch=master"></a></p>
+<p>ReChain is a modified blockchain design that uses signature transactions to enforce blockchain integrity rather than an expensive proof-of-work calculation. There is still a fixed proof-of-work difficulty in order to stop many transactions from being executed at once.</p>
 <h3>Documentation</h3>
 <p>Generated documentation is available <a href="https://mjhouse.github.io/rechain/">here</a>. Currently, there are no written tutorials or guides because the project isn't that far along yet.</p>
 <h3>Can I Contribute?</h3>
-<p>No.</p>
+<p>There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at <a href="#" onclick="location.href='mai'+'lto:'+'mic'+'ha'+'elh'+'ou'+'se@'+'gm'+'x.u'+'s'; return false;">micha<span style="display: none;">.nosp@m.</span>elho<span style="display: none;">.nosp@m.</span>use@g<span style="display: none;">.nosp@m.</span>mx.u<span style="display: none;">.nosp@m.</span>s</a>.</p>
 <h3>Tools</h3>
 <ul>
-<li>make 4.1</li>
-<li>gcc 5.4.0</li>
+<li>cmake</li>
+<li>g++5.4.0 / llvm-g++ / cl.exe</li>
+<li>doxygen</li>
 </ul>
 <h3>Dependencies</h3>
 <table class="doxtable">
 <tr>
-<th align="left">Dependency </th><th align="left">Included for  </th></tr>
+<th align="left">Dependency </th><th align="left">Included for </th><th align="left">Status  </th></tr>
 <tr>
-<td align="left">cxxopts.hpp </td><td align="left">Command line argument parsing </td></tr>
+<td align="left">cxxopts </td><td align="left">Command line argument parsing </td><td align="left">Included </td></tr>
 <tr>
-<td align="left">cereal </td><td align="left">Serializing objects to/from files </td></tr>
+<td align="left">cereal </td><td align="left">Serializing objects to/from files </td><td align="left">Included </td></tr>
 <tr>
-<td align="left">libcrypto++-dev </td><td align="left">Public keys and hashing </td></tr>
+<td align="left">Crypto++ </td><td align="left">Public keys and hashing </td><td align="left">Not included </td></tr>
 <tr>
-<td align="left">Catch2 </td><td align="left">Unit tests </td></tr>
+<td align="left">Catch2 </td><td align="left">Unit tests </td><td align="left">Included </td></tr>
 </table>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jan 31 2018 06:27:05 for ReChain by
+    <li class="footer">Generated on Mon Feb 5 2018 08:37:40 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
