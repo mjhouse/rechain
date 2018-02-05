@@ -23,6 +23,7 @@
 #define _RECHAIN_BLOCK_HPP_
 
 // system includes
+#include <inttypes.h>
 #include <map>
 #include <vector>
 #include <string>
@@ -47,7 +48,7 @@ class Block {
 
 		long nonce;			/**< Randomly generated value to modify hash */
 		long timestamp;			/**< A timestamp */
-		unsigned int counter;		/**< Counter to modify hash output */
+		uint32_t  counter;		/**< Counter to modify hash output */
 
 	public:
 		/** Define a Record iterator */
