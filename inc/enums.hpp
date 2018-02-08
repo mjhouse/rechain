@@ -4,10 +4,10 @@
 
 /** For different log levels */
 enum Level {
-    error   = 0,
-    warning = 1,
-    debug   = 2,
-    info    = 3,
+    debug   = 0,
+    info    = 1,
+    warning = 2,
+    error   = 3,
     none    = 4
 };
 
