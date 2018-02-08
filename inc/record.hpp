@@ -30,14 +30,14 @@
 
 // system includes
 #include <string>
+
+// dependency includes
 #include "cereal/cereal.hpp"
 
-class PrivateKey;
+// local includes
+#include "enums.hpp"
 
-/** An enum type for different flavors of 
-	Record objects.
-*/
-enum DataType { Publication, Signature };
+class PrivateKey;
 
 /** A single record that can be stored
 	within a Block on the BlockChain

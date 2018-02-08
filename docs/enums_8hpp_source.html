@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>ReChain: inc/keys.hpp File Reference</title>
+<title>ReChain: inc/enums.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('keys_8hpp.html','');});
+$(document).ready(function(){initNavTree('enums_8hpp_source.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -104,62 +104,16 @@ $(document).ready(function(){initNavTree('keys_8hpp.html','');});
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">keys.hpp File Reference</div>  </div>
+<div class="title">enums.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Defines the <a class="el" href="classKey.html">Key</a> classes used to manage, load, save and generate a public and private pair of RSA256 keys.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;stdexcept&gt;</code><br />
-<code>#include &lt;cryptopp/osrng.h&gt;</code><br />
-<code>#include &lt;cryptopp/hex.h&gt;</code><br />
-<code>#include &lt;cryptopp/rsa.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="record_8hpp_source.html">record.hpp</a>&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for keys.hpp:</div>
-<div class="dyncontent">
-<div class="center"><img src="keys_8hpp__incl.png" border="0" usemap="#inc_2keys_8hpp" alt=""/></div>
-<map name="inc_2keys_8hpp" id="inc_2keys_8hpp">
-<area shape="rect" id="node8" href="record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="699,80,781,107"/>
-<area shape="rect" id="node11" href="enums_8hpp_source.html" title="enums.hpp" alt="" coords="825,155,911,181"/>
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="keys_8hpp__dep__incl.png" border="0" usemap="#inc_2keys_8hppdep" alt=""/></div>
-<map name="inc_2keys_8hppdep" id="inc_2keys_8hppdep">
-<area shape="rect" id="node2" href="interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="71,80,189,107"/>
-<area shape="rect" id="node5" href="keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="213,80,311,107"/>
-<area shape="rect" id="node6" href="record_8cpp_source.html" title="src/record.cpp" alt="" coords="335,80,440,107"/>
-<area shape="rect" id="node3" href="interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="5,155,124,181"/>
-<area shape="rect" id="node4" href="main_8cpp_source.html" title="src/main.cpp" alt="" coords="148,155,245,181"/>
-</map>
-</div>
-</div>
-<p><a href="keys_8hpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html">Key&lt; T, K &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html">PrivateKey</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPublicKey.html">PublicKey</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef _RECHAIN_ENUMS_HPP_</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define _RECHAIN_ENUMS_HPP_</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">enum</span> Level {</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    error   = 0,</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    warning = 1,</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    debug   = 2,</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    info    = 3,</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    none    = 4</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;};</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">enum</span> DataType { </div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    Publication, </div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    Signature </div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div></div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><a class="el" href="keys_8hpp.html">keys.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><b>enums.hpp</b></li>
     <li class="footer">Generated on Wed Feb 7 2018 20:22:33 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>

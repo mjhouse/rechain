@@ -6,17 +6,11 @@
 #include <fstream>
 #include <ctime>
 
+// local includes
+#include "enums.hpp"
+
 #ifndef _RECHAIN_LOGGER_HPP_
 #define _RECHAIN_LOGGER_HPP_
-
-/** Enum for different log levels */
-enum Level {
-    error   = 0,
-    warning = 1,
-    debug   = 2,
-    info    = 3,
-    none    = 4
-};
 
 static const std::string STDOUT = "__stdout__"; /**< A key to identify STDOUT v. file path */
 static const std::string STDERR = "__stderr__";	/**< A key to identify STDERR v. file path */
