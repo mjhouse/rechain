@@ -26,9 +26,12 @@
 
 // dependency includes
 #include "cxxopts.hpp"
-#include <cryptopp/osrng.h>	// for the AutoSeededRandomPool
+#include <cryptopp/osrng.h>	    // for the AutoSeededRandomPool
 #include <cryptopp/integer.h>	// for Integer data type
-#include <cryptopp/hex.h>	// for the HexEncoder
+#include <cryptopp/hex.h>	    // for the HexEncoder
+
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
 
 // local includes
 #include "interface.hpp"
@@ -37,8 +40,14 @@
 #include "blockchain.hpp"
 #include "logger.hpp"
 
+#ifdef WINDOWS
+    #include "windows.h"
+#endif
+
 #define NOERR	0
 #define ERROR	1
+
+namespace fs = boost::filesystem;
 
 typedef Logger rl;
 
@@ -92,7 +101,7 @@ bool Interface::sign( std::string s ){
 
 bool Interface::check(){
 	if(blockchain.valid()){
-        rl::get().error("Blockchain is GOOD");
+        rl::get().info("Blockchain is GOOD");
         return true;
 	} else {
 		rl::get().error("Blockchain is BAD");
@@ -105,8 +114,10 @@ bool Interface::mine(){
 		.info("Mining: ")
 		.info("Hash: " + blockchain.mine());
 
-	if(blockchain.valid() && blockchain.save())
-		return true;
+	if(blockchain.valid() && blockchain.save()){
+	    // right here is where we need to publish the torrent
+        return true;
+    }
 	return false;
 }
 
@@ -135,6 +146,43 @@ void Interface::list(){
 			print("\t\tTrust: " + std::to_string(trust));
 		}
 	}
+}
+
+bool Interface::configure(){
+
+    std::string private_key_path = home + "/current.private";
+    std::string public_key_path = home + "/current.public";
+
+    if( this->home.empty() ){
+        rl::get().error("RECHAIN_HOME isn't set.");
+        return false;
+    }
+    else {
+        fs::create_directories(home + "/torrents/");
+        fs::create_directories(home + "/files/");
+        fs::create_directories(home + "/logs/");
+
+        if(!this->private_key && !fs::exists(private_key_path)){
+           // Create a new private key
+           this->private_key.reset(PrivateKey::empty());
+           this->private_key->generate();
+           
+           // Save it to the active key path
+           this->private_key->save(private_key_path);
+        }
+
+        if(!this->public_key && !fs::exists(public_key_path)){
+           // Create a new public key
+           this->public_key.reset(PublicKey::empty());
+           this->public_key->generate(this->public_key.get());
+           
+           // Save it to the active key path
+           this->public_key->save(public_key_path);
+        }
+
+    }
+
+    return true;
 }
 
 int Interface::execute(){
@@ -172,7 +220,8 @@ int Interface::execute(){
 			std::string path = home + "/rechain.blockchain";
 			if(!blockchain.load(path)){
 				blockchain.save(path);
-			}
+			    // create a files directory and torrents directory 
+            }
 		}
 		else {
             // or error out
@@ -204,7 +253,7 @@ int Interface::execute(){
 			} catch (const CryptoPP::InvalidArgument& e){
 				rl::get().error(e.what());
 				return ERROR;
-			}
+			} 
 		
 			// Try to load a public key from a given path
 			// or from the default path
@@ -218,7 +267,7 @@ int Interface::execute(){
 			} catch (const CryptoPP::InvalidArgument& e){
 				rl::get().error(e.what());
 				return ERROR;
-			}
+			} 
 
 			// Publish a document to the BlockChain
 			if(result.count("publish")){

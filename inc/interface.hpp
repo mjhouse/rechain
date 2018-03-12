@@ -41,41 +41,10 @@
 */
 class Interface {
 	private:
-		int argc;						/**< Command line argument count */
-		char** argv;						/**< Command line arguments */
+		int argc;					                	/**< Command line argument count */
+		char** argv;			            			/**< Command line arguments */
 
-		std::string home;					/**< The path to the home directory */
-
-		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
-		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
-
-		BlockChain blockchain;					/**< A BlockChain to load data into */
-
-		/** Public a given document
-			\param s The path to the file
-			\returns True on success
-		*/
-		bool publish( std::string s );
-		
-		/** Sign a previously published document
-			\param s The reference hash to sign
-			\returns True on success
-		*/
-		bool sign( std::string s );
-	
-		/** Check the BlockChain is valid
-		    \returns true if blockchain is valid
-        */
-		bool check();
-	
-		/** Mine the current working block
-			\returns True on success
-		*/
-		bool mine();
-
-		/** List the current BlockChain state
-		*/
-		void list();
+        std::shared_ptr<Manager> manager;
 
 		/** Trim a trailing slash from a path
 			\param s The path to trim
