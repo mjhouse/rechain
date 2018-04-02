@@ -14,13 +14,13 @@ there are no written tutorials or guides because the project isn't that far alon
 
 ### Can I Contribute?
 
-There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at michaelhouse@gmx.us.
+There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at mjhouse@protonmail.com.
 
 ### Tools
 
-* cmake
+* make
 
-* g++5.4.0 / llvm-g++ / cl.exe
+* g++5.4.0 / llvm-g++ 
 
 * doxygen
 

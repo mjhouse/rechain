@@ -15,7 +15,7 @@ if [[ "$OS_NAME" == "osx" ]]; then
     brew install cryptopp       || failure "couldn't install cryptopp!"; 
     rm '/usr/local/include/c++' || failure "couldn't remove symlink!";
     
-    brew install boost          || failure "couldn't install boost";
+    brew upgrade boost          || failure "couldn't install boost";
 
     brew install gcc5           || failure "couldn't install gcc5!";
     eval "$(pyenv init -)"      || failure "couldn't init pyenv!";
