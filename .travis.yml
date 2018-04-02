@@ -33,14 +33,15 @@ before_install:
             pyenv rehash
             python3 -m pip install cpp-coveralls;
             pyenv rehash;
+            export CXX=gcc-5
         fi
       - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
             pip install --user cpp-coveralls;
+            export CXX=g++-5
         fi
 
 script:
-      - if [[ "$OS_NAME" == "osx" ]]; then make test CXX=gcc-5; fi
-      - if [[ "$OS_NAME" == "linux" ]]; then make test; fi
+      - make test
 
 after_success:
       - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
