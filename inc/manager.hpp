@@ -69,7 +69,7 @@ class Manager {
 		/** Constructor
             \param home The path to the install directory
 		*/
-		Manager( std::string home );
+		Manager( std::string home, Level level );
 
 		/** Destructor
 		*/
@@ -86,6 +86,11 @@ class Manager {
 		*/
 		bool publish( std::string s );
 		
+		/** Mine the current block 
+			\returns True on success
+		*/
+		bool mine();
+
 		/** Find a document by reference
 			\param h The hash of the file
 			\returns True on success
@@ -96,14 +101,14 @@ class Manager {
 			\param p The path to the key file
 			\returns True on success
 		*/
-		void set_private_key( std::string p );
+		bool set_private_key( std::string p );
 
         
 		/** Add or generate a public key 
 			\param p The path to the key file
 			\returns True on success
 		*/
-		void set_public_key( std::string p );
+		bool set_public_key( std::string p );
        
         
 		/** Sign a previously published document
@@ -116,6 +121,11 @@ class Manager {
 		    \returns true if blockchain is valid
         */
 		bool validate();
+
+        /** Get a copy of the blockchain
+            \returns a BlockChain instance
+        */
+        BlockChain get_blockchain(){ return this->blockchain; }
 
 };
 

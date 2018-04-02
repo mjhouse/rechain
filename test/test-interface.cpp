@@ -198,7 +198,7 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
                 std::remove(get_path_char("files/tmp/rechain.blockchain"));
 
                 Interface interface(argc,argv);
-				int result = interface.execute();
+                int result = interface.execute();
 
                 std::string gold = dump_file(get_path("files/gold/interface_publish.gold"));
                 std::string grey = dump_file(get_path("files/tmp/rechain.blockchain"));

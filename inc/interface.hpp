@@ -35,6 +35,8 @@
 #include "blockchain.hpp"
 #include "keys.hpp"
 
+class Manager;
+
 /** Manages a command line interface to the
 	BlockChain and executes arguments 
 	against it.
@@ -70,13 +72,15 @@ class Interface {
 			\param c The count of arguments
 			\param v The command line arguments
 		*/
-		Interface( int c, char** v ) : argc(c), argv(v) {
-			home = env("RECHAIN_HOME");
-		};
+		Interface( int c, char** v ) : argc(c), argv(v) {};
 
 		/** Destructor
 		*/
 		~Interface(){};
+
+        /** Print the current blockchain
+        */
+        void list();
 
 		/** Execute command line options
 			\returns 0 on success, 1 otherwise.

@@ -234,7 +234,7 @@ size_t BlockChain::size(){
 */
 bool BlockChain::save( std::string p ){
 	std::string path = (!p.empty()) ? p : this->file_path;
-	if(!path.empty()){
+    if(!path.empty()){
 		std::ofstream os(path);
 		if(os.is_open()){
 			cereal::JSONOutputArchive archive(os);

@@ -32,9 +32,10 @@
 
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+#include <boost/assign/list_inserter.hpp>
 
 // local includes
-#include "interface.hpp"
+#include "manager.hpp"
 #include "record.hpp"
 #include "block.hpp"
 #include "blockchain.hpp"
@@ -43,28 +44,44 @@
 namespace fs = boost::filesystem;
 typedef Logger rl;
 
-Manager::Manager( std::string home ){
+#define DBG( s )( std::cout << "DEBUG: " << s << std::endl )
+
+Manager::Manager( std::string home, Level level ){
+    /*
+    insert( this->context )
+        ("home",home)
+        ("log",home + "/logs/rechain.log")
+        ("private_key");
+    */
     this->home = home;
-};
+    Logger::get()
+        .with( Log("console",STDOUT,level) )
+        .with( Log("log",home + "/rechain.log",Level::error) );
+}
 
 Manager::~Manager(){
     if(blockchain.valid()){
         blockchain.save();
     }
-};
+}
 
 bool Manager::configure(){
     std::string private_key_path = home + "/current.private";
     std::string public_key_path  = home + "/current.public";
+    std::string blockchain_path  = home + "/rechain.blockchain";
 
     if( this->home.empty() ){
         rl::get().error("RECHAIN_HOME isn't set.");
         return false;
     }
     else {
-        fs::create_directories(home + "/torrents/");
-        fs::create_directories(home + "/files/");
-        fs::create_directories(home + "/logs/");
+        //fs::create_directories(home + "/torrents/");
+        //fs::create_directories(home + "/files/");
+        //fs::create_directories(home + "/logs/");
+
+        if(!this->blockchain.load(blockchain_path)){
+            this->blockchain.save(blockchain_path);
+        }
 
         if(!this->private_key && !fs::exists(private_key_path)){
            this->private_key.reset(PrivateKey::empty());
@@ -75,7 +92,7 @@ bool Manager::configure(){
 
         if(!this->public_key && !fs::exists(public_key_path)){
            this->public_key.reset(PublicKey::empty());
-           this->public_key->generate(this->public_key.get());
+           this->public_key->generate(this->private_key.get());
            
            this->public_key->save(public_key_path);
         }
@@ -83,24 +100,22 @@ bool Manager::configure(){
     }
 
     return true;
-};
+}
 
 // publish a record object
 bool Manager::publish( Record& r ){
     private_key->sign(r);
 
     if(!blockchain.contains(r.reference(),Search::RecordType)){
-        blockchain.add(r)
-                  .mine();
-        
-        if(blockchain.valid() && blockchain.save(){
-            
+        blockchain.add(r);
+  
+        if(blockchain.valid() && blockchain.save()){
             return true;
         }
     } 
 
     return false;
-};
+}
 
 // publish a file
 bool Manager::publish( std::string s ){
@@ -111,7 +126,14 @@ bool Manager::publish( std::string s ){
     }
 
     return false;
-};
+}
+
+bool Manager::mine(){
+    blockchain.mine();
+    if(blockchain.valid() && blockchain.save())
+        return true;
+    return false;
+}
 
 Record Manager::request( std::string h ){
 	for(auto b : blockchain){
@@ -126,34 +148,52 @@ Record Manager::request( std::string h ){
 		}
 	}
     return Record();
-};
+}
 
 void Manager::set_private_key( PrivateKey* k ){
-    if(k.valid()){
+    if(k->valid()){
         private_key.reset(k);
         private_key->save(home + "/current.private");
     }
 }
 
-void Manager::set_private_key( std::string p ){
-    std::ifstream ifs(p);
-    if(ifs.is_open()){
-        this->set_private_key(PrivateKey::load_file(p));
-    }
-}
-
 void Manager::set_public_key( PublicKey* k ){
-    if(k.valid()){
+    if(k->valid()){
         public_key.reset(k);
         public_key->save(home + "/current.public");
     }
 }
 
-void Manager::set_public_key( std::string p ){
+bool Manager::set_private_key( std::string p ){
     std::ifstream ifs(p);
     if(ifs.is_open()){
-        this->set_public_key(PrivateKey::load_file(p));
+        try {
+            this->set_private_key(PrivateKey::load_file(p));
+        } catch (const CryptoPP::InvalidArgument& e){
+            rl::get().error(e.what());
+            return false;
+        } catch (const std::invalid_argument& e){
+            rl::get().error("Not a valid private key: " + p);
+            return false;
+        }
     }
+    return true;
+}
+
+bool Manager::set_public_key( std::string p ){
+    std::ifstream ifs(p);
+    if(ifs.is_open()){
+        try {
+            this->set_public_key(PublicKey::load_file(p));
+        } catch (const CryptoPP::InvalidArgument& e){
+            rl::get().error(e.what());
+            return false;
+        } catch (const std::invalid_argument& e){
+            rl::get().error("Not a valid public key: " + p);
+            return false;
+        }
+    }
+    return true;
 }
 
 bool Manager::sign( std::string s ){
@@ -166,8 +206,8 @@ bool Manager::sign( std::string s ){
 		}
 	}
     return false;
-};
+}
 
 bool Manager::validate(){
     return blockchain.valid();
-};
+}

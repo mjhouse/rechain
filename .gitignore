@@ -1,5 +1,7 @@
 # generated files
 build/*
+bin/*
+obj/*
 
 # keep empty files
 !build/.empty
