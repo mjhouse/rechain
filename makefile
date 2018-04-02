@@ -34,7 +34,7 @@ all: ./configure.sh
 debug: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -ggdb -lboost_system -lboost_filesystem 
 debug: link-debug
 
-test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -lboost_filesystem -lboost_system -DTEST_ROOT=\"test/data\" 
+test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -Wno-deprecated -fprofile-arcs -ftest-coverage -lboost_filesystem -lboost_system -DTEST_ROOT=\"test/data\" 
 test: link-test
 	./bin/rechain ${TAGGED}
 
