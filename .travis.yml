@@ -26,9 +26,7 @@ before_install:
       - ./configure.sh $TRAVIS_OS_NAME
 
 script:
-      - cd build && cmake .. -DCMAKE_BUILD_TYPE=Test
-      - make
-      - ./test/rechain
+      - make test 
 
 after_success:
-      - coveralls --root .. --exclude data --exclude inc/dependencies -E ".*CMake.*" --exclude test --gcov-options '\-lp';
+      - coveralls --root .. --exclude data --exclude inc/dependencies --exclude test --gcov-options '\-lp';
