@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['record',['Record',['../classRecord.html',1,'']]]
+  ['privatekey',['PrivateKey',['../classPrivateKey.html',1,'']]],
+  ['publickey',['PublicKey',['../classPublicKey.html',1,'']]]
 ];

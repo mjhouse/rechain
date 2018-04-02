@@ -8,6 +8,9 @@ var dir_bfccd401955b95cf8c75461437045ac0 =
     ] ],
     [ "keys.hpp", "keys_8hpp.html", "keys_8hpp" ],
     [ "logger.hpp", "logger_8hpp_source.html", null ],
+    [ "manager.hpp", "manager_8hpp.html", [
+      [ "Manager", "classManager.html", "classManager" ]
+    ] ],
     [ "record.hpp", "record_8hpp.html", [
       [ "Record", "classRecord.html", "classRecord" ]
     ] ]

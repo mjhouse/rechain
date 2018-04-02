@@ -6,6 +6,7 @@ var annotated_dup =
     [ "Key", "classKey.html", "classKey" ],
     [ "Log", "classLog.html", "classLog" ],
     [ "Logger", "classLogger.html", "classLogger" ],
+    [ "Manager", "classManager.html", "classManager" ],
     [ "PrivateKey", "classPrivateKey.html", "classPrivateKey" ],
     [ "PublicKey", "classPublicKey.html", "classPublicKey" ],
     [ "Record", "classRecord.html", "classRecord" ]
