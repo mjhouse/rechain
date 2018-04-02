@@ -24,7 +24,7 @@ compiler:
 
 before_install:
       - ./configure.sh $TRAVIS_OS_NAME
-      - g++5 --version
+      - g++-5 --version
 
 script:
       - make test 
