@@ -1,4 +1,4 @@
-#CXX=g++-5
+CXX=g++-5
 CC=gcc
 
 # This is overridden from the command line
