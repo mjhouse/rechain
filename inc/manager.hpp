@@ -1,17 +1,17 @@
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -34,7 +34,7 @@
 #include "blockchain.hpp"
 #include "keys.hpp"
 
-/** Executes operations against the blockchain
+/** \brief Executes operations against the blockchain
     and holds the private and public keys.
 */
 class Manager {
@@ -46,19 +46,19 @@ class Manager {
 
 		BlockChain blockchain;				        	/**< A BlockChain to load data into */
 
-		/** Publish a given record 
+		/** Publish a given record
 			\param r The Record to publish
 			\returns True on success
 		*/
 		bool publish( Record& r );
 
-		/** Add a private key 
+		/** Add a private key
 			\param k Add a key object
 			\returns True on success
 		*/
 		void set_private_key( PrivateKey* k );
 
-		/** Add a public key 
+		/** Add a public key
 			\param k Add a key object
 			\returns True on success
 		*/
@@ -75,7 +75,7 @@ class Manager {
 		*/
 		~Manager();
 
-		/** Configure the program environment 
+		/** Configure the program environment
             \returns True if home directory is configured
 		*/
 		bool configure();
@@ -85,8 +85,8 @@ class Manager {
 			\returns True on success
 		*/
 		bool publish( std::string s );
-		
-		/** Mine the current block 
+
+		/** Mine the current block
 			\returns True on success
 		*/
 		bool mine();
@@ -97,26 +97,26 @@ class Manager {
 		*/
 		Record request( std::string h );
 
-		/** Add or generate a private key 
+		/** Add or generate a private key
 			\param p The path to the key file
 			\returns True on success
 		*/
 		bool set_private_key( std::string p );
 
-        
-		/** Add or generate a public key 
+
+		/** Add or generate a public key
 			\param p The path to the key file
 			\returns True on success
 		*/
 		bool set_public_key( std::string p );
-       
-        
+
+
 		/** Sign a previously published document
 			\param s The reference hash to sign
 			\returns True on success
 		*/
 		bool sign( std::string s );
-	
+
 		/** Check the BlockChain is valid
 		    \returns true if blockchain is valid
         */

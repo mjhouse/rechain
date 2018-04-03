@@ -12,6 +12,16 @@ proof-of-work difficulty in order to stop many transactions from being executed 
 Generated documentation is available [here](https://mjhouse.github.io/rechain/). Currently,
 there are no written tutorials or guides because the project isn't that far along yet.
 
+#### ToDo
+
+* set up automated linting with [CppCheck](http://cppcheck.sourceforge.net/) (or similar)
+* set up automatic leak checking with [valgrind](http://valgrind.org/) (or similar)
+* implement Settings class to manage configuration
+
+#### Notes
+
+* read [Cpp Best Practices](https://www.gitbook.com/book/lefticus/cpp-best-practices/details)
+
 ### Can I Contribute?
 
 There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at mjhouse@protonmail.com.
@@ -20,7 +30,7 @@ There isn't any support or guides for contributions, but if you add something co
 
 * make
 
-* g++5.4.0 / llvm-g++ 
+* g++5.4.0
 
 * doxygen
 

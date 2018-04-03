@@ -25,7 +25,6 @@
 #include <string>
 
 // dependency includes
-#include "cxxopts.hpp"
 #include <cryptopp/osrng.h>	    // for the AutoSeededRandomPool
 #include <cryptopp/integer.h>	// for Integer data type
 #include <cryptopp/hex.h>	    // for the HexEncoder
@@ -47,12 +46,6 @@ typedef Logger rl;
 #define DBG( s )( std::cout << "DEBUG: " << s << std::endl )
 
 Manager::Manager( std::string home, Level level ){
-    /*
-    insert( this->context )
-        ("home",home)
-        ("log",home + "/logs/rechain.log")
-        ("private_key");
-    */
     this->home = home;
     Logger::get()
         .with( Log("console",STDOUT,level) )
