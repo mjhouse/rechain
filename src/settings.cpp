@@ -49,15 +49,15 @@ Settings::Settings(){
 		root /= ".rechain";
 	}
 	else {
-		// if nothing else works- throw an error
+		// if nothing else worked- throw an error
 	}
 
 	if(fs::exists(root) && fs::is_directory(root)){
 		// make sure subdirs exist
-		this->set<std::string>("HOME",root.string());
-		this->set<std::stri>
-		if(fs::exists(root / "rechain.config")){
-			
+		this->set<std::string>("home",root.string());
+		this->set<std::string>("config",root / "rechain.config");
+		if(fs::exists(this->get<std::string>("config"))){
+
 		}
 	}
 	else {
