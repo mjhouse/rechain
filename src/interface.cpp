@@ -1,21 +1,21 @@
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact: michaelhouse@gmx.us
+ * Contact: mjhouse@protonmail.com
  *
 */
 
@@ -87,11 +87,11 @@ int Interface::execute(){
 
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()
-		("h,help","Display this usage message")	
+		("h,help","Display this usage message")
 		("v,version","Display version information")
-		("p,publish","Publish a document",cxxopts::value<std::string>(),"<path>")	
-		("c,check","Validate the blockchain")	
-		("m,mine","Mine a block")	
+		("p,publish","Publish a document",cxxopts::value<std::string>(),"<path>")
+		("c,check","Validate the blockchain")
+		("m,mine","Mine a block")
 		("s,sign","Sign a published document",cxxopts::value<std::string>(),"<path>")
 		("private_key","Make a private key active",cxxopts::value<std::string>(),"<path>")
 		("public_key","Make a public key active",cxxopts::value<std::string>(),"<path>")
@@ -99,9 +99,9 @@ int Interface::execute(){
 		("verbose","All logging output")
 		("silent","No logging output");
 
-	
+
     try {
-		
+
 		auto result = options.parse(this->argc,this->argv);
 
         Level level;
@@ -156,7 +156,7 @@ int Interface::execute(){
 				else
 					return ERROR;
 			}
-			
+
 			// Mine the current block
 			if(result.count("mine")){
 				if(this->manager->mine())
@@ -172,14 +172,14 @@ int Interface::execute(){
 				else
 					return ERROR;
 			}
-			
+
 			// Sign a previously published Record
 			if(result.count("sign")){
 				if(this->manager->sign(result["s"].as<std::string>()))
 					return NOERR;
 				else
 					return ERROR;
-				
+
 			}
 
 			// Sign a previously published Record

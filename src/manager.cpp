@@ -1,21 +1,21 @@
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact: michaelhouse@gmx.us
+ * Contact: mjhouse@protonmail.com
  *
 */
 
@@ -86,14 +86,14 @@ bool Manager::configure(){
         if(!this->private_key && !fs::exists(private_key_path)){
            this->private_key.reset(PrivateKey::empty());
            this->private_key->generate();
-           
+
            this->private_key->save(private_key_path);
         }
 
         if(!this->public_key && !fs::exists(public_key_path)){
            this->public_key.reset(PublicKey::empty());
            this->public_key->generate(this->private_key.get());
-           
+
            this->public_key->save(public_key_path);
         }
 
@@ -108,11 +108,11 @@ bool Manager::publish( Record& r ){
 
     if(!blockchain.contains(r.reference(),Search::RecordType)){
         blockchain.add(r);
-  
+
         if(blockchain.valid() && blockchain.save()){
             return true;
         }
-    } 
+    }
 
     return false;
 }
@@ -143,7 +143,7 @@ Record Manager::request( std::string h ){
                 // torrent the file contained
                 // in the record
                 // -----------------------
-			    return r; 
+			    return r;
             }
 		}
 	}

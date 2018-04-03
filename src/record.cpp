@@ -1,21 +1,21 @@
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact: michaelhouse@gmx.us
+ * Contact: mjhouse@protonmail.com
  *
 */
 
@@ -33,9 +33,9 @@ Record::Record(){}
 Record::Record( std::string r, std::string b ) : _reference(r), _block(b) {}
 
 Record::Record( std::ifstream& r ){
-	
+
 	CryptoPP::SHA256 hasher;
-	
+
 	std::string data = [&r]{
 		std::ostringstream ss{};
 		ss << r.rdbuf();
@@ -44,7 +44,7 @@ Record::Record( std::ifstream& r ){
 	CryptoPP::StringSource ss(data,true,
 		new CryptoPP::HashFilter(hasher,
 			new CryptoPP::HexEncoder(
-				new CryptoPP::StringSink(_reference)))); 
+				new CryptoPP::StringSink(_reference))));
 }
 
 Record::~Record(){}
@@ -76,7 +76,7 @@ DataType Record::type(){
 
 std::string Record::string( bool b ){
 	std::string data;
-	
+
 	data.append(_reference);
 	data.append(_block);
 	data.append(_public_key);
@@ -101,4 +101,3 @@ bool Record::valid(){
 
 	return false;
 }
-

@@ -1,21 +1,21 @@
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact: michaelhouse@gmx.us
+ * Contact: mjhouse@protonmail.com
  *
 */
 
@@ -62,7 +62,7 @@ void BlockChain::update_trust(){
 			    break;
 			    case DataType::Signature:
 				records.push_back(r);
-				count++; 
+				count++;
 			    break;
 			}
 		    }
@@ -76,7 +76,7 @@ void BlockChain::update_trust(){
 			std::string pubref = r.reference();
 			std::string signer = r.public_key();
 			std::string signee = references[pubref];
-		    
+
 			float ct = usr_trust[signer]/2.0f;
 			if(ct && !signee.empty()){
 			    usr_trust[signer]	 = ct;	// signer loses half of trust
@@ -89,7 +89,7 @@ void BlockChain::update_trust(){
 
 /* Mine and add a block to the chain
 */
-std::string BlockChain::mine(){	
+std::string BlockChain::mine(){
 	// Check if the chain has a genesis block
 	if(this->blockchain.size() > 0){
 		this->current.previous(this->blockchain.back().hash());
@@ -97,14 +97,14 @@ std::string BlockChain::mine(){
 
 	// Get the hash to return
 	std::string hash = this->current.mine();
-	
+
 	// Add to the chain
 	this->blockchain.push_back( this->current );
-	this->current = Block();	
+	this->current = Block();
 
 	// Update trust maps
 	this->update_trust();
-	
+
 	return hash;
 }
 
@@ -142,10 +142,10 @@ bool BlockChain::contains( std::string s, Search type ){
             for(auto b : blockchain)
                 for(auto r : b)
                     if(r.reference() == s) return true;
-            
+
             for(auto r : current)
                 if(r.reference() == s) return true;
-            
+
             break;
         }
         case Search::BlockType:
@@ -153,7 +153,7 @@ bool BlockChain::contains( std::string s, Search type ){
             // Check in the blockchain
             for(auto b : blockchain)
                 if(b.hash() == s) return true;
-            
+
             break;
         }
     }
@@ -179,7 +179,7 @@ bool BlockChain::valid(){
 
 		for(auto r : b){
 			if(!r.valid()) return false;
-			
+
 			switch(r.type()){
 				case DataType::Publication:
 					if(!pubs.insert(r.reference()).second)
@@ -196,7 +196,7 @@ bool BlockChain::valid(){
 					// Try to find the referenced publication
 					Block& b = *b_it;
 					auto r_it = b.find(r.reference());
-					if(r_it == b.end()) 
+					if(r_it == b.end())
 						return false;
 				}
 				break;
@@ -244,10 +244,10 @@ bool BlockChain::save( std::string p ){
 			rl::get().debug("Blockchain saved: " + path);
 			return true;
 		}
-	} 
+	}
 
-	
-	rl::get().warning("Blockchain failed to save: " + path);	
+
+	rl::get().warning("Blockchain failed to save: " + path);
 	return false;
 }
 
@@ -267,7 +267,7 @@ bool BlockChain::load( std::string p ){
 			return true;
 		}
 	}
-	
-	rl::get().warning("Blockchain failed to load: " + path);	
+
+	rl::get().warning("Blockchain failed to load: " + path);
 	return false;
 }

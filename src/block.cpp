@@ -1,21 +1,21 @@
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact: michaelhouse@gmx.us
+ * Contact: mjhouse@protonmail.com
  *
 */
 
@@ -64,7 +64,7 @@ std::string Block::hash(){
 	CryptoPP::StringSource ss(hash_data,true,
 		new CryptoPP::HashFilter(hasher,
 			new CryptoPP::HexEncoder(
-				new CryptoPP::StringSink(new_hash)))); 
+				new CryptoPP::StringSink(new_hash))));
 	// Return new_hash
 	return new_hash;
 }
@@ -72,28 +72,28 @@ std::string Block::hash(){
 /* Change the hashing variables
 */
 std::string Block::mine(){
-	
+
 	// Mine the block until it has a valid hash
 	while(this->hash() > HASH_MAX){
 		// Update the counter, and reset to 0 if it
 		// gets to the int max
 		if(this->counter >= UINT_MAX-1) this->counter = 0;
 		else this->counter++;
-		
+
 		// Update the timestamp
 		auto e = std::chrono::system_clock::now().time_since_epoch();
 		auto seconds = std::chrono::duration_cast<std::chrono::seconds>(e).count();
 		this->timestamp = (long)seconds;
-	
-		// Update the random nonce	
+
+		// Update the random nonce
 		CryptoPP::AutoSeededRandomPool rng;
 		this->nonce = CryptoPP::Integer(rng,
 			CryptoPP::Integer(1),
-			CryptoPP::Integer(LONG_MAX)).ConvertToLong();	
+			CryptoPP::Integer(LONG_MAX)).ConvertToLong();
 	}
 
 	return this->hash();
-	
+
 }
 
 /* Check if Block is valid
@@ -103,7 +103,7 @@ bool Block::valid(){
 	for(auto r : records)
 		if(!r.valid())
 			return false;
-	
+
 	// Check that hash is good
 	if(this->hash() > HASH_MAX)
 		return false;
@@ -141,7 +141,7 @@ bool Block::add( Record& r ){
 	// Check the Record object is signed and
 	// valid.
 	if(r.valid()){
-		// Add to the end of data	
+		// Add to the end of data
 		records.push_back(r);
 		return true;
 	}
@@ -159,12 +159,12 @@ std::string Block::previous( std::string h ){
 
 /** Return an iterator to the start of the Record
 */
-Block::iterator Block::begin(){ 
+Block::iterator Block::begin(){
 	return records.begin();
 }
 
 /** Returns an iterator to the end of the Record collection
-*/ 
+*/
 Block::iterator Block::end(){
 	return records.end();
 }
