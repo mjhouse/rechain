@@ -1,21 +1,21 @@
 /*
  * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact: mjhouse@protonmail.com
+ * Contact: michaelhouse@gmx.us
  *
 */
 
@@ -26,33 +26,17 @@
 
 // dependency includes
 #include "cxxopts.hpp"
-#include <cryptopp/osrng.h>	    // for the AutoSeededRandomPool
-#include <cryptopp/integer.h>	// for Integer data type
-#include <cryptopp/hex.h>	    // for the HexEncoder
-
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
 
 // local includes
 #include "interface.hpp"
 #include "manager.hpp"
-#include "record.hpp"
-#include "block.hpp"
 #include "blockchain.hpp"
 #include "logger.hpp"
-
-#ifdef WINDOWS
-    #include "windows.h"
-#endif
 
 #define NOERR	0
 #define ERROR	1
 
-namespace fs = boost::filesystem;
-
 typedef Logger rl;
-
-#define HRESULT( b )( b ? NOERR : ERROR )
 
 void Interface::list(){
 	#define print(x)(std::cout << x << std::endl)
@@ -87,11 +71,11 @@ int Interface::execute(){
 
 	cxxopts::Options options("ReChain","The distributed research journal");
 	options.add_options()
-		("h,help","Display this usage message")
+		("h,help","Display this usage message")	
 		("v,version","Display version information")
-		("p,publish","Publish a document",cxxopts::value<std::string>(),"<path>")
-		("c,check","Validate the blockchain")
-		("m,mine","Mine a block")
+		("p,publish","Publish a document",cxxopts::value<std::string>(),"<path>")	
+		("c,check","Validate the blockchain")	
+		("m,mine","Mine a block")	
 		("s,sign","Sign a published document",cxxopts::value<std::string>(),"<path>")
 		("private_key","Make a private key active",cxxopts::value<std::string>(),"<path>")
 		("public_key","Make a public key active",cxxopts::value<std::string>(),"<path>")
@@ -99,9 +83,9 @@ int Interface::execute(){
 		("verbose","All logging output")
 		("silent","No logging output");
 
-
+	
     try {
-
+		
 		auto result = options.parse(this->argc,this->argv);
 
         Level level;
@@ -109,14 +93,7 @@ int Interface::execute(){
         else if(result.count("silent")) level = Level::none;
         else                            level = Level::info;
 
-
-        std::string home = env("RECHAIN_HOME");
-        if(home.empty()){
-			rl::get().error("RECHAIN_HOME isn't set!");
-			return ERROR;
-        }
-
-        this->manager = std::shared_ptr<Manager>(new Manager(home,level));
+        this->manager = std::shared_ptr<Manager>(new Manager(level));
         this->manager->configure();
 
 
@@ -133,16 +110,10 @@ int Interface::execute(){
                 if(!this->manager->set_private_key(result["private_key"].as<std::string>()))
                     status = ERROR;
             }
-            else {
-                this->manager->set_private_key(home + "/current.private");
-            }
 
             if(result.count("public_key")){
                 if(!this->manager->set_public_key(result["public_key"].as<std::string>()))
                     status = ERROR;
-            }
-            else {
-                this->manager->set_public_key(home + "/current.public");
             }
 
             if(status == ERROR){
@@ -156,7 +127,7 @@ int Interface::execute(){
 				else
 					return ERROR;
 			}
-
+			
 			// Mine the current block
 			if(result.count("mine")){
 				if(this->manager->mine())
@@ -172,14 +143,14 @@ int Interface::execute(){
 				else
 					return ERROR;
 			}
-
+			
 			// Sign a previously published Record
 			if(result.count("sign")){
 				if(this->manager->sign(result["s"].as<std::string>()))
 					return NOERR;
 				else
 					return ERROR;
-
+				
 			}
 
 			// Sign a previously published Record

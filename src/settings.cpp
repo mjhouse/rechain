@@ -21,47 +21,65 @@
 
 // system includes
 #include <iostream>
+#include <stdexcept>
 #include <string>
-#include <unistd.h>
-#include <sys/types.h>
-#include <pwd.h>
 
 // dependency includes
 #include <boost/filesystem/operations.hpp>
 #include <boost/lexical_cast.hpp>
+#include <cereal/archives/json.hpp>
+
+// local includes
+#include "settings.hpp"
+#include "logger.hpp"
+#include "utility.hpp"
+
+namespace fs = boost::filesystem;
+typedef Logger rl;
 
 Settings::Settings(){
 
 	// find the users home directory
-	const char *home;
-	fs::path root;
-	if(( home = getenv("RECHAIN_HOME")) != NULL){
-		// if RECHAIN_HOME is set, use that
-		root = fs::path(std::string(home));
-	}
-	else if (( home = getenv("XDG_CONFIG_HOME"))  != NULL ||
-	         ( home = getenv("HOME"))             != NULL ||
-	 	     ( home = getpwuid(getuid())->pw_dir) != NULL )
-	{
-		// otherwise try XDG_CONFIG_HOME, HOME and getpwuid(),
-		// and look for '.rechain' in the home directory
-		root = fs::path(std::string(home));
-		root /= ".rechain";
+	const char *path;
+	fs::path home;
+	if(( path = getenv("RECHAIN_HOME")) != NULL){
+
+		home = fs::path(path);
+
+        if(fs::exists(home) && fs::is_directory(home)){
+        
+            // build a path to the expected config location
+            fs::path config      = home / "rechain.config";
+            fs::path log         = home / "rechain.log";
+            fs::path public_key  = home / "current.public";
+            fs::path private_key = home / "current.private";
+
+            // add the home path and config file path to settings
+            set<std::string>("home",home.string());
+            set<std::string>("config",config.string());
+            set<std::string>("public_key",public_key.string());
+            set<std::string>("private_key",private_key.string());
+            set<std::string>("log",log.string());
+
+            if(fs::exists(config)){
+                // load the config file
+                this->load(); 
+            }
+            else {
+                // create a new default config file
+                this->save();
+            }
+
+        }
+        else {
+            // throw an error: home directory doesn't exist
+            rl::get().error("RECHAIN_HOME directory doesn't exist!");
+            throw std::runtime_error("RECHAIN_HOME directory doesn't exist!");
+        }
 	}
 	else {
-		// if nothing else worked- throw an error
-	}
-
-	if(fs::exists(root) && fs::is_directory(root)){
-		// make sure subdirs exist
-		this->set<std::string>("home",root.string());
-		this->set<std::string>("config",root / "rechain.config");
-		if(fs::exists(this->get<std::string>("config"))){
-
-		}
-	}
-	else {
-		// throw an error: home directory doesn't exist
+        rl::get().error("RECHAIN_HOME environment variable isn't set!");
+        throw std::runtime_error("RECHAIN_HOME environment variable isn't set!");
 	}
 
 }
@@ -71,13 +89,13 @@ Settings* Settings::instance(){
 	return &settings;
 }
 
-<template typename T>
+template <typename T>
 T Settings::get( std::string key ){
 	std::string result = this->settings.at(key);
 	return boost::lexical_cast<T>(result);
 }
 
-<template typename T>
+template <typename T>
 void Settings::set( std::string key, T value ){
 	std::string result = boost::lexical_cast<std::string>(value);
 	this->settings[key] = result;
@@ -85,8 +103,31 @@ void Settings::set( std::string key, T value ){
 
 bool Settings::save(){
 	// save the config
+    std::ofstream ofs(this->get<std::string>("config"));
+    if(ofs.is_open()){
+
+        // serialize settings to the file
+        cereal::JSONOutputArchive archive(ofs);
+        archive( *this );
+
+        rl::get().debug("Settings was saved");
+        return true;
+    }
+    rl::get().warning("Settings couldn't be saved");
+    return false;
 }
 
 bool Settings::load(){
-	// load the config
+    std::ifstream ifs(this->get<std::string>("config"));
+    if(ifs.is_open()){
+
+        // serialize settings from the file
+        cereal::JSONInputArchive archive(ifs);
+        archive( *this );
+
+        rl::get().debug("Settings was loaded");
+        return true;
+    }
+    rl::get().warning("Settings couldn't be loaded");
+    return false;
 }

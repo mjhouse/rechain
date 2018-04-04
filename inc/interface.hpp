@@ -48,25 +48,6 @@ class Interface {
 
         std::shared_ptr<Manager> manager;
 
-		/** Trim a trailing slash from a path
-			\param s The path to trim
-			\returns The trimmed path
-		*/
-		inline std::string trim( std::string s ){
-			auto it = s.end() - 1;
-			if(*it == '/') s.erase(it);
-			return s;
-		}
-
-		/** Get and environment variable
-			\param key The key for the environment variable
-			\returns The variable as a string or empty on failure
-		*/
-		inline std::string env(std::string const& key){
-		    char const* val = std::getenv(key.c_str()); 
-		    return (val == NULL) ? std::string() : trim(std::string(val));
-		}
-
 	public:
 		/** Constructor
 			\param c The count of arguments

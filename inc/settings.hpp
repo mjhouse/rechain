@@ -27,6 +27,9 @@
 #include <string>
 #include <map>
 
+// dependency includes
+#include "cereal/types/map.hpp"
+
 #ifndef _RECHAIN_SETTINGS_HPP_
 #define _RECHAIN_SETTINGS_HPP_
 
@@ -35,10 +38,14 @@
 */
 class Settings {
 	private:
-		std::map<std::string,std::string> settings;		/**< Paths to files in the install location*/
+        /** The settings as key/value string pairs */
+		std::map<std::string,std::string> settings = {
+            { "home", "" },
+            { "config", "" }
+            { "log", "" }
+        };		
 
 		/** \brief Private constructor
-			\param home The path to the install directory
 		*/
 		Settings();
 
@@ -51,20 +58,28 @@ class Settings {
 		/** \brief Get the single instance of Settings
 			\returns A pointer to the Settings object
 		*/
-		Settings* instance();
+		static Settings* instance();
 
 		/** \brief Get a saved value from Settings
 			\param key The key for the desired value
 			\returns A 'T' value or throws an exception
 		*/
-		<template typename T>
+		template <typename T>
 		T get( std::string key );
 
 		/** \brief Set a value in application Settings
 			\param key The key for the desired value
 		*/
-		<template typename T>
+		template <typename T>
 		void set( std::string key, T value );
+
+		/** Serialize/Unserialize settings
+			\param ar The archive to serialize to or from
+		*/
+		template <class Archive>
+		void serialize( Archive& ar ){
+			ar(	CEREAL_NVP(this->settings) );
+		}
 
 		/** \brief Save the settings into a file
 			\returns True if settings were successfully saved

@@ -43,13 +43,12 @@
 namespace fs = boost::filesystem;
 typedef Logger rl;
 
-#define DBG( s )( std::cout << "DEBUG: " << s << std::endl )
+Manager::Manager( Level level ){
+    settings = std::make_shared<Settings>(Settings::instance());
 
-Manager::Manager( std::string home, Level level ){
-    this->home = home;
     Logger::get()
         .with( Log("console",STDOUT,level) )
-        .with( Log("log",home + "/rechain.log",Level::error) );
+        .with( Log("log",settings->get<std::string>("log"),Level::error) );
 }
 
 Manager::~Manager(){
@@ -59,40 +58,27 @@ Manager::~Manager(){
 }
 
 bool Manager::configure(){
-    std::string private_key_path = home + "/current.private";
-    std::string public_key_path  = home + "/current.public";
-    std::string blockchain_path  = home + "/rechain.blockchain";
+    std::string private_key_path = settings.get<std::string>("private_key");
+    std::string public_key_path  = settings.get<std::string>("public_key");
+    std::string blockchain_path  = settings.get<std::string>("blockchain");
 
-    if( this->home.empty() ){
-        rl::get().error("RECHAIN_HOME isn't set.");
-        return false;
-    }
-    else {
-        //fs::create_directories(home + "/torrents/");
-        //fs::create_directories(home + "/files/");
-        //fs::create_directories(home + "/logs/");
-
-        if(!this->blockchain.load(blockchain_path)){
-            this->blockchain.save(blockchain_path);
-        }
-
-        if(!this->private_key && !fs::exists(private_key_path)){
-           this->private_key.reset(PrivateKey::empty());
-           this->private_key->generate();
-
-           this->private_key->save(private_key_path);
-        }
-
-        if(!this->public_key && !fs::exists(public_key_path)){
-           this->public_key.reset(PublicKey::empty());
-           this->public_key->generate(this->private_key.get());
-
-           this->public_key->save(public_key_path);
-        }
-
+    if(!this->blockchain.load(blockchain_path)){
+        this->blockchain.save(blockchain_path);
     }
 
-    return true;
+    if(!this->private_key && !fs::exists(private_key_path)){
+       this->private_key.reset(PrivateKey::empty());
+       this->private_key->generate();
+
+       this->private_key->save(private_key_path);
+    }
+
+    if(!this->public_key && !fs::exists(public_key_path)){
+       this->public_key.reset(PublicKey::empty());
+       this->public_key->generate(this->private_key.get());
+
+       this->public_key->save(public_key_path);
+    }
 }
 
 // publish a record object

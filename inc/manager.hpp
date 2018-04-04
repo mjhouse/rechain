@@ -32,6 +32,7 @@
 
 // local includes
 #include "blockchain.hpp"
+#include "settings.hpp"
 #include "keys.hpp"
 
 /** \brief Executes operations against the blockchain
@@ -39,7 +40,7 @@
 */
 class Manager {
 	private:
-		std::string home;					            /**< The path to the home directory */
+        std::shared_ptr<Settings> settings;
 
 		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
 		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
@@ -69,7 +70,7 @@ class Manager {
 		/** Constructor
             \param home The path to the install directory
 		*/
-		Manager( std::string home, Level level );
+		Manager( Level level );
 
 		/** Destructor
 		*/
