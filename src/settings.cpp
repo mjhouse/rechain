@@ -21,8 +21,8 @@
 
 // system includes
 #include <iostream>
-#include <stdexcept>
 #include <string>
+#include <fstream>
 
 // dependency includes
 #include <boost/filesystem/operations.hpp>
@@ -31,20 +31,23 @@
 
 // local includes
 #include "settings.hpp"
-#include "logger.hpp"
 #include "utility.hpp"
 
 namespace fs = boost::filesystem;
-typedef Logger rl;
 
-Settings::Settings(){
+Settings::Settings(){}
 
+Settings* Settings::instance(){
+	static Settings settings;
+	return &settings;
+}
+
+bool Settings::initialize(){
 	// find the users home directory
-	const char *path;
-	fs::path home;
-	if(( path = getenv("RECHAIN_HOME")) != NULL){
+    const char* path = std::getenv("RECHAIN_HOME");
+	if( path != NULL && (std::strlen(path) != 0)){
 
-		home = fs::path(path);
+        fs::path home(path);
 
         if(fs::exists(home) && fs::is_directory(home)){
         
@@ -55,11 +58,11 @@ Settings::Settings(){
             fs::path private_key = home / "current.private";
 
             // add the home path and config file path to settings
-            set<std::string>("home",home.string());
-            set<std::string>("config",config.string());
-            set<std::string>("public_key",public_key.string());
-            set<std::string>("private_key",private_key.string());
-            set<std::string>("log",log.string());
+            sets("home",home.string());
+            sets("config",config.string());
+            sets("public_key",public_key.string());
+            sets("private_key",private_key.string());
+            sets("log",log.string());
 
             if(fs::exists(config)){
                 // load the config file
@@ -72,21 +75,17 @@ Settings::Settings(){
 
         }
         else {
-            // throw an error: home directory doesn't exist
-            rl::get().error("RECHAIN_HOME directory doesn't exist!");
-            throw std::runtime_error("RECHAIN_HOME directory doesn't exist!");
+            // home directory doesn't exist
+            return false;
         }
 	}
 	else {
-        rl::get().error("RECHAIN_HOME environment variable isn't set!");
-        throw std::runtime_error("RECHAIN_HOME environment variable isn't set!");
-	}
+        // RECHAIN_HOME isn't set
+        return false;
+    }
 
-}
-
-Settings* Settings::instance(){
-	static Settings settings;
-	return &settings;
+    // settings initialized
+    return true;
 }
 
 template <typename T>
@@ -95,39 +94,59 @@ T Settings::get( std::string key ){
 	return boost::lexical_cast<T>(result);
 }
 
+std::string Settings::gets( std::string key ){
+    return this->settings.at(key);
+}
+
 template <typename T>
 void Settings::set( std::string key, T value ){
 	std::string result = boost::lexical_cast<std::string>(value);
 	this->settings[key] = result;
 }
 
-bool Settings::save(){
-	// save the config
-    std::ofstream ofs(this->get<std::string>("config"));
+void Settings::sets( std::string key, std::string value ){
+    this->settings[key] = value;
+}
+
+bool Settings::save( std::string path ){
+    sets("config",path);
+    std::ofstream ofs(path);
     if(ofs.is_open()){
 
         // serialize settings to the file
         cereal::JSONOutputArchive archive(ofs);
         archive( *this );
 
-        rl::get().debug("Settings was saved");
+        // saved
         return true;
     }
-    rl::get().warning("Settings couldn't be saved");
+
+    // couldn't save
     return false;
 }
 
-bool Settings::load(){
-    std::ifstream ifs(this->get<std::string>("config"));
+bool Settings::save(){
+    return save(gets("config"));
+}
+
+bool Settings::load( std::string path ){
+    sets("config",path);
+    std::ifstream ifs(path);
     if(ifs.is_open()){
 
         // serialize settings from the file
         cereal::JSONInputArchive archive(ifs);
         archive( *this );
 
-        rl::get().debug("Settings was loaded");
+        // loaded
         return true;
     }
-    rl::get().warning("Settings couldn't be loaded");
+    
+    // couldn't load
     return false;
 }
+
+bool Settings::load(){
+    return load(gets("config"));
+}
+

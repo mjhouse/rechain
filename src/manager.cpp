@@ -43,12 +43,7 @@
 namespace fs = boost::filesystem;
 typedef Logger rl;
 
-Manager::Manager( Level level ){
-    settings = std::make_shared<Settings>(Settings::instance());
-
-    Logger::get()
-        .with( Log("console",STDOUT,level) )
-        .with( Log("log",settings->get<std::string>("log"),Level::error) );
+Manager::Manager(){
 }
 
 Manager::~Manager(){
@@ -57,15 +52,25 @@ Manager::~Manager(){
     }
 }
 
-bool Manager::configure(){
-    std::string private_key_path = settings.get<std::string>("private_key");
-    std::string public_key_path  = settings.get<std::string>("public_key");
-    std::string blockchain_path  = settings.get<std::string>("blockchain");
+bool Manager::configure( Level level ){
+    
+    settings.reset(Settings::instance());
+    if(!settings->initialize())
+        return false;
+
+    Logger::get()
+        .with( Log("console",STDOUT,level) )
+        .with( Log("log",settings->gets("log"),Level::error) );
+
+    std::string private_key_path = settings->gets("private_key");
+    std::string public_key_path  = settings->gets("public_key");
+    std::string blockchain_path  = settings->gets("blockchain");
 
     if(!this->blockchain.load(blockchain_path)){
         this->blockchain.save(blockchain_path);
     }
-
+    
+    // if there is no private key or key file, create a new one
     if(!this->private_key && !fs::exists(private_key_path)){
        this->private_key.reset(PrivateKey::empty());
        this->private_key->generate();
@@ -73,12 +78,15 @@ bool Manager::configure(){
        this->private_key->save(private_key_path);
     }
 
+    // if there is no public key or key file, create a new one
     if(!this->public_key && !fs::exists(public_key_path)){
        this->public_key.reset(PublicKey::empty());
        this->public_key->generate(this->private_key.get());
 
        this->public_key->save(public_key_path);
     }
+
+    return true;
 }
 
 // publish a record object
@@ -100,17 +108,14 @@ bool Manager::publish( Record& r ){
 bool Manager::publish( std::string s ){
     std::ifstream ifs(s);
     if(ifs.is_open()){
+        // -----------------------
+        // seed the file contained
+        // in the record
+        // -----------------------
         Record r(ifs);
         return this->publish(r);
     }
 
-    return false;
-}
-
-bool Manager::mine(){
-    blockchain.mine();
-    if(blockchain.valid() && blockchain.save())
-        return true;
     return false;
 }
 
@@ -129,17 +134,24 @@ Record Manager::request( std::string h ){
     return Record();
 }
 
+bool Manager::mine(){
+    blockchain.mine();
+    if(blockchain.valid() && blockchain.save())
+        return true;
+    return false;
+}
+
 void Manager::set_private_key( PrivateKey* k ){
     if(k->valid()){
         private_key.reset(k);
-        private_key->save(home + "/current.private");
+        private_key->save(settings->gets("private_key"));
     }
 }
 
 void Manager::set_public_key( PublicKey* k ){
     if(k->valid()){
         public_key.reset(k);
-        public_key->save(home + "/current.public");
+        public_key->save(settings->gets("private_key"));
     }
 }
 

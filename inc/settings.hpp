@@ -41,9 +41,11 @@ class Settings {
         /** The settings as key/value string pairs */
 		std::map<std::string,std::string> settings = {
             { "home", "" },
-            { "config", "" }
+            { "config", "" },
             { "log", "" }
         };		
+
+        bool initialized;
 
 		/** \brief Private constructor
 		*/
@@ -60,18 +62,36 @@ class Settings {
 		*/
 		static Settings* instance();
 
+		/** \brief Initialize this instance of Settings
+			\returns True on success 
+		*/
+		bool initialize();
+
 		/** \brief Get a saved value from Settings
 			\param key The key for the desired value
-			\returns A 'T' value or throws an exception
+			\returns A value of type 'T'
 		*/
 		template <typename T>
 		T get( std::string key );
 
+		/** \brief Get a saved value from Settings
+			\param key The key for the desired value
+			\returns A string value
+		*/
+        std::string gets( std::string key );
+
 		/** \brief Set a value in application Settings
 			\param key The key for the desired value
+			\param value The value to set 
 		*/
 		template <typename T>
 		void set( std::string key, T value );
+
+		/** \brief Set a value in application Settings
+			\param key The key for the desired value
+			\param value The value to set 
+		*/
+        void sets( std::string key, std::string value );
 
 		/** Serialize/Unserialize settings
 			\param ar The archive to serialize to or from
@@ -82,10 +102,22 @@ class Settings {
 		}
 
 		/** \brief Save the settings into a file
+            \param path The path to save the configuration to
+			\returns True if settings were successfully saved
+		*/
+		bool save( std::string path );
+
+		/** \brief Save the settings into a file
 			\returns True if settings were successfully saved
 		*/
 		bool save();
 
+		/** \brief Load the settings from a file
+            \param path The path to load the configuration from
+			\returns True if settings were successfully loaded
+		*/
+		bool load( std::string path);
+        
 		/** \brief Load the settings from a file
 			\returns True if settings were successfully loaded
 		*/

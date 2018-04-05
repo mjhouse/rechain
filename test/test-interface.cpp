@@ -11,6 +11,8 @@ extern void copy_file( std::string in, std::string out );
 extern std::string get_path( std::string partial );
 extern char* get_path_char( std::string partial );
 
+#define P(x)(std::cout << x << std::endl)
+
 SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
 
     GIVEN( "a test environment without variables" ){

@@ -40,8 +40,8 @@
 */
 class Manager {
 	private:
-        std::shared_ptr<Settings> settings;
-
+        
+        std::shared_ptr<Settings> settings;             /**< The Settings object that holds config value */
 		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
 		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
 
@@ -70,7 +70,7 @@ class Manager {
 		/** Constructor
             \param home The path to the install directory
 		*/
-		Manager( Level level );
+		Manager();
 
 		/** Destructor
 		*/
@@ -79,7 +79,7 @@ class Manager {
 		/** Configure the program environment
             \returns True if home directory is configured
 		*/
-		bool configure();
+		bool configure(Level level);
 
 		/** Publish a given document
 			\param s The path to the file
@@ -87,16 +87,16 @@ class Manager {
 		*/
 		bool publish( std::string s );
 
-		/** Mine the current block
-			\returns True on success
-		*/
-		bool mine();
-
 		/** Find a document by reference
 			\param h The hash of the file
 			\returns True on success
 		*/
 		Record request( std::string h );
+
+		/** Mine the current block
+			\returns True on success
+		*/
+		bool mine();
 
 		/** Add or generate a private key
 			\param p The path to the key file

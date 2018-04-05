@@ -15,9 +15,14 @@
 static const std::string STDOUT = "__stdout__"; /**< A key to identify STDOUT v. file path */
 static const std::string STDERR = "__stderr__";	/**< A key to identify STDERR v. file path */
 
+
+/** \todo create macros for all levels and update logger
+          to take __LINE__ and __FILE__ arguments 
+*/
+
 /** A log that writes to a file or stderr/stdout
 */
-class Log{
+class Log {
 	private:
 		std::string _name;	/**< The name to identify this log by */
 		std::string _out;	/**< The path to the log file */

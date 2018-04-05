@@ -93,8 +93,9 @@ int Interface::execute(){
         else if(result.count("silent")) level = Level::none;
         else                            level = Level::info;
 
-        this->manager = std::shared_ptr<Manager>(new Manager(level));
-        this->manager->configure();
+        manager = std::shared_ptr<Manager>(new Manager());
+        if(!manager->configure(level))
+            return ERROR;
 
 
         // Check for help first
