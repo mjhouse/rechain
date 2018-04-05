@@ -17,8 +17,13 @@ static const std::string STDERR = "__stderr__";	/**< A key to identify STDERR v.
 
 
 /** \todo create macros for all levels and update logger
-          to take __LINE__ and __FILE__ arguments 
+          to take __LINE__ and __FILE__ arguments
 */
+
+#define INFO( s ) ( Logger::get()->info( __FILE__, __LINE__, s ) )
+#define DEBUG( s ) ( Logger::get()->debug( __FILE__, __LINE__, s ) )
+#define WARNING( s ) ( Logger::get()->warning( __FILE__, __LINE__, s ) )
+#define ERROR( s ) ( Logger::get()->error( __FILE__, __LINE__, s ) )
 
 /** A log that writes to a file or stderr/stdout
 */
@@ -140,7 +145,7 @@ class Log {
         }
 };
 
-/** The Logger is a singleton class used to write to 
+/** The Logger is a singleton class used to write to
 	a collection of logs.
 */
 class Logger {
@@ -200,6 +205,18 @@ class Logger {
 			return *this;
 		}
 
+		/** Write an info-level message to the logs
+			\param f The file of the caller
+			\param l The line number of the caller
+			\param m The message to write
+			\returns A reference to the Logger
+		*/
+		Logger& info( const char* f, const int l, std::string m ){
+			std::string file(f,std::strlen(f));
+			std::string line = boost::lexical_cast<std::string>(l);
+			return info(file + ": " + line + ": " + m);
+		}
+
 		/** Write a debug-level message to the logs
 			\param m The message to write
 			\returns A reference to the Logger
@@ -208,7 +225,19 @@ class Logger {
 			write("Debug: " + m,Level::debug);
 			return *this;
 		}
-		
+
+		/** Write an debug-level message to the logs
+			\param f The file of the caller
+			\param l The line number of the caller
+			\param m The message to write
+			\returns A reference to the Logger
+		*/
+		Logger& debug( const char* f, const int l, std::string m ){
+			std::string file(f,std::strlen(f));
+			std::string line = boost::lexical_cast<std::string>(l);
+			return debug(file + ": " + line + ": " + m);
+		}
+
 		/** Write a warning-level message to the logs
 			\param m The message to write
 			\returns A reference to the Logger
@@ -217,7 +246,19 @@ class Logger {
 			write("Warning: " + m,Level::warning);
 			return *this;
 		}
-	
+
+		/** Write an warning-level message to the logs
+			\param f The file of the caller
+			\param l The line number of the caller
+			\param m The message to write
+			\returns A reference to the Logger
+		*/
+		Logger& warning( const char* f, const int l, std::string m ){
+			std::string file(f,std::strlen(f));
+			std::string line = boost::lexical_cast<std::string>(l);
+			return warning(file + ": " + line + ": " + m);
+		}
+
 		/** Write an error-level message to the logs
 			\param m The message to write
 			\returns A reference to the Logger
@@ -225,6 +266,18 @@ class Logger {
 		Logger& error( std::string m ){
 			write("Error: " + m,Level::error);
 			return *this;
+		}
+
+		/** Write an error-level message to the logs
+			\param f The file of the caller
+			\param l The line number of the caller
+			\param m The message to write
+			\returns A reference to the Logger
+		*/
+		Logger& error( const char* f, const int l, std::string m ){
+			std::string file(f,std::strlen(f));
+			std::string line = boost::lexical_cast<std::string>(l);
+			return error(file + ": " + line + ": " + m);
 		}
 };
 
