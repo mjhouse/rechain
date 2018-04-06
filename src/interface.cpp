@@ -33,8 +33,8 @@
 #include "blockchain.hpp"
 #include "logger.hpp"
 
-#define NOERR	0
-#define ERROR	1
+#define H_NOERR	0
+#define H_ERROR	1
 
 typedef Logger rl;
 
@@ -94,83 +94,84 @@ int Interface::execute(){
         else                            level = Level::info;
 
         manager = std::shared_ptr<Manager>(new Manager());
-        if(!manager->configure(level))
-            return ERROR;
+        if(!manager->configure(level)){
+            return H_ERROR;
+        }
 
 
         // Check for help first
 		if(result.count("help")){
 			// Display help for command line options
 			std::cout << options.help() << std::endl;
-            return NOERR;
+            return H_NOERR;
 		}
 		else {
 
-            int status = NOERR;
+            int status = H_NOERR;
             if(result.count("private_key")){
                 if(!this->manager->set_private_key(result["private_key"].as<std::string>()))
-                    status = ERROR;
+                    status = H_ERROR;
             }
 
             if(result.count("public_key")){
                 if(!this->manager->set_public_key(result["public_key"].as<std::string>()))
-                    status = ERROR;
+                    status = H_ERROR;
             }
 
-            if(status == ERROR){
+            if(status == H_ERROR){
                 return status;
             }
 
 			// Publish a document to the BlockChain
 			if(result.count("publish")){
 				if(this->manager->publish(result["p"].as<std::string>()))
-					return NOERR;
+					return H_NOERR;
 				else
-					return ERROR;
+					return H_ERROR;
 			}
 			
 			// Mine the current block
 			if(result.count("mine")){
 				if(this->manager->mine())
-					return NOERR;
+					return H_NOERR;
 				else
-					return ERROR;
+					return H_ERROR;
 			}
 
 			// Check the BlockChain integrity
 			if(result.count("check")){
                 if(this->manager->validate())
-					return NOERR;
+					return H_NOERR;
 				else
-					return ERROR;
+					return H_ERROR;
 			}
 			
 			// Sign a previously published Record
 			if(result.count("sign")){
 				if(this->manager->sign(result["s"].as<std::string>()))
-					return NOERR;
+					return H_NOERR;
 				else
-					return ERROR;
+					return H_ERROR;
 				
 			}
 
 			// Sign a previously published Record
 			if(result.count("list")){
 				this->list();
-                return NOERR;
+                return H_NOERR;
 			}
 
 			// Display the current version
 			if(result.count("version")){
                 std::cout << "ReChain v" << RECHAIN_VERSION << " (GNU GPL v3) "
 					  << "The distributed research journal" << std::endl;
-				return NOERR;
+				return H_NOERR;
 			}
 		}
 	} catch (const cxxopts::OptionException& e){
 		rl::get().error("Failed to parse command line arguments!");
-        return ERROR;
+        return H_ERROR;
 	}
 
-	return NOERR;
+	return H_NOERR;
 }

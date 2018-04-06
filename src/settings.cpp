@@ -38,8 +38,8 @@ namespace fs = boost::filesystem;
 Settings::Settings(){}
 
 Settings* Settings::instance(){
-	static Settings settings;
-	return &settings;
+    static Settings settings;
+    return &settings;
 }
 
 bool Settings::initialize(){
@@ -47,11 +47,10 @@ bool Settings::initialize(){
     const char* path = std::getenv("RECHAIN_HOME");
 	if( path != NULL && (std::strlen(path) != 0)){
 
-
-        fs::path home(std::string(path,std::strlen(path)));
+        fs::path home(path);
 
         if(fs::exists(home) && fs::is_directory(home)){
-
+        
             // build a path to the expected config location
             fs::path config      = home / "rechain.config";
             fs::path log         = home / "rechain.log";
@@ -67,7 +66,7 @@ bool Settings::initialize(){
 
             if(fs::exists(config)){
                 // load the config file
-                this->load();
+                this->load(); 
             }
             else {
                 // create a new default config file
@@ -86,6 +85,7 @@ bool Settings::initialize(){
     }
 
     // settings initialized
+    initialized = true;
     return true;
 }
 
@@ -142,7 +142,7 @@ bool Settings::load( std::string path ){
         // loaded
         return true;
     }
-
+    
     // couldn't load
     return false;
 }
@@ -150,3 +150,4 @@ bool Settings::load( std::string path ){
 bool Settings::load(){
     return load(gets("config"));
 }
+

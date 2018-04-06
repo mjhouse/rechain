@@ -54,7 +54,7 @@ Manager::~Manager(){
 
 bool Manager::configure( Level level ){
     
-    settings.reset(Settings::instance());
+    settings = Settings::instance();
     if(!settings->initialize())
         return false;
 

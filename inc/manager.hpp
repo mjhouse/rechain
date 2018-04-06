@@ -41,7 +41,7 @@
 class Manager {
 	private:
         
-        std::shared_ptr<Settings> settings;             /**< The Settings object that holds config value */
+        Settings* settings;                             /**< The Settings object that holds config value */
 		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
 		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
 

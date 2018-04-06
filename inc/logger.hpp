@@ -6,6 +6,9 @@
 #include <fstream>
 #include <ctime>
 
+// dependency includes
+#include <boost/lexical_cast.hpp>
+
 // local includes
 #include "enums.hpp"
 
@@ -20,10 +23,10 @@ static const std::string STDERR = "__stderr__";	/**< A key to identify STDERR v.
           to take __LINE__ and __FILE__ arguments
 */
 
-#define INFO( s ) ( Logger::get()->info( __FILE__, __LINE__, s ) )
-#define DEBUG( s ) ( Logger::get()->debug( __FILE__, __LINE__, s ) )
-#define WARNING( s ) ( Logger::get()->warning( __FILE__, __LINE__, s ) )
-#define ERROR( s ) ( Logger::get()->error( __FILE__, __LINE__, s ) )
+#define R_INFO( s ) ( Logger::get()->info( __FILE__, __LINE__, s ) )
+#define R_DEBUG( s ) ( Logger::get()->debug( __FILE__, __LINE__, s ) )
+#define R_WARNING( s ) ( Logger::get()->warning( __FILE__, __LINE__, s ) )
+#define R_ERROR( s ) ( Logger::get()->error( __FILE__, __LINE__, s ) )
 
 /** A log that writes to a file or stderr/stdout
 */
