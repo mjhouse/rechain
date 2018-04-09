@@ -30,10 +30,19 @@
 #include <string>
 #include <iostream>
 
+// dependency includes
+#include <boost/filesystem/path.hpp>
+
 // local includes
 #include "blockchain.hpp"
 #include "settings.hpp"
-#include "keys.hpp"
+
+namespace fs = boost::filesystem;
+
+class PrivateKey;
+class PublicKey;
+class Settings;
+class Remote;
 
 /** \brief Executes operations against the blockchain
     and holds the private and public keys.
@@ -41,7 +50,8 @@
 class Manager {
 	private:
         
-        Settings* settings;                             /**< The Settings object that holds config value */
+        std::shared_ptr<Settings> settings;             /**< Settings instance for configuration */
+        std::shared_ptr<Remote> remote;                 /**< Remote instance for web requests */
 		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
 		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
 
@@ -65,10 +75,15 @@ class Manager {
 		*/
 		void set_public_key( PublicKey* k );
 
-        /** \brief Create a torrent
-            \param path The file to create a torrent file for
+        /** \brief Setup the home directory
+            \returns True if setup was successful
         */
-        void create_torrent( std::string path );
+        bool make_home();
+
+        /** \brief Create a torrent
+            \param name The file to create a torrent file for
+        */
+        void create_torrent( fs::path file );
 
     public:
 

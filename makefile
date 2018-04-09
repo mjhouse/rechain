@@ -26,7 +26,7 @@ OBJECTS  := $(SOURCES:$(SRCDIR)/%.cpp=$(BLDDIR)/%.o)
 TOBJECTS := $(patsubst %.cpp, $(BLDDIR)/%.o, $(notdir $(TSOURCES)))
 
 # clear out tmp files from the test dir
-$(shell rm -f test/data/files/tmp/*)
+$(shell rm -rf test/data/files/tmp/*)
 
 # ----------------------------------------------------------------------
 # DON'T EDIT BELOW THIS LINE

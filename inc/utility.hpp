@@ -27,7 +27,13 @@
 #include <algorithm> 
 #include <functional> 
 #include <cctype>
+#include <stdio.h>
 #include <locale>
+
+// dependency includes
+#include <boost/filesystem/path.hpp>
+
+namespace fs = boost::filesystem;
 
 #ifndef _RECHAIN_UTILITY_HPP_
 #define _RECHAIN_UTILITY_HPP_
@@ -64,6 +70,24 @@ namespace rechain {
         return s;
     }
 
+    // copy a file
+    static inline bool copy_file( std::string from, std::string to, bool overwrite ){
+        if(overwrite)
+            remove(to.c_str());
+
+        std::ifstream ifs(from,std::ios::binary);
+        std::ofstream ofs(to,std::ios::binary);
+        if(ifs.is_open() && ofs.is_open()){
+            ofs << ifs.rdbuf();
+            return true;
+        }
+        return false;
+    }
+
+    // copy a file using boost paths
+    static inline bool copy_file( fs::path from, fs::path to, bool overwrite ){
+        return copy_file(from.string(),to.string(),overwrite);
+    }
 }
 
 #endif

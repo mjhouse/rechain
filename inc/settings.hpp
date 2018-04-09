@@ -47,25 +47,16 @@ class Settings {
 
         bool initialized;
 
+
+	public:
+
 		/** \brief Private constructor
 		*/
 		Settings();
 
-	public:
-
 		/** \brief The destructor
 		*/
 		~Settings(){}
-
-		/** \brief Get the single instance of Settings
-			\returns A pointer to the Settings object
-		*/
-		static Settings* instance();
-
-		/** \brief Initialize this instance of Settings
-			\returns True on success 
-		*/
-		bool initialize();
 
 		/** \brief Get a saved value from Settings
 			\param key The key for the desired value

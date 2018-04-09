@@ -37,14 +37,7 @@
 namespace fs = boost::filesystem;
 typedef Logger rl;
 
-Settings::Settings(){}
-
-Settings* Settings::instance(){
-    static Settings settings;
-    return &settings;
-}
-
-bool Settings::initialize(){
+Settings::Settings(){
 	// find the users home directory
     const char* path = std::getenv("RECHAIN_HOME");
 	if( path != NULL && (std::strlen(path) != 0)){
@@ -53,20 +46,28 @@ bool Settings::initialize(){
 
         if(fs::exists(home) && fs::is_directory(home)){
         
-            // build a path to the expected config location
+            // build paths 
             fs::path config      = home / "rechain.config";
             fs::path log         = home / "rechain.log";
             fs::path public_key  = home / "current.public";
             fs::path private_key = home / "current.private";
             fs::path blockchain  = home / "rechain.blockchain";
 
-            // add the home path and config file path to settings
+            fs::path logs        = home / "logs";
+            fs::path files       = home / "files";
+            fs::path torrents    = home / "torrents";
+
+            // add the paths to settings
             sets("home",home.string());
             sets("config",config.string());
             sets("public_key",public_key.string());
             sets("private_key",private_key.string());
             sets("log",log.string());
             sets("blockchain",blockchain.string());
+
+            sets("logs",logs.string());
+            sets("files",files.string());
+            sets("torrents",torrents.string());
 
             if(fs::exists(config)){
                 // load the config file
@@ -80,17 +81,11 @@ bool Settings::initialize(){
         }
         else {
             // home directory doesn't exist
-            return false;
         }
 	}
 	else {
         // RECHAIN_HOME isn't set
-        return false;
     }
-
-    // settings initialized
-    initialized = true;
-    return true;
 }
 
 template <typename T>

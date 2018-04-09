@@ -23,15 +23,11 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <memory>
 
 // dependency includes
-#include <cryptopp/osrng.h>	    // for the AutoSeededRandomPool
-#include <cryptopp/integer.h>	// for Integer data type
-#include <cryptopp/hex.h>	    // for the HexEncoder
-
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
-#include <boost/assign/list_inserter.hpp>
 
 #include <libtorrent/create_torrent.hpp>
 
@@ -41,13 +37,16 @@
 #include "block.hpp"
 #include "blockchain.hpp"
 #include "logger.hpp"
+#include "remote.hpp"
+#include "utility.hpp"
 
 namespace fs = boost::filesystem;
 namespace lt = libtorrent;
+namespace rc = rechain;
 
 typedef Logger rl;
 
-Manager::Manager(){
+Manager::Manager() : settings(nullptr), remote(nullptr) {
 }
 
 Manager::~Manager(){
@@ -57,9 +56,15 @@ Manager::~Manager(){
 }
 
 bool Manager::configure( Level level ){
-    
-    settings = Settings::instance();
-    if(!settings->initialize())
+   
+    // create a Settings instance
+    settings.reset(new Settings());
+
+    // create a new Remote instance
+    remote.reset(new Remote( settings ));
+
+    // verify or create home dir structure
+    if(!make_home())
         return false;
 
     Logger::get()
@@ -126,14 +131,14 @@ bool Manager::publish( Record& r ){
     return false;
 }
 
-// publish a file
+// publish a file given a path string
 bool Manager::publish( std::string s ){
     std::ifstream ifs(s);
     if(ifs.is_open()){
         Record r(ifs);
         bool result = this->publish(r);
         if(result){
-            //create_torrent( s );
+            remote->seed( s );
             return true;
         }
     }
@@ -165,32 +170,49 @@ bool Manager::mine(){
 
 void Manager::set_private_key( PrivateKey* k ){
     if(k->valid()){
+        std::string path = settings->gets("private_key");
+
         private_key.reset(k);
-        private_key->save(settings->gets("private_key"));
+        private_key->save(path);
     }
 }
 
 void Manager::set_public_key( PublicKey* k ){
     if(k->valid()){
+        std::string path = settings->gets("public_key");
+
         public_key.reset(k);
-        public_key->save(settings->gets("public_key"));
+        public_key->save(path);
     }
 }
 
-void Manager::create_torrent( std::string path ){
-    if(fs::exists(path)){
-        lt::file_storage storage;
-        lt::add_files(storage,path);
+bool Manager::make_home(){
+    // build/validate the expected dir structure
+    fs::path home(settings->gets("home"));
+    
+    fs::path logs(settings->gets("logs"));
+    fs::path files(settings->gets("files"));
+    fs::path torrents(settings->gets("torrents"));
 
-        lt::create_torrent torrent(storage);
-        
-        torrent.add_tracker("http://my.tracker.com/announce");
+    try {
+        if( !(fs::exists(logs) || fs::create_directory(logs)) ){
+            return false;
+        }
 
-        lt::set_piece_hashes(torrent,".");
-        
-        std::ofstream ofs("data/tmp/mytorrent.torrent",std::ios_base::binary);
-        lt::bencode(std::ostream_iterator<char>(ofs), torrent.generate());
+        if( !(fs::exists(files) || fs::create_directory(files)) ){
+            return false;
+        }
+
+        if( !(fs::exists(torrents) || fs::create_directory(torrents)) ){
+            return false;
+        }
     }
+    catch (fs::filesystem_error& e){
+        rl::get().error(e.what());
+        return false;
+    }
+
+    return true;
 }
 
 bool Manager::set_private_key( std::string p ){
