@@ -25,7 +25,7 @@
 			private pair of RSA256 keys.
 */
 
-#include <fstream>			// File I/O
+#include <fstream>			    // File I/O
 #include <iostream>
 #include <stdexcept>
 

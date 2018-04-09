@@ -32,8 +32,10 @@
 // local includes
 #include "settings.hpp"
 #include "utility.hpp"
+#include "logger.hpp"
 
 namespace fs = boost::filesystem;
+typedef Logger rl;
 
 Settings::Settings(){}
 
@@ -56,6 +58,7 @@ bool Settings::initialize(){
             fs::path log         = home / "rechain.log";
             fs::path public_key  = home / "current.public";
             fs::path private_key = home / "current.private";
+            fs::path blockchain  = home / "rechain.blockchain";
 
             // add the home path and config file path to settings
             sets("home",home.string());
@@ -63,6 +66,7 @@ bool Settings::initialize(){
             sets("public_key",public_key.string());
             sets("private_key",private_key.string());
             sets("log",log.string());
+            sets("blockchain",blockchain.string());
 
             if(fs::exists(config)){
                 // load the config file
@@ -91,12 +95,18 @@ bool Settings::initialize(){
 
 template <typename T>
 T Settings::get( std::string key ){
-	std::string result = this->settings.at(key);
+	std::string result = gets(key);
 	return boost::lexical_cast<T>(result);
 }
 
 std::string Settings::gets( std::string key ){
-    return this->settings.at(key);
+    try {
+        return this->settings.at(key);
+    }
+    catch(const std::out_of_range& e){
+        rl::get().error("value '" + key + "' isn't in settings!");
+        return "";
+    }
 }
 
 template <typename T>

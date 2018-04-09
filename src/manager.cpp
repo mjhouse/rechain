@@ -71,19 +71,24 @@ bool Manager::configure( Level level ){
     }
     
     // if there is no private key or key file, create a new one
-    if(!this->private_key && !fs::exists(private_key_path)){
-       this->private_key.reset(PrivateKey::empty());
-       this->private_key->generate();
-
-       this->private_key->save(private_key_path);
+    if(fs::exists(private_key_path)){
+        this->private_key.reset(PrivateKey::load_file(private_key_path)); 
+    }
+    else {
+        this->private_key.reset(PrivateKey::empty());
+        this->private_key->generate();
+        this->private_key->save(private_key_path);
     }
 
     // if there is no public key or key file, create a new one
-    if(!this->public_key && !fs::exists(public_key_path)){
-       this->public_key.reset(PublicKey::empty());
-       this->public_key->generate(this->private_key.get());
+    if(fs::exists(public_key_path)){
+        this->public_key.reset(PublicKey::load_file(public_key_path));
+    }
+    else {
+        this->public_key.reset(PublicKey::empty());
+        this->public_key->generate(this->private_key.get());
 
-       this->public_key->save(public_key_path);
+        this->public_key->save(public_key_path);
     }
 
     return true;
@@ -91,6 +96,7 @@ bool Manager::configure( Level level ){
 
 // publish a record object
 bool Manager::publish( Record& r ){
+
     private_key->sign(r);
 
     if(!blockchain.contains(r.reference(),Search::RecordType)){
@@ -151,7 +157,7 @@ void Manager::set_private_key( PrivateKey* k ){
 void Manager::set_public_key( PublicKey* k ){
     if(k->valid()){
         public_key.reset(k);
-        public_key->save(settings->gets("private_key"));
+        public_key->save(settings->gets("public_key"));
     }
 }
 

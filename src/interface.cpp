@@ -113,6 +113,7 @@ int Interface::execute(){
                     status = H_ERROR;
             }
 
+
             if(result.count("public_key")){
                 if(!this->manager->set_public_key(result["public_key"].as<std::string>()))
                     status = H_ERROR;
