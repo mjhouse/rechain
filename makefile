@@ -36,7 +36,7 @@ all: ./configure.sh
 debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -ggdb 
 debug: link-debug
 
-test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -DTEST_ROOT=\"test/data\" 
+test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -DBOOST_ASIO_DYN_LINK -DTEST_ROOT=\"test/data\" 
 test: link-test
 	./bin/rechain ${TAGGED}
 
