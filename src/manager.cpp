@@ -33,6 +33,8 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/assign/list_inserter.hpp>
 
+#include <libtorrent/create_torrent.hpp>
+
 // local includes
 #include "manager.hpp"
 #include "record.hpp"
@@ -41,6 +43,8 @@
 #include "logger.hpp"
 
 namespace fs = boost::filesystem;
+namespace lt = libtorrent;
+
 typedef Logger rl;
 
 Manager::Manager(){
@@ -66,29 +70,41 @@ bool Manager::configure( Level level ){
     std::string public_key_path  = settings->gets("public_key");
     std::string blockchain_path  = settings->gets("blockchain");
 
-    if(!this->blockchain.load(blockchain_path)){
-        this->blockchain.save(blockchain_path);
+    if(!blockchain.load(blockchain_path)){
+        blockchain.save(blockchain_path);
     }
     
     // if there is no private key or key file, create a new one
     if(fs::exists(private_key_path)){
-        this->private_key.reset(PrivateKey::load_file(private_key_path)); 
+        try {
+            private_key.reset(PrivateKey::load_file(private_key_path)); 
+        }
+        catch(std::invalid_argument& e){
+            rl::get().error("Private key is corrupted: " + private_key_path);
+            return false;
+        }
     }
     else {
-        this->private_key.reset(PrivateKey::empty());
-        this->private_key->generate();
-        this->private_key->save(private_key_path);
+        private_key.reset(PrivateKey::empty());
+        private_key->generate();
+        private_key->save(private_key_path);
     }
 
     // if there is no public key or key file, create a new one
     if(fs::exists(public_key_path)){
-        this->public_key.reset(PublicKey::load_file(public_key_path));
+        try {
+            public_key.reset(PublicKey::load_file(public_key_path));
+        }
+        catch(const std::invalid_argument& e){
+            rl::get().error("Public key is corrupted: " + private_key_path);
+            return false;
+        }
     }
     else {
-        this->public_key.reset(PublicKey::empty());
-        this->public_key->generate(this->private_key.get());
+        public_key.reset(PublicKey::empty());
+        public_key->generate(this->private_key.get());
 
-        this->public_key->save(public_key_path);
+        public_key->save(public_key_path);
     }
 
     return true;
@@ -114,12 +130,12 @@ bool Manager::publish( Record& r ){
 bool Manager::publish( std::string s ){
     std::ifstream ifs(s);
     if(ifs.is_open()){
-        // -----------------------
-        // seed the file contained
-        // in the record
-        // -----------------------
         Record r(ifs);
-        return this->publish(r);
+        bool result = this->publish(r);
+        if(result){
+            //create_torrent( s );
+            return true;
+        }
     }
 
     return false;
@@ -158,6 +174,22 @@ void Manager::set_public_key( PublicKey* k ){
     if(k->valid()){
         public_key.reset(k);
         public_key->save(settings->gets("public_key"));
+    }
+}
+
+void Manager::create_torrent( std::string path ){
+    if(fs::exists(path)){
+        lt::file_storage storage;
+        lt::add_files(storage,path);
+
+        lt::create_torrent torrent(storage);
+        
+        torrent.add_tracker("http://my.tracker.com/announce");
+
+        lt::set_piece_hashes(torrent,".");
+        
+        std::ofstream ofs("data/tmp/mytorrent.torrent",std::ios_base::binary);
+        lt::bencode(std::ostream_iterator<char>(ofs), torrent.generate());
     }
 }
 

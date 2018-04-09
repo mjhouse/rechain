@@ -16,7 +16,6 @@ there are no written tutorials or guides because the project isn't that far alon
 
 * set up automated linting with [CppCheck](http://cppcheck.sourceforge.net/) (or similar)
 * set up automatic leak checking with [valgrind](http://valgrind.org/) (or similar)
-* implement Settings class to manage configuration
 
 #### Notes
 
@@ -42,3 +41,4 @@ There isn't any support or guides for contributions, but if you add something co
 | cereal                | Serializing objects to/from files     | Included     |
 | Crypto++              | Public keys and hashing               | Not included |
 | Catch2                | Unit tests                            | Included     |
+| Libtorrent            | For sharing published documents       | Not Included |

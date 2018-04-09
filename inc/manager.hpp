@@ -65,6 +65,11 @@ class Manager {
 		*/
 		void set_public_key( PublicKey* k );
 
+        /** \brief Create a torrent
+            \param path The file to create a torrent file for
+        */
+        void create_torrent( std::string path );
+
     public:
 
 		/** Constructor

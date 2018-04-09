@@ -3,8 +3,10 @@ CC=gcc
 
 # This is overridden from the command line
 # to provide arguments to the tests
-TAGGED =
-VERSION= $(shell git describe --abbrev=0 --tags)
+TAGGED  =
+VERSION = $(shell git describe --abbrev=0 --tags)
+COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_filesystem -lboost_system -ltorrent-rasterbar 
+
 
 TARGET = bin/rechain
 OUTDIR = bin
@@ -31,14 +33,14 @@ $(shell rm -f test/data/files/tmp/*)
 # ----------------------------------------------------------------------
 all: ./configure.sh
 
-debug: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -ggdb -lboost_system -lboost_filesystem 
+debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -ggdb 
 debug: link-debug
 
-test: CPPFLAGS = -std=c++11 -lcrypto++ -lpthread -Wall -Wextra -Wpedantic -g -Wno-deprecated -fprofile-arcs -ftest-coverage -lboost_filesystem -lboost_system -DTEST_ROOT=\"test/data\" 
+test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -DTEST_ROOT=\"test/data\" 
 test: link-test
 	./bin/rechain ${TAGGED}
 
-release: CPPFLAGS = -DNDEBUG -std=c++11 -lpthread -lcrypto++ -O3 -lboost_system -lboost_filesystem
+release: CPPFLAGS = ${COMMON} -DNDEBUG -O3
 release: link-release
 
 # LINK
