@@ -65,11 +65,11 @@ bool Manager::configure( Level level ){
 
     Logger::get()
         .with( Log("console",STDOUT,level) )
-        .with( Log("log",cfg::get()->gets("log"),Level::error) );
+        .with( Log("log",cfg::get()->setting("log"),Level::error) );
 
-    std::string private_key_path = cfg::get()->gets("private_key");
-    std::string public_key_path  = cfg::get()->gets("public_key");
-    std::string blockchain_path  = cfg::get()->gets("blockchain");
+    std::string private_key_path = cfg::get()->setting("private_key");
+    std::string public_key_path  = cfg::get()->setting("public_key");
+    std::string blockchain_path  = cfg::get()->setting("blockchain");
 
     if(!blockchain.load(blockchain_path)){
         blockchain.save(blockchain_path);
@@ -165,7 +165,7 @@ bool Manager::mine(){
 
 void Manager::set_private_key( PrivateKey* k ){
     if(k->valid()){
-        std::string path = cfg::get()->gets("private_key");
+        std::string path = cfg::get()->setting("private_key");
 
         private_key.reset(k);
         private_key->save(path);
@@ -174,7 +174,7 @@ void Manager::set_private_key( PrivateKey* k ){
 
 void Manager::set_public_key( PublicKey* k ){
     if(k->valid()){
-        std::string path = cfg::get()->gets("public_key");
+        std::string path = cfg::get()->setting("public_key");
 
         public_key.reset(k);
         public_key->save(path);
@@ -183,11 +183,11 @@ void Manager::set_public_key( PublicKey* k ){
 
 bool Manager::make_home(){
     // build/validate the expected dir structure
-    fs::path home(cfg::get()->gets("home"));
+    fs::path home(cfg::get()->setting("home"));
     
-    fs::path logs(cfg::get()->gets("logs"));
-    fs::path files(cfg::get()->gets("files"));
-    fs::path torrents(cfg::get()->gets("torrents"));
+    fs::path logs(cfg::get()->setting("logs"));
+    fs::path files(cfg::get()->setting("files"));
+    fs::path torrents(cfg::get()->setting("torrents"));
 
     try {
         if( !(fs::exists(logs) || fs::create_directory(logs)) ){

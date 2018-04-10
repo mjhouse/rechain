@@ -49,7 +49,7 @@ Remote::~Remote(){
 
 void Remote::broadcast( Record& record ){
     // broadcast a new record to the network
-    //std::string url = Config::get()->gets("tracker");
+    //std::string url = Config::get()->setting("tracker");
 }
 
 void Remote::receive( ){

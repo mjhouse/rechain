@@ -65,29 +65,15 @@ class Config {
 
 		/** \brief Get a saved value from Config
 			\param key The key for the desired value
-			\returns A value of type 'T'
-		*/
-		template <typename T>
-		T get( std::string key );
-
-		/** \brief Get a saved value from Config
-			\param key The key for the desired value
 			\returns A string value
 		*/
-        std::string gets( std::string key );
+        std::string setting( std::string key );
 
 		/** \brief Set a value in application Config
 			\param key The key for the desired value
 			\param value The value to set 
 		*/
-		template <typename T>
-		void set( std::string key, T value );
-
-		/** \brief Set a value in application Config
-			\param key The key for the desired value
-			\param value The value to set 
-		*/
-        void sets( std::string key, std::string value );
+        void setting( std::string key, std::string value );
 
 		/** Serialize/Unserialize settings
 			\param ar The archive to serialize to or from

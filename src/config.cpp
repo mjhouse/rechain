@@ -44,44 +44,29 @@ Config::Config(){
 
         fs::path home(path);
 
-        if(fs::exists(home) && fs::is_directory(home)){
-        
-            // build paths 
-            fs::path config      = home / "rechain.config";
-            fs::path log         = home / "rechain.log";
-            fs::path public_key  = home / "current.public";
-            fs::path private_key = home / "current.private";
-            fs::path blockchain  = home / "rechain.blockchain";
+        // build paths 
+        fs::path config      = home / "rechain.config";
+        fs::path log         = home / "rechain.log";
+        fs::path public_key  = home / "current.public";
+        fs::path private_key = home / "current.private";
+        fs::path blockchain  = home / "rechain.blockchain";
 
-            fs::path logs        = home / "logs";
-            fs::path files       = home / "files";
-            fs::path torrents    = home / "torrents";
+        fs::path logs        = home / "logs";
+        fs::path files       = home / "files";
+        fs::path torrents    = home / "torrents";
 
-            // add the paths to settings
-            sets("home",home.string());
-            sets("config",config.string());
-            sets("public_key",public_key.string());
-            sets("private_key",private_key.string());
-            sets("log",log.string());
-            sets("blockchain",blockchain.string());
+        // add the paths to settings
+        setting("home",home.string());
+        setting("config",config.string());
+        setting("public_key",public_key.string());
+        setting("private_key",private_key.string());
+        setting("log",log.string());
+        setting("blockchain",blockchain.string());
 
-            sets("logs",logs.string());
-            sets("files",files.string());
-            sets("torrents",torrents.string());
+        setting("logs",logs.string());
+        setting("files",files.string());
+        setting("torrents",torrents.string());
 
-            if(fs::exists(config)){
-                // load the config file
-                this->load(); 
-            }
-            else {
-                // create a new default config file
-                this->save();
-            }
-
-        }
-        else {
-            // home directory doesn't exist
-        }
 	}
 	else {
         // RECHAIN_HOME isn't set
@@ -90,41 +75,29 @@ Config::Config(){
 
 // get the config instance
 Config* Config::get(){
-    static Config cfg;
-    return &cfg;
+    static Config config;
+    return &config;
 }
 
 Config::~Config(){
 }
 
-template <typename T>
-T Config::get( std::string key ){
-	std::string result = gets(key);
-	return boost::lexical_cast<T>(result);
-}
-
-std::string Config::gets( std::string key ){
+std::string Config::setting( std::string key ){
     try {
         return settings.at(key);
     }
     catch(const std::out_of_range& e){
-        rl::get().error("value '" + key + "' isn't in settings!");
+        rl::get().error("value for '" + key + "' isn't in settings");
         return "";
     }
 }
 
-template <typename T>
-void Config::set( std::string key, T value ){
-	std::string result = boost::lexical_cast<std::string>(value);
-	this->settings[key] = result;
-}
-
-void Config::sets( std::string key, std::string value ){
+void Config::setting( std::string key, std::string value ){
     this->settings[key] = value;
 }
 
 bool Config::save( std::string path ){
-    sets("config",path);
+    setting("config",path);
     std::ofstream ofs(path);
     if(ofs.is_open()){
 
@@ -141,11 +114,11 @@ bool Config::save( std::string path ){
 }
 
 bool Config::save(){
-    return save(gets("config"));
+    return save(setting("config"));
 }
 
 bool Config::load( std::string path ){
-    sets("config",path);
+    setting("config",path);
     std::ifstream ifs(path);
     if(ifs.is_open()){
 
@@ -162,6 +135,6 @@ bool Config::load( std::string path ){
 }
 
 bool Config::load(){
-    return load(gets("config"));
+    return load(setting("config"));
 }
 
