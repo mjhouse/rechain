@@ -40,41 +40,32 @@
 
 namespace fs = boost::filesystem;
 
-class Settings;
-
 /** \brief Handles http(s) requests and torrents.
 */
 class Remote {
 
     private:
-        std::shared_ptr<Settings> settings;
 
-
-        /** Create a new torrent file
-            \param file The file to create a torrent for
-            \returns A path to the torrent file
-        */
-        std::string create_torrent( fs::path file );
 
     public:
-
         /** Private constructor 
         */
-        Remote( std::shared_ptr<Settings>& s );
+        Remote();
 
         /** Destructor
         */
         ~Remote();
 
-        /** Seed a file to peers 
-            \param path The file to seed
+        /** Broadcast a new record to all miners 
+            \param record The Record to broadcast
         */
-        void seed( std::string path );
+        void broadcast( Record& record );
 
-        /** Get a file from peers
-            \param t The file hash 
+        /** Push received records to a listener 
+            NOT IMPLEMENTED
         */
-        void leech( std::string t );
+        void receive();
+
 };
 
 #endif

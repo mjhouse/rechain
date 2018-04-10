@@ -29,24 +29,23 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-#include <libtorrent/create_torrent.hpp>
-
 // local includes
 #include "manager.hpp"
 #include "record.hpp"
 #include "block.hpp"
 #include "blockchain.hpp"
 #include "logger.hpp"
+#include "config.hpp"
 #include "remote.hpp"
 #include "utility.hpp"
 
 namespace fs = boost::filesystem;
-namespace lt = libtorrent;
 namespace rc = rechain;
 
 typedef Logger rl;
+typedef Config cfg;
 
-Manager::Manager() : settings(nullptr), remote(nullptr) {
+Manager::Manager() : remote(nullptr) {
 }
 
 Manager::~Manager(){
@@ -56,12 +55,9 @@ Manager::~Manager(){
 }
 
 bool Manager::configure( Level level ){
-   
-    // create a Settings instance
-    settings.reset(new Settings());
 
     // create a new Remote instance
-    remote.reset(new Remote( settings ));
+    remote.reset(new Remote());
 
     // verify or create home dir structure
     if(!make_home())
@@ -69,11 +65,11 @@ bool Manager::configure( Level level ){
 
     Logger::get()
         .with( Log("console",STDOUT,level) )
-        .with( Log("log",settings->gets("log"),Level::error) );
+        .with( Log("log",cfg::get()->gets("log"),Level::error) );
 
-    std::string private_key_path = settings->gets("private_key");
-    std::string public_key_path  = settings->gets("public_key");
-    std::string blockchain_path  = settings->gets("blockchain");
+    std::string private_key_path = cfg::get()->gets("private_key");
+    std::string public_key_path  = cfg::get()->gets("public_key");
+    std::string blockchain_path  = cfg::get()->gets("blockchain");
 
     if(!blockchain.load(blockchain_path)){
         blockchain.save(blockchain_path);
@@ -138,7 +134,6 @@ bool Manager::publish( std::string s ){
         Record r(ifs);
         bool result = this->publish(r);
         if(result){
-            remote->seed( s );
             return true;
         }
     }
@@ -170,7 +165,7 @@ bool Manager::mine(){
 
 void Manager::set_private_key( PrivateKey* k ){
     if(k->valid()){
-        std::string path = settings->gets("private_key");
+        std::string path = cfg::get()->gets("private_key");
 
         private_key.reset(k);
         private_key->save(path);
@@ -179,7 +174,7 @@ void Manager::set_private_key( PrivateKey* k ){
 
 void Manager::set_public_key( PublicKey* k ){
     if(k->valid()){
-        std::string path = settings->gets("public_key");
+        std::string path = cfg::get()->gets("public_key");
 
         public_key.reset(k);
         public_key->save(path);
@@ -188,11 +183,11 @@ void Manager::set_public_key( PublicKey* k ){
 
 bool Manager::make_home(){
     // build/validate the expected dir structure
-    fs::path home(settings->gets("home"));
+    fs::path home(cfg::get()->gets("home"));
     
-    fs::path logs(settings->gets("logs"));
-    fs::path files(settings->gets("files"));
-    fs::path torrents(settings->gets("torrents"));
+    fs::path logs(cfg::get()->gets("logs"));
+    fs::path files(cfg::get()->gets("files"));
+    fs::path torrents(cfg::get()->gets("torrents"));
 
     try {
         if( !(fs::exists(logs) || fs::create_directory(logs)) ){

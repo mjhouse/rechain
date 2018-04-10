@@ -35,13 +35,12 @@
 
 // local includes
 #include "blockchain.hpp"
-#include "settings.hpp"
+#include "config.hpp"
 
 namespace fs = boost::filesystem;
 
 class PrivateKey;
 class PublicKey;
-class Settings;
 class Remote;
 
 /** \brief Executes operations against the blockchain
@@ -50,7 +49,6 @@ class Remote;
 class Manager {
 	private:
         
-        std::shared_ptr<Settings> settings;             /**< Settings instance for configuration */
         std::shared_ptr<Remote> remote;                 /**< Remote instance for web requests */
 		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
 		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */

@@ -74,6 +74,7 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             std::string help_gold = dump_file(get_path("files/gold/interface_help.gold"));
 
 			THEN("interface prints help message"){
+                std::cout << "CALLING" << std::endl;
 				Interface i(argc,argv);
                 int result = i.execute();
 

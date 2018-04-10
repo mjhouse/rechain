@@ -5,7 +5,7 @@ CC=gcc
 # to provide arguments to the tests
 TAGGED  =
 VERSION = $(shell git describe --abbrev=0 --tags)
-COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_filesystem -lboost_system -ltorrent-rasterbar 
+COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_filesystem -lboost_system -ltorrent-rasterbar -DBOOST_ROOT -DBOOST_ASIO_DYN_LINK
 
 
 TARGET = bin/rechain
@@ -33,10 +33,11 @@ $(shell rm -rf test/data/files/tmp/*)
 # ----------------------------------------------------------------------
 all: ./configure.sh
 
-debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -ggdb 
+debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -ggdb
 debug: link-debug
 
-test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -DBOOST_ASIO_DYN_LINK -DTEST_ROOT=\"test/data\" 
+test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -DTEST_ROOT=\"test/data\" 
+test: export BOOST_ROOT = /usr/include/boost
 test: link-test
 	./bin/rechain ${TAGGED}
 

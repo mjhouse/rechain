@@ -35,10 +35,11 @@ There isn't any support or guides for contributions, but if you add something co
 
 ### Dependencies
 
-| Dependency		        | Included for				                  | Status       |
+| Dependency		    | Included for		                    | Status       |
 |:----------------------|:--------------------------------------|:-------------|
 | cxxopts               | Command line argument parsing         | Included     |
 | cereal                | Serializing objects to/from files     | Included     |
 | Crypto++              | Public keys and hashing               | Not included |
 | Catch2                | Unit tests                            | Included     |
-| Libtorrent            | For sharing published documents       | Not Included |
+| libtorrent            | Sharing published documents           | Not Included |
+| cpp-netlib 0.11.2     | Communicating with other clients      | Not Included |
