@@ -46,6 +46,7 @@ class Interface {
 		int argc;					                	/**< Command line argument count */
 		char** argv;			            			/**< Command line arguments */
 
+        /** Pointer to the manager */
         std::shared_ptr<Manager> manager;
 
 	public:

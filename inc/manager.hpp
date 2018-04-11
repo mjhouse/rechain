@@ -79,15 +79,9 @@ class Manager {
         */
         bool make_home();
 
-        /** \brief Create a torrent
-            \param name The file to create a torrent file for
-        */
-        void create_torrent( fs::path file );
-
     public:
 
 		/** Constructor
-            \param home The path to the install directory
 		*/
 		Manager();
 
@@ -96,6 +90,7 @@ class Manager {
 		~Manager();
 
 		/** Configure the program environment
+            \param level The level to log at
             \returns True if home directory is configured
 		*/
 		bool configure(Level level);

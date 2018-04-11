@@ -59,6 +59,10 @@ class Remote {
         */
         ~Remote();
 
+        /** \brief Init the Remote
+            \param cfg A Config pointer to provide paths
+            \returns True if initialization was successful
+        */
         bool initialize( std::shared_ptr<Config> cfg );
         
         /** Broadcast a new record to all miners 

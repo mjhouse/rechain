@@ -40,37 +40,54 @@ namespace fs = boost::filesystem;
 
 namespace rechain {
 
-    // trim from start (in place)
+    /** \brief Trim whitespace from the left side of a string
+        \param s A reference to the string to trim
+    */
     static inline void ltrim(std::string &s) {
         s.erase(s.begin(), std::find_if(s.begin(), s.end(),
                 std::not1(std::ptr_fun<int, int>(std::isspace))));
     }
 
-    // trim from end (in place)
+    /** \brief Trim whitespace from the right side of a string
+        \param s A reference to the string to trim
+    */
     static inline void rtrim(std::string &s) {
         s.erase(std::find_if(s.rbegin(), s.rend(),
                 std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
     }
 
-    // trim from both ends (in place)
+    /** \brief Trim whitespace from both sides of a string
+        \param s A reference to the string to trim
+    */
     static inline void trim(std::string &s) {
         ltrim(s);
         rtrim(s);
     }
 
-    // trim from start (copying)
+    /** \brief Trim whitespace from the left side of a string
+        \param s The string to trim
+        \returns A trimmed copy of the string
+    */
     static inline std::string ltrim_copy(std::string s) {
         ltrim(s);
         return s;
     }
 
-    // trim from end (copying)
+    /** \brief Trim whitespace from the right side of a string
+        \param s The string to trim
+        \returns A trimmed copy of the string
+    */
     static inline std::string rtrim_copy(std::string s) {
         rtrim(s);
         return s;
     }
 
-    // copy a file
+    /** \brief Copy a file from one location to another
+        \param from The full path of the source file
+        \param to The full path to the new location
+        \param overwrite True if copy should overwrite
+        \returns True if copy was successful
+    */
     static inline bool copy_file( std::string from, std::string to, bool overwrite ){
         if(overwrite)
             remove(to.c_str());
@@ -84,7 +101,12 @@ namespace rechain {
         return false;
     }
 
-    // copy a file using boost paths
+    /** \brief Copy a file from one location to another
+        \param from The boost::filesystem::path of the source file
+        \param to The full boost::filesystem::path to the new location
+        \param overwrite True if copy should overwrite
+        \returns True if copy was successful
+    */
     static inline bool copy_file( fs::path from, fs::path to, bool overwrite ){
         return copy_file(from.string(),to.string(),overwrite);
     }
