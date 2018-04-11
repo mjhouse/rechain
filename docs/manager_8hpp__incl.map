@@ -1,7 +1,7 @@
 <map id="inc/manager.hpp" name="inc/manager.hpp">
-<area shape="rect" id="node4" href="$blockchain_8hpp.html" title="Defines the BlockChain class that manages Block objects, searches and verifies the Block collection..." alt="" coords="1063,80,1173,107"/>
-<area shape="rect" id="node18" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="465,80,539,107"/>
-<area shape="rect" id="node13" href="$block_8hpp_source.html" title="block.hpp" alt="" coords="1079,155,1157,181"/>
-<area shape="rect" id="node15" href="$record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="609,155,691,181"/>
-<area shape="rect" id="node17" href="$enums_8hpp_source.html" title="enums.hpp" alt="" coords="607,229,693,256"/>
+<area shape="rect" id="node5" href="$blockchain_8hpp.html" title="Defines the BlockChain class that manages Block objects, searches and verifies the Block collection..." alt="" coords="394,80,503,107"/>
+<area shape="rect" id="node19" href="$config_8hpp.html" title="Global settings for the application. " alt="" coords="883,80,966,107"/>
+<area shape="rect" id="node14" href="$block_8hpp_source.html" title="block.hpp" alt="" coords="260,155,339,181"/>
+<area shape="rect" id="node16" href="$record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="897,155,979,181"/>
+<area shape="rect" id="node18" href="$enums_8hpp_source.html" title="enums.hpp" alt="" coords="749,229,836,256"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classKey.html" title="Key\&lt; CryptoPP::RSA\l::PublicKey, PublicKey \&gt;" alt="" coords="5,5,173,47"/>
-<area shape="rect" id="node2" href="$classPublicKey.html" title="PublicKey" alt="" coords="221,13,303,39"/>
+<area shape="rect" id="node1" href="$classKey.html" title="Key\&lt; CryptoPP::RSA\l::PrivateKey, PrivateKey \&gt;" alt="" coords="5,5,184,47"/>
+<area shape="rect" id="node2" href="$classPrivateKey.html" title="PrivateKey" alt="" coords="232,13,319,39"/>
 </map>

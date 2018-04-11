@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['record_2ehpp',['record.hpp',['../record_8hpp.html',1,'']]]
+  ['manager_2ehpp',['manager.hpp',['../manager_8hpp.html',1,'']]]
 ];

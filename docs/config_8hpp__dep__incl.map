@@ -1,0 +1,8 @@
+<map id="inc/config.hpp" name="inc/config.hpp">
+<area shape="rect" id="node2" href="$manager_8hpp.html" title="Handles requests from a cli or gui. " alt="" coords="39,80,157,107"/>
+<area shape="rect" id="node4" href="$manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="148,155,267,181"/>
+<area shape="rect" id="node5" href="$remote_8hpp.html" title="Handles web requests. " alt="" coords="233,80,341,107"/>
+<area shape="rect" id="node6" href="$remote_8cpp_source.html" title="src/remote.cpp" alt="" coords="302,155,411,181"/>
+<area shape="rect" id="node7" href="$config_8cpp_source.html" title="src/config.cpp" alt="" coords="417,80,521,107"/>
+<area shape="rect" id="node3" href="$interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="5,155,124,181"/>
+</map>

@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "Block", "classBlock.html", null ],
     [ "BlockChain", "classBlockChain.html", null ],
+    [ "Config", "classConfig.html", null ],
     [ "Interface", "classInterface.html", null ],
     [ "Key< T, K >", "classKey.html", null ],
     [ "Key< CryptoPP::RSA::PrivateKey, PrivateKey >", "classKey.html", [
@@ -13,5 +14,6 @@ var hierarchy =
     [ "Log", "classLog.html", null ],
     [ "Logger", "classLogger.html", null ],
     [ "Manager", "classManager.html", null ],
-    [ "Record", "classRecord.html", null ]
+    [ "Record", "classRecord.html", null ],
+    [ "Remote", "classRemote.html", null ]
 ];

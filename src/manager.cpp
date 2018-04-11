@@ -71,6 +71,7 @@ bool Manager::configure( Level level ){
     if(!make_home())
         return false;
 
+    // configure logger
     Logger::get()
         .with( Log("console",STDOUT,level) )
         .with( Log("log",config->setting("log"),Level::error) );

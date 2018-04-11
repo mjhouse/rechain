@@ -108,7 +108,6 @@ $(document).ready(function(){initNavTree('classInterface.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classInterface-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -128,13 +127,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a687ee3c3021f07b0cfd9af5b42b71896"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3f24e3f85920b871a65c0b25d79224d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterface.html#aa3f24e3f85920b871a65c0b25d79224d">execute</a> ()</td></tr>
 <tr class="separator:aa3f24e3f85920b871a65c0b25d79224d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:a17b94f7a998330a5966c2aa633884855"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterface.html#a17b94f7a998330a5966c2aa633884855">trim</a> (std::string s)</td></tr>
-<tr class="separator:a17b94f7a998330a5966c2aa633884855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9255da373826af6766b3849b04cf0826"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterface.html#a9255da373826af6766b3849b04cf0826">env</a> (std::string const &amp;key)</td></tr>
-<tr class="separator:a9255da373826af6766b3849b04cf0826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -190,7 +182,7 @@ std::shared_ptr&lt; <a class="el" href="classManager.html">Manager</a> &gt;&#160
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="interface_8hpp_source.html#l00075">75</a> of file <a class="el" href="interface_8hpp_source.html">interface.hpp</a>.</p>
+<p>Definition at line <a class="el" href="interface_8hpp_source.html#l00056">56</a> of file <a class="el" href="interface_8hpp_source.html">interface.hpp</a>.</p>
 
 </div>
 </div>
@@ -216,44 +208,11 @@ std::shared_ptr&lt; <a class="el" href="classManager.html">Manager</a> &gt;&#160
 </div><div class="memdoc">
 <p>Destructor </p>
 
-<p>Definition at line <a class="el" href="interface_8hpp_source.html#l00079">79</a> of file <a class="el" href="interface_8hpp_source.html">interface.hpp</a>.</p>
+<p>Definition at line <a class="el" href="interface_8hpp_source.html#l00060">60</a> of file <a class="el" href="interface_8hpp_source.html">interface.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a9255da373826af6766b3849b04cf0826"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Interface::env </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Get and environment variable </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>The key for the environment variable </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The variable as a string or empty on failure </dd></dl>
-
-<p>Definition at line <a class="el" href="interface_8hpp_source.html#l00065">65</a> of file <a class="el" href="interface_8hpp_source.html">interface.hpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="aa3f24e3f85920b871a65c0b25d79224d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -268,7 +227,7 @@ std::shared_ptr&lt; <a class="el" href="classManager.html">Manager</a> &gt;&#160
 </div><div class="memdoc">
 <p>Execute command line options </p><dl class="section return"><dt>Returns</dt><dd>0 on success, 1 otherwise. </dd></dl>
 
-<p>Definition at line <a class="el" href="interface_8cpp_source.html#l00086">86</a> of file <a class="el" href="interface_8cpp_source.html">interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="interface_8cpp_source.html#l00070">70</a> of file <a class="el" href="interface_8cpp_source.html">interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -286,40 +245,7 @@ std::shared_ptr&lt; <a class="el" href="classManager.html">Manager</a> &gt;&#160
 </div><div class="memdoc">
 <p>Print the current blockchain </p>
 
-<p>Definition at line <a class="el" href="interface_8cpp_source.html#l00057">57</a> of file <a class="el" href="interface_8cpp_source.html">interface.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a17b94f7a998330a5966c2aa633884855"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Interface::trim </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Trim a trailing slash from a path </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>The path to trim </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The trimmed path </dd></dl>
-
-<p>Definition at line <a class="el" href="interface_8hpp_source.html#l00055">55</a> of file <a class="el" href="interface_8hpp_source.html">interface.hpp</a>.</p>
+<p>Definition at line <a class="el" href="interface_8cpp_source.html#l00041">41</a> of file <a class="el" href="interface_8cpp_source.html">interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -380,7 +306,7 @@ std::shared_ptr&lt; <a class="el" href="classManager.html">Manager</a> &gt;&#160
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classInterface.html">Interface</a></li>
-    <li class="footer">Generated on Mon Apr 2 2018 15:17:46 for ReChain by
+    <li class="footer">Generated on Wed Apr 11 2018 06:04:17 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
