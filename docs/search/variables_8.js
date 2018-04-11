@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nonce',['nonce',['../classBlock.html#a5dc13805185f799f0057e3dd9c5179a7',1,'Block']]]
+  ['manager',['manager',['../classInterface.html#a54b022d952778edad89d2ce7f2638d40',1,'Interface']]]
 ];

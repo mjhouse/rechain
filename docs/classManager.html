@@ -166,9 +166,6 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a4f9374369368d53352e340d85194217a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a4f9374369368d53352e340d85194217a">make_home</a> ()</td></tr>
 <tr class="memdesc:a4f9374369368d53352e340d85194217a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the home directory.  <a href="#a4f9374369368d53352e340d85194217a">More...</a><br /></td></tr>
 <tr class="separator:a4f9374369368d53352e340d85194217a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0414535f98f727fcf9fed0f2cafee77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#ae0414535f98f727fcf9fed0f2cafee77">create_torrent</a> (fs::path file)</td></tr>
-<tr class="memdesc:ae0414535f98f727fcf9fed0f2cafee77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a torrent.  <a href="#ae0414535f98f727fcf9fed0f2cafee77">More...</a><br /></td></tr>
-<tr class="separator:ae0414535f98f727fcf9fed0f2cafee77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -199,12 +196,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Constructor </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">home</td><td>The path to the install directory </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Constructor </p>
 
 <p>Definition at line <a class="el" href="manager_8cpp_source.html#l00047">47</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
@@ -242,39 +234,15 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Configure the program environment </p><dl class="section return"><dt>Returns</dt><dd>True if home directory is configured </dd></dl>
-
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00056">56</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae0414535f98f727fcf9fed0f2cafee77"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Manager::create_torrent </td>
-          <td>(</td>
-          <td class="paramtype">fs::path&#160;</td>
-          <td class="paramname"><em>file</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Configure the program environment </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>The file to create a torrent file for </td></tr>
+    <tr><td class="paramname">level</td><td>The level to log at </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if home directory is configured </dd></dl>
+
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00056">56</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -300,7 +268,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get a copy of the blockchain </p><dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classBlockChain.html">BlockChain</a> instance </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8hpp_source.html#l00148">148</a> of file <a class="el" href="manager_8hpp_source.html">manager.hpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8hpp_source.html#l00143">143</a> of file <a class="el" href="manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -716,7 +684,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classManager.html">Manager</a></li>
-    <li class="footer">Generated on Wed Apr 11 2018 06:10:06 for ReChain by
+    <li class="footer">Generated on Wed Apr 11 2018 06:47:03 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

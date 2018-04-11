@@ -1,0 +1,16 @@
+/home/mhouse/Projects/cpp/rechain/inc/utility.hpp:44: warning: Member ltrim(std::string &s) (function) of namespace rechain is not documented.
+/home/mhouse/Projects/cpp/rechain/inc/utility.hpp:50: warning: Member rtrim(std::string &s) (function) of namespace rechain is not documented.
+/home/mhouse/Projects/cpp/rechain/inc/utility.hpp:56: warning: Member trim(std::string &s) (function) of namespace rechain is not documented.
+/home/mhouse/Projects/cpp/rechain/inc/utility.hpp:62: warning: Member ltrim_copy(std::string s) (function) of namespace rechain is not documented.
+/home/mhouse/Projects/cpp/rechain/inc/utility.hpp:68: warning: Member rtrim_copy(std::string s) (function) of namespace rechain is not documented.
+/home/mhouse/Projects/cpp/rechain/inc/utility.hpp:74: warning: Member copy_file(std::string from, std::string to, bool overwrite) (function) of namespace rechain is not documented.
+/home/mhouse/Projects/cpp/rechain/inc/utility.hpp:88: warning: Member copy_file(fs::path from, fs::path to, bool overwrite) (function) of namespace rechain is not documented.
+/home/mhouse/Projects/cpp/rechain/inc/interface.hpp:49: warning: Member manager (variable) of class Interface is not documented.
+/home/mhouse/Projects/cpp/rechain/inc/manager.hpp:89: warning: argument 'home' of command @param is not found in the argument list of Manager::Manager()
+/home/mhouse/Projects/cpp/rechain/inc/manager.hpp:101: warning: parameters of member Manager::configure are not (all) documented
+/home/mhouse/Projects/cpp/rechain/inc/manager.hpp:82: warning: argument 'name' of command @param is not found in the argument list of Manager::create_torrent(fs::path file)
+/home/mhouse/Projects/cpp/rechain/inc/manager.hpp:85: warning: The following parameters of Manager::create_torrent(fs::path file) are not documented:
+  parameter 'file'
+/home/mhouse/Projects/cpp/rechain/inc/remote.hpp:62: warning: Member initialize(std::shared_ptr< Config > cfg) (function) of class Remote is not documented.
+/home/mhouse/Projects/cpp/rechain/README.md:3: warning: Unexpected html tag <img> found within <a href=...> context
+/home/mhouse/Projects/cpp/rechain/README.md:4: warning: Unexpected html tag <img> found within <a href=...> context

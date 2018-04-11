@@ -3,7 +3,6 @@ var classManager =
     [ "Manager", "classManager.html#a1658ff9f18e38ccd9cb8b0b371b9c20b", null ],
     [ "~Manager", "classManager.html#a322cad25d7007438b3a043ad02253d29", null ],
     [ "configure", "classManager.html#a7cce6ce9113b55d90c86a6d09531d9d0", null ],
-    [ "create_torrent", "classManager.html#ae0414535f98f727fcf9fed0f2cafee77", null ],
     [ "get_blockchain", "classManager.html#aa8acd793912b2e7f96b9c66c5be1fe32", null ],
     [ "make_home", "classManager.html#a4f9374369368d53352e340d85194217a", null ],
     [ "mine", "classManager.html#ad735e35ec5313ef895a3be0ab7cd21ce", null ],

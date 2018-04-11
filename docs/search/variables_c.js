@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timestamp',['timestamp',['../classBlock.html#acaa9f7ad0f75fdafc83a435d2c38425d',1,'Block']]]
+  ['settings',['settings',['../classConfig.html#a734b11f702a5fae1fbc98a94f8bc91c5',1,'Config']]]
 ];
