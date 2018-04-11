@@ -55,8 +55,6 @@ class Remote {
         */
         Remote();
 
-        /** Destructor
-        */
         ~Remote();
 
         /** \brief Init the Remote
