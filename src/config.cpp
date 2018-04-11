@@ -37,59 +37,61 @@
 namespace fs = boost::filesystem;
 typedef Logger rl;
 
-Config::Config(){
-	// find the users home directory
-    const char* path = std::getenv("RECHAIN_HOME");
-	if( path != NULL && (std::strlen(path) != 0)){
+Config::Config() : initialized(false) {
 
-        fs::path home(path);
-
-        // build paths 
-        fs::path config      = home / "rechain.config";
-        fs::path log         = home / "rechain.log";
-        fs::path public_key  = home / "current.public";
-        fs::path private_key = home / "current.private";
-        fs::path blockchain  = home / "rechain.blockchain";
-
-        fs::path logs        = home / "logs";
-        fs::path files       = home / "files";
-        fs::path torrents    = home / "torrents";
-
-        // add the paths to settings
-        setting("home",home.string());
-        setting("config",config.string());
-        setting("public_key",public_key.string());
-        setting("private_key",private_key.string());
-        setting("log",log.string());
-        setting("blockchain",blockchain.string());
-
-        setting("logs",logs.string());
-        setting("files",files.string());
-        setting("torrents",torrents.string());
-
-	}
-	else {
-        // RECHAIN_HOME isn't set
-    }
-}
-
-// get the config instance
-Config* Config::get(){
-    static Config config;
-    return &config;
 }
 
 Config::~Config(){
+
+}
+
+bool Config::initialize(){
+
+	// find the users home directory
+    if(!initialized){
+        const char* path = std::getenv("RECHAIN_HOME");
+        if( path != NULL && (std::strlen(path) != 0)){
+
+            fs::path home(path);
+
+            // build paths 
+            fs::path config      = home / "rechain.config";
+            fs::path log         = home / "rechain.log";
+            fs::path public_key  = home / "current.public";
+            fs::path private_key = home / "current.private";
+            fs::path blockchain  = home / "rechain.blockchain";
+
+            fs::path logs        = home / "logs";
+            fs::path files       = home / "files";
+            fs::path torrents    = home / "torrents";
+
+            // add the paths to settings
+            setting("home",home.string());
+            setting("config",config.string());
+            setting("public_key",public_key.string());
+            setting("private_key",private_key.string());
+            setting("log",log.string());
+            setting("blockchain",blockchain.string());
+
+            setting("logs",logs.string());
+            setting("files",files.string());
+            setting("torrents",torrents.string());
+
+            initialized = true;
+            return initialized;
+        }
+	}
+
+    return false;
+
 }
 
 std::string Config::setting( std::string key ){
-    try {
-        return settings.at(key);
-    }
-    catch(const std::out_of_range& e){
-        rl::get().error("value for '" + key + "' isn't in settings");
+    auto it = settings.find(key);
+    if(it == settings.end())
         return "";
-    }
+
+    return it->second;
 }
 
 void Config::setting( std::string key, std::string value ){

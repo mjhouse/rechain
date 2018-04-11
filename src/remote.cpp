@@ -37,14 +37,17 @@ namespace fs = boost::filesystem;
 namespace rc = rechain;
 
 typedef Logger rl;
-typedef Config cfg;
 
-Remote::Remote(){
-
+Remote::Remote() : config(nullptr) {
 }
 
 Remote::~Remote(){
 
+}
+
+bool Remote::initialize( std::shared_ptr<Config> cfg ){
+    config = cfg;
+    return true;
 }
 
 void Remote::broadcast( Record& record ){

@@ -49,6 +49,7 @@ class Remote;
 class Manager {
 	private:
         
+        std::shared_ptr<Config> config;                 /**< Application configuration/paths */
         std::shared_ptr<Remote> remote;                 /**< Remote instance for web requests */
 		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
 		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */

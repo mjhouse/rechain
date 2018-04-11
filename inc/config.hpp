@@ -39,29 +39,25 @@
 class Config {
 	private:
         /** The settings as key/value string pairs */
-		std::map<std::string,std::string> settings = {
-            { "home", "" },
-            { "config", "" },
-            { "log", "" }
-        };		
+		std::map<std::string,std::string> settings;
 
+        /** Flag to stop initialization from happening more than once */
         bool initialized;
-
-
-		/** \brief Private constructor
-		*/
-		Config();
 
 	public:
 
-        /** \brief Get the single instance
-            \returns A pointer to Config
-        */
-        static Config* get();
+		/** \brief constructor
+		*/
+		Config();
 
 		/** \brief The destructor
 		*/
 		~Config();
+
+        /** \brief Create initial settings values
+            \returns True if initialization was successful
+        */
+        bool initialize();
 
 		/** \brief Get a saved value from Config
 			\param key The key for the desired value
@@ -80,7 +76,7 @@ class Config {
 		*/
 		template <class Archive>
 		void serialize( Archive& ar ){
-			ar(	CEREAL_NVP(this->settings) );
+			ar(	CEREAL_NVP(settings) );
 		}
 
 		/** \brief Save the settings into a file

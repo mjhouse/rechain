@@ -36,6 +36,7 @@
 
 // local includes
 #include "blockchain.hpp"
+#include "config.hpp"
 #include "keys.hpp"
 
 namespace fs = boost::filesystem;
@@ -46,6 +47,8 @@ class Remote {
 
     private:
 
+        /** The settings for the application */
+        std::shared_ptr<Config> config;
 
     public:
         /** Private constructor 
@@ -56,13 +59,17 @@ class Remote {
         */
         ~Remote();
 
+        /** Init the Remote object 
+            \param cfg Application configuration
+        */
+        bool initialize( std::shared_ptr<Config> cfg );
+        
         /** Broadcast a new record to all miners 
             \param record The Record to broadcast
         */
         void broadcast( Record& record );
 
         /** Push received records to a listener 
-            NOT IMPLEMENTED
         */
         void receive();
 

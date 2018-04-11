@@ -43,9 +43,8 @@ namespace fs = boost::filesystem;
 namespace rc = rechain;
 
 typedef Logger rl;
-typedef Config cfg;
 
-Manager::Manager() : remote(nullptr) {
+Manager::Manager() : config(nullptr), remote(nullptr) {
 }
 
 Manager::~Manager(){
@@ -56,8 +55,17 @@ Manager::~Manager(){
 
 bool Manager::configure( Level level ){
 
+    // create a new Config instance
+    config.reset(new Config());
+    if(!config->initialize()){
+        return false;
+    }
+
     // create a new Remote instance
     remote.reset(new Remote());
+    if(!remote->initialize(config)){
+        return false;
+    }
 
     // verify or create home dir structure
     if(!make_home())
@@ -65,11 +73,11 @@ bool Manager::configure( Level level ){
 
     Logger::get()
         .with( Log("console",STDOUT,level) )
-        .with( Log("log",cfg::get()->setting("log"),Level::error) );
+        .with( Log("log",config->setting("log"),Level::error) );
 
-    std::string private_key_path = cfg::get()->setting("private_key");
-    std::string public_key_path  = cfg::get()->setting("public_key");
-    std::string blockchain_path  = cfg::get()->setting("blockchain");
+    std::string private_key_path = config->setting("private_key");
+    std::string public_key_path  = config->setting("public_key");
+    std::string blockchain_path  = config->setting("blockchain");
 
     if(!blockchain.load(blockchain_path)){
         blockchain.save(blockchain_path);
@@ -165,7 +173,7 @@ bool Manager::mine(){
 
 void Manager::set_private_key( PrivateKey* k ){
     if(k->valid()){
-        std::string path = cfg::get()->setting("private_key");
+        std::string path = config->setting("private_key");
 
         private_key.reset(k);
         private_key->save(path);
@@ -174,7 +182,7 @@ void Manager::set_private_key( PrivateKey* k ){
 
 void Manager::set_public_key( PublicKey* k ){
     if(k->valid()){
-        std::string path = cfg::get()->setting("public_key");
+        std::string path = config->setting("public_key");
 
         public_key.reset(k);
         public_key->save(path);
@@ -183,11 +191,11 @@ void Manager::set_public_key( PublicKey* k ){
 
 bool Manager::make_home(){
     // build/validate the expected dir structure
-    fs::path home(cfg::get()->setting("home"));
+    fs::path home(config->setting("home"));
     
-    fs::path logs(cfg::get()->setting("logs"));
-    fs::path files(cfg::get()->setting("files"));
-    fs::path torrents(cfg::get()->setting("torrents"));
+    fs::path logs(config->setting("logs"));
+    fs::path files(config->setting("files"));
+    fs::path torrents(config->setting("torrents"));
 
     try {
         if( !(fs::exists(logs) || fs::create_directory(logs)) ){
