@@ -59,9 +59,6 @@ class Remote {
         */
         ~Remote();
 
-        /** Init the Remote object 
-            \param cfg Application configuration
-        */
         bool initialize( std::shared_ptr<Config> cfg );
         
         /** Broadcast a new record to all miners 
