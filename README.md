@@ -14,8 +14,12 @@ there are no written tutorials or guides because the project isn't that far alon
 
 #### ToDo
 
-* set up automated linting with [CppCheck](http://cppcheck.sourceforge.net/) (or similar)
-* set up automatic leak checking with [valgrind](http://valgrind.org/) (or similar)
+- [ ] publish should broadcast Records to miners rather than mining locally
+- [ ] mining should be a daemonized process that listens for new Records
+- [ ] review trust calculation and add linear scaling (so trust score is percentage of total)
+- [ ] refactor PrivateKey/PublicKey into a single class (don't need user-settable public key)
+- [ ] set up automated linting with [clang-tidy](http://clang.llvm.org/extra/clang-tidy/) (or similar)
+- [ ] set up automatic leak checking with [valgrind](http://valgrind.org/) (or similar)
 
 #### Notes
 
