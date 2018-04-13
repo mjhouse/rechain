@@ -129,8 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a87161b0beb45bc85532dc0237a636948"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#a87161b0beb45bc85532dc0237a636948">initialize</a> (std::shared_ptr&lt; <a class="el" href="classConfig.html">Config</a> &gt; cfg)</td></tr>
 <tr class="memdesc:a87161b0beb45bc85532dc0237a636948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init the <a class="el" href="classRemote.html" title="Handles http(s) requests and torrents. ">Remote</a>.  <a href="#a87161b0beb45bc85532dc0237a636948">More...</a><br /></td></tr>
 <tr class="separator:a87161b0beb45bc85532dc0237a636948"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a92d295ca749004cdf7d3abcd6e447f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#a1a92d295ca749004cdf7d3abcd6e447f">broadcast</a> (<a class="el" href="classRecord.html">Record</a> &amp;record)</td></tr>
-<tr class="separator:a1a92d295ca749004cdf7d3abcd6e447f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a651ca33127353b855594e5c68bc96f4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#a651ca33127353b855594e5c68bc96f4c">send</a> (<a class="el" href="classRecord.html">Record</a> &amp;record)</td></tr>
+<tr class="separator:a651ca33127353b855594e5c68bc96f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc31207ddac8638a018cbe82c3cae282"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#acc31207ddac8638a018cbe82c3cae282">receive</a> ()</td></tr>
 <tr class="separator:acc31207ddac8638a018cbe82c3cae282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -157,7 +157,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Private constructor </p>
 
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00041">41</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00044">44</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
@@ -175,35 +175,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Destructor </p>
 
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00044">44</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00047">47</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a1a92d295ca749004cdf7d3abcd6e447f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Remote::broadcast </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classRecord.html">Record</a> &amp;&#160;</td>
-          <td class="paramname"><em>record</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Broadcast a new record to all miners </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">record</td><td>The <a class="el" href="classRecord.html">Record</a> to broadcast </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00053">53</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a87161b0beb45bc85532dc0237a636948"></a>
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +201,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if initialization was successful </dd></dl>
 
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00048">48</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00051">51</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
@@ -243,7 +219,32 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Push received records to a listener </p>
 
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00058">58</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00109">109</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a651ca33127353b855594e5c68bc96f4c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Remote::send </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classRecord.html">Record</a> &amp;&#160;</td>
+          <td class="paramname"><em>record</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Broadcast a new record to all miners </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">record</td><td>The <a class="el" href="classRecord.html">Record</a> to broadcast </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
+
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00056">56</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +282,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRemote.html">Remote</a></li>
-    <li class="footer">Generated on Wed Apr 11 2018 10:34:51 for ReChain by
+    <li class="footer">Generated on Fri Apr 13 2018 06:59:58 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

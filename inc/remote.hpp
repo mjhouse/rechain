@@ -67,8 +67,9 @@ class Remote {
         
         /** Broadcast a new record to all miners 
             \param record The Record to broadcast
+            \returns True on success
         */
-        void broadcast( Record& record );
+        bool send( Record& record );
 
         /** Push received records to a listener 
         */

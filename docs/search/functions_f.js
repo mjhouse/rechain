@@ -1,6 +1,7 @@
 var searchData=
 [
   ['save',['save',['../classBlockChain.html#a5e73c9e3754a32dca2ce587dfa8f1be9',1,'BlockChain::save()'],['../classConfig.html#ae97387488f56a429c9e6a8511cfd4391',1,'Config::save(std::string path)'],['../classConfig.html#a11842409224e673d095e9ab5b65686f7',1,'Config::save()'],['../classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6',1,'Key::save()']]],
+  ['send',['send',['../classRemote.html#a651ca33127353b855594e5c68bc96f4c',1,'Remote']]],
   ['serialize',['serialize',['../classBlock.html#ad0db01340a60dee62eae231295cba1f9',1,'Block::serialize()'],['../classBlockChain.html#ac0dd294dc2adfd1857b7aef9911370d8',1,'BlockChain::serialize()'],['../classConfig.html#aeb544004c244dab944b5ae8433b9e28c',1,'Config::serialize()'],['../classRecord.html#a3d60bd49c6c0745b9cfcb0ae884db3dd',1,'Record::serialize()']]],
   ['set_5fkey',['set_key',['../classKey.html#ab73e562ed50f209dcf0f6b08104fffd9',1,'Key']]],
   ['set_5fprivate_5fkey',['set_private_key',['../classManager.html#af44e87fde9b95375540d1c8fa2739c83',1,'Manager::set_private_key(PrivateKey *k)'],['../classManager.html#a73974ceee34c11e310f6014450a34c8e',1,'Manager::set_private_key(std::string p)']]],

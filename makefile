@@ -5,7 +5,7 @@ CC=gcc
 # to provide arguments to the tests
 TAGGED  =
 VERSION = $(shell git describe --abbrev=0 --tags)
-COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_filesystem -lboost_system -ltorrent-rasterbar -DBOOST_ROOT -DBOOST_ASIO_DYN_LINK
+COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_filesystem -lboost_system -lboost_thread -L/usr/lib/x86_64-linux-gnu/ -ltorrent-rasterbar -DBOOST_ASIO_DYN_LINK
 
 
 TARGET = bin/rechain
@@ -15,7 +15,7 @@ INCDIR = inc
 SRCDIR = src
 TSTDIR = test
 
-INC = -I$(INCDIR) -I$(INCDIR)/dependencies
+INC = -I$(INCDIR) -I$(INCDIR)/dependencies 
 
 # find all source files in srcdir
 TSOURCES := $(shell find $(SRCDIR) $(TSTDIR) -type f -name '*.cpp' -not -name "main.cpp")
@@ -26,6 +26,7 @@ OBJECTS  := $(SOURCES:$(SRCDIR)/%.cpp=$(BLDDIR)/%.o)
 TOBJECTS := $(patsubst %.cpp, $(BLDDIR)/%.o, $(notdir $(TSOURCES)))
 
 # clear out tmp files from the test dir
+$(shell export BOOST_ROOT=/usr/include/boost)
 $(shell rm -rf test/data/files/tmp/*)
 
 # ----------------------------------------------------------------------
