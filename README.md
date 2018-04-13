@@ -12,18 +12,24 @@ proof-of-work difficulty in order to stop many transactions from being executed 
 Generated documentation is available [here](https://mjhouse.github.io/rechain/). Currently,
 there are no written tutorials or guides because the project isn't that far along yet.
 
-#### ToDo
+### Can I Contribute?
 
-* set up automated linting with [CppCheck](http://cppcheck.sourceforge.net/) (or similar)
-* set up automatic leak checking with [valgrind](http://valgrind.org/) (or similar)
+There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at mjhouse@protonmail.com.
+
+
+### ToDo
+
+- [ ] write bash script to configure environment and verify that necessary tools are installed for development
+- [ ] publish should broadcast Records to miners rather than mining locally
+- [ ] mining should be a daemonized process that listens for new Records
+- [ ] review trust calculation and add linear scaling (so trust score is percentage of total)
+- [ ] refactor PrivateKey/PublicKey into a single class (don't need user-settable public key)
+- [ ] set up automated linting with [clang-tidy](http://clang.llvm.org/extra/clang-tidy/) (or similar)
+- [ ] set up automatic leak checking with [valgrind](http://valgrind.org/) (or similar)
 
 #### Notes
 
 * read [Cpp Best Practices](https://www.gitbook.com/book/lefticus/cpp-best-practices/details)
-
-### Can I Contribute?
-
-There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at mjhouse@protonmail.com.
 
 ### Tools
 
