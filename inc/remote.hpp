@@ -29,10 +29,12 @@
 // system includes
 #include <string>
 #include <iostream>
+#include <thread>
 
 // dependency includes
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+#include <boost/asio.hpp>
 
 // local includes
 #include "blockchain.hpp"
@@ -40,6 +42,8 @@
 #include "keys.hpp"
 
 namespace fs = boost::filesystem;
+
+using boost::asio::ip::tcp;
 
 /** \brief Handles http(s) requests and torrents.
 */
@@ -49,6 +53,17 @@ class Remote {
 
         /** The settings for the application */
         std::shared_ptr<Config> config;
+
+        std::map<std::string,std::string> get_peers();
+
+        std::string make_header( std::string method, std::string addr, std::string message );
+
+        /** Push received records to a listener 
+            \returns True on success
+        */
+        void receive();
+
+        void handle_accept(std::shared_ptr<tcp::socket> socket);
 
     public:
         /** Private constructor 
@@ -67,14 +82,9 @@ class Remote {
         
         /** Broadcast a new record to all miners 
             \param record The Record to broadcast
-            \returns True on success
+            \returns The number of peers who accepted the record 
         */
-        bool send( Record& record );
-
-        /** Push received records to a listener 
-        */
-        void receive();
-
+        unsigned int send( Record& record );
 };
 
 #endif

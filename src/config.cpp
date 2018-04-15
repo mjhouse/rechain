@@ -77,9 +77,6 @@ bool Config::initialize(){
             setting("files",files.string());
             setting("torrents",torrents.string());
 
-            // FOR TESTING ONLY
-            setting("tracker","http://www.google.com");
-
             initialized = true;
             return initialized;
         }

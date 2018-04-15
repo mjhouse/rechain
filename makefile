@@ -5,7 +5,7 @@ CC=gcc
 # to provide arguments to the tests
 TAGGED  =
 VERSION = $(shell git describe --abbrev=0 --tags)
-COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_filesystem -lboost_system -lboost_thread -L/usr/lib/x86_64-linux-gnu/ -ltorrent-rasterbar -DBOOST_ASIO_DYN_LINK
+COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_filesystem -lboost_system -lboost_thread -L/usr/lib/x86_64-linux-gnu/ -ltorrent-rasterbar 
 
 
 TARGET = bin/rechain

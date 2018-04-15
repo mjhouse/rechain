@@ -22,10 +22,13 @@
 // system includes
 #include <iostream>
 #include <string>
+#include <thread>
 
 // dependency includes
 #include <boost/filesystem/path.hpp>
 #include <boost/asio.hpp>
+
+#include <cereal/archives/json.hpp>
 
 
 // local includes
@@ -53,58 +56,85 @@ bool Remote::initialize( std::shared_ptr<Config> cfg ){
     return true;
 }
 
-bool Remote::send( Record& record ){
-    // broadcast a new record to the network
-    std::string ip_address= config->setting("tracker");
-    std::string message = "TEST";
+std::map<std::string,std::string> Remote::get_peers(){
+    std::map<std::string,std::string> peers;
+    peers.insert( std::make_pair<std::string,std::string>("localhost","8080") );
+    return peers;
+}
 
+std::string Remote::make_header( std::string method, std::string addr, std::string message ){
+    std::ostringstream request_stream;
 
-    boost::asio::io_service io_service;
-
-    tcp::resolver resolver(io_service);
-    tcp::resolver::query query( ip_address, "80" );
-    tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
-
-    tcp::socket socket(io_service);
-    boost::asio::connect(socket, endpoint_iterator);
-
-
-    boost::asio::streambuf request;
-    std::ostream request_stream(&request);
-
-    request_stream << "POST /title/ HTTP/1.1 \r\n";
-    request_stream << "Host: http://google\r\n";
-    request_stream << "User-Agent: C/1.0";
+    request_stream << method << " / HTTP/1.1 \r\n";
+    request_stream << "Host: " << addr << ":8080\r\n";
+    request_stream << "User-Agent: Rechain/1.0\r\n";
     request_stream << "Content-Type: text/plain; charset=utf-8 \r\n";
     request_stream << "Accept: */*\r\n";
     request_stream << "Content-Length: " << message.length() << "\r\n";    
     request_stream << "Connection: close\r\n\r\n";  //NOTE THE Double line feed
     request_stream << message;
 
-    boost::asio::write(socket,request);
-
-    // get the response
-    boost::asio::streambuf response;
-    boost::asio::read_until(socket, response, "\r\n");
-
-    std::istream response_stream(&response);
-
-    // set up the input variables
-    std::string http_version;
-    unsigned int status_code;
-    std::string status_message;
-
-    response_stream >> http_version;
-    response_stream >> status_code;
-
-    std::getline(response_stream,status_message);
-
-    std::cout << http_version << "\n" 
-              << status_code << "\n"
-              << status_message << "\n"
-              << std::endl;
-    return true;
+    return request_stream.str();
 }
 
-void Remote::receive( ){
+unsigned int Remote::send( Record& record ){
+
+    // serialize the record
+    std::ostringstream data;
+    cereal::JSONOutputArchive archive(data);
+    archive( record );
+    std::string message = data.str();
+
+    unsigned int result = 0; 
+
+    // for each peer, send a POST request with the 
+    // serialized record in the body
+    for( auto& peer : get_peers() ){
+        std::string address = peer.first;
+        std::string port = peer.second;
+
+        // connect to the endpoint
+        boost::asio::io_service io_service;
+
+        // get a query and endpoint iterator, and connect
+        // a socket to them 
+        tcp::resolver resolver(io_service);
+        tcp::resolver::query query(address,port);
+        tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
+
+        tcp::socket socket(io_service);
+
+        boost::system::error_code ec;
+        boost::asio::connect(socket, endpoint_iterator,ec);
+
+        if(ec.value() != ECONNREFUSED){
+            // push all the headers into the stream
+            boost::asio::streambuf request;
+            std::ostream request_stream(&request);
+            request_stream << make_header("POST","localhost",message); 
+            boost::asio::write(socket,request);
+
+            // feed the response into a stream
+            boost::asio::streambuf response;
+            boost::asio::read_until(socket, response, "\r\n");
+            std::istream response_stream(&response);
+
+            // get the response status code
+            std::string http_version;
+            unsigned int status_code;
+
+            response_stream >> http_version;
+            response_stream >> status_code;
+
+            // if any of the peers return 200, the send
+            // operation was a success
+            if(status_code == 200){
+                result++;
+            }
+        }
+
+    }
+
+    return result;
 }
+

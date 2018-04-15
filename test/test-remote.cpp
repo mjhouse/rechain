@@ -10,7 +10,7 @@ extern std::string generate_hash();
 extern std::string get_path( std::string partial );
 extern std::string dump_file( std::string path );
 
-SCENARIO( "remote is created with a valid config", "[remote]" ){
+SCENARIO( "remote is created with a valid config", "[.][remote]" ){
 
 	GIVEN( "a reference and block hash" ){
 
@@ -29,13 +29,17 @@ SCENARIO( "remote is created with a valid config", "[remote]" ){
         Remote remote;
         REQUIRE(remote.initialize(config));
 
+        Remote server;
+        REQUIRE(server.initialize(config));
+
 		WHEN( "remote::send is called with appropriate arguments" ){
 
-            bool result = remote.send(r);
+            unsigned int result = remote.send(r);
 
-			THEN( "it returns true" ){
-			    REQUIRE(result);
+			THEN( "it returns the number of successful sends" ){
+			    REQUIRE(result > 0);
             }
 		}
+
 	}
 }

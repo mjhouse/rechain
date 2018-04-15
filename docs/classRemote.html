@@ -108,6 +108,7 @@ $(document).ready(function(){initNavTree('classRemote.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classRemote-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -129,10 +130,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a87161b0beb45bc85532dc0237a636948"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#a87161b0beb45bc85532dc0237a636948">initialize</a> (std::shared_ptr&lt; <a class="el" href="classConfig.html">Config</a> &gt; cfg)</td></tr>
 <tr class="memdesc:a87161b0beb45bc85532dc0237a636948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init the <a class="el" href="classRemote.html" title="Handles http(s) requests and torrents. ">Remote</a>.  <a href="#a87161b0beb45bc85532dc0237a636948">More...</a><br /></td></tr>
 <tr class="separator:a87161b0beb45bc85532dc0237a636948"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a651ca33127353b855594e5c68bc96f4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#a651ca33127353b855594e5c68bc96f4c">send</a> (<a class="el" href="classRecord.html">Record</a> &amp;record)</td></tr>
-<tr class="separator:a651ca33127353b855594e5c68bc96f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a839d3df5a651ef0e8192a51790d108c8"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#a839d3df5a651ef0e8192a51790d108c8">send</a> (<a class="el" href="classRecord.html">Record</a> &amp;record)</td></tr>
+<tr class="separator:a839d3df5a651ef0e8192a51790d108c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:af9fc23539211d470fb99c2f166afded1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9fc23539211d470fb99c2f166afded1"></a>
+std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_peers</b> ()</td></tr>
+<tr class="separator:af9fc23539211d470fb99c2f166afded1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c87e72933e78c8fa77022c2f5ab0972"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c87e72933e78c8fa77022c2f5ab0972"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>make_header</b> (std::string method, std::string addr, std::string message)</td></tr>
+<tr class="separator:a1c87e72933e78c8fa77022c2f5ab0972"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc31207ddac8638a018cbe82c3cae282"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#acc31207ddac8638a018cbe82c3cae282">receive</a> ()</td></tr>
 <tr class="separator:acc31207ddac8638a018cbe82c3cae282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dd342aadd78e25fe9bcf6db9b67784"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8dd342aadd78e25fe9bcf6db9b67784"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>handle_accept</b> (std::shared_ptr&lt; tcp::socket &gt; socket)</td></tr>
+<tr class="separator:ac8dd342aadd78e25fe9bcf6db9b67784"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -141,7 +154,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="remote_8hpp_source.html#l00046">46</a> of file <a class="el" href="remote_8hpp_source.html">remote.hpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8hpp_source.html#l00050">50</a> of file <a class="el" href="remote_8hpp_source.html">remote.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aaf28ca55be03a9706db0c3d288cbaae5"></a>
 <div class="memitem">
@@ -157,7 +170,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Private constructor </p>
 
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00044">44</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00047">47</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
@@ -175,7 +188,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Destructor </p>
 
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00047">47</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00050">50</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
@@ -201,13 +214,16 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if initialization was successful </dd></dl>
 
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00051">51</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00054">54</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
 <a class="anchor" id="acc31207ddac8638a018cbe82c3cae282"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Remote::receive </td>
@@ -216,19 +232,22 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p>Push received records to a listener </p>
-
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00109">109</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Push received records to a listener </p><dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a651ca33127353b855594e5c68bc96f4c"></a>
+<a class="anchor" id="a839d3df5a651ef0e8192a51790d108c8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Remote::send </td>
+          <td class="memname">unsigned int Remote::send </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classRecord.html">Record</a> &amp;&#160;</td>
           <td class="paramname"><em>record</em></td><td>)</td>
@@ -242,9 +261,9 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of peers who accepted the record </dd></dl>
 
-<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00056">56</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00080">80</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
@@ -268,7 +287,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The settings for the application </p>
 
-<p>Definition at line <a class="el" href="remote_8hpp_source.html#l00051">51</a> of file <a class="el" href="remote_8hpp_source.html">remote.hpp</a>.</p>
+<p>Definition at line <a class="el" href="remote_8hpp_source.html#l00055">55</a> of file <a class="el" href="remote_8hpp_source.html">remote.hpp</a>.</p>
 
 </div>
 </div>
@@ -282,7 +301,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRemote.html">Remote</a></li>
-    <li class="footer">Generated on Fri Apr 13 2018 06:59:58 for ReChain by
+    <li class="footer">Generated on Sun Apr 15 2018 14:17:11 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
