@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['make_5fheader',['make_header',['../classRemote.html#a1c87e72933e78c8fa77022c2f5ab0972',1,'Remote']]],
   ['make_5fhome',['make_home',['../classManager.html#a4f9374369368d53352e340d85194217a',1,'Manager']]],
   ['manager',['Manager',['../classManager.html',1,'Manager'],['../classInterface.html#a54b022d952778edad89d2ce7f2638d40',1,'Interface::manager()'],['../classManager.html#a1658ff9f18e38ccd9cb8b0b371b9c20b',1,'Manager::Manager()']]],
   ['manager_2ehpp',['manager.hpp',['../manager_8hpp.html',1,'']]],

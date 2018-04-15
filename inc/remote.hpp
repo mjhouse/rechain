@@ -54,16 +54,23 @@ class Remote {
         /** The settings for the application */
         std::shared_ptr<Config> config;
 
+        /** \brief Get a list of peers to broadcast to
+            \returns A map of address/port pairs
+        */
         std::map<std::string,std::string> get_peers();
 
+        /** \brief Create a header for a GET or POST request
+            \param method GET or POST
+            \param addr The address to query
+            \param message The body of the request
+            \returns The header as a string
+        */
         std::string make_header( std::string method, std::string addr, std::string message );
 
         /** Push received records to a listener 
             \returns True on success
         */
         void receive();
-
-        void handle_accept(std::shared_ptr<tcp::socket> socket);
 
     public:
         /** Private constructor 

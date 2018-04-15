@@ -135,17 +135,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:af9fc23539211d470fb99c2f166afded1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9fc23539211d470fb99c2f166afded1"></a>
-std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_peers</b> ()</td></tr>
+<tr class="memitem:af9fc23539211d470fb99c2f166afded1"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#af9fc23539211d470fb99c2f166afded1">get_peers</a> ()</td></tr>
+<tr class="memdesc:af9fc23539211d470fb99c2f166afded1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of peers to broadcast to.  <a href="#af9fc23539211d470fb99c2f166afded1">More...</a><br /></td></tr>
 <tr class="separator:af9fc23539211d470fb99c2f166afded1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c87e72933e78c8fa77022c2f5ab0972"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c87e72933e78c8fa77022c2f5ab0972"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>make_header</b> (std::string method, std::string addr, std::string message)</td></tr>
+<tr class="memitem:a1c87e72933e78c8fa77022c2f5ab0972"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#a1c87e72933e78c8fa77022c2f5ab0972">make_header</a> (std::string method, std::string addr, std::string message)</td></tr>
+<tr class="memdesc:a1c87e72933e78c8fa77022c2f5ab0972"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a header for a GET or POST request.  <a href="#a1c87e72933e78c8fa77022c2f5ab0972">More...</a><br /></td></tr>
 <tr class="separator:a1c87e72933e78c8fa77022c2f5ab0972"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc31207ddac8638a018cbe82c3cae282"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRemote.html#acc31207ddac8638a018cbe82c3cae282">receive</a> ()</td></tr>
 <tr class="separator:acc31207ddac8638a018cbe82c3cae282"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8dd342aadd78e25fe9bcf6db9b67784"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8dd342aadd78e25fe9bcf6db9b67784"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>handle_accept</b> (std::shared_ptr&lt; tcp::socket &gt; socket)</td></tr>
-<tr class="separator:ac8dd342aadd78e25fe9bcf6db9b67784"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -193,6 +190,32 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af9fc23539211d470fb99c2f166afded1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, std::string &gt; Remote::get_peers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>A map of address/port pairs </dd></dl>
+
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00059">59</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a87161b0beb45bc85532dc0237a636948"></a>
 <div class="memitem">
 <div class="memproto">
@@ -215,6 +238,57 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if initialization was successful </dd></dl>
 
 <p>Definition at line <a class="el" href="remote_8cpp_source.html#l00054">54</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1c87e72933e78c8fa77022c2f5ab0972"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Remote::make_header </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>method</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>GET or POST </td></tr>
+    <tr><td class="paramname">addr</td><td>The address to query </td></tr>
+    <tr><td class="paramname">message</td><td>The body of the request </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The header as a string </dd></dl>
+
+<p>Definition at line <a class="el" href="remote_8cpp_source.html#l00065">65</a> of file <a class="el" href="remote_8cpp_source.html">remote.cpp</a>.</p>
 
 </div>
 </div>
@@ -301,7 +375,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRemote.html">Remote</a></li>
-    <li class="footer">Generated on Sun Apr 15 2018 14:17:11 for ReChain by
+    <li class="footer">Generated on Sun Apr 15 2018 14:28:10 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
