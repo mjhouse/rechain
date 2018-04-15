@@ -5,7 +5,7 @@ var searchData=
   ['record_2ehpp',['record.hpp',['../record_8hpp.html',1,'']]],
   ['records',['records',['../classBlock.html#a724ef3897835b66c4d1a847564e83837',1,'Block']]],
   ['reference',['reference',['../classRecord.html#a59b4303c0ca636a3338c5fda770b11ac',1,'Record']]],
-  ['remote',['Remote',['../classRemote.html',1,'Remote'],['../classRemote.html#aaf28ca55be03a9706db0c3d288cbaae5',1,'Remote::Remote()'],['../classManager.html#ad391816f0476f0bc8b37e623c62b65e2',1,'Manager::remote()']]],
+  ['remote',['Remote',['../classRemote.html',1,'Remote'],['../classManager.html#ad391816f0476f0bc8b37e623c62b65e2',1,'Manager::remote()'],['../classRemote.html#aaf28ca55be03a9706db0c3d288cbaae5',1,'Remote::Remote()']]],
   ['remote_2ehpp',['remote.hpp',['../remote_8hpp.html',1,'']]],
   ['request',['request',['../classManager.html#ac4be1fcc4f45e80ec38acf2fb8fc6cbd',1,'Manager']]],
   ['rtrim',['rtrim',['../utility_8hpp.html#af8c372f2bb768b0373d7c55e47a9df8e',1,'rechain']]],

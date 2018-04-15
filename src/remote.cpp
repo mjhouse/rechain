@@ -19,14 +19,15 @@
  *
 */
 
+
 // system includes
 #include <iostream>
 #include <string>
-#include <thread>
 
 // dependency includes
 #include <boost/filesystem/path.hpp>
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
 
 #include <cereal/archives/json.hpp>
 
@@ -44,15 +45,15 @@ using boost::asio::ip::tcp;
 
 typedef Logger rl;
 
-Remote::Remote() : config(nullptr) {
+Remote::Remote() : config(nullptr), m_io_service(), m_socket(m_io_service) {
 }
 
 Remote::~Remote(){
-
 }
 
 bool Remote::initialize( std::shared_ptr<Config> cfg ){
     config = cfg;
+
     return true;
 }
 
@@ -62,19 +63,24 @@ std::map<std::string,std::string> Remote::get_peers(){
     return peers;
 }
 
-std::string Remote::make_header( std::string method, std::string addr, std::string message ){
-    std::ostringstream request_stream;
+void Remote::listen(){
+    m_port = 8080;
+    m_endpoint = boost::shared_ptr<tcp::endpoint>(new tcp::endpoint(tcp::v4(), m_port));
+    m_acceptor = boost::shared_ptr<tcp::acceptor>(new tcp::acceptor(m_io_service, *m_endpoint));
 
-    request_stream << method << " / HTTP/1.1 \r\n";
-    request_stream << "Host: " << addr << ":8080\r\n";
-    request_stream << "User-Agent: Rechain/1.0\r\n";
-    request_stream << "Content-Type: text/plain; charset=utf-8 \r\n";
-    request_stream << "Accept: */*\r\n";
-    request_stream << "Content-Length: " << message.length() << "\r\n";    
-    request_stream << "Connection: close\r\n\r\n";  //NOTE THE Double line feed
-    request_stream << message;
+    m_acceptor->async_accept(m_socket,boost::bind(&Remote::handler,this,boost::asio::placeholders::error)); 
+    worker = std::thread([&](boost::asio::io_service* s){ s->run(); }, &m_io_service);
+}
 
-    return request_stream.str();
+void Remote::handler(const boost::system::error_code& error){
+    if(!error){
+        std::cout << "GOT A MESSAGE" << std::endl;
+    }
+}
+
+void Remote::stop_listening(){
+    m_acceptor->cancel();
+    worker.join();
 }
 
 unsigned int Remote::send( Record& record ){
@@ -111,7 +117,16 @@ unsigned int Remote::send( Record& record ){
             // push all the headers into the stream
             boost::asio::streambuf request;
             std::ostream request_stream(&request);
-            request_stream << make_header("POST","localhost",message); 
+
+            request_stream << "POST / HTTP/1.1 \r\n";
+            request_stream << "Host: localhost:8080\r\n";
+            request_stream << "User-Agent: Rechain/1.0\r\n";
+            request_stream << "Content-Type: text/plain; charset=utf-8 \r\n";
+            request_stream << "Accept: */*\r\n";
+            request_stream << "Content-Length: " << message.length() << "\r\n";    
+            request_stream << "Connection: close\r\n\r\n";  //NOTE THE Double line feed
+            request_stream << message;
+
             boost::asio::write(socket,request);
 
             // feed the response into a stream
@@ -137,4 +152,3 @@ unsigned int Remote::send( Record& record ){
 
     return result;
 }
-

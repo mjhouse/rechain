@@ -54,18 +54,28 @@ class Remote {
         /** The settings for the application */
         std::shared_ptr<Config> config;
 
+        /** IO service to manage system access */
+        boost::asio::io_service m_io_service;
+
+        /** Thread for m_io_services,run  */
+        std::thread worker;
+
+        /** The socket for listening */
+        tcp::socket m_socket;
+
+        /** An endpoint to listen at */
+        boost::shared_ptr<tcp::endpoint> m_endpoint;
+
+        /** Calls handlers with incoming requests */
+        boost::shared_ptr<tcp::acceptor> m_acceptor;
+
+        /** The port number to listen at */
+        unsigned short m_port;
+
         /** \brief Get a list of peers to broadcast to
             \returns A map of address/port pairs
         */
         std::map<std::string,std::string> get_peers();
-
-        /** \brief Create a header for a GET or POST request
-            \param method GET or POST
-            \param addr The address to query
-            \param message The body of the request
-            \returns The header as a string
-        */
-        std::string make_header( std::string method, std::string addr, std::string message );
 
         /** Push received records to a listener 
             \returns True on success
@@ -86,7 +96,19 @@ class Remote {
             \returns True if initialization was successful
         */
         bool initialize( std::shared_ptr<Config> cfg );
-        
+
+        /** \brief Listen for incoming requests */
+        void listen();
+
+        /** \brief Handle requests
+            \param error An error code or '0'
+        */
+        void handler(const boost::system::error_code& error);
+
+        /** \brief Shut down worker thread, cancel acceptor
+        */
+        void stop_listening();
+
         /** Broadcast a new record to all miners 
             \param record The Record to broadcast
             \returns The number of peers who accepted the record 
