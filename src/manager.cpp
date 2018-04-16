@@ -166,7 +166,7 @@ Record Manager::request( std::string h ){
 }
 
 bool Manager::mine(){
-    blockchain.mine();
+    blockchain.mine(public_key->to_string());
     if(blockchain.valid() && blockchain.save())
         return true;
     return false;

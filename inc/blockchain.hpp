@@ -60,12 +60,12 @@ class Record;
 */
 class BlockChain {
 	private:
-		std::vector<Block> blockchain;		    /**< Collection of Block objects*/
+		std::vector<Block> blockchain;		            /**< Collection of Block objects*/
 		
-		Block current;				            /**< Current working Block*/
-        std::string file_path;			        /**< The path to load or save from/to*/
-		std::map<std::string,float> pub_trust;	/**< Trust of publications by reference*/
-		std::map<std::string,float> usr_trust;	/**< Trust of users by public key*/
+		Block current;				                    /**< Current working Block*/
+        std::string file_path;			                /**< The path to load or save from/to*/
+		std::map<std::string,unsigned int> pub_trust;	/**< Trust of publications by reference*/
+		std::map<std::string,unsigned int> usr_trust;	/**< Trust of users by public key*/
 
 		/** Update 'usr_trust' and 'pub_trust'*/	
 		void update_trust();	
@@ -92,9 +92,10 @@ class BlockChain {
 		BlockChain& add( Record& r );
 
 		/** Mine the current Block to the BlockChain
+            \param pubkey An identifier for the miner
 			\returns The valid hash of the new Block
 		*/	
-		std::string mine();
+		std::string mine( std::string pub_key );
 
 		// ------------------------------------------------------
 		// Accessor Methods
@@ -167,8 +168,7 @@ class BlockChain {
 		template <class Archive>
 		void serialize( Archive& ar ){
 			ar(	CEREAL_NVP(blockchain),
-				CEREAL_NVP(current),
-				CEREAL_NVP(pub_trust)
+				CEREAL_NVP(current)
 			);
 		}
 

@@ -52,6 +52,7 @@ std::string Block::hash(){
 	});
 
 	hash_data.append( this->prev );
+	hash_data.append( this->pub_key );
 	hash_data.append( std::to_string(this->nonce) );
 	hash_data.append( std::to_string(this->timestamp) );
 	hash_data.append( std::to_string(this->counter) );
@@ -71,7 +72,9 @@ std::string Block::hash(){
 
 /* Change the hashing variables
 */
-std::string Block::mine(){
+std::string Block::mine( std::string pubkey ){
+
+    this->pub_key = pubkey;
 
 	// Mine the block until it has a valid hash
 	while(this->hash() > HASH_MAX){

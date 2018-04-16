@@ -21,10 +21,12 @@
 
 // system includes
 #include <iostream>
-#include <set>
+#include <utility>
+#include <math.h>
+#include <climits>
 
 // dependency includes
-#include <cereal/archives/json.hpp>
+#include "cereal/archives/json.hpp"
 #include "cereal/types/vector.hpp"
 
 // local includes
@@ -33,6 +35,9 @@
 #include "logger.hpp"
 
 typedef Logger rl;
+
+#define MAX_TRUST UINT_MAX
+#define MIN_TRUST 0
 
 /* Add a Record to an open Block
 */
@@ -45,58 +50,100 @@ BlockChain& BlockChain::add( Record& r ){
 */
 void BlockChain::update_trust(){
 
+    usr_trust.clear();
+    pub_trust.clear();
+
 	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
 
-		std::map<std::string,std::string> references;
-		std::vector<Record> records;
+		// this map stores references that link author keys to
+		// document references.
+		std::map<std::string,std::string> reference;
 
-        pub_trust.clear();
-        usr_trust.clear();
-
-		int count = 1;
-		for(auto b : blockchain){
-		    for(auto r : b){
-			switch(r.type()){
-			    case DataType::Publication:
-				references.insert( std::make_pair(r.reference(),r.public_key()) );
-			    break;
-			    case DataType::Signature:
-				records.push_back(r);
-				count++;
-			    break;
-			}
-		    }
-		}
-
-		float gt = (float)(count*2);
+		// the first record in the first block is the owner, they
+		// get an initial amount of trust equal to 'MAX_TRUST'.
 		std::string owner = blockchain[0][0].public_key();
-		usr_trust.insert( std::make_pair(owner,gt) );
+		usr_trust.insert( std::make_pair(owner,MAX_TRUST) );
 
-		for(auto r : records){
-			std::string pubref = r.reference();
-			std::string signer = r.public_key();
-			std::string signee = references[pubref];
+		// iterate the through all blocks and all records
+		// in each block
+		for(auto& block : blockchain){
+            // get block author here for transfered-total distribution
+            std::string miner = block.public_key();
+            unsigned int transferred = 0;
 
-			float ct = usr_trust[signer]/2.0f;
-			if(ct && !signee.empty()){
-			    usr_trust[signer]	 = ct;	// signer loses half of trust
-			    usr_trust[signee]	+= ct;	// signee gains half of signers trust
-			    pub_trust[pubref]	+= ct;	// pubref gains half of signers trust
+			for(auto& record : block){
+
+				switch(record.type()){
+					case DataType::Publication:
+						{
+							std::string author = record.public_key();
+							std::string document = record.reference();
+
+							// add each document hash and author's public key to the reference map
+							reference.insert(std::pair<std::string,std::string>(document,author));
+
+                            usr_trust.insert( std::pair<std::string,unsigned int>(author,0) );
+						}
+						break;
+					case DataType::Signature:
+						{
+							// get the public keys and publication reference
+							std::string pubref = record.reference();
+
+							// try to find the signer in the trust map- if they
+							// aren't found, then they haven't published anything.
+							auto it = usr_trust.find(record.public_key());
+
+							// check if the signer is published
+							if( it != usr_trust.end() ){
+
+                                std::string signer = it->first;
+                                std::string signee = reference[pubref];
+
+                                unsigned int trust = it->second;
+
+								// get amount to transfer
+								unsigned int doc_amount = floor(trust*0.25);
+								unsigned int usr_amount = floor(trust*0.25);
+
+								// if they have 1 trust, then doc_amount will be
+								// 0, so set doc_amount equal to total trust. we
+                                // don't care if users get 0.
+                                if(doc_amount == 0)
+									amount = trust;
+
+								// transfer trust to the signee
+								usr_trust[signee] += usr_amount;
+                                pub_trust[pubref] += doc_amount;
+								usr_trust[signer] -= (doc_amount + usr_amount);
+
+                                unsigned int transferred += doc_amount;
+							}
+						}
+						break;
+
+					default:
+						// may add other types of records
+						break;
+				}
 			}
+
+            // update the miner's trust
+            usr_trust[miner] += transferred;
 		}
 	}
 }
 
 /* Mine and add a block to the chain
 */
-std::string BlockChain::mine(){
+std::string BlockChain::mine( std::string pubkey ){
 	// Check if the chain has a genesis block
 	if(this->blockchain.size() > 0){
 		this->current.previous(this->blockchain.back().hash());
 	}
 
 	// Get the hash to return
-	std::string hash = this->current.mine();
+	std::string hash = this->current.mine(pubkey);
 
 	// Add to the chain
 	this->blockchain.push_back( this->current );

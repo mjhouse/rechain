@@ -44,11 +44,12 @@ class Record;
 class Block {
 	private:
 		std::vector<Record> records;	/**< Contained Record objects*/
-		std::string prev;		/**< Hash of the previous block */
+		std::string prev;		        /**< Hash of the previous block */
+        std::string pub_key;            /**< Public key of the miner */
 
-		long nonce;			/**< Randomly generated value to modify hash */
-		long timestamp;			/**< A timestamp */
-		uint32_t  counter;		/**< Counter to modify hash output */
+		long nonce;		            	/**< Randomly generated value to modify hash */
+		long timestamp;			        /**< A timestamp */
+		uint32_t  counter;	        	/**< Counter to modify hash output */
 
 	public:
 		/** Define a Record iterator */
@@ -65,11 +66,12 @@ class Block {
 		*/
 		std::string hash();
 
-		/** Hash and update hashing variables until
+		/** \brief Hash and update hashing variables until
 		    a valid hash is found
+            \param pubkey An identifier for the miner
 		    \returns A valid hash
 		*/
-		std::string mine();
+		std::string mine( std::string pubkey );
 
 		/** Check if Block is valid
 			\returns True if Block is valid

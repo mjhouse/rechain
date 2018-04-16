@@ -8,7 +8,7 @@ var classBlock =
     [ "end", "classBlock.html#af32ff9a1df5fd761f9c5fb820a598cbf", null ],
     [ "find", "classBlock.html#ad24d61039cce7244b6faedb1fa7bc90d", null ],
     [ "hash", "classBlock.html#ae2de4f093f846bf821445f80b02da7de", null ],
-    [ "mine", "classBlock.html#af177a6a4941fee4af655e8b2d6d8ba24", null ],
+    [ "mine", "classBlock.html#a3fb190981bcb1fba72780f7e157f0bfb", null ],
     [ "operator=", "classBlock.html#a211f39ec7292f203df97a9170257845d", null ],
     [ "operator[]", "classBlock.html#ae17df2fe7ac29ac2b63faaa29de77478", null ],
     [ "previous", "classBlock.html#ab42c53898f487472ae314f3d86617a5f", null ],
@@ -18,6 +18,7 @@ var classBlock =
     [ "counter", "classBlock.html#a435aabe8a36b368b64e180239fea8670", null ],
     [ "nonce", "classBlock.html#a5dc13805185f799f0057e3dd9c5179a7", null ],
     [ "prev", "classBlock.html#a7b067da7a49637a3967093bfb4efa85a", null ],
+    [ "pub_key", "classBlock.html#a4fd715df4a89f4b23dc15b82560761c6", null ],
     [ "records", "classBlock.html#a724ef3897835b66c4d1a847564e83837", null ],
     [ "timestamp", "classBlock.html#acaa9f7ad0f75fdafc83a435d2c38425d", null ]
 ];
