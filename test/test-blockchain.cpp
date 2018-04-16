@@ -66,6 +66,7 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 		blockchain.load(get_path("files/gold/blockchain_general.gold"));
 
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
+		std::shared_ptr<PublicKey> public_key(PublicKey::load_file(get_path("keys/test.public")));
 
 		std::vector<std::string> signatures;
 		std::vector<std::string> hashes;
@@ -88,7 +89,7 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 				blockchain.add(r);
 			}
 		
-			hashes.push_back(blockchain.mine());
+			hashes.push_back(blockchain.mine(public_key->to_string()));
 
 			THEN( "blockchain adds them" ){	
 				REQUIRE(blockchain.size() == orig_size+1);
@@ -115,7 +116,7 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 				blockchain.add(r);
 			}
 		
-			hashes.push_back(blockchain.mine());
+			hashes.push_back(blockchain.mine(public_key->to_string()));
 
 			THEN( "the blockchain adds them" ){
 				REQUIRE(blockchain.size() == orig_size+1);
@@ -244,6 +245,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 		blockchain.load(get_path("files/gold/blockchain_general.gold"));
 
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
+		std::shared_ptr<PublicKey> public_key(PublicKey::load_file(get_path("keys/test.public")));
 		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file(get_path("keys/user1.private")));
 
 		WHEN( "blockchain loaded from gold file" ){
@@ -296,7 +298,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			key->sign(r);
 			
 			blockchain.add(r);
-			blockchain.mine();
+			blockchain.mine(public_key->to_string());
 
 
 			THEN( "blockchain is invalid because duplicate reference" ){
@@ -311,7 +313,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			key->generate();
 			key->sign(b[0]);
 
-			b.mine();
+			b.mine(public_key->to_string());
 
 			THEN( "blockchain is invalid because previous hash is wrong" ){
 				REQUIRE_FALSE(blockchain.valid());
@@ -336,7 +338,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 				Block& current = blockchain[i];
 
 				current.previous(previous);
-				current.mine();
+				current.mine(public_key->to_string());
 			}
 
 			// Check that signatures are broken
@@ -357,11 +359,11 @@ SCENARIO( "blockchain is accessed for trust", "[blockchain][blockchain-trust]" )
 		std::shared_ptr<PrivateKey> private_key(PrivateKey::load_file(get_path("keys/test.private")));
 		std::shared_ptr<PrivateKey> user1_key(PrivateKey::load_file(get_path("keys/user1.private")));
 
-		std::map<std::string,float> expected = {
-            {"8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903",7.0f},
-            {"A9A8D2EE0BD117F7048FC657234E0641CD78393347E7453936FD9FB84377A570",7.0f},
-            {"C155EFCE2F1429CC37DA1BDE36EE478CA2EDE8DCDDC02D8C76AE2577A6B9A146",1.75f},
-            {"ED6FBF3F6C3F94D0193341BABA2BE7AAF23E2A16FE78E9152BD77CD9C83B3664",6.125f}
+		std::map<std::string,unsigned int> expected = {
+            {"8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903",1073741824},
+            {"A9A8D2EE0BD117F7048FC657234E0641CD78393347E7453936FD9FB84377A570",805306368},
+            {"C155EFCE2F1429CC37DA1BDE36EE478CA2EDE8DCDDC02D8C76AE2577A6B9A146",134217728},
+            {"ED6FBF3F6C3F94D0193341BABA2BE7AAF23E2A16FE78E9152BD77CD9C83B3664",503316480}
         };
 
 		WHEN( "blockchain calculates publication trust on load" ){
@@ -371,9 +373,9 @@ SCENARIO( "blockchain is accessed for trust", "[blockchain][blockchain-trust]" )
 			THEN( "trust should match expected values" ){
 				for(auto block : blockchain){
 					for(auto record : block){
-						float trust = blockchain.trust( record.reference() );
+						unsigned int trust = blockchain.trust( record.reference() );
                         if(expected.count(record.reference()) == 0 ){
-							REQUIRE(trust == 0.0f);
+							REQUIRE(trust == 0);
 						} else {
 							REQUIRE(trust == expected[record.reference()]);
 						}

@@ -115,6 +115,12 @@ bool Block::valid(){
 	return true;
 }
 
+/** Get hex-encoded public key
+*/
+std::string Block::public_key(){
+    return this->pub_key;
+}
+
 /** Overloaded index operator
 */
 Record& Block::operator[] ( unsigned int i ){

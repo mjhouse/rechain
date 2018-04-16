@@ -78,6 +78,11 @@ class Block {
 		*/
 		bool valid();
 
+        /** \brief Get the miner's public key
+            \returns A hex-encoded public key
+        */
+        std::string public_key();
+
 		// ------------------------------------------------------
 		// Accessor Methods
 

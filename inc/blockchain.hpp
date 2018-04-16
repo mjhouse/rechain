@@ -95,7 +95,7 @@ class BlockChain {
             \param pubkey An identifier for the miner
 			\returns The valid hash of the new Block
 		*/	
-		std::string mine( std::string pub_key );
+		std::string mine( std::string pubkey );
 
 		// ------------------------------------------------------
 		// Accessor Methods

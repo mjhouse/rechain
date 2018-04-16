@@ -27,7 +27,7 @@ SCENARIO( "block can be mined and generate a valid hash", "[block-mining]" ){
 			block.add(r);
 		}
 
-		std::string hash = block.mine();
+		std::string hash = block.mine( public_key->to_string() );
 		
 		WHEN( "block should be valid" ){
 			THEN( "block is valid" ){

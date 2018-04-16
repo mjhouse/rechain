@@ -110,14 +110,15 @@ void BlockChain::update_trust(){
 								// 0, so set doc_amount equal to total trust. we
                                 // don't care if users get 0.
                                 if(doc_amount == 0)
-									amount = trust;
+									doc_amount = trust;
 
 								// transfer trust to the signee
 								usr_trust[signee] += usr_amount;
                                 pub_trust[pubref] += doc_amount;
 								usr_trust[signer] -= (doc_amount + usr_amount);
 
-                                unsigned int transferred += doc_amount;
+                                // update the total of transferred trust
+                                transferred += doc_amount;
 							}
 						}
 						break;
