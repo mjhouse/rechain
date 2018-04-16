@@ -1,10 +1,10 @@
 # generated files
-build/*
 bin/*
 obj/*
 
 # keep empty files
-!build/.empty
+!bin/.empty
+!obj/.empty
 
 # gcov files
 *.gcov
