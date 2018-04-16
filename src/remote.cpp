@@ -69,18 +69,19 @@ void Remote::listen(){
     m_acceptor = boost::shared_ptr<tcp::acceptor>(new tcp::acceptor(m_io_service, *m_endpoint));
 
     m_acceptor->async_accept(m_socket,boost::bind(&Remote::handler,this,boost::asio::placeholders::error)); 
-    worker = std::thread([&](boost::asio::io_service* s){ s->run(); }, &m_io_service);
+    m_io_service.run();
 }
 
 void Remote::handler(const boost::system::error_code& error){
     if(!error){
         std::cout << "GOT A MESSAGE" << std::endl;
+        m_acceptor->async_accept(m_socket,boost::bind(&Remote::handler,this,boost::asio::placeholders::error)); 
     }
 }
 
 void Remote::stop_listening(){
     m_acceptor->cancel();
-    worker.join();
+    m_io_service.stop();
 }
 
 unsigned int Remote::send( Record& record ){

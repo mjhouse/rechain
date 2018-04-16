@@ -57,9 +57,6 @@ class Remote {
         /** IO service to manage system access */
         boost::asio::io_service m_io_service;
 
-        /** Thread for m_io_services,run  */
-        std::thread worker;
-
         /** The socket for listening */
         tcp::socket m_socket;
 

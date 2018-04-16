@@ -14,6 +14,5 @@ var classRemote =
     [ "m_endpoint", "classRemote.html#ad961875dfa5519d1e023522db0e4fe97", null ],
     [ "m_io_service", "classRemote.html#a4735a1cdc7be95296f6b91ab4c842861", null ],
     [ "m_port", "classRemote.html#a41f7daffc1c53e45613374f07107d6f7", null ],
-    [ "m_socket", "classRemote.html#ac8fed1808e978dfdbebe692a0f17b256", null ],
-    [ "worker", "classRemote.html#aa6668d506ac973c83d5ec4f992a3e870", null ]
+    [ "m_socket", "classRemote.html#ac8fed1808e978dfdbebe692a0f17b256", null ]
 ];
