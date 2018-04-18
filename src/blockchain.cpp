@@ -36,7 +36,7 @@
 
 typedef Logger rl;
 
-#define MAX_TRUST UINT_MAX
+#define MAX_TRUST 100
 #define MIN_TRUST 0
 
 /* Add a Record to an open Block
@@ -50,8 +50,7 @@ BlockChain& BlockChain::add( Record& r ){
 */
 void BlockChain::update_trust(){
 
-    usr_trust.clear();
-    pub_trust.clear();
+    trust_map.clear();
 
 	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
 
@@ -62,14 +61,18 @@ void BlockChain::update_trust(){
 		// the first record in the first block is the owner, they
 		// get an initial amount of trust equal to 'MAX_TRUST'.
 		std::string owner = blockchain[0][0].public_key();
-		usr_trust.insert( std::make_pair(owner,MAX_TRUST) );
+		trust_map.insert( std::make_pair(owner,MAX_TRUST) );
 
 		// iterate the through all blocks and all records
 		// in each block
 		for(auto& block : blockchain){
-            // get block author here for transfered-total distribution
+            
+            // get the id of the person who mined the block and add them
+            // to the trust map
             std::string miner = block.public_key();
-            unsigned int transferred = 0;
+            trust_map.insert( std::pair<std::string,unsigned int>(miner,0) );
+
+            double transferred = 0;
 
 			for(auto& record : block){
 
@@ -82,7 +85,9 @@ void BlockChain::update_trust(){
 							// add each document hash and author's public key to the reference map
 							reference.insert(std::pair<std::string,std::string>(document,author));
 
-                            usr_trust.insert( std::pair<std::string,unsigned int>(author,0) );
+                            trust_map.insert( std::pair<std::string,unsigned int>(author,0) );
+
+                            trust_map.insert( std::pair<std::string,unsigned int>(document,0) );
 						}
 						break;
 					case DataType::Signature:
@@ -92,30 +97,30 @@ void BlockChain::update_trust(){
 
 							// try to find the signer in the trust map- if they
 							// aren't found, then they haven't published anything.
-							auto it = usr_trust.find(record.public_key());
+							auto it = trust_map.find(record.public_key());
 
 							// check if the signer is published
-							if( it != usr_trust.end() ){
+							if( it != trust_map.end() ){
 
                                 std::string signer = it->first;
                                 std::string signee = reference[pubref];
 
-                                unsigned int trust = it->second;
+                                double trust = it->second;
 
 								// get amount to transfer
-								unsigned int doc_amount = floor(trust*0.25);
-								unsigned int usr_amount = floor(trust*0.25);
+								double doc_amount = trust*0.25;
+								double usr_amount = trust*0.25;
 
-								// if they have 1 trust, then doc_amount will be
-								// 0, so set doc_amount equal to total trust. we
-                                // don't care if users get 0.
-                                if(doc_amount == 0)
-									doc_amount = trust;
+                                // if the new document trust will be larger than
+                                // trust max, set it to 0.
+                                if((trust_map[pubref] + doc_amount) > MAX_TRUST){
+                                    doc_amount = 0;
+                                }
 
 								// transfer trust to the signee
-								usr_trust[signee] += usr_amount;
-                                pub_trust[pubref] += doc_amount;
-								usr_trust[signer] -= (doc_amount + usr_amount);
+								trust_map[signee] += usr_amount;
+                                trust_map[pubref] += doc_amount;
+								trust_map[signer] -= (doc_amount + usr_amount);
 
                                 // update the total of transferred trust
                                 transferred += doc_amount;
@@ -130,7 +135,7 @@ void BlockChain::update_trust(){
 			}
 
             // update the miner's trust
-            usr_trust[miner] += transferred;
+            trust_map[miner] += transferred;
 		}
 	}
 }
@@ -168,7 +173,7 @@ Block& BlockChain::operator[] ( unsigned int i ){
 BlockChain& BlockChain::operator=( const BlockChain& b ){
 	this->blockchain = b.blockchain;
 	this->current	 = b.current;
-	this->pub_trust	 = b.pub_trust;
+	this->trust_map	 = b.trust_map;
 	return *this;
 }
 
@@ -256,8 +261,17 @@ bool BlockChain::valid(){
 
 /* Get the trust for a publication
 */
-float BlockChain::trust( std::string r ){
-	return this->pub_trust[r];
+double BlockChain::trust( std::string r ){
+	
+    std::map<std::string,double>::iterator it;
+    double value = 0;
+
+    if( (it = trust_map.find(r)) != trust_map.end()){
+        value = 100*(it->second/MAX_TRUST);
+    }
+
+    // return the trust value
+    return value;
 }
 
 /* Iterator begin

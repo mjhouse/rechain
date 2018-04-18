@@ -60,14 +60,13 @@ class Record;
 */
 class BlockChain {
 	private:
-		std::vector<Block> blockchain;		            /**< Collection of Block objects*/
+		std::vector<Block> blockchain;		            /**< Collection of Block objects */
 		
-		Block current;				                    /**< Current working Block*/
-        std::string file_path;			                /**< The path to load or save from/to*/
-		std::map<std::string,unsigned int> pub_trust;	/**< Trust of publications by reference*/
-		std::map<std::string,unsigned int> usr_trust;	/**< Trust of users by public key*/
+		Block current;				                    /**< Current working Block */
+        std::string file_path;			                /**< The path to load or save from/to */
+		std::map<std::string,double> trust_map;	        /**< Trust of documents and users */
 
-		/** Update 'usr_trust' and 'pub_trust'*/	
+		/** Update the trust_map */	
 		void update_trust();	
 
 	public:
@@ -139,7 +138,7 @@ class BlockChain {
 			\param r The reference of the Record object
 			\returns The trust for the Record object
 		*/
-		float trust( std::string r );
+		double trust( std::string r );
 
 		// ------------------------------------------------------
 		// Iterator Methods

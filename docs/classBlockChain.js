@@ -15,12 +15,11 @@ var classBlockChain =
     [ "save", "classBlockChain.html#a5e73c9e3754a32dca2ce587dfa8f1be9", null ],
     [ "serialize", "classBlockChain.html#ac0dd294dc2adfd1857b7aef9911370d8", null ],
     [ "size", "classBlockChain.html#acb48c2b272c045d5e3fa294fafe536b9", null ],
-    [ "trust", "classBlockChain.html#ae920a7a7bfad3b828b74be00f331936c", null ],
+    [ "trust", "classBlockChain.html#a948dff588ed05cc7cf76ac0d44b99cf4", null ],
     [ "update_trust", "classBlockChain.html#a82851a102065917794e939b1bbd91633", null ],
     [ "valid", "classBlockChain.html#affe7ebd7b5d67de56bf685b4e0adc0f0", null ],
     [ "blockchain", "classBlockChain.html#a9e885cdf4c59b225b8a4efd70ce084f0", null ],
     [ "current", "classBlockChain.html#a288c8c10e0586dfe6bc0bbd638c0d778", null ],
     [ "file_path", "classBlockChain.html#acdba7c5340f6b0b26966c341b2e6a8d4", null ],
-    [ "pub_trust", "classBlockChain.html#a85792d2eaf5b987f6c6783cba285af01", null ],
-    [ "usr_trust", "classBlockChain.html#aaa5f2e125f73d88482bb5b073c3c87a3", null ]
+    [ "trust_map", "classBlockChain.html#a5362a4227ef157797a1649d6cb5be7c4", null ]
 ];
