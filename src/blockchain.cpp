@@ -85,9 +85,25 @@ void BlockChain::update_trust(){
 							// add each document hash and author's public key to the reference map
 							reference.insert(std::pair<std::string,std::string>(document,author));
 
-                            trust_map.insert( std::pair<std::string,unsigned int>(author,0) );
 
-                            trust_map.insert( std::pair<std::string,unsigned int>(document,0) );
+                            // try to insert author and document into trust_map, capture
+                            // the result std::pair.
+                            auto a_it = trust_map.insert( std::pair<std::string,unsigned int>(author,0) );
+                            auto d_it = trust_map.insert( std::pair<std::string,unsigned int>(document,0) );
+
+                            // if the insert failed, then the author may have trust, and if
+                            // the author has trust, give half to the document
+                            if(!a_it.second){
+
+                                // get references to the actual iterators
+                                auto a_entry = a_it.first;
+                                auto d_entry = d_it.first;
+
+                                // split up trust
+                                double amount = a_entry->second/2;
+                                a_entry->second -= amount;
+                                d_entry->second += amount;
+                            }
 						}
 						break;
 					case DataType::Signature:
