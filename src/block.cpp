@@ -32,8 +32,8 @@
 #include <vector>
 
 // local includes
-#include "record.hpp"
 #include "block.hpp"
+#include "record.hpp"
 #include "logger.hpp"
 
 Block::~Block(){}

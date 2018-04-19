@@ -32,6 +32,7 @@
 // local includes
 #include "blockchain.hpp"
 #include "block.hpp"
+#include "record.hpp"
 #include "logger.hpp"
 
 typedef Logger rl;

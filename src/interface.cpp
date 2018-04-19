@@ -31,6 +31,7 @@
 #include "interface.hpp"
 #include "manager.hpp"
 #include "blockchain.hpp"
+#include "record.hpp"
 #include "logger.hpp"
 
 #define H_NOERR	0
