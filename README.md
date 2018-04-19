@@ -20,9 +20,9 @@ There isn't any support or guides for contributions, but if you add something co
 ### ToDo
 
 - [ ] write bash script to configure environment and verify that necessary tools are installed for development
-- [ ] publish should broadcast Records to miners rather than mining locally
+- [X] publish should broadcast Records to miners rather than mining locally
 - [ ] mining should be a daemonized process that listens for new Records
-- [ ] review trust calculation and add linear scaling (so trust score is percentage of total)
+- [X] review trust calculation and add linear scaling (so trust score is percentage of total)
 - [ ] refactor PrivateKey/PublicKey into a single class (don't need user-settable public key)
 - [ ] set up automated linting with [clang-tidy](http://clang.llvm.org/extra/clang-tidy/) (or similar)
 - [ ] set up automatic leak checking with [valgrind](http://valgrind.org/) (or similar)
