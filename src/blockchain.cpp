@@ -62,6 +62,7 @@ void BlockChain::update_trust(){
 		// the first record in the first block is the owner, they
 		// get an initial amount of trust equal to 'MAX_TRUST'.
 		std::string owner = blockchain[0][0].public_key();
+		std::string genesis = blockchain[0][0].reference();
 		trust_map.insert( std::make_pair(owner,MAX_TRUST) );
 
 		// iterate the through all blocks and all records
@@ -94,7 +95,7 @@ void BlockChain::update_trust(){
 
                             // if the insert failed, then the author may have trust, and if
                             // the author has trust, give half to the document
-                            if(!a_it.second){
+                            if(!a_it.second && document != genesis){
 
                                 // get references to the actual iterators
                                 auto a_entry = a_it.first;

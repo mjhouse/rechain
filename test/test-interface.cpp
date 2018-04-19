@@ -13,7 +13,10 @@ extern char* get_path_char( std::string partial );
 
 #define P(x)(std::cout << x << std::endl)
 
-SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
+/* ------------------------------------------------------------
+   THESE TESTS NEED TO BE CONVERTED INTO MANAGER TESTS
+   ------------------------------------------------------------*/
+SCENARIO( "interface is called with various argc/argv values", "[.][interface]" ){
 
     GIVEN( "a test environment without variables" ){
     
@@ -391,18 +394,19 @@ SCENARIO( "interface is called with various argc/argv values", "[interface]" ){
             std::string list_gold = dump_file(get_path("files/gold/interface_list.gold"));
 
             copy_file(get_path("files/gold/interface_list_blockchain.gold"),
-                 get_path("files/tmp/rechain.blockchain"));
+                      get_path("files/tmp/rechain.blockchain"));
+
+            Interface interface(argc,argv);
+            int result = interface.execute();
 
 			THEN("interface prints blockchain information"){
-				Interface interface(argc,argv);
-                int result = interface.execute();
-
 				REQUIRE(result == 0);
 				REQUIRE(list_gold == buffer.str());
-
-                // Set cout back to original buf
-                std::cout.rdbuf( buf );
+                REQUIRE(false);
 			}
+            
+            // Set cout back to original buf
+            std::cout.rdbuf( buf );
 		}
 
 	}
