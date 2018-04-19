@@ -19,9 +19,6 @@ matrix:
                     - libtorrent-rasterbar-dev
                     - g++-5
 
-compiler:
-      - g++
-
 before_install:
       - pip install --user cpp-coveralls;
 
