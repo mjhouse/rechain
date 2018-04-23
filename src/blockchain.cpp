@@ -105,6 +105,8 @@ void BlockChain::update_trust(){
                                 double amount = a_entry->second/2;
                                 a_entry->second -= amount;
                                 d_entry->second += amount;
+
+                                transferred += amount;
                             }
 						}
 						break;
