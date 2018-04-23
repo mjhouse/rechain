@@ -3,9 +3,11 @@
 [![Build Status](https://travis-ci.org/mjhouse/rechain.svg?branch=master)](https://travis-ci.org/mjhouse/rechain)
 [![Coverage Status](https://coveralls.io/repos/github/mjhouse/rechain/badge.svg?branch=master)](https://coveralls.io/github/mjhouse/rechain?branch=master)
 
-ReChain is a modified blockchain design that uses signature transactions to enforce blockchain
-integrity rather than an expensive proof-of-work calculation. There is still a fixed
-proof-of-work difficulty in order to stop many transactions from being executed at once.
+ReChain is a modified blockchain design that uses signature records to enforce blockchain
+integrity rather than an expensive proof-of-work calculation (although there is still a fixed 
+proof-of-work to stop clients from creating large numbers of blocks at once). The goal is to 
+create a network of clients that share the burden of hosting, publishing and peer-reviewing 
+a repository of research documents in an immutable blockchain.
 
 ### Documentation
 
@@ -20,9 +22,9 @@ There isn't any support or guides for contributions, but if you add something co
 ### ToDo
 
 - [ ] write bash script to configure environment and verify that necessary tools are installed for development
-- [ ] publish should broadcast Records to miners rather than mining locally
+- [X] publish should broadcast Records to miners rather than mining locally
 - [ ] mining should be a daemonized process that listens for new Records
-- [ ] review trust calculation and add linear scaling (so trust score is percentage of total)
+- [X] review trust calculation and add linear scaling (so trust score is percentage of total)
 - [ ] refactor PrivateKey/PublicKey into a single class (don't need user-settable public key)
 - [ ] set up automated linting with [clang-tidy](http://clang.llvm.org/extra/clang-tidy/) (or similar)
 - [ ] set up automatic leak checking with [valgrind](http://valgrind.org/) (or similar)

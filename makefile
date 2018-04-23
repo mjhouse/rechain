@@ -15,6 +15,9 @@ INCDIR = inc
 SRCDIR = src
 TSTDIR = test
 
+# create directories
+$(shell mkdir obj bin)
+
 INC = -I$(INCDIR) -I$(INCDIR)/dependencies 
 
 # find all source files in srcdir
