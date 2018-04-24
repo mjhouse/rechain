@@ -11,8 +11,8 @@ a repository of research documents in an immutable blockchain.
 
 ### Documentation/Status
 
-[Taskboard](https://tree.taiga.io/project/mjhouse-rechain/taskboard/2018_4_3)
-[Documentation](https://mjhouse.github.io/rechain/)
+* [Taskboard](https://tree.taiga.io/project/mjhouse-rechain/taskboard/2018_4_3)
+* [Documentation](https://mjhouse.github.io/rechain/)
 
 Currently, there are no written tutorials or guides because the project isn't that far along yet (the documentation is generated using doxygen). The taskboard is what I'm using to keep things organized. You can see the features and fixes I haven't started yet in the backlog (left-side menu).
 
