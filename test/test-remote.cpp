@@ -28,16 +28,16 @@ SCENARIO( "remote is created with a valid config", "[.][remote]" ){
         REQUIRE(config->initialize());
 
         // create a Remote
-        Remote remote;
-        REQUIRE(remote.initialize(config));
+        //Remote remote;
+        //REQUIRE(remote.initialize(config));
 
-        Remote server;
-        REQUIRE(server.initialize(config));
+        Remote server(config);
 
 		WHEN( "remote::send is called with appropriate arguments" ){
 
-            server.listen();
-
+            server.start_listening();
+            server.stop_listening();
+            
             unsigned int result = 1;//= remote.send(r);
 
             //server.stop_listening();

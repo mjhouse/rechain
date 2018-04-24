@@ -34,7 +34,9 @@
 // dependency includes
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+
 #include <boost/asio.hpp>
+#include <boost/thread.hpp>
 
 // local includes
 #include "blockchain.hpp"
@@ -43,7 +45,7 @@
 
 namespace fs = boost::filesystem;
 
-using boost::asio::ip::tcp;
+using namespace boost::asio::ip;
 
 /** \brief Handles http(s) requests and torrents.
 */
@@ -55,54 +57,33 @@ class Remote {
         std::shared_ptr<Config> config;
 
         /** IO service to manage system access */
-        boost::asio::io_service m_io_service;
+        boost::asio::io_service service;
 
-        /** The socket for listening */
-        tcp::socket m_socket;
+        /** The acceptor that listens for broadcasts */
+        boost::shared_ptr<tcp::acceptor> acceptor;
 
-        /** An endpoint to listen at */
-        boost::shared_ptr<tcp::endpoint> m_endpoint;
+        /** A thread that service runs in */
+        boost::shared_ptr<boost::thread> service_thread;
+        
+        /** This flag will be used to control thread listening */
+        bool running;
 
-        /** Calls handlers with incoming requests */
-        boost::shared_ptr<tcp::acceptor> m_acceptor;
-
-        /** The port number to listen at */
-        unsigned short m_port;
-
-        /** \brief Get a list of peers to broadcast to
-            \returns A map of address/port pairs
-        */
-        std::map<std::string,std::string> get_peers();
-
-        /** Push received records to a listener 
-            \returns True on success
-        */
-        void receive();
 
     public:
-        /** Private constructor 
+        /** Private constructor
+            \param cfg A pointer to Config
         */
-        Remote();
+        Remote(std::shared_ptr<Config> cfg);
 
         /** Destructor
         */
         ~Remote();
 
-        /** \brief Init the Remote
-            \param cfg A Config pointer to provide paths
-            \returns True if initialization was successful
+        /** \brief Start listening for broadcasts
         */
-        bool initialize( std::shared_ptr<Config> cfg );
+        void start_listening();
 
-        /** \brief Listen for incoming requests */
-        void listen();
-
-        /** \brief Handle requests
-            \param error An error code or '0'
-        */
-        void handler(const boost::system::error_code& error);
-
-        /** \brief Shut down worker thread, cancel acceptor
+        /** \brief Stop listening for broadcasts
         */
         void stop_listening();
 

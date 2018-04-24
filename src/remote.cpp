@@ -26,6 +26,7 @@
 
 // dependency includes
 #include <boost/filesystem/path.hpp>
+#include <boost/make_shared.hpp>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 
@@ -41,47 +42,35 @@
 namespace fs = boost::filesystem;
 namespace rc = rechain;
 
-using boost::asio::ip::tcp;
+using namespace boost::asio::ip;
 
 typedef Logger rl;
 
-Remote::Remote() : config(nullptr), m_io_service(), m_socket(m_io_service) {
+Remote::Remote(std::shared_ptr<Config> cfg) 
+    : config(cfg), service(), service_thread(), running(false) {
+
+    acceptor = boost::make_shared<tcp::acceptor>(service,tcp::endpoint(tcp::v4(),8080));
 }
 
 Remote::~Remote(){
 }
 
-bool Remote::initialize( std::shared_ptr<Config> cfg ){
-    config = cfg;
+void Remote::start_listening(){
+    if(service_thread) return;
 
-    return true;
-}
-
-std::map<std::string,std::string> Remote::get_peers(){
-    std::map<std::string,std::string> peers;
-    peers.insert( std::make_pair<std::string,std::string>("localhost","8080") );
-    return peers;
-}
-
-void Remote::listen(){
-    m_port = 8080;
-    m_endpoint = boost::shared_ptr<tcp::endpoint>(new tcp::endpoint(tcp::v4(), m_port));
-    m_acceptor = boost::shared_ptr<tcp::acceptor>(new tcp::acceptor(m_io_service, *m_endpoint));
-
-    m_acceptor->async_accept(m_socket,boost::bind(&Remote::handler,this,boost::asio::placeholders::error)); 
-    m_io_service.run();
-}
-
-void Remote::handler(const boost::system::error_code& error){
-    if(!error){
-        std::cout << "GOT A MESSAGE" << std::endl;
-        m_acceptor->async_accept(m_socket,boost::bind(&Remote::handler,this,boost::asio::placeholders::error)); 
-    }
+    service_thread.reset(new boost::thread(
+        boost::bind(&boost::asio::io_service::run,&service)
+    ));
 }
 
 void Remote::stop_listening(){
-    m_acceptor->cancel();
-    m_io_service.stop();
+    if(!service_thread) return;
+
+    service.stop();
+    service_thread->join();
+
+    service.reset();
+    service_thread.reset();
 }
 
 unsigned int Remote::send( Record& record ){
@@ -92,11 +81,19 @@ unsigned int Remote::send( Record& record ){
     archive( record );
     std::string message = data.str();
 
+    // ----------------------------------------------------
+    // TEST CODE:
+    //      peers will be in config, and this is a stand in
+    //      for a collection of peers received
+    std::map<std::string,std::string> peers;
+    peers.insert( std::make_pair<std::string,std::string>("localhost","8080") );
+    // ----------------------------------------------------
+
     unsigned int result = 0; 
 
     // for each peer, send a POST request with the 
     // serialized record in the body
-    for( auto& peer : get_peers() ){
+    for( auto& peer : peers ){
         std::string address = peer.first;
         std::string port = peer.second;
 

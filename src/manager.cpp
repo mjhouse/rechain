@@ -61,12 +61,6 @@ bool Manager::configure( Level level ){
         return false;
     }
 
-    // create a new Remote instance
-    remote.reset(new Remote());
-    if(!remote->initialize(config)){
-        return false;
-    }
-
     // verify or create home dir structure
     if(!make_home())
         return false;

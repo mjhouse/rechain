@@ -10,6 +10,7 @@ var searchData=
   ['sign',['sign',['../classPrivateKey.html#ae201c4156c0449bc4e83e07879cf3ab4',1,'PrivateKey::sign()'],['../classManager.html#a48d9aa74bfd726d5259db316247df38f',1,'Manager::sign()']]],
   ['signature',['signature',['../classRecord.html#a77d4cd555d271d7136785a08564beb27',1,'Record']]],
   ['size',['size',['../classBlock.html#aa3f0e1e2580adb15c40d7135f7c820f2',1,'Block::size()'],['../classBlockChain.html#acb48c2b272c045d5e3fa294fafe536b9',1,'BlockChain::size()']]],
+  ['start_5flistening',['start_listening',['../classRemote.html#a536ffff1fa84c59c984a4ca05c848498',1,'Remote']]],
   ['stop_5flistening',['stop_listening',['../classRemote.html#a8ddbe86f5961a452e38cfcedfd1bd689',1,'Remote']]],
   ['string',['string',['../classRecord.html#af114f694bef7f6dcdab07ed42e0a88f6',1,'Record']]]
 ];

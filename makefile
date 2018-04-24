@@ -16,7 +16,7 @@ SRCDIR = src
 TSTDIR = test
 
 # create directories
-$(shell mkdir obj bin)
+$(shell mkdir -p obj bin)
 
 INC = -I$(INCDIR) -I$(INCDIR)/dependencies 
 
