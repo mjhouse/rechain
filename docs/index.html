@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>ReChain: Main Page</title>
+<title>ReChain: ReChain</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -99,15 +99,50 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">ReChain Documentation</div>  </div>
+<div class="title">ReChain </div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><p>//!</p>
+<p>ReChain is a modified blockchain design that uses signature records to enforce blockchain integrity rather than an expensive proof-of-work calculation (although there is still a fixed proof-of-work to stop clients from creating large numbers of blocks at once). The goal is to create a network of clients that share the burden of hosting, publishing and peer-reviewing a repository of research documents in an immutable blockchain.</p>
+<h3>Documentation/Status</h3>
+<ul>
+<li><a href="https://tree.taiga.io/project/mjhouse-rechain/taskboard/2018_4_3">Taskboard</a></li>
+<li><a href="https://mjhouse.github.io/rechain/">Documentation</a></li>
+</ul>
+<p>Currently, there are no written tutorials or guides because the project isn't that far along yet (the documentation is generated using doxygen). The taskboard is what I'm using to keep things organized. You can see the features and fixes I haven't started yet in the backlog (left-side menu).</p>
+<h3>Can I Contribute?</h3>
+<p>There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at <a href="#" onclick="location.href='mai'+'lto:'+'mjh'+'ou'+'se@'+'pr'+'oto'+'nm'+'ail'+'.c'+'om'; return false;">mjhou<span style="display: none;">.nosp@m.</span>se@p<span style="display: none;">.nosp@m.</span>roton<span style="display: none;">.nosp@m.</span>mail<span style="display: none;">.nosp@m.</span>.com</a>.</p>
+<h4>Notes</h4>
+<ul>
+<li>read <a href="https://www.gitbook.com/book/lefticus/cpp-best-practices/details">Cpp Best Practices</a></li>
+</ul>
+<h3>Tools</h3>
+<ul>
+<li>make</li>
+<li>g++5.4.0</li>
+<li>doxygen</li>
+</ul>
+<h3>Dependencies</h3>
+<table class="doxtable">
+<tr>
+<th align="left">Dependency </th><th align="left">Included for </th><th align="left">Status  </th></tr>
+<tr>
+<td align="left">cxxopts </td><td align="left">Command line argument parsing </td><td align="left">Included </td></tr>
+<tr>
+<td align="left">cereal </td><td align="left">Serializing objects to/from files </td><td align="left">Included </td></tr>
+<tr>
+<td align="left">Crypto++ </td><td align="left">Public keys and hashing </td><td align="left">Not included </td></tr>
+<tr>
+<td align="left">Catch2 </td><td align="left">Unit tests </td><td align="left">Included </td></tr>
+<tr>
+<td align="left">libtorrent </td><td align="left">Sharing published documents </td><td align="left">Not Included </td></tr>
+</table>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 25 2018 14:18:15 for ReChain by
+    <li class="footer">Generated on Wed Apr 25 2018 16:36:38 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
