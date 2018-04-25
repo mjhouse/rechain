@@ -47,7 +47,7 @@ using namespace boost::asio::ip;
 typedef Logger rl;
 
 Remote::Remote(std::shared_ptr<Config> cfg) 
-    : config(cfg), service(), service_thread(), running(false) {
+    : config(cfg), service(), service_thread() {
 
     acceptor = boost::make_shared<tcp::acceptor>(service,tcp::endpoint(tcp::v4(),8080));
 }
@@ -55,8 +55,21 @@ Remote::Remote(std::shared_ptr<Config> cfg)
 Remote::~Remote(){
 }
 
+void Remote::handle(){
+    std::cout << "Got a message" << std::endl;
+
+    listen();
+}
+
+void Remote::listen(){
+    boost::shared_ptr<tcp::socket> socket(new tcp::socket(service));
+    acceptor->async_accept(*socket,boost::bind(&Remote::handle,this));
+}
+
 void Remote::start_listening(){
     if(service_thread) return;
+
+    listen();
 
     service_thread.reset(new boost::thread(
         boost::bind(&boost::asio::io_service::run,&service)
@@ -65,6 +78,8 @@ void Remote::start_listening(){
 
 void Remote::stop_listening(){
     if(!service_thread) return;
+
+    acceptor->cancel();
 
     service.stop();
     service_thread->join();

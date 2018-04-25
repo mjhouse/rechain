@@ -64,10 +64,12 @@ class Remote {
 
         /** A thread that service runs in */
         boost::shared_ptr<boost::thread> service_thread;
-        
-        /** This flag will be used to control thread listening */
-        bool running;
+       
+        /** The handler for received messages */
+        void handle();
 
+        /** Sets up the async listener (acceptor) */
+        void listen();
 
     public:
         /** Private constructor

@@ -8,6 +8,5 @@ var searchData=
   ['remote_2ehpp',['remote.hpp',['../remote_8hpp.html',1,'']]],
   ['request',['request',['../classManager.html#ac4be1fcc4f45e80ec38acf2fb8fc6cbd',1,'Manager']]],
   ['rtrim',['rtrim',['../utility_8hpp.html#af8c372f2bb768b0373d7c55e47a9df8e',1,'rechain']]],
-  ['rtrim_5fcopy',['rtrim_copy',['../utility_8hpp.html#a6b93b5c4082c1e72fa0fce04631aba28',1,'rechain']]],
-  ['running',['running',['../classRemote.html#a2ca1cf515f323451ff98aff32b9438a5',1,'Remote']]]
+  ['rtrim_5fcopy',['rtrim_copy',['../utility_8hpp.html#a6b93b5c4082c1e72fa0fce04631aba28',1,'rechain']]]
 ];
