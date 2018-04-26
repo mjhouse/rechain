@@ -23,6 +23,7 @@
 // system includes
 #include <iostream>
 #include <string>
+#include <regex>
 
 // dependency includes
 #include <boost/filesystem/path.hpp>
@@ -49,25 +50,54 @@ typedef Logger rl;
 Remote::Remote(std::shared_ptr<Config> cfg) 
     : config(cfg), service(), service_thread() {
 
-    acceptor = boost::make_shared<tcp::acceptor>(service,tcp::endpoint(tcp::v4(),8080));
 }
 
 Remote::~Remote(){
 }
 
-void Remote::handle(){
-    std::cout << "Got a message" << std::endl;
+void Remote::handle( boost::shared_ptr<tcp::socket> socket ){
+
+    // feed the request into a stream
+    boost::asio::streambuf request;
+    boost::asio::read_until(*socket, request, "\r\n\r\n");
+    std::istream response_stream(&request);
+
+    // get the message header 
+    std::string header(std::istreambuf_iterator<char>(response_stream), {});
+    std::cout << header << std::endl;
+
+    /*
+    std::regex rgx("Content-Length: (\d).*");
+    std::smatch match;
+
+    if (std::regex_search(header.begin(), header.end(), match, rgx))
+        std::cout << "match: " << match[1] << '\n';
+    else:
+        std::cout << "no match" << std::endl;
+    */
+
+    // -----------------------------------
+    // send a '200' response to the client
+    boost::asio::streambuf response;
+    std::ostream stream(&response);
+
+    stream << "HTTP/1.1 200 OK\r\n";
+    stream << "Connection: close\r\n\r\n"; 
+
+    boost::asio::write(*socket,response);
 
     listen();
 }
 
 void Remote::listen(){
     boost::shared_ptr<tcp::socket> socket(new tcp::socket(service));
-    acceptor->async_accept(*socket,boost::bind(&Remote::handle,this));
+    acceptor->async_accept(*socket,boost::bind(&Remote::handle,this,socket));
 }
 
 void Remote::start_listening(){
     if(service_thread) return;
+
+    acceptor = boost::make_shared<tcp::acceptor>(service,tcp::endpoint(tcp::v4(),8080));
 
     listen();
 
@@ -131,6 +161,7 @@ unsigned int Remote::send( Record& record ){
             boost::asio::streambuf request;
             std::ostream request_stream(&request);
 
+
             request_stream << "POST / HTTP/1.1 \r\n";
             request_stream << "Host: localhost:8080\r\n";
             request_stream << "User-Agent: Rechain/1.0\r\n";
@@ -140,7 +171,10 @@ unsigned int Remote::send( Record& record ){
             request_stream << "Connection: close\r\n\r\n";  //NOTE THE Double line feed
             request_stream << message;
 
-            boost::asio::write(socket,request);
+            size_t bufsize = request.size();
+
+            size_t written = boost::asio::write(socket,request);
+            std::cout << written << " : " << bufsize << std::endl;
 
             // feed the response into a stream
             boost::asio::streambuf response;

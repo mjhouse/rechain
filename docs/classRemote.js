@@ -2,7 +2,7 @@ var classRemote =
 [
     [ "Remote", "classRemote.html#a264b7432cdb257659e84fc3bf434ff9c", null ],
     [ "~Remote", "classRemote.html#a448a7f03fa23a062d11ccb9752775f47", null ],
-    [ "handle", "classRemote.html#a8c5dc44013faa5917ffdce1d789b50f5", null ],
+    [ "handle", "classRemote.html#a1da3a4bbe8497b45d85d28852affb95f", null ],
     [ "listen", "classRemote.html#a50d34dd25124db8ddf8250db9104defb", null ],
     [ "send", "classRemote.html#a839d3df5a651ef0e8192a51790d108c8", null ],
     [ "start_listening", "classRemote.html#a536ffff1fa84c59c984a4ca05c848498", null ],

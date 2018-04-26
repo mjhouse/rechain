@@ -28,20 +28,23 @@ SCENARIO( "remote is created with a valid config", "[.][remote]" ){
         REQUIRE(config->initialize());
 
         // create a Remote
-        //Remote remote(config);
+        Remote remote(config);
 
         // create a server
         Remote server(config);
 
 		WHEN( "remote::send is called with appropriate arguments" ){
 
+            std::cout << "listening" << std::endl;
             server.start_listening();
             
-            unsigned int result = 1;//= remote.send(r);
-    
+            std::cout << "sending" << std::endl;
+            unsigned int result = remote.send(r);
+
             std::cout << "sleeping" << std::endl;
             std::this_thread::sleep_for(std::chrono::seconds(60));
 
+            std::cout << "not listening" << std::endl;
             server.stop_listening();
 
 			THEN( "it returns the number of successful sends" ){

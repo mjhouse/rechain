@@ -65,10 +65,13 @@ class Remote {
         /** A thread that service runs in */
         boost::shared_ptr<boost::thread> service_thread;
        
-        /** The handler for received messages */
-        void handle();
+        /** \brief The handler for received messages 
+            \param socket The socket to read messages from
+        */
+        void handle( boost::shared_ptr<tcp::socket> socket );
 
-        /** Sets up the async listener (acceptor) */
+        /** \brief Sets up the async listener (acceptor) 
+        */
         void listen();
 
     public:
