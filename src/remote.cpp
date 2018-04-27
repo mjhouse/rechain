@@ -23,19 +23,20 @@
 // system includes
 #include <iostream>
 #include <string>
-#include <regex>
 
 // dependency includes
 #include <boost/filesystem/path.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include <cereal/archives/json.hpp>
 
 
 // local includes
 #include "remote.hpp"
+#include "message.hpp"
 #include "config.hpp"
 #include "logger.hpp"
 #include "utility.hpp"
@@ -57,24 +58,19 @@ Remote::~Remote(){
 
 void Remote::handle( boost::shared_ptr<tcp::socket> socket ){
 
-    // feed the request into a stream
-    boost::asio::streambuf request;
-    boost::asio::read_until(*socket, request, "\r\n\r\n");
-    std::istream response_stream(&request);
+    // build a Request from the socket
+    Request r;
+    r.read(socket);
 
-    // get the message header 
-    std::string header(std::istreambuf_iterator<char>(response_stream), {});
-    std::cout << header << std::endl;
+    std::string body = r.body();
 
-    /*
-    std::regex rgx("Content-Length: (\d).*");
-    std::smatch match;
+    std::stringstream serialized(body);
+    Record record;
 
-    if (std::regex_search(header.begin(), header.end(), match, rgx))
-        std::cout << "match: " << match[1] << '\n';
-    else:
-        std::cout << "no match" << std::endl;
-    */
+    {
+        cereal::JSONInputArchive archive(serialized);
+        archive( record );
+    }
 
     // -----------------------------------
     // send a '200' response to the client
@@ -122,8 +118,12 @@ unsigned int Remote::send( Record& record ){
 
     // serialize the record
     std::ostringstream data;
-    cereal::JSONOutputArchive archive(data);
-    archive( record );
+    
+    {
+        cereal::JSONOutputArchive archive(data);
+        archive( record );
+    }
+
     std::string message = data.str();
 
     // ----------------------------------------------------
@@ -161,20 +161,18 @@ unsigned int Remote::send( Record& record ){
             boost::asio::streambuf request;
             std::ostream request_stream(&request);
 
-
             request_stream << "POST / HTTP/1.1 \r\n";
             request_stream << "Host: localhost:8080\r\n";
             request_stream << "User-Agent: Rechain/1.0\r\n";
             request_stream << "Content-Type: text/plain; charset=utf-8 \r\n";
             request_stream << "Accept: */*\r\n";
             request_stream << "Content-Length: " << message.length() << "\r\n";    
+            request_stream << "Message-Type: Publish\r\n";    
             request_stream << "Connection: close\r\n\r\n";  //NOTE THE Double line feed
             request_stream << message;
 
-            size_t bufsize = request.size();
-
-            size_t written = boost::asio::write(socket,request);
-            std::cout << written << " : " << bufsize << std::endl;
+            boost::system::error_code e;
+            boost::asio::write(socket,request,e);
 
             // feed the response into a stream
             boost::asio::streambuf response;

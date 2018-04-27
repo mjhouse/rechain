@@ -11,5 +11,6 @@ var annotated_dup =
     [ "PrivateKey", "classPrivateKey.html", "classPrivateKey" ],
     [ "PublicKey", "classPublicKey.html", "classPublicKey" ],
     [ "Record", "classRecord.html", "classRecord" ],
-    [ "Remote", "classRemote.html", "classRemote" ]
+    [ "Remote", "classRemote.html", "classRemote" ],
+    [ "Request", "classRequest.html", "classRequest" ]
 ];

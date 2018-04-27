@@ -15,5 +15,6 @@ var hierarchy =
     [ "Logger", "classLogger.html", null ],
     [ "Manager", "classManager.html", null ],
     [ "Record", "classRecord.html", null ],
-    [ "Remote", "classRemote.html", null ]
+    [ "Remote", "classRemote.html", null ],
+    [ "Request", "classRequest.html", null ]
 ];
