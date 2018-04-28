@@ -116,60 +116,121 @@ $(document).ready(function(){initNavTree('classRequest.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Parses an http request.  
+<p>Parse an http request.  
  <a href="classRequest.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="message_8hpp_source.html">message.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Request:</div>
+<div class="dyncontent">
+<div class="center"><img src="classRequest__inherit__graph.png" border="0" usemap="#Request_inherit__map" alt="Inheritance graph"/></div>
+<map name="Request_inherit__map" id="Request_inherit__map">
+<area shape="rect" id="node2" href="classMessage.html" title="Parses an http request. " alt="" coords="5,5,80,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for Request:</div>
+<div class="dyncontent">
+<div class="center"><img src="classRequest__coll__graph.png" border="0" usemap="#Request_coll__map" alt="Collaboration graph"/></div>
+<map name="Request_coll__map" id="Request_coll__map">
+<area shape="rect" id="node2" href="classMessage.html" title="Parses an http request. " alt="" coords="5,5,80,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5536e2e35c6942bfb2a67fdc0fb5a245"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a5536e2e35c6942bfb2a67fdc0fb5a245">read</a> (boost::shared_ptr&lt; boost::asio::ip::tcp::socket &gt; socket)</td></tr>
-<tr class="memdesc:a5536e2e35c6942bfb2a67fdc0fb5a245"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads http request data from a socket.  <a href="#a5536e2e35c6942bfb2a67fdc0fb5a245">More...</a><br /></td></tr>
-<tr class="separator:a5536e2e35c6942bfb2a67fdc0fb5a245"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8aaf15da8612ae46811e1ebbf253b58"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#ae8aaf15da8612ae46811e1ebbf253b58">property</a> (std::string key)</td></tr>
-<tr class="memdesc:ae8aaf15da8612ae46811e1ebbf253b58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a header property.  <a href="#ae8aaf15da8612ae46811e1ebbf253b58">More...</a><br /></td></tr>
-<tr class="separator:ae8aaf15da8612ae46811e1ebbf253b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f1f06dd0f4ddcafd9b4cda96afce6c2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a0f1f06dd0f4ddcafd9b4cda96afce6c2"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRequest.html#a0f1f06dd0f4ddcafd9b4cda96afce6c2">property</a> (std::string key)</td></tr>
-<tr class="memdesc:a0f1f06dd0f4ddcafd9b4cda96afce6c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a header property as type 'T'.  <a href="#a0f1f06dd0f4ddcafd9b4cda96afce6c2">More...</a><br /></td></tr>
-<tr class="separator:a0f1f06dd0f4ddcafd9b4cda96afce6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a081ef84c19d81e15c8f91e6cc3fbcda3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a081ef84c19d81e15c8f91e6cc3fbcda3">body</a> ()</td></tr>
-<tr class="memdesc:a081ef84c19d81e15c8f91e6cc3fbcda3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the message body.  <a href="#a081ef84c19d81e15c8f91e6cc3fbcda3">More...</a><br /></td></tr>
-<tr class="separator:a081ef84c19d81e15c8f91e6cc3fbcda3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab550cbb25032222804dfec7b67a142c1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#ab550cbb25032222804dfec7b67a142c1">method</a> ()</td></tr>
-<tr class="memdesc:ab550cbb25032222804dfec7b67a142c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the request method (e.g. 'POST')  <a href="#ab550cbb25032222804dfec7b67a142c1">More...</a><br /></td></tr>
-<tr class="separator:ab550cbb25032222804dfec7b67a142c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57ae87782576f3b739f84db801b0a462"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a57ae87782576f3b739f84db801b0a462">url</a> ()</td></tr>
-<tr class="memdesc:a57ae87782576f3b739f84db801b0a462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the request url (e.g. '/')  <a href="#a57ae87782576f3b739f84db801b0a462">More...</a><br /></td></tr>
-<tr class="separator:a57ae87782576f3b739f84db801b0a462"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23b1c4a59f89180fda3d32d95b8f6f52"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a23b1c4a59f89180fda3d32d95b8f6f52">version</a> ()</td></tr>
-<tr class="memdesc:a23b1c4a59f89180fda3d32d95b8f6f52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the http version string.  <a href="#a23b1c4a59f89180fda3d32d95b8f6f52">More...</a><br /></td></tr>
-<tr class="separator:a23b1c4a59f89180fda3d32d95b8f6f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65d622bb03df29f986e9abf1e2132095"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65d622bb03df29f986e9abf1e2132095"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a65d622bb03df29f986e9abf1e2132095">clear</a> ()</td></tr>
+<tr class="memdesc:a65d622bb03df29f986e9abf1e2132095"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the message to defaults. <br /></td></tr>
+<tr class="separator:a65d622bb03df29f986e9abf1e2132095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7969c969a1396d02bd6f77958a2fb801"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a7969c969a1396d02bd6f77958a2fb801">get_method</a> ()</td></tr>
+<tr class="memdesc:a7969c969a1396d02bd6f77958a2fb801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the request method (e.g. 'POST')  <a href="#a7969c969a1396d02bd6f77958a2fb801">More...</a><br /></td></tr>
+<tr class="separator:a7969c969a1396d02bd6f77958a2fb801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3736d5f0b25627eca8aaf682e97f886"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#af3736d5f0b25627eca8aaf682e97f886">set_method</a> (std::string method)</td></tr>
+<tr class="memdesc:af3736d5f0b25627eca8aaf682e97f886"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the message method.  <a href="#af3736d5f0b25627eca8aaf682e97f886">More...</a><br /></td></tr>
+<tr class="separator:af3736d5f0b25627eca8aaf682e97f886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacf38ca9578fa2537f3cce099a2d9163"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#aacf38ca9578fa2537f3cce099a2d9163">get_url</a> ()</td></tr>
+<tr class="memdesc:aacf38ca9578fa2537f3cce099a2d9163"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the request url (e.g. '/')  <a href="#aacf38ca9578fa2537f3cce099a2d9163">More...</a><br /></td></tr>
+<tr class="separator:aacf38ca9578fa2537f3cce099a2d9163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad83d6ba182a56596e2ffdec93bc606d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#ad83d6ba182a56596e2ffdec93bc606d5">set_url</a> (std::string url)</td></tr>
+<tr class="memdesc:ad83d6ba182a56596e2ffdec93bc606d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the request url (e.g. '/')  <a href="#ad83d6ba182a56596e2ffdec93bc606d5">More...</a><br /></td></tr>
+<tr class="separator:ad83d6ba182a56596e2ffdec93bc606d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classMessage"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMessage')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMessage.html">Message</a></td></tr>
+<tr class="memitem:a4fc4f717b634e66070366cb7722d7761 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4fc4f717b634e66070366cb7722d7761"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#a4fc4f717b634e66070366cb7722d7761">Message</a> ()</td></tr>
+<tr class="memdesc:a4fc4f717b634e66070366cb7722d7761 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor. <br /></td></tr>
+<tr class="separator:a4fc4f717b634e66070366cb7722d7761 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7275462831f787a861271687bcad67 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f7275462831f787a861271687bcad67"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#a3f7275462831f787a861271687bcad67">~Message</a> ()</td></tr>
+<tr class="memdesc:a3f7275462831f787a861271687bcad67 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor. <br /></td></tr>
+<tr class="separator:a3f7275462831f787a861271687bcad67 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad816654c4ec174ad004dcf0159f8f8ec inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#ad816654c4ec174ad004dcf0159f8f8ec">serialize</a> ()</td></tr>
+<tr class="memdesc:ad816654c4ec174ad004dcf0159f8f8ec inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the <a class="el" href="classMessage.html" title="Parses an http request. ">Message</a> to a string.  <a href="#ad816654c4ec174ad004dcf0159f8f8ec">More...</a><br /></td></tr>
+<tr class="separator:ad816654c4ec174ad004dcf0159f8f8ec inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70bc4f71e59350077be772d1efe590c6 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#a70bc4f71e59350077be772d1efe590c6">read</a> (boost::asio::ip::tcp::socket &amp;socket)</td></tr>
+<tr class="memdesc:a70bc4f71e59350077be772d1efe590c6 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads http <a class="el" href="classMessage.html" title="Parses an http request. ">Message</a> data from a socket.  <a href="#a70bc4f71e59350077be772d1efe590c6">More...</a><br /></td></tr>
+<tr class="separator:a70bc4f71e59350077be772d1efe590c6 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac617d14a8fcd7e917a936401657910a2 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#ac617d14a8fcd7e917a936401657910a2">write</a> (boost::asio::ip::tcp::socket &amp;socket)</td></tr>
+<tr class="memdesc:ac617d14a8fcd7e917a936401657910a2 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes http request data to a socket.  <a href="#ac617d14a8fcd7e917a936401657910a2">More...</a><br /></td></tr>
+<tr class="separator:ac617d14a8fcd7e917a936401657910a2 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aa4683bb993c45d7a2dcca9c8114647 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#a1aa4683bb993c45d7a2dcca9c8114647">get_property</a> (std::string key)</td></tr>
+<tr class="memdesc:a1aa4683bb993c45d7a2dcca9c8114647 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a header property.  <a href="#a1aa4683bb993c45d7a2dcca9c8114647">More...</a><br /></td></tr>
+<tr class="separator:a1aa4683bb993c45d7a2dcca9c8114647 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab54380c644afed1e0536e0e85d3dd6b7 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#ab54380c644afed1e0536e0e85d3dd6b7">set_property</a> (std::string key, std::string value)</td></tr>
+<tr class="memdesc:ab54380c644afed1e0536e0e85d3dd6b7 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a header property.  <a href="#ab54380c644afed1e0536e0e85d3dd6b7">More...</a><br /></td></tr>
+<tr class="separator:ab54380c644afed1e0536e0e85d3dd6b7 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a8c5eaf63757b07b23adaac00ff33fb inherit pub_methods_classMessage"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9a8c5eaf63757b07b23adaac00ff33fb inherit pub_methods_classMessage"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMessage.html#a9a8c5eaf63757b07b23adaac00ff33fb">get_property</a> (std::string key)</td></tr>
+<tr class="memdesc:a9a8c5eaf63757b07b23adaac00ff33fb inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a header property as type 'T'.  <a href="#a9a8c5eaf63757b07b23adaac00ff33fb">More...</a><br /></td></tr>
+<tr class="separator:a9a8c5eaf63757b07b23adaac00ff33fb inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad74b01013fc6889904153f7d07fa0906 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#ad74b01013fc6889904153f7d07fa0906">get_body</a> ()</td></tr>
+<tr class="memdesc:ad74b01013fc6889904153f7d07fa0906 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the message body.  <a href="#ad74b01013fc6889904153f7d07fa0906">More...</a><br /></td></tr>
+<tr class="separator:ad74b01013fc6889904153f7d07fa0906 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50009ec988b3d7e570f2dda9f8a3ffaf inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#a50009ec988b3d7e570f2dda9f8a3ffaf">set_body</a> (std::string body)</td></tr>
+<tr class="memdesc:a50009ec988b3d7e570f2dda9f8a3ffaf inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the message body.  <a href="#a50009ec988b3d7e570f2dda9f8a3ffaf">More...</a><br /></td></tr>
+<tr class="separator:a50009ec988b3d7e570f2dda9f8a3ffaf inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07e2f6237ca6fdc9fad039c259623f94 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#a07e2f6237ca6fdc9fad039c259623f94">get_version</a> ()</td></tr>
+<tr class="memdesc:a07e2f6237ca6fdc9fad039c259623f94 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the http version string.  <a href="#a07e2f6237ca6fdc9fad039c259623f94">More...</a><br /></td></tr>
+<tr class="separator:a07e2f6237ca6fdc9fad039c259623f94 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1388244f8741f96d1bb42ba809baf1b5 inherit pub_methods_classMessage"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#a1388244f8741f96d1bb42ba809baf1b5">set_version</a> (std::string version)</td></tr>
+<tr class="memdesc:a1388244f8741f96d1bb42ba809baf1b5 inherit pub_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the http version string.  <a href="#a1388244f8741f96d1bb42ba809baf1b5">More...</a><br /></td></tr>
+<tr class="separator:a1388244f8741f96d1bb42ba809baf1b5 inherit pub_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:aeff9978a4ff93a1bff6d917fc6e0ef4e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#aeff9978a4ff93a1bff6d917fc6e0ef4e">parse_header</a> (std::string s_header)</td></tr>
-<tr class="memdesc:aeff9978a4ff93a1bff6d917fc6e0ef4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the header of the request.  <a href="#aeff9978a4ff93a1bff6d917fc6e0ef4e">More...</a><br /></td></tr>
-<tr class="separator:aeff9978a4ff93a1bff6d917fc6e0ef4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6639d54959e0918cacb01e963b3979fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a6639d54959e0918cacb01e963b3979fb">set_specific</a> (std::vector&lt; std::string &gt; specific)</td></tr>
+<tr class="memdesc:a6639d54959e0918cacb01e963b3979fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="classRequest.html" title="Parse an http request. ">Request</a> specific values.  <a href="#a6639d54959e0918cacb01e963b3979fb">More...</a><br /></td></tr>
+<tr class="separator:a6639d54959e0918cacb01e963b3979fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389fe0303ac066603e700bf70d271916"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a389fe0303ac066603e700bf70d271916">get_specific</a> ()</td></tr>
+<tr class="memdesc:a389fe0303ac066603e700bf70d271916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="classRequest.html" title="Parse an http request. ">Request</a> header line.  <a href="#a389fe0303ac066603e700bf70d271916">More...</a><br /></td></tr>
+<tr class="separator:a389fe0303ac066603e700bf70d271916"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a1f1637a8c59903a175ebe3d9dbf21a7d"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a1f1637a8c59903a175ebe3d9dbf21a7d">m_header</a></td></tr>
-<tr class="separator:a1f1637a8c59903a175ebe3d9dbf21a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab369a4749316d22e59b28b07c52f04ab"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#ab369a4749316d22e59b28b07c52f04ab">m_body</a></td></tr>
-<tr class="separator:ab369a4749316d22e59b28b07c52f04ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9221fd60f1a9795c25e88452274a5bb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#ad9221fd60f1a9795c25e88452274a5bb">m_method</a></td></tr>
 <tr class="separator:ad9221fd60f1a9795c25e88452274a5bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a231f72749bc5e377159f1f2b32d6bd06"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a231f72749bc5e377159f1f2b32d6bd06">m_url</a></td></tr>
 <tr class="separator:a231f72749bc5e377159f1f2b32d6bd06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e4c2b6031d194165314eaa5b892956a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRequest.html#a1e4c2b6031d194165314eaa5b892956a">m_version</a></td></tr>
-<tr class="separator:a1e4c2b6031d194165314eaa5b892956a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classMessage"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classMessage')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classMessage.html">Message</a></td></tr>
+<tr class="memitem:adfa1efcb53ef9b9d7e253a226fdb0d30 inherit pro_methods_classMessage"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#adfa1efcb53ef9b9d7e253a226fdb0d30">parse_header</a> (std::string s_header)</td></tr>
+<tr class="memdesc:adfa1efcb53ef9b9d7e253a226fdb0d30 inherit pro_methods_classMessage"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the header.  <a href="#adfa1efcb53ef9b9d7e253a226fdb0d30">More...</a><br /></td></tr>
+<tr class="separator:adfa1efcb53ef9b9d7e253a226fdb0d30 inherit pro_methods_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classMessage"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classMessage')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classMessage.html">Message</a></td></tr>
+<tr class="memitem:aca4ea8a4050d9fa82699ee934dab6d16 inherit pro_attribs_classMessage"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#aca4ea8a4050d9fa82699ee934dab6d16">m_header</a></td></tr>
+<tr class="separator:aca4ea8a4050d9fa82699ee934dab6d16 inherit pro_attribs_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace246a6fab849e32c15e7c4d7144e501 inherit pro_attribs_classMessage"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#ace246a6fab849e32c15e7c4d7144e501">m_body</a></td></tr>
+<tr class="separator:ace246a6fab849e32c15e7c4d7144e501 inherit pro_attribs_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d6e3b7989436d6f65dbd606ba9b0a68 inherit pro_attribs_classMessage"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMessage.html#a0d6e3b7989436d6f65dbd606ba9b0a68">m_version</a></td></tr>
+<tr class="separator:a0d6e3b7989436d6f65dbd606ba9b0a68 inherit pro_attribs_classMessage"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00040">40</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
+<p>Definition at line <a class="el" href="message_8hpp_source.html#l00139">139</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a081ef84c19d81e15c8f91e6cc3fbcda3"></a>
+<a class="anchor" id="a7969c969a1396d02bd6f77958a2fb801"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -177,33 +238,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Request::body </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>The body of the request </dd></dl>
-
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00089">89</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab550cbb25032222804dfec7b67a142c1"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Request::method </td>
+          <td class="memname">std::string Request::get_method </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -217,11 +252,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The request method </dd></dl>
 
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00094">94</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
+<p>Definition at line <a class="el" href="message_8hpp_source.html#l00171">171</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aeff9978a4ff93a1bff6d917fc6e0ef4e"></a>
+<a class="anchor" id="a389fe0303ac066603e700bf70d271916"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -229,108 +264,27 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Request::parse_header </td>
+          <td class="memname">std::string Request::get_specific </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>s_header</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s_header</td><td>The header to parse </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The number of properties found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="classRequest.html" title="Parse an http request. ">Request</a> specific header line </dd></dl>
 
-<p>Definition at line <a class="el" href="message_8cpp_source.html#l00035">35</a> of file <a class="el" href="message_8cpp_source.html">message.cpp</a>.</p>
+<p>Implements <a class="el" href="classMessage.html#a8f3c4c0cb6f5a783fabc6e25e4fc1fba">Message</a>.</p>
+
+<p>Definition at line <a class="el" href="message_8cpp_source.html#l00182">182</a> of file <a class="el" href="message_8cpp_source.html">message.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae8aaf15da8612ae46811e1ebbf253b58"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Request::property </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>The property to get (e.g. 'Content-Type') </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Property value as a string ('text/plain') </dd></dl>
-
-<p>Definition at line <a class="el" href="message_8cpp_source.html#l00099">99</a> of file <a class="el" href="message_8cpp_source.html">message.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0f1f06dd0f4ddcafd9b4cda96afce6c2"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">T Request::property </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>The property to get (e.g. 'Content-Length') </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Property value as a type 'T' </dd></dl>
-
-<p>Definition at line <a class="el" href="message_8cpp_source.html#l00105">105</a> of file <a class="el" href="message_8cpp_source.html">message.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5536e2e35c6942bfb2a67fdc0fb5a245"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Request::read </td>
-          <td>(</td>
-          <td class="paramtype">boost::shared_ptr&lt; boost::asio::ip::tcp::socket &gt;&#160;</td>
-          <td class="paramname"><em>socket</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">socket</td><td>the open socket to read from </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="message_8cpp_source.html#l00067">67</a> of file <a class="el" href="message_8cpp_source.html">message.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a57ae87782576f3b739f84db801b0a462"></a>
+<a class="anchor" id="aacf38ca9578fa2537f3cce099a2d9163"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -338,7 +292,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Request::url </td>
+          <td class="memname">std::string Request::get_url </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -352,11 +306,11 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The request endpoint </dd></dl>
 
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00099">99</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
+<p>Definition at line <a class="el" href="message_8hpp_source.html#l00181">181</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a23b1c4a59f89180fda3d32d95b8f6f52"></a>
+<a class="anchor" id="af3736d5f0b25627eca8aaf682e97f886"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -364,9 +318,10 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Request::version </td>
+          <td class="memname">void Request::set_method </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>method</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -376,59 +331,84 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>The http verison as a string </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>The value to use for method (e.g. 'POST') </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00104">104</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
+<p>Definition at line <a class="el" href="message_8hpp_source.html#l00176">176</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6639d54959e0918cacb01e963b3979fb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Request::set_specific </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>specific</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">specific</td><td>A vector of <a class="el" href="classRequest.html" title="Parse an http request. ">Request</a> specific values </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classMessage.html#acc6f9bfeb7b134f97e509f5de7bf0661">Message</a>.</p>
+
+<p>Definition at line <a class="el" href="message_8cpp_source.html#l00173">173</a> of file <a class="el" href="message_8cpp_source.html">message.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad83d6ba182a56596e2ffdec93bc606d5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Request::set_url </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>url</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">url</td><td>The value to use for the url </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="message_8hpp_source.html#l00186">186</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ab369a4749316d22e59b28b07c52f04ab"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Request::m_body</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The body of the request </p>
-
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00046">46</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1f1637a8c59903a175ebe3d9dbf21a7d"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::map&lt;std::string,std::string&gt; Request::m_header</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Header keys and values </p>
-
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00043">43</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ad9221fd60f1a9795c25e88452274a5bb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -448,7 +428,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <p>The method of the request (e.g. 'POST') </p>
 
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00049">49</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
+<p>Definition at line <a class="el" href="message_8hpp_source.html#l00143">143</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
@@ -471,30 +451,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <p>The url of the request </p>
 
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00052">52</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1e4c2b6031d194165314eaa5b892956a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Request::m_version</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The http version </p>
-
-<p>Definition at line <a class="el" href="message_8hpp_source.html#l00055">55</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
+<p>Definition at line <a class="el" href="message_8hpp_source.html#l00146">146</a> of file <a class="el" href="message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
@@ -508,7 +465,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRequest.html">Request</a></li>
-    <li class="footer">Generated on Fri Apr 27 2018 13:52:50 for ReChain by
+    <li class="footer">Generated on Sat Apr 28 2018 05:47:09 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -64,6 +64,9 @@ class Remote {
 
         /** A thread that service runs in */
         boost::shared_ptr<boost::thread> service_thread;
+
+        /** A function to call with new Record objects */
+        std::function<void(Record&)> m_callback;
        
         /** \brief The handler for received messages 
             \param socket The socket to read messages from
@@ -84,6 +87,13 @@ class Remote {
         */
         ~Remote();
 
+        /** \brief set the handler for received records 
+            \param function The function to pass received records too
+        */
+        void callback( const std::function<void(Record&)>& function ){
+            m_callback = function;
+        };
+
         /** \brief Start listening for broadcasts
         */
         void start_listening();
@@ -94,9 +104,8 @@ class Remote {
 
         /** Broadcast a new record to all miners 
             \param record The Record to broadcast
-            \returns The number of peers who accepted the record 
         */
-        unsigned int send( Record& record );
+        void send( Record& record );
 };
 
 #endif

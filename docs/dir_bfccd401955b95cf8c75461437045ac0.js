@@ -15,7 +15,9 @@ var dir_bfccd401955b95cf8c75461437045ac0 =
       [ "Manager", "classManager.html", "classManager" ]
     ] ],
     [ "message.hpp", "message_8hpp.html", [
-      [ "Request", "classRequest.html", "classRequest" ]
+      [ "Message", "classMessage.html", "classMessage" ],
+      [ "Request", "classRequest.html", "classRequest" ],
+      [ "Response", "classResponse.html", "classResponse" ]
     ] ],
     [ "record.hpp", "record_8hpp.html", [
       [ "Record", "classRecord.html", "classRecord" ]

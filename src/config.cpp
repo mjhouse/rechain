@@ -45,6 +45,14 @@ Config::~Config(){
 
 }
 
+void Config::set_peers( std::map<std::string,std::string> peers ){
+    m_peers = peers;
+}
+
+std::map<std::string,std::string> Config::get_peers(){
+    return m_peers;
+}
+
 bool Config::initialize(){
 
 	// find the users home directory

@@ -14,7 +14,10 @@ var hierarchy =
     [ "Log", "classLog.html", null ],
     [ "Logger", "classLogger.html", null ],
     [ "Manager", "classManager.html", null ],
+    [ "Message", "classMessage.html", [
+      [ "Request", "classRequest.html", null ],
+      [ "Response", "classResponse.html", null ]
+    ] ],
     [ "Record", "classRecord.html", null ],
-    [ "Remote", "classRemote.html", null ],
-    [ "Request", "classRequest.html", null ]
+    [ "Remote", "classRemote.html", null ]
 ];

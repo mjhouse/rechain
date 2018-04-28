@@ -12,6 +12,20 @@ extern std::string generate_hash();
 extern std::string get_path( std::string partial );
 extern std::string dump_file( std::string path );
 
+// gets set by async callback
+Record callback_record;
+
+class CallbackClass {
+    public:
+        void test_callback( Record& record ){
+           callback_record = record; 
+        }
+};
+
+void test_callback( Record& record ){
+   callback_record = record; 
+}
+
 SCENARIO( "remote is created with a valid config", "[.][remote]" ){
 
 	GIVEN( "a reference and block hash" ){
@@ -20,12 +34,15 @@ SCENARIO( "remote is created with a valid config", "[.][remote]" ){
         std::string home_path = "RECHAIN_HOME=" + get_path("files/tmp");
         putenv((char*)home_path.c_str());
 
-        // create dummy record
-        Record r(generate_hash());
-
         // create Config
         std::shared_ptr<Config> config(new Config());
         REQUIRE(config->initialize());
+
+        std::map<std::string,std::string> peers = {
+            { "localhost", "8080" }
+        };
+
+        config->set_peers(peers);
 
         // create a Remote
         Remote remote(config);
@@ -33,22 +50,43 @@ SCENARIO( "remote is created with a valid config", "[.][remote]" ){
         // create a server
         Remote server(config);
 
-		WHEN( "remote::send is called with appropriate arguments" ){
+		WHEN( "remote::send is called while server listens (callback class)" ){
+            // create dummy record
+            Record r(generate_hash());
 
-            std::cout << "listening" << std::endl;
+            CallbackClass cbc;
+            server.callback(std::bind(&CallbackClass::test_callback,cbc,std::placeholders::_1));
+
+            // start listening on localhost:8080, broadcast and
+            // receive the record, and stop listening.
             server.start_listening();
-            
-            std::cout << "sending" << std::endl;
-            unsigned int result = remote.send(r);
-
-            std::cout << "sleeping" << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(60));
-
-            std::cout << "not listening" << std::endl;
+            remote.send(r);
             server.stop_listening();
 
-			THEN( "it returns the number of successful sends" ){
-			    REQUIRE(result > 0);
+			THEN( "callback class is successfully called with received record" ){
+			    // the callback_record should be exactly the same as the
+                // given record
+                REQUIRE(callback_record.string() == r.string());
+            }
+		}
+
+		WHEN( "remote::send is called while server listens (callback function)" ){
+
+            // create dummy record
+            Record r(generate_hash());
+
+            server.callback(test_callback);
+
+            // start listening on localhost:8080, broadcast and
+            // receive the record, and stop listening.
+            server.start_listening();
+            remote.send(r);
+            server.stop_listening();
+
+			THEN( "callback function is successfully called with received record" ){
+			    // the callback_record should be exactly the same as the
+                // given record
+                REQUIRE(callback_record.string() == r.string());
             }
 		}
 

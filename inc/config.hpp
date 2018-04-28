@@ -41,6 +41,9 @@ class Config {
         /** The settings as key/value string pairs */
 		std::map<std::string,std::string> settings;
 
+        /** A collection of url/port pairs for current peers */
+        std::map<std::string,std::string> m_peers;
+
         /** Flag to stop initialization from happening more than once */
         bool initialized;
 
@@ -53,6 +56,16 @@ class Config {
 		/** \brief The destructor
 		*/
 		~Config();
+
+        /** \brief Set the map of current peers/ports
+            \param peers The peers to use
+        */
+        void set_peers( std::map<std::string,std::string> peers );
+
+        /** \brief Get the map of current peers/ports
+            \returns A map of the current peers and ports to connect to
+        */
+        std::map<std::string,std::string> get_peers();
 
         /** \brief Create initial settings values
             \returns True if initialization was successful

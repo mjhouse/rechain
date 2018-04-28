@@ -130,6 +130,12 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a543dce59b66475c5108088ee4ce1cdfc">~Config</a> ()</td></tr>
 <tr class="memdesc:a543dce59b66475c5108088ee4ce1cdfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor. <br /></td></tr>
 <tr class="separator:a543dce59b66475c5108088ee4ce1cdfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bad42d15727af32cb699d4c9bc36e5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a0bad42d15727af32cb699d4c9bc36e5f">set_peers</a> (std::map&lt; std::string, std::string &gt; peers)</td></tr>
+<tr class="memdesc:a0bad42d15727af32cb699d4c9bc36e5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the map of current peers/ports.  <a href="#a0bad42d15727af32cb699d4c9bc36e5f">More...</a><br /></td></tr>
+<tr class="separator:a0bad42d15727af32cb699d4c9bc36e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adac71a12da2f13e578a4f5aba9f6910f"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#adac71a12da2f13e578a4f5aba9f6910f">get_peers</a> ()</td></tr>
+<tr class="memdesc:adac71a12da2f13e578a4f5aba9f6910f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the map of current peers/ports.  <a href="#adac71a12da2f13e578a4f5aba9f6910f">More...</a><br /></td></tr>
+<tr class="separator:adac71a12da2f13e578a4f5aba9f6910f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d6c1f981c529aa2ec738f1b8f78d115"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a2d6c1f981c529aa2ec738f1b8f78d115">initialize</a> ()</td></tr>
 <tr class="memdesc:a2d6c1f981c529aa2ec738f1b8f78d115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create initial settings values.  <a href="#a2d6c1f981c529aa2ec738f1b8f78d115">More...</a><br /></td></tr>
 <tr class="separator:a2d6c1f981c529aa2ec738f1b8f78d115"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,6 +165,8 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a734b11f702a5fae1fbc98a94f8bc91c5"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a734b11f702a5fae1fbc98a94f8bc91c5">settings</a></td></tr>
 <tr class="separator:a734b11f702a5fae1fbc98a94f8bc91c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e3fb9df25c60392856ec7785dda1b69"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a2e3fb9df25c60392856ec7785dda1b69">m_peers</a></td></tr>
+<tr class="separator:a2e3fb9df25c60392856ec7785dda1b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a067f38bc1b88cf239d4b47e0fd9a69db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a067f38bc1b88cf239d4b47e0fd9a69db">initialized</a></td></tr>
 <tr class="separator:a067f38bc1b88cf239d4b47e0fd9a69db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -166,6 +174,24 @@ Private Attributes</h2></td></tr>
 <div class="textblock">
 <p>Definition at line <a class="el" href="config_8hpp_source.html#l00039">39</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="adac71a12da2f13e578a4f5aba9f6910f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, std::string &gt; Config::get_peers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>A map of the current peers and ports to connect to </dd></dl>
+
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00052">52</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a2d6c1f981c529aa2ec738f1b8f78d115"></a>
 <div class="memitem">
 <div class="memproto">
@@ -180,7 +206,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>True if initialization was successful </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00048">48</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00056">56</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -205,7 +231,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if settings were successfully loaded </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00122">122</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00130">130</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -223,7 +249,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>True if settings were successfully loaded </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00139">139</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00147">147</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -248,7 +274,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if settings were successfully saved </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00101">101</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00109">109</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -266,7 +292,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>True if settings were successfully saved </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00118">118</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00126">126</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -300,7 +326,31 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="config_8hpp_source.html#l00078">78</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8hpp_source.html#l00091">91</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0bad42d15727af32cb699d4c9bc36e5f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Config::set_peers </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; std::string, std::string &gt;&#160;</td>
+          <td class="paramname"><em>peers</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">peers</td><td>The peers to use </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00048">48</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -325,7 +375,7 @@ template&lt;class Archive &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A string value </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00089">89</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00097">97</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -360,7 +410,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00097">97</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00105">105</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -383,6 +433,29 @@ template&lt;class Archive &gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Flag to stop initialization from happening more than once </p>
+
+<p>Definition at line <a class="el" href="config_8hpp_source.html#l00048">48</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2e3fb9df25c60392856ec7785dda1b69"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string,std::string&gt; Config::m_peers</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A collection of url/port pairs for current peers </p>
 
 <p>Definition at line <a class="el" href="config_8hpp_source.html#l00045">45</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
 
@@ -421,7 +494,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classConfig.html">Config</a></li>
-    <li class="footer">Generated on Fri Apr 27 2018 13:52:50 for ReChain by
+    <li class="footer">Generated on Sat Apr 28 2018 05:47:08 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -59,29 +59,30 @@ Remote::~Remote(){
 void Remote::handle( boost::shared_ptr<tcp::socket> socket ){
 
     // build a Request from the socket
-    Request r;
-    r.read(socket);
+    Request request;
+    request.read(*socket);
 
-    std::string body = r.body();
+    std::string body = request.get_body();
 
     std::stringstream serialized(body);
     Record record;
-
+              
     {
         cereal::JSONInputArchive archive(serialized);
         archive( record );
     }
 
-    // -----------------------------------
+    if(m_callback)
+        m_callback(record);
+
     // send a '200' response to the client
-    boost::asio::streambuf response;
-    std::ostream stream(&response);
+    Response response;
 
-    stream << "HTTP/1.1 200 OK\r\n";
-    stream << "Connection: close\r\n\r\n"; 
+    response.set_code(200);
+    response.set_status("OK");
+    response.set_property("Connection","close");
 
-    boost::asio::write(*socket,response);
-
+    response.write(*socket);
     listen();
 }
 
@@ -114,7 +115,7 @@ void Remote::stop_listening(){
     service_thread.reset();
 }
 
-unsigned int Remote::send( Record& record ){
+void Remote::send( Record& record ){
 
     // serialize the record
     std::ostringstream data;
@@ -126,19 +127,9 @@ unsigned int Remote::send( Record& record ){
 
     std::string message = data.str();
 
-    // ----------------------------------------------------
-    // TEST CODE:
-    //      peers will be in config, and this is a stand in
-    //      for a collection of peers received
-    std::map<std::string,std::string> peers;
-    peers.insert( std::make_pair<std::string,std::string>("localhost","8080") );
-    // ----------------------------------------------------
-
-    unsigned int result = 0; 
-
     // for each peer, send a POST request with the 
     // serialized record in the body
-    for( auto& peer : peers ){
+    for( auto& peer : config->get_peers() ){
         std::string address = peer.first;
         std::string port = peer.second;
 
@@ -157,43 +148,22 @@ unsigned int Remote::send( Record& record ){
         boost::asio::connect(socket, endpoint_iterator,ec);
 
         if(ec.value() != ECONNREFUSED){
-            // push all the headers into the stream
-            boost::asio::streambuf request;
-            std::ostream request_stream(&request);
+            
+            Request res;
 
-            request_stream << "POST / HTTP/1.1 \r\n";
-            request_stream << "Host: localhost:8080\r\n";
-            request_stream << "User-Agent: Rechain/1.0\r\n";
-            request_stream << "Content-Type: text/plain; charset=utf-8 \r\n";
-            request_stream << "Accept: */*\r\n";
-            request_stream << "Content-Length: " << message.length() << "\r\n";    
-            request_stream << "Message-Type: Publish\r\n";    
-            request_stream << "Connection: close\r\n\r\n";  //NOTE THE Double line feed
-            request_stream << message;
+            res.set_method("POST");
+            res.set_url("/");
+            res.set_property("Host","localhost:8080");
+            res.set_property("User-Agent","Rechain/1.0");
+            res.set_property("Content-Type","text/plain; charset=utf-8");
+            res.set_property("Accept","*/*");
+            res.set_property("Content-Length",std::to_string(message.length()));
+            res.set_property("Message-Type","Publish");
+            res.set_property("Connection","close");
+            res.set_body(message);
 
-            boost::system::error_code e;
-            boost::asio::write(socket,request,e);
-
-            // feed the response into a stream
-            boost::asio::streambuf response;
-            boost::asio::read_until(socket, response, "\r\n");
-            std::istream response_stream(&response);
-
-            // get the response status code
-            std::string http_version;
-            unsigned int status_code;
-
-            response_stream >> http_version;
-            response_stream >> status_code;
-
-            // if any of the peers return 200, the send
-            // operation was a success
-            if(status_code == 200){
-                result++;
-            }
+            res.write(socket);
         }
 
     }
-
-    return result;
 }

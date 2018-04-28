@@ -1,0 +1,4 @@
+<map id="Message" name="Message">
+<area shape="rect" id="node2" href="$classRequest.html" title="Parse an http request. " alt="" coords="5,80,76,107"/>
+<area shape="rect" id="node3" href="$classResponse.html" title="Parse an http response. " alt="" coords="100,80,181,107"/>
+</map>
