@@ -44,6 +44,9 @@ SCENARIO( "remote is created with a valid config", "[remote]" ){
 
         config->set_peers(peers);
 
+        // create dummy record
+        Record r(generate_hash());
+
         // create a Remote
         Remote remote(config);
 
@@ -51,8 +54,7 @@ SCENARIO( "remote is created with a valid config", "[remote]" ){
         Remote server(config);
 
 		WHEN( "remote::send is called while server listens (callback class)" ){
-            // create dummy record
-            Record r(generate_hash());
+            callback_record = Record();
 
             CallbackClass cbc;
             server.callback(std::bind(&CallbackClass::test_callback,cbc,std::placeholders::_1));
@@ -71,9 +73,7 @@ SCENARIO( "remote is created with a valid config", "[remote]" ){
 		}
 
 		WHEN( "remote::send is called while server listens (callback function)" ){
-
-            // create dummy record
-            Record r(generate_hash());
+            callback_record = Record();
 
             server.callback(test_callback);
 
