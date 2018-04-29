@@ -40,6 +40,14 @@ typedef Logger rl;
 #define MAX_TRUST 100
 #define MIN_TRUST 0
 
+/** Empty constructor
+*/
+BlockChain::BlockChain(){}
+
+/** Empty destructor
+*/
+BlockChain::~BlockChain(){}
+
 /* Add a Record to an open Block
 */
 BlockChain& BlockChain::add( Record& r ){
@@ -164,19 +172,19 @@ void BlockChain::update_trust(){
 */
 std::string BlockChain::mine( std::string pubkey ){
 	// Check if the chain has a genesis block
-	if(this->blockchain.size() > 0){
-		this->current.previous(this->blockchain.back().hash());
+	if(blockchain.size() > 0){
+		current.previous(blockchain.back().hash());
 	}
 
 	// Get the hash to return
-	std::string hash = this->current.mine(pubkey);
+	std::string hash = current.mine(pubkey);
 
 	// Add to the chain
-	this->blockchain.push_back( this->current );
-	this->current = Block();
+	blockchain.push_back( current );
+	current = Block();
 
 	// Update trust maps
-	this->update_trust();
+	update_trust();
 
 	return hash;
 }
@@ -241,7 +249,7 @@ bool BlockChain::valid(){
 	std::string previous;
 	std::set<std::string> pubs;
 
-	for(auto b : blockchain){
+	for(auto& b : blockchain){
 
 		if(b.previous() != previous)
 			return false;
@@ -250,7 +258,7 @@ bool BlockChain::valid(){
 
 		previous = b.hash();
 
-		for(auto r : b){
+		for(auto& r : b){
 			if(!r.valid()) return false;
 
 			switch(r.type()){

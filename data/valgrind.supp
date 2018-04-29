@@ -1,0 +1,14 @@
+{
+   suppress_ld-2.23.so
+   Memcheck:Leak
+   ...
+   obj:*ld-2.23.so*
+}
+
+{
+   suppress_cryptopp_func_cond
+   Memcheck:Cond
+   ...
+   fun:*CryptoPP*
+   ...
+}

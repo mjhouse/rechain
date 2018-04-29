@@ -75,11 +75,11 @@ class BlockChain {
 
 		/** Empty constructor
 		*/
-		BlockChain(){};
+		BlockChain();
 
 		/** Empty destructor
 		*/
-		~BlockChain(){};
+		~BlockChain();
 		
 		// ------------------------------------------------------
 		// Mining Methods

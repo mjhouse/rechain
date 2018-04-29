@@ -55,7 +55,7 @@ class Block {
 		/** Define a Record iterator */
 		typedef std::vector<Record>::iterator iterator;
 
-		Block() : nonce(0), timestamp(0), counter(0) {}
+		Block();
 		~Block();
 		
 		// ------------------------------------------------------

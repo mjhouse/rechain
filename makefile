@@ -13,7 +13,7 @@ OUTDIR = bin
 BLDDIR = obj
 INCDIR = inc
 SRCDIR = src
-TSTDIR = test
+TSTDIR = test/src
 
 # create directories
 $(shell mkdir -p obj bin)
@@ -34,14 +34,12 @@ $(shell rm -rf test/data/files/tmp/*)
 # ----------------------------------------------------------------------
 # DON'T EDIT BELOW THIS LINE
 # ----------------------------------------------------------------------
-all: ./configure.sh
 
 debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -ggdb
 debug: link-debug
 
 test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -DTEST_ROOT=\"test/data\" 
 test: link-test
-	./bin/rechain ${TAGGED}
 
 release: CPPFLAGS = ${COMMON} -DNDEBUG -O3
 release: link-release
@@ -64,5 +62,5 @@ obj/%.o: $(SRCDIR)/%.cpp
 	$(CXX) -DRECHAIN_VERSION=\"$(VERSION)\" $(INC) -c $< -o $@ $(CPPFLAGS)
 
 clean:
-	find $(BLDDIR)/ ! -name '.empty' -type f -exec rm -f {} +;
-	find $(OUTDIR)/ ! -name '.empty' -type f -exec rm -f {} +;
+	find $(BLDDIR)/ -type f -exec rm -f {} +;
+	find $(OUTDIR)/ -type f -exec rm -f {} +;

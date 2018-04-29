@@ -44,7 +44,9 @@ namespace rc = rechain;
 
 typedef Logger rl;
 
-Manager::Manager() : config(nullptr), remote(nullptr) {
+Manager::Manager() : config(nullptr), remote(nullptr), blockchain() {
+    private_key = std::make_shared<PrivateKey>();
+    public_key = std::make_shared<PublicKey>();
 }
 
 Manager::~Manager(){

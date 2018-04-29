@@ -36,6 +36,8 @@
 #include "record.hpp"
 #include "logger.hpp"
 
+Block::Block() : nonce(0), timestamp(0), counter(0) {}
+
 Block::~Block(){}
 
 using rl = Logger;
@@ -74,28 +76,28 @@ std::string Block::hash(){
 */
 std::string Block::mine( std::string pubkey ){
 
-    this->pub_key = pubkey;
+    pub_key = pubkey;
 
 	// Mine the block until it has a valid hash
-	while(this->hash() > HASH_MAX){
+	while(hash() > HASH_MAX){
 		// Update the counter, and reset to 0 if it
 		// gets to the int max
-		if(this->counter >= UINT_MAX-1) this->counter = 0;
-		else this->counter++;
+		if(counter >= UINT_MAX-1) counter = 0;
+		else counter++;
 
 		// Update the timestamp
 		auto e = std::chrono::system_clock::now().time_since_epoch();
 		auto seconds = std::chrono::duration_cast<std::chrono::seconds>(e).count();
-		this->timestamp = (long)seconds;
+		timestamp = (long)seconds;
 
 		// Update the random nonce
 		CryptoPP::AutoSeededRandomPool rng;
-		this->nonce = CryptoPP::Integer(rng,
+		nonce = CryptoPP::Integer(rng,
 			CryptoPP::Integer(1),
 			CryptoPP::Integer(LONG_MAX)).ConvertToLong();
 	}
 
-	return this->hash();
+	return hash();
 
 }
 

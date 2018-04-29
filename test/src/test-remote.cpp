@@ -26,7 +26,7 @@ void test_callback( Record& record ){
    callback_record = record; 
 }
 
-SCENARIO( "remote is created with a valid config", "[remote]" ){
+SCENARIO( "remote is created with a valid config", "[.][remote]" ){
 
 	GIVEN( "a reference and block hash" ){
 
