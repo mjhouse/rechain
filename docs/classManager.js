@@ -8,7 +8,7 @@ var classManager =
     [ "mine", "classManager.html#ad735e35ec5313ef895a3be0ab7cd21ce", null ],
     [ "publish", "classManager.html#a44a85f690c8ccbac2333198c253836de", null ],
     [ "publish", "classManager.html#ab1ae4e7dd9fc6b04034b5de9fad92976", null ],
-    [ "request", "classManager.html#ac4be1fcc4f45e80ec38acf2fb8fc6cbd", null ],
+    [ "request", "classManager.html#a4e43cb51f4fb17107d9b1b6a3c08f5eb", null ],
     [ "set_private_key", "classManager.html#af44e87fde9b95375540d1c8fa2739c83", null ],
     [ "set_private_key", "classManager.html#a73974ceee34c11e310f6014450a34c8e", null ],
     [ "set_public_key", "classManager.html#a85b339a8a3c1414bac82e17667508f0a", null ],

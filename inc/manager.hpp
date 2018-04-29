@@ -108,7 +108,7 @@ class Manager {
 			\param h The hash of the file
 			\returns True on success
 		*/
-		Record request( std::string h );
+		Record* request( std::string h );
 
 		/** Mine the current block
 			\returns True on success

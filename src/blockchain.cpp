@@ -171,22 +171,30 @@ void BlockChain::update_trust(){
 /* Mine and add a block to the chain
 */
 std::string BlockChain::mine( std::string pubkey ){
-	// Check if the chain has a genesis block
-	if(blockchain.size() > 0){
-		current.previous(blockchain.back().hash());
-	}
 
-	// Get the hash to return
-	std::string hash = current.mine(pubkey);
+    if(current.size() > 0){
 
-	// Add to the chain
-	blockchain.push_back( current );
-	current = Block();
+        // Check if the chain has a genesis block
+        if(blockchain.size() > 0){
+            current.previous(blockchain.back().hash());
+        }
 
-	// Update trust maps
-	update_trust();
+        // Get the hash to return
+        std::string hash = current.mine(pubkey);
 
-	return hash;
+        // Add to the chain
+        blockchain.push_back( current );
+        current = Block();
+
+        // Update trust maps
+        update_trust();
+
+        return hash;
+
+    }
+
+    return "";
+
 }
 
 /** Overloaded index operator
@@ -251,15 +259,20 @@ bool BlockChain::valid(){
 
 	for(auto& b : blockchain){
 
-		if(b.previous() != previous)
+		if(b.previous() != previous){
 			return false;
-		if(b.hash() > HASH_MAX)
+        }
+		
+        if(b.hash() > HASH_MAX){
 			return false;
+        }
 
 		previous = b.hash();
 
 		for(auto& r : b){
-			if(!r.valid()) return false;
+			if(!r.valid()){
+                return false;
+            }
 
 			switch(r.type()){
 				case DataType::Publication:

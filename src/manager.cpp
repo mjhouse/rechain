@@ -155,25 +155,32 @@ bool Manager::publish( std::string s ){
     return false;
 }
 
-Record Manager::request( std::string h ){
-	for(auto b : blockchain){
-		for(auto r : b){
+Record* Manager::request( std::string h ){
+	for(auto& b : blockchain){
+		for(auto& r : b){
 			if(r.reference() == h){
                 // -----------------------
                 // torrent the file contained
                 // in the record
                 // -----------------------
-			    return r;
+			    return &r;
             }
 		}
 	}
-    return Record();
+    return nullptr;
 }
 
 bool Manager::mine(){
-    blockchain.mine(public_key->to_string());
-    if(blockchain.valid() && blockchain.save())
-        return true;
+
+    if(configured){
+
+        std::string hash = blockchain.mine(public_key->to_string());
+        if(!hash.empty() && blockchain.valid() && blockchain.save()){
+            return true;
+        }
+
+    }
+
     return false;
 }
 
@@ -257,17 +264,25 @@ bool Manager::set_public_key( std::string p ){
 }
 
 bool Manager::sign( std::string s ){
-	for(auto b : blockchain){
-		for(auto r : b){
-			if(r.reference() == s){
-				Record r( r.reference(), b.hash() );
-                return this->publish(r);
-			}
-		}
-	}
+
+    if(configured){
+        for(auto b : blockchain){
+            for(auto r : b){
+                if(r.reference() == s){
+                    Record r( r.reference(), b.hash() );
+                    return publish(r);
+                }
+            }
+        }
+    }
+
     return false;
 }
 
 bool Manager::validate(){
-    return blockchain.valid();
+    if(configured){
+        return blockchain.valid();
+    }
+
+    return false;
 }

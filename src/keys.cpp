@@ -64,8 +64,6 @@ void PrivateKey::sign( Record& r ){
 	Signer signer(key);
 	CryptoPP::AutoSeededRandomPool rng;
 
-    std::cout << "before" << std::endl;
-
 	// sign the Data object
 	CryptoPP::StringSource ss(r.string(), true,
 				new CryptoPP::SignerFilter(rng, signer,
