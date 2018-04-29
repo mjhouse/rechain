@@ -17,6 +17,7 @@ var classManager =
     [ "validate", "classManager.html#a6a96238ce66b87c173c509641a15492e", null ],
     [ "blockchain", "classManager.html#a908c76fcf82c6cf68978690885a2aeb6", null ],
     [ "config", "classManager.html#a0cd73d2faeb08b0b5035ede245edafaa", null ],
+    [ "configured", "classManager.html#a5b546aee37884522dbfc4db7bff9532e", null ],
     [ "private_key", "classManager.html#ad86791c0e352e7a65e33cebd7a5a59ab", null ],
     [ "public_key", "classManager.html#ac7d162f83bb9f4123c2561a107dee69d", null ],
     [ "remote", "classManager.html#ad391816f0476f0bc8b37e623c62b65e2", null ]

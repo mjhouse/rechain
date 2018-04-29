@@ -44,7 +44,7 @@ namespace rc = rechain;
 
 typedef Logger rl;
 
-Manager::Manager() : config(nullptr), remote(nullptr), blockchain() {
+Manager::Manager() : configured(false), config(nullptr), remote(nullptr), blockchain() {
     private_key = std::make_shared<PrivateKey>();
     public_key = std::make_shared<PublicKey>();
 }
@@ -56,6 +56,8 @@ Manager::~Manager(){
 }
 
 bool Manager::configure( Level level ){
+
+    configured = false;
 
     // create a new Config instance
     config.reset(new Config());
@@ -113,20 +115,25 @@ bool Manager::configure( Level level ){
         public_key->save(public_key_path);
     }
 
+    configured = true;
     return true;
 }
 
 // publish a record object
 bool Manager::publish( Record& r ){
+    
+    if(configured){
 
-    private_key->sign(r);
+        private_key->sign(r);
 
-    if(!blockchain.contains(r.reference(),Search::RecordType)){
-        blockchain.add(r);
+        if(!blockchain.contains(r.reference(),Search::RecordType)){
+            blockchain.add(r);
 
-        if(blockchain.valid() && blockchain.save()){
-            return true;
+            if(blockchain.valid() && blockchain.save()){
+                return true;
+            }
         }
+        
     }
 
     return false;
@@ -134,13 +141,15 @@ bool Manager::publish( Record& r ){
 
 // publish a file given a path string
 bool Manager::publish( std::string s ){
-    std::ifstream ifs(s);
-    if(ifs.is_open()){
-        Record r(ifs);
-        bool result = this->publish(r);
-        if(result){
-            return true;
+
+    if(configured){
+
+        std::ifstream ifs(s);
+        if(ifs.is_open()){
+            Record r(ifs);
+            return publish(r);
         }
+
     }
 
     return false;

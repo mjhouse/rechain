@@ -49,12 +49,15 @@ class Remote;
 class Manager {
 	private:
         
+        bool configured;                                /**< This flag is true if Manager is configured*/
+
         std::shared_ptr<Config> config;                 /**< Application configuration/paths */
         std::shared_ptr<Remote> remote;                 /**< Remote instance for web requests */
 		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
 		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
 
 		BlockChain blockchain;				        	/**< A BlockChain to load data into */
+
 
 		/** Publish a given record
 			\param r The Record to publish

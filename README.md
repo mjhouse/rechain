@@ -24,17 +24,15 @@ Currently, there are no written tutorials or guides because the project isn't th
 
 There isn't any support or guides for contributions, but if you add something cool, send me a pull request and I'll take a look at it. If you want to help and you aren't sure where to start, email me at mjhouse@protonmail.com.
 
-#### Notes
-
-* read [Cpp Best Practices](https://www.gitbook.com/book/lefticus/cpp-best-practices/details)
-
 ### Tools
 
-* make
+* make 4.1
 
-* g++5.4.0
+* g++ 5.4.0
 
-* doxygen
+* doxygen 1.8.11
+
+* valgrind 3.11.0
 
 ### Dependencies
 

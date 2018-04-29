@@ -52,17 +52,21 @@ void PrivateKey::generate(){
 void PrivateKey::sign( Record& r ){
 	std::string signature;
 
-	// Create a public key and set it on the
-	// Data object
+	// create a public key and set it on the  Record
 	std::shared_ptr<PublicKey> pub_key(PublicKey::empty());
 	pub_key->generate( this );
+
+
 	r.public_key(pub_key->to_string());
 
-	// Create a Signer and random generator
-	Signer signer(this->key);
+
+	// create a Signer and random generator
+	Signer signer(key);
 	CryptoPP::AutoSeededRandomPool rng;
 
-	// Sign the Data object
+    std::cout << "before" << std::endl;
+
+	// sign the Data object
 	CryptoPP::StringSource ss(r.string(), true,
 				new CryptoPP::SignerFilter(rng, signer,
 					new CryptoPP::HexEncoder(
