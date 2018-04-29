@@ -35,10 +35,10 @@ $(shell rm -rf test/data/files/tmp/*)
 # DON'T EDIT BELOW THIS LINE
 # ----------------------------------------------------------------------
 
-debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -pg -ggdb
+debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -ggdb
 debug: link-debug
 
-test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -pg -fprofile-arcs -ftest-coverage -DTEST_ROOT=\"test/data\" 
+test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -DTEST_ROOT=\"test/data\" 
 test: link-test
 
 release: CPPFLAGS = ${COMMON} -DNDEBUG -O3
