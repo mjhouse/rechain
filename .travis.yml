@@ -1,24 +1,25 @@
 language: cpp
 
 git:
-  lfs_skip_smudge: true
+    lfs_skip_smudge: true
+    depth: 99999
 
 matrix:
-      include:
-            - os: linux
-              dist: trusty
-              sudo: false
-              addons:
-                apt:
+    include:
+        - os: linux
+          dist: trusty
+          sudo: false
+          addons:
+              apt:
                   sources:
-                    - ubuntu-toolchain-r-test
+                      - ubuntu-toolchain-r-test
                   packages:
-                    - libboost-all-dev
-                    - libcrypto++-dev
-                    - libtorrent-dev
-                    - libtorrent-rasterbar-dev
-                    - valgrind
-                    - g++-5
+                      - libboost-all-dev
+                      - libcrypto++-dev
+                      - libtorrent-dev
+                      - libtorrent-rasterbar-dev
+                      - valgrind
+                      - g++-5
 
 before_install:
       - pip install --user cpp-coveralls;
