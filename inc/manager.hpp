@@ -143,7 +143,7 @@ class Manager {
         /** Get a copy of the blockchain
             \returns a BlockChain instance
         */
-        BlockChain get_blockchain(){ return this->blockchain; }
+        BlockChain& get_blockchain(){ return blockchain; }
 
 };
 

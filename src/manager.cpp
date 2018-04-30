@@ -24,6 +24,7 @@
 #include <sstream>
 #include <string>
 #include <memory>
+#include <stdexcept>
 
 // dependency includes
 #include <boost/filesystem/operations.hpp>
@@ -121,12 +122,13 @@ bool Manager::configure( Level level ){
 
 // publish a record object
 bool Manager::publish( Record& r ){
-    
-    if(configured){
+   
+	std::string ref = r.reference();
+    if(configured && !ref.empty() ){
 
         private_key->sign(r);
 
-        if(!blockchain.contains(r.reference(),Search::RecordType)){
+        if((r.type() == DataType::Signature) || (!blockchain.contains(r.reference(),Search::RecordType)) ){
             blockchain.add(r);
 
             if(blockchain.valid() && blockchain.save()){
@@ -265,12 +267,16 @@ bool Manager::set_public_key( std::string p ){
 
 bool Manager::sign( std::string s ){
 
-    if(configured){
-        for(auto b : blockchain){
-            for(auto r : b){
+	if(s.empty()){
+		throw std::invalid_argument("reference cannot be empty");
+	}
+
+    if(configured && !s.empty()){
+        for(auto& b : blockchain){
+            for(auto& r : b){
                 if(r.reference() == s){
-                    Record r( r.reference(), b.hash() );
-                    return publish(r);
+                    Record record( r.reference(), b.hash() );
+                    return publish(record);
                 }
             }
         }

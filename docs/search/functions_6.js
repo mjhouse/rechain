@@ -2,7 +2,7 @@ var searchData=
 [
   ['generate',['generate',['../classPrivateKey.html#a4360bb239415bbadddfbb3f40cf52a79',1,'PrivateKey::generate()'],['../classPublicKey.html#a7a42eb5ca0c399b1da9cc1d71ea93777',1,'PublicKey::generate()']]],
   ['get',['get',['../classLogger.html#a40756728767e9e61adc4654709bb9e05',1,'Logger']]],
-  ['get_5fblockchain',['get_blockchain',['../classManager.html#aa8acd793912b2e7f96b9c66c5be1fe32',1,'Manager']]],
+  ['get_5fblockchain',['get_blockchain',['../classManager.html#a83bb9bd92b68949a23e54eacca7c23be',1,'Manager']]],
   ['get_5fbody',['get_body',['../classMessage.html#ad74b01013fc6889904153f7d07fa0906',1,'Message']]],
   ['get_5fcode',['get_code',['../classResponse.html#a62b258f8c637649da2bc03a0a694abd6',1,'Response']]],
   ['get_5fkey',['get_key',['../classKey.html#a95aeb74991b64b8555332f0b9b391797',1,'Key']]],

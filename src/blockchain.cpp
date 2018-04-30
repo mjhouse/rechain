@@ -358,6 +358,7 @@ bool BlockChain::save( std::string p ){
 */
 bool BlockChain::load( std::string p ){
 	std::string path = (!p.empty()) ? p : this->file_path;
+
 	if(!path.empty()){
 		std::ifstream is(path);
 		if(is.is_open()){
