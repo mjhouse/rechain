@@ -264,7 +264,7 @@ bool Manager::set_public_key( std::string p ){
     }
     return true;
 }
-
+ 
 bool Manager::sign( std::string s ){
 
 	if(s.empty()){
