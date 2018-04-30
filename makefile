@@ -15,10 +15,16 @@ INCDIR = inc
 SRCDIR = src
 TSTDIR = test/src
 
+
 # create directories
 $(shell mkdir -p obj bin)
 
-INC = -I$(INCDIR) -I$(INCDIR)/dependencies 
+# set the hooks path
+$(shell git config core.hooksPath .hooks)
+
+# clear out tmp files from the test dir
+$(shell rm -rf test/data/files/tmp/*)
+
 
 # find all source files in srcdir
 TSOURCES := $(shell find $(SRCDIR) $(TSTDIR) -type f -name '*.cpp' -not -name "main.cpp")
@@ -28,12 +34,12 @@ SOURCES  := $(shell find $(SRCDIR)/ -type f -name '*.cpp')
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.cpp=$(BLDDIR)/%.o)
 TOBJECTS := $(patsubst %.cpp, $(BLDDIR)/%.o, $(notdir $(TSOURCES)))
 
-# clear out tmp files from the test dir
-$(shell rm -rf test/data/files/tmp/*)
+INC = -I$(INCDIR) -I$(INCDIR)/dependencies 
 
 # ----------------------------------------------------------------------
 # DON'T EDIT BELOW THIS LINE
 # ----------------------------------------------------------------------
+
 
 debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -ggdb
 debug: link-debug

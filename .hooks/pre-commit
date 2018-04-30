@@ -1,0 +1,30 @@
+
+# check if doxygen is installed before generating docs
+if command -v doxygen >/dev/null 2>&1; then
+
+  # run doxygen to generate documentation and get all errors
+  ERRORS="$(doxygen doxygen.conf 2>&1 1>/dev/null)"
+
+  # check if there are doc warnings
+  if [[ $ERRORS = *[$' \t\n']* ]]; then
+
+    # there were documentation warnings, so print
+    # them and cancel the commit
+    echo "$ERRORS";
+    echo "-- Undocumented symbols, cancelling commit --"
+    exit 1;
+
+  else
+
+    echo "-- Documenting codebase, continue pushing --"
+    # no warnings, so add the new documentation to
+    # the commit and continue
+    git add docs/*
+    exit 0;
+
+  fi
+else
+  # doxygen isn't installed, so give a warning and commit
+  echo "Doxygen is NOT installed. Committing STALE documentation!";
+  exit 0;
+fi
