@@ -57,7 +57,7 @@ void PrivateKey::sign( Record& r ){
 	pub_key->generate( this );
 
 
-	r.public_key(pub_key->to_string());
+	r.set_public_key(pub_key->to_string());
 
 
 	// create a Signer and random generator
@@ -70,7 +70,7 @@ void PrivateKey::sign( Record& r ){
 					new CryptoPP::HexEncoder(
 						new CryptoPP::StringSink(signature))));
 
-	r.signature(signature);
+	r.set_signature(signature);
 }
 // -----------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ bool PublicKey::verify( Record& r ){
 
 	Verifier verifier(this->key);
 
-	CryptoPP::StringSource ss(r.signature(), true,
+	CryptoPP::StringSource ss(r.get_signature(), true,
 				  new CryptoPP::HexDecoder(
 					new CryptoPP::StringSink(signature)));
 

@@ -18,23 +18,18 @@
 static const std::string STDOUT = "__stdout__"; /**< A key to identify STDOUT v. file path */
 static const std::string STDERR = "__stderr__";	/**< A key to identify STDERR v. file path */
 
-
-/** \todo create macros for all levels and update logger
-          to take __LINE__ and __FILE__ arguments
-*/
-
-#define R_INFO( s ) ( Logger::get()->info( __FILE__, __LINE__, s ) )
-#define R_DEBUG( s ) ( Logger::get()->debug( __FILE__, __LINE__, s ) )
-#define R_WARNING( s ) ( Logger::get()->warning( __FILE__, __LINE__, s ) )
-#define R_ERROR( s ) ( Logger::get()->error( __FILE__, __LINE__, s ) )
+#define RCINFO( s )    ( Logger::get().info( __FILE__, __LINE__, s ) )
+#define RCDEBUG( s )   ( Logger::get().debug( __FILE__, __LINE__, s ) )
+#define RCWARNING( s ) ( Logger::get().warning( __FILE__, __LINE__, s ) )
+#define RCERROR( s )   ( Logger::get().error( __FILE__, __LINE__, s ) )
 
 /** A log that writes to a file or stderr/stdout
 */
 class Log {
 	private:
-		std::string _name;	/**< The name to identify this log by */
-		std::string _out;	/**< The path to the log file */
-		Level _level;		/**< The log level to write at */
+		std::string m_name;	/**< The name to identify this log by */
+		std::string m_out;	/**< The path to the log file */
+		Level m_level;		/**< The log level to write at */
 
 		/** Get a timestamp as a string
 			\returns A timestamp as a string
@@ -42,9 +37,11 @@ class Log {
 		inline std::string timestamp() const {
 			time_t now = time(0);
 			std::string dt = std::string(ctime(&now));
+
 			dt.erase(std::remove_if(dt.begin(),dt.end(),[]( unsigned char c ){
 				return (c == '\n' || c == '\t');
 			}), dt.end());
+
 			return dt;
 		}
 
@@ -55,7 +52,7 @@ class Log {
 		inline std::string format( std::string m ) const {
 			std::string formatted;
 
-			formatted.append("[" + timestamp() + "]: ");
+			formatted.append("[" + timestamp() + "] ");
 			formatted.append(m);
 
 			return formatted;
@@ -68,7 +65,7 @@ class Log {
 			\param o The path to write to
 			\param l The log level to write at
 		*/
-		Log( std::string n, std::string o, Level l ) : _name(n), _out(o), _level(l) {}
+		Log( std::string n, std::string o, Level l ) : m_name(n), m_out(o), m_level(l) {}
 
 		/** Empty destructor */
 		~Log(){}
@@ -77,14 +74,14 @@ class Log {
 			\returns The log name
 		*/
 		std::string name() const {
-			return _name;
+			return m_name;
 		}
 
         /** Get the log level
             \returns A Level enum value
         */
         Level level() const {
-            return _level;
+            return m_level;
         }
 
 		/** Write to this log
@@ -92,13 +89,13 @@ class Log {
 			\param l The Level to write at
 		*/
 		void write( std::string m, Level l ) const {
-            if(l >= _level){
-				if(_out == STDOUT)
+            if(l >= m_level){
+				if(m_out == STDOUT)
 					std::cout << format(m) << std::endl;
-				else if(_out == STDERR)
+				else if(m_out == STDERR)
 					std::cerr << format(m) << std::endl;
 				else {
-					std::ofstream ofs(_out,std::ios::app);
+					std::ofstream ofs(m_out,std::ios::app);
 					if(ofs.is_open()){
 						ofs << format(m) << std::endl;
 					}
@@ -119,7 +116,7 @@ class Log {
             \returns True if logs are equal
         */
         bool operator==( const Log& rhs ) const {
-            return (_name == rhs._name && _out == rhs._out && _level == rhs._level);
+            return (m_name == rhs.m_name && m_out == rhs.m_out && m_level == rhs.m_level);
         }
 
         /** Overloaded less-than comparison
@@ -127,7 +124,7 @@ class Log {
             \returns True if this < rhs
         */
         bool operator<( const Log& rhs ) const {
-            return (_name < rhs._name);
+            return (m_name < rhs.m_name);
         }
 
         /** Overloaded greater-than comparison
@@ -135,16 +132,16 @@ class Log {
             \returns True if this > rhs
         */
         bool operator>( const Log& rhs ) const {
-            return (_name > rhs._name);
+            return (m_name > rhs.m_name);
         }
 
         /** Overloaded copy/assignment operator
             \param rhs The log to copy
         */
         void operator=( const Log& rhs ){
-            _name  = rhs._name;
-            _out   = rhs._out;
-            _level = rhs._level;
+            m_name  = rhs.m_name;
+            m_out   = rhs.m_out;
+            m_level = rhs.m_level;
         }
 };
 
@@ -204,7 +201,7 @@ class Logger {
 			\returns A reference to the Logger
 		*/
 		Logger& info( std::string m ){
-            write("Info: " + m,Level::info);
+            write("INFO: " + m,Level::info);
 			return *this;
 		}
 
@@ -225,7 +222,7 @@ class Logger {
 			\returns A reference to the Logger
 		*/
 		Logger& debug( std::string m ){
-			write("Debug: " + m,Level::debug);
+			write("DEBUG: " + m,Level::debug);
 			return *this;
 		}
 
@@ -246,7 +243,7 @@ class Logger {
 			\returns A reference to the Logger
 		*/
 		Logger& warning( std::string m ){
-			write("Warning: " + m,Level::warning);
+			write("WARNING: " + m,Level::warning);
 			return *this;
 		}
 
@@ -267,7 +264,7 @@ class Logger {
 			\returns A reference to the Logger
 		*/
 		Logger& error( std::string m ){
-			write("Error: " + m,Level::error);
+			write("ERROR: " + m,Level::error);
 			return *this;
 		}
 

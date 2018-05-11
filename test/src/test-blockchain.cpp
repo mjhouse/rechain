@@ -74,7 +74,7 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 		for(auto b : blockchain){
 			hashes.push_back(b.hash());
 			for(auto r : b){
-				signatures.push_back(r.signature());
+				signatures.push_back(r.get_signature());
 			}
 		}
 
@@ -82,10 +82,10 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 			size_t orig_size = blockchain.size();
 
 			for(unsigned int i = 0; i < 10; ++i){
-				Record r(generate_hash());
+				Record r(generate_hash(),"");
 				private_key->sign(r);
 
-				signatures.push_back(r.signature());
+				signatures.push_back(r.get_signature());
 				blockchain.add(r);
 			}
 		
@@ -98,7 +98,7 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 				int count = 0;
 				for(auto b : blockchain){
 					for(auto r : b){
-						REQUIRE(r.signature() == signatures[count]);
+						REQUIRE(r.get_signature() == signatures[count]);
 						count++;
 					}
 				}
@@ -109,10 +109,10 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 			size_t orig_size = blockchain.size();
 
 			for(unsigned int i = 0; i < 3; ++i){
-				Record r(blockchain[i][0].reference(),blockchain[i].hash());
+				Record r(blockchain[i][0].get_reference(),blockchain[i].hash());
 				private_key->sign(r);
 
-				signatures.push_back(r.signature());
+				signatures.push_back(r.get_signature());
 				blockchain.add(r);
 			}
 		
@@ -125,7 +125,7 @@ SCENARIO( "records are added to blockchain and mined", "[blockchain][blockchain-
 				int count = 0;
 				for(auto b : blockchain){
 					for(auto r : b){
-						REQUIRE(r.signature() == signatures[count]);
+						REQUIRE(r.get_signature() == signatures[count]);
 						count++;
 					}
 				}
@@ -150,8 +150,8 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 		for(auto b : blockchain){
 			hashes.push_back(b.hash());
 			for(auto r : b){
-				signatures.push_back(r.signature());
-				references.push_back(r.reference());
+				signatures.push_back(r.get_signature());
+				references.push_back(r.get_reference());
 			}
 		}
 
@@ -172,7 +172,7 @@ SCENARIO( "blockhain is accessed for blocks or records", "[blockchain][blockchai
 					for(unsigned int j = 0; j < b.size(); ++j){
 						Record& a = b[j];
 
-						REQUIRE(a.signature() == signatures[count]);
+						REQUIRE(a.get_signature() == signatures[count]);
 						count++;
 
 						REQUIRE(a.valid());
@@ -258,7 +258,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			int idx = NUM_BLOCKS/2;
 			Block& b = blockchain[idx];
 
-			b[0].reference("BAD REFERENCE");
+			b[0].set_reference("BAD REFERENCE");
 
 			THEN( "blockchain is invalid because block hash is bad" ){
 				REQUIRE_FALSE(blockchain.valid());
@@ -269,7 +269,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			int idx = NUM_BLOCKS/2;
 			Block& b = blockchain[idx];
 
-			b[0].block( "BAD BLOCK" );
+			b[0].set_block( "BAD BLOCK" );
 
 			THEN( "blockchain is invalid because block hash is bad" ){
 				REQUIRE_FALSE(b.valid());
@@ -291,7 +291,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 		}
 
 		WHEN( "a duplicate record is added to the blockchain" ){
-			Record r(blockchain[1][0].reference());
+			Record r(blockchain[1][0].get_reference(),"");
 
 			std::shared_ptr<PrivateKey> key(PrivateKey::empty());
 			key->generate();
@@ -328,7 +328,7 @@ SCENARIO( "blockchain is altered", "[blockchain][blockchain-altered]" ){
 			Record& r = b[0];
 
 			// Alter a record in the block
-			r.reference(generate_hash());
+			r.set_reference(generate_hash());
 			user1_key->sign(r);
 		
 			// Falsify the blockchain by re-mining each block after

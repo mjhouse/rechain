@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['parse_5fheader',['parse_header',['../classMessage.html#adfa1efcb53ef9b9d7e253a226fdb0d30',1,'Message']]],
-  ['previous',['previous',['../classBlock.html#ab42c53898f487472ae314f3d86617a5f',1,'Block']]],
-  ['privatekey',['PrivateKey',['../classPrivateKey.html#ad3e7fd1d3fd3552a52b5425e37b02e85',1,'PrivateKey']]],
-  ['public_5fkey',['public_key',['../classBlock.html#ae584ac0e640517dafe0f8f4bdcd5da11',1,'Block::public_key()'],['../classRecord.html#a6e3df43b85e4798a505ed609c85370c0',1,'Record::public_key()']]],
-  ['publickey',['PublicKey',['../classPublicKey.html#af4c4839004f3b4f54dc5320a602e7547',1,'PublicKey']]],
-  ['publish',['publish',['../classManager.html#a44a85f690c8ccbac2333198c253836de',1,'Manager::publish(Record &amp;r)'],['../classManager.html#ab1ae4e7dd9fc6b04034b5de9fad92976',1,'Manager::publish(std::string s)']]]
+  ['read',['read',['../classMessage.html#a70bc4f71e59350077be772d1efe590c6',1,'Message']]],
+  ['record',['Record',['../classRecord.html#a0f8732272ec86b8d63b850a3a6a9f860',1,'Record']]],
+  ['remote',['Remote',['../classRemote.html#a264b7432cdb257659e84fc3bf434ff9c',1,'Remote']]],
+  ['request',['request',['../classManager.html#a4e43cb51f4fb17107d9b1b6a3c08f5eb',1,'Manager']]],
+  ['rtrim',['rtrim',['../utility_8hpp.html#af8c372f2bb768b0373d7c55e47a9df8e',1,'rechain']]],
+  ['rtrim_5fcopy',['rtrim_copy',['../utility_8hpp.html#a6b93b5c4082c1e72fa0fce04631aba28',1,'rechain']]]
 ];

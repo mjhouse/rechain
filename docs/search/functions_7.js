@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['handle',['handle',['../classRemote.html#a1da3a4bbe8497b45d85d28852affb95f',1,'Remote']]],
-  ['hash',['hash',['../classBlock.html#ae2de4f093f846bf821445f80b02da7de',1,'Block']]]
+  ['info',['info',['../classLogger.html#a0a9052468ca3d05f8a2c4bb397d86651',1,'Logger::info(std::string m)'],['../classLogger.html#a969fb7f76d242ebe0d21de2365a452c4',1,'Logger::info(const char *f, const int l, std::string m)']]],
+  ['initialize',['initialize',['../classConfig.html#a2d6c1f981c529aa2ec738f1b8f78d115',1,'Config']]],
+  ['interface',['Interface',['../classInterface.html#af93d05de57a4d0eb2339ce463d780560',1,'Interface']]],
+  ['is_5fvalid',['is_valid',['../classBlockchain.html#a3aed5746095246ac08c6ecdf318db9eb',1,'Blockchain::is_valid()'],['../classRecord.html#a3be930b1c4ea9ee06ef147c411e6768b',1,'Record::is_valid()']]]
 ];

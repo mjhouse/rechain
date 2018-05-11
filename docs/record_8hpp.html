@@ -72,7 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -106,23 +105,26 @@ $(document).ready(function(){initNavTree('record_8hpp.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">record.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Defines a <a class="el" href="classRecord.html">Record</a> object that holds publishing information or a signature for another published <a class="el" href="classRecord.html">Record</a> object.  
+<p>Defines a <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> object that holds publishing information or a signature for another published <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> object.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &quot;cereal/cereal.hpp&quot;</code><br />
 <code>#include &quot;enums.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="keys_8hpp_source.html">keys.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for record.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="record_8hpp__incl.png" border="0" usemap="#inc_2record_8hpp" alt=""/></div>
 <map name="inc_2record_8hpp" id="inc_2record_8hpp">
 <area shape="rect" id="node4" href="enums_8hpp_source.html" title="enums.hpp" alt="" coords="229,80,316,107"/>
+<area shape="rect" id="node5" href="keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="341,80,415,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -130,13 +132,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="record_8hpp__dep__incl.png" border="0" usemap="#inc_2record_8hppdep" alt=""/></div>
 <map name="inc_2record_8hppdep" id="inc_2record_8hppdep">
-<area shape="rect" id="node2" href="blockchain_8hpp.html" title="Defines the BlockChain class that manages Block objects, searches and verifies the Block collection..." alt="" coords="370,80,501,107"/>
+<area shape="rect" id="node2" href="blockchain_8hpp.html" title="Defines the Blockchain class that manages Record objects, searches and verifies the Record collection..." alt="" coords="370,80,501,107"/>
 <area shape="rect" id="node4" href="interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="181,229,300,256"/>
 <area shape="rect" id="node7" href="manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="492,229,611,256"/>
 <area shape="rect" id="node10" href="blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="27,155,158,181"/>
 <area shape="rect" id="node11" href="keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="623,80,719,107"/>
 <area shape="rect" id="node13" href="record_8cpp_source.html" title="src/record.cpp" alt="" coords="875,155,980,181"/>
-<area shape="rect" id="node14" href="block_8cpp_source.html" title="src/block.cpp" alt="" coords="795,80,895,107"/>
 <area shape="rect" id="node3" href="interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="376,155,495,181"/>
 <area shape="rect" id="node6" href="manager_8hpp.html" title="Handles requests from a cli or gui. " alt="" coords="233,155,352,181"/>
 <area shape="rect" id="node8" href="remote_8hpp.html" title="Handles web requests. " alt="" coords="621,155,729,181"/>
@@ -151,7 +152,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html">Record</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> that can be stored on the BlockChain.  <a href="classRecord.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aab1b90f59dc5a2902b083c30abd7ff36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab1b90f59dc5a2902b083c30abd7ff36"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HASH_MAX</b>&#160;&#160;&#160;&quot;000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF&quot;</td></tr>
+<tr class="separator:aab1b90f59dc5a2902b083c30abd7ff36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -159,7 +167,7 @@ Classes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><a class="el" href="record_8hpp.html">record.hpp</a></li>
-    <li class="footer">Generated on Mon Apr 30 2018 12:02:57 for ReChain by
+    <li class="footer">Generated on Sun May 6 2018 22:41:50 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

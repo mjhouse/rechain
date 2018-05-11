@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['empty',['empty',['../classKey.html#a08e57890f02ba908908a2cce74718569',1,'Key']]],
-  ['end',['end',['../classBlock.html#af32ff9a1df5fd761f9c5fb820a598cbf',1,'Block::end()'],['../classBlockChain.html#ad951d129fca84317ef4c321d3dd61c20',1,'BlockChain::end()']]],
-  ['error',['error',['../classLogger.html#af087d53472568f6895e0c193a7de3221',1,'Logger::error(std::string m)'],['../classLogger.html#a80c92ea209ddef29c774bba1c11cbe0d',1,'Logger::error(const char *f, const int l, std::string m)']]],
-  ['execute',['execute',['../classInterface.html#aa3f24e3f85920b871a65c0b25d79224d',1,'Interface']]]
+  ['find_5fpublication',['find_publication',['../classBlockchain.html#a4611b43bf0d93fe8481f0a8353c9fb66',1,'Blockchain']]],
+  ['find_5frecord',['find_record',['../classBlockchain.html#ac976e61e0e64834ba30db587c0c90f09',1,'Blockchain']]],
+  ['find_5fsignatures',['find_signatures',['../classBlockchain.html#ac28de525e90c658a2f39806810fe3f5c',1,'Blockchain']]],
+  ['format',['format',['../classLog.html#a010f5924417033e293ff56bc80b3df63',1,'Log']]],
+  ['from_5ffile',['from_file',['../classRecord.html#ab6aea6d2d216487676d0d144f34fddc7',1,'Record']]],
+  ['from_5freference',['from_reference',['../classRecord.html#a9bc8770967e924a49745531bc4838aaa',1,'Record']]]
 ];

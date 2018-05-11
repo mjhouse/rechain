@@ -1,6 +1,5 @@
 var dir_68267d1309a1af8e8297ef4c3efbcdba =
 [
-    [ "block.cpp", "block_8cpp_source.html", null ],
     [ "blockchain.cpp", "blockchain_8cpp_source.html", null ],
     [ "config.cpp", "config_8cpp_source.html", null ],
     [ "interface.cpp", "interface_8cpp_source.html", null ],

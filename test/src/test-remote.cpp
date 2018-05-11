@@ -45,7 +45,7 @@ SCENARIO( "remote is created with a valid config", "[.][remote]" ){
         config->set_peers(peers);
 
         // create dummy record
-        Record r(generate_hash());
+        Record r(generate_hash(),"");
 
         // create a Remote
         Remote remote(config);

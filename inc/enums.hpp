@@ -20,7 +20,9 @@ enum Level {
 };
 
 /** For different flavors of Record. */
-enum DataType { 
+enum RecordType { 
+    Base,
+    Genesis,
     Publication, 
     Signature 
 };

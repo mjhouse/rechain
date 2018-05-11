@@ -23,12 +23,12 @@ SCENARIO( "records created with different initial values", "[record-create]" ){
 		std::string block = generate_hash();
 
 		WHEN( "record is created with only a reference" ){
-			Record r(reference);
+			Record r(reference,"");
 
 			THEN( "it reports the correct reference and type" ){
 				REQUIRE(r.type() == DataType::Publication);
-				REQUIRE(r.reference() == reference);
-				REQUIRE(r.block() == "");
+				REQUIRE(r.get_reference() == reference);
+				REQUIRE(r.get_block() == "");
 			}
 		}
 
@@ -37,16 +37,15 @@ SCENARIO( "records created with different initial values", "[record-create]" ){
 			Record r(reference,block);
 
 			THEN( "it reports the correct values and type" ){
-				REQUIRE(r.reference() == reference);
-				REQUIRE(r.block() == block);
+				REQUIRE(r.get_reference() == reference);
+				REQUIRE(r.get_block() == block);
 				REQUIRE(r.type() == DataType::Signature);
 			}
 		}
 
 		WHEN( "record is created with file iostream" ){
-			std::string tmp_path = get_path("files/general/dummy.txt");
-			std::ifstream ifs(tmp_path);
-			Record r(ifs);
+			std::string tmp_path = get_path("files/general/test_create_record.txt");
+			Record r(tmp_path);
 
 			CryptoPP::SHA256 hasher;
 	
@@ -59,7 +58,7 @@ SCENARIO( "records created with different initial values", "[record-create]" ){
 						new CryptoPP::StringSink(hash)))); 
 
 			THEN( "it reports the correct values and type" ){
-				REQUIRE(r.reference() == hash);
+				REQUIRE(r.get_reference() == hash);
 				REQUIRE(r.type() == DataType::Publication);
 			}
 		}
@@ -74,7 +73,7 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 		std::string reference = generate_hash();
 		std::string block = generate_hash();
 
-		Record publication(reference);
+		Record publication(reference,"");
 		Record signature(reference,block);
 	
 
@@ -89,8 +88,8 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 		}
 
 		WHEN( "values are retrieved" ){
-			std::string r = publication.reference();
-			std::string b = signature.block();
+			std::string r = publication.get_reference();
+			std::string b = signature.get_block();
 
 			THEN( "reference matches given reference" ){
 				REQUIRE(r == reference);
@@ -107,8 +106,11 @@ SCENARIO( "record methods are used to set and retrieve values", "[record-access]
 		}
 
 		WHEN( "values are set" ){
-			std::string r = publication.reference("TEST");
-			std::string b = signature.block("TEST");
+			publication.set_reference("TEST");
+			signature.set_block("TEST");
+
+			std::string r = publication.get_reference();
+			std::string b = signature.get_block();
 
 			THEN( "reference matches given reference" ){
 				REQUIRE(r == "TEST");
@@ -143,10 +145,10 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 			std::string automatic = record.string(true);
 			std::string manual;
 
-			manual.append(record.reference());
-			manual.append(record.block());
-			manual.append(record.public_key());
-			manual.append(record.signature());
+			manual.append(record.get_reference());
+			manual.append(record.get_block());
+			manual.append(record.get_public_key());
+			manual.append(record.get_signature());
 
 			THEN( "string is equal to expected string" ){
 				REQUIRE(manual == automatic);
@@ -171,8 +173,8 @@ SCENARIO( "records are serialized or converted to strings", "[record-transform]"
 
 			std::remove(tmp_path.c_str());
 			THEN( "unserialized record is the same as original" ){
-				REQUIRE(empty.reference() == record.reference());
-				REQUIRE(empty.block() == record.block());
+				REQUIRE(empty.get_reference() == record.get_reference());
+				REQUIRE(empty.get_block() == record.get_block());
 				REQUIRE(empty.string(true) == record.string(true));
 			}
 

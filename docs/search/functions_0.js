@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['add',['add',['../classBlock.html#a0f426185d80227fffc5ace2c71f4b15b',1,'Block::add()'],['../classBlockChain.html#ac45040e3d6d95f17f98e84ccaed32bde',1,'BlockChain::add()']]]
+  ['begin',['begin',['../classBlockchain.html#aa5b89107a878fbb69a4514d8e650c93b',1,'Blockchain']]],
+  ['blockchain',['Blockchain',['../classBlockchain.html#afb66c736ee870ebf75913d01a50f87a4',1,'Blockchain']]]
 ];

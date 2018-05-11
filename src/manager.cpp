@@ -45,16 +45,11 @@ namespace rc = rechain;
 
 typedef Logger rl;
 
-Manager::Manager() : configured(false), config(nullptr), remote(nullptr), blockchain() {
-    private_key = std::make_shared<PrivateKey>();
-    public_key = std::make_shared<PublicKey>();
+Manager::Manager() : configured(false), config(nullptr), blockchain() {
+    private_key = std::make_shared<PrivateKey>(new PrivateLey::empty());
 }
 
-Manager::~Manager(){
-    if(blockchain.valid()){
-        blockchain.save();
-    }
-}
+Manager::~Manager(){}
 
 bool Manager::configure( Level level ){
 
@@ -99,23 +94,6 @@ bool Manager::configure( Level level ){
         private_key->save(private_key_path);
     }
 
-    // if there is no public key or key file, create a new one
-    if(fs::exists(public_key_path)){
-        try {
-            public_key.reset(PublicKey::load_file(public_key_path));
-        }
-        catch(const std::invalid_argument& e){
-            rl::get().error("Public key is corrupted: " + private_key_path);
-            return false;
-        }
-    }
-    else {
-        public_key.reset(PublicKey::empty());
-        public_key->generate(this->private_key.get());
-
-        public_key->save(public_key_path);
-    }
-
     configured = true;
     return true;
 }
@@ -123,44 +101,47 @@ bool Manager::configure( Level level ){
 // publish a record object
 bool Manager::publish( Record& r ){
    
-	std::string ref = r.reference();
-    if(configured && !ref.empty() ){
-
-        private_key->sign(r);
-
-        if((r.type() == DataType::Signature) || (!blockchain.contains(r.reference(),Search::RecordType)) ){
-            blockchain.add(r);
-
-            if(blockchain.valid() && blockchain.save()){
-                return true;
-            }
-        }
-        
-    }
 
     return false;
 }
 
 // publish a file given a path string
-bool Manager::publish( std::string s ){
+bool Manager::publish( std::string t_path ){
 
     if(configured){
 
-        std::ifstream ifs(s);
-        if(ifs.is_open()){
-            Record r(ifs);
-            return publish(r);
+        try {
+
+            std::shared_ptr<Record> record(new Record::publication(t_path));
+
+            std::string ref = r.get_reference();
+            if(configured && !ref.empty() ){
+
+                private_key->sign(r);
+
+                if((r.type() == DataType::Signature) || (!blockchain.contains(r.get_reference(),Search::RecordType)) ){
+                    blockchain.add(r);
+
+                    if(blockchain.valid() && blockchain.save()){
+                        return true;
+                    }
+                }
+                
+            }
+        }
+        catch(const std::invalid_argument& ex){
+            R_INFO("failed to create record from path");
         }
 
     }
 
-    return false;
+    return result;
 }
 
 Record* Manager::request( std::string h ){
 	for(auto& b : blockchain){
 		for(auto& r : b){
-			if(r.reference() == h){
+			if(r.get_reference() == h){
                 // -----------------------
                 // torrent the file contained
                 // in the record
@@ -274,8 +255,8 @@ bool Manager::sign( std::string s ){
     if(configured && !s.empty()){
         for(auto& b : blockchain){
             for(auto& r : b){
-                if(r.reference() == s){
-                    Record record( r.reference(), b.hash() );
+                if(r.get_reference() == s){
+                    Record record( r.get_reference(), b.hash() );
                     return publish(record);
                 }
             }

@@ -46,14 +46,14 @@ void Interface::list(){
     BlockChain blockchain = this->manager->get_blockchain();
 
 	for(unsigned int i = 0; i < blockchain.size(); ++i){
-		print("Block #" + std::to_string(i) + ":");
+		print("Block #" + std::to_string(i) + "  {" + blockchain[i].hash() + ")" +  ":");
 		for(unsigned int j = 0; j < blockchain[i].size(); ++j){
 			auto record = blockchain[i][j];
 			std::string msg;
-			std::string ref = record.reference();
-			std::string own = record.public_key();
+			std::string ref = record.get_reference();
+			std::string own = record.get_public_key();
 			std::string type = (record.type() == DataType::Publication) ? "Publication" : "Signature";
-			float trust = (type == "Publication") ? blockchain.trust(record.reference()) : 0.0f;
+			float trust = (type == "Publication") ? blockchain.trust(record.get_reference()) : 0.0f;
 
 			if(j == 0 && i == 0)
 				msg = "\tRecord: " + ref + " (Genesis)";
@@ -126,18 +126,23 @@ int Interface::execute(){
 
 			// Publish a document to the BlockChain
 			if(result.count("publish")){
-				if(this->manager->publish(result["p"].as<std::string>()))
-					return H_NOERR;
-				else
+				if(this->manager->publish(result["p"].as<std::string>())){
+                	return H_NOERR;
+                
+                }
+				else {
 					return H_ERROR;
+                }
 			}
 			
 			// Mine the current block
 			if(result.count("mine")){
-				if(this->manager->mine())
+				if(this->manager->mine()){
 					return H_NOERR;
-				else
+                }
+				else {
 					return H_ERROR;
+                }
 			}
 
 			// Check the BlockChain integrity

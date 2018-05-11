@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['update_5ftrust',['update_trust',['../classBlockChain.html#a82851a102065917794e939b1bbd91633',1,'BlockChain']]],
-  ['utility_2ehpp',['utility.hpp',['../utility_8hpp.html',1,'']]]
+  ['validate',['validate',['../classManager.html#a6a96238ce66b87c173c509641a15492e',1,'Manager']]]
 ];

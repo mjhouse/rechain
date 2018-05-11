@@ -21,9 +21,9 @@ SCENARIO( "block can be mined and generate a valid hash", "[block-mining]" ){
 
 		std::vector<std::string> sigs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){
-			Record r(generate_hash());
+			Record r(generate_hash(),"");
 			private_key->sign(r);
-			sigs.push_back(r.signature());
+			sigs.push_back(r.get_signature());
 			block.add(r);
 		}
 
@@ -34,7 +34,7 @@ SCENARIO( "block can be mined and generate a valid hash", "[block-mining]" ){
 				REQUIRE(block.valid());
 				REQUIRE(block.size() == NUM_RECORDS);
 				for(unsigned int i = 0; i < block.size(); ++i){
-					REQUIRE(block[i].signature() == sigs[i]);
+					REQUIRE(block[i].get_signature() == sigs[i]);
 				}
 			}
 		}
@@ -61,17 +61,17 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 		std::vector<std::string> sigs;
 		std::vector<std::string> refs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){
-			Record r(generate_hash());
+			Record r(generate_hash(),"");
 			private_key->sign(r);
-			sigs.push_back(r.signature());
-			refs.push_back(r.reference());
+			sigs.push_back(r.get_signature());
+			refs.push_back(r.get_reference());
 			block.add(r);
 		}
 
 		WHEN( "block is accessed by index" ){
 			THEN( "it returns references to correct records" ){
 				for(unsigned int i = 0; i < block.size(); ++i){
-					REQUIRE(block[i].signature() == sigs[i]);
+					REQUIRE(block[i].get_signature() == sigs[i]);
 				}
 			}
 		}
@@ -79,7 +79,7 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 		WHEN( "block is assigned" ){
 			Block b;
 			for(unsigned int i = 0; i < (NUM_RECORDS/2); ++i){
-				Record r(generate_hash());
+				Record r(generate_hash(),"");
 				private_key->sign(r);
 				b.add(r);
 			}
@@ -88,7 +88,7 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 			THEN( "block is copied successfully" ){
 				REQUIRE(block.size() == b.size());
 				for(unsigned int i = 0; i < block.size(); ++i){
-					REQUIRE(block[i].signature() == b[i].signature());
+					REQUIRE(block[i].get_signature() == b[i].get_signature());
 				}
 			}
 		}
@@ -108,7 +108,7 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 			THEN( "block returns expected references" ){
 				for(Block::iterator b_it = block.begin(); b_it != block.end(); ++b_it){
 					auto r = *b_it;
-					auto r_it = std::find(sigs.begin(),sigs.end(),r.signature());
+					auto r_it = std::find(sigs.begin(),sigs.end(),r.get_signature());
 					REQUIRE(r_it != sigs.end());
 				}
 			}
@@ -119,8 +119,8 @@ SCENARIO( "block is copyable and accessable", "[block-access]" ){
 			auto r = *it;
 
 			THEN( "it returns an iterator to the correct record" ){
-				REQUIRE(r.signature() == sigs[NUM_RECORDS/2]);
-				REQUIRE(r.reference() == refs[NUM_RECORDS/2]);
+				REQUIRE(r.get_signature() == sigs[NUM_RECORDS/2]);
+				REQUIRE(r.get_reference() == refs[NUM_RECORDS/2]);
 			}
 		}
 
@@ -166,25 +166,25 @@ SCENARIO( "block can add valid and reject invalid records", "[block-adding]" ){
 
 		std::vector<std::string> sigs;
 		for(unsigned int i = 0; i < NUM_RECORDS; ++i){
-			Record r(generate_hash());
+			Record r(generate_hash(),"");
 			private_key->sign(r);
-			sigs.push_back(r.signature());
+			sigs.push_back(r.get_signature());
 			block.add(r);
 		}
 		WHEN( "valid blocks are added" ){
-			Record r(generate_hash());
+			Record r(generate_hash(),"");
 			private_key->sign(r);
 
 			THEN( "they are accepted" ){
 				REQUIRE(block.add(r));
 				REQUIRE(block.size() == NUM_RECORDS+1);
-				REQUIRE(block[NUM_RECORDS].signature() == r.signature());
+				REQUIRE(block[NUM_RECORDS].get_signature() == r.get_signature());
 			}
 		}
 		
 		WHEN( "invalid blocks are added" ){
-			Record a("");		// invalid because no reference
-			Record b(generate_hash()); // invalid because not signed
+			Record a;		// invalid because no reference
+			Record b(generate_hash(),""); // invalid because not signed
 
 			private_key->sign(a);
 
@@ -198,7 +198,7 @@ SCENARIO( "block can add valid and reject invalid records", "[block-adding]" ){
 		WHEN( "block is deliberately given an invalid record" ){
 			
 			// invalid because no reference
-			block[3] = Record("");
+			block[3] = Record();
 
 			THEN( "block becomes invalid" ){
 				REQUIRE_FALSE(block.valid());

@@ -72,7 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -106,33 +105,27 @@ $(document).ready(function(){initNavTree('blockchain_8hpp.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">blockchain.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Defines the <a class="el" href="classBlockChain.html">BlockChain</a> class that manages <a class="el" href="classBlock.html">Block</a> objects, searches and verifies the <a class="el" href="classBlock.html">Block</a> collection.  
+<p>Defines the <a class="el" href="classBlockchain.html">Blockchain</a> class that manages <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> objects, searches and verifies the <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> collection.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
-<code>#include &lt;math.h&gt;</code><br />
 <code>#include &quot;cereal/types/vector.hpp&quot;</code><br />
-<code>#include &quot;cereal/types/map.hpp&quot;</code><br />
-<code>#include &quot;block.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="record_8hpp_source.html">record.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for blockchain.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="blockchain_8hpp__incl.png" border="0" usemap="#inc_2blockchain_8hpp" alt=""/></div>
 <map name="inc_2blockchain_8hpp" id="inc_2blockchain_8hpp">
-<area shape="rect" id="node10" href="block_8hpp_source.html" title="block.hpp" alt="" coords="191,80,270,107"/>
-<area shape="rect" id="node13" href="record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="379,80,461,107"/>
-<area shape="rect" id="node15" href="enums_8hpp_source.html" title="enums.hpp" alt="" coords="523,155,610,181"/>
+<area shape="rect" id="node6" href="record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="436,80,519,107"/>
+<area shape="rect" id="node9" href="enums_8hpp_source.html" title="enums.hpp" alt="" coords="434,155,521,181"/>
+<area shape="rect" id="node10" href="keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="545,155,620,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -155,39 +148,16 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockChain.html">BlockChain</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html">Blockchain</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a15114eead2e93c50944553a29b2b4da5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="blockchain_8hpp.html#a15114eead2e93c50944553a29b2b4da5">Search</a> { <b>RecordType</b>, 
-<b>BlockType</b>
- }</td></tr>
-<tr class="separator:a15114eead2e93c50944553a29b2b4da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a class="anchor" id="a15114eead2e93c50944553a29b2b4da5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="blockchain_8hpp.html#a15114eead2e93c50944553a29b2b4da5">Search</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Flag to specify the type of object to search for. </p>
-
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00050">50</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><a class="el" href="blockchain_8hpp.html">blockchain.hpp</a></li>
-    <li class="footer">Generated on Mon Apr 30 2018 12:02:57 for ReChain by
+    <li class="footer">Generated on Sun May 6 2018 22:41:50 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

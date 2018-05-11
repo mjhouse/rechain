@@ -1,11 +1,10 @@
 <map id="inc/record.hpp" name="inc/record.hpp">
-<area shape="rect" id="node2" href="$blockchain_8hpp.html" title="Defines the BlockChain class that manages Block objects, searches and verifies the Block collection..." alt="" coords="370,80,501,107"/>
+<area shape="rect" id="node2" href="$blockchain_8hpp.html" title="Defines the Blockchain class that manages Record objects, searches and verifies the Record collection..." alt="" coords="370,80,501,107"/>
 <area shape="rect" id="node4" href="$interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="181,229,300,256"/>
 <area shape="rect" id="node7" href="$manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="492,229,611,256"/>
 <area shape="rect" id="node10" href="$blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="27,155,158,181"/>
 <area shape="rect" id="node11" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="623,80,719,107"/>
 <area shape="rect" id="node13" href="$record_8cpp_source.html" title="src/record.cpp" alt="" coords="875,155,980,181"/>
-<area shape="rect" id="node14" href="$block_8cpp_source.html" title="src/block.cpp" alt="" coords="795,80,895,107"/>
 <area shape="rect" id="node3" href="$interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="376,155,495,181"/>
 <area shape="rect" id="node6" href="$manager_8hpp.html" title="Handles requests from a cli or gui. " alt="" coords="233,155,352,181"/>
 <area shape="rect" id="node8" href="$remote_8hpp.html" title="Handles web requests. " alt="" coords="621,155,729,181"/>

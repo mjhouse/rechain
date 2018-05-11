@@ -196,8 +196,8 @@ SCENARIO( "manager is used with and without environment variables", "[manager]" 
 
             // signatures are different every
             // time, so we have to strip them out
-            gold.erase(1158,768);
-            grey.erase(1158,768);
+            gold.erase(1163,768);
+            grey.erase(1163,768);
 
             THEN( "manager successfully  publishes" ){
                 REQUIRE(result);
@@ -250,7 +250,7 @@ SCENARIO( "manager is used with and without environment variables", "[manager]" 
                 REQUIRE(publish_result);
                 REQUIRE(mine_result);
                 REQUIRE_FALSE(record == nullptr);
-                REQUIRE(record->reference() == ref);
+                REQUIRE(record->get_reference() == ref);
             }
         }
 

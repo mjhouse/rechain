@@ -26,352 +26,489 @@
 #include <climits>
 
 // dependency includes
-#include "cereal/archives/json.hpp"
-#include "cereal/types/vector.hpp"
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 
 // local includes
 #include "blockchain.hpp"
-#include "block.hpp"
-#include "record.hpp"
+#include "base_record.hpp"
+#include "genesis_record.hpp"
+#include "publication_record.hpp"
+#include "signature_record.hpp"
 #include "logger.hpp"
+#include "enums.hpp"
 
-typedef Logger rl;
-
-#define MAX_TRUST 100
-#define MIN_TRUST 0
-
-/** Empty constructor
-*/
-BlockChain::BlockChain(){}
-
-/** Empty destructor
-*/
-BlockChain::~BlockChain(){}
-
-/* Add a Record to an open Block
-*/
-BlockChain& BlockChain::add( Record& r ){
-	this->current.add(r);
-	return *this;
+// ----------------------------------------------------------------------------
+// Name: 
+//      Constructor
+// Description:
+//      Construct a Blockchain
+// ----------------------------------------------------------------------------
+Blockchain::Blockchain() : max_trust(1), min_trust(0) {
 }
 
-/* Update trust maps
-*/
-void BlockChain::update_trust(){
+// ----------------------------------------------------------------------------
+// Name: 
+//      Destructor
+// Description:
+//      Called when the Blockchain is deleted
+// ----------------------------------------------------------------------------
+Blockchain::~Blockchain(){}
 
-    trust_map.clear();
+// ----------------------------------------------------------------------------
+// Name: 
+//      update_trust
+// Description:
+//      Update the trust map
+// ----------------------------------------------------------------------------
+void Blockchain::update_trust(){
 
-	if(!this->blockchain.empty() && this->blockchain[0].size() > 0){
+    if(m_blockchain.size() > 0){
 
-		// this map stores references that link author keys to
-		// document references.
-		std::map<std::string,std::string> reference;
+        // clear the trust map and set the maximum available
+        // trust to the length of the blockchain.
+        m_trust.clear();
 
-		// the first record in the first block is the owner, they
-		// get an initial amount of trust equal to 'MAX_TRUST'.
-		std::string owner = blockchain[0][0].public_key();
-		std::string genesis = blockchain[0][0].reference();
-		trust_map.insert( std::make_pair(owner,MAX_TRUST) );
+        // lost trust is the trust that is given
+        // to the records. they can't spend it, so it
+        // is subtracted from max trust after the trust
+        // calculation.
+        double lost_trust = 0;
 
-		// iterate the through all blocks and all records
-		// in each block
-		for(auto& block : blockchain){
+        // get the distribution list from the genesis record and
+        // split the max_trust between them.
+
+        GenesisRecord* genesis = static_cast<GenesisRecord*>(&m_blockchain[0]);
+        if(!genesis){
+            RCERROR("blockchain doesn't have a genesis record");
+            return;
+        }
+
+        auto distribution = genesis->get_distribution();
+        max_trust = static_cast<double>(m_blockchain.size());
+
+        double partial = max_trust/distribution.size();
+        for(auto& identifier : distribution){
+            m_trust.emplace(identifier,partial);
+        }
+
+        // a reference map to link record hashes to authors
+        std::map<std::string,std::string> reference;
+
+        for(auto& record : m_blockchain){
+       
+            switch(record.get_type()){
             
-            // get the id of the person who mined the block and add them
-            // to the trust map
-            std::string miner = block.public_key();
-            trust_map.insert( std::pair<std::string,unsigned int>(miner,0) );
+                case RecordType::Publication:
+                {
 
-            double transferred = 0;
+                    PublicationRecord* pub_record = static_cast<PublicationRecord*>(&record);
 
-			for(auto& record : block){
+                    if(pub_record){
 
-				switch(record.type()){
-					case DataType::Publication:
-						{
-							std::string author = record.public_key();
-							std::string document = record.reference();
+                        std::string author = pub_record->get_public_key();
+                        std::string hash   = pub_record->hash();
 
-							// add each document hash and author's public key to the reference map
-							reference.insert(std::pair<std::string,std::string>(document,author));
+                        // get a reference to the trust of both
+                        // the author and the record
+                        double& author_trust = m_trust[author];
+                        double& record_trust = m_trust[hash];
 
+                        // check the author has trust to give
+                        if(author_trust > 0){
 
-                            // try to insert author and document into trust_map, capture
-                            // the result std::pair.
-                            auto a_it = trust_map.insert( std::pair<std::string,unsigned int>(author,0) );
-                            auto d_it = trust_map.insert( std::pair<std::string,unsigned int>(document,0) );
+                            double half_trust = (author_trust/2);
+                           
+                            // give the record half of the author's
+                            // trust
+                            author_trust = half_trust;
+                            record_trust = half_trust;
 
-                            // if the insert failed, then the author may have trust, and if
-                            // the author has trust, give half to the document
-                            if(!a_it.second && document != genesis){
+                            // save the lost half that went 
+                            // to the record.
+                            lost_trust  += half_trust;
 
-                                // get references to the actual iterators
-                                auto a_entry = a_it.first;
-                                auto d_entry = d_it.first;
+                            // link the hash to the author
+                            reference.emplace(hash,author);
+                        }
 
-                                // split up trust
-                                double amount = a_entry->second/2;
-                                a_entry->second -= amount;
-                                d_entry->second += amount;
+                    }
 
-                                transferred += amount;
-                            }
-						}
-						break;
-					case DataType::Signature:
-						{
-							// get the public keys and publication reference
-							std::string pubref = record.reference();
+                }
+                break;
 
-							// try to find the signer in the trust map- if they
-							// aren't found, then they haven't published anything.
-							auto it = trust_map.find(record.public_key());
+                case RecordType::Signature:
+                {
 
-							// check if the signer is published
-							if( it != trust_map.end() ){
+                    SignatureRecord* sig_record = static_cast<SignatureRecord*>(&record);
 
-                                std::string signer = it->first;
-                                std::string signee = reference[pubref];
+                    if(sig_record){
 
-                                double trust = it->second;
+                        // get the signer and the signer's trust
+                        std::string signer   = sig_record->get_public_key();
+                        double& signer_trust = m_trust[signer];
 
-								// get amount to transfer
-								double doc_amount = trust*0.25;
-								double usr_amount = trust*0.25;
+                        // check that they have trust to give
+                        if(signer_trust > 0){
 
-                                // if the new document trust will be larger than
-                                // trust max, set it to 0.
-                                if((trust_map[pubref] + doc_amount) > MAX_TRUST){
-                                    doc_amount = 0;
-                                }
+                            std::string hash   = sig_record->get_record_hash();
+                            std::string signee = reference[hash];
 
-								// transfer trust to the signee
-								trust_map[signee] += usr_amount;
-                                trust_map[pubref] += doc_amount;
-								trust_map[signer] -= (doc_amount + usr_amount);
+                            // remove one-half of the signer's trust
+                            double quarter_trust = (signer_trust/4);
+                            signer_trust = quarter_trust*2;
 
-                                // update the total of transferred trust
-                                transferred += doc_amount;
-							}
-						}
-						break;
+                            // signee and the record each get one
+                            // quarter of the signer's trust
+                            m_trust[signee] += quarter_trust;
+                            m_trust[hash]   += quarter_trust;
 
-					default:
-						// may add other types of records
-						break;
-				}
-			}
+                            // save the lost quarter that went 
+                            // to the record.
+                            lost_trust   += quarter_trust;
 
-            // update the miner's trust
-            trust_map[miner] += transferred;
-		}
-	}
-}
+                        }
 
-/* Mine and add a block to the chain
-*/
-std::string BlockChain::mine( std::string pubkey ){
+                    }
 
-    if(current.size() > 0){
+                }
+                break;
 
-        // Check if the chain has a genesis block
-        if(blockchain.size() > 0){
-            current.previous(blockchain.back().hash());
-        }
+                default:
+                {
+                    // genesis
+                }
+                break;
 
-        // Get the hash to return
-        std::string hash = current.mine(pubkey);
-
-        // Add to the chain
-        blockchain.push_back( current );
-        current = Block();
-
-        // Update trust maps
-        update_trust();
-
-        return hash;
-
-    }
-
-    return "";
-
-}
-
-/** Overloaded index operator
-*/
-Block& BlockChain::operator[] ( unsigned int i ){
-	return this->blockchain[i];
-}
-
-
-/** Overloaded assignment operator
-*/
-BlockChain& BlockChain::operator=( const BlockChain& b ){
-	this->blockchain = b.blockchain;
-	this->current	 = b.current;
-	this->trust_map	 = b.trust_map;
-	return *this;
-}
-
-/**
-*/
-BlockChain::iterator BlockChain::find( std::string h ){
-	return std::find_if(blockchain.begin(),blockchain.end(),
-	[&h](Block& b){ return (b.hash() == h); });
-}
-
-/* Check if a Record already exists
-*/
-bool BlockChain::contains( std::string s, Search type ){
-
-    switch(type){
-        case Search::RecordType:
-        {
-            // Check in the blockchain
-            for(auto b : blockchain)
-                for(auto r : b)
-                    if(r.reference() == s) return true;
-
-            for(auto r : current)
-                if(r.reference() == s) return true;
-
-            break;
-        }
-        case Search::BlockType:
-        {
-            // Check in the blockchain
-            for(auto b : blockchain)
-                if(b.hash() == s) return true;
-
-            break;
-        }
-    }
-
-    // Can't find it
-	return false;
-}
-
-/* Check if BlockChain is valid
-*/
-bool BlockChain::valid(){
-	std::string previous;
-	std::set<std::string> pubs;
-
-	for(auto& b : blockchain){
-
-		if(b.previous() != previous){
-			return false;
-        }
-		
-        if(b.hash() > HASH_MAX){
-			return false;
-        }
-
-		previous = b.hash();
-
-		for(auto& r : b){
-			if(!r.valid()){
-                return false;
             }
+        
+        }
 
-			switch(r.type()){
-				case DataType::Publication:
-					if(!pubs.insert(r.reference()).second)
-						return false;
-					break;
+        // max_trust is used for normalizing trust values
+        // when they are requested. removing lost trust
+        // means that the normalization is relative to free
+        // trust in the system only.
+        max_trust -= lost_trust;
 
-				case DataType::Signature:
-				{
-					// Try to find the referenced block by hash
-					auto b_it = this->find(r.block());
-					if(b_it == this->end())
-						return false;
-
-					// Try to find the referenced publication
-					Block& b = *b_it;
-					auto r_it = b.find(r.reference());
-					if(r_it == b.end())
-						return false;
-				}
-				break;
-			}
-		}
-	}
-	return true;
+    }
 }
 
-/* Get the trust for a publication
-*/
-double BlockChain::trust( std::string r ){
-	
-    std::map<std::string,double>::iterator it;
-    double value = 0;
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::publish
+// Description:
+//      Mine and publish a valid record to the blockchain,
+//      broadcast to other clients, and return true on success
+// ----------------------------------------------------------------------------
+bool Blockchain::publish( BaseRecord& t_record ){
 
-    if( (it = trust_map.find(r)) != trust_map.end()){
-        value = 100*(it->second/MAX_TRUST);
+    std::string hash = t_record.hash();
+    RCDEBUG("publishing record: " + hash);
+
+    if(m_blockchain.size() > 0){
+
+        auto& last = m_blockchain.back();
+        t_record.set_previous(last.hash());
+
     }
 
-    // return the trust value
-    return value;
+    t_record.mine();
+
+    if(t_record.is_valid()){
+    
+        m_blockchain.push_back(t_record);
+        // remote->send( t_record );
+
+        RCINFO("record was published: " + hash);
+        return true;
+    }
+
+    RCERROR("record was not valid: " + hash);
+    return false;
+
 }
 
-/* Iterator begin
-*/
-BlockChain::iterator BlockChain::begin(){
-	return this->blockchain.begin();
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::publish
+// Description:
+//      Mine and publish a valid record to the blockchain,
+//      broadcast to other clients, and return true on success
+// ----------------------------------------------------------------------------
+bool Blockchain::publish( BaseRecord* t_record ){
+    BaseRecord& record = *t_record;
+    return publish(record);
+
 }
 
-/* Iterator end
-*/
-BlockChain::iterator BlockChain::end(){
-	return this->blockchain.end();
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::find_record
+// Description:
+//      Find a publication with the given hash.
+// ----------------------------------------------------------------------------
+BaseRecord* Blockchain::find_record( std::string t_hash ){
+    
+    RCDEBUG("searching for record with hash: " + t_hash );
+   
+    for(auto& record : m_blockchain){
+        if(record.hash() == t_hash){
+
+            RCDEBUG("record was found");
+            return &record;
+        }
+    }
+
+    RCDEBUG("record not found");
+    return nullptr;
+
 }
 
-/* Returns the number of Block objects
-*/
-size_t BlockChain::size(){
-	return this->blockchain.size();
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::find_publication
+// Description:
+//      Find a publication with the given reference.
+// ----------------------------------------------------------------------------
+PublicationRecord* Blockchain::find_publication( std::string t_reference ){
+
+    RCDEBUG("searching for record with reference: " + t_reference);
+   
+    for(auto& record : m_blockchain){
+
+        PublicationRecord* pub_record = static_cast<PublicationRecord*>(&record);
+
+        if( pub_record && pub_record->get_reference() == t_reference ){
+
+            RCDEBUG("record was found");
+            return pub_record;
+        }
+    }
+
+    RCDEBUG("record not found");
+    return nullptr;
+
 }
 
-/** Save the BlockChain to a given location
-*/
-bool BlockChain::save( std::string p ){
-	std::string path = (!p.empty()) ? p : this->file_path;
-    if(!path.empty()){
-		std::ofstream os(path);
-		if(os.is_open()){
-			cereal::JSONOutputArchive archive(os);
-			archive( *this );
-			this->file_path = path;
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::find_signature
+// Description:
+//      Find all signatures for the given reference
+// ----------------------------------------------------------------------------
+std::vector<SignatureRecord*> Blockchain::find_signatures( std::string t_reference ){
 
-			rl::get().debug("Blockchain saved: " + path);
-			return true;
-		}
-	}
+    RCDEBUG("searching for signatures with reference: " + t_reference);
+    std::vector<SignatureRecord*> results;
 
+    auto publication = find_publication(t_reference);
 
-	rl::get().warning("Blockchain failed to save: " + path);
+    if(publication){
+
+        std::string hash = publication->hash();
+
+        for(auto& record : m_blockchain){
+
+            SignatureRecord* sig_record = static_cast<SignatureRecord*>(&record);
+
+            if( sig_record && sig_record->get_record_hash() == hash ){
+
+                results.push_back(sig_record);
+            
+            }
+        }
+
+    }
+
+    std::string count = std::to_string(results.size());
+    RCDEBUG(count + " signatures found");
+    return results;
+}
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::is_valid
+// Description:
+//      Check that currently loaded blockchain is valid
+// ----------------------------------------------------------------------------
+bool Blockchain::is_valid(){
+    RCDEBUG("checking if blockchain is valid");
+
+	std::set<std::string> references;
+	std::set<std::string> hashes;
+    std::string previous;
+
+    for(auto& record : m_blockchain){
+
+		if(record.get_previous() != previous){
+            RCERROR("record doesn't reference previous");
+			return false;
+        }
+
+        if(!record.is_valid()){
+            RCERROR("record isn't valid");
+			return false;
+        }
+
+        // update previous for the next iteration
+        previous = record.hash();
+
+        switch(record.get_type()){
+
+            case RecordType::Publication:
+            {	
+
+                PublicationRecord* pub_record = static_cast<PublicationRecord*>(&record);
+                
+                if(!pub_record){
+                    RCERROR("record type is publication, record is not");
+                    return false;
+                }
+
+                // try to insert the reference and hash
+                auto r_pair = references.insert(pub_record->get_reference());
+                auto h_pair = hashes.insert(pub_record->hash());
+
+                // second item in pair is false if insert failed,
+                // and both pairs should insert successfully
+                if(!r_pair.second && !h_pair.second){
+                    RCERROR("duplicate records in blockchain");
+                    return false;
+                }
+
+            }	
+            break;
+
+            case RecordType::Signature:
+            {
+
+                SignatureRecord* sig_record = static_cast<SignatureRecord*>(&record);
+
+                if(!sig_record){
+                    RCERROR("record type is signature, record is not");
+                    return false;
+                }
+
+                // try to find the referenced record by reference
+                auto it = hashes.find(sig_record->get_record_hash());
+
+                if(it == hashes.end()){
+                    RCERROR("signature doesn't reference pre-existing publication");
+                    return false;
+                }
+
+            }
+            break;
+        }
+    }
+
+    // all tests passed
+    return true;
+}
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::trust
+// Description:
+//      Get the trust for a publication or user
+// ----------------------------------------------------------------------------
+double Blockchain::trust( std::string t_identifier ){
+
+    auto it = m_trust.find(t_identifier);
+
+    if( it != m_trust.end() && max_trust > 0 ){
+        double trust = it->second;
+        return 100*(trust/max_trust);
+    }
+    else {
+        return 0;
+    }
+
+}
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::begin
+// Description:
+//      Get iterator to the beginning of the blockchain
+// ----------------------------------------------------------------------------
+Blockchain::iterator Blockchain::begin(){
+	return m_blockchain.begin();
+}
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::end
+// Description:
+//      Get iterator to the end of the blockchain
+// ----------------------------------------------------------------------------
+Blockchain::iterator Blockchain::end(){
+	return m_blockchain.end();
+}
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::size
+// Description:
+//      Get the size of the current blockchain
+// ----------------------------------------------------------------------------
+size_t Blockchain::size(){
+	return m_blockchain.size();
+}
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::save
+// Description:
+//      Serialize the blockchain to disk
+// ----------------------------------------------------------------------------
+bool Blockchain::save( std::string t_path ){
+
+    RCDEBUG("saving to location: " + t_path);
+    std::ofstream os(t_path);
+
+    if(os.is_open()){
+
+        boost::archive::text_oarchive archive(os);
+        archive << *this;
+
+        RCINFO("blockchain was saved");
+        return true;
+
+    }
+
+    RCWARNING("blockchain failed to save");
 	return false;
 }
 
-/** Load the BlockChain from a given location
-*/
-bool BlockChain::load( std::string p ){
-	std::string path = (!p.empty()) ? p : this->file_path;
+// ----------------------------------------------------------------------------
+// Name: 
+//      Blockchain::load
+// Description:
+//      Load a serialized blockchain to memory
+// ----------------------------------------------------------------------------
+bool Blockchain::load( std::string t_path ){
 
-	if(!path.empty()){
-		std::ifstream is(path);
-		if(is.is_open()){
-			cereal::JSONInputArchive archive(is);
-			archive( *this );
-			this->file_path = path;
-			this->update_trust();
+    RCDEBUG("loading from location: " + t_path);
+    std::ifstream is(t_path);
 
-			rl::get().debug("Blockchain loaded: " + path);
-			return true;
-		}
-	}
+    if(is.is_open()){
 
-	rl::get().warning("Blockchain failed to load: " + path);
+        boost::archive::text_iarchive archive(is);
+        archive >> *this;
+
+        if(is_valid()){
+            update_trust();
+
+            RCINFO("blockchain was loaded");
+            return true;
+        }
+        else {
+            RCWARNING("blockchain loaded, but is invalid");
+            return false;
+        }
+    }
+
+    RCWARNING("blockchain failed to load");
 	return false;
 }

@@ -12,7 +12,7 @@ var classLog =
     [ "operator>", "classLog.html#a0dba693a25869115a397f2e4ac382097", null ],
     [ "timestamp", "classLog.html#a327a1d1ad631091d58900fe9f8917913", null ],
     [ "write", "classLog.html#a3b8f6b6e8af71467c36785f8158fba35", null ],
-    [ "_level", "classLog.html#ac6c47bab1fa8de4d2ff1e6f8f79d8826", null ],
-    [ "_name", "classLog.html#a6ee8680ac00f693b126f4e7c3e0bb8d8", null ],
-    [ "_out", "classLog.html#a5237dde4e15979b02c2cf27517bf8fb2", null ]
+    [ "m_level", "classLog.html#a2324ba38101208b1b00533685a1f8885", null ],
+    [ "m_name", "classLog.html#a886920c9124cb30228de9d65116155c5", null ],
+    [ "m_out", "classLog.html#acedfe13b77750b2c625372f4660c52ae", null ]
 ];

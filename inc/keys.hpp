@@ -25,23 +25,24 @@
 			private pair of RSA256 keys.
 */
 
+// system includes
 #include <fstream>			    // File I/O
 #include <iostream>
 #include <stdexcept>
 
+// dependency includes
 #include <cryptopp/osrng.h>		// For AutoSeededRandomPool
 #include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 
-#include "record.hpp"			// Data objects
+// local includes
+#include "base_record.hpp"		// Data objects
 
 #ifndef _RECHAIN_KEYS_HPP_
 #define _RECHAIN_KEYS_HPP_
 
 class PrivateKey;
 class PublicKey;
-class Data;
-
 
 /** The templated Key class acts as a base class for both
 	PrivateKey and PublicKey.
@@ -166,7 +167,7 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 			\param r A pointer to the Record to sign
 			\returns True if the Record was signed
 		*/
-		void sign( Record& r );
+		void sign( BaseRecord& r );
 };
 
 /** The PublicKey class inherits from the templated
@@ -187,7 +188,7 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey,PublicKey> {
 			\param r A pointer to the Record to verify
 			\returns True if the Record is signed correctly
 		*/
-		bool verify( Record& r );
+		bool verify( BaseRecord& r );
 };
 
 #endif

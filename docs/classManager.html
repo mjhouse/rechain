@@ -144,16 +144,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a48d9aa74bfd726d5259db316247df38f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a96238ce66b87c173c509641a15492e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a6a96238ce66b87c173c509641a15492e">validate</a> ()</td></tr>
 <tr class="separator:a6a96238ce66b87c173c509641a15492e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83bb9bd92b68949a23e54eacca7c23be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBlockChain.html">BlockChain</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a83bb9bd92b68949a23e54eacca7c23be">get_blockchain</a> ()</td></tr>
+<tr class="memitem:a83bb9bd92b68949a23e54eacca7c23be"><td class="memItemLeft" align="right" valign="top">BlockChain &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a83bb9bd92b68949a23e54eacca7c23be">get_blockchain</a> ()</td></tr>
 <tr class="separator:a83bb9bd92b68949a23e54eacca7c23be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a44a85f690c8ccbac2333198c253836de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a44a85f690c8ccbac2333198c253836de">publish</a> (<a class="el" href="classRecord.html">Record</a> &amp;r)</td></tr>
 <tr class="separator:a44a85f690c8ccbac2333198c253836de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af44e87fde9b95375540d1c8fa2739c83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#af44e87fde9b95375540d1c8fa2739c83">set_private_key</a> (<a class="el" href="classPrivateKey.html">PrivateKey</a> *k)</td></tr>
+<tr class="memitem:af44e87fde9b95375540d1c8fa2739c83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#af44e87fde9b95375540d1c8fa2739c83">set_private_key</a> (PrivateKey *k)</td></tr>
 <tr class="separator:af44e87fde9b95375540d1c8fa2739c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85b339a8a3c1414bac82e17667508f0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a85b339a8a3c1414bac82e17667508f0a">set_public_key</a> (<a class="el" href="classPublicKey.html">PublicKey</a> *k)</td></tr>
+<tr class="memitem:a85b339a8a3c1414bac82e17667508f0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a85b339a8a3c1414bac82e17667508f0a">set_public_key</a> (PublicKey *k)</td></tr>
 <tr class="separator:a85b339a8a3c1414bac82e17667508f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f9374369368d53352e340d85194217a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a4f9374369368d53352e340d85194217a">make_home</a> ()</td></tr>
 <tr class="memdesc:a4f9374369368d53352e340d85194217a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the home directory.  <a href="#a4f9374369368d53352e340d85194217a">More...</a><br /></td></tr>
@@ -167,26 +167,17 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a0cd73d2faeb08b0b5035ede245edafaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad391816f0476f0bc8b37e623c62b65e2"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classRemote.html">Remote</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#ad391816f0476f0bc8b37e623c62b65e2">remote</a></td></tr>
 <tr class="separator:ad391816f0476f0bc8b37e623c62b65e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad86791c0e352e7a65e33cebd7a5a59ab"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classPrivateKey.html">PrivateKey</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#ad86791c0e352e7a65e33cebd7a5a59ab">private_key</a></td></tr>
+<tr class="memitem:ad86791c0e352e7a65e33cebd7a5a59ab"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; PrivateKey &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#ad86791c0e352e7a65e33cebd7a5a59ab">private_key</a></td></tr>
 <tr class="separator:ad86791c0e352e7a65e33cebd7a5a59ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7d162f83bb9f4123c2561a107dee69d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classPublicKey.html">PublicKey</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#ac7d162f83bb9f4123c2561a107dee69d">public_key</a></td></tr>
+<tr class="memitem:ac7d162f83bb9f4123c2561a107dee69d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; PublicKey &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#ac7d162f83bb9f4123c2561a107dee69d">public_key</a></td></tr>
 <tr class="separator:ac7d162f83bb9f4123c2561a107dee69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a908c76fcf82c6cf68978690885a2aeb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBlockChain.html">BlockChain</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a908c76fcf82c6cf68978690885a2aeb6">blockchain</a></td></tr>
+<tr class="memitem:a908c76fcf82c6cf68978690885a2aeb6"><td class="memItemLeft" align="right" valign="top">BlockChain&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a908c76fcf82c6cf68978690885a2aeb6">blockchain</a></td></tr>
 <tr class="separator:a908c76fcf82c6cf68978690885a2aeb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p>Definition at line <a class="el" href="manager_8hpp_source.html#l00049">49</a> of file <a class="el" href="manager_8hpp_source.html">manager.hpp</a>.</p>
-</div><div class="dynheader">
-Collaboration diagram for Manager:</div>
-<div class="dyncontent">
-<div class="center"><img src="classManager__coll__graph.png" border="0" usemap="#Manager_coll__map" alt="Collaboration graph"/></div>
-<map name="Manager_coll__map" id="Manager_coll__map">
-<area shape="rect" id="node2" href="classBlockChain.html" title="BlockChain" alt="" coords="5,95,95,121"/>
-<area shape="rect" id="node3" href="classBlock.html" title="Block" alt="" coords="23,5,77,32"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1658ff9f18e38ccd9cb8b0b371b9c20b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -257,7 +248,7 @@ Collaboration diagram for Manager:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classBlockChain.html">BlockChain</a>&amp; Manager::get_blockchain </td>
+          <td class="memname">BlockChain&amp; Manager::get_blockchain </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -269,7 +260,7 @@ Collaboration diagram for Manager:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get a copy of the blockchain </p><dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classBlockChain.html">BlockChain</a> instance </dd></dl>
+<p>Get a copy of the blockchain </p><dl class="section return"><dt>Returns</dt><dd>a BlockChain instance </dd></dl>
 
 <p>Definition at line <a class="el" href="manager_8hpp_source.html#l00146">146</a> of file <a class="el" href="manager_8hpp_source.html">manager.hpp</a>.</p>
 
@@ -297,7 +288,7 @@ Collaboration diagram for Manager:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>True if setup was successful </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00207">207</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00211">211</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -315,7 +306,7 @@ Collaboration diagram for Manager:</div>
 </div><div class="memdoc">
 <p>Mine the current block </p><dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00175">175</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00179">179</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +333,7 @@ Collaboration diagram for Manager:</div>
 </div><div class="memdoc">
 <p>Publish a given record </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">r</td><td>The <a class="el" href="classRecord.html">Record</a> to publish </td></tr>
+    <tr><td class="paramname">r</td><td>The <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> to publish </td></tr>
   </table>
   </dd>
 </dl>
@@ -398,7 +389,7 @@ Collaboration diagram for Manager:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00160">160</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00164">164</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -412,7 +403,7 @@ Collaboration diagram for Manager:</div>
         <tr>
           <td class="memname">void Manager::set_private_key </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classPrivateKey.html">PrivateKey</a> *&#160;</td>
+          <td class="paramtype">PrivateKey *&#160;</td>
           <td class="paramname"><em>k</em></td><td>)</td>
           <td></td>
         </tr>
@@ -431,7 +422,7 @@ Collaboration diagram for Manager:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00189">189</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00193">193</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -456,7 +447,7 @@ Collaboration diagram for Manager:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00236">236</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00240">240</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +461,7 @@ Collaboration diagram for Manager:</div>
         <tr>
           <td class="memname">void Manager::set_public_key </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classPublicKey.html">PublicKey</a> *&#160;</td>
+          <td class="paramtype">PublicKey *&#160;</td>
           <td class="paramname"><em>k</em></td><td>)</td>
           <td></td>
         </tr>
@@ -489,7 +480,7 @@ Collaboration diagram for Manager:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00198">198</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00202">202</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -514,7 +505,7 @@ Collaboration diagram for Manager:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00252">252</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00256">256</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -539,7 +530,7 @@ Collaboration diagram for Manager:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00268">268</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00272">272</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -555,9 +546,9 @@ Collaboration diagram for Manager:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Check the <a class="el" href="classBlockChain.html">BlockChain</a> is valid </p><dl class="section return"><dt>Returns</dt><dd>true if blockchain is valid </dd></dl>
+<p>Check the BlockChain is valid </p><dl class="section return"><dt>Returns</dt><dd>true if blockchain is valid </dd></dl>
 
-<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00288">288</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="manager_8cpp_source.html#l00292">292</a> of file <a class="el" href="manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -570,7 +561,7 @@ Collaboration diagram for Manager:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classBlockChain.html">BlockChain</a> Manager::blockchain</td>
+          <td class="memname">BlockChain Manager::blockchain</td>
         </tr>
       </table>
   </td>
@@ -579,7 +570,7 @@ Collaboration diagram for Manager:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>A <a class="el" href="classBlockChain.html">BlockChain</a> to load data into </p>
+<p>A BlockChain to load data into </p>
 
 <p>Definition at line <a class="el" href="manager_8hpp_source.html#l00059">59</a> of file <a class="el" href="manager_8hpp_source.html">manager.hpp</a>.</p>
 
@@ -639,7 +630,7 @@ Collaboration diagram for Manager:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classPrivateKey.html">PrivateKey</a>&gt; Manager::private_key</td>
+          <td class="memname">std::shared_ptr&lt;PrivateKey&gt; Manager::private_key</td>
         </tr>
       </table>
   </td>
@@ -662,7 +653,7 @@ Collaboration diagram for Manager:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classPublicKey.html">PublicKey</a>&gt; Manager::public_key</td>
+          <td class="memname">std::shared_ptr&lt;PublicKey&gt; Manager::public_key</td>
         </tr>
       </table>
   </td>
@@ -710,7 +701,7 @@ Collaboration diagram for Manager:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classManager.html">Manager</a></li>
-    <li class="footer">Generated on Mon Apr 30 2018 12:02:57 for ReChain by
+    <li class="footer">Generated on Sun May 6 2018 22:41:51 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

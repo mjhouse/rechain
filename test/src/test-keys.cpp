@@ -111,8 +111,8 @@ SCENARIO( "keys can generated and used to sign/verify", "[keys-work]" ){
 		std::string public_path = get_path("keys/test.public");
 		std::string private_path = get_path("keys/test.private");
 
-		Record good_record(generate_hash());
-		Record bad_record("");
+		Record good_record(generate_hash(),"");
+		Record bad_record;
 
 
 		std::shared_ptr<PublicKey> public_key(PublicKey::load_file(public_path));
