@@ -104,6 +104,6 @@ class SignatureRecord : public BaseRecord {
 
 };
 
-BOOST_CLASS_EXPORT_GUID(SignatureRecord, "_signature_record_")
+BOOST_CLASS_EXPORT_GUID(SignatureRecord, "SignatureRecord")
 
 #endif

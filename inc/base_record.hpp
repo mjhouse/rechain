@@ -72,7 +72,7 @@ class BaseRecord {
         BaseRecord();
 
         /** \brief Empty destructor */
-        ~BaseRecord();
+        virtual ~BaseRecord();
 
         /** Get the hash of this BaseRecord
             \returns The current hash of the BaseRecord
@@ -84,20 +84,20 @@ class BaseRecord {
         */
         std::string mine();
 
-        /** \brief Get the RecordType of this BaseRecord
-            \returns The RecordType of this BaseRecord
-        */
-        int get_type();
-
         /** \brief Check if BaseRecord is internally valid
             \returns True if BaseRecord is valid
         */
-        bool is_valid();
+        virtual bool is_valid();
 
-        /** \brief Get the serialized BaseRecord as a string
-            \returns The BaseRecord as a string
+        /** \brief Get the RecordType of this Record
+            \returns The RecordType of this Record
         */
-        std::string to_string();
+        virtual int get_type()=0;
+
+        /** \brief Get the serialized Record as a string
+            \returns The Record as a string
+        */
+        virtual std::string to_string()=0;
 
         /** \brief Get the hash of the previous record 
             \returns The hash of the previous record

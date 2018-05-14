@@ -105,6 +105,6 @@ class PublicationRecord : public BaseRecord {
 
 };
 
-BOOST_CLASS_EXPORT_GUID(PublicationRecord, "_publication_record_")
+BOOST_CLASS_EXPORT_GUID(PublicationRecord, "PublicationRecord");
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * ReChain: The distributed resea
+ * ReChain: The distributed research journal
  * Copyright (C) 2018  Michael House
  *
  * This program is free software: you can redistribute it and/or modify
@@ -62,14 +62,6 @@ BaseRecord::BaseRecord()
 
 // ----------------------------------------------------------------------------
 // Name:
-//      BaseRecord::~BaseRecord
-// Description:
-//      Empty destructor
-// ----------------------------------------------------------------------------
-BaseRecord::~BaseRecord(){}
-
-// ----------------------------------------------------------------------------
-// Name:
 //      BaseRecord::hash
 // Description:
 //      Hash the BaseRecord with current values (for nonce, count etc.)
@@ -126,16 +118,6 @@ std::string BaseRecord::mine(){
 
 // ----------------------------------------------------------------------------
 // Name:
-//      BaseRecord::get_type
-// Description:
-//      Returns the type of the BaseRecord (RecordType::Base)
-// ----------------------------------------------------------------------------
-int BaseRecord::get_type(){
-  return RecordType::Base;
-}
-
-// ----------------------------------------------------------------------------
-// Name:
 //      BaseRecord::is_valid
 // Description:
 //      Checks BaseRecord-specific values and that the Record is
@@ -164,24 +146,4 @@ bool BaseRecord::is_valid(){
   }
 
   return valid;
-}
-
-// ----------------------------------------------------------------------------
-// Name:
-//      BaseRecord::to_string
-// Description:
-//      Serializes the BaseRecord into a string
-// ----------------------------------------------------------------------------
-std::string BaseRecord::to_string(){
-
-  // serialize the record
-  std::ostringstream data;
-
-  {
-      boost::archive::text_oarchive archive{data};
-      archive << *this;
-  }
-
-  return data.str();
-
 }

@@ -118,4 +118,6 @@ class GenesisRecord : public BaseRecord {
 
 };
 
+BOOST_CLASS_EXPORT_GUID(GenesisRecord, "GenesisRecord");
+
 #endif
