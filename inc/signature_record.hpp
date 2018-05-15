@@ -74,6 +74,9 @@ class SignatureRecord : public BaseRecord {
         /** \brief Empty constructor */
         SignatureRecord();
 
+        /** \brief Construct a signature from a hash */
+        SignatureRecord( std::string t_hash );
+
         /** \brief Empty destructor */
         ~SignatureRecord();
 

@@ -41,6 +41,33 @@ PublicationRecord::PublicationRecord(){};
 
 // ----------------------------------------------------------------------------
 // Name:
+//      PublicationRecord::PublicationRecord
+// Description:
+//      Construct a record from a path. 
+// ----------------------------------------------------------------------------
+PublicationRecord::PublicationRecord( std::string t_path ){
+
+    RCDEBUG("creating new publication record from file");
+
+    std::ifstream in_file(t_file,std::ifstream::binary);
+
+    if(in_file.is_open()){
+
+        CryptoPP::SHA256 hasher;
+
+        CryptoPP::FileSource fs(in_file,true,
+            new CryptoPP::HashFilter(hasher,
+                new CryptoPP::HexEncoder(
+                    new CryptoPP::StringSink(m_reference))));
+
+    }
+
+    RCERROR("can't open the given file path");
+
+};
+
+// ----------------------------------------------------------------------------
+// Name:
 //      PublicationRecord::~PublicationRecord
 // Description:
 //      Empty destructor 

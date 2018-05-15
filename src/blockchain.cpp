@@ -200,21 +200,21 @@ void Blockchain::update_trust(){
 //      Mine and publish a valid record to the blockchain,
 //      broadcast to other clients, and return true on success
 // ----------------------------------------------------------------------------
-bool Blockchain::publish( BaseRecord& t_record ){
+bool Blockchain::publish( std::shared_ptr<BaseRecord> t_record ){
 
-    std::string hash = t_record.hash();
+    std::string hash = t_record->hash();
     RCDEBUG("publishing record: " + hash);
 
     if(m_blockchain.size() > 0){
 
         auto& last = m_blockchain.back();
-        t_record.set_previous(last.hash());
+        t_record->set_previous(last.hash());
 
     }
 
-    t_record.mine();
+    t_record->mine();
 
-    if(t_record.is_valid()){
+    if(t_record->is_valid()){
     
         m_blockchain.push_back(t_record);
         // remote->send( t_record );
@@ -225,19 +225,6 @@ bool Blockchain::publish( BaseRecord& t_record ){
 
     RCERROR("record was not valid: " + hash);
     return false;
-
-}
-
-// ----------------------------------------------------------------------------
-// Name: 
-//      Blockchain::publish
-// Description:
-//      Mine and publish a valid record to the blockchain,
-//      broadcast to other clients, and return true on success
-// ----------------------------------------------------------------------------
-bool Blockchain::publish( BaseRecord* t_record ){
-    BaseRecord& record = *t_record;
-    return publish(record);
 
 }
 
@@ -296,10 +283,10 @@ PublicationRecord* Blockchain::find_publication( std::string t_reference ){
 // Description:
 //      Find all signatures for the given reference
 // ----------------------------------------------------------------------------
-std::vector<SignatureRecord*> Blockchain::find_signatures( std::string t_reference ){
+std::vector< std::shared_ptr<SignatureRecord> > Blockchain::find_signatures( std::string t_reference ){
 
     RCDEBUG("searching for signatures with reference: " + t_reference);
-    std::vector<SignatureRecord*> results;
+    std::vector< std::shared_ptr<SignatureRecord> > results;
 
     auto publication = find_publication(t_reference);
 
@@ -309,7 +296,7 @@ std::vector<SignatureRecord*> Blockchain::find_signatures( std::string t_referen
 
         for(auto& record : m_blockchain){
 
-            SignatureRecord* sig_record = static_cast<SignatureRecord*>(&record);
+            auto sig_record = std::dynamic_pointer_cast<SignatureRecord>(record);
 
             if( sig_record && sig_record->get_record_hash() == hash ){
 

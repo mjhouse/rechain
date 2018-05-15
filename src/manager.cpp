@@ -41,69 +41,192 @@
 #include "utility.hpp"
 
 namespace fs = boost::filesystem;
-namespace rc = rechain;
 
-typedef Logger rl;
 
-Manager::Manager() : configured(false), config(nullptr), blockchain() {
-    private_key = std::make_shared<PrivateKey>(new PrivateLey::empty());
+// ----------------------------------------------------------------------------
+// Name: 
+//      Constructor
+// Description:
+//      Construct a Manager instance
+// ----------------------------------------------------------------------------
+Manager::Manager() : m_configured(false), m_blockchain() {
+    private_key = std::make_shared<PrivateKey>(PrivateLey::empty());
+    private_key->generate();
 }
 
+// ----------------------------------------------------------------------------
+// Name: 
+//      Destructor
+// Description:
+//      Called when Manager is destroyed
+// ----------------------------------------------------------------------------
 Manager::~Manager(){}
 
+// ----------------------------------------------------------------------------
+// Name: 
+//      Destructor
+// Description:
+//      Called when Manager is destroyed
+// ----------------------------------------------------------------------------
+bool Manager::setup(){}
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      configure
+// Description:
+//      Configure the Manager instance and ensure that the
+//      install rechain environment is good.
+// ----------------------------------------------------------------------------
 bool Manager::configure( Level level ){
 
     configured = false;
 
-    // create a new Config instance
-    config.reset(new Config());
-    if(!config->initialize()){
-        return false;
-    }
+    std::string private_key_path = RCSETTING("private_key");
+    std::string blockchain_path  = RCSETTING("blockchain");
 
-    // verify or create home dir structure
-    if(!make_home())
-        return false;
+    try {
 
-    // configure logger
-    Logger::get()
-        .with( Log("console",STDOUT,level) )
-        .with( Log("log",config->setting("log"),Level::error) );
-
-    std::string private_key_path = config->setting("private_key");
-    std::string public_key_path  = config->setting("public_key");
-    std::string blockchain_path  = config->setting("blockchain");
-
-    if(!blockchain.load(blockchain_path)){
-        blockchain.save(blockchain_path);
-    }
-    
-    // if there is no private key or key file, create a new one
-    if(fs::exists(private_key_path)){
-        try {
-            private_key.reset(PrivateKey::load_file(private_key_path)); 
-        }
-        catch(std::invalid_argument& e){
-            rl::get().error("Private key is corrupted: " + private_key_path);
+        // verify or create home dir structure
+        if(!setup()){
             return false;
         }
+
+        // configure logger
+        Logger::get()
+            .with( Log("console",STDOUT,level) )
+            .with( Log("log",config->setting("log"),Level::error) );
+
+        // load the blockchain or create a new one
+        if(!blockchain.load(blockchain_path)){
+            blockchain.save(blockchain_path);
+        }
+        
+        // load the private key or create a new one
+        if(fs::exists(private_key_path)){
+            private_key.reset(PrivateKey::load_file(private_key_path)); 
+        }
+        else {
+            private_key->save(private_key_path);
+        }
+
     }
-    else {
-        private_key.reset(PrivateKey::empty());
-        private_key->generate();
-        private_key->save(private_key_path);
+    catch(const std::exception& e){
+        RCERROR("exception during configuration: " + e.what());
+        return false;
     }
 
     configured = true;
     return true;
 }
 
-// publish a record object
-bool Manager::publish( Record& r ){
-   
+// ----------------------------------------------------------------------------
+// Name: 
+//      publish
+// Description:
+//      Publish a document to the network/blockchain.
+// ----------------------------------------------------------------------------
+bool Manager::publish( std::string t_path ){
 
-    return false;
+    bool result = false;
+
+    try {
+        if(configured){
+
+            std::shared_ptr<PublicationRecord> record(new PublicationRecord(t_path));
+
+            if(!record->get_reference().empty()){
+
+                private_key->sign(r);
+
+                result = ( m_blockchain.publish(record &&
+                           m_blockchain.is_valid()     &&
+                           m_blockchain.save()         && );
+                }
+                
+            }
+
+        }
+
+    }
+    catch(const std::exception& e){
+        RCERROR("exception during publishing: " + e.what());
+        result = false;
+    }
+
+    return result;
 }
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      sign
+// Description:
+//      Sign a previously published document. 
+// ----------------------------------------------------------------------------
+bool sign( std::string t_hash );
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      key
+// Description:
+//      Load the active identity/private key from a path. 
+// ----------------------------------------------------------------------------
+bool key( std::string t_path );
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      save
+// Description:
+//      Save the Blockchain. 
+// ----------------------------------------------------------------------------
+bool save();
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      save
+// Description:
+//      Save the Blockchain to a location. 
+// ----------------------------------------------------------------------------
+bool save( std::string t_path );
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      load
+// Description:
+//      Load the Blockchain. 
+// ----------------------------------------------------------------------------
+bool load();
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      load
+// Description:
+//      Load the Blockchain from a location. 
+// ----------------------------------------------------------------------------
+bool load( std::string t_path );
+
+// ----------------------------------------------------------------------------
+// Name: 
+//      is_valid
+// Description:
+//      Check that the current Blockchain is valid. 
+// ----------------------------------------------------------------------------
+bool is_valid();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // publish a file given a path string
 bool Manager::publish( std::string t_path ){
@@ -112,16 +235,15 @@ bool Manager::publish( std::string t_path ){
 
         try {
 
-            std::shared_ptr<Record> record(new Record::publication(t_path));
+            PublicationRecord record(new R(t_path));
 
-            std::string ref = r.get_reference();
-            if(configured && !ref.empty() ){
+            if(!record->get_reference().empty()){
 
-                private_key->sign(r);
+                private_key->sign(record);
 
-                if((r.type() == DataType::Signature) || (!blockchain.contains(r.get_reference(),Search::RecordType)) ){
-                    blockchain.add(r);
+                return ( m_blockchain.publish());
 
+                if(m_blockchain.publish()){
                     if(blockchain.valid() && blockchain.save()){
                         return true;
                     }

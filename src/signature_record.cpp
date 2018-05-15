@@ -41,6 +41,16 @@ SignatureRecord::SignatureRecord(){};
 
 // ----------------------------------------------------------------------------
 // Name:
+//      SignatureRecord::SignatureRecord
+// Description:
+//      Construct a new signature from a hash 
+// ----------------------------------------------------------------------------
+SignatureRecord::SignatureRecord( std::string t_hash ){
+    m_record_hash = t_hash;
+};
+
+// ----------------------------------------------------------------------------
+// Name:
 //      SignatureRecord::~SignatureRecord
 // Description:
 //      Empty destructor 

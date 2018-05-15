@@ -53,7 +53,7 @@ class Manager {
         /** \brief Setup the home directory
             \returns True if setup was successful
         */
-        bool make_home();
+        bool setup();
 
     public:
 

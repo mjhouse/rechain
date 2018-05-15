@@ -74,6 +74,9 @@ class PublicationRecord : public BaseRecord {
         /** \brief Empty constructor */
         PublicationRecord();
 
+        /** \brief Construct a publication record from a path */
+        PublicationRecord( std::string t_path );
+
         /** \brief Empty destructor */
         ~PublicationRecord();
 
