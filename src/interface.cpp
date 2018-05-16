@@ -31,42 +31,10 @@
 #include "interface.hpp"
 #include "manager.hpp"
 #include "blockchain.hpp"
-#include "record.hpp"
 #include "logger.hpp"
 
 #define H_NOERR	0
 #define H_ERROR	1
-
-typedef Logger rl;
-
-void Interface::list(){
-	#define print(x)(std::cout << x << std::endl)
-    print(" ---- Blockchain ---- ");
-
-    BlockChain blockchain = this->manager->get_blockchain();
-
-	for(unsigned int i = 0; i < blockchain.size(); ++i){
-		print("Block #" + std::to_string(i) + "  {" + blockchain[i].hash() + ")" +  ":");
-		for(unsigned int j = 0; j < blockchain[i].size(); ++j){
-			auto record = blockchain[i][j];
-			std::string msg;
-			std::string ref = record.get_reference();
-			std::string own = record.get_public_key();
-			std::string type = (record.type() == DataType::Publication) ? "Publication" : "Signature";
-			float trust = (type == "Publication") ? blockchain.trust(record.get_reference()) : 0.0f;
-
-			if(j == 0 && i == 0)
-				msg = "\tRecord: " + ref + " (Genesis)";
-			else
-				msg = "\tRecord: " + ref;
-
-			print(msg);
-		    print("\tOwner:  " + own.substr(50,ref.length()-3) + "...");
-		    print("\t\tType:  " + type);
-			print("\t\tTrust: " + std::to_string(trust));
-		}
-	}
-}
 
 int Interface::execute(){
 
@@ -76,10 +44,8 @@ int Interface::execute(){
 		("v,version","Display version information")
 		("p,publish","Publish a document",cxxopts::value<std::string>(),"<path>")	
 		("c,check","Validate the blockchain")	
-		("m,mine","Mine a block")	
 		("s,sign","Sign a published document",cxxopts::value<std::string>(),"<path>")
 		("private_key","Make a private key active",cxxopts::value<std::string>(),"<path>")
-		("public_key","Make a public key active",cxxopts::value<std::string>(),"<path>")
 		("l,list","List published documents")
 		("verbose","All logging output")
 		("silent","No logging output");
@@ -108,46 +74,28 @@ int Interface::execute(){
 		}
 		else {
 
-            int status = H_NOERR;
             if(result.count("private_key")){
-                if(!this->manager->set_private_key(result["private_key"].as<std::string>()))
-                    status = H_ERROR;
+                if(manager->key(result["private_key"].as<std::string>())){
+                	return H_NOERR;
+                }
+				else {
+					return H_ERROR;
+                }
             }
 
-
-            if(result.count("public_key")){
-                if(!this->manager->set_public_key(result["public_key"].as<std::string>()))
-                    status = H_ERROR;
-            }
-
-            if(status == H_ERROR){
-                return status;
-            }
-
-			// Publish a document to the BlockChain
+			// Publish a document to the blockchain
 			if(result.count("publish")){
 				if(this->manager->publish(result["p"].as<std::string>())){
                 	return H_NOERR;
-                
                 }
 				else {
 					return H_ERROR;
                 }
 			}
 			
-			// Mine the current block
-			if(result.count("mine")){
-				if(this->manager->mine()){
-					return H_NOERR;
-                }
-				else {
-					return H_ERROR;
-                }
-			}
-
-			// Check the BlockChain integrity
+			// Check blockchain is valid
 			if(result.count("check")){
-                if(this->manager->validate())
+                if(manager->is_valid())
 					return H_NOERR;
 				else
 					return H_ERROR;
@@ -155,17 +103,11 @@ int Interface::execute(){
 			
 			// Sign a previously published Record
 			if(result.count("sign")){
-				if(this->manager->sign(result["s"].as<std::string>()))
+				if(manager->sign(result["s"].as<std::string>()))
 					return H_NOERR;
 				else
 					return H_ERROR;
 				
-			}
-
-			// Sign a previously published Record
-			if(result.count("list")){
-				this->list();
-                return H_NOERR;
 			}
 
 			// Display the current version
@@ -176,7 +118,7 @@ int Interface::execute(){
 			}
 		}
 	} catch (const cxxopts::OptionException& e){
-		rl::get().error("Failed to parse command line arguments!");
+		RCERROR("Failed to parse command line arguments!");
         return H_ERROR;
 	}
 

@@ -37,7 +37,7 @@
 // Description:
 //      Empty constructor 
 // ----------------------------------------------------------------------------
-GenesisRecord::GenesisRecord(){};
+GenesisRecord::GenesisRecord(){}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -45,7 +45,7 @@ GenesisRecord::GenesisRecord(){};
 // Description:
 //      Empty destructor 
 // ----------------------------------------------------------------------------
-GenesisRecord::~GenesisRecord(){};
+GenesisRecord::~GenesisRecord(){}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -72,6 +72,25 @@ bool GenesisRecord::is_valid(){
   }
 
   return valid;
+}
+
+// ----------------------------------------------------------------------------
+// Name:
+//      GenesisRecord::get_data
+// Description:
+//      Returns the concatenated data of the record
+// ----------------------------------------------------------------------------
+std::string GenesisRecord::get_data(){
+
+    std::string data = BaseRecord::get_data();
+
+    data.append(m_name);
+
+    for(auto& id : m_distribution){
+        data.append(id);
+    }
+
+    return data;
 }
 
 // ----------------------------------------------------------------------------

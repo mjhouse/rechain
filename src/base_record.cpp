@@ -132,7 +132,7 @@ bool BaseRecord::is_valid(){
       std::shared_ptr<PublicKey> key(PublicKey::load_string(m_public_key));
 
       // check if the signature is valid
-      if(!key->verify( *this )){
+      if(!key->verify( this )){
           valid = false;
       }
 
@@ -147,3 +147,23 @@ bool BaseRecord::is_valid(){
 
   return valid;
 }
+
+
+// ----------------------------------------------------------------------------
+// Name:
+//      BaseRecord::get_data
+// Description:
+//      Get the concatenated values of the record without the signature
+// ----------------------------------------------------------------------------
+std::string BaseRecord::get_data(){
+    std::string data;
+
+    data.append(m_public_key);
+    data.append(m_previous);
+    data.append(std::to_string(m_nonce));
+    data.append(std::to_string(m_timestamp));
+    data.append(std::to_string(m_counter));
+
+    return data;
+}
+

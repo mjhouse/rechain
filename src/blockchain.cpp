@@ -78,12 +78,13 @@ void Blockchain::update_trust(){
         // get the distribution list from the genesis record and
         // split the max_trust between them.
 
-        GenesisRecord* genesis = static_cast<GenesisRecord*>(&m_blockchain[0]);
-        if(!genesis){
-            RCERROR("blockchain doesn't have a genesis record");
-            return;
-        }
+        auto genesis = std::dynamic_pointer_cast<GenesisRecord>(m_blockchain[0]);
 
+        // should have a genesis block at all times
+        assert(genesis);
+
+        // get the owners of the blockchain and split the
+        // starting trust between them.
         auto distribution = genesis->get_distribution();
         max_trust = static_cast<double>(m_blockchain.size());
 
@@ -97,12 +98,12 @@ void Blockchain::update_trust(){
 
         for(auto& record : m_blockchain){
        
-            switch(record.get_type()){
+            switch(record->get_type()){
             
                 case RecordType::Publication:
                 {
 
-                    PublicationRecord* pub_record = static_cast<PublicationRecord*>(&record);
+                    auto pub_record = std::dynamic_pointer_cast<PublicationRecord>(record);
 
                     if(pub_record){
 
@@ -140,7 +141,7 @@ void Blockchain::update_trust(){
                 case RecordType::Signature:
                 {
 
-                    SignatureRecord* sig_record = static_cast<SignatureRecord*>(&record);
+                    auto sig_record = std::dynamic_pointer_cast<SignatureRecord>(record);
 
                     if(sig_record){
 
@@ -208,7 +209,7 @@ bool Blockchain::publish( std::shared_ptr<BaseRecord> t_record ){
     if(m_blockchain.size() > 0){
 
         auto& last = m_blockchain.back();
-        t_record->set_previous(last.hash());
+        t_record->set_previous(last->hash());
 
     }
 
@@ -234,15 +235,15 @@ bool Blockchain::publish( std::shared_ptr<BaseRecord> t_record ){
 // Description:
 //      Find a publication with the given hash.
 // ----------------------------------------------------------------------------
-BaseRecord* Blockchain::find_record( std::string t_hash ){
+std::shared_ptr<BaseRecord> Blockchain::find_record( std::string t_hash ){
     
     RCDEBUG("searching for record with hash: " + t_hash );
    
     for(auto& record : m_blockchain){
-        if(record.hash() == t_hash){
+        if(record->hash() == t_hash){
 
             RCDEBUG("record was found");
-            return &record;
+            return record;
         }
     }
 
@@ -257,13 +258,13 @@ BaseRecord* Blockchain::find_record( std::string t_hash ){
 // Description:
 //      Find a publication with the given reference.
 // ----------------------------------------------------------------------------
-PublicationRecord* Blockchain::find_publication( std::string t_reference ){
+std::shared_ptr<PublicationRecord> Blockchain::find_publication( std::string t_reference ){
 
     RCDEBUG("searching for record with reference: " + t_reference);
    
     for(auto& record : m_blockchain){
 
-        PublicationRecord* pub_record = static_cast<PublicationRecord*>(&record);
+        auto pub_record = std::dynamic_pointer_cast<PublicationRecord>(record);
 
         if( pub_record && pub_record->get_reference() == t_reference ){
 
@@ -327,25 +328,25 @@ bool Blockchain::is_valid(){
 
     for(auto& record : m_blockchain){
 
-		if(record.get_previous() != previous){
+		if(record->get_previous() != previous){
             RCERROR("record doesn't reference previous");
 			return false;
         }
 
-        if(!record.is_valid()){
+        if(!record->is_valid()){
             RCERROR("record isn't valid");
 			return false;
         }
 
         // update previous for the next iteration
-        previous = record.hash();
+        previous = record->hash();
 
-        switch(record.get_type()){
+        switch(record->get_type()){
 
             case RecordType::Publication:
             {	
 
-                PublicationRecord* pub_record = static_cast<PublicationRecord*>(&record);
+                auto pub_record = std::dynamic_pointer_cast<PublicationRecord>(record);
                 
                 if(!pub_record){
                     RCERROR("record type is publication, record is not");
@@ -369,7 +370,7 @@ bool Blockchain::is_valid(){
             case RecordType::Signature:
             {
 
-                SignatureRecord* sig_record = static_cast<SignatureRecord*>(&record);
+                auto sig_record = std::dynamic_pointer_cast<SignatureRecord>(record);
 
                 if(!sig_record){
                     RCERROR("record type is signature, record is not");
@@ -403,7 +404,7 @@ double Blockchain::trust( std::string t_identifier ){
 
     auto it = m_trust.find(t_identifier);
 
-    if( it != m_trust.end() && max_trust > 0 ){
+    if( it != m_trust.end() ){
         double trust = it->second;
         return 100*(trust/max_trust);
     }
@@ -491,7 +492,7 @@ bool Blockchain::load( std::string t_path ){
             return true;
         }
         else {
-            RCWARNING("blockchain loaded, but is invalid");
+            RCWARNING("blockchain loaded, but is corrupted");
             return false;
         }
     }

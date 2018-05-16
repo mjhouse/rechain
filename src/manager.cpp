@@ -32,8 +32,6 @@
 
 // local includes
 #include "manager.hpp"
-#include "record.hpp"
-#include "block.hpp"
 #include "blockchain.hpp"
 #include "logger.hpp"
 #include "config.hpp"
@@ -50,8 +48,8 @@ namespace fs = boost::filesystem;
 //      Construct a Manager instance
 // ----------------------------------------------------------------------------
 Manager::Manager() : m_configured(false), m_blockchain() {
-    private_key = std::make_shared<PrivateKey>(PrivateLey::empty());
-    private_key->generate();
+    m_private_key = std::make_shared<PrivateKey>(PrivateKey::empty());
+    m_private_key->generate();
 }
 
 // ----------------------------------------------------------------------------
@@ -66,9 +64,40 @@ Manager::~Manager(){}
 // Name: 
 //      Destructor
 // Description:
-//      Called when Manager is destroyed
+//      Configure or validate the home directory
 // ----------------------------------------------------------------------------
-bool Manager::setup(){}
+bool Manager::setup(){
+
+    fs::path home(Config::get()->setting("home"));
+    
+    fs::path logs(Config::get()->setting("logs"));
+    fs::path files(Config::get()->setting("files"));
+    fs::path torrents(Config::get()->setting("torrents"));
+
+    try {
+        if( !(fs::exists(logs) || fs::create_directory(logs)) ){
+            RCERROR("failed to create 'log' directory during setup");
+            return false;
+        }
+
+        if( !(fs::exists(files) || fs::create_directory(files)) ){
+            RCERROR("failed to create 'files' directory during setup");
+            return false;
+        }
+
+        if( !(fs::exists(torrents) || fs::create_directory(torrents)) ){
+            RCERROR("failed to create 'torrents' directory during setup");
+            return false;
+        }
+    }
+    catch (fs::filesystem_error& e){
+        RCERROR(e.what());
+        return false;
+    }
+
+    return true;
+    
+}
 
 // ----------------------------------------------------------------------------
 // Name: 
@@ -79,10 +108,10 @@ bool Manager::setup(){}
 // ----------------------------------------------------------------------------
 bool Manager::configure( Level level ){
 
-    configured = false;
+    m_configured = false;
 
-    std::string private_key_path = RCSETTING("private_key");
-    std::string blockchain_path  = RCSETTING("blockchain");
+    std::string private_key_path = Config::get()->setting("private_key");
+    std::string blockchain_path  = Config::get()->setting("blockchain");
 
     try {
 
@@ -91,31 +120,36 @@ bool Manager::configure( Level level ){
             return false;
         }
 
+        // verify or create home dir structure
+        if(!Config::get()->initialize()){
+            return false;
+        }
+
         // configure logger
         Logger::get()
             .with( Log("console",STDOUT,level) )
-            .with( Log("log",config->setting("log"),Level::error) );
+            .with( Log("log",Config::get()->setting("log"),Level::error) );
 
         // load the blockchain or create a new one
-        if(!blockchain.load(blockchain_path)){
-            blockchain.save(blockchain_path);
+        if(!m_blockchain.load(blockchain_path)){
+            m_blockchain.save(blockchain_path);
         }
         
         // load the private key or create a new one
         if(fs::exists(private_key_path)){
-            private_key.reset(PrivateKey::load_file(private_key_path)); 
+            m_private_key.reset(PrivateKey::load_file(private_key_path)); 
         }
         else {
-            private_key->save(private_key_path);
+            m_private_key->save(private_key_path);
         }
 
     }
     catch(const std::exception& e){
-        RCERROR("exception during configuration: " + e.what());
+        RCERROR(e.what());
         return false;
     }
 
-    configured = true;
+    m_configured = true;
     return true;
 }
 
@@ -130,26 +164,22 @@ bool Manager::publish( std::string t_path ){
     bool result = false;
 
     try {
-        if(configured){
+        if(m_configured && fs::exists(t_path)){
 
             std::shared_ptr<PublicationRecord> record(new PublicationRecord(t_path));
 
-            if(!record->get_reference().empty()){
+            m_private_key->sign(record);
 
-                private_key->sign(r);
+            std::string path = Config::get()->setting("blockchain");
 
-                result = ( m_blockchain.publish(record &&
-                           m_blockchain.is_valid()     &&
-                           m_blockchain.save()         && );
-                }
-                
-            }
-
+            result = ( m_blockchain.publish(record) &&
+                       m_blockchain.is_valid()      &&
+                       m_blockchain.save(path)         );
         }
 
     }
     catch(const std::exception& e){
-        RCERROR("exception during publishing: " + e.what());
+        RCERROR(e.what());
         result = false;
     }
 
@@ -162,7 +192,29 @@ bool Manager::publish( std::string t_path ){
 // Description:
 //      Sign a previously published document. 
 // ----------------------------------------------------------------------------
-bool sign( std::string t_hash );
+bool Manager::sign( std::string t_hash ){
+    
+	if(t_hash.empty()){
+        RCERROR("hash to sign is empty");
+        return false;
+	}
+
+    if(!m_configured){
+        RCERROR("manager is not configured");
+        return false;
+    }
+
+    auto record = m_blockchain.find_record(t_hash);
+
+    if(record && record->get_type() == RecordType::Publication){
+
+        std::shared_ptr<SignatureRecord> record(new SignatureRecord(t_hash));
+        return m_blockchain.publish(record);
+
+    }
+
+    return false;
+}
 
 // ----------------------------------------------------------------------------
 // Name: 
@@ -170,7 +222,38 @@ bool sign( std::string t_hash );
 // Description:
 //      Load the active identity/private key from a path. 
 // ----------------------------------------------------------------------------
-bool key( std::string t_path );
+bool Manager::key( std::string t_path ){
+
+    std::ifstream ifs(t_path);
+
+    if(ifs.is_open()){
+
+        try {
+
+            PrivateKey* key = PrivateKey::load_file(t_path);
+
+            if(key->valid()){
+
+                m_private_key.reset(key);
+                m_private_key->save(Config::get()->setting("private_key"));
+
+            }
+
+        } catch (const CryptoPP::InvalidArgument& e){
+
+            RCERROR(e.what());
+            return false;
+
+        } catch (const std::invalid_argument& e){
+
+            RCERROR("not a valid private key: " + t_path);
+            return false;
+
+        }
+
+    }
+    return true;
+}
 
 // ----------------------------------------------------------------------------
 // Name: 
@@ -178,7 +261,9 @@ bool key( std::string t_path );
 // Description:
 //      Save the Blockchain. 
 // ----------------------------------------------------------------------------
-bool save();
+bool Manager::save(){
+    return m_blockchain.save(Config::get()->setting("blockchain"));
+}
 
 // ----------------------------------------------------------------------------
 // Name: 
@@ -186,7 +271,9 @@ bool save();
 // Description:
 //      Save the Blockchain to a location. 
 // ----------------------------------------------------------------------------
-bool save( std::string t_path );
+bool Manager::save( std::string t_path ){
+    return m_blockchain.save(t_path);
+}
 
 // ----------------------------------------------------------------------------
 // Name: 
@@ -194,7 +281,9 @@ bool save( std::string t_path );
 // Description:
 //      Load the Blockchain. 
 // ----------------------------------------------------------------------------
-bool load();
+bool Manager::load(){
+    return m_blockchain.load(Config::get()->setting("blockchain"));
+}
 
 // ----------------------------------------------------------------------------
 // Name: 
@@ -202,7 +291,9 @@ bool load();
 // Description:
 //      Load the Blockchain from a location. 
 // ----------------------------------------------------------------------------
-bool load( std::string t_path );
+bool Manager::load( std::string t_path ){
+    return m_blockchain.load(t_path);
+}
 
 // ----------------------------------------------------------------------------
 // Name: 
@@ -210,187 +301,9 @@ bool load( std::string t_path );
 // Description:
 //      Check that the current Blockchain is valid. 
 // ----------------------------------------------------------------------------
-bool is_valid();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// publish a file given a path string
-bool Manager::publish( std::string t_path ){
-
-    if(configured){
-
-        try {
-
-            PublicationRecord record(new R(t_path));
-
-            if(!record->get_reference().empty()){
-
-                private_key->sign(record);
-
-                return ( m_blockchain.publish());
-
-                if(m_blockchain.publish()){
-                    if(blockchain.valid() && blockchain.save()){
-                        return true;
-                    }
-                }
-                
-            }
-        }
-        catch(const std::invalid_argument& ex){
-            R_INFO("failed to create record from path");
-        }
-
-    }
-
-    return result;
-}
-
-Record* Manager::request( std::string h ){
-	for(auto& b : blockchain){
-		for(auto& r : b){
-			if(r.get_reference() == h){
-                // -----------------------
-                // torrent the file contained
-                // in the record
-                // -----------------------
-			    return &r;
-            }
-		}
-	}
-    return nullptr;
-}
-
-bool Manager::mine(){
-
-    if(configured){
-
-        std::string hash = blockchain.mine(public_key->to_string());
-        if(!hash.empty() && blockchain.valid() && blockchain.save()){
-            return true;
-        }
-
-    }
-
-    return false;
-}
-
-void Manager::set_private_key( PrivateKey* k ){
-    if(k->valid()){
-        std::string path = config->setting("private_key");
-
-        private_key.reset(k);
-        private_key->save(path);
-    }
-}
-
-void Manager::set_public_key( PublicKey* k ){
-    if(k->valid()){
-        std::string path = config->setting("public_key");
-
-        public_key.reset(k);
-        public_key->save(path);
-    }
-}
-
-bool Manager::make_home(){
-    // build/validate the expected dir structure
-    fs::path home(config->setting("home"));
-    
-    fs::path logs(config->setting("logs"));
-    fs::path files(config->setting("files"));
-    fs::path torrents(config->setting("torrents"));
-
-    try {
-        if( !(fs::exists(logs) || fs::create_directory(logs)) ){
-            return false;
-        }
-
-        if( !(fs::exists(files) || fs::create_directory(files)) ){
-            return false;
-        }
-
-        if( !(fs::exists(torrents) || fs::create_directory(torrents)) ){
-            return false;
-        }
-    }
-    catch (fs::filesystem_error& e){
-        rl::get().error(e.what());
-        return false;
-    }
-
-    return true;
-}
-
-bool Manager::set_private_key( std::string p ){
-    std::ifstream ifs(p);
-    if(ifs.is_open()){
-        try {
-            this->set_private_key(PrivateKey::load_file(p));
-        } catch (const CryptoPP::InvalidArgument& e){
-            rl::get().error(e.what());
-            return false;
-        } catch (const std::invalid_argument& e){
-            rl::get().error("Not a valid private key: " + p);
-            return false;
-        }
-    }
-    return true;
-}
-
-bool Manager::set_public_key( std::string p ){
-    std::ifstream ifs(p);
-    if(ifs.is_open()){
-        try {
-            this->set_public_key(PublicKey::load_file(p));
-        } catch (const CryptoPP::InvalidArgument& e){
-            rl::get().error(e.what());
-            return false;
-        } catch (const std::invalid_argument& e){
-            rl::get().error("Not a valid public key: " + p);
-            return false;
-        }
-    }
-    return true;
-}
- 
-bool Manager::sign( std::string s ){
-
-	if(s.empty()){
-		throw std::invalid_argument("reference cannot be empty");
-	}
-
-    if(configured && !s.empty()){
-        for(auto& b : blockchain){
-            for(auto& r : b){
-                if(r.get_reference() == s){
-                    Record record( r.get_reference(), b.hash() );
-                    return publish(record);
-                }
-            }
-        }
-    }
-
-    return false;
-}
-
-bool Manager::validate(){
-    if(configured){
-        return blockchain.valid();
+bool Manager::is_valid(){
+    if(m_configured){
+        return m_blockchain.is_valid();
     }
 
     return false;

@@ -36,6 +36,7 @@
 // local includes
 #include "blockchain.hpp"
 #include "config.hpp"
+#include "enums.hpp"
 
 class PrivateKey;
 

@@ -58,7 +58,7 @@ class BaseRecord {
             \param t_archive The archive to serialize to
         */
         template <class Archive>
-        void serialize( Archive& t_archive, const unsigned int version ){
+        void serialize( Archive& t_archive, const unsigned int /* version */ ){
             t_archive & m_public_key;
             t_archive & m_signature;
             t_archive & m_nonce;
@@ -88,6 +88,11 @@ class BaseRecord {
             \returns True if BaseRecord is valid
         */
         virtual bool is_valid();
+
+        /** \brief Get the concatenated data for hashing/signing
+            \returns The data of the record as a string
+        */
+        virtual std::string get_data();
 
         /** \brief Get the RecordType of this Record
             \returns The RecordType of this Record

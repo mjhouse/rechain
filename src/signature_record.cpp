@@ -37,7 +37,7 @@
 // Description:
 //      Empty constructor 
 // ----------------------------------------------------------------------------
-SignatureRecord::SignatureRecord(){};
+SignatureRecord::SignatureRecord(){}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -47,7 +47,7 @@ SignatureRecord::SignatureRecord(){};
 // ----------------------------------------------------------------------------
 SignatureRecord::SignatureRecord( std::string t_hash ){
     m_record_hash = t_hash;
-};
+}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -55,7 +55,7 @@ SignatureRecord::SignatureRecord( std::string t_hash ){
 // Description:
 //      Empty destructor 
 // ----------------------------------------------------------------------------
-SignatureRecord::~SignatureRecord(){};
+SignatureRecord::~SignatureRecord(){}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -83,6 +83,21 @@ bool SignatureRecord::is_valid(){
   }
 
   return valid;
+}
+
+// ----------------------------------------------------------------------------
+// Name:
+//      SignatureRecord::get_data
+// Description:
+//      Returns the concatenated data of the record
+// ----------------------------------------------------------------------------
+std::string SignatureRecord::get_data(){
+
+    std::string data = BaseRecord::get_data();
+
+    data.append(m_record_hash);
+
+    return data;
 }
 
 // ----------------------------------------------------------------------------

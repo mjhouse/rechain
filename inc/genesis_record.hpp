@@ -66,7 +66,7 @@ class GenesisRecord : public BaseRecord {
             \param t_archive The archive to serialize to
         */
         template <class Archive>
-        void serialize( Archive& t_archive, const unsigned int version ){
+        void serialize( Archive& t_archive, const unsigned int /* version */ ){
             t_archive & base_object<BaseRecord>(*this);
             t_archive & m_name;
             t_archive & m_distribution;
@@ -110,14 +110,19 @@ class GenesisRecord : public BaseRecord {
         */
         bool is_valid();
 
-        /** \brief Get the serialized Record as a string
-            \returns The Record as a string
+        /** \brief Get the concatenated data for signing
+            \returns The data of the record as a string
+        */
+        std::string get_data();
+
+        /** \brief Get the serialized record as a string
+            \returns The record as a string
         */
         std::string to_string();
 
 
 };
 
-BOOST_CLASS_EXPORT_GUID(GenesisRecord, "GenesisRecord");
+BOOST_CLASS_EXPORT_GUID(GenesisRecord, "GenesisRecord")
 
 #endif

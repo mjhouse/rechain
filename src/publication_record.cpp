@@ -23,11 +23,16 @@
 #include <sstream>
 
 // dependency includes
+#include <cryptopp/filters.h>
+#include <cryptopp/files.h>
+#include <cryptopp/hex.h>
+
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
 // local includes
 #include "publication_record.hpp"
+#include "logger.hpp"
 #include "enums.hpp"
 #include "keys.hpp"
 
@@ -37,7 +42,7 @@
 // Description:
 //      Empty constructor 
 // ----------------------------------------------------------------------------
-PublicationRecord::PublicationRecord(){};
+PublicationRecord::PublicationRecord(){}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -49,7 +54,7 @@ PublicationRecord::PublicationRecord( std::string t_path ){
 
     RCDEBUG("creating new publication record from file");
 
-    std::ifstream in_file(t_file,std::ifstream::binary);
+    std::ifstream in_file(t_path,std::ifstream::binary);
 
     if(in_file.is_open()){
 
@@ -64,7 +69,7 @@ PublicationRecord::PublicationRecord( std::string t_path ){
 
     RCERROR("can't open the given file path");
 
-};
+}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -72,7 +77,7 @@ PublicationRecord::PublicationRecord( std::string t_path ){
 // Description:
 //      Empty destructor 
 // ----------------------------------------------------------------------------
-PublicationRecord::~PublicationRecord(){};
+PublicationRecord::~PublicationRecord(){}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -100,6 +105,21 @@ bool PublicationRecord::is_valid(){
   }
 
   return valid;
+}
+
+// ----------------------------------------------------------------------------
+// Name:
+//      PublicationRecord::get_data
+// Description:
+//      Returns the concatenated data of the record
+// ----------------------------------------------------------------------------
+std::string PublicationRecord::get_data(){
+
+    std::string data = BaseRecord::get_data();
+
+    data.append(m_reference);
+
+    return data;
 }
 
 // ----------------------------------------------------------------------------

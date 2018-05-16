@@ -160,14 +160,24 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 		/** Empty constructor */
 		PrivateKey(){}
 
+		/** Copy constructor */
+		PrivateKey( PrivateKey* t_key ){
+            key = t_key->key;
+        }
+
 		/** Generate a new key */
 		void generate();
 
 		/** Sign a given Record
-			\param r A pointer to the Record to sign
-			\returns True if the Record was signed
+			\param t_record A pointer to the record to sign
 		*/
-		void sign( BaseRecord& r );
+		void sign( BaseRecord* t_record );
+
+		/** Sign a given Record
+			\param t_record A pointer to the record to sign
+		*/
+		void sign( std::shared_ptr<BaseRecord> t_record );
+
 };
 
 /** The PublicKey class inherits from the templated
@@ -178,17 +188,22 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey,PublicKey> {
 		/** Empty constructor */
 		PublicKey(){}
 
+		/** Copy constructor */
+		PublicKey( PublicKey* t_key ){
+            key = t_key->key;
+        }
+
 		/** Generate a new PublicKey from a PrivateKey
 			\param key The PrivateKey to generate from
 		*/
-		void generate( PrivateKey* key );
+		void generate( PrivateKey* t_key );
 
 		/** Verify a Record to ensure that the
 		 	signature attached to it is correct
 			\param r A pointer to the Record to verify
 			\returns True if the Record is signed correctly
 		*/
-		bool verify( BaseRecord& r );
+		bool verify( BaseRecord* t_record );
 };
 
 #endif

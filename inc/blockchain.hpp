@@ -34,8 +34,8 @@
 #include <map>
 
 // dependency includes
-#include "cereal/types/vector.hpp"
-#include "cereal/types/memory.hpp"
+#include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/vector.hpp>
 
 // local includes
 #include "base_record.hpp"
@@ -49,7 +49,7 @@ class Blockchain {
 	private:
 
         /** The collection of records in the Blockchain */
-		std::vector<BaseRecord> m_blockchain; 
+		std::vector< std::shared_ptr<BaseRecord> > m_blockchain; 
 
         /** The collection of records in the Blockchain */
 		std::map<std::string,double> m_trust;
@@ -67,14 +67,14 @@ class Blockchain {
             \param t_archive The archive to serialize to
         */
         template <class Archive>
-        void serialize( Archive& t_archive, const unsigned int version ){
+        void serialize( Archive& t_archive, const unsigned int /* version */ ){
             t_archive & m_blockchain;
         }
 
 	public:
 
 		/** Typedef a Blockchain iterator */
-		typedef std::vector<BaseRecord>::iterator iterator;
+		typedef std::vector< std::shared_ptr<BaseRecord> >::iterator iterator;
 
 		/** Empty constructor
 		*/
@@ -87,30 +87,25 @@ class Blockchain {
         /** \brief Mine, add and broadcast a record
             \param t_record The record to mine, add and broadcast
         */
-        bool publish( BaseRecord& t_record );
-
-        /** \brief Mine, add and broadcast a record
-            \param t_record The record to mine, add and broadcast
-        */
-        bool publish( BaseRecord* t_record );
+        bool publish( std::shared_ptr<BaseRecord> t_record );
 
 		/** \brief Find a BaseRecord by the hash
 			\param t_hash The hash of the BaseRecord to return
 			\returns A pointer to a BaseRecord object
 		*/
-		BaseRecord* find_record( std::string t_hash );
+		std::shared_ptr<BaseRecord> find_record( std::string t_hash );
 
 		/** \brief Find a BaseRecord by the reference
 			\param t_reference The reference of the PublicationRecord to return
 			\returns A pointer to a PublicationRecord object
 		*/
-		PublicationRecord* find_publication( std::string t_reference );
+		std::shared_ptr<PublicationRecord> find_publication( std::string t_reference );
 
 		/** \brief Find signatures by the publication reference
 			\param t_reference The reference of the signatures
-			\returns A vector of Signature BaseRecord objects
+			\returns A vector of SignatureRecord objects
 		*/
-		std::vector<SignatureRecord*> find_signatures( std::string t_reference );
+		std::vector< std::shared_ptr<SignatureRecord> > find_signatures( std::string t_reference );
 
 		/** Verify that the Blockchain is valid
 			\returns True if Blockchain is valid
