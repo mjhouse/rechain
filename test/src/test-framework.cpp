@@ -3,21 +3,17 @@
 #include <string>
 #include <sstream>
 
-#ifndef TEST_ROOT
-    static_assert(0,"TEST_ROOT isn't set!");
-#endif
-
-#define ALPHANUM "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+#include "test-framework.hpp"
 
 std::string generate_hash() {
-	std::string result;
-	const char alphanum[] = ALPHANUM;
+    std::string result;
+    const char alphanum[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-	for (int i = 0; i < 64; ++i) {
-		result.append(&(alphanum[rand() % (sizeof(alphanum) - 1)]));
-	}
+    for (int i = 0; i < 64; ++i) {
+        result.append(&(alphanum[rand() % (sizeof(alphanum) - 1)]));
+    }
 
-	return result;
+    return result;
 }
 
 std::string trim_last_slash( std::string s ){
@@ -62,3 +58,4 @@ void copy_file( std::string in, std::string out ){
     std::ofstream dst(out, std::ios::binary);
     dst << src.rdbuf();
 }
+
