@@ -2,9 +2,8 @@
 bin/*
 obj/*
 
-# keep empty files
-!bin/.empty
-!obj/.empty
+# reference files
+tmp/
 
 # gcov files
 *.gcov

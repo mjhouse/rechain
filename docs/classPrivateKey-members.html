@@ -124,9 +124,11 @@ $(document).ready(function(){initNavTree('classPrivateKey.html','');});
   <tr><td class="entry"><a class="el" href="classKey.html#abd5ac5ed0c7299812e4710f4b6f21b5a">load_file</a>(std::string fn)</td><td class="entry"><a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classKey.html#ad68afd1fc17b523c1abc47f0f12e4c5a">load_string</a>(std::string s)</td><td class="entry"><a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
   <tr><td class="entry"><a class="el" href="classPrivateKey.html#ad3e7fd1d3fd3552a52b5425e37b02e85">PrivateKey</a>()</td><td class="entry"><a class="el" href="classPrivateKey.html">PrivateKey</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6">save</a>(std::string fn)</td><td class="entry"><a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classKey.html#ab73e562ed50f209dcf0f6b08104fffd9">set_key</a>(CryptoPP::RSA::PrivateKeyk)</td><td class="entry"><a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classPrivateKey.html#ae201c4156c0449bc4e83e07879cf3ab4">sign</a>(Record &amp;r)</td><td class="entry"><a class="el" href="classPrivateKey.html">PrivateKey</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classPrivateKey.html#a7e4ce1ebe589bda9ccb1564f94ad443e">PrivateKey</a>(PrivateKey *t_key)</td><td class="entry"><a class="el" href="classPrivateKey.html">PrivateKey</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classKey.html#a4f267d4271aff8b17abdeaf7a4b211d6">save</a>(std::string fn)</td><td class="entry"><a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classKey.html#ab73e562ed50f209dcf0f6b08104fffd9">set_key</a>(CryptoPP::RSA::PrivateKeyk)</td><td class="entry"><a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classPrivateKey.html#a0f417cfc4a19fe4450b0f2c4dd41bed1">sign</a>(BaseRecord *t_record)</td><td class="entry"><a class="el" href="classPrivateKey.html">PrivateKey</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classPrivateKey.html#a33160f180a1ddfc3533c7767d534e03c">sign</a>(std::shared_ptr&lt; BaseRecord &gt; t_record)</td><td class="entry"><a class="el" href="classPrivateKey.html">PrivateKey</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classKey.html#a5be9347813dd1648ee07427bf2971eba">to_string</a>()</td><td class="entry"><a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classKey.html#a3ad46ab1196dcad2937abca7ca166011">valid</a>()</td><td class="entry"><a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
@@ -134,7 +136,7 @@ $(document).ready(function(){initNavTree('classPrivateKey.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Apr 30 2018 12:02:57 for ReChain by
+    <li class="footer">Generated on Wed May 16 2018 07:00:58 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -37,8 +37,12 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/vector.hpp>
 
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+
 // local includes
 #include "base_record.hpp"
+#include "genesis_record.hpp"
 #include "publication_record.hpp"
 #include "signature_record.hpp"
 

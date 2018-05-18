@@ -31,11 +31,10 @@
 #include <vector>
 
 // dependency includes
-#include <boost/serialization/string.hpp>
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/base_object.hpp>
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/export.hpp>
+
+#include <boost/serialization/string.hpp>
 
 // local includes
 #include "base_record.hpp"
@@ -45,7 +44,7 @@ using boost::serialization::base_object;
 /** \brief A record that contains publication information for
            a document and is stored in the Blockchain
 */
-class PublicationRecord : public BaseRecord {
+class PublicationRecord : virtual public BaseRecord {
 
     private:
 
@@ -113,6 +112,6 @@ class PublicationRecord : public BaseRecord {
 
 };
 
-BOOST_CLASS_EXPORT_GUID(PublicationRecord, "PublicationRecord")
+BOOST_CLASS_EXPORT_KEY(PublicationRecord)
 
 #endif

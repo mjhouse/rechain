@@ -31,9 +31,10 @@
 #include <vector>
 
 // dependency includes
-#include <boost/serialization/string.hpp>
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/base_object.hpp>
+
+#include <boost/serialization/string.hpp>
 #include <boost/serialization/vector.hpp>
 
 // local includes
@@ -45,7 +46,7 @@ using boost::serialization::base_object;
            information about the Blockchain itself, and acting as an initial
            distributor of trust during trust calculations.
 */
-class GenesisRecord : public BaseRecord {
+class GenesisRecord : virtual public BaseRecord {
 
     private:
 
@@ -123,6 +124,6 @@ class GenesisRecord : public BaseRecord {
 
 };
 
-BOOST_CLASS_EXPORT_GUID(GenesisRecord, "GenesisRecord")
+BOOST_CLASS_EXPORT_KEY(GenesisRecord)
 
 #endif

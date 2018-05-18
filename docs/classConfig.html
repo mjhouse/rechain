@@ -109,7 +109,10 @@ $(document).ready(function(){initNavTree('classConfig.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classConfig-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Config Class Reference</div>  </div>
@@ -123,10 +126,6 @@ $(document).ready(function(){initNavTree('classConfig.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abd0c571c116924871e30444b192b792a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abd0c571c116924871e30444b192b792a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#abd0c571c116924871e30444b192b792a">Config</a> ()</td></tr>
-<tr class="memdesc:abd0c571c116924871e30444b192b792a"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:abd0c571c116924871e30444b192b792a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a543dce59b66475c5108088ee4ce1cdfc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a543dce59b66475c5108088ee4ce1cdfc"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a543dce59b66475c5108088ee4ce1cdfc">~Config</a> ()</td></tr>
 <tr class="memdesc:a543dce59b66475c5108088ee4ce1cdfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor. <br /></td></tr>
@@ -146,9 +145,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac8922c690fbc8f474277e09ddc1a939e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#ac8922c690fbc8f474277e09ddc1a939e">setting</a> (std::string key, std::string value)</td></tr>
 <tr class="memdesc:ac8922c690fbc8f474277e09ddc1a939e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a value in application <a class="el" href="classConfig.html" title="Maintains global configuration for the application and loads/saves the config to a standard location...">Config</a>.  <a href="#ac8922c690fbc8f474277e09ddc1a939e">More...</a><br /></td></tr>
 <tr class="separator:ac8922c690fbc8f474277e09ddc1a939e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb544004c244dab944b5ae8433b9e28c"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
-<tr class="memitem:aeb544004c244dab944b5ae8433b9e28c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classConfig.html#aeb544004c244dab944b5ae8433b9e28c">serialize</a> (Archive &amp;ar)</td></tr>
-<tr class="separator:aeb544004c244dab944b5ae8433b9e28c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae97387488f56a429c9e6a8511cfd4391"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#ae97387488f56a429c9e6a8511cfd4391">save</a> (std::string path)</td></tr>
 <tr class="memdesc:ae97387488f56a429c9e6a8511cfd4391"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the settings into a file.  <a href="#ae97387488f56a429c9e6a8511cfd4391">More...</a><br /></td></tr>
 <tr class="separator:ae97387488f56a429c9e6a8511cfd4391"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,19 +158,67 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac1bedc5e3bca421c0cc20c9bf3bfbe36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the settings from a file.  <a href="#ac1bedc5e3bca421c0cc20c9bf3bfbe36">More...</a><br /></td></tr>
 <tr class="separator:ac1bedc5e3bca421c0cc20c9bf3bfbe36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ad08761637c4158794f1a5afc88c79b2d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classConfig.html">Config</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#ad08761637c4158794f1a5afc88c79b2d">get</a> ()</td></tr>
+<tr class="memdesc:ad08761637c4158794f1a5afc88c79b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the config instance.  <a href="#ad08761637c4158794f1a5afc88c79b2d">More...</a><br /></td></tr>
+<tr class="separator:ad08761637c4158794f1a5afc88c79b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:adf19b8dc91973d69d66434fd152ed8fe"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:adf19b8dc91973d69d66434fd152ed8fe"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classConfig.html#adf19b8dc91973d69d66434fd152ed8fe">serialize</a> (Archive &amp;t_archive, const unsigned int)</td></tr>
+<tr class="memdesc:adf19b8dc91973d69d66434fd152ed8fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize <a class="el" href="classConfig.html" title="Maintains global configuration for the application and loads/saves the config to a standard location...">Config</a> to an archive.  <a href="#adf19b8dc91973d69d66434fd152ed8fe">More...</a><br /></td></tr>
+<tr class="separator:adf19b8dc91973d69d66434fd152ed8fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd0c571c116924871e30444b192b792a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abd0c571c116924871e30444b192b792a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#abd0c571c116924871e30444b192b792a">Config</a> ()</td></tr>
+<tr class="memdesc:abd0c571c116924871e30444b192b792a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:abd0c571c116924871e30444b192b792a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a734b11f702a5fae1fbc98a94f8bc91c5"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a734b11f702a5fae1fbc98a94f8bc91c5">settings</a></td></tr>
-<tr class="separator:a734b11f702a5fae1fbc98a94f8bc91c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d5e4d16c2ad49d9d31c63613eac248a"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a7d5e4d16c2ad49d9d31c63613eac248a">m_settings</a></td></tr>
+<tr class="separator:a7d5e4d16c2ad49d9d31c63613eac248a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e3fb9df25c60392856ec7785dda1b69"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a2e3fb9df25c60392856ec7785dda1b69">m_peers</a></td></tr>
 <tr class="separator:a2e3fb9df25c60392856ec7785dda1b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a067f38bc1b88cf239d4b47e0fd9a69db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#a067f38bc1b88cf239d4b47e0fd9a69db">initialized</a></td></tr>
-<tr class="separator:a067f38bc1b88cf239d4b47e0fd9a69db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04f6b8867c83eeb677437c37fcafe21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#aa04f6b8867c83eeb677437c37fcafe21">m_initialized</a></td></tr>
+<tr class="separator:aa04f6b8867c83eeb677437c37fcafe21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfig.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">boost::serialization::access</a></td></tr>
+<tr class="separator:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="config_8hpp_source.html#l00039">39</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8hpp_source.html#l00040">40</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ad08761637c4158794f1a5afc88c79b2d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classConfig.html">Config</a> * Config::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the <a class="el" href="classConfig.html" title="Maintains global configuration for the application and loads/saves the config to a standard location...">Config</a> instance </dd></dl>
+
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00049">49</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="adac71a12da2f13e578a4f5aba9f6910f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -189,7 +233,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>A map of the current peers and ports to connect to </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00052">52</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00058">58</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -207,7 +251,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>True if initialization was successful </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00056">56</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00062">62</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -232,7 +276,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if settings were successfully loaded </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00130">130</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00135">135</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +294,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>True if settings were successfully loaded </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00147">147</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00152">152</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -275,7 +319,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if settings were successfully saved </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00109">109</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00114">114</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -293,11 +337,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>True if settings were successfully saved </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00126">126</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00131">131</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aeb544004c244dab944b5ae8433b9e28c"></a>
+<a class="anchor" id="adf19b8dc91973d69d66434fd152ed8fe"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -310,24 +354,34 @@ template&lt;class Archive &gt; </div>
           <td class="memname">void Config::serialize </td>
           <td>(</td>
           <td class="paramtype">Archive &amp;&#160;</td>
-          <td class="paramname"><em>ar</em></td><td>)</td>
+          <td class="paramname"><em>t_archive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const unsigned&#160;</td>
+          <td class="paramname"><em>int</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Serialize/Unserialize settings </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ar</td><td>The archive to serialize to or from </td></tr>
+    <tr><td class="paramname">t_archive</td><td>The archive to serialize to </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="config_8hpp_source.html#l00091">91</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8hpp_source.html#l00058">58</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +405,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00048">48</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00054">54</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -376,7 +430,7 @@ template&lt;class Archive &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A string value </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00097">97</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00102">102</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -411,12 +465,12 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00105">105</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00110">110</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a067f38bc1b88cf239d4b47e0fd9a69db"></a>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a class="anchor" id="ac98d07dd8f7b70e16ccb9a01abf56b9c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -424,7 +478,31 @@ template&lt;class Archive &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Config::initialized</td>
+          <td class="memname">friend class boost::serialization::access</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Make access a friend for serialization </p>
+
+<p>Definition at line <a class="el" href="config_8hpp_source.html#l00052">52</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="aa04f6b8867c83eeb677437c37fcafe21"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Config::m_initialized</td>
         </tr>
       </table>
   </td>
@@ -435,7 +513,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Flag to stop initialization from happening more than once </p>
 
-<p>Definition at line <a class="el" href="config_8hpp_source.html#l00048">48</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8hpp_source.html#l00049">49</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
 
 </div>
 </div>
@@ -458,11 +536,11 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>A collection of url/port pairs for current peers </p>
 
-<p>Definition at line <a class="el" href="config_8hpp_source.html#l00045">45</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8hpp_source.html#l00046">46</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a734b11f702a5fae1fbc98a94f8bc91c5"></a>
+<a class="anchor" id="a7d5e4d16c2ad49d9d31c63613eac248a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -470,7 +548,7 @@ template&lt;class Archive &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;std::string,std::string&gt; Config::settings</td>
+          <td class="memname">std::map&lt;std::string,std::string&gt; Config::m_settings</td>
         </tr>
       </table>
   </td>
@@ -481,7 +559,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The settings as key/value string pairs </p>
 
-<p>Definition at line <a class="el" href="config_8hpp_source.html#l00042">42</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8hpp_source.html#l00043">43</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
 
 </div>
 </div>
@@ -495,7 +573,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classConfig.html">Config</a></li>
-    <li class="footer">Generated on Sun May 6 2018 22:41:50 for ReChain by
+    <li class="footer">Generated on Wed May 16 2018 07:00:57 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

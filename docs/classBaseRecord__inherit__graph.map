@@ -1,0 +1,5 @@
+<map id="BaseRecord" name="BaseRecord">
+<area shape="rect" id="node2" href="$classGenesisRecord.html" title="A class that acts as the initial Record in a Blockchain, storing information about the Blockchain its..." alt="" coords="5,80,117,107"/>
+<area shape="rect" id="node3" href="$classPublicationRecord.html" title="A record that contains publication information for a document and is stored in the Blockchain..." alt="" coords="141,80,269,107"/>
+<area shape="rect" id="node4" href="$classSignatureRecord.html" title="A record that contains publication information for a document and is stored in the Blockchain..." alt="" coords="294,80,413,107"/>
+</map>

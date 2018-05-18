@@ -113,3 +113,4 @@ std::string GenesisRecord::to_string(){
 
 }
 
+BOOST_CLASS_EXPORT_IMPLEMENT(GenesisRecord)

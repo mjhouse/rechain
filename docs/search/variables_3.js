@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['initialized',['initialized',['../classConfig.html#a067f38bc1b88cf239d4b47e0fd9a69db',1,'Config']]]
+  ['logs',['logs',['../classLogger.html#ad9442b3a33f313553cd57048be7afa8f',1,'Logger']]]
 ];

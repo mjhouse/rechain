@@ -39,17 +39,7 @@
 */
 class BaseRecord {
 
-    protected:
-
-        // data variables
-        std::string m_public_key;         /**< The public key of the owner */
-        std::string m_signature;		  /**< The signature */
-        std::string m_previous;	          /**< The signature */
-
-        // hashing variables
-        long m_nonce;		           	  /**< Randomly generated value to modify hash */
-        long m_timestamp;			      /**< A timestamp */
-        uint32_t m_counter;               /**< Counter to modify hash output */
+    private:
 
         /** Make access a friend for serialization */
         friend class boost::serialization::access;
@@ -66,13 +56,26 @@ class BaseRecord {
             t_archive & m_counter;
         }
 
+    protected:
+
+        // data variables
+        std::string m_public_key;         /**< The public key of the owner */
+        std::string m_signature;		  /**< The signature */
+        std::string m_previous;	          /**< The signature */
+
+        // hashing variables
+        long m_nonce;		           	  /**< Randomly generated value to modify hash */
+        long m_timestamp;			      /**< A timestamp */
+        uint32_t m_counter;               /**< Counter to modify hash output */
+
+
 	public:
 
         /** \brief Empty constructor */
         BaseRecord();
 
         /** \brief Empty destructor */
-        virtual ~BaseRecord();
+        virtual ~BaseRecord(){};
 
         /** Get the hash of this BaseRecord
             \returns The current hash of the BaseRecord
@@ -97,12 +100,12 @@ class BaseRecord {
         /** \brief Get the RecordType of this Record
             \returns The RecordType of this Record
         */
-        virtual int get_type()=0;
+        virtual int get_type() = 0;
 
         /** \brief Get the serialized Record as a string
             \returns The Record as a string
         */
-        virtual std::string to_string()=0;
+        virtual std::string to_string() = 0;
 
         /** \brief Get the hash of the previous record 
             \returns The hash of the previous record
@@ -151,6 +154,5 @@ class BaseRecord {
 
 };
 
-BOOST_CLASS_EXPORT_GUID(BaseRecord, "_base_record_")
 
 #endif

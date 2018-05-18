@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['parse_5fheader',['parse_header',['../classMessage.html#adfa1efcb53ef9b9d7e253a226fdb0d30',1,'Message']]],
-  ['publish',['publish',['../classBlockchain.html#afbd881a004cc1a2414acc2016733d333',1,'Blockchain::publish(std::shared_ptr&lt; Record &gt; t_record)'],['../classBlockchain.html#ad911fc507c2ec8454cb1910b085a33c7',1,'Blockchain::publish(Record *t_record)'],['../classManager.html#a44a85f690c8ccbac2333198c253836de',1,'Manager::publish(Record &amp;r)'],['../classManager.html#ab1ae4e7dd9fc6b04034b5de9fad92976',1,'Manager::publish(std::string s)']]]
+  ['operator_21_3d',['operator!=',['../classLog.html#a6f1b59a82e999e9bc24b3df766d71f61',1,'Log']]],
+  ['operator_3c',['operator&lt;',['../classLog.html#ab297c84a708dba331f88f195759e8190',1,'Log']]],
+  ['operator_3d',['operator=',['../classLog.html#ad00a131af9a8d852273b83e0d717adbb',1,'Log']]],
+  ['operator_3d_3d',['operator==',['../classLog.html#ae1ce7ad12b4b12984c9a1f47bb4fe25f',1,'Log']]],
+  ['operator_3e',['operator&gt;',['../classLog.html#a0dba693a25869115a397f2e4ac382097',1,'Log']]]
 ];

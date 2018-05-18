@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['log',['Log',['../classLog.html',1,'']]],
-  ['logger',['Logger',['../classLogger.html',1,'']]]
+  ['interface',['Interface',['../classInterface.html',1,'']]]
 ];

@@ -1,8 +1,9 @@
 var searchData=
 [
   ['parse_5fheader',['parse_header',['../classMessage.html#adfa1efcb53ef9b9d7e253a226fdb0d30',1,'Message']]],
-  ['private_5fkey',['private_key',['../classManager.html#ad86791c0e352e7a65e33cebd7a5a59ab',1,'Manager']]],
-  ['public_5fkey',['public_key',['../classManager.html#ac7d162f83bb9f4123c2561a107dee69d',1,'Manager']]],
-  ['publication',['Publication',['../classRecord.html#a82795bf7de09526e4d55ce5a380bd7fb',1,'Record']]],
-  ['publish',['publish',['../classBlockchain.html#afbd881a004cc1a2414acc2016733d333',1,'Blockchain::publish(std::shared_ptr&lt; Record &gt; t_record)'],['../classBlockchain.html#ad911fc507c2ec8454cb1910b085a33c7',1,'Blockchain::publish(Record *t_record)'],['../classManager.html#a44a85f690c8ccbac2333198c253836de',1,'Manager::publish(Record &amp;r)'],['../classManager.html#ab1ae4e7dd9fc6b04034b5de9fad92976',1,'Manager::publish(std::string s)']]]
+  ['privatekey',['PrivateKey',['../classPrivateKey.html',1,'PrivateKey'],['../classPrivateKey.html#ad3e7fd1d3fd3552a52b5425e37b02e85',1,'PrivateKey::PrivateKey()'],['../classPrivateKey.html#a7e4ce1ebe589bda9ccb1564f94ad443e',1,'PrivateKey::PrivateKey(PrivateKey *t_key)']]],
+  ['publication_5frecord_2ehpp',['publication_record.hpp',['../publication__record_8hpp.html',1,'']]],
+  ['publicationrecord',['PublicationRecord',['../classPublicationRecord.html',1,'PublicationRecord'],['../classPublicationRecord.html#adef6246554f051c8f465411dd5c8e906',1,'PublicationRecord::PublicationRecord()'],['../classPublicationRecord.html#ac4abad6966b5f0c13b3002ed01b9062b',1,'PublicationRecord::PublicationRecord(std::string t_path)']]],
+  ['publickey',['PublicKey',['../classPublicKey.html',1,'PublicKey'],['../classPublicKey.html#af4c4839004f3b4f54dc5320a602e7547',1,'PublicKey::PublicKey()'],['../classPublicKey.html#af9a5149c3767cf8c1cf26e003e164dcd',1,'PublicKey::PublicKey(PublicKey *t_key)']]],
+  ['publish',['publish',['../classBlockchain.html#a89545481360bc9b0db44451e657357f8',1,'Blockchain::publish()'],['../classManager.html#ab948862cab8578c97529fa4c964daa3a',1,'Manager::publish()']]]
 ];

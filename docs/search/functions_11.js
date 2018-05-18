@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['validate',['validate',['../classManager.html#a6a96238ce66b87c173c509641a15492e',1,'Manager']]]
+  ['update_5ftrust',['update_trust',['../classBlockchain.html#a8681a367c1ddf061f3216d0cf85392b8',1,'Blockchain']]]
 ];

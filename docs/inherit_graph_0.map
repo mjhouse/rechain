@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classBlockchain.html" title="Blockchain" alt="" coords="5,5,92,32"/>
+<area shape="rect" id="node1" href="$classBaseRecord.html" title="The BaseRecord class acts as an abstract base class for other kinds of records. " alt="" coords="5,56,100,83"/>
+<area shape="rect" id="node2" href="$classGenesisRecord.html" title="A class that acts as the initial Record in a Blockchain, storing information about the Blockchain its..." alt="" coords="156,5,268,32"/>
+<area shape="rect" id="node3" href="$classPublicationRecord.html" title="A record that contains publication information for a document and is stored in the Blockchain..." alt="" coords="148,56,276,83"/>
+<area shape="rect" id="node4" href="$classSignatureRecord.html" title="A record that contains publication information for a document and is stored in the Blockchain..." alt="" coords="153,107,271,133"/>
 </map>

@@ -142,3 +142,4 @@ std::string PublicationRecord::to_string(){
 
 }
 
+BOOST_CLASS_EXPORT_IMPLEMENT(PublicationRecord)
