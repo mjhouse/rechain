@@ -21,6 +21,7 @@
 
 // system includes
 #include <sstream>
+#include <exception>
 
 // dependency includes
 #include <cryptopp/filters.h>
@@ -66,8 +67,14 @@ PublicationRecord::PublicationRecord( std::string t_path ){
                     new CryptoPP::StringSink(m_reference))));
 
     }
+    else {
 
-    RCERROR("can't open the given file path");
+        std::string err = "can't open given path: \"" + t_path + "\"";
+
+        RCERROR(err);
+        throw std::invalid_argument(err);
+
+    }
 
 }
 

@@ -38,19 +38,6 @@
 #include "enums.hpp"
 #include "keys.hpp"
 
-/* Maximum hash value (smaller increases difficulty) */
-#ifndef NDEBUG
-
-    // set mining difficulty down for debug/test builds
-    #define HASH_MAX "000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-
-#else
-
-    // set difficulty up for release builds
-    #define HASH_MAX "0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-
-#endif
-
 // ----------------------------------------------------------------------------
 // Name:
 //      BaseRecord::BaseRecord
@@ -92,6 +79,10 @@ std::string BaseRecord::hash(){
 //      Mine the BaseRecord
 // ----------------------------------------------------------------------------
 std::string BaseRecord::mine(){
+
+    if(m_signature.empty()){
+        throw std::invalid_argument("record has not been signed");
+    }
 
 	// mine the record until it has a valid hash
 	while(hash() > HASH_MAX){
@@ -160,9 +151,6 @@ std::string BaseRecord::get_data(){
 
     data.append(m_public_key);
     data.append(m_previous);
-    data.append(std::to_string(m_nonce));
-    data.append(std::to_string(m_timestamp));
-    data.append(std::to_string(m_counter));
 
     return data;
 }

@@ -168,6 +168,11 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 		/** Generate a new key */
 		void generate();
 
+        /** \brief Get a public key
+            \returns A pointer to a public key
+        */
+        PublicKey* get_public();
+
 		/** Sign a given Record
 			\param t_record A pointer to the record to sign
 		*/

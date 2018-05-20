@@ -46,6 +46,15 @@ void PrivateKey::generate(){
 	key.GenerateRandomWithKeySize(rng, KEY_SIZE);
 }
 
+PublicKey* PrivateKey::get_public(){
+
+    PublicKey* public_key = new PublicKey();
+    public_key->generate(this);
+
+    return public_key;
+
+}
+
 void PrivateKey::sign( BaseRecord* t_record ){
 	std::string signature;
 
@@ -53,9 +62,7 @@ void PrivateKey::sign( BaseRecord* t_record ){
 	std::shared_ptr<PublicKey> pub_key(PublicKey::empty());
 	pub_key->generate( this );
 
-
 	t_record->set_public_key(pub_key->to_string());
-
 
 	// create a Signer and random generator
 	Signer signer(key);

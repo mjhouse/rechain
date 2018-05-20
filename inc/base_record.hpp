@@ -34,6 +34,19 @@
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/export.hpp>
 
+/* Maximum hash value (smaller increases difficulty) */
+#ifndef NDEBUG
+
+    // set mining difficulty down for debug/test builds
+    #define HASH_MAX "000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+
+#else
+
+    // set difficulty up for release builds
+    #define HASH_MAX "0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+
+#endif
+
 /** \brief The BaseRecord class acts as an abstract base class
            for other kinds of records.
 */

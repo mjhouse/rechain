@@ -1,61 +1,45 @@
-#include <fstream>
-#include <cstring>
-#include <string>
-#include <sstream>
-
 #include "test-framework.hpp"
 
-std::string generate_hash() {
-    std::string result;
-    const char alphanum[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+std::vector<test_set*> test_set::all_test_sets = {};
 
-    for (int i = 0; i < 64; ++i) {
-        result.append(&(alphanum[rand() % (sizeof(alphanum) - 1)]));
+test_set::test_set( std::string n, std::vector<test_case> t ){
+    name = n;
+    tests = t;
+
+    test_set::all_test_sets.push_back(this);
+}
+
+bool test_set::run() {
+    for(auto& test : tests){
+        try {
+            test.run();
+        }
+        catch(failure& result){
+            failures.push_back(result);
+        }
+        catch(const std::exception& e){
+            failure f({ std::string(e.what()), std::string(__FILE__), __LINE__ });
+            failures.push_back(f);
+        }
     }
-
-    return result;
+    return (failures.size() == 0);
 }
 
-std::string trim_last_slash( std::string s ){
-    auto it = s.end() - 1;
-    if(*it == '/') s.erase(it);
-    return s;
-}
-
-std::string trim_first_slash( std::string s ){
-    auto it = s.begin();
-    if(*it == '/') s.erase(it);
-    return s;
-}
-
-std::string get_path( std::string partial ){
-    std::string path = TEST_ROOT;
-    return trim_last_slash(path) + "/" + trim_first_slash(partial);
-}
-
-char* get_path_char( std::string partial ){
-    std::string full = get_path(partial);
-    
-    char* cstr = new char[full.length() + 1];
-    std::strcpy(cstr,full.c_str());
-    return cstr;
-}
-
-std::string dump_file( std::string path ){
-    std::string content;
-    std::ifstream ifs(path);
-    if(ifs.is_open()){
-        content = [&ifs]{
-            std::ostringstream ss{};
-            ss << ifs.rdbuf();
-            return ss.str();}();
+bool test_framework::run(){
+    for(auto test : test_set::all_test_sets){
+        bool success = test->run();
+        if(!success){
+            failures.push_back(*test);
+        }
     }
-    return content;
+    return (failures.size() == 0);
 }
 
-void copy_file( std::string in, std::string out ){
-    std::ifstream src(in, std::ios::binary);
-    std::ofstream dst(out, std::ios::binary);
-    dst << src.rdbuf();
+void test_framework::report(){
+    for(auto& test_set : failures){
+        std::cout << test_set.name << ": FAILED" << std::endl;
+        for(auto& failure : test_set.failures){
+           std::cout << "   " << failure.file << ": " << std::to_string(failure.line) << ": " << failure.name << std::endl; 
+        }
+    }
 }
-
