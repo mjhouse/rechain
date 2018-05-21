@@ -8,7 +8,10 @@
 #endif
 
 int main( int /* argc */, char** /* argv[] */ ){
+    
     test_framework tf;
+    
+    tf.catch_signals();
     bool result = tf.run();
 
     if(!result){

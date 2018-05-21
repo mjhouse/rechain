@@ -5,6 +5,7 @@
 #include <functional>
 #include <fstream>
 #include <cstring>
+#include <csignal>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -33,6 +34,7 @@ class test_set {
     public:
 
         static std::vector<test_set*> all_test_sets;
+        static test_case* current_test_case;
 
         std::string name;
 
@@ -47,71 +49,35 @@ class test_set {
 
 class test_framework {
 
-    private:
-        std::vector<test_set> failures;
-
     public:
+
+        std::vector<test_set> failures;
+        static test_set* current_test_set;
 
         bool run();
 
         void report();
 
+        void catch_signals();
 };
 
-// ---------------------------------------
-// UTILITIES
-inline std::string generate_hash() {
-    std::string result;
-    const char alphanum[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+// ------------------------------------------------------------------
+// FUNCTIONS
+// ------------------------------------------------------------------
+void signal_handler(int signal_num);
 
-    for (int i = 0; i < 64; ++i) {
-        result.append(&(alphanum[rand() % (sizeof(alphanum) - 1)]));
-    }
+std::string generate_hash();
 
-    return result;
-}
+std::string trim_last_slash( std::string s );
 
-inline std::string trim_last_slash( std::string s ){
-    auto it = s.end() - 1;
-    if(*it == '/') s.erase(it);
-    return s;
-}
+std::string trim_first_slash( std::string s );
 
-inline std::string trim_first_slash( std::string s ){
-    auto it = s.begin();
-    if(*it == '/') s.erase(it);
-    return s;
-}
+std::string get_path( std::string partial );
 
-inline std::string get_path( std::string partial ){
-    std::string path = TEST_ROOT;
-    return trim_last_slash(path) + "/" + trim_first_slash(partial);
-}
+char* get_path_char( std::string partial );
 
-inline char* get_path_char( std::string partial ){
-    std::string full = get_path(partial);
-    
-    char* cstr = new char[full.length() + 1];
-    std::strcpy(cstr,full.c_str());
-    return cstr;
-}
+std::string dump_file( std::string path );
 
-inline std::string dump_file( std::string path ){
-    std::string content;
-    std::ifstream ifs(path);
-    if(ifs.is_open()){
-        content = [&ifs]{
-            std::ostringstream ss{};
-            ss << ifs.rdbuf();
-            return ss.str();}();
-    }
-    return content;
-}
-
-inline void copy_file( std::string in, std::string out ){
-    std::ifstream src(in, std::ios::binary);
-    std::ofstream dst(out, std::ios::binary);
-    dst << src.rdbuf();
-}
+void copy_file( std::string in, std::string out );
 
 #endif

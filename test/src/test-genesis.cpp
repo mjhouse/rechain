@@ -1,10 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <csignal>
 
 #include <boost/archive/text_iarchive.hpp>
-#include "test-framework.hpp"
 
+#include "test-framework.hpp"
 #include "genesis_record.hpp"
 #include "enums.hpp"
 #include "keys.hpp"
