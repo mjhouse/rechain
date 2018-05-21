@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['interface',['Interface',['../classInterface.html',1,'']]]
+  ['genesisrecord',['GenesisRecord',['../classGenesisRecord.html',1,'']]]
 ];

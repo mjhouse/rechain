@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logs',['logs',['../classLogger.html#ad9442b3a33f313553cd57048be7afa8f',1,'Logger']]]
+  ['remote',['remote',['../classManager.html#ad391816f0476f0bc8b37e623c62b65e2',1,'Manager']]]
 ];

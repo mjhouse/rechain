@@ -1,8 +1,9 @@
 var annotated_dup =
 [
-    [ "Block", "classBlock.html", "classBlock" ],
-    [ "BlockChain", "classBlockChain.html", "classBlockChain" ],
+    [ "BaseRecord", "classBaseRecord.html", "classBaseRecord" ],
+    [ "Blockchain", "classBlockchain.html", "classBlockchain" ],
     [ "Config", "classConfig.html", "classConfig" ],
+    [ "GenesisRecord", "classGenesisRecord.html", "classGenesisRecord" ],
     [ "Interface", "classInterface.html", "classInterface" ],
     [ "Key", "classKey.html", "classKey" ],
     [ "Log", "classLog.html", "classLog" ],
@@ -10,9 +11,10 @@ var annotated_dup =
     [ "Manager", "classManager.html", "classManager" ],
     [ "Message", "classMessage.html", "classMessage" ],
     [ "PrivateKey", "classPrivateKey.html", "classPrivateKey" ],
+    [ "PublicationRecord", "classPublicationRecord.html", "classPublicationRecord" ],
     [ "PublicKey", "classPublicKey.html", "classPublicKey" ],
-    [ "Record", "classRecord.html", "classRecord" ],
     [ "Remote", "classRemote.html", "classRemote" ],
     [ "Request", "classRequest.html", "classRequest" ],
-    [ "Response", "classResponse.html", "classResponse" ]
+    [ "Response", "classResponse.html", "classResponse" ],
+    [ "SignatureRecord", "classSignatureRecord.html", "classSignatureRecord" ]
 ];

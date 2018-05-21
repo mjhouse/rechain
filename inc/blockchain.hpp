@@ -20,9 +20,9 @@
 */
 
 /**	\file  	blockchain.hpp
-	\brief 	Defines the BlockChain class that 
-		manages Block objects, searches
-		and verifies the Block collection. 
+	\brief 	Defines the Blockchain class that 
+		manages BaseRecord objects, searches
+		and verifies the BaseRecord collection. 
 */
 
 #ifndef _RECHAIN_BLOCKCHAIN_HPP_
@@ -31,157 +31,123 @@
 // system includes
 #include <vector>
 #include <memory>
-#include <fstream>
-#include <utility>
 #include <map>
-#include <math.h>
 
 // dependency includes
-#include "cereal/types/vector.hpp"
-#include "cereal/types/map.hpp"
+#include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/vector.hpp>
+
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 
 // local includes
-#include "block.hpp"
-#include "record.hpp"
+#include "base_record.hpp"
+#include "genesis_record.hpp"
+#include "publication_record.hpp"
+#include "signature_record.hpp"
 
-/** Flag to specify the type of object
-    to search for.
+/** The Blockchain class manages a collection of 
+    BaseRecord objects.
 */
-enum Search {
-    RecordType,
-    BlockType
-};
-
-class Block;
-class Record; 
-
-/** The BlockChain class manages a collection of 
-    Block objects.
-*/
-class BlockChain {
+class Blockchain {
 	private:
-		std::vector<Block> blockchain;		            /**< Collection of Block objects */
-		
-		Block current;				                    /**< Current working Block */
-        std::string file_path;			                /**< The path to load or save from/to */
-		std::map<std::string,double> trust_map;	        /**< Trust of documents and users */
+
+        /** The collection of records in the Blockchain */
+		std::vector< std::shared_ptr<BaseRecord> > m_blockchain; 
+
+        /** The collection of records in the Blockchain */
+		std::map<std::string,double> m_trust;
+
+        double max_trust;
+        double min_trust;
 
 		/** Update the trust_map */	
 		void update_trust();	
 
+        /** Make access a friend for serialization */
+        friend class boost::serialization::access;
+
+        /** \brief Serialize Blockchain to an archive
+            \param t_archive The archive to serialize to
+        */
+        template <class Archive>
+        void serialize( Archive& t_archive, const unsigned int /* version */ ){
+            t_archive & m_blockchain;
+        }
+
 	public:
-		/** Define a BlockChain iterator */
-		typedef std::vector<Block>::iterator iterator;
+
+		/** Typedef a Blockchain iterator */
+		typedef std::vector< std::shared_ptr<BaseRecord> >::iterator iterator;
 
 		/** Empty constructor
 		*/
-		BlockChain();
+		Blockchain();
 
 		/** Empty destructor
 		*/
-		~BlockChain();
+		~Blockchain();
+
+        /** \brief Mine, add and broadcast a record
+            \param t_record The record to mine, add and broadcast
+        */
+        bool publish( std::shared_ptr<BaseRecord> t_record );
+
+		/** \brief Find a BaseRecord by the hash
+			\param t_hash The hash of the BaseRecord to return
+			\returns A pointer to a BaseRecord object
+		*/
+		std::shared_ptr<BaseRecord> find_record( std::string t_hash );
+
+		/** \brief Find a BaseRecord by the reference
+			\param t_reference The reference of the PublicationRecord to return
+			\returns A pointer to a PublicationRecord object
+		*/
+		std::shared_ptr<PublicationRecord> find_publication( std::string t_reference );
+
+		/** \brief Find signatures by the publication reference
+			\param t_reference The reference of the signatures
+			\returns A vector of SignatureRecord objects
+		*/
+		std::vector< std::shared_ptr<SignatureRecord> > find_signatures( std::string t_reference );
+
+		/** Verify that the Blockchain is valid
+			\returns True if Blockchain is valid
+		*/
+		bool is_valid();
+
+		/** Get the trust for a published BaseRecord or user
+			\param t_identifier The BaseRecord hash or user public key
+			\returns The trust for the user or BaseRecord
+		*/
+		double trust( std::string t_identifier );
 		
-		// ------------------------------------------------------
-		// Mining Methods
-
-		/** Add Record to an open Block
-			\param r A reference to a Record block
-			\returns A reference to the BlockChain
-		*/
-		BlockChain& add( Record& r );
-
-		/** Mine the current Block to the BlockChain
-            \param pubkey An identifier for the miner
-			\returns The valid hash of the new Block
-		*/	
-		std::string mine( std::string pubkey );
-
-		// ------------------------------------------------------
-		// Accessor Methods
-
-		
-		/** Overloaded index operator
-			\param i The index to return a reference to
-			\returns A reference to a Block object
-		*/
-		Block& operator[] ( unsigned int i );
-
-
-		/** Overloaded assignment operator
-			\param b The BlockChain to copy data from
-			\returns A reference to the current BlockChain
-		*/
-		BlockChain& operator=( const BlockChain& b );
-	
-		/** Find a Block by hash
-			\param h The hash of the Block
-			\returns An iterator to the Block
-		*/
-		BlockChain::iterator find( std::string h );
-
-		/** Check if a given Block already exists
-			\param s The hash to check
-            \param type The type of search to perform
-			\returns True if Block exists
-		*/
-		bool contains( std::string s, Search type = Search::BlockType );
-
-		/** Verify that the BlockChain is valid
-			\returns True if BlockChain is valid
-		*/
-		bool valid();
-
-		// ------------------------------------------------------
-		// Trust Methods
-
-		/** Get the trust for a publication
-			\param r The reference of the Record object
-			\returns The trust for the Record object
-		*/
-		double trust( std::string r );
-
-		// ------------------------------------------------------
-		// Iterator Methods
-		
-		/** Return an iterator to the start of the BlockChain
+		/** Return an iterator to the start of the Blockchain
 			\returns An iterator
 		*/
-		BlockChain::iterator begin();
+		Blockchain::iterator begin();
 
-		/** Returns an iterator to the end of the BlockChain
+		/** Returns an iterator to the end of the Blockchain
 		\returns A vector iterator
 		*/ 
-		BlockChain::iterator end();
+		Blockchain::iterator end();
 
-		// ------------------------------------------------------
-		// Utility Methods
-
-		/** Return the number of Block objects in the chain
-			\returns The number of Block objects 
+		/** Return the number of BaseRecord objects in the chain
+			\returns The number of BaseRecord objects 
 		*/
 		size_t size();	
 
-		/** Serialize/Unserialize this BlockChain
-			\param ar The archive to serialize to or from
+		/** Save the Blockchain to a given location
+			\param t_path The path to save to
+			\returns True if the Blockchain was saved
 		*/
-		template <class Archive>
-		void serialize( Archive& ar ){
-			ar(	CEREAL_NVP(blockchain),
-				CEREAL_NVP(current)
-			);
-		}
-
-		/** Save the BlockChain to a given location
-			\param p The path to save to
-			\returns True if the BlockChain was saved
-		*/
-		bool save( std::string p = "" );
+		bool save( std::string t_path );
 		
-		/** Load the BlockChain from a given location
-			\param p The path to load from
-			\returns True if the BlockChain was loaded and is valid
+		/** Load the Blockchain from a given location
+			\param t_path The path to load from
+			\returns True if the Blockchain was loaded and is valid
 		*/
-		bool load( std::string p = "" );
+		bool load( std::string t_path );
 
 };
 

@@ -1,10 +1,12 @@
 <map id="inc/keys.hpp" name="inc/keys.hpp">
-<area shape="rect" id="node2" href="$interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="136,80,255,107"/>
-<area shape="rect" id="node5" href="$remote_8hpp.html" title="Handles web requests. " alt="" coords="279,80,387,107"/>
-<area shape="rect" id="node8" href="$keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="411,80,508,107"/>
-<area shape="rect" id="node9" href="$record_8cpp_source.html" title="src/record.cpp" alt="" coords="532,80,637,107"/>
+<area shape="rect" id="node2" href="$interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="8,80,127,107"/>
+<area shape="rect" id="node4" href="$remote_8hpp.html" title="Handles web requests. " alt="" coords="153,80,261,107"/>
+<area shape="rect" id="node7" href="$base__record_8cpp_source.html" title="src/base_record.cpp" alt="" coords="285,80,425,107"/>
+<area shape="rect" id="node8" href="$genesis__record_8cpp_source.html" title="src/genesis_record.cpp" alt="" coords="450,80,607,107"/>
+<area shape="rect" id="node9" href="$keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="632,80,729,107"/>
+<area shape="rect" id="node10" href="$publication__record_8cpp_source.html" title="src/publication_record.cpp" alt="" coords="753,80,928,107"/>
+<area shape="rect" id="node11" href="$signature__record_8cpp_source.html" title="src/signature_record.cpp" alt="" coords="953,80,1118,107"/>
 <area shape="rect" id="node3" href="$interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="5,155,124,181"/>
-<area shape="rect" id="node4" href="$main_8cpp_source.html" title="src/main.cpp" alt="" coords="148,155,245,181"/>
-<area shape="rect" id="node6" href="$manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="272,155,391,181"/>
-<area shape="rect" id="node7" href="$remote_8cpp_source.html" title="src/remote.cpp" alt="" coords="415,155,525,181"/>
+<area shape="rect" id="node5" href="$manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="148,155,267,181"/>
+<area shape="rect" id="node6" href="$remote_8cpp_source.html" title="src/remote.cpp" alt="" coords="291,155,401,181"/>
 </map>

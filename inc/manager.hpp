@@ -36,12 +36,9 @@
 // local includes
 #include "blockchain.hpp"
 #include "config.hpp"
-
-namespace fs = boost::filesystem;
+#include "enums.hpp"
 
 class PrivateKey;
-class PublicKey;
-class Remote;
 
 /** \brief Executes operations against the blockchain
     and holds the private and public keys.
@@ -49,101 +46,74 @@ class Remote;
 class Manager {
 	private:
         
-        bool configured;                                /**< This flag is true if Manager is configured*/
+        bool m_configured;                              /**< This flag is true if Manager is configured*/
 
-        std::shared_ptr<Config> config;                 /**< Application configuration/paths */
-        std::shared_ptr<Remote> remote;                 /**< Remote instance for web requests */
-		std::shared_ptr<PrivateKey> private_key;		/**< A pointer to the current private key */
-		std::shared_ptr<PublicKey> public_key;			/**< A pointer to the current public key */
-
-		BlockChain blockchain;				        	/**< A BlockChain to load data into */
-
-
-		/** Publish a given record
-			\param r The Record to publish
-			\returns True on success
-		*/
-		bool publish( Record& r );
-
-		/** Add a private key
-			\param k Add a key object
-			\returns True on success
-		*/
-		void set_private_key( PrivateKey* k );
-
-		/** Add a public key
-			\param k Add a key object
-			\returns True on success
-		*/
-		void set_public_key( PublicKey* k );
+		std::shared_ptr<PrivateKey> m_private_key;      /**< A pointer to the current private key */
+		Blockchain m_blockchain;                        /**< A Blockchain to load data into */
 
         /** \brief Setup the home directory
             \returns True if setup was successful
         */
-        bool make_home();
+        bool setup();
 
     public:
 
-		/** Constructor
+		/** \brief Constructor
 		*/
 		Manager();
 
-		/** Destructor
+		/** \brief Destructor
 		*/
 		~Manager();
 
-		/** Configure the program environment
+		/** \brief Configure the program environment
             \param level The level to log at
             \returns True if home directory is configured
 		*/
 		bool configure(Level level);
 
-		/** Publish a given document
-			\param s The path to the file
+		/** \brief Publish a given document
+			\param t_path The path to the file
 			\returns True on success
 		*/
-		bool publish( std::string s );
+		bool publish( std::string t_path );
 
-		/** Find a document by reference
-			\param h The hash of the file
+		/** \brief Sign a previously published document
+			\param t_hash The hash of the Record to sign
 			\returns True on success
 		*/
-		Record* request( std::string h );
+		bool sign( std::string t_hash );
 
-		/** Mine the current block
+		/** \brief Add or generate a private key
+			\param t_path The path to the key file
 			\returns True on success
 		*/
-		bool mine();
+		bool key( std::string t_path );
 
-		/** Add or generate a private key
-			\param p The path to the key file
-			\returns True on success
-		*/
-		bool set_private_key( std::string p );
+        /** \brief Save the current blockchain
+            \returns True on success
+        */
+        bool save();
 
+        /** \brief Save the blockchain to a new location
+            \returns True on success
+        */
+        bool save( std::string t_path );
 
-		/** Add or generate a public key
-			\param p The path to the key file
-			\returns True on success
-		*/
-		bool set_public_key( std::string p );
+        /** \brief Load the blockchain
+            \returns True on success
+        */
+        bool load();
 
+        /** \brief Load the blockchain from a new location
+            \returns True on success
+        */
+        bool load( std::string t_path );
 
-		/** Sign a previously published document
-			\param s The reference hash to sign
-			\returns True on success
-		*/
-		bool sign( std::string s );
-
-		/** Check the BlockChain is valid
+		/** \brief Check the Blockchain is valid
 		    \returns true if blockchain is valid
         */
-		bool validate();
-
-        /** Get a copy of the blockchain
-            \returns a BlockChain instance
-        */
-        BlockChain& get_blockchain(){ return blockchain; }
+		bool is_valid();
 
 };
 

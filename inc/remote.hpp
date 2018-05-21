@@ -40,6 +40,7 @@
 
 // local includes
 #include "blockchain.hpp"
+#include "base_record.hpp"
 #include "config.hpp"
 #include "keys.hpp"
 
@@ -65,8 +66,8 @@ class Remote {
         /** A thread that service runs in */
         boost::shared_ptr<boost::thread> service_thread;
 
-        /** A function to call with new Record objects */
-        std::function<void(Record&)> m_callback;
+        /** A function to call with new BaseRecord objects */
+        std::function<void(std::shared_ptr<BaseRecord>)> m_callback;
        
         /** \brief The handler for received messages 
             \param socket The socket to read messages from
@@ -90,7 +91,7 @@ class Remote {
         /** \brief set the handler for received records 
             \param function The function to pass received records too
         */
-        void callback( const std::function<void(Record&)>& function ){
+        void callback( const std::function<void(std::shared_ptr<BaseRecord>)>& function ){
             m_callback = function;
         };
 
@@ -105,7 +106,7 @@ class Remote {
         /** Broadcast a new record to all miners 
             \param record The Record to broadcast
         */
-        void send( Record& record );
+        void send( std::shared_ptr<BaseRecord> record );
 };
 
 #endif

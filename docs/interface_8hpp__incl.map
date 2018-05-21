@@ -1,7 +1,7 @@
 <map id="inc/interface.hpp" name="inc/interface.hpp">
-<area shape="rect" id="node4" href="$blockchain_8hpp.html" title="Defines the BlockChain class that manages Block objects, searches and verifies the Block collection..." alt="" coords="1063,80,1173,107"/>
-<area shape="rect" id="node18" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="465,80,539,107"/>
-<area shape="rect" id="node13" href="$block_8hpp_source.html" title="block.hpp" alt="" coords="1079,155,1157,181"/>
-<area shape="rect" id="node15" href="$record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="609,155,691,181"/>
-<area shape="rect" id="node17" href="$enums_8hpp_source.html" title="enums.hpp" alt="" coords="607,229,693,256"/>
+<area shape="rect" id="node4" href="$blockchain_8hpp.html" title="Defines the Blockchain class that manages BaseRecord objects, searches and verifies the BaseRecord co..." alt="" coords="539,80,649,107"/>
+<area shape="rect" id="node17" href="$keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="1237,80,1311,107"/>
+<area shape="rect" id="node10" href="$base__record_8hpp.html" title="Defines a abstract BaseRecord class. " alt="" coords="671,251,789,278"/>
+<area shape="rect" id="node14" href="$publication__record_8hpp.html" title="Defines the PublicationRecord class. " alt="" coords="405,162,557,189"/>
+<area shape="rect" id="node16" href="$signature__record_8hpp.html" title="Defines the SignatureRecord class. " alt="" coords="136,162,279,189"/>
 </map>

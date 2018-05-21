@@ -1,7 +1,11 @@
 var hierarchy =
 [
-    [ "Block", "classBlock.html", null ],
-    [ "BlockChain", "classBlockChain.html", null ],
+    [ "BaseRecord", "classBaseRecord.html", [
+      [ "GenesisRecord", "classGenesisRecord.html", null ],
+      [ "PublicationRecord", "classPublicationRecord.html", null ],
+      [ "SignatureRecord", "classSignatureRecord.html", null ]
+    ] ],
+    [ "Blockchain", "classBlockchain.html", null ],
     [ "Config", "classConfig.html", null ],
     [ "Interface", "classInterface.html", null ],
     [ "Key< T, K >", "classKey.html", null ],
@@ -18,6 +22,5 @@ var hierarchy =
       [ "Request", "classRequest.html", null ],
       [ "Response", "classResponse.html", null ]
     ] ],
-    [ "Record", "classRecord.html", null ],
     [ "Remote", "classRemote.html", null ]
 ];

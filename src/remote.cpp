@@ -31,7 +31,9 @@
 #include <boost/bind.hpp>
 #include <boost/algorithm/string.hpp>
 
-#include <cereal/archives/json.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 
 
 // local includes
@@ -65,11 +67,11 @@ void Remote::handle( boost::shared_ptr<tcp::socket> socket ){
     std::string body = request.get_body();
 
     std::stringstream serialized(body);
-    Record record;
+    std::shared_ptr<BaseRecord> record;
               
     {
-        cereal::JSONInputArchive archive(serialized);
-        archive( record );
+        boost::archive::text_iarchive archive(serialized);
+        archive >> record;
     }
 
     if(m_callback)
@@ -115,14 +117,14 @@ void Remote::stop_listening(){
     service_thread.reset();
 }
 
-void Remote::send( Record& record ){
+void Remote::send( std::shared_ptr<BaseRecord> record ){
 
     // serialize the record
     std::ostringstream data;
     
     {
-        cereal::JSONOutputArchive archive(data);
-        archive( record );
+        boost::archive::text_oarchive archive(data);
+        archive << record;
     }
 
     std::string message = data.str();

@@ -5,7 +5,7 @@ CC=gcc
 # to provide arguments to the tests
 TAGGED  =
 VERSION = $(shell git describe --abbrev=0 --tags)
-COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_filesystem -lboost_system -lboost_thread -lboost_regex -ltorrent-rasterbar 
+COMMON  = -std=c++11 -lpthread -lcrypto++ -lboost_serialization -lboost_filesystem -lboost_system -lboost_thread -lboost_regex -ltorrent-rasterbar 
 
 
 TARGET = bin/rechain
@@ -13,21 +13,17 @@ OUTDIR = bin
 BLDDIR = obj
 INCDIR = inc
 SRCDIR = src
-TSTDIR = test/src
-
+TSTSRC = test/src
+TSTINC = test/inc
 
 # create directories
-$(shell mkdir -p obj bin)
-
-# set the hooks path
-$(shell git config core.hooksPath .hooks)
+$(shell mkdir -p obj bin test/data/home )
 
 # clear out tmp files from the test dir
-$(shell rm -rf test/data/files/tmp/*)
-
+$(shell rm -rf test/data/home/*)
 
 # find all source files in srcdir
-TSOURCES := $(shell find $(SRCDIR) $(TSTDIR) -type f -name '*.cpp' -not -name "main.cpp")
+TSOURCES := $(shell find $(SRCDIR) $(TSTSRC) -type f -name '*.cpp' -not -name "main.cpp")
 SOURCES  := $(shell find $(SRCDIR)/ -type f -name '*.cpp')
 
 # assembles each source file into a BLDIR/*.o filename
@@ -40,11 +36,13 @@ INC = -I$(INCDIR) -I$(INCDIR)/dependencies
 # DON'T EDIT BELOW THIS LINE
 # ----------------------------------------------------------------------
 
+init: $(shell git config core.hooksPath .hooks)
 
 debug: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -ggdb
 debug: link-debug
 
 test: CPPFLAGS = ${COMMON} -Wall -Wextra -Wpedantic -g -fprofile-arcs -ftest-coverage -DTEST_ROOT=\"test/data\" 
+test: INC += -I$(TSTINC)
 test: link-test
 
 release: CPPFLAGS = ${COMMON} -DNDEBUG -O3
@@ -61,7 +59,7 @@ link-release: $(OBJECTS)
 	$(CXX) $(OBJECTS) -o $(TARGET) $(CPPFLAGS)
 
 # BUILD
-obj/%.o: $(TSTDIR)/%.cpp
+obj/%.o: $(TSTSRC)/%.cpp
 	$(CXX) -DRECHAIN_VERSION=\"$(VERSION)\" $(INC) -c $< -o $@ $(CPPFLAGS)
 
 obj/%.o: $(SRCDIR)/%.cpp

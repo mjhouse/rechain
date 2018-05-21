@@ -1,10 +1,10 @@
 <map id="inc/blockchain.hpp" name="inc/blockchain.hpp">
-<area shape="rect" id="node2" href="$interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="9,80,128,107"/>
-<area shape="rect" id="node3" href="$interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="127,155,245,181"/>
-<area shape="rect" id="node5" href="$manager_8hpp.html" title="Handles requests from a cli or gui. " alt="" coords="204,80,323,107"/>
-<area shape="rect" id="node6" href="$manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="285,155,404,181"/>
-<area shape="rect" id="node7" href="$remote_8hpp.html" title="Handles web requests. " alt="" coords="399,80,507,107"/>
-<area shape="rect" id="node9" href="$blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="531,80,662,107"/>
-<area shape="rect" id="node4" href="$main_8cpp_source.html" title="src/main.cpp" alt="" coords="5,155,103,181"/>
-<area shape="rect" id="node8" href="$remote_8cpp_source.html" title="src/remote.cpp" alt="" coords="429,155,538,181"/>
+<area shape="rect" id="node2" href="$interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="5,80,124,107"/>
+<area shape="rect" id="node3" href="$interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="51,155,169,181"/>
+<area shape="rect" id="node4" href="$manager_8hpp.html" title="Handles requests from a cli or gui. " alt="" coords="200,80,319,107"/>
+<area shape="rect" id="node6" href="$manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="315,155,433,181"/>
+<area shape="rect" id="node7" href="$remote_8hpp.html" title="Handles web requests. " alt="" coords="395,80,503,107"/>
+<area shape="rect" id="node9" href="$blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="527,80,658,107"/>
+<area shape="rect" id="node5" href="$main_8cpp_source.html" title="src/main.cpp" alt="" coords="193,155,291,181"/>
+<area shape="rect" id="node8" href="$remote_8cpp_source.html" title="src/remote.cpp" alt="" coords="458,155,567,181"/>
 </map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['record_2ehpp',['record.hpp',['../record_8hpp.html',1,'']]],
-  ['remote_2ehpp',['remote.hpp',['../remote_8hpp.html',1,'']]]
+  ['manager_2ehpp',['manager.hpp',['../manager_8hpp.html',1,'']]],
+  ['message_2ehpp',['message.hpp',['../message_8hpp.html',1,'']]]
 ];

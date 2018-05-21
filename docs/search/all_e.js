@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['operator_21_3d',['operator!=',['../classLog.html#a6f1b59a82e999e9bc24b3df766d71f61',1,'Log']]],
-  ['operator_3c',['operator&lt;',['../classLog.html#ab297c84a708dba331f88f195759e8190',1,'Log']]],
-  ['operator_3d',['operator=',['../classBlock.html#a211f39ec7292f203df97a9170257845d',1,'Block::operator=()'],['../classBlockChain.html#afff04093ee51b47097bd614e94cc8619',1,'BlockChain::operator=()'],['../classLog.html#ad00a131af9a8d852273b83e0d717adbb',1,'Log::operator=()']]],
-  ['operator_3d_3d',['operator==',['../classLog.html#ae1ce7ad12b4b12984c9a1f47bb4fe25f',1,'Log']]],
-  ['operator_3e',['operator&gt;',['../classLog.html#a0dba693a25869115a397f2e4ac382097',1,'Log']]],
-  ['operator_5b_5d',['operator[]',['../classBlock.html#ae17df2fe7ac29ac2b63faaa29de77478',1,'Block::operator[]()'],['../classBlockChain.html#a21f80b91af87e4ba9e90139cd0c737bf',1,'BlockChain::operator[]()']]]
+  ['parse_5fheader',['parse_header',['../classMessage.html#adfa1efcb53ef9b9d7e253a226fdb0d30',1,'Message']]],
+  ['privatekey',['PrivateKey',['../classPrivateKey.html',1,'PrivateKey'],['../classPrivateKey.html#ad3e7fd1d3fd3552a52b5425e37b02e85',1,'PrivateKey::PrivateKey()'],['../classPrivateKey.html#a7e4ce1ebe589bda9ccb1564f94ad443e',1,'PrivateKey::PrivateKey(PrivateKey *t_key)']]],
+  ['publication_5frecord_2ehpp',['publication_record.hpp',['../publication__record_8hpp.html',1,'']]],
+  ['publicationrecord',['PublicationRecord',['../classPublicationRecord.html',1,'PublicationRecord'],['../classPublicationRecord.html#adef6246554f051c8f465411dd5c8e906',1,'PublicationRecord::PublicationRecord()'],['../classPublicationRecord.html#ac4abad6966b5f0c13b3002ed01b9062b',1,'PublicationRecord::PublicationRecord(std::string t_path)']]],
+  ['publickey',['PublicKey',['../classPublicKey.html',1,'PublicKey'],['../classPublicKey.html#af4c4839004f3b4f54dc5320a602e7547',1,'PublicKey::PublicKey()'],['../classPublicKey.html#af9a5149c3767cf8c1cf26e003e164dcd',1,'PublicKey::PublicKey(PublicKey *t_key)']]],
+  ['publish',['publish',['../classBlockchain.html#a89545481360bc9b0db44451e657357f8',1,'Blockchain::publish()'],['../classManager.html#ab948862cab8578c97529fa4c964daa3a',1,'Manager::publish()']]]
 ];

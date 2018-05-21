@@ -1,5 +1,5 @@
 <map id="inc/blockchain.hpp" name="inc/blockchain.hpp">
-<area shape="rect" id="node10" href="$block_8hpp_source.html" title="block.hpp" alt="" coords="191,80,270,107"/>
-<area shape="rect" id="node13" href="$record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="379,80,461,107"/>
-<area shape="rect" id="node15" href="$enums_8hpp_source.html" title="enums.hpp" alt="" coords="523,155,610,181"/>
+<area shape="rect" id="node7" href="$base__record_8hpp.html" title="Defines a abstract BaseRecord class. " alt="" coords="672,177,790,203"/>
+<area shape="rect" id="node12" href="$publication__record_8hpp.html" title="Defines the PublicationRecord class. " alt="" coords="222,87,374,114"/>
+<area shape="rect" id="node14" href="$signature__record_8hpp.html" title="Defines the SignatureRecord class. " alt="" coords="496,87,638,114"/>
 </map>

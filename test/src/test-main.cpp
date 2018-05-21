@@ -1,18 +1,21 @@
-#define CATCH_CONFIG_RUNNER
-#include "catch.hpp"
 
-int main( int argc, char* argv[] ){
-	// There must be exactly one instance of Session
-	Catch::Session session;
+#include <iostream>
 
-	// writing to session.configData() here sets defaults
-	// this is the preferred way to set them
-	int code = session.applyCommandLine( argc, argv );
-	if( code != 0 )
-		return code;
+#include "test-framework.hpp"
 
-	// writing to session.configData() or session.Config() here
-	// overrides command line args
-	int failed = session.run();
-	return failed;
+#ifndef TEST_ROOT
+    static_assert(0,"TEST_ROOT isn't set!");
+#endif
+
+int main( int /* argc */, char** /* argv[] */ ){
+    test_framework tf;
+    bool result = tf.run();
+
+    if(!result){
+        tf.report();
+        return 0;
+    } else {
+        std::cout << "ALL TESTS PASSED" << std::endl;
+        return 1;
+    }
 }

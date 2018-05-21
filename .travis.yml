@@ -25,8 +25,8 @@ before_install:
       - pip install --user cpp-coveralls;
 
 script:
-      - ./test/scripts/mem_tests.sh
-      - ./test/scripts/unit_tests.sh
+      - make test
+      - ./bin/rechain
 
 after_success:
       - coveralls --root . --exclude data --exclude inc/dependencies --exclude test --gcov-options '\-lp';

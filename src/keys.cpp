@@ -34,8 +34,6 @@
 /** The RSA key size */
 #define KEY_SIZE 3072
 
-using rl = Logger;
-
 using Signer   = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Signer;
 using Verifier = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Verifier;
 
@@ -45,58 +43,71 @@ using Verifier = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Verifier;
 // Generate a new PrivateKey
 void PrivateKey::generate(){
 	CryptoPP::AutoSeededRandomPool rng;
-	this->key.GenerateRandomWithKeySize(rng, KEY_SIZE);
+	key.GenerateRandomWithKeySize(rng, KEY_SIZE);
 }
 
-// Sign a Data block
-void PrivateKey::sign( Record& r ){
+PublicKey* PrivateKey::get_public(){
+
+    PublicKey* public_key = new PublicKey();
+    public_key->generate(this);
+
+    return public_key;
+
+}
+
+void PrivateKey::sign( BaseRecord* t_record ){
 	std::string signature;
 
 	// create a public key and set it on the  Record
 	std::shared_ptr<PublicKey> pub_key(PublicKey::empty());
 	pub_key->generate( this );
 
-
-	r.public_key(pub_key->to_string());
-
+	t_record->set_public_key(pub_key->to_string());
 
 	// create a Signer and random generator
 	Signer signer(key);
 	CryptoPP::AutoSeededRandomPool rng;
 
 	// sign the Data object
-	CryptoPP::StringSource ss(r.string(), true,
+	CryptoPP::StringSource ss(t_record->get_data(), true,
 				new CryptoPP::SignerFilter(rng, signer,
 					new CryptoPP::HexEncoder(
 						new CryptoPP::StringSink(signature))));
 
-	r.signature(signature);
+	t_record->set_signature(signature);
 }
+
+// Sign a Data block
+void PrivateKey::sign( std::shared_ptr<BaseRecord> t_record ){
+    sign(t_record.get());
+}
+
 // -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
 // PublicKey Implementation
 
 // Generate a new PublicKey from a PrivateKey
-void PublicKey::generate( PrivateKey* key ){
-	CryptoPP::RSA::PublicKey n_key(key->get_key());
-	this->key = n_key;
+void PublicKey::generate( PrivateKey* t_key ){
+	CryptoPP::RSA::PublicKey n_key(t_key->get_key());
+	key = n_key;
 }
 
 // Verify the signature on a Data block
-bool PublicKey::verify( Record& r ){
+bool PublicKey::verify( BaseRecord* t_record ){
 	std::string signature;
 	bool result = false;
 
-	Verifier verifier(this->key);
+	Verifier verifier(key);
 
-	CryptoPP::StringSource ss(r.signature(), true,
+	CryptoPP::StringSource ss(t_record->get_signature(), true,
 				  new CryptoPP::HexDecoder(
 					new CryptoPP::StringSink(signature)));
 
-	CryptoPP::StringSource ss2(signature + r.string(), true,
+	CryptoPP::StringSource ss2(signature + t_record->get_data(), true,
 				   new CryptoPP::SignatureVerificationFilter(verifier,
 					 new CryptoPP::ArraySink((unsigned char*)&result, sizeof(result))));
+
 	return result;
 }
 

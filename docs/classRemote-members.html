@@ -115,13 +115,13 @@ $(document).ready(function(){initNavTree('classRemote.html','');});
 <p>This is the complete list of members for <a class="el" href="classRemote.html">Remote</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classRemote.html#a3c4b9fefb3b5f122610448aa95233e2c">acceptor</a></td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classRemote.html#aea855cb27b38f33bce6ffe6ef17ec76b">callback</a>(const std::function&lt; void(Record &amp;)&gt; &amp;function)</td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classRemote.html#af8b8823e73722b94b3a967a56ba1bf2c">callback</a>(const std::function&lt; void(std::shared_ptr&lt; BaseRecord &gt;)&gt; &amp;function)</td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classRemote.html#acf9bd3f78e1abe577ea5bad93553171c">config</a></td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr><td class="entry"><a class="el" href="classRemote.html#a1da3a4bbe8497b45d85d28852affb95f">handle</a>(boost::shared_ptr&lt; tcp::socket &gt; socket)</td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classRemote.html#a50d34dd25124db8ddf8250db9104defb">listen</a>()</td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classRemote.html#aab0995343461d6d883db9e2aecad8f44">m_callback</a></td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classRemote.html#ad967cf99babccf456ed6cbaa6f80bfa2">m_callback</a></td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classRemote.html#a264b7432cdb257659e84fc3bf434ff9c">Remote</a>(std::shared_ptr&lt; Config &gt; cfg)</td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classRemote.html#ae1d188df34dbef1e5746d7aa21100827">send</a>(Record &amp;record)</td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classRemote.html#a3b12569333286e3ec7671aae31f41061">send</a>(std::shared_ptr&lt; BaseRecord &gt; record)</td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classRemote.html#a680f556b0e7fe45fe9107340ade7d545">service</a></td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr><td class="entry"><a class="el" href="classRemote.html#aac0b0891b5ccbf99eb882a13026d4da6">service_thread</a></td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classRemote.html#a536ffff1fa84c59c984a4ca05c848498">start_listening</a>()</td><td class="entry"><a class="el" href="classRemote.html">Remote</a></td><td class="entry"></td></tr>
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('classRemote.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Apr 30 2018 12:02:57 for ReChain by
+    <li class="footer">Generated on Wed May 16 2018 07:00:58 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

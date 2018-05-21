@@ -72,7 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -119,16 +118,18 @@ $(document).ready(function(){initNavTree('manager_8hpp.html','');});
 <code>#include &lt;boost/filesystem/path.hpp&gt;</code><br />
 <code>#include &quot;<a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="config_8hpp_source.html">config.hpp</a>&quot;</code><br />
+<code>#include &quot;enums.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for manager.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="manager_8hpp__incl.png" border="0" usemap="#inc_2manager_8hpp" alt=""/></div>
 <map name="inc_2manager_8hpp" id="inc_2manager_8hpp">
-<area shape="rect" id="node5" href="blockchain_8hpp.html" title="Defines the BlockChain class that manages Block objects, searches and verifies the Block collection..." alt="" coords="394,80,503,107"/>
-<area shape="rect" id="node19" href="config_8hpp.html" title="Global settings for the application. " alt="" coords="883,80,966,107"/>
-<area shape="rect" id="node14" href="block_8hpp_source.html" title="block.hpp" alt="" coords="260,155,339,181"/>
-<area shape="rect" id="node16" href="record_8hpp.html" title="Defines a Record object that holds publishing information or a signature for another published Record..." alt="" coords="897,155,979,181"/>
-<area shape="rect" id="node18" href="enums_8hpp_source.html" title="enums.hpp" alt="" coords="749,229,836,256"/>
+<area shape="rect" id="node5" href="blockchain_8hpp.html" title="Defines the Blockchain class that manages BaseRecord objects, searches and verifies the BaseRecord co..." alt="" coords="408,80,517,107"/>
+<area shape="rect" id="node18" href="config_8hpp.html" title="Global settings for the application. " alt="" coords="927,80,1009,107"/>
+<area shape="rect" id="node20" href="enums_8hpp_source.html" title="enums.hpp" alt="" coords="1501,80,1587,107"/>
+<area shape="rect" id="node11" href="base__record_8hpp.html" title="Defines a abstract BaseRecord class. " alt="" coords="609,251,727,278"/>
+<area shape="rect" id="node15" href="publication__record_8hpp.html" title="Defines the PublicationRecord class. " alt="" coords="79,162,231,189"/>
+<area shape="rect" id="node17" href="signature__record_8hpp.html" title="Defines the SignatureRecord class. " alt="" coords="651,162,794,189"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -137,7 +138,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="center"><img src="manager_8hpp__dep__incl.png" border="0" usemap="#inc_2manager_8hppdep" alt=""/></div>
 <map name="inc_2manager_8hppdep" id="inc_2manager_8hppdep">
 <area shape="rect" id="node2" href="interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="5,80,124,107"/>
-<area shape="rect" id="node3" href="manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="148,80,267,107"/>
+<area shape="rect" id="node3" href="main_8cpp_source.html" title="src/main.cpp" alt="" coords="148,80,245,107"/>
+<area shape="rect" id="node4" href="manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="269,80,388,107"/>
 </map>
 </div>
 </div>
@@ -155,7 +157,7 @@ Classes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><a class="el" href="manager_8hpp.html">manager.hpp</a></li>
-    <li class="footer">Generated on Mon Apr 30 2018 12:02:57 for ReChain by
+    <li class="footer">Generated on Wed May 16 2018 07:00:57 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

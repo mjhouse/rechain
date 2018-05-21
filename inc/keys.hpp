@@ -25,23 +25,24 @@
 			private pair of RSA256 keys.
 */
 
+// system includes
 #include <fstream>			    // File I/O
 #include <iostream>
 #include <stdexcept>
 
+// dependency includes
 #include <cryptopp/osrng.h>		// For AutoSeededRandomPool
 #include <cryptopp/hex.h>		// For HexEncoder/HexDecoder
 #include <cryptopp/rsa.h>		// For RSA:: namespace
 
-#include "record.hpp"			// Data objects
+// local includes
+#include "base_record.hpp"		// Data objects
 
 #ifndef _RECHAIN_KEYS_HPP_
 #define _RECHAIN_KEYS_HPP_
 
 class PrivateKey;
 class PublicKey;
-class Data;
-
 
 /** The templated Key class acts as a base class for both
 	PrivateKey and PublicKey.
@@ -159,14 +160,29 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 		/** Empty constructor */
 		PrivateKey(){}
 
+		/** Copy constructor */
+		PrivateKey( PrivateKey* t_key ){
+            key = t_key->key;
+        }
+
 		/** Generate a new key */
 		void generate();
 
+        /** \brief Get a public key
+            \returns A pointer to a public key
+        */
+        PublicKey* get_public();
+
 		/** Sign a given Record
-			\param r A pointer to the Record to sign
-			\returns True if the Record was signed
+			\param t_record A pointer to the record to sign
 		*/
-		void sign( Record& r );
+		void sign( BaseRecord* t_record );
+
+		/** Sign a given Record
+			\param t_record A pointer to the record to sign
+		*/
+		void sign( std::shared_ptr<BaseRecord> t_record );
+
 };
 
 /** The PublicKey class inherits from the templated
@@ -177,17 +193,22 @@ class PublicKey: public Key<CryptoPP::RSA::PublicKey,PublicKey> {
 		/** Empty constructor */
 		PublicKey(){}
 
+		/** Copy constructor */
+		PublicKey( PublicKey* t_key ){
+            key = t_key->key;
+        }
+
 		/** Generate a new PublicKey from a PrivateKey
 			\param key The PrivateKey to generate from
 		*/
-		void generate( PrivateKey* key );
+		void generate( PrivateKey* t_key );
 
 		/** Verify a Record to ensure that the
 		 	signature attached to it is correct
 			\param r A pointer to the Record to verify
 			\returns True if the Record is signed correctly
 		*/
-		bool verify( Record& r );
+		bool verify( BaseRecord* t_record );
 };
 
 #endif

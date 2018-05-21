@@ -121,10 +121,14 @@ $(document).ready(function(){initNavTree('classPrivateKey.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad3e7fd1d3fd3552a52b5425e37b02e85"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#ad3e7fd1d3fd3552a52b5425e37b02e85">PrivateKey</a> ()</td></tr>
 <tr class="separator:ad3e7fd1d3fd3552a52b5425e37b02e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e4ce1ebe589bda9ccb1564f94ad443e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#a7e4ce1ebe589bda9ccb1564f94ad443e">PrivateKey</a> (<a class="el" href="classPrivateKey.html">PrivateKey</a> *t_key)</td></tr>
+<tr class="separator:a7e4ce1ebe589bda9ccb1564f94ad443e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4360bb239415bbadddfbb3f40cf52a79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#a4360bb239415bbadddfbb3f40cf52a79">generate</a> ()</td></tr>
 <tr class="separator:a4360bb239415bbadddfbb3f40cf52a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae201c4156c0449bc4e83e07879cf3ab4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#ae201c4156c0449bc4e83e07879cf3ab4">sign</a> (<a class="el" href="classRecord.html">Record</a> &amp;r)</td></tr>
-<tr class="separator:ae201c4156c0449bc4e83e07879cf3ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f417cfc4a19fe4450b0f2c4dd41bed1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#a0f417cfc4a19fe4450b0f2c4dd41bed1">sign</a> (<a class="el" href="classBaseRecord.html">BaseRecord</a> *t_record)</td></tr>
+<tr class="separator:a0f417cfc4a19fe4450b0f2c4dd41bed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33160f180a1ddfc3533c7767d534e03c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrivateKey.html#a33160f180a1ddfc3533c7767d534e03c">sign</a> (std::shared_ptr&lt; <a class="el" href="classBaseRecord.html">BaseRecord</a> &gt; t_record)</td></tr>
+<tr class="separator:a33160f180a1ddfc3533c7767d534e03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classKey"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classKey')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PrivateKey, PrivateKey &gt;</a></td></tr>
 <tr class="memitem:a95aeb74991b64b8555332f0b9b391797 inherit pub_methods_classKey"><td class="memItemLeft" align="right" valign="top">CryptoPP::RSA::PrivateKey&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a95aeb74991b64b8555332f0b9b391797">get_key</a> ()</td></tr>
 <tr class="separator:a95aeb74991b64b8555332f0b9b391797 inherit pub_methods_classKey"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,7 +161,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classPrivateKey.html">PrivateKey</a> class inherits from the templated '<a class="el" href="classKey.html">Key</a>' base class and adds private-key-specific methods. </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00157">157</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00158">158</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for PrivateKey:</div>
 <div class="dyncontent">
@@ -197,7 +201,34 @@ Collaboration diagram for PrivateKey:</div>
 </div><div class="memdoc">
 <p>Empty constructor </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00160">160</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00161">161</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7e4ce1ebe589bda9ccb1564f94ad443e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">PrivateKey::PrivateKey </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classPrivateKey.html">PrivateKey</a> *&#160;</td>
+          <td class="paramname"><em>t_key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Copy constructor </p>
+
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00164">164</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
@@ -216,32 +247,55 @@ Collaboration diagram for PrivateKey:</div>
 </div><div class="memdoc">
 <p>Generate a new key </p>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00046">46</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00044">44</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae201c4156c0449bc4e83e07879cf3ab4"></a>
+<a class="anchor" id="a0f417cfc4a19fe4450b0f2c4dd41bed1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void PrivateKey::sign </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classRecord.html">Record</a> &amp;&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classBaseRecord.html">BaseRecord</a> *&#160;</td>
+          <td class="paramname"><em>t_record</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sign a given <a class="el" href="classRecord.html">Record</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sign a given Record </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">r</td><td>A pointer to the <a class="el" href="classRecord.html">Record</a> to sign </td></tr>
+    <tr><td class="paramname">t_record</td><td>A pointer to the record to sign </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="classRecord.html">Record</a> was signed </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00052">52</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00049">49</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a33160f180a1ddfc3533c7767d534e03c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PrivateKey::sign </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classBaseRecord.html">BaseRecord</a> &gt;&#160;</td>
+          <td class="paramname"><em>t_record</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sign a given Record </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t_record</td><td>A pointer to the record to sign </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00074">74</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +309,7 @@ Collaboration diagram for PrivateKey:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPrivateKey.html">PrivateKey</a></li>
-    <li class="footer">Generated on Mon Apr 30 2018 12:02:57 for ReChain by
+    <li class="footer">Generated on Wed May 16 2018 07:00:58 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

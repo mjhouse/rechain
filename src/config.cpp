@@ -27,7 +27,8 @@
 // dependency includes
 #include <boost/filesystem/operations.hpp>
 #include <boost/lexical_cast.hpp>
-#include <cereal/archives/json.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 
 // local includes
 #include "config.hpp"
@@ -37,12 +38,17 @@
 namespace fs = boost::filesystem;
 typedef Logger rl;
 
-Config::Config() : initialized(false) {
+Config::Config() : m_initialized(false) {
 
 }
 
 Config::~Config(){
 
+}
+
+Config* Config::get(){
+    static Config config;
+    return &config;
 }
 
 void Config::set_peers( std::map<std::string,std::string> peers ){
@@ -56,7 +62,7 @@ std::map<std::string,std::string> Config::get_peers(){
 bool Config::initialize(){
 
 	// find the users home directory
-    if(!initialized){
+    if(!m_initialized){
         const char* path = std::getenv("RECHAIN_HOME");
         if( path != NULL && (std::strlen(path) != 0)){
 
@@ -85,25 +91,24 @@ bool Config::initialize(){
             setting("files",files.string());
             setting("torrents",torrents.string());
 
-            initialized = true;
-            return initialized;
+            m_initialized = true;
         }
 	}
 
-    return false;
+    return m_initialized;
 
 }
 
 std::string Config::setting( std::string key ){
-    auto it = settings.find(key);
-    if(it == settings.end())
+    auto it = m_settings.find(key);
+    if(it == m_settings.end())
         return "";
 
     return it->second;
 }
 
 void Config::setting( std::string key, std::string value ){
-    this->settings[key] = value;
+    m_settings[key] = value;
 }
 
 bool Config::save( std::string path ){
@@ -112,8 +117,8 @@ bool Config::save( std::string path ){
     if(ofs.is_open()){
 
         // serialize settings to the file
-        cereal::JSONOutputArchive archive(ofs);
-        archive( *this );
+        boost::archive::text_oarchive archive(ofs);
+        archive << *this;
 
         // saved
         return true;
@@ -133,8 +138,8 @@ bool Config::load( std::string path ){
     if(ifs.is_open()){
 
         // serialize settings from the file
-        cereal::JSONInputArchive archive(ifs);
-        archive( *this );
+        boost::archive::text_iarchive archive(ifs);
+        archive >> *this;
 
         // loaded
         return true;

@@ -109,6 +109,9 @@ $(document).ready(function(){initNavTree('classRecord.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classRecord-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -116,85 +119,135 @@ $(document).ready(function(){initNavTree('classRecord.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A single <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> that can be stored on the BlockChain.  
+ <a href="classRecord.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="record_8hpp_source.html">record.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae8ee53ffec6ff4dac9911517d47e86a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ae8ee53ffec6ff4dac9911517d47e86a5">Record</a> ()</td></tr>
-<tr class="separator:ae8ee53ffec6ff4dac9911517d47e86a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f55e5b97e110841fcff26ab407264a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a7f55e5b97e110841fcff26ab407264a2">Record</a> (std::string r, std::string b=&quot;&quot;)</td></tr>
-<tr class="separator:a7f55e5b97e110841fcff26ab407264a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8870746d3130da6f64f65c8cc37014a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a8870746d3130da6f64f65c8cc37014a6">Record</a> (std::ifstream &amp;r)</td></tr>
-<tr class="separator:a8870746d3130da6f64f65c8cc37014a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2ce1a99d866834ab53dedd788cb1ea6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ad2ce1a99d866834ab53dedd788cb1ea6">~Record</a> ()</td></tr>
+<tr class="memitem:ad2ce1a99d866834ab53dedd788cb1ea6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2ce1a99d866834ab53dedd788cb1ea6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ad2ce1a99d866834ab53dedd788cb1ea6">~Record</a> ()</td></tr>
+<tr class="memdesc:ad2ce1a99d866834ab53dedd788cb1ea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor. <br /></td></tr>
 <tr class="separator:ad2ce1a99d866834ab53dedd788cb1ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59b4303c0ca636a3338c5fda770b11ac"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a59b4303c0ca636a3338c5fda770b11ac">reference</a> (std::string s=&quot;&quot;)</td></tr>
-<tr class="separator:a59b4303c0ca636a3338c5fda770b11ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a675e1dc6656497d29a1c5d6cd059208f"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a675e1dc6656497d29a1c5d6cd059208f">block</a> (std::string b=&quot;&quot;)</td></tr>
-<tr class="separator:a675e1dc6656497d29a1c5d6cd059208f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e3df43b85e4798a505ed609c85370c0"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a6e3df43b85e4798a505ed609c85370c0">public_key</a> (std::string k=&quot;&quot;)</td></tr>
-<tr class="separator:a6e3df43b85e4798a505ed609c85370c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77d4cd555d271d7136785a08564beb27"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a77d4cd555d271d7136785a08564beb27">signature</a> (std::string s=&quot;&quot;)</td></tr>
-<tr class="separator:a77d4cd555d271d7136785a08564beb27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac88205304b44a4fc8a1f864a7a20a296"><td class="memItemLeft" align="right" valign="top">DataType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ac88205304b44a4fc8a1f864a7a20a296">type</a> ()</td></tr>
-<tr class="separator:ac88205304b44a4fc8a1f864a7a20a296"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af114f694bef7f6dcdab07ed42e0a88f6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#af114f694bef7f6dcdab07ed42e0a88f6">string</a> (bool b=false)</td></tr>
-<tr class="separator:af114f694bef7f6dcdab07ed42e0a88f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99384e7e8fce0967eccd6aadd8bcecdb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a99384e7e8fce0967eccd6aadd8bcecdb">valid</a> ()</td></tr>
-<tr class="separator:a99384e7e8fce0967eccd6aadd8bcecdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d60bd49c6c0745b9cfcb0ae884db3dd"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
-<tr class="memitem:a3d60bd49c6c0745b9cfcb0ae884db3dd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRecord.html#a3d60bd49c6c0745b9cfcb0ae884db3dd">serialize</a> (Archive &amp;ar)</td></tr>
-<tr class="separator:a3d60bd49c6c0745b9cfcb0ae884db3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3180ce711a965f0b6975e9359bd4e676"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a3180ce711a965f0b6975e9359bd4e676">hash</a> ()</td></tr>
+<tr class="separator:a3180ce711a965f0b6975e9359bd4e676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd6b7b64627a3e593c31d38085cbbb15"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#afd6b7b64627a3e593c31d38085cbbb15">mine</a> ()</td></tr>
+<tr class="memdesc:afd6b7b64627a3e593c31d38085cbbb15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-hash until the hash is valid.  <a href="#afd6b7b64627a3e593c31d38085cbbb15">More...</a><br /></td></tr>
+<tr class="separator:afd6b7b64627a3e593c31d38085cbbb15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92bb50c492a2971e25bd34971d94b94f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a92bb50c492a2971e25bd34971d94b94f">get_reference</a> ()</td></tr>
+<tr class="memdesc:a92bb50c492a2971e25bd34971d94b94f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the reference.  <a href="#a92bb50c492a2971e25bd34971d94b94f">More...</a><br /></td></tr>
+<tr class="separator:a92bb50c492a2971e25bd34971d94b94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4986cedadfec7f804154bf380bdf34c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a4986cedadfec7f804154bf380bdf34c6">set_reference</a> (std::string t_reference)</td></tr>
+<tr class="memdesc:a4986cedadfec7f804154bf380bdf34c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the reference.  <a href="#a4986cedadfec7f804154bf380bdf34c6">More...</a><br /></td></tr>
+<tr class="separator:a4986cedadfec7f804154bf380bdf34c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aace55d0096a7e663eff9f8d94d1aab02"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#aace55d0096a7e663eff9f8d94d1aab02">get_public_key</a> ()</td></tr>
+<tr class="memdesc:aace55d0096a7e663eff9f8d94d1aab02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the public key.  <a href="#aace55d0096a7e663eff9f8d94d1aab02">More...</a><br /></td></tr>
+<tr class="separator:aace55d0096a7e663eff9f8d94d1aab02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc160ce8bee62f8cd0d63057af67cac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#aabc160ce8bee62f8cd0d63057af67cac">set_public_key</a> (std::string t_key)</td></tr>
+<tr class="memdesc:aabc160ce8bee62f8cd0d63057af67cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the public key.  <a href="#aabc160ce8bee62f8cd0d63057af67cac">More...</a><br /></td></tr>
+<tr class="separator:aabc160ce8bee62f8cd0d63057af67cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9008227570709c8fe723267708ee496d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a9008227570709c8fe723267708ee496d">get_signature</a> ()</td></tr>
+<tr class="memdesc:a9008227570709c8fe723267708ee496d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the signature.  <a href="#a9008227570709c8fe723267708ee496d">More...</a><br /></td></tr>
+<tr class="separator:a9008227570709c8fe723267708ee496d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73fb143d770d6f8f7975ddb237e96d93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a73fb143d770d6f8f7975ddb237e96d93">set_signature</a> (std::string t_signature)</td></tr>
+<tr class="memdesc:a73fb143d770d6f8f7975ddb237e96d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the signature.  <a href="#a73fb143d770d6f8f7975ddb237e96d93">More...</a><br /></td></tr>
+<tr class="separator:a73fb143d770d6f8f7975ddb237e96d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d672d76d1ee4f1768e1ee520ca7f9b0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a9d672d76d1ee4f1768e1ee520ca7f9b0">get_previous</a> ()</td></tr>
+<tr class="memdesc:a9d672d76d1ee4f1768e1ee520ca7f9b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the hash of the previous <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a>.  <a href="#a9d672d76d1ee4f1768e1ee520ca7f9b0">More...</a><br /></td></tr>
+<tr class="separator:a9d672d76d1ee4f1768e1ee520ca7f9b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a09f0534ee7b7d1552d318d02908127"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a0a09f0534ee7b7d1552d318d02908127">set_previous</a> (std::string t_previous)</td></tr>
+<tr class="memdesc:a0a09f0534ee7b7d1552d318d02908127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the hash of the previous <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a>.  <a href="#a0a09f0534ee7b7d1552d318d02908127">More...</a><br /></td></tr>
+<tr class="separator:a0a09f0534ee7b7d1552d318d02908127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41df1fbb63d1047e3279a7e93444e70"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#af41df1fbb63d1047e3279a7e93444e70">get_nonce</a> ()</td></tr>
+<tr class="memdesc:af41df1fbb63d1047e3279a7e93444e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the random number used in hashing.  <a href="#af41df1fbb63d1047e3279a7e93444e70">More...</a><br /></td></tr>
+<tr class="separator:af41df1fbb63d1047e3279a7e93444e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ed1de51161d9b0f52621770dc8bd2b3"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a1ed1de51161d9b0f52621770dc8bd2b3">get_timestamp</a> ()</td></tr>
+<tr class="memdesc:a1ed1de51161d9b0f52621770dc8bd2b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the timestamp of the <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a>.  <a href="#a1ed1de51161d9b0f52621770dc8bd2b3">More...</a><br /></td></tr>
+<tr class="separator:a1ed1de51161d9b0f52621770dc8bd2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7237a7b622753bf95bc959a111112ea"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#aa7237a7b622753bf95bc959a111112ea">get_counter</a> ()</td></tr>
+<tr class="memdesc:aa7237a7b622753bf95bc959a111112ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the counter used in hashing.  <a href="#aa7237a7b622753bf95bc959a111112ea">More...</a><br /></td></tr>
+<tr class="separator:aa7237a7b622753bf95bc959a111112ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dc9f5455ac9d0945cac31c380c59227"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a2dc9f5455ac9d0945cac31c380c59227">type</a> ()</td></tr>
+<tr class="memdesc:a2dc9f5455ac9d0945cac31c380c59227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the DataType of this <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a>.  <a href="#a2dc9f5455ac9d0945cac31c380c59227">More...</a><br /></td></tr>
+<tr class="separator:a2dc9f5455ac9d0945cac31c380c59227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3be930b1c4ea9ee06ef147c411e6768b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a3be930b1c4ea9ee06ef147c411e6768b">is_valid</a> ()</td></tr>
+<tr class="memdesc:a3be930b1c4ea9ee06ef147c411e6768b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> is internally valid.  <a href="#a3be930b1c4ea9ee06ef147c411e6768b">More...</a><br /></td></tr>
+<tr class="separator:a3be930b1c4ea9ee06ef147c411e6768b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca0e7004428f7e28b5d9d31a9ef02596"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#aca0e7004428f7e28b5d9d31a9ef02596">to_string</a> ()</td></tr>
+<tr class="memdesc:aca0e7004428f7e28b5d9d31a9ef02596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the serialized <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> as a string.  <a href="#aca0e7004428f7e28b5d9d31a9ef02596">More...</a><br /></td></tr>
+<tr class="separator:aca0e7004428f7e28b5d9d31a9ef02596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfdf56aa0bb0329e73fa957465e1aeb5"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:adfdf56aa0bb0329e73fa957465e1aeb5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRecord.html#adfdf56aa0bb0329e73fa957465e1aeb5">serialize</a> (Archive &amp;t_archive)</td></tr>
+<tr class="memdesc:adfdf56aa0bb0329e73fa957465e1aeb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> to an archive.  <a href="#adfdf56aa0bb0329e73fa957465e1aeb5">More...</a><br /></td></tr>
+<tr class="separator:adfdf56aa0bb0329e73fa957465e1aeb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a9bc8770967e924a49745531bc4838aaa"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classRecord.html">Record</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a9bc8770967e924a49745531bc4838aaa">from_reference</a> (std::string t_reference, const int &amp;t_type)</td></tr>
+<tr class="memdesc:a9bc8770967e924a49745531bc4838aaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> from a reference.  <a href="#a9bc8770967e924a49745531bc4838aaa">More...</a><br /></td></tr>
+<tr class="separator:a9bc8770967e924a49745531bc4838aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6aea6d2d216487676d0d144f34fddc7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classRecord.html">Record</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ab6aea6d2d216487676d0d144f34fddc7">from_file</a> (std::string t_file, const int &amp;t_type)</td></tr>
+<tr class="memdesc:ab6aea6d2d216487676d0d144f34fddc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> from a file.  <a href="#ab6aea6d2d216487676d0d144f34fddc7">More...</a><br /></td></tr>
+<tr class="separator:ab6aea6d2d216487676d0d144f34fddc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ae38d863ea0903d31f0dbe5bd8598edf1"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ae38d863ea0903d31f0dbe5bd8598edf1">All</a> = 0</td></tr>
+<tr class="separator:ae38d863ea0903d31f0dbe5bd8598edf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82795bf7de09526e4d55ce5a380bd7fb"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a82795bf7de09526e4d55ce5a380bd7fb">Publication</a> = 1</td></tr>
+<tr class="separator:a82795bf7de09526e4d55ce5a380bd7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6209d9340fcee59ee83d452fccbc1f54"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a6209d9340fcee59ee83d452fccbc1f54">Signature</a> = 2</td></tr>
+<tr class="separator:a6209d9340fcee59ee83d452fccbc1f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0f8732272ec86b8d63b850a3a6a9f860"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f8732272ec86b8d63b850a3a6a9f860"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a0f8732272ec86b8d63b850a3a6a9f860">Record</a> (const int &amp;t_type)</td></tr>
+<tr class="memdesc:a0f8732272ec86b8d63b850a3a6a9f860"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor. <br /></td></tr>
+<tr class="separator:a0f8732272ec86b8d63b850a3a6a9f860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ac119b8e74dc524b3fd86ed0a48774273"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ac119b8e74dc524b3fd86ed0a48774273">_reference</a></td></tr>
-<tr class="separator:ac119b8e74dc524b3fd86ed0a48774273"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98e04677b98c8b6aa8c2d6c867695059"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a98e04677b98c8b6aa8c2d6c867695059">_block</a></td></tr>
-<tr class="separator:a98e04677b98c8b6aa8c2d6c867695059"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5951ab8149eedbb859214d5d4182c42e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a5951ab8149eedbb859214d5d4182c42e">_public_key</a></td></tr>
-<tr class="separator:a5951ab8149eedbb859214d5d4182c42e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97d2a3278efab8469f9e223d88e21c26"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a97d2a3278efab8469f9e223d88e21c26">_signature</a></td></tr>
-<tr class="separator:a97d2a3278efab8469f9e223d88e21c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a425ac4c02bccfad6b24a83ed073d7073"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a425ac4c02bccfad6b24a83ed073d7073">m_reference</a></td></tr>
+<tr class="separator:a425ac4c02bccfad6b24a83ed073d7073"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59933618cdd68743241bda8e538e3e3d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a59933618cdd68743241bda8e538e3e3d">m_public_key</a></td></tr>
+<tr class="separator:a59933618cdd68743241bda8e538e3e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ae082c0402c9023fe9975fe618326a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a28ae082c0402c9023fe9975fe618326a">m_signature</a></td></tr>
+<tr class="separator:a28ae082c0402c9023fe9975fe618326a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b60fea666d1189ef0f1ce8c6df4522"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a36b60fea666d1189ef0f1ce8c6df4522">m_previous</a></td></tr>
+<tr class="separator:a36b60fea666d1189ef0f1ce8c6df4522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ab4ff39bdbfa3c079761bfd0287539"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ae1ab4ff39bdbfa3c079761bfd0287539">m_type</a></td></tr>
+<tr class="separator:ae1ab4ff39bdbfa3c079761bfd0287539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8aeffe902176eb235f316c320908f26"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#aa8aeffe902176eb235f316c320908f26">m_nonce</a></td></tr>
+<tr class="separator:aa8aeffe902176eb235f316c320908f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18662ca5c8136a2a773c8c78ea9dc687"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#a18662ca5c8136a2a773c8c78ea9dc687">m_timestamp</a></td></tr>
+<tr class="separator:a18662ca5c8136a2a773c8c78ea9dc687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3699098331171ecef6c9f4de3dc3b8a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRecord.html#ad3699098331171ecef6c9f4de3dc3b8a">m_counter</a></td></tr>
+<tr class="separator:ad3699098331171ecef6c9f4de3dc3b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A single record that can be stored within a <a class="el" href="classBlock.html">Block</a> on the <a class="el" href="classBlockChain.html">BlockChain</a> </p>
-
-<p>Definition at line <a class="el" href="record_8hpp_source.html#l00045">45</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ae8ee53ffec6ff4dac9911517d47e86a5"></a>
+<div class="textblock">
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00052">52</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ab6aea6d2d216487676d0d144f34fddc7"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Record::Record </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Empty constructor </p>
-
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00031">31</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7f55e5b97e110841fcff26ab407264a2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Record::Record </td>
+          <td class="memname"><a class="el" href="classRecord.html">Record</a> * Record::from_file </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
+          <td class="paramname"><em>t_file</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>b</em> = <code>&quot;&quot;</code>&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>t_type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -202,138 +255,304 @@ Private Attributes</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p>Construct from a reference and block hash </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">r</td><td>A file hash or reference to another <a class="el" href="classRecord.html">Record</a> </td></tr>
-    <tr><td class="paramname">b</td><td>An optional <a class="el" href="classBlock.html">Block</a> hash </td></tr>
+    <tr><td class="paramname">t_file</td><td>The path to the file </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the new <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00033">33</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00048">48</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a8870746d3130da6f64f65c8cc37014a6"></a>
+<a class="anchor" id="a9bc8770967e924a49745531bc4838aaa"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Record::Record </td>
+          <td class="memname"><a class="el" href="classRecord.html">Record</a> * Record::from_reference </td>
           <td>(</td>
-          <td class="paramtype">std::ifstream &amp;&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>t_reference</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>t_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t_reference</td><td>The hash/reference for a document </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the new <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00042">42</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa7237a7b622753bf95bc959a111112ea"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Record::get_counter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p>Construct a Publication <a class="el" href="classRecord.html">Record</a> from a file </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">r</td><td>An open ifstream object </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>The counter </dd></dl>
 
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00035">35</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00155">155</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad2ce1a99d866834ab53dedd788cb1ea6"></a>
+<a class="anchor" id="af41df1fbb63d1047e3279a7e93444e70"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long Record::get_nonce </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The nonce </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00145">145</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9d672d76d1ee4f1768e1ee520ca7f9b0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Record::get_previous </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The value of m_previous </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00135">135</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aace55d0096a7e663eff9f8d94d1aab02"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Record::get_public_key </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The value of m_public_key </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00115">115</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a92bb50c492a2971e25bd34971d94b94f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Record::get_reference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The value of m_reference </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00105">105</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9008227570709c8fe723267708ee496d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Record::get_signature </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The value of m_signature </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00125">125</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1ed1de51161d9b0f52621770dc8bd2b3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long Record::get_timestamp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The raw posix timestamp </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00150">150</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3180ce711a965f0b6975e9359bd4e676"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Record::~Record </td>
+          <td class="memname">std::string Record::hash </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Empty destructor </p>
+<p>Get the hash of this <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </p><dl class="section return"><dt>Returns</dt><dd>The current hash of the <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00050">50</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00069">69</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a675e1dc6656497d29a1c5d6cd059208f"></a>
+<a class="anchor" id="a3be930b1c4ea9ee06ef147c411e6768b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string &amp; Record::block </td>
+          <td class="memname">bool Record::is_valid </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>b</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Update or get the <a class="el" href="classBlock.html">Block</a> hash </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">b</td><td>The <a class="el" href="classBlock.html">Block</a> hash to use </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of _block </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> is valid </dd></dl>
 
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00057">57</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00127">127</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6e3df43b85e4798a505ed609c85370c0"></a>
+<a class="anchor" id="afd6b7b64627a3e593c31d38085cbbb15"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string &amp; Record::public_key </td>
+          <td class="memname">std::string Record::mine </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>k</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Update or get the public key </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">k</td><td>The public key to use </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of _public_key </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A valid hash </dd></dl>
 
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00062">62</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00088">88</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a59b4303c0ca636a3338c5fda770b11ac"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string &amp; Record::reference </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>s</em> = <code>&quot;&quot;</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Update or get the reference </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>The reference to use </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of _reference </dd></dl>
-
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00052">52</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3d60bd49c6c0745b9cfcb0ae884db3dd"></a>
+<a class="anchor" id="adfdf56aa0bb0329e73fa957465e1aeb5"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -346,7 +565,7 @@ template&lt;class Archive &gt; </div>
           <td class="memname">void Record::serialize </td>
           <td>(</td>
           <td class="paramtype">Archive &amp;&#160;</td>
-          <td class="paramname"><em>ar</em></td><td>)</td>
+          <td class="paramname"><em>t_archive</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -356,105 +575,18 @@ template&lt;class Archive &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Serialize <a class="el" href="classRecord.html">Record</a> to an archive/file </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ar</td><td>The archive to serialize to </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="record_8hpp_source.html#l00114">114</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00176">176</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a77d4cd555d271d7136785a08564beb27"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string &amp; Record::signature </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>s</em> = <code>&quot;&quot;</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Update or get the signature </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>The signature to use </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of _signature </dd></dl>
-
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00067">67</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af114f694bef7f6dcdab07ed42e0a88f6"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Record::string </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>b</em> = <code>false</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get <a class="el" href="classRecord.html">Record</a> as a single string </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">b</td><td>False returns a subset of values </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Data in the <a class="el" href="classRecord.html">Record</a> as a string </dd></dl>
-
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00077">77</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac88205304b44a4fc8a1f864a7a20a296"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DataType Record::type </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get the DataType of this <a class="el" href="classRecord.html">Record</a> </p><dl class="section return"><dt>Returns</dt><dd>The DataType of this <a class="el" href="classRecord.html">Record</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00072">72</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a99384e7e8fce0967eccd6aadd8bcecdb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Record::valid </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Check if <a class="el" href="classRecord.html">Record</a> is internally valid </p><dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="classRecord.html">Record</a> is valid </dd></dl>
-
-<p>Definition at line <a class="el" href="record_8cpp_source.html#l00088">88</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a98e04677b98c8b6aa8c2d6c867695059"></a>
+<a class="anchor" id="a0a09f0534ee7b7d1552d318d02908127"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -462,7 +594,203 @@ template&lt;class Archive &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Record::_block</td>
+          <td class="memname">void Record::set_previous </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>t_previous</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t_previous</td><td>The hash of the previous <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00140">140</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aabc160ce8bee62f8cd0d63057af67cac"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Record::set_public_key </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>t_key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t_key</td><td>The public key to use </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00120">120</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4986cedadfec7f804154bf380bdf34c6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Record::set_reference </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>t_reference</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t_reference</td><td>The reference to use </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00110">110</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a73fb143d770d6f8f7975ddb237e96d93"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Record::set_signature </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>t_signature</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t_signature</td><td>The signature to use </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00130">130</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aca0e7004428f7e28b5d9d31a9ef02596"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Record::to_string </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> as a string </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8cpp_source.html#l00113">113</a> of file <a class="el" href="record_8cpp_source.html">record.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2dc9f5455ac9d0945cac31c380c59227"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Record::type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The DataType of this <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00160">160</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="ae38d863ea0903d31f0dbe5bd8598edf1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Record::All = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Base <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> type </p>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00072">72</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad3699098331171ecef6c9f4de3dc3b8a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Record::m_counter</td>
         </tr>
       </table>
   </td>
@@ -471,13 +799,13 @@ template&lt;class Archive &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="el" href="classBlock.html">Block</a> hash, only used if this is a Signature record </p>
+<p>Counter to modify hash output </p>
 
-<p>Definition at line <a class="el" href="record_8hpp_source.html#l00048">48</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00065">65</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5951ab8149eedbb859214d5d4182c42e"></a>
+<a class="anchor" id="aa8aeffe902176eb235f316c320908f26"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -485,7 +813,53 @@ template&lt;class Archive &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Record::_public_key</td>
+          <td class="memname">long Record::m_nonce</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Randomly generated value to modify hash </p>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00063">63</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a36b60fea666d1189ef0f1ce8c6df4522"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Record::m_previous</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Hash of the previous <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </p>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00059">59</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a59933618cdd68743241bda8e538e3e3d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Record::m_public_key</td>
         </tr>
       </table>
   </td>
@@ -496,11 +870,11 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The public key of the owner </p>
 
-<p>Definition at line <a class="el" href="record_8hpp_source.html#l00049">49</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00057">57</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac119b8e74dc524b3fd86ed0a48774273"></a>
+<a class="anchor" id="a425ac4c02bccfad6b24a83ed073d7073"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -508,7 +882,7 @@ template&lt;class Archive &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Record::_reference</td>
+          <td class="memname">std::string Record::m_reference</td>
         </tr>
       </table>
   </td>
@@ -517,13 +891,13 @@ template&lt;class Archive &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>A reference to a document or another <a class="el" href="classRecord.html">Record</a> </p>
+<p>A reference to a document or another <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </p>
 
-<p>Definition at line <a class="el" href="record_8hpp_source.html#l00047">47</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00056">56</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a97d2a3278efab8469f9e223d88e21c26"></a>
+<a class="anchor" id="a28ae082c0402c9023fe9975fe618326a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -531,7 +905,7 @@ template&lt;class Archive &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Record::_signature</td>
+          <td class="memname">std::string Record::m_signature</td>
         </tr>
       </table>
   </td>
@@ -542,7 +916,99 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The signature </p>
 
-<p>Definition at line <a class="el" href="record_8hpp_source.html#l00050">50</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00058">58</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a18662ca5c8136a2a773c8c78ea9dc687"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long Record::m_timestamp</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A timestamp </p>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00064">64</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae1ab4ff39bdbfa3c079761bfd0287539"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Record::m_type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The type of the <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> </p>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00060">60</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a82795bf7de09526e4d55ce5a380bd7fb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Record::Publication = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The Publication <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> type </p>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00073">73</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6209d9340fcee59ee83d452fccbc1f54"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Record::Signature = 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The Signature <a class="el" href="classRecord.html" title="A single Record that can be stored on the BlockChain. ">Record</a> type </p>
+
+<p>Definition at line <a class="el" href="record_8hpp_source.html#l00074">74</a> of file <a class="el" href="record_8hpp_source.html">record.hpp</a>.</p>
 
 </div>
 </div>
@@ -556,7 +1022,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRecord.html">Record</a></li>
-    <li class="footer">Generated on Mon Apr 30 2018 12:02:57 for ReChain by
+    <li class="footer">Generated on Sun May 6 2018 22:41:51 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['initialized',['initialized',['../classConfig.html#a067f38bc1b88cf239d4b47e0fd9a69db',1,'Config']]]
+  ['service',['service',['../classRemote.html#a680f556b0e7fe45fe9107340ade7d545',1,'Remote']]],
+  ['service_5fthread',['service_thread',['../classRemote.html#aac0b0891b5ccbf99eb882a13026d4da6',1,'Remote']]]
 ];

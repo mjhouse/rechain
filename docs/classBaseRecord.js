@@ -1,0 +1,28 @@
+var classBaseRecord =
+[
+    [ "BaseRecord", "classBaseRecord.html#a2be781400ac8c1b81976669122710b94", null ],
+    [ "~BaseRecord", "classBaseRecord.html#a60de3a29bf89d5ad99036f95ed2a4e8b", null ],
+    [ "get_counter", "classBaseRecord.html#a93c7fd196b08036845909c6aa7806a90", null ],
+    [ "get_data", "classBaseRecord.html#af66c9a17c04a7f4d05b5f5c8d71601d8", null ],
+    [ "get_nonce", "classBaseRecord.html#acb8b053b128d45c69e2bf14a6aabd970", null ],
+    [ "get_previous", "classBaseRecord.html#aee53bf01925bd922e2977e12840d1c10", null ],
+    [ "get_public_key", "classBaseRecord.html#a7431841dc26bcffd74b58be7851a6f42", null ],
+    [ "get_signature", "classBaseRecord.html#a069a328f50bad4f13fdfa56c80b06ba4", null ],
+    [ "get_timestamp", "classBaseRecord.html#a2d32fbbee7cd488f469624350b833652", null ],
+    [ "get_type", "classBaseRecord.html#a0942f8ebd8dd4cb3e83d1d246675cce0", null ],
+    [ "hash", "classBaseRecord.html#a5c616586f1287ad8853c01840ee31449", null ],
+    [ "is_valid", "classBaseRecord.html#a3ac732f1b7302c1f4238819b3d7689c6", null ],
+    [ "mine", "classBaseRecord.html#a2e64e50ab87243fdf0a9d955ef2d1edf", null ],
+    [ "serialize", "classBaseRecord.html#ae02fd43f34c259e05f370dcb9707837f", null ],
+    [ "set_previous", "classBaseRecord.html#af5f49dcf23114e7d13b38c1ec7b829b9", null ],
+    [ "set_public_key", "classBaseRecord.html#a8276a586d032369a8db5ef8a3276f64a", null ],
+    [ "set_signature", "classBaseRecord.html#a33bf89f9b7e69d39d167d8f06768d70d", null ],
+    [ "to_string", "classBaseRecord.html#a627effec6cc1f1aecd478c70805f42d2", null ],
+    [ "boost::serialization::access", "classBaseRecord.html#ac98d07dd8f7b70e16ccb9a01abf56b9c", null ],
+    [ "m_counter", "classBaseRecord.html#a97246e651a562620951866ffd01890c7", null ],
+    [ "m_nonce", "classBaseRecord.html#a3da046a801cb52b895069a9af5f7b767", null ],
+    [ "m_previous", "classBaseRecord.html#a6e45617b8c14696da02b7b5e61b214b3", null ],
+    [ "m_public_key", "classBaseRecord.html#ac07d27aeecd153eb9292ec0d81878b2f", null ],
+    [ "m_signature", "classBaseRecord.html#ad759b6e25d34c98dc31c02b7fd7acb13", null ],
+    [ "m_timestamp", "classBaseRecord.html#aebb2e8e9399bee0abbc239cb85de5815", null ]
+];

@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['acceptor',['acceptor',['../classRemote.html#a3c4b9fefb3b5f122610448aa95233e2c',1,'Remote']]],
-  ['add',['add',['../classBlock.html#a0f426185d80227fffc5ace2c71f4b15b',1,'Block::add()'],['../classBlockChain.html#ac45040e3d6d95f17f98e84ccaed32bde',1,'BlockChain::add()']]],
-  ['argc',['argc',['../classInterface.html#aca541ba0454057c87ea258f17ceb0eae',1,'Interface']]],
-  ['argv',['argv',['../classInterface.html#af12b358bea1addb340cd1cc7b32100e0',1,'Interface']]]
+  ['access',['access',['../classBaseRecord.html#ac98d07dd8f7b70e16ccb9a01abf56b9c',1,'BaseRecord::access()'],['../classBlockchain.html#ac98d07dd8f7b70e16ccb9a01abf56b9c',1,'Blockchain::access()'],['../classConfig.html#ac98d07dd8f7b70e16ccb9a01abf56b9c',1,'Config::access()'],['../classGenesisRecord.html#ac98d07dd8f7b70e16ccb9a01abf56b9c',1,'GenesisRecord::access()'],['../classPublicationRecord.html#ac98d07dd8f7b70e16ccb9a01abf56b9c',1,'PublicationRecord::access()'],['../classSignatureRecord.html#ac98d07dd8f7b70e16ccb9a01abf56b9c',1,'SignatureRecord::access()']]],
+  ['base_5frecord_2ehpp',['base_record.hpp',['../base__record_8hpp.html',1,'']]],
+  ['baserecord',['BaseRecord',['../classBaseRecord.html',1,'BaseRecord'],['../classBaseRecord.html#a2be781400ac8c1b81976669122710b94',1,'BaseRecord::BaseRecord()']]],
+  ['begin',['begin',['../classBlockchain.html#aa5b89107a878fbb69a4514d8e650c93b',1,'Blockchain']]],
+  ['blockchain',['Blockchain',['../classBlockchain.html',1,'Blockchain'],['../classBlockchain.html#afb66c736ee870ebf75913d01a50f87a4',1,'Blockchain::Blockchain()']]],
+  ['blockchain_2ehpp',['blockchain.hpp',['../blockchain_8hpp.html',1,'']]]
 ];

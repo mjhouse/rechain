@@ -28,7 +28,8 @@
 #include <map>
 
 // dependency includes
-#include "cereal/types/map.hpp"
+#include <boost/serialization/map.hpp>
+#include <boost/serialization/access.hpp>
 
 #ifndef _RECHAIN_CONFIG_HPP_
 #define _RECHAIN_CONFIG_HPP_
@@ -39,19 +40,35 @@
 class Config {
 	private:
         /** The settings as key/value string pairs */
-		std::map<std::string,std::string> settings;
+		std::map<std::string,std::string> m_settings;
 
         /** A collection of url/port pairs for current peers */
         std::map<std::string,std::string> m_peers;
 
         /** Flag to stop initialization from happening more than once */
-        bool initialized;
+        bool m_initialized;
+
+        /** Make access a friend for serialization */
+        friend class boost::serialization::access;
+
+        /** \brief Serialize Config to an archive
+            \param t_archive The archive to serialize to
+        */
+        template <class Archive>
+        void serialize( Archive& t_archive, const unsigned int /* version */ ){
+            t_archive & m_settings;
+        }
+
+		/** \brief Constructor
+		*/
+		Config();
 
 	public:
 
-		/** \brief constructor
-		*/
-		Config();
+        /** \brief Get the config instance
+            \returns A pointer to the Config instance
+        */
+        static Config* get();
 
 		/** \brief The destructor
 		*/
@@ -83,14 +100,6 @@ class Config {
 			\param value The value to set 
 		*/
         void setting( std::string key, std::string value );
-
-		/** Serialize/Unserialize settings
-			\param ar The archive to serialize to or from
-		*/
-		template <class Archive>
-		void serialize( Archive& ar ){
-			ar(	CEREAL_NVP(settings) );
-		}
 
 		/** \brief Save the settings into a file
             \param path The path to save the configuration to
