@@ -7,7 +7,7 @@
     static_assert(0,"TEST_ROOT isn't set!");
 #endif
 
-int main( int argc, char* argv[] ){
+int main( int /* argc */, char** /* argv[] */ ){
     test_framework tf;
     bool result = tf.run();
 

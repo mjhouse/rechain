@@ -35,6 +35,17 @@ test_set publication_tests("tests for publication records",{
 
     }},
 
+    {"call path constructor with good path",[]{
+
+        try {
+            PublicationRecord pr(get_path("files/general/test_publication.txt"));
+        }
+        catch (const std::exception& e){
+            RCTHROW(e.what());
+        }
+
+    }},
+
     {"test the publication record destructor",[]{
 
         try {
@@ -42,17 +53,6 @@ test_set publication_tests("tests for publication records",{
             delete pr;
         }
         catch(const std::exception& e){
-            RCTHROW(e.what());
-        }
-
-    }},
-
-    {"call path constructor with good path",[]{
-
-        try {
-            PublicationRecord pr(get_path("files/general/test_publication.txt"));
-        }
-        catch (const std::exception& e){
             RCTHROW(e.what());
         }
 
@@ -82,6 +82,56 @@ test_set publication_tests("tests for publication records",{
 
         PublicationRecord pr(get_path("files/general/test_publication.txt"));
         RCREQUIRE(pr.get_type() == RecordType::Publication);
+
+    }},
+    
+    {"check validity of publication record with no reference",[]{
+
+        PublicationRecord pr;
+        RCREQUIRE(!pr.is_valid());
+
+    }},
+
+    {"check validity of unsigned publication record",[]{
+
+        PublicationRecord pr(get_path("files/general/test_publication.txt"));
+        RCREQUIRE(!pr.is_valid());
+
+    }},
+
+    {"check validity of signed publication record with no reference",[]{
+
+        PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
+        PublicKey* public_key   = private_key->get_public();
+        
+        PublicationRecord pr;
+        private_key->sign(&pr);
+
+        RCREQUIRE(!pr.is_valid());
+        RCREQUIRE(!(pr.get_signature().empty()));
+        RCREQUIRE(public_key->verify(&pr));
+
+
+        delete private_key;
+        delete public_key;
+
+    }},
+
+    {"check validity of signed publication record with reference",[]{
+
+        PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
+        PublicKey* public_key   = private_key->get_public();
+        
+        PublicationRecord pr(get_path("files/general/test_publication.txt"));
+        private_key->sign(&pr);
+
+        RCREQUIRE(!pr.is_valid());
+        RCREQUIRE(!(pr.get_signature().empty()));
+        RCREQUIRE(public_key->verify(&pr));
+
+
+        delete public_key;
+        delete private_key;
 
     }},
 
@@ -125,6 +175,7 @@ test_set publication_tests("tests for publication records",{
     {"sign a publication record",[]{
 
         PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
+        PublicKey* public_key   = private_key->get_public();
         PublicationRecord pr;
 
         try {
@@ -135,7 +186,10 @@ test_set publication_tests("tests for publication records",{
         }
 
         RCREQUIRE(!(pr.get_signature().empty()));
+        RCREQUIRE(pr.get_public_key() == public_key->to_string());
 
+        delete private_key;
+        delete public_key;
     }},
 
     {"mine a publication record without signing",[]{
@@ -169,56 +223,63 @@ test_set publication_tests("tests for publication records",{
         RCREQUIRE(!(pr.get_reference().empty()));
         RCREQUIRE(pr.is_valid());
 
+        delete private_key;
+        delete public_key;
+    }},
+
+    {"set and get the previous reference on a publication record",[]{
+
+        std::string hash = "NOTAHASH";
+        PublicationRecord pr;
+
+        pr.set_previous(hash);
+        
+        RCREQUIRE(pr.get_previous() == hash);
+
     }},
     
-    {"check validity of publication record with no reference",[]{
+    {"set and get the public key on a publication record",[]{
 
+        std::string key = "NOTAPUBLICKEY";
         PublicationRecord pr;
-        RCREQUIRE(!pr.is_valid());
+
+        pr.set_public_key(key);
+        
+        RCREQUIRE(pr.get_public_key() == key);
 
     }},
 
-    {"check validity of unsigned publication record",[]{
+    {"set and get the signature on a publication record",[]{
 
-        PublicationRecord pr(get_path("files/general/test_publication.txt"));
-        RCREQUIRE(!pr.is_valid());
+        std::string sig = "NOTASIGNATURE";
+        PublicationRecord pr;
+
+        pr.set_signature(sig);
+        
+        RCREQUIRE(pr.get_signature() == sig);
 
     }},
 
-    {"check validity of signed publication record with no reference",[]{
+    {"check nonce, timestamp and counter before/after mining",[]{
 
         PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
         PublicKey* public_key   = private_key->get_public();
-        
-        PublicationRecord pr;
-        private_key->sign(&pr);
 
-        RCREQUIRE(!pr.is_valid());
-        RCREQUIRE(!(pr.get_signature().empty()));
-        RCREQUIRE(public_key->verify(&pr));
-
-
-        delete public_key;
-        delete private_key;
-
-    }},
-
-    {"check validity of signed publication record with reference",[]{
-
-        PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
-        PublicKey* public_key   = private_key->get_public();
-        
         PublicationRecord pr(get_path("files/general/test_publication.txt"));
+
+        RCREQUIRE(pr.get_nonce() == 0);
+        RCREQUIRE(pr.get_timestamp() == 0);
+        RCREQUIRE(pr.get_counter() == 0);
+
         private_key->sign(&pr);
+        pr.mine();
 
-        RCREQUIRE(!pr.is_valid());
-        RCREQUIRE(!(pr.get_signature().empty()));
-        RCREQUIRE(public_key->verify(&pr));
+        RCREQUIRE(pr.get_nonce() > 0);
+        RCREQUIRE(pr.get_timestamp() > 0);
+        RCREQUIRE(pr.get_counter() > 0);
 
-
-        delete public_key;
         delete private_key;
-
-    }},
+        delete public_key;
+    }}
 
 });
