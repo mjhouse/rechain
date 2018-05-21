@@ -53,6 +53,7 @@ class Config {
 
         /** \brief Serialize Config to an archive
             \param t_archive The archive to serialize to
+            \param int The version of the serialized Config
         */
         template <class Archive>
         void serialize( Archive& t_archive, const unsigned int /* version */ ){

@@ -37,12 +37,12 @@
 /* Maximum hash value (smaller increases difficulty) */
 #ifndef NDEBUG
 
-    // set mining difficulty down for debug/test builds
+    /** The maximum size of a mined hash */
     #define HASH_MAX "000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 
 #else
 
-    // set difficulty up for release builds
+    /** The maximum size of a hash for release */
     #define HASH_MAX "0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 
 #endif
@@ -59,6 +59,7 @@ class BaseRecord {
 
         /** \brief Serialize BaseRecord to an archive
             \param t_archive The archive to serialize to
+            \param int The version of the serialize record
         */
         template <class Archive>
         void serialize( Archive& t_archive, const unsigned int /* version */ ){

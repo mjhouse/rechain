@@ -174,11 +174,9 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a2fe8b14dc656b838e64c724efdf6cf61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82c1864c0e29df431d67286af2d68815"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#a82c1864c0e29df431d67286af2d68815">m_trust</a></td></tr>
 <tr class="separator:a82c1864c0e29df431d67286af2d68815"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adae872e2dff6fc13a43b4bbab01fc0ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adae872e2dff6fc13a43b4bbab01fc0ac"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>max_trust</b></td></tr>
+<tr class="memitem:adae872e2dff6fc13a43b4bbab01fc0ac"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#adae872e2dff6fc13a43b4bbab01fc0ac">max_trust</a></td></tr>
 <tr class="separator:adae872e2dff6fc13a43b4bbab01fc0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c999de526dd4974256a170e50c4e9b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c999de526dd4974256a170e50c4e9b5"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>min_trust</b></td></tr>
+<tr class="memitem:a9c999de526dd4974256a170e50c4e9b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#a9c999de526dd4974256a170e50c4e9b5">min_trust</a></td></tr>
 <tr class="separator:a9c999de526dd4974256a170e50c4e9b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -189,7 +187,7 @@ Friends</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classBlockchain.html">Blockchain</a> class manages a collection of <a class="el" href="classBaseRecord.html" title="The BaseRecord class acts as an abstract base class for other kinds of records. ">BaseRecord</a> objects. </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00048">48</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00052">52</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a0821f5c46948636907babb59f33353f2"></a>
 <div class="memitem">
@@ -202,7 +200,7 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 <p>Typedef a <a class="el" href="classBlockchain.html">Blockchain</a> iterator </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00077">77</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00085">85</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -417,6 +415,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the record was published </dd></dl>
 
 <p>Definition at line <a class="el" href="blockchain_8cpp_source.html#l00204">204</a> of file <a class="el" href="blockchain_8cpp_source.html">blockchain.cpp</a>.</p>
 
@@ -483,11 +482,12 @@ template&lt;class Archive &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t_archive</td><td>The archive to serialize to </td></tr>
+    <tr><td class="paramname">int</td><td>The version of the serialized <a class="el" href="classBlockchain.html">Blockchain</a> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00070">70</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00078">78</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -580,7 +580,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Make access a friend for serialization </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00064">64</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00071">71</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -604,7 +604,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The collection of records in the <a class="el" href="classBlockchain.html">Blockchain</a> </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00052">52</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00056">56</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -627,7 +627,53 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The collection of records in the <a class="el" href="classBlockchain.html">Blockchain</a> </p>
 
-<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00055">55</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00059">59</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adae872e2dff6fc13a43b4bbab01fc0ac"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Blockchain::max_trust</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maximum trust in the <a class="el" href="classBlockchain.html">Blockchain</a> </p>
+
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00062">62</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9c999de526dd4974256a170e50c4e9b5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Blockchain::min_trust</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Minimum trust in the <a class="el" href="classBlockchain.html">Blockchain</a> </p>
+
+<p>Definition at line <a class="el" href="blockchain_8hpp_source.html#l00065">65</a> of file <a class="el" href="blockchain_8hpp_source.html">blockchain.hpp</a>.</p>
 
 </div>
 </div>
@@ -641,7 +687,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBlockchain.html">Blockchain</a></li>
-    <li class="footer">Generated on Wed May 16 2018 07:00:57 for ReChain by
+    <li class="footer">Generated on Mon May 21 2018 03:37:25 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

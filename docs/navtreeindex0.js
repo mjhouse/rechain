@@ -3,6 +3,7 @@ var NAVTREEINDEX0 =
 "annotated.html":[0,0],
 "base__record_8cpp_source.html":[1,0,1,0],
 "base__record_8hpp.html":[1,0,0,0],
+"base__record_8hpp.html#aab1b90f59dc5a2902b083c30abd7ff36":[1,0,0,0,1],
 "base__record_8hpp_source.html":[1,0,0,0],
 "blockchain_8cpp_source.html":[1,0,1,1],
 "blockchain_8hpp.html":[1,0,0,1],
@@ -178,10 +179,11 @@ var NAVTREEINDEX0 =
 "classMessage.html#ad816654c4ec174ad004dcf0159f8f8ec":[0,0,9,10],
 "classMessage.html#adfa1efcb53ef9b9d7e253a226fdb0d30":[0,0,9,8],
 "classPrivateKey.html":[0,0,10],
-"classPrivateKey.html#a0f417cfc4a19fe4450b0f2c4dd41bed1":[0,0,10,3],
-"classPrivateKey.html#a33160f180a1ddfc3533c7767d534e03c":[0,0,10,4],
+"classPrivateKey.html#a0f417cfc4a19fe4450b0f2c4dd41bed1":[0,0,10,4],
+"classPrivateKey.html#a33160f180a1ddfc3533c7767d534e03c":[0,0,10,5],
 "classPrivateKey.html#a4360bb239415bbadddfbb3f40cf52a79":[0,0,10,2],
 "classPrivateKey.html#a7e4ce1ebe589bda9ccb1564f94ad443e":[0,0,10,1],
+"classPrivateKey.html#acdf9eb69cd5c802d69301a6b45c43ef3":[0,0,10,3],
 "classPrivateKey.html#ad3e7fd1d3fd3552a52b5425e37b02e85":[0,0,10,0],
 "classPublicKey.html":[0,0,12],
 "classPublicKey.html#a0d6430c0c56f769c1cc9a12bad20a503":[0,0,12,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "classSignatureRecord.html#a5dc8a79a7bf69360945f59020dff0dfe":[0,0,16,1],
 "classSignatureRecord.html#a6dad7d6941a302ab33a02a8e2baac078":[0,0,16,2],
 "classSignatureRecord.html#aa0f14606c818b63c762a3e610fb778e4":[0,0,16,4],
-"classSignatureRecord.html#aac07f396bd482debf8f146202ac7c79d":[0,0,16,11],
-"classSignatureRecord.html#ac70daa6e60ac9e541a2f329762cfe17d":[0,0,16,0],
-"classSignatureRecord.html#ac98d07dd8f7b70e16ccb9a01abf56b9c":[0,0,16,10]
+"classSignatureRecord.html#aac07f396bd482debf8f146202ac7c79d":[0,0,16,11]
 };

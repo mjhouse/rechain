@@ -29,7 +29,9 @@ var searchData=
   ['m_5fversion',['m_version',['../classMessage.html#a0d6e3b7989436d6f65dbd606ba9b0a68',1,'Message']]],
   ['manager',['Manager',['../classManager.html',1,'Manager'],['../classInterface.html#a54b022d952778edad89d2ce7f2638d40',1,'Interface::manager()'],['../classManager.html#a1658ff9f18e38ccd9cb8b0b371b9c20b',1,'Manager::Manager()']]],
   ['manager_2ehpp',['manager.hpp',['../manager_8hpp.html',1,'']]],
+  ['max_5ftrust',['max_trust',['../classBlockchain.html#adae872e2dff6fc13a43b4bbab01fc0ac',1,'Blockchain']]],
   ['message',['Message',['../classMessage.html',1,'Message'],['../classMessage.html#a4fc4f717b634e66070366cb7722d7761',1,'Message::Message()']]],
   ['message_2ehpp',['message.hpp',['../message_8hpp.html',1,'']]],
+  ['min_5ftrust',['min_trust',['../classBlockchain.html#a9c999de526dd4974256a170e50c4e9b5',1,'Blockchain']]],
   ['mine',['mine',['../classBaseRecord.html#a2e64e50ab87243fdf0a9d955ef2d1edf',1,'BaseRecord']]]
 ];

@@ -61,6 +61,7 @@ class SignatureRecord : virtual public BaseRecord {
 
         /** \brief Serialize SignatureRecord to an archive
             \param t_archive The archive to serialize to
+            \param int The version of the serialized SignatureRecord
         */
         template <class Archive>
         void serialize( Archive& t_archive, const unsigned int /* version */ ){

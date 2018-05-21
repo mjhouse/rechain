@@ -157,15 +157,17 @@ class Key {
 */
 class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 	public:
-		/** Empty constructor */
+		/** \brief Empty constructor */
 		PrivateKey(){}
 
-		/** Copy constructor */
+		/** \brief Copy constructor 
+            \param t_key The key to copy
+        */
 		PrivateKey( PrivateKey* t_key ){
             key = t_key->key;
         }
 
-		/** Generate a new key */
+		/** \brief Generate a new key */
 		void generate();
 
         /** \brief Get a public key
@@ -173,12 +175,12 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
         */
         PublicKey* get_public();
 
-		/** Sign a given Record
+		/** \brief Sign a given Record
 			\param t_record A pointer to the record to sign
 		*/
 		void sign( BaseRecord* t_record );
 
-		/** Sign a given Record
+		/** \brief Sign a given Record
 			\param t_record A pointer to the record to sign
 		*/
 		void sign( std::shared_ptr<BaseRecord> t_record );
@@ -190,22 +192,24 @@ class PrivateKey : public Key<CryptoPP::RSA::PrivateKey,PrivateKey> {
 */
 class PublicKey: public Key<CryptoPP::RSA::PublicKey,PublicKey> {
 	public:
-		/** Empty constructor */
+		/** \brief Empty constructor */
 		PublicKey(){}
 
-		/** Copy constructor */
+		/** \brief Copy constructor
+            \param t_key The key to copy
+        */
 		PublicKey( PublicKey* t_key ){
             key = t_key->key;
         }
 
-		/** Generate a new PublicKey from a PrivateKey
-			\param key The PrivateKey to generate from
+		/** \brief Generate a new PublicKey from a PrivateKey
+			\param t_key The PrivateKey to generate from
 		*/
 		void generate( PrivateKey* t_key );
 
-		/** Verify a Record to ensure that the
-		 	signature attached to it is correct
-			\param r A pointer to the Record to verify
+		/** \brief Verify a Record to ensure that the
+		 	       signature attached to it is correct.
+			\param t_record A pointer to the Record to verify
 			\returns True if the Record is signed correctly
 		*/
 		bool verify( BaseRecord* t_record );

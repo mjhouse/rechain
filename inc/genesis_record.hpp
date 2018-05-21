@@ -65,6 +65,7 @@ class GenesisRecord : virtual public BaseRecord {
 
         /** \brief Serialize GenesisRecord to an archive
             \param t_archive The archive to serialize to
+            \param int The version of the serialized GenesisRecord
         */
         template <class Archive>
         void serialize( Archive& t_archive, const unsigned int /* version */ ){

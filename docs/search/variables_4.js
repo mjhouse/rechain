@@ -27,5 +27,7 @@ var searchData=
   ['m_5ftrust',['m_trust',['../classBlockchain.html#a82c1864c0e29df431d67286af2d68815',1,'Blockchain']]],
   ['m_5furl',['m_url',['../classRequest.html#a231f72749bc5e377159f1f2b32d6bd06',1,'Request']]],
   ['m_5fversion',['m_version',['../classMessage.html#a0d6e3b7989436d6f65dbd606ba9b0a68',1,'Message']]],
-  ['manager',['manager',['../classInterface.html#a54b022d952778edad89d2ce7f2638d40',1,'Interface']]]
+  ['manager',['manager',['../classInterface.html#a54b022d952778edad89d2ce7f2638d40',1,'Interface']]],
+  ['max_5ftrust',['max_trust',['../classBlockchain.html#adae872e2dff6fc13a43b4bbab01fc0ac',1,'Blockchain']]],
+  ['min_5ftrust',['min_trust',['../classBlockchain.html#a9c999de526dd4974256a170e50c4e9b5',1,'Blockchain']]]
 ];

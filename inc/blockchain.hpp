@@ -58,7 +58,10 @@ class Blockchain {
         /** The collection of records in the Blockchain */
 		std::map<std::string,double> m_trust;
 
+        /** Maximum trust in the Blockchain */
         double max_trust;
+
+        /** Minimum trust in the Blockchain */
         double min_trust;
 
 		/** Update the trust_map */	
@@ -69,6 +72,7 @@ class Blockchain {
 
         /** \brief Serialize Blockchain to an archive
             \param t_archive The archive to serialize to
+            \param int The version of the serialized Blockchain
         */
         template <class Archive>
         void serialize( Archive& t_archive, const unsigned int /* version */ ){
@@ -90,6 +94,7 @@ class Blockchain {
 
         /** \brief Mine, add and broadcast a record
             \param t_record The record to mine, add and broadcast
+            \returns True if the record was published
         */
         bool publish( std::shared_ptr<BaseRecord> t_record );
 

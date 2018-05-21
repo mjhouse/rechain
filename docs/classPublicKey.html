@@ -119,13 +119,18 @@ $(document).ready(function(){initNavTree('classPublicKey.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af4c4839004f3b4f54dc5320a602e7547"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPublicKey.html#af4c4839004f3b4f54dc5320a602e7547">PublicKey</a> ()</td></tr>
+<tr class="memitem:af4c4839004f3b4f54dc5320a602e7547"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4c4839004f3b4f54dc5320a602e7547"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPublicKey.html#af4c4839004f3b4f54dc5320a602e7547">PublicKey</a> ()</td></tr>
+<tr class="memdesc:af4c4839004f3b4f54dc5320a602e7547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor. <br /></td></tr>
 <tr class="separator:af4c4839004f3b4f54dc5320a602e7547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a5149c3767cf8c1cf26e003e164dcd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPublicKey.html#af9a5149c3767cf8c1cf26e003e164dcd">PublicKey</a> (<a class="el" href="classPublicKey.html">PublicKey</a> *t_key)</td></tr>
+<tr class="memdesc:af9a5149c3767cf8c1cf26e003e164dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#af9a5149c3767cf8c1cf26e003e164dcd">More...</a><br /></td></tr>
 <tr class="separator:af9a5149c3767cf8c1cf26e003e164dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d6430c0c56f769c1cc9a12bad20a503"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPublicKey.html#a0d6430c0c56f769c1cc9a12bad20a503">generate</a> (<a class="el" href="classPrivateKey.html">PrivateKey</a> *t_key)</td></tr>
+<tr class="memdesc:a0d6430c0c56f769c1cc9a12bad20a503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a new <a class="el" href="classPublicKey.html">PublicKey</a> from a <a class="el" href="classPrivateKey.html">PrivateKey</a>.  <a href="#a0d6430c0c56f769c1cc9a12bad20a503">More...</a><br /></td></tr>
 <tr class="separator:a0d6430c0c56f769c1cc9a12bad20a503"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87f4a6fd0c5cde68dfb515cddbdbd79a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPublicKey.html#a87f4a6fd0c5cde68dfb515cddbdbd79a">verify</a> (<a class="el" href="classBaseRecord.html">BaseRecord</a> *t_record)</td></tr>
+<tr class="memdesc:a87f4a6fd0c5cde68dfb515cddbdbd79a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify a Record to ensure that the signature attached to it is correct.  <a href="#a87f4a6fd0c5cde68dfb515cddbdbd79a">More...</a><br /></td></tr>
 <tr class="separator:a87f4a6fd0c5cde68dfb515cddbdbd79a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classKey"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classKey')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classKey.html">Key&lt; CryptoPP::RSA::PublicKey, PublicKey &gt;</a></td></tr>
 <tr class="memitem:a95aeb74991b64b8555332f0b9b391797 inherit pub_methods_classKey"><td class="memItemLeft" align="right" valign="top">CryptoPP::RSA::PublicKey&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKey.html#a95aeb74991b64b8555332f0b9b391797">get_key</a> ()</td></tr>
@@ -159,7 +164,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classPublicKey.html">PublicKey</a> class inherits from the templated '<a class="el" href="classKey.html">Key</a>' base class and adds public-key-specific methods. </p>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00186">186</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00193">193</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for PublicKey:</div>
 <div class="dyncontent">
@@ -177,32 +182,6 @@ Collaboration diagram for PublicKey:</div>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="af4c4839004f3b4f54dc5320a602e7547"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">PublicKey::PublicKey </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Empty constructor </p>
-
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00189">189</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="af9a5149c3767cf8c1cf26e003e164dcd"></a>
 <div class="memitem">
 <div class="memproto">
@@ -224,9 +203,14 @@ Collaboration diagram for PublicKey:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Copy constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t_key</td><td>The key to copy </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00192">192</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8hpp_source.html#l00201">201</a> of file <a class="el" href="keys_8hpp_source.html">keys.hpp</a>.</p>
 
 </div>
 </div>
@@ -244,14 +228,14 @@ Collaboration diagram for PublicKey:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Generate a new <a class="el" href="classPublicKey.html">PublicKey</a> from a <a class="el" href="classPrivateKey.html">PrivateKey</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>The <a class="el" href="classPrivateKey.html">PrivateKey</a> to generate from </td></tr>
+    <tr><td class="paramname">t_key</td><td>The <a class="el" href="classPrivateKey.html">PrivateKey</a> to generate from </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00084">84</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00091">91</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -268,15 +252,15 @@ Collaboration diagram for PublicKey:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Verify a Record to ensure that the signature attached to it is correct </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">r</td><td>A pointer to the Record to verify </td></tr>
+    <tr><td class="paramname">t_record</td><td>A pointer to the Record to verify </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the Record is signed correctly </dd></dl>
 
-<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00090">90</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
+<p>Definition at line <a class="el" href="keys_8cpp_source.html#l00097">97</a> of file <a class="el" href="keys_8cpp_source.html">keys.cpp</a>.</p>
 
 </div>
 </div>
@@ -290,7 +274,7 @@ Collaboration diagram for PublicKey:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPublicKey.html">PublicKey</a></li>
-    <li class="footer">Generated on Wed May 16 2018 07:00:58 for ReChain by
+    <li class="footer">Generated on Mon May 21 2018 03:37:25 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

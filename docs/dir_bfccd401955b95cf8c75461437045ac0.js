@@ -1,8 +1,6 @@
 var dir_bfccd401955b95cf8c75461437045ac0 =
 [
-    [ "base_record.hpp", "base__record_8hpp.html", [
-      [ "BaseRecord", "classBaseRecord.html", "classBaseRecord" ]
-    ] ],
+    [ "base_record.hpp", "base__record_8hpp.html", "base__record_8hpp" ],
     [ "blockchain.hpp", "blockchain_8hpp.html", [
       [ "Blockchain", "classBlockchain.html", "classBlockchain" ]
     ] ],

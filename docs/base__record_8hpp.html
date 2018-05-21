@@ -72,6 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -105,7 +106,8 @@ $(document).ready(function(){initNavTree('base__record_8hpp.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">base_record.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -121,32 +123,30 @@ $(document).ready(function(){initNavTree('base__record_8hpp.html','');});
 Include dependency graph for base_record.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="base__record_8hpp__incl.png" border="0" usemap="#inc_2base__record_8hpp" alt=""/></div>
-<map name="inc_2base__record_8hpp" id="inc_2base__record_8hpp">
-</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="base__record_8hpp__dep__incl.png" border="0" usemap="#inc_2base__record_8hppdep" alt=""/></div>
 <map name="inc_2base__record_8hppdep" id="inc_2base__record_8hppdep">
-<area shape="rect" id="node2" href="blockchain_8hpp.html" title="Defines the Blockchain class that manages BaseRecord objects, searches and verifies the BaseRecord co..." alt="" coords="212,155,343,181"/>
-<area shape="rect" id="node8" href="remote_8hpp.html" title="Handles web requests. " alt="" coords="70,229,178,256"/>
-<area shape="rect" id="node10" href="blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="591,229,721,256"/>
-<area shape="rect" id="node11" href="publication__record_8hpp.html" title="Defines the PublicationRecord class. " alt="" coords="355,80,528,107"/>
-<area shape="rect" id="node13" href="signature__record_8hpp.html" title="Defines the SignatureRecord class. " alt="" coords="570,80,734,107"/>
-<area shape="rect" id="node15" href="genesis__record_8hpp.html" title="Defines the GenesisRecord class. " alt="" coords="1195,80,1351,107"/>
-<area shape="rect" id="node17" href="keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="801,80,897,107"/>
-<area shape="rect" id="node18" href="base__record_8cpp_source.html" title="src/base_record.cpp" alt="" coords="1030,155,1170,181"/>
-<area shape="rect" id="node3" href="interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="449,229,567,256"/>
-<area shape="rect" id="node4" href="interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="403,304,522,331"/>
-<area shape="rect" id="node5" href="manager_8hpp.html" title="Handles requests from a cli or gui. " alt="" coords="254,229,373,256"/>
-<area shape="rect" id="node7" href="manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="139,304,258,331"/>
-<area shape="rect" id="node6" href="main_8cpp_source.html" title="src/main.cpp" alt="" coords="282,304,379,331"/>
-<area shape="rect" id="node9" href="remote_8cpp_source.html" title="src/remote.cpp" alt="" coords="5,304,115,331"/>
-<area shape="rect" id="node12" href="publication__record_8cpp_source.html" title="src/publication_record.cpp" alt="" coords="418,155,593,181"/>
-<area shape="rect" id="node14" href="signature__record_8cpp_source.html" title="src/signature_record.cpp" alt="" coords="668,155,833,181"/>
-<area shape="rect" id="node16" href="genesis__record_8cpp_source.html" title="src/genesis_record.cpp" alt="" coords="1195,155,1352,181"/>
-<area shape="rect" id="node19" href="keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="909,155,1006,181"/>
+<area shape="rect" id="node2" href="blockchain_8hpp.html" title="Defines the Blockchain class that manages BaseRecord objects, searches and verifies the BaseRecord co..." alt="" coords="159,155,289,181"/>
+<area shape="rect" id="node8" href="remote_8hpp.html" title="Handles web requests. " alt="" coords="771,229,879,256"/>
+<area shape="rect" id="node10" href="blockchain_8cpp_source.html" title="src/blockchain.cpp" alt="" coords="5,229,136,256"/>
+<area shape="rect" id="node11" href="genesis__record_8hpp.html" title="Defines the GenesisRecord class. " alt="" coords="154,80,310,107"/>
+<area shape="rect" id="node13" href="publication__record_8hpp.html" title="Defines the PublicationRecord class. " alt="" coords="335,80,508,107"/>
+<area shape="rect" id="node15" href="signature__record_8hpp.html" title="Defines the SignatureRecord class. " alt="" coords="533,80,697,107"/>
+<area shape="rect" id="node17" href="keys_8hpp.html" title="Defines the Key classes used to manage, load, save and generate a public and private pair of RSA256 k..." alt="" coords="789,80,885,107"/>
+<area shape="rect" id="node18" href="base__record_8cpp_source.html" title="src/base_record.cpp" alt="" coords="1107,155,1247,181"/>
+<area shape="rect" id="node3" href="interface_8hpp.html" title="Defines the command line interface for ReChain. " alt="" coords="237,229,355,256"/>
+<area shape="rect" id="node4" href="interface_8cpp_source.html" title="src/interface.cpp" alt="" coords="237,304,355,331"/>
+<area shape="rect" id="node5" href="manager_8hpp.html" title="Handles requests from a cli or gui. " alt="" coords="379,229,498,256"/>
+<area shape="rect" id="node7" href="manager_8cpp_source.html" title="src/manager.cpp" alt="" coords="506,304,625,331"/>
+<area shape="rect" id="node6" href="main_8cpp_source.html" title="src/main.cpp" alt="" coords="385,304,482,331"/>
+<area shape="rect" id="node9" href="remote_8cpp_source.html" title="src/remote.cpp" alt="" coords="771,304,880,331"/>
+<area shape="rect" id="node12" href="genesis__record_8cpp_source.html" title="src/genesis_record.cpp" alt="" coords="313,155,471,181"/>
+<area shape="rect" id="node14" href="publication__record_8cpp_source.html" title="src/publication_record.cpp" alt="" coords="495,155,670,181"/>
+<area shape="rect" id="node16" href="signature__record_8cpp_source.html" title="src/signature_record.cpp" alt="" coords="695,155,860,181"/>
+<area shape="rect" id="node19" href="keys_8cpp_source.html" title="src/keys.cpp" alt="" coords="986,155,1083,181"/>
 </map>
 </div>
 </div>
@@ -157,14 +157,35 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html">BaseRecord</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classBaseRecord.html" title="The BaseRecord class acts as an abstract base class for other kinds of records. ">BaseRecord</a> class acts as an abstract base class for other kinds of records.  <a href="classBaseRecord.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aab1b90f59dc5a2902b083c30abd7ff36"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="base__record_8hpp.html#aab1b90f59dc5a2902b083c30abd7ff36">HASH_MAX</a>&#160;&#160;&#160;&quot;000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF&quot;</td></tr>
+<tr class="separator:aab1b90f59dc5a2902b083c30abd7ff36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="aab1b90f59dc5a2902b083c30abd7ff36"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HASH_MAX&#160;&#160;&#160;&quot;000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The maximum size of a mined hash </p>
+
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00041">41</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_bfccd401955b95cf8c75461437045ac0.html">inc</a></li><li class="navelem"><a class="el" href="base__record_8hpp.html">base_record.hpp</a></li>
-    <li class="footer">Generated on Wed May 16 2018 07:00:57 for ReChain by
+    <li class="footer">Generated on Mon May 21 2018 03:37:25 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

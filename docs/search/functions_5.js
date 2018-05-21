@@ -15,6 +15,7 @@ var searchData=
   ['get_5fpeers',['get_peers',['../classConfig.html#adac71a12da2f13e578a4f5aba9f6910f',1,'Config']]],
   ['get_5fprevious',['get_previous',['../classBaseRecord.html#aee53bf01925bd922e2977e12840d1c10',1,'BaseRecord']]],
   ['get_5fproperty',['get_property',['../classMessage.html#a1aa4683bb993c45d7a2dcca9c8114647',1,'Message::get_property(std::string key)'],['../classMessage.html#a9a8c5eaf63757b07b23adaac00ff33fb',1,'Message::get_property(std::string key)']]],
+  ['get_5fpublic',['get_public',['../classPrivateKey.html#acdf9eb69cd5c802d69301a6b45c43ef3',1,'PrivateKey']]],
   ['get_5fpublic_5fkey',['get_public_key',['../classBaseRecord.html#a7431841dc26bcffd74b58be7851a6f42',1,'BaseRecord']]],
   ['get_5frecord_5fhash',['get_record_hash',['../classSignatureRecord.html#aa0f14606c818b63c762a3e610fb778e4',1,'SignatureRecord']]],
   ['get_5freference',['get_reference',['../classPublicationRecord.html#a52dfb91c522b326846e7d32d9bda8690',1,'PublicationRecord']]],

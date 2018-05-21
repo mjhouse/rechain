@@ -96,6 +96,7 @@ class Manager {
         bool save();
 
         /** \brief Save the blockchain to a new location
+            \param t_path The location the save to
             \returns True on success
         */
         bool save( std::string t_path );
@@ -106,6 +107,7 @@ class Manager {
         bool load();
 
         /** \brief Load the blockchain from a new location
+            \param t_path The location the load from
             \returns True on success
         */
         bool load( std::string t_path );
