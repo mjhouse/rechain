@@ -24,7 +24,11 @@ bool test_set::run() {
             failures.push_back(result);
         }
         catch(const std::exception& e){
-            failure f({ std::string(e.what()), std::string(__FILE__), __LINE__ });
+            std::string tname  = std::string(test_set::current_test_case->name); 
+            std::string terror = std::string(e.what());
+            
+            std::string msg = "(\"" + tname + "\") " + terror;
+            failure f({ msg, std::string(__FILE__), __LINE__ });
             failures.push_back(f);
         }
     }
