@@ -14,11 +14,10 @@ int main( int /* argc */, char** /* argv[] */ ){
     tf.catch_signals();
     bool result = tf.run();
 
+    tf.report();
     if(!result){
-        tf.report();
         return 0;
     } else {
-        std::cout << "ALL TESTS PASSED" << std::endl;
         return 1;
     }
 }

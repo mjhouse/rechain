@@ -277,6 +277,11 @@ test_set publication_tests("tests for publication records",{
         RCREQUIRE(pr.get_nonce() > 0);
         RCREQUIRE(pr.get_timestamp() > 0);
         RCREQUIRE(pr.get_counter() > 0);
+        RCREQUIRE(pr.hash() < HASH_MAX);
+        RCREQUIRE(!(pr.get_signature().empty()));
+        RCREQUIRE(public_key->verify(&pr));
+        RCREQUIRE(!(pr.get_reference().empty()));
+        RCREQUIRE(pr.is_valid());
 
         delete private_key;
         delete public_key;

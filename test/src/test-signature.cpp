@@ -148,52 +148,58 @@ test_set signature_tests("tests for signature records",{
 
     {"convert signature record to/from string and compare",[]{
 
-        PublicationRecord pr;
+        PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
+
+        SignatureRecord sr("NOTAHASH");
+        sr.set_previous("NOTAHASH");
+
+        private_key->sign(&sr);
+        delete private_key;
   
-        std::string path = get_path("files/gold/test_pub_serialize.txt");
+        std::string path = get_path("files/gold/test_sig_serialize.txt");
         std::ostringstream data;
 
         std::ifstream is(path);
         if(is.is_open()){
 
             boost::archive::text_iarchive archive(is);
-            archive >> pr;
+            archive >> sr;
 
         }
 
         std::string gold = dump_file(path);
-        std::string gray = pr.to_string();
+        std::string gray = sr.to_string();
 
         RCREQUIRE(gray == gold);
 
     }},
 
-    {"sign a publication record",[]{
+    {"sign a signature record",[]{
 
         PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
         PublicKey* public_key   = private_key->get_public();
-        PublicationRecord pr;
+        SignatureRecord sr;
 
         try {
-            private_key->sign(&pr);
+            private_key->sign(&sr);
         }
         catch(const std::exception& e){
             RCTHROW(e.what());
         }
 
-        RCREQUIRE(!(pr.get_signature().empty()));
-        RCREQUIRE(pr.get_public_key() == public_key->to_string());
+        RCREQUIRE(!(sr.get_signature().empty()));
+        RCREQUIRE(sr.get_public_key() == public_key->to_string());
 
         delete private_key;
         delete public_key;
     }},
 
-    {"mine a publication record without signing",[]{
+    {"mine a signature record without signing",[]{
 
-        PublicationRecord pr(get_path("files/general/test_publication.txt"));
+        SignatureRecord sr(generate_hash());
 
         try {
-            pr.mine();
+            sr.mine();
         }
         catch(const std::invalid_argument& e){
             return;
@@ -203,56 +209,56 @@ test_set signature_tests("tests for signature records",{
 
     }},
 
-    {"sign and mine a publication record",[]{
+    {"sign and mine a signature record",[]{
 
         PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
         PublicKey* public_key   = private_key->get_public();
 
-        PublicationRecord pr(get_path("files/general/test_publication.txt"));
+        SignatureRecord sr(generate_hash());
 
-        private_key->sign(&pr);
-        pr.mine();
+        private_key->sign(&sr);
+        sr.mine();
 
-        RCREQUIRE(pr.hash() < HASH_MAX);
-        RCREQUIRE(!(pr.get_signature().empty()));
-        RCREQUIRE(public_key->verify(&pr));
-        RCREQUIRE(!(pr.get_reference().empty()));
-        RCREQUIRE(pr.is_valid());
+        RCREQUIRE(sr.hash() < HASH_MAX);
+        RCREQUIRE(!(sr.get_signature().empty()));
+        RCREQUIRE(public_key->verify(&sr));
+        RCREQUIRE(!(sr.get_record_hash().empty()));
+        RCREQUIRE(sr.is_valid());
 
         delete private_key;
         delete public_key;
     }},
 
-    {"set and get the previous reference on a publication record",[]{
+    {"set and get the previous reference on a signature record",[]{
 
-        std::string hash = "NOTAHASH";
-        PublicationRecord pr;
+        std::string hash = generate_hash();
+        SignatureRecord sr;
 
-        pr.set_previous(hash);
+        sr.set_previous(hash);
         
-        RCREQUIRE(pr.get_previous() == hash);
+        RCREQUIRE(sr.get_previous() == hash);
 
     }},
     
-    {"set and get the public key on a publication record",[]{
+    {"set and get the public key on a signature record",[]{
 
         std::string key = "NOTAPUBLICKEY";
-        PublicationRecord pr;
+        SignatureRecord sr;
 
-        pr.set_public_key(key);
+        sr.set_public_key(key);
         
-        RCREQUIRE(pr.get_public_key() == key);
+        RCREQUIRE(sr.get_public_key() == key);
 
     }},
 
-    {"set and get the signature on a publication record",[]{
+    {"set and get the signature on a signature record",[]{
 
         std::string sig = "NOTASIGNATURE";
-        PublicationRecord pr;
+        SignatureRecord sr;
 
-        pr.set_signature(sig);
+        sr.set_signature(sig);
         
-        RCREQUIRE(pr.get_signature() == sig);
+        RCREQUIRE(sr.get_signature() == sig);
 
     }},
 
@@ -261,18 +267,23 @@ test_set signature_tests("tests for signature records",{
         PrivateKey* private_key = PrivateKey::load_file(get_path("keys/rsa.private"));
         PublicKey* public_key   = private_key->get_public();
 
-        PublicationRecord pr(get_path("files/general/test_publication.txt"));
+        SignatureRecord sr(generate_hash());
 
-        RCREQUIRE(pr.get_nonce() == 0);
-        RCREQUIRE(pr.get_timestamp() == 0);
-        RCREQUIRE(pr.get_counter() == 0);
+        RCREQUIRE(sr.get_nonce() == 0);
+        RCREQUIRE(sr.get_timestamp() == 0);
+        RCREQUIRE(sr.get_counter() == 0);
 
-        private_key->sign(&pr);
-        pr.mine();
+        private_key->sign(&sr);
+        sr.mine();
 
-        RCREQUIRE(pr.get_nonce() > 0);
-        RCREQUIRE(pr.get_timestamp() > 0);
-        RCREQUIRE(pr.get_counter() > 0);
+        RCREQUIRE(sr.get_nonce() > 0);
+        RCREQUIRE(sr.get_timestamp() > 0);
+        RCREQUIRE(sr.get_counter() > 0);
+        RCREQUIRE(sr.hash() < HASH_MAX);
+        RCREQUIRE(!(sr.get_signature().empty()));
+        RCREQUIRE(public_key->verify(&sr));
+        RCREQUIRE(!(sr.get_record_hash().empty()));
+        RCREQUIRE(sr.is_valid());
 
         delete private_key;
         delete public_key;

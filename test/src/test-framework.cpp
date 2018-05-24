@@ -5,10 +5,15 @@ std::vector<test_set*> test_set::all_test_sets = {};
 test_case* test_set::current_test_case = nullptr;
 test_set* test_framework::current_test_set = nullptr;
 
+int test_set::test_case_count = 0;
+int test_set::test_set_count = 0;
+
 test_set::test_set( std::string n, std::vector<test_case> t ){
     name = n;
     tests = t;
 
+    test_set::test_set_count += 1;
+    test_set::test_case_count += t.size();
     test_set::all_test_sets.push_back(this);
 }
 
@@ -51,11 +56,22 @@ bool test_framework::run(){
 }
 
 void test_framework::report(){
-    for(auto& test_set : failures){
-        std::cout << test_set.name << ": FAILED" << std::endl;
-        for(auto& failure : test_set.failures){
-           std::cout << "   " << failure.file << ": " << std::to_string(failure.line) << ": " << failure.name << std::endl; 
+
+    if(failures.size() > 0){
+        for(auto& test_set : failures){
+            std::cout << test_set.name << ": FAILED" << std::endl;
+            for(auto& failure : test_set.failures){
+               std::cout << "   " << failure.file << ": " << std::to_string(failure.line) << ": " << failure.name << std::endl; 
+            }
         }
+    }
+    else {
+        std::cout << "ALL TESTS PASSING: "
+                  << test_set::test_case_count 
+                  << " cases in "
+                  << test_set::test_set_count 
+                  << " test sets." 
+                  << std::endl;
     }
 }
 

@@ -269,6 +269,10 @@ test_set genesis_tests("tests for genesis records",{
         RCREQUIRE(gr.get_nonce() > 0);
         RCREQUIRE(gr.get_timestamp() > 0);
         RCREQUIRE(gr.get_counter() > 0);
+        RCREQUIRE(gr.hash() < HASH_MAX);
+        RCREQUIRE(!(gr.get_signature().empty()));
+        RCREQUIRE(public_key->verify(&gr));
+        RCREQUIRE(gr.is_valid());
 
         delete private_key;
         delete public_key;

@@ -36,6 +36,9 @@ class test_set {
         static std::vector<test_set*> all_test_sets;
         static test_case* current_test_case;
 
+        static int test_case_count;
+        static int test_set_count;
+
         std::string name;
 
         std::vector<test_case> tests;
