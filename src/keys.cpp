@@ -77,7 +77,7 @@ void PrivateKey::sign( BaseRecord* t_record ){
 	t_record->set_signature(signature);
 }
 
-// Sign a Data block
+// Sign a Record
 void PrivateKey::sign( std::shared_ptr<BaseRecord> t_record ){
     sign(t_record.get());
 }
