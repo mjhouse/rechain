@@ -45,7 +45,7 @@
 //      Constructor that inits default values
 // ----------------------------------------------------------------------------
 BaseRecord::BaseRecord()
-    : m_nonce(0), m_timestamp(0), m_counter(0) {}
+    : m_type(RecordType::Base), m_nonce(0), m_timestamp(0), m_counter(0) {}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -153,5 +153,15 @@ std::string BaseRecord::get_data(){
     data.append(m_previous);
 
     return data;
+}
+
+// ----------------------------------------------------------------------------
+// Name:
+//      BaseRecord::get_type
+// Description:
+//      Get the type of this record      
+// ----------------------------------------------------------------------------
+RecordType BaseRecord::get_type(){
+    return m_type;
 }
 

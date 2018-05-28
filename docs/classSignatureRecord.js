@@ -5,7 +5,6 @@ var classSignatureRecord =
     [ "~SignatureRecord", "classSignatureRecord.html#a6dad7d6941a302ab33a02a8e2baac078", null ],
     [ "get_data", "classSignatureRecord.html#a0cbb4330b31d922a7ec838885d87c21b", null ],
     [ "get_record_hash", "classSignatureRecord.html#aa0f14606c818b63c762a3e610fb778e4", null ],
-    [ "get_type", "classSignatureRecord.html#adeb88b77c808f1adc24821f8ac0c6a01", null ],
     [ "is_valid", "classSignatureRecord.html#a3d9749e3a4b571956200d05bd22e127b", null ],
     [ "serialize", "classSignatureRecord.html#a4c08d80cf9ec2386baa036d13a46e647", null ],
     [ "set_record_hash", "classSignatureRecord.html#ad728d91f7662849707e8a24846a551a4", null ],

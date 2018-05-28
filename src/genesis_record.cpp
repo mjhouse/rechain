@@ -37,7 +37,9 @@
 // Description:
 //      Empty constructor 
 // ----------------------------------------------------------------------------
-GenesisRecord::GenesisRecord(){}
+GenesisRecord::GenesisRecord(){
+    m_type = RecordType::Genesis;
+}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -46,16 +48,6 @@ GenesisRecord::GenesisRecord(){}
 //      Empty destructor 
 // ----------------------------------------------------------------------------
 GenesisRecord::~GenesisRecord(){}
-
-// ----------------------------------------------------------------------------
-// Name:
-//      GenesisRecord::get_type
-// Description:
-//      Returns the type of the GenesisRecord (RecordType::Genesis)
-// ----------------------------------------------------------------------------
-int GenesisRecord::get_type(){
-  return RecordType::Genesis;
-}
 
 // ----------------------------------------------------------------------------
 // Name:

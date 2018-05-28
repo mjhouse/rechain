@@ -2,8 +2,10 @@
 
 <!-- @cond suppress 
 -->
+<!-- 
 [![Build Status](https://travis-ci.org/mjhouse/rechain.svg?branch=master)](https://travis-ci.org/mjhouse/rechain)
 [![Coverage Status](https://coveralls.io/repos/github/mjhouse/rechain/badge.svg?branch=master)](https://coveralls.io/github/mjhouse/rechain?branch=master)
+-->
 <!-- @endcond 
 -->
 

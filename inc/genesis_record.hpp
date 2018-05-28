@@ -39,6 +39,7 @@
 
 // local includes
 #include "base_record.hpp"
+#include "enums.hpp"
 
 using boost::serialization::base_object;
 
@@ -101,11 +102,6 @@ class GenesisRecord : virtual public BaseRecord {
             \param t_distribution The distribution list for the GenesisRecord
         */
         void set_distribution( std::vector<std::string> t_distribution ){ m_distribution = t_distribution; }
-
-        /** \brief Get the RecordType of this Record
-            \returns The RecordType of this Record
-        */
-        int get_type();
 
         /** \brief Check if Record is internally valid
             \returns True if Record is valid

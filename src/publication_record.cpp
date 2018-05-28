@@ -43,7 +43,9 @@
 // Description:
 //      Empty constructor 
 // ----------------------------------------------------------------------------
-PublicationRecord::PublicationRecord(){}
+PublicationRecord::PublicationRecord(){
+    m_type = RecordType::Publication;
+}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -53,6 +55,7 @@ PublicationRecord::PublicationRecord(){}
 // ----------------------------------------------------------------------------
 PublicationRecord::PublicationRecord( std::string t_path ){
 
+    m_type = RecordType::Publication;
     RCDEBUG("creating new publication record from file");
 
     std::ifstream in_file(t_path,std::ifstream::binary);
@@ -85,16 +88,6 @@ PublicationRecord::PublicationRecord( std::string t_path ){
 //      Empty destructor 
 // ----------------------------------------------------------------------------
 PublicationRecord::~PublicationRecord(){}
-
-// ----------------------------------------------------------------------------
-// Name:
-//      PublicationRecord::get_type
-// Description:
-//      Returns the type of the PublicationRecord (RecordType::Genesis)
-// ----------------------------------------------------------------------------
-int PublicationRecord::get_type(){
-  return RecordType::Publication;
-}
 
 // ----------------------------------------------------------------------------
 // Name:

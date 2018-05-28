@@ -5,7 +5,6 @@ var classGenesisRecord =
     [ "get_data", "classGenesisRecord.html#acde08cec5aaea9b04524d5457eda217a", null ],
     [ "get_distribution", "classGenesisRecord.html#a193e170301f3deb16a72f1ac2cec0ab6", null ],
     [ "get_name", "classGenesisRecord.html#a1d8c05997f1fa8acba133c47a5139a86", null ],
-    [ "get_type", "classGenesisRecord.html#a7fd23dcd43f6891d7bc2baa4760db4c2", null ],
     [ "is_valid", "classGenesisRecord.html#a87088e4a4fb02d9c3dc43cfbae856d7f", null ],
     [ "serialize", "classGenesisRecord.html#acb780895ff31c4d6b5c2798f6bd34452", null ],
     [ "set_distribution", "classGenesisRecord.html#ab35d68719570b53c04c509f91dcd3c3f", null ],

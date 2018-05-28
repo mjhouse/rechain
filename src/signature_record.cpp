@@ -37,7 +37,9 @@
 // Description:
 //      Empty constructor 
 // ----------------------------------------------------------------------------
-SignatureRecord::SignatureRecord(){}
+SignatureRecord::SignatureRecord(){
+    m_type = RecordType::Signature;
+}
 
 // ----------------------------------------------------------------------------
 // Name:
@@ -46,6 +48,7 @@ SignatureRecord::SignatureRecord(){}
 //      Construct a new signature from a hash 
 // ----------------------------------------------------------------------------
 SignatureRecord::SignatureRecord( std::string t_hash ){
+    m_type = RecordType::Signature;
     m_record_hash = t_hash;
 }
 
@@ -56,16 +59,6 @@ SignatureRecord::SignatureRecord( std::string t_hash ){
 //      Empty destructor 
 // ----------------------------------------------------------------------------
 SignatureRecord::~SignatureRecord(){}
-
-// ----------------------------------------------------------------------------
-// Name:
-//      SignatureRecord::get_type
-// Description:
-//      Returns the type of the SignatureRecord (RecordType::Signature)
-// ----------------------------------------------------------------------------
-int SignatureRecord::get_type(){
-  return RecordType::Signature;
-}
 
 // ----------------------------------------------------------------------------
 // Name:

@@ -10,6 +10,7 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+#include <chrono>
 
 #define RCTHROW(message)  \
     throw failure( { std::string(message), std::string(__FILE__), __LINE__ } )
@@ -43,8 +44,9 @@ class test_set {
 
         std::vector<test_case> tests;
         std::vector<failure> failures; 
+        std::vector<std::string> tags; 
 
-        test_set( std::string n, std::vector<test_case> t );
+        test_set( std::string t_name, std::vector<test_case> t_cases, std::vector<std::string> t_tags = {} );
 
         bool run();
 
@@ -53,6 +55,8 @@ class test_set {
 class test_framework {
 
     public:
+
+        int run_time;
 
         std::vector<test_set> failures;
         static test_set* current_test_set;

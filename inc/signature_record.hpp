@@ -90,11 +90,6 @@ class SignatureRecord : virtual public BaseRecord {
         */
         void set_record_hash( std::string t_record_hash ){ m_record_hash = t_record_hash; };
 
-        /** \brief Get the RecordType of this Record
-            \returns The RecordType of this Record
-        */
-        int get_type();
-
         /** \brief Check if Record is internally valid
             \returns True if Record is valid
         */

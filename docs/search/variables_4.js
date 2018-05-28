@@ -25,6 +25,7 @@ var searchData=
   ['m_5fstatus',['m_status',['../classResponse.html#a44b8b0afb61f1882b5a21ecdecc8ed83',1,'Response']]],
   ['m_5ftimestamp',['m_timestamp',['../classBaseRecord.html#aebb2e8e9399bee0abbc239cb85de5815',1,'BaseRecord']]],
   ['m_5ftrust',['m_trust',['../classBlockchain.html#a82c1864c0e29df431d67286af2d68815',1,'Blockchain']]],
+  ['m_5ftype',['m_type',['../classBaseRecord.html#af8e97a5ff749f70b431ff4f91101da40',1,'BaseRecord']]],
   ['m_5furl',['m_url',['../classRequest.html#a231f72749bc5e377159f1f2b32d6bd06',1,'Request']]],
   ['m_5fversion',['m_version',['../classMessage.html#a0d6e3b7989436d6f65dbd606ba9b0a68',1,'Message']]],
   ['manager',['manager',['../classInterface.html#a54b022d952778edad89d2ce7f2638d40',1,'Interface']]],

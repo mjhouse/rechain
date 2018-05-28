@@ -155,6 +155,10 @@ test_set signature_tests("tests for signature records",{
 
         private_key->sign(&sr);
         delete private_key;
+
+        //std::ofstream ofs(get_path("files/gold/test_sig_serialize.txt"));
+        //ofs << sr.to_string();
+        //return;
   
         std::string path = get_path("files/gold/test_sig_serialize.txt");
         std::ostringstream data;

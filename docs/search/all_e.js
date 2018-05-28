@@ -5,5 +5,5 @@ var searchData=
   ['publication_5frecord_2ehpp',['publication_record.hpp',['../publication__record_8hpp.html',1,'']]],
   ['publicationrecord',['PublicationRecord',['../classPublicationRecord.html',1,'PublicationRecord'],['../classPublicationRecord.html#adef6246554f051c8f465411dd5c8e906',1,'PublicationRecord::PublicationRecord()'],['../classPublicationRecord.html#ac4abad6966b5f0c13b3002ed01b9062b',1,'PublicationRecord::PublicationRecord(std::string t_path)']]],
   ['publickey',['PublicKey',['../classPublicKey.html',1,'PublicKey'],['../classPublicKey.html#af4c4839004f3b4f54dc5320a602e7547',1,'PublicKey::PublicKey()'],['../classPublicKey.html#af9a5149c3767cf8c1cf26e003e164dcd',1,'PublicKey::PublicKey(PublicKey *t_key)']]],
-  ['publish',['publish',['../classBlockchain.html#a89545481360bc9b0db44451e657357f8',1,'Blockchain::publish()'],['../classManager.html#ab948862cab8578c97529fa4c964daa3a',1,'Manager::publish()']]]
+  ['publish',['publish',['../classBlockchain.html#adab21a81d24a4d4c94829ee83500a7d2',1,'Blockchain::publish()'],['../classManager.html#ab948862cab8578c97529fa4c964daa3a',1,'Manager::publish()']]]
 ];

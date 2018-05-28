@@ -34,6 +34,9 @@
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/export.hpp>
 
+// local includes
+#include "enums.hpp"
+
 /* Maximum hash value (smaller increases difficulty) */
 #ifndef NDEBUG
 
@@ -63,6 +66,7 @@ class BaseRecord {
         */
         template <class Archive>
         void serialize( Archive& t_archive, const unsigned int /* version */ ){
+            t_archive & m_previous;
             t_archive & m_public_key;
             t_archive & m_signature;
             t_archive & m_nonce;
@@ -71,6 +75,9 @@ class BaseRecord {
         }
 
     protected:
+
+        /** The type of record */
+        RecordType m_type;
 
         // data variables
         std::string m_public_key;         /**< The public key of the owner */
@@ -114,7 +121,7 @@ class BaseRecord {
         /** \brief Get the RecordType of this Record
             \returns The RecordType of this Record
         */
-        virtual int get_type() = 0;
+        RecordType get_type();
 
         /** \brief Get the serialized Record as a string
             \returns The Record as a string

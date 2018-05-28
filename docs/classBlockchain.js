@@ -10,7 +10,7 @@ var classBlockchain =
     [ "find_signatures", "classBlockchain.html#aa6526309dc8a930d19a6b41c51217712", null ],
     [ "is_valid", "classBlockchain.html#a3aed5746095246ac08c6ecdf318db9eb", null ],
     [ "load", "classBlockchain.html#a0010eede3dac6febaa90bf789b979e76", null ],
-    [ "publish", "classBlockchain.html#a89545481360bc9b0db44451e657357f8", null ],
+    [ "publish", "classBlockchain.html#adab21a81d24a4d4c94829ee83500a7d2", null ],
     [ "save", "classBlockchain.html#a859af645b38e1d391643c8492f0e5aa6", null ],
     [ "serialize", "classBlockchain.html#a410157dcb2341867330047b61e5afeca", null ],
     [ "size", "classBlockchain.html#a53b20aa429f9069e5266455de0027df0", null ],

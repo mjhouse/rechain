@@ -90,11 +90,6 @@ class PublicationRecord : virtual public BaseRecord {
         */
         void set_reference( std::string t_reference ){ m_reference = t_reference; };
 
-        /** \brief Get the RecordType of this Record
-            \returns The RecordType of this Record
-        */
-        int get_type();
-
         /** \brief Check if Record is internally valid
             \returns True if Record is valid
         */

@@ -37,6 +37,7 @@
 #include "publication_record.hpp"
 #include "signature_record.hpp"
 #include "logger.hpp"
+#include "keys.hpp"
 #include "enums.hpp"
 
 // ----------------------------------------------------------------------------
@@ -202,10 +203,9 @@ void Blockchain::update_trust(){
 //      Mine and publish a valid record to the blockchain,
 //      broadcast to other clients, and return true on success
 // ----------------------------------------------------------------------------
-bool Blockchain::publish( std::shared_ptr<BaseRecord> t_record ){
+bool Blockchain::publish( std::shared_ptr<BaseRecord> t_record, std::shared_ptr<PrivateKey> t_key ){
 
-    std::string hash = t_record->hash();
-    RCDEBUG("publishing record: " + hash);
+    RCDEBUG("publishing record");
 
     if(m_blockchain.size() > 0){
 
@@ -214,10 +214,11 @@ bool Blockchain::publish( std::shared_ptr<BaseRecord> t_record ){
 
     }
 
-    t_record->mine();
+    t_key->sign(t_record);
+    std::string hash = t_record->mine();
 
     if(t_record->is_valid()){
-    
+
         m_blockchain.push_back(t_record);
         // remote->send( t_record );
 
@@ -327,12 +328,21 @@ bool Blockchain::is_valid(){
 	std::set<std::string> hashes;
     std::string previous;
 
+    // check that there is a genesis record
+    if(m_blockchain.size() == 0){
+        return false;
+    }
+
+    int count = 0;
+
     for(auto& record : m_blockchain){
 
 		if(record->get_previous() != previous){
             RCERROR("record doesn't reference previous");
 			return false;
         }
+
+        count++;
 
         if(!record->is_valid()){
             RCERROR("record isn't valid");

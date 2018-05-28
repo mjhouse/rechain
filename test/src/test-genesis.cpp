@@ -142,6 +142,10 @@ test_set genesis_tests("tests for genesis records",{
     {"convert genesis record to/from string and compare",[]{
 
         GenesisRecord gr;
+
+        //std::ofstream ofs(get_path("files/gold/test_gen_serialize.txt"));
+        //ofs << gr.to_string();
+        //return;
   
         std::string path = get_path("files/gold/test_gen_serialize.txt");
         std::ostringstream data;

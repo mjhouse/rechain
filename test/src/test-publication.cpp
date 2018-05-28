@@ -154,6 +154,10 @@ test_set publication_tests("tests for publication records",{
 
         PublicationRecord pr;
   
+        //std::ofstream ofs(get_path("files/gold/test_pub_serialize.txt"));
+        //ofs << pr.to_string();
+        //return;
+
         std::string path = get_path("files/gold/test_pub_serialize.txt");
         std::ostringstream data;
 

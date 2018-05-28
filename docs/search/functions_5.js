@@ -23,7 +23,7 @@ var searchData=
   ['get_5fspecific',['get_specific',['../classMessage.html#a8f3c4c0cb6f5a783fabc6e25e4fc1fba',1,'Message::get_specific()'],['../classRequest.html#a389fe0303ac066603e700bf70d271916',1,'Request::get_specific()'],['../classResponse.html#a40555ff653fe1678cc9d023bb3136b4b',1,'Response::get_specific()']]],
   ['get_5fstatus',['get_status',['../classResponse.html#a72f4b12f983c3140a2e933ab7167d747',1,'Response']]],
   ['get_5ftimestamp',['get_timestamp',['../classBaseRecord.html#a2d32fbbee7cd488f469624350b833652',1,'BaseRecord']]],
-  ['get_5ftype',['get_type',['../classBaseRecord.html#a0942f8ebd8dd4cb3e83d1d246675cce0',1,'BaseRecord::get_type()'],['../classGenesisRecord.html#a7fd23dcd43f6891d7bc2baa4760db4c2',1,'GenesisRecord::get_type()'],['../classPublicationRecord.html#a08e37e4fdf2e4d37c12673cbe9b5bb06',1,'PublicationRecord::get_type()'],['../classSignatureRecord.html#adeb88b77c808f1adc24821f8ac0c6a01',1,'SignatureRecord::get_type()']]],
+  ['get_5ftype',['get_type',['../classBaseRecord.html#a02310b48631cc028c98c13b8752b56d1',1,'BaseRecord']]],
   ['get_5furl',['get_url',['../classRequest.html#aacf38ca9578fa2537f3cce099a2d9163',1,'Request']]],
   ['get_5fversion',['get_version',['../classMessage.html#a07e2f6237ca6fdc9fad039c259623f94',1,'Message']]]
 ];

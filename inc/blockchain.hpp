@@ -45,6 +45,7 @@
 #include "genesis_record.hpp"
 #include "publication_record.hpp"
 #include "signature_record.hpp"
+#include "keys.hpp"
 
 /** The Blockchain class manages a collection of 
     BaseRecord objects.
@@ -93,10 +94,11 @@ class Blockchain {
 		~Blockchain();
 
         /** \brief Mine, add and broadcast a record
-            \param t_record The record to mine, add and broadcast
+            \param t_record The record to sign, mine and broadcast
+            \param t_key The key to publish the record with 
             \returns True if the record was published
         */
-        bool publish( std::shared_ptr<BaseRecord> t_record );
+        bool publish( std::shared_ptr<BaseRecord> t_record, std::shared_ptr<PrivateKey> t_key );
 
 		/** \brief Find a BaseRecord by the hash
 			\param t_hash The hash of the BaseRecord to return

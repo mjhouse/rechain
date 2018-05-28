@@ -144,9 +144,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:af66c9a17c04a7f4d05b5f5c8d71601d8"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#af66c9a17c04a7f4d05b5f5c8d71601d8">get_data</a> ()</td></tr>
 <tr class="memdesc:af66c9a17c04a7f4d05b5f5c8d71601d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the concatenated data for hashing/signing.  <a href="#af66c9a17c04a7f4d05b5f5c8d71601d8">More...</a><br /></td></tr>
 <tr class="separator:af66c9a17c04a7f4d05b5f5c8d71601d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0942f8ebd8dd4cb3e83d1d246675cce0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#a0942f8ebd8dd4cb3e83d1d246675cce0">get_type</a> ()=0</td></tr>
-<tr class="memdesc:a0942f8ebd8dd4cb3e83d1d246675cce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the RecordType of this Record.  <a href="#a0942f8ebd8dd4cb3e83d1d246675cce0">More...</a><br /></td></tr>
-<tr class="separator:a0942f8ebd8dd4cb3e83d1d246675cce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02310b48631cc028c98c13b8752b56d1"><td class="memItemLeft" align="right" valign="top">RecordType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#a02310b48631cc028c98c13b8752b56d1">get_type</a> ()</td></tr>
+<tr class="memdesc:a02310b48631cc028c98c13b8752b56d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the RecordType of this Record.  <a href="#a02310b48631cc028c98c13b8752b56d1">More...</a><br /></td></tr>
+<tr class="separator:a02310b48631cc028c98c13b8752b56d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a627effec6cc1f1aecd478c70805f42d2"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#a627effec6cc1f1aecd478c70805f42d2">to_string</a> ()=0</td></tr>
 <tr class="memdesc:a627effec6cc1f1aecd478c70805f42d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the serialized Record as a string.  <a href="#a627effec6cc1f1aecd478c70805f42d2">More...</a><br /></td></tr>
 <tr class="separator:a627effec6cc1f1aecd478c70805f42d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,6 +180,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:af8e97a5ff749f70b431ff4f91101da40"><td class="memItemLeft" align="right" valign="top">RecordType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#af8e97a5ff749f70b431ff4f91101da40">m_type</a></td></tr>
+<tr class="separator:af8e97a5ff749f70b431ff4f91101da40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac07d27aeecd153eb9292ec0d81878b2f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#ac07d27aeecd153eb9292ec0d81878b2f">m_public_key</a></td></tr>
 <tr class="separator:ac07d27aeecd153eb9292ec0d81878b2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad759b6e25d34c98dc31c02b7fd7acb13"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#ad759b6e25d34c98dc31c02b7fd7acb13">m_signature</a></td></tr>
@@ -207,7 +209,7 @@ Friends</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00053">53</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00056">56</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for BaseRecord:</div>
 <div class="dyncontent">
@@ -241,7 +243,7 @@ Inheritance diagram for BaseRecord:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The counter </dd></dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00167">167</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00174">174</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -295,7 +297,7 @@ Inheritance diagram for BaseRecord:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The nonce </dd></dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00157">157</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00164">164</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -321,7 +323,7 @@ Inheritance diagram for BaseRecord:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The hash of the previous record </dd></dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00127">127</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00134">134</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -347,7 +349,7 @@ Inheritance diagram for BaseRecord:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The value of m_public_key </dd></dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00137">137</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00144">144</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -373,7 +375,7 @@ Inheritance diagram for BaseRecord:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The value of m_signature </dd></dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00147">147</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00154">154</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -399,33 +401,25 @@ Inheritance diagram for BaseRecord:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The raw posix timestamp </dd></dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00162">162</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00169">169</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0942f8ebd8dd4cb3e83d1d246675cce0"></a>
+<a class="anchor" id="a02310b48631cc028c98c13b8752b56d1"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int BaseRecord::get_type </td>
+          <td class="memname">RecordType BaseRecord::get_type </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The RecordType of this Record </dd></dl>
 
-<p>Implemented in <a class="el" href="classGenesisRecord.html#a7fd23dcd43f6891d7bc2baa4760db4c2">GenesisRecord</a>, <a class="el" href="classPublicationRecord.html#a08e37e4fdf2e4d37c12673cbe9b5bb06">PublicationRecord</a>, and <a class="el" href="classSignatureRecord.html#adeb88b77c808f1adc24821f8ac0c6a01">SignatureRecord</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8cpp_source.html#l00164">164</a> of file <a class="el" href="base__record_8cpp_source.html">base_record.cpp</a>.</p>
 
 </div>
 </div>
@@ -534,7 +528,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00065">65</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00068">68</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -566,7 +560,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00132">132</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00139">139</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -598,7 +592,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00142">142</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00149">149</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -630,7 +624,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00152">152</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00159">159</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -680,7 +674,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Make access a friend for serialization </p>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00058">58</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00061">61</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -704,7 +698,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Counter to modify hash output </p>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00083">83</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00090">90</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -727,7 +721,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Randomly generated value to modify hash </p>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00081">81</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00088">88</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -750,7 +744,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The signature </p>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00078">78</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00085">85</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -773,7 +767,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The public key of the owner </p>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00076">76</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00083">83</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -796,7 +790,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The signature </p>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00077">77</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00084">84</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -819,7 +813,30 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>A timestamp </p>
 
-<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00082">82</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00089">89</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af8e97a5ff749f70b431ff4f91101da40"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RecordType BaseRecord::m_type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The type of record </p>
+
+<p>Definition at line <a class="el" href="base__record_8hpp_source.html#l00080">80</a> of file <a class="el" href="base__record_8hpp_source.html">base_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -833,7 +850,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBaseRecord.html">BaseRecord</a></li>
-    <li class="footer">Generated on Thu May 24 2018 04:33:35 for ReChain by
+    <li class="footer">Generated on Mon May 28 2018 04:51:43 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

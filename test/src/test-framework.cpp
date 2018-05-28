@@ -1,4 +1,7 @@
+#include <chrono>
 #include "test-framework.hpp"
+
+using namespace std::chrono;
 
 std::vector<test_set*> test_set::all_test_sets = {};
 
@@ -8,16 +11,18 @@ test_set* test_framework::current_test_set = nullptr;
 int test_set::test_case_count = 0;
 int test_set::test_set_count = 0;
 
-test_set::test_set( std::string n, std::vector<test_case> t ){
-    name = n;
-    tests = t;
+test_set::test_set( std::string t_name, std::vector<test_case> t_cases, std::vector<std::string> t_tags){
+    name = t_name;
+    tests = t_cases;
+    tags = t_tags;
 
     test_set::test_set_count += 1;
-    test_set::test_case_count += t.size();
+    test_set::test_case_count += t_cases.size();
     test_set::all_test_sets.push_back(this);
 }
 
 bool test_set::run() {
+    
     for(auto& test : tests){
 
         test_set::current_test_case = &test;
@@ -37,10 +42,15 @@ bool test_set::run() {
             failures.push_back(f);
         }
     }
+
     return (failures.size() == 0);
 }
 
 bool test_framework::run(){
+
+    run_time = 0;
+    high_resolution_clock::time_point t1 = high_resolution_clock::now();
+
     for(auto test : test_set::all_test_sets){
 
         test_framework::current_test_set = test;
@@ -52,12 +62,18 @@ bool test_framework::run(){
         }
 
     }
+
+    high_resolution_clock::time_point t2 = high_resolution_clock::now();
+    run_time = duration_cast<microseconds>( t2 - t1 ).count();
+
     return (failures.size() == 0);
 }
 
 void test_framework::report(){
 
+    std::cout << "Tests complete (in " << run_time << "  ms): ";
     if(failures.size() > 0){
+        std::cout << std::endl;
         for(auto& test_set : failures){
             std::cout << test_set.name << ": FAILED" << std::endl;
             for(auto& failure : test_set.failures){

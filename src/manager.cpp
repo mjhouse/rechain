@@ -168,13 +168,11 @@ bool Manager::publish( std::string t_path ){
 
             std::shared_ptr<PublicationRecord> record(new PublicationRecord(t_path));
 
-            m_private_key->sign(record);
-
             std::string path = Config::get()->setting("blockchain");
 
-            result = ( m_blockchain.publish(record) &&
-                       m_blockchain.is_valid()      &&
-                       m_blockchain.save(path)         );
+            result = ( m_blockchain.publish(record,m_private_key) &&
+                       m_blockchain.is_valid()                    &&
+                       m_blockchain.save(path)                      );
         }
 
     }
@@ -209,7 +207,7 @@ bool Manager::sign( std::string t_hash ){
     if(record && record->get_type() == RecordType::Publication){
 
         std::shared_ptr<SignatureRecord> record(new SignatureRecord(t_hash));
-        return m_blockchain.publish(record);
+        return m_blockchain.publish(record,m_private_key);
 
     }
 

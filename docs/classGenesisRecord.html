@@ -145,9 +145,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab35d68719570b53c04c509f91dcd3c3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGenesisRecord.html#ab35d68719570b53c04c509f91dcd3c3f">set_distribution</a> (std::vector&lt; std::string &gt; t_distribution)</td></tr>
 <tr class="memdesc:ab35d68719570b53c04c509f91dcd3c3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the distribution list for the <a class="el" href="classGenesisRecord.html" title="A class that acts as the initial Record in a Blockchain, storing information about the Blockchain its...">GenesisRecord</a>.  <a href="#ab35d68719570b53c04c509f91dcd3c3f">More...</a><br /></td></tr>
 <tr class="separator:ab35d68719570b53c04c509f91dcd3c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fd23dcd43f6891d7bc2baa4760db4c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGenesisRecord.html#a7fd23dcd43f6891d7bc2baa4760db4c2">get_type</a> ()</td></tr>
-<tr class="memdesc:a7fd23dcd43f6891d7bc2baa4760db4c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the RecordType of this Record.  <a href="#a7fd23dcd43f6891d7bc2baa4760db4c2">More...</a><br /></td></tr>
-<tr class="separator:a7fd23dcd43f6891d7bc2baa4760db4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87088e4a4fb02d9c3dc43cfbae856d7f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGenesisRecord.html#a87088e4a4fb02d9c3dc43cfbae856d7f">is_valid</a> ()</td></tr>
 <tr class="memdesc:a87088e4a4fb02d9c3dc43cfbae856d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if Record is internally valid.  <a href="#a87088e4a4fb02d9c3dc43cfbae856d7f">More...</a><br /></td></tr>
 <tr class="separator:a87088e4a4fb02d9c3dc43cfbae856d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,6 +168,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a2e64e50ab87243fdf0a9d955ef2d1edf inherit pub_methods_classBaseRecord"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#a2e64e50ab87243fdf0a9d955ef2d1edf">mine</a> ()</td></tr>
 <tr class="memdesc:a2e64e50ab87243fdf0a9d955ef2d1edf inherit pub_methods_classBaseRecord"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-hash until the hash is valid.  <a href="#a2e64e50ab87243fdf0a9d955ef2d1edf">More...</a><br /></td></tr>
 <tr class="separator:a2e64e50ab87243fdf0a9d955ef2d1edf inherit pub_methods_classBaseRecord"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02310b48631cc028c98c13b8752b56d1 inherit pub_methods_classBaseRecord"><td class="memItemLeft" align="right" valign="top">RecordType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#a02310b48631cc028c98c13b8752b56d1">get_type</a> ()</td></tr>
+<tr class="memdesc:a02310b48631cc028c98c13b8752b56d1 inherit pub_methods_classBaseRecord"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the RecordType of this Record.  <a href="#a02310b48631cc028c98c13b8752b56d1">More...</a><br /></td></tr>
+<tr class="separator:a02310b48631cc028c98c13b8752b56d1 inherit pub_methods_classBaseRecord"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee53bf01925bd922e2977e12840d1c10 inherit pub_methods_classBaseRecord"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#aee53bf01925bd922e2977e12840d1c10">get_previous</a> ()</td></tr>
 <tr class="memdesc:aee53bf01925bd922e2977e12840d1c10 inherit pub_methods_classBaseRecord"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the hash of the previous record.  <a href="#aee53bf01925bd922e2977e12840d1c10">More...</a><br /></td></tr>
 <tr class="separator:aee53bf01925bd922e2977e12840d1c10 inherit pub_methods_classBaseRecord"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,6 +223,8 @@ Friends</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classBaseRecord"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBaseRecord')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classBaseRecord.html">BaseRecord</a></td></tr>
+<tr class="memitem:af8e97a5ff749f70b431ff4f91101da40 inherit pro_attribs_classBaseRecord"><td class="memItemLeft" align="right" valign="top">RecordType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#af8e97a5ff749f70b431ff4f91101da40">m_type</a></td></tr>
+<tr class="separator:af8e97a5ff749f70b431ff4f91101da40 inherit pro_attribs_classBaseRecord"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac07d27aeecd153eb9292ec0d81878b2f inherit pro_attribs_classBaseRecord"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#ac07d27aeecd153eb9292ec0d81878b2f">m_public_key</a></td></tr>
 <tr class="separator:ac07d27aeecd153eb9292ec0d81878b2f inherit pro_attribs_classBaseRecord"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad759b6e25d34c98dc31c02b7fd7acb13 inherit pro_attribs_classBaseRecord"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseRecord.html#ad759b6e25d34c98dc31c02b7fd7acb13">m_signature</a></td></tr>
@@ -238,7 +240,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00049">49</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00050">50</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for GenesisRecord:</div>
 <div class="dyncontent">
@@ -280,7 +282,7 @@ Collaboration diagram for GenesisRecord:</div>
 
 <p>Reimplemented from <a class="el" href="classBaseRecord.html#af66c9a17c04a7f4d05b5f5c8d71601d8">BaseRecord</a>.</p>
 
-<p>Definition at line <a class="el" href="genesis__record_8cpp_source.html#l00083">83</a> of file <a class="el" href="genesis__record_8cpp_source.html">genesis_record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8cpp_source.html#l00075">75</a> of file <a class="el" href="genesis__record_8cpp_source.html">genesis_record.cpp</a>.</p>
 
 </div>
 </div>
@@ -306,7 +308,7 @@ Collaboration diagram for GenesisRecord:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The distribution list for the <a class="el" href="classGenesisRecord.html" title="A class that acts as the initial Record in a Blockchain, storing information about the Blockchain its...">GenesisRecord</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00098">98</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00099">99</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -332,35 +334,7 @@ Collaboration diagram for GenesisRecord:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The name of the <a class="el" href="classBlockchain.html">Blockchain</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00088">88</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7fd23dcd43f6891d7bc2baa4760db4c2"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int GenesisRecord::get_type </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>The RecordType of this Record </dd></dl>
-
-<p>Implements <a class="el" href="classBaseRecord.html#a0942f8ebd8dd4cb3e83d1d246675cce0">BaseRecord</a>.</p>
-
-<p>Definition at line <a class="el" href="genesis__record_8cpp_source.html#l00056">56</a> of file <a class="el" href="genesis__record_8cpp_source.html">genesis_record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00089">89</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -388,7 +362,7 @@ Collaboration diagram for GenesisRecord:</div>
 
 <p>Reimplemented from <a class="el" href="classBaseRecord.html#a3ac732f1b7302c1f4238819b3d7689c6">BaseRecord</a>.</p>
 
-<p>Definition at line <a class="el" href="genesis__record_8cpp_source.html#l00067">67</a> of file <a class="el" href="genesis__record_8cpp_source.html">genesis_record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8cpp_source.html#l00059">59</a> of file <a class="el" href="genesis__record_8cpp_source.html">genesis_record.cpp</a>.</p>
 
 </div>
 </div>
@@ -433,7 +407,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00071">71</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00072">72</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -465,7 +439,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00103">103</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00104">104</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -497,7 +471,7 @@ template&lt;class Archive &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00093">93</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00094">94</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -525,7 +499,7 @@ template&lt;class Archive &gt; </div>
 
 <p>Implements <a class="el" href="classBaseRecord.html#a627effec6cc1f1aecd478c70805f42d2">BaseRecord</a>.</p>
 
-<p>Definition at line <a class="el" href="genesis__record_8cpp_source.html#l00102">102</a> of file <a class="el" href="genesis__record_8cpp_source.html">genesis_record.cpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8cpp_source.html#l00094">94</a> of file <a class="el" href="genesis__record_8cpp_source.html">genesis_record.cpp</a>.</p>
 
 </div>
 </div>
@@ -549,7 +523,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>Make access a friend for serialization </p>
 
-<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00064">64</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00065">65</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -573,7 +547,7 @@ template&lt;class Archive &gt; </div>
 </div><div class="memdoc">
 <p>The name of the <a class="el" href="classBlockchain.html">Blockchain</a> in which this <a class="el" href="classGenesisRecord.html" title="A class that acts as the initial Record in a Blockchain, storing information about the Blockchain its...">GenesisRecord</a> is held. </p>
 
-<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00056">56</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
+<p>Definition at line <a class="el" href="genesis__record_8hpp_source.html#l00057">57</a> of file <a class="el" href="genesis__record_8hpp_source.html">genesis_record.hpp</a>.</p>
 
 </div>
 </div>
@@ -587,7 +561,7 @@ template&lt;class Archive &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classGenesisRecord.html">GenesisRecord</a></li>
-    <li class="footer">Generated on Thu May 24 2018 04:33:35 for ReChain by
+    <li class="footer">Generated on Mon May 28 2018 04:51:43 for ReChain by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

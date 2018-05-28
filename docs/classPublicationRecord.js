@@ -5,7 +5,6 @@ var classPublicationRecord =
     [ "~PublicationRecord", "classPublicationRecord.html#ad0686204da456155a6fc0afd21233fec", null ],
     [ "get_data", "classPublicationRecord.html#a98cb7bf0d06b5e4204d7b0322a4a2af9", null ],
     [ "get_reference", "classPublicationRecord.html#a52dfb91c522b326846e7d32d9bda8690", null ],
-    [ "get_type", "classPublicationRecord.html#a08e37e4fdf2e4d37c12673cbe9b5bb06", null ],
     [ "is_valid", "classPublicationRecord.html#a3852f5de35bee9cfa460834cf62ced17", null ],
     [ "serialize", "classPublicationRecord.html#af51cb861ee4983476554cae1a83d563c", null ],
     [ "set_reference", "classPublicationRecord.html#ab5bf87ff365daeb5ca90e27f797c2a0c", null ],

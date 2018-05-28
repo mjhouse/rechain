@@ -9,7 +9,7 @@ var classBaseRecord =
     [ "get_public_key", "classBaseRecord.html#a7431841dc26bcffd74b58be7851a6f42", null ],
     [ "get_signature", "classBaseRecord.html#a069a328f50bad4f13fdfa56c80b06ba4", null ],
     [ "get_timestamp", "classBaseRecord.html#a2d32fbbee7cd488f469624350b833652", null ],
-    [ "get_type", "classBaseRecord.html#a0942f8ebd8dd4cb3e83d1d246675cce0", null ],
+    [ "get_type", "classBaseRecord.html#a02310b48631cc028c98c13b8752b56d1", null ],
     [ "hash", "classBaseRecord.html#a5c616586f1287ad8853c01840ee31449", null ],
     [ "is_valid", "classBaseRecord.html#a3ac732f1b7302c1f4238819b3d7689c6", null ],
     [ "mine", "classBaseRecord.html#a2e64e50ab87243fdf0a9d955ef2d1edf", null ],
@@ -24,5 +24,6 @@ var classBaseRecord =
     [ "m_previous", "classBaseRecord.html#a6e45617b8c14696da02b7b5e61b214b3", null ],
     [ "m_public_key", "classBaseRecord.html#ac07d27aeecd153eb9292ec0d81878b2f", null ],
     [ "m_signature", "classBaseRecord.html#ad759b6e25d34c98dc31c02b7fd7acb13", null ],
-    [ "m_timestamp", "classBaseRecord.html#aebb2e8e9399bee0abbc239cb85de5815", null ]
+    [ "m_timestamp", "classBaseRecord.html#aebb2e8e9399bee0abbc239cb85de5815", null ],
+    [ "m_type", "classBaseRecord.html#af8e97a5ff749f70b431ff4f91101da40", null ]
 ];
