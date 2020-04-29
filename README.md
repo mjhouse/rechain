@@ -9,6 +9,8 @@
 <!-- @endcond 
 -->
 
+__Not Maintained__
+
 ReChain is a modified blockchain design that uses signature records to enforce blockchain
 integrity rather than an expensive proof-of-work calculation (although there is still a fixed 
 proof-of-work to stop clients from creating large numbers of records at once). The goal is to 
